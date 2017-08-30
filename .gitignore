@@ -5,7 +5,6 @@ target/
 .settings/
 /.settings
 Test*.java
-!Test.java
 log/
 /log
 .log
