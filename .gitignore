@@ -1,0 +1,13 @@
+target/
+/target
+.classpath
+.class
+.settings/
+/.settings
+Test*.java
+log/
+/log
+.log
+generatorConfig.properties
+generatorConfig.xml
+
