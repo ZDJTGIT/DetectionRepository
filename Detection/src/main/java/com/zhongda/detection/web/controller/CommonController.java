@@ -35,6 +35,46 @@ public class CommonController {
         return "index";
     }
 
+    @RequestMapping("dashboard")
+    public String dashboard(HttpServletRequest request) {
+        return "dashboard";
+    }
+
+    @RequestMapping("user")
+    public String user(HttpServletRequest request) {
+        return "user";
+    }
+
+    @RequestMapping("table")
+    public String table(HttpServletRequest request) {
+        return "table";
+    }
+
+    @RequestMapping("typography")
+    public String typography(HttpServletRequest request) {
+        return "typography";
+    }
+
+    @RequestMapping("icons")
+    public String icons(HttpServletRequest request) {
+        return "icons";
+    }
+
+    @RequestMapping("maps")
+    public String maps(HttpServletRequest request) {
+        return "maps";
+    }
+
+    @RequestMapping("notifications")
+    public String notifications(HttpServletRequest request) {
+        return "notifications";
+    }
+
+    @RequestMapping("upgrade")
+    public String upgrade(HttpServletRequest request) {
+        return "upgrade";
+    }
+
     /**
      * 获取验证码（Gif版本）
      */

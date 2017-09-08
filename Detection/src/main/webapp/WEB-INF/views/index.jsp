@@ -13,151 +13,294 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
     <!--<![endif]-->
     <!-- BEGIN HEAD -->
     <head>
+    	<base href="<%=basePath%>">
         <meta charset="utf-8" />
-        <title>Detection</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <meta content="" name="description" />
-        <meta content="" name="author" />
-        <meta name="MobileOptimized" content="320">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+	    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/zdLogo.png">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-        <!-- BEGIN GLOBAL MANDATORY STYLES -->
-        <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
-        <!-- END GLOBAL MANDATORY STYLES -->
-
-        <!-- BEGIN THEME STYLES -->
-        <link href="assets/css/style-metronic.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
-        <link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="assets/css/custom.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
-        <!-- END THEME STYLES -->
-		<style type="text/css">
-			#displayMap {
-			  width: 1000px;
-			  height: 700px;
-			}
-		</style>
-        <link rel="shortcut icon" href="app/img/favicon.ico" />
+		<title>Detection</title>
+		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    	<meta name="viewport" content="width=device-width" />
+        <!-- Bootstrap core CSS     -->
+	    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+	    <!-- Animation library for notifications   -->
+	    <link href="assets/css/animate.min.css" rel="stylesheet"/>
+	    <!--  Paper Dashboard core CSS    -->
+	    <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
+	    <!--  CSS for Demo Purpose, don't include it in your project     -->
+	    <link href="assets/css/demo.css" rel="stylesheet" />
+	    <!--  Fonts and icons     -->
+	    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+	    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+	    <link href="assets/css/themify-icons.css" rel="stylesheet">
+	    <!--  AMap CSS  -->
+	    <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+	    <style type="text/css">
+	        #mapContent {
+	            height: 700px;
+	        }
+    	</style>
     </head>
     <!-- END HEAD -->
 
     <!-- BEGIN BODY -->
-    <body class="page-header-fixed" onload="mapInit()">
-        <!-- BEGIN HEADER -->
-        <div class="header navbar navbar-inverse navbar-fixed-top">
-            <!-- BEGIN TOP NAVIGATION BAR -->
-            <div class="header-inner container">
+    <div class="wrapper">
+    <%@ include file="../base/sidebar.jsp"%>
+	<%@ include file="../base/navbar.jsp"%>
+
+    <div class="main-panel">
+        <div class="content"id="mydiv">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-1">
-                        <!-- BEGIN LOGO -->
-                        <a class="navbar-brand" href="javascript:;">
-                            <img src="assets/img/zdLogo.png" alt="logo" class="img-responsive" />
-                        </a>
-                        <!-- END LOGO -->
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-warning text-center">
+                                            <i class="ti-server"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>农田</p>
+                                            4000亩
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-reload"></i> 当前
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                     <div class="col-md-10">
-                        <h3>中大检测在线检测平台</h3>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-success text-center">
+                                            <i class="ti-wallet"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>隧道</p>
+                                            20测点
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-calendar"></i> 一天前
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-1">
-                        <!-- BEGIN TOP NAVIGATION MENU -->
-                        <ul class="nav navbar-nav pull-right">
-                            <li class="dropdown user">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <img alt="" src="assets/img/avatar1_small.jpg"/>
-                                    <i class="fa fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="javascript:;" id="trigger_fullscreen">
-                                            <i class="fa fa-move"></i> 全屏
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="extra_lock.html">
-                                            <i class="fa fa-lock"></i> 锁屏
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="rest/user/logout">
-                                            <i class="fa fa-key"></i> 退出
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- END USER LOGIN DROPDOWN -->
-                        </ul>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-danger text-center">
+                                            <i class="ti-pulse"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>桥梁</p>
+                                           20测点
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-timer"></i> 一小时前
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-info text-center">
+                                            <i class="ti-twitter-alt"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>高层建筑</p>
+                                            20测点
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-reload"></i> 当前
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- END TOP NAVIGATION MENU -->
-            </div>
-            <!-- END TOP NAVIGATION BAR -->
-        </div>
-        <!-- END HEADER -->
-        <div class="clearfix"></div>
-        <!-- BEGIN CONTAINER -->
-        <div class="page-container">
-            <!-- BEGIN CONTENT -->
-            <div class="page-content-wrapper">
-                <div class="page-content">
-                    <!-- BEGIN DASHBOARD STATS -->
-                    <div id="main-content">
-                        <div id="displayMap"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="content" id="mapContent"></div>
+                        </div>
                     </div>
-                    <!-- END PORTLET-->
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="content">
+                                <div id="chartHours" class="ct-chart"></div>
+                                <div class="footer">
+                                    <div class="chart-legend">
+                                        <i class="fa fa-circle text-info"></i> Open
+                                        <i class="fa fa-circle text-danger"></i> Click
+                                        <i class="fa fa-circle text-warning"></i> Click Second Time
+                                    </div>
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="ti-reload"></i> Updated 3 minutes ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- END CONTENT -->
         </div>
-        <!-- END CONTAINER -->
-        <!-- BEGIN FOOTER -->
-        <div class="footer">
-            <div class="footer-inner">
-                2017 &copy; Detection by zhongda.
+
+<!--
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+
+                        <li>
+                            <a href="#">
+                                <img src="assets/img/zdLogo.png" alt="logo"/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.hnzdjc.com">
+                               中大检测官网
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="copyright pull-right">
+                    Copyright &copy; 2017.Company name zhongdajiance.
+                </div>
             </div>
-            <div class="footer-tools">
-                <span class="go-top"><i class="fa fa-angle-up"></i></span>
-            </div>
-        </div>
-        <!--[if lt IE 9]>
-        <script src="assets/plugins/respond.min.js"></script>
-        <script src="assets/plugins/excanvas.min.js"></script>
-        <![endif]-->
-        <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=45d7aee2c7ba665d7c3445f4209fe885"></script>
-        <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
-        <script src="assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript">
-                            </script>
-        <script src="assets/scripts/app.js" type="text/javascript"></script>
-       <!--  <script type="text/javascript" src="../app/js/index.js"></script> -->
+        </footer>-->
 
-        <!--Begin Test -->
-        <script type="text/javascript">
-            var mapObj;
-            var point = new AMap.LngLat(112.883749,28.115017);
+    </div>
+</div>
 
-            var satellLayer = new AMap.TileLayer.Satellite({zIndex:10}); //实例化卫星图
+</body>
+    <!--  GaoDe Map Plugin   -->
+    <script src="http://webapi.amap.com/maps?v=1.3&key=45d7aee2c7ba665d7c3445f4209fe885" type="text/javascript"></script>
+    <!--  jquery.js   -->
+    <script src="assets/plugin/jquery-1.10.2.js" type="text/javascript"></script>
+	<!-- bootstrap js -->
+    <script src="assets/plugin/bootstrap.min.js" type="text/javascript"></script>
+    <!--  Checkbox, Radio & Switch Plugins -->
+    <script src="assets/plugin/bootstrap-checkbox-radio.js" type="text/javascript"></script>
+    <!--  Charts Plugin -->
+    <script src="assets/plugin/chartist.min.js" type="text/javascript"></script>
+    <!--  Notifications Plugin    -->
+    <script src="assets/plugin/bootstrap-notify.js" type="text/javascript"></script>
+    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+    <script src="assets/plugin/paper-dashboard.js" type="text/javascript"></script>
+    <!-- websocket stomp js -->
+    <script src="assets/plugin/sockjs.min.js" type="text/javascript"></script>
+    <script src="assets/plugin/stomp.min.js" type="text/javascript"></script>
+    <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+    <script src="assets/js/demo.js" type="text/javascript"></script>
+    <script src="assets/js/index.js" type="text/javascript"></script>
+    <script type="text/javascript">
 
-            function mapInit(){   //初始化地图对象，加载地图。
-                mapObj = new AMap.Map("displayMap",{
-                center : point, //地图中心点
-                level : 15  //地图显示的缩放级别
-                });
-                AMap.event.addListener(mapObj,'click',getLnglat); //点击事件
-                satellLayer.setMap(mapObj); //在map中添加卫星图
-                mapObj.setZoom(18);
-            }
-            //鼠标点击，获取经纬度坐标
-            function getLnglat(e){
-                var x = e.lnglat.getLng();
-                var y = e.lnglat.getLat();
-                document.getElementById("lnglat").innerHTML = x + "," + y;
-            }
-        </script>
-		<!--End Test -->
+         $(document).ready(function(){
 
-        <!-- <script data-main="app/js/main" src="app/lib/requirejs/require.js"></script> -->
-    </body>
+            demo.initAMap();
+
+            $.notify({
+                icon: 'ti-home',
+                message: "欢迎来到<b>中大检测在线监控平台</b>."
+
+            },{
+                type: 'success',
+                timer: 4000
+            });
+
+            danru();
+
+        });
+
+         var socket = new SockJS('/Detection/rest/webSocket');
+
+         /**
+          * 建立成功的回调函数
+          */
+         socket.onopen = function() {
+             console.log('open');
+         };
+
+         /**
+          * 服务器有消息返回的回调函数
+          */
+         socket.onmessage = function(e) {
+             console.log('message', e.data);
+         };
+
+         /**
+          * websocket链接关闭的回调函数
+          */
+         socket.onclose = function() {
+             console.log('close');
+         };
+
+         var stompClient = Stomp.over(socket);
+         stompClient.connect({}, function(frame) {
+         	console.log("connected-------:"+frame);
+             stompClient.subscribe('/topic/hello',  function(data) { //订阅消息
+             	alert("AAA");
+                 alert(data);
+             });
+
+             console.log("connected++++++:"+frame);
+             stompClient.subscribe('/topic/message',  function(data) { //订阅消息
+             	alert("BBB");
+                 alert(data.body);
+             });
+
+             console.log("connected======:"+frame);
+             stompClient.subscribe('/user/queue/single',  function(data) { //订阅消息
+             	alert("CCC");
+                 alert(data.body);
+             });
+         });
+
+         stompClient.send("/ws/singlemessage", {}, JSON.stringify({
+             name : "nane",
+             taskName : "taskName",
+             taskDetail : "taskDetail"
+         }));
+
+    </script>
 </html>

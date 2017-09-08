@@ -6,13 +6,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 
 <!DOCTYPE html>
-<!--
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.0.3
-Version: 1.5.5
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
--->
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
@@ -22,30 +15,26 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <head>
 <base href="<%=basePath%>">
 <meta charset="utf-8"/>
-<title>登录到Decetion</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="" name="description"/>
-<meta content="" name="author"/>
-<meta name="MobileOptimized" content="320">
-<!-- BEGIN GLOBAL MANDATORY STYLES -->
-<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-<!-- END GLOBAL MANDATORY STYLES -->
-<!-- BEGIN PAGE LEVEL STYLES -->
-<link rel="stylesheet" type="text/css" href="assets/plugins/select2/select2_metro.css"/>
-<!-- END PAGE LEVEL SCRIPTS -->
-<!-- BEGIN THEME STYLES -->
-<link href="assets/css/style-vcode.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/plugins.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
-<link href="assets/css/pages/login-soft.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
-<!-- END THEME STYLES -->
-<link rel="shortcut icon" href="app/img/favicon.ico"/>
+<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+<link rel="icon" type="image/png" sizes="96x96" href="assets/img/zdLogo.png">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<title>登录到Decetion</title>
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<meta name="viewport" content="width=device-width" />
+<!-- Bootstrap core CSS     -->
+<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+<!-- Animation library for notifications   -->
+<link href="assets/css/animate.min.css" rel="stylesheet"/>
+<!--  Paper Dashboard core CSS    -->
+<link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
+<!--  CSS for Demo Purpose, don't include it in your project     -->
+<link href="assets/css/demo.css" rel="stylesheet" />
+<!--  Fonts and icons     -->
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+<link href="assets/css/themify-icons.css" rel="stylesheet">
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -56,85 +45,70 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
-<div class="content">
-	<!-- BEGIN LOGIN FORM -->
-	<form class="login-form" action="rest/user/login" method="post">
-		<h3 class="form-title">用户登录</h3>
-		<div class="alert alert-danger display-hide">
-			<button class="close" data-close="alert"></button>
-			<span>
-				 输入您的用户名和密码
-			</span>
-		</div>
-		<div class="form-group">
-			<!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-			<label class="control-label visible-ie8 visible-ie9">用户名</label>
-			<div class="input-icon">
-				<i class="fa fa-user"></i>
-				<input name="name" id="name" size="25" value="admin" class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" />
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label visible-ie8 visible-ie9">密码</label>
-			<div class="input-icon">
-				<i class="fa fa-lock"></i>
-				<input name="password" id="password" size="25" value="123456" class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" />
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label visible-ie8 visible-ie9">验证码</label>
-			<div class="input-icon">
-				<i class="fa fa-keyboard-o"></i>
-				<input name="vcode_flag" id="vcode_flag" size="25" type="hidden"/>
-				<input name="vcode" id="vcode" size="25" value="" class="form-control-half placeholder-no-fix" type="text" autocomplete="off" placeholder="验证码" />
-				<img alt="验证码" id="vcodeImg" src="rest/getGifCode" align="right">
-				<div style="clear:both"></div>
-			</div>
-		</div>
-		<div class="form-actions">
-			<label class="checkbox">
-			<input type="checkbox" name="rememberMe" value="true"/> 记住我 </label>
-			<button id="loginBut" type="submit" class="btn blue pull-right">
-			登录 <i class="m-icon-swapright m-icon-white"></i>
-			</button>
-		</div>
-		<div class="dd">
-			<span><font color="red" size="5">${error}</font></span>
-		</div>
-	</form>
-	<!-- END LOGIN FORM -->
-</div>
+<body style="background: url(assets/img/background/backgroud-3.jpg);" class="blur" >
+    <nav class="navbar navbar-transparent navbar-absolute">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href=""><font><font>中大检测自动检测</font></font></a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                       <a href=""><font><font>
+                            注册
+                        </font></font></a>
+                    </li>
+                    <li>
+                       <a href=""><font><font>
+                            首页
+                        </font></font></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- 登录层 -->
+    <div class="content" style="position:absolute;left:50%;margin-left:-600px;top:50%;margin-top:-300px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+                	<!-- BEGIN LOGIN FORM -->
+                    <form method="post" action="rest/user/login">
+                        <div class="card" >
+                            <div style="text-align: center;">
+                            <br>
+                                <h3 class="card-title"><font><font>登录</font></font></h3>
+                                <br>
+                            </div>
+                            <div class="form-group">
+                                <label ><font style="color: #010101">&ensp;用户名</font></label>
+                                <input type="text" name="name" placeholder="请输入用户名" class="form-control input-no-border">
+                            </div>
+                            <div class="form-group">
+                                <label ><font style="color: #010101">&ensp;密码</font></label>
+                                &ensp;<input type="password" name="password" placeholder="请输入密码" class="form-control input-no-border">
+                            </div>
+                            <div class="card-footer text-center">
+                                <button type="submit" class="btn btn-fill btn-wd "><font><font>我们走吧</font></font></button>
+                                <div class="forgot">
+                                    <a href=""><font><font>忘记密码了吗？</font></font></a>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="dd">
+							<span><font color="red" size="5">${error}</font></span>
+						</div>
+                    </form>
+                    <!-- END LOGIN FORM -->
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
 <div class="copyright">
 	 2017 &copy; Detection by zhongda
 </div>
-<!-- END COPYRIGHT -->
-<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-<!-- BEGIN CORE PLUGINS -->
-<!--[if lt IE 9]>
-	<script src="assets/plugins/respond.min.js"></script>
-	<script src="assets/plugins/excanvas.min.js"></script>
-	<![endif]-->
-<script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-<!-- END CORE PLUGINS -->
-<!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="assets/plugins/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="assets/plugins/select2/select2.min.js"></script>
-<!-- END PAGE LEVEL PLUGINS -->
-<!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script src="assets/scripts/app.js" type="text/javascript"></script>
-<script src="assets/scripts/login-soft.js" type="text/javascript"></script>
-<script src="app/lib/security/sha256.js" type="text/javascript"></script>
-<!-- END PAGE LEVEL SCRIPTS -->
-<script>
-		jQuery(document).ready(function() {
-		  App.init();
-		  Login.init();
-		});
-</script>
-<!-- END JAVASCRIPTS -->
 </body>
 </html>
