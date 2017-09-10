@@ -46,9 +46,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
     <!-- END HEAD -->
 
     <!-- BEGIN BODY -->
+    <body>
     <div class="wrapper">
-    <%@ include file="../base/sidebar.jsp"%>
-	<%@ include file="../base/navbar.jsp"%>
+    <%@ include file="../base/header.jsp"%>
+	<%@ include file="../base/sidebar.jsp"%>
 
     <div class="main-panel">
         <div class="content"id="mydiv">
@@ -184,8 +185,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                 </div>
             </div>
         </div>
-
-<!--
         <footer class="footer">
             <div class="container-fluid">
                 <nav class="pull-left">
@@ -207,11 +206,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                     Copyright &copy; 2017.Company name zhongdajiance.
                 </div>
             </div>
-        </footer>-->
-
+        </footer>
     </div>
 </div>
-
 </body>
     <!--  GaoDe Map Plugin   -->
     <script src="http://webapi.amap.com/maps?v=1.3&key=45d7aee2c7ba665d7c3445f4209fe885" type="text/javascript"></script>

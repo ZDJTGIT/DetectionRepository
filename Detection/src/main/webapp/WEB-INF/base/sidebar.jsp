@@ -4,11 +4,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>sidebar</title>
+<style type="text/css">
+.hide_div_box{
+	width:"65px";
+	overflow:"hidden";
+	}
+.hide_fti{
+	margin: "3px -10px 20px -10px";
+	}
+.hide_active{
+	height:"51px";
+	}
+.hide_active_bg{
+	width:"100%";
+	height:"50px";
+	}
+.hide_mydiv{
+	position: "relative";
+	left:"-160px";
+	width:"110%";
+	transition: ".3s";
+	}
+	.span_box_2{
+	display:"hidden";
+	}
+</style>
 </head>
 <body>
  <div class="sidebar" data-background-color="white" data-active-color="danger">
-         <div class="sidebar-wrapper"id="div_box">
-            <ul class="nav nav_bt"id="ul">
+         <div class="sidebar-wrapper" id="div_box">
+            <ul class="nav nav_bt" id="ul">
                 <li class="active">
                     <a href="rest/index">
                         <i class="ti-home fti" title="首页"></i>
@@ -16,10 +41,29 @@
                     </a>
                 </li>
                 <li class="active_bg">
-                    <a href="rest/dashboard">
-                        <i class="ti-panel fti" title="数据展示"></i>
-                        <p class="ft">数据展示</p>
+                    <a href="#farmland" data-toggle="collapse">
+                        <i class="ti-panel fti" title="我的项目"></i>
+                        <p class="ft">我的项目</p>
                     </a>
+                    <div id="farmland" class="collapse">
+                    	 <ul class="list-group">
+			                <li class="list-group-item">
+			                	<a  href="rest/dashboard">
+			                		<span class="list-group-item-text">农田</span>
+			                	</a>
+			                </li>
+			                <li class="list-group-item">
+			                	<a  href="rest/dashboard">
+			                		 <span class="list-group-item-text">桥梁</span>
+			                	</a>
+			                </li>
+			                <li class="list-group-item">
+			                	<a  href="rest/dashboard">
+			                		 <span class="list-group-item-text">隧道</span>
+			                	</a>
+			                </li>
+			             </ul>
+                    </div>
                 </li>
                 <li class="active_bg">
                     <a href="rest/user">
@@ -63,7 +107,8 @@
                         <p class="ft">升级</p>
                     </a>
                 </li>
-                <span class="span_box"></span>
+               	<span id="span_box_1" class="span_box" onclick="danru('1')"></span>
+                <span id="span_box_2" class="span_box_2" onclick="danru('2')"></span>
             </ul>
         </div>
     </div>

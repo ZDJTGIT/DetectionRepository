@@ -3,10 +3,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>navbar</title>
+<title>header</title>
 </head>
 <body>
- <nav class="navbar navbar-default">
+ <header class="navbar navbar-default">
 	   	  <div  class="logo">
 	   	  	<a href="#" class="simple-text">
                 <img src="assets/img/zdLogo.png" alt="logo" class="logo">
@@ -33,12 +33,10 @@
                     <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="ti-bell"></i>
-                                <p class="notification">5</p>
+                               <!--  <p class="notification">5</p> -->
+                                <span class="badge">5</span>
                                 <p>消息</p>
-     <!--**         *****-->
-      <!--**         *****--> <!--<b class="caret"></b>-->
                                 <b class="caret caret_jt"></b>
-
                           </a>
                           <ul class="dropdown-menu">
                             <li><a href="#">消息 1</a></li>
@@ -51,18 +49,18 @@
                     <li>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="ti-user"></i>
-                            <p>账户名</p>
+                            <p>${userInfo.name}</p>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">切换账户</a></li>
-                            <li><a href="#">退出</a></li>
+                            <li><a href="rest/page/login">切换账户</a></li>
+                            <li><a href="rest/user/logout">退出</a></li>
                         </ul>
                     </li>
                 </ul>
 
             </div>
         </div>
-    </nav>
+    </header>
 </body>
 </html>

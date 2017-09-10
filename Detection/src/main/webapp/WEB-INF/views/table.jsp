@@ -16,10 +16,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
     <base href="<%=basePath%>">
 	<meta charset="utf-8" />
 	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/zdLogo.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title></title>
+	<title>Detection</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -47,7 +47,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 <div class="wrapper">
 	<%@ include file="../base/sidebar.jsp"%>
-	<%@ include file="../base/navbar.jsp"%>
+	<%@ include file="../base/header.jsp"%>
 
     <div class="main-panel">
         <div class="content">
@@ -62,11 +62,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-striped">
                                     <thead>
-                                        <th>ID</th>
-                                    	<th>Name</th>
-                                    	<th>Salary</th>
-                                    	<th>Country</th>
-                                    	<th>City</th>
+                                    	<tr>
+                                    		<th>ID</th>
+	                                    	<th>Name</th>
+	                                    	<th>Salary</th>
+	                                    	<th>Country</th>
+	                                    	<th>City</th>
+                                    	</tr>
                                     </thead>
                                     <tbody>
                                         <tr>
@@ -128,11 +130,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <div class="content table-responsive table-full-width">
                                 <table class="table table-hover">
                                     <thead>
-                                        <th>ID</th>
-                                    	<th>Name</th>
-                                    	<th>Salary</th>
-                                    	<th>Country</th>
-                                    	<th>City</th>
+                                    	<tr>
+                                    		<th>ID</th>
+	                                    	<th>Name</th>
+	                                    	<th>Salary</th>
+	                                    	<th>Country</th>
+	                                    	<th>City</th>
+                                    	</tr>
                                     </thead>
                                     <tbody>
                                         <tr>

@@ -19,7 +19,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/zdLogo.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title></title>
+	<title>Detection</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -47,7 +47,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 <div class="wrapper">
 	<%@ include file="../base/sidebar.jsp"%>
-	<%@ include file="../base/navbar.jsp"%>
+	<%@ include file="../base/header.jsp"%>
     <div class="main-panel">
 		<!--用户资料-->
         <div class="content">
@@ -106,6 +106,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                                     </div>
 
                                                     <div class="col-xs-3 text-right">
+                                                        <!-- <button class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></button> -->
                                                         <btn class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></btn>
                                                     </div>
                                                 </div>
@@ -161,19 +162,19 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <label>公司</label>
-                                                <input type="text" class="form-control border-input" disabled placeholder="Company" value="Creative Code Inc.">
+                                                <input type="text" class="form-control border-input" disabled placeholder="Company" value="${userInfo.company}">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>用户名</label>
-                                                <input type="text" class="form-control border-input" placeholder="Username" value="michael23">
+                                                <input type="text" class="form-control border-input" placeholder="Username" value="${userInfo.name}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">邮箱地址</label>
-                                                <input type="email" class="form-control border-input" placeholder="Email">
+                                                <input type="email" class="form-control border-input" placeholder="Email" value="${userInfo.email}">
                                             </div>
                                         </div>
                                     </div>
@@ -182,13 +183,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>姓氏</label>
-                                                <input type="text" class="form-control border-input" placeholder="Company" value="Chet">
+                                                <input type="text" class="form-control border-input" placeholder="Company" value="${userInfo.linkman}">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>名字</label>
-                                                <input type="text" class="form-control border-input" placeholder="Last Name" value="Faker">
+                                                <input type="text" class="form-control border-input" placeholder="Last Name" value="${userInfo.linkman}">
                                             </div>
                                         </div>
                                     </div>
@@ -227,7 +228,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>个人说明</label>
-                                                <textarea rows="5" class="form-control border-input" placeholder="Here can be your description" value="Mike">Oh so, your weak rhyme
+                                                <textarea rows="5" class="form-control border-input" placeholder="Here can be your description" name="Mike">Oh so, your weak rhyme
 You doubt I'll bother, reading into it
 I'll probably won't, left to my own devices
 But that's the difference in our opinions.</textarea>
