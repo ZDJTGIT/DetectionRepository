@@ -35,6 +35,11 @@ public class CommonController {
         return "index";
     }
 
+    @RequestMapping("home")
+    public String home(HttpServletRequest request) {
+        return "home";
+    }
+
     @RequestMapping("dashboard")
     public String dashboard(HttpServletRequest request) {
         return "dashboard";
