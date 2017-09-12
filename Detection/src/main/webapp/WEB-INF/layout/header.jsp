@@ -24,8 +24,8 @@
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="ti-panel"></i>
-							<p>状态</p>
+							<i class="ti-drupal"></i>
+							<p>${userInfo.status}</p>
 					</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown"> <i class="ti-bell"></i> <!--  <p class="notification">5</p> -->
