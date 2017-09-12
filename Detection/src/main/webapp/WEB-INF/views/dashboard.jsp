@@ -122,10 +122,7 @@
 						<p class="category">24 Hours performance</p>
 					</div>
 					<div class="content">
-						<div id="test" style="height: 500px">
-							<script src="echarts-2.2.7/doc/example/www/js/echarts.js"></script>
-							<script src = "echarts-2.2.7/js/dashboard.js">
-							</script>
+						<div id="waterlevel" style="height: 500px">
 						</div>
 					</div>
 				</div>
@@ -133,46 +130,23 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="card">
-						<!--  <div class="header">
-                                <h4 class="title">Email Statistics</h4>
-                                <p class="category">Last Campaign Performance</p>
-                            </div> -->
+						<div class="header">
+							<h4 class="title">PH变化</h4>
+							<p class="category">24 Hours performance</p>
+						</div>
 						<div class="content">
-							<!-- <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-
-                                <div class="footer">
-                                    <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Open
-                                        <i class="fa fa-circle text-danger"></i> Bounce
-                                        <i class="fa fa-circle text-warning"></i> Unsubscribe
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="ti-timer"></i> Campaign sent 2 days ago
-                                    </div>
-                                </div> -->
+							<div id="ph" style="height: 300px;"></div>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="card ">
-						<!-- <div class="header">
-                                <h4 class="title">2015 Sales</h4>
-                                <p class="category">All products including Taxes</p>
-                            </div> -->
+						<div class="header">
+                            <h4 class="title">镉变化</h4>
+                            <p class="category">24 Hours performance</p>
+                        </div> 
 						<div class="content">
-							<!--  <div id="chartActivity" class="ct-chart"></div>
-
-                                <div class="footer">
-                                    <div class="chart-legend">
-                                        <i class="fa fa-circle text-info"></i> Tesla Model S
-                                        <i class="fa fa-circle text-warning"></i> BMW 5 Series
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="ti-check"></i> Data information certified
-                                    </div>
-                                </div> -->
+							<div id="cadmium" style="height: 300px"></div>
 						</div>
 					</div>
 				</div>
@@ -208,7 +182,7 @@
 											</div>
 										</div>
 									</div>
-									</p>
+									
 								</div>
 							</div>
 							<div class="content table-responsive table-full-width">
@@ -302,22 +276,26 @@
 		</div>
 	</div>
 </body>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-
-		demo.initChartist();
-
-		$.notify({
-			icon : 'ti-gift',
-			message : "欢迎进入我的项目 ."
-
-		}, {
-			type : 'success',
-			timer : 4000
+	<script src="echarts-2.2.7/doc/example/www/js/echarts.js"></script>
+	<script src = "echarts-2.2.7/js/dashboard.js"></script>
+	<script type="text/javascript">
+		water();
+		ph();
+		cadmium();
+		$(document).ready(function() {
+		
+			demo.initChartist();
+		
+			$.notify({
+				icon : 'ti-gift',
+				message : "欢迎进入我的项目 ."
+		
+			}, {
+				type : 'success',
+				timer : 4000
+			});
+		
 		});
-
-	});
-</script>
+	</script>
 
 </html>
