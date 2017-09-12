@@ -1,6 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -8,119 +13,167 @@
 <html lang="en" class="no-js">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
-<head></head>
-<body>
-	<div class="container-fluid">
-		<div class="card">
-			<div class="header">
-				<h4 class="title">Notifications</h4>
-				<p class="category">
-					Handcrafted by our friend <a target="_blank"
-						href="https://github.com/mouse0270">Robert McIntosh</a>. Please
-					checkout the <a href="http://bootstrap-notify.remabledesigns.com/"
-						target="_blank">full documentation.</a>
-				</p>
+<head>
 
-			</div>
-			<div class="content">
-				<div class="row">
-					<div class="col-md-6">
-						<h5>Notifications Style</h5>
-						<div class="alert alert-info">
-							<span>This is a plain notification</span>
-						</div>
-						<div class="alert alert-info">
-							<button type="button" aria-hidden="true" class="close">Ã</button>
-							<span>This is a notification with close button.</span>
-						</div>
-						<div class="alert alert-info alert-with-icon"
-							data-notify="container">
-							<button type="button" aria-hidden="true" class="close">Ã</button>
-							<span data-notify="icon" class="ti-bell"></span> <span
-								data-notify="message">This is a notification with close
-								button and icon.</span>
-						</div>
-						<div class="alert alert-info alert-with-icon"
-							data-notify="container">
-							<button type="button" aria-hidden="true" class="close">Ã</button>
-							<span data-notify="icon" class="ti-pie-chart"></span> <span
-								data-notify="message">This is a notification with close
-								button and icon and have many lines. You can see that the icon
-								and the close button are always vertically aligned. This is a
-								beautiful notification. So you don't have to worry about the
-								style.</span>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>H+ 后台主题UI框架 - 通知 &amp; 提示</title>
+<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+<meta name="description"
+	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+<link rel="shortcut icon" href="favicon.ico">
+<link href="assets/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+<link href="assets/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+
+<link href="assets/css/animate.min.css" rel="stylesheet">
+<link href="assets/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content animated fadeIn">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>警告框</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+							</a> <a class="dropdown-toggle" data-toggle="dropdown"
+								href="notifications.html#"> <i class="fa fa-wrench"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="notifications.html#">选项1</a></li>
+								<li><a href="notifications.html#">选项2</a></li>
+							</ul>
+							<a class="close-link"> <i class="fa fa-times"></i>
+							</a>
 						</div>
 					</div>
-					<div class="col-md-6">
-						<h5>Notification states</h5>
-						<div class="alert alert-info">
-							<button type="button" aria-hidden="true" class="close">Ã</button>
-							<span><b> Info - </b> This is a regular notification made
-								with ".alert-info"</span>
-						</div>
+					<div class="ibox-content">
 						<div class="alert alert-success">
-							<button type="button" aria-hidden="true" class="close">Ã</button>
-							<span><b> Success - </b> This is a regular notification
-								made with ".alert-success"</span>
+							H+是一个很棒的后台UI框架 <a class="alert-link" href="notifications.html#">了解更多</a>.
+						</div>
+						<div class="alert alert-info">
+							H+是一个很棒的后台UI框架 <a class="alert-link" href="notifications.html#">了解更多</a>.
 						</div>
 						<div class="alert alert-warning">
-							<button type="button" aria-hidden="true" class="close">Ã</button>
-							<span><b> Warning - </b> This is a regular notification
-								made with ".alert-warning"</span>
+							H+是一个很棒的后台UI框架 <a class="alert-link" href="notifications.html#">了解更多</a>.
 						</div>
 						<div class="alert alert-danger">
-							<button type="button" aria-hidden="true" class="close">Ã</button>
-							<span><b> Danger - </b> This is a regular notification
-								made with ".alert-danger"</span>
+							H+是一个很棒的后台UI框架 <a class="alert-link" href="notifications.html#">了解更多</a>.
 						</div>
 					</div>
 				</div>
-				<br> <br>
-				<div class="places-buttons">
-					<div class="row">
-						<div class="col-md-9">
-							<h5>
-								Notifications Places
-								<p class="category">Click to view notifications</p>
-							</h5>
+			</div>
+			<div class="col-sm-6">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>带关闭按钮的警告框</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+							</a> <a class="dropdown-toggle" data-toggle="dropdown"
+								href="notifications.html#"> <i class="fa fa-wrench"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="notifications.html#">选项1</a></li>
+								<li><a href="notifications.html#">选项2</a></li>
+							</ul>
+							<a class="close-link"> <i class="fa fa-times"></i>
+							</a>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-3">
-							<button class="btn btn-default btn-block"
-								onClick="demo.showNotification('top','left')">Top Left</button>
+					<div class="ibox-content">
+						<div class="alert alert-success alert-dismissable">
+							<button aria-hidden="true" data-dismiss="alert" class="close"
+								type="button">×</button>
+							H+是一个很棒的后台UI框架 <a class="alert-link" href="notifications.html#">了解更多</a>.
 						</div>
-						<div class="col-md-3">
-							<button class="btn btn-default btn-block"
-								onClick="demo.showNotification('top','center')">Top
-								Center</button>
+						<div class="alert alert-info alert-dismissable">
+							<button aria-hidden="true" data-dismiss="alert" class="close"
+								type="button">×</button>
+							H+是一个很棒的后台UI框架 <a class="alert-link" href="notifications.html#">了解更多</a>.
 						</div>
-						<div class="col-md-3">
-							<button class="btn btn-default btn-block"
-								onClick="demo.showNotification('top','right')">Top
-								Right</button>
+						<div class="alert alert-warning alert-dismissable">
+							<button aria-hidden="true" data-dismiss="alert" class="close"
+								type="button">×</button>
+							H+是一个很棒的后台UI框架 <a class="alert-link" href="notifications.html#">了解更多</a>.
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-3">
-							<button class="btn btn-default btn-block"
-								onClick="demo.showNotification('bottom','left')">Bottom
-								Left</button>
-						</div>
-						<div class="col-md-3">
-							<button class="btn btn-default btn-block"
-								onClick="demo.showNotification('bottom','center')">Bottom
-								Center</button>
-						</div>
-						<div class="col-md-3">
-							<button class="btn btn-default btn-block"
-								onClick="demo.showNotification('bottom','right')">Bottom
-								Right</button>
+						<div class="alert alert-danger alert-dismissable">
+							<button aria-hidden="true" data-dismiss="alert" class="close"
+								type="button">×</button>
+							H+是一个很棒的后台UI框架 <a class="alert-link" href="notifications.html#">了解更多</a>.
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>工具提示</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+							</a> <a class="dropdown-toggle" data-toggle="dropdown"
+								href="notifications.html#"> <i class="fa fa-wrench"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="notifications.html#">选项1</a></li>
+								<li><a href="notifications.html#">选项2</a></li>
+							</ul>
+							<a class="close-link"> <i class="fa fa-times"></i>
+							</a>
+						</div>
+					</div>
+					<div class="ibox-content text-center">
+						<h4>
+							工具提示示例 <small>深色背景</small>
+						</h4>
+						<div class="tooltip-demo">
+							<button type="button" class="btn btn-default"
+								data-toggle="tooltip" data-placement="left" title="这里是提示内容">左侧提示</button>
+							<button type="button" class="btn btn-default"
+								data-toggle="tooltip" data-placement="top" title="这里是提示内容">顶部提示</button>
+							<button type="button" class="btn btn-default"
+								data-toggle="tooltip" data-placement="bottom" title="这里是提示内容">底部提示</button>
+							<button type="button" class="btn btn-default"
+								data-toggle="tooltip" data-placement="right" title="这里是提示内容">右侧提示</button>
+						</div>
+						<br>
+						<h4>工具提示 - 单击提示</h4>
+						<div class="tooltip-demo">
+							<button type="button" class="btn btn-primary"
+								data-container="body" data-toggle="popover"
+								data-placement="left" data-content="这里是提示内容">左侧提示</button>
+							<button type="button" class="btn btn-primary"
+								data-container="body" data-toggle="popover" data-placement="top"
+								data-content="这里是提示内容">顶部提示</button>
+							<button type="button" class="btn btn-primary"
+								data-container="body" data-toggle="popover"
+								data-placement="bottom" data-content="这里是提示内容">底部提示</button>
+							<button type="button" class="btn btn-primary"
+								data-container="body" data-toggle="popover"
+								data-placement="right" data-content="这里是提示内容">右侧提示</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
 	</div>
+
+
+	<script src="assets/js/jquery.min.js?v=2.1.4"></script>
+	<script src="assets/js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="assets/js/content.min.js?v=1.0.0"></script>
+	<script type="text/javascript"
+		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+
 </body>
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/notifications.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:53 GMT -->
 </html>
