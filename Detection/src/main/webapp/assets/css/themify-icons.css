@@ -1079,3 +1079,46 @@
 .ti-rss-alt:before {
 	content: "\e75f";
 }
+#header {
+    line-height:30px;
+    background-color: #989898;
+    height:80px;
+    width:40%;
+    float:left;
+    padding:5px;
+}
+#header_s {
+    background-color: #989898;
+    height: 80px;
+    width:50%;
+    float:left;
+    padding:5px;        
+}
+#section {
+    background-color: #989898;
+    color:white;
+    clear:both;
+    text-align:center;
+   padding:5px;          
+}
+#last{
+    background-color: #989898;
+    height: 80px;
+    width:10%;
+    float:left;
+    padding:5px;    
+}
+#innaf{
+   background-color: #989898;
+   color:white;
+   margin: 0 auto;
+   width: 420px;
+   padding:5px;  
+   }
+   #input_color{
+    background-color: #FFFFFF;
+   }
+#button_color{
+    background-color: #FF3300;
+    border:none;
+}              
