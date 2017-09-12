@@ -35,29 +35,29 @@ public class CommonController {
         return "index";
     }
 
-    @RequestMapping("home")
+    @RequestMapping("index_v1")
     public String home(HttpServletRequest request) {
-        return "home";
+        return "index_v1";
     }
 
-    @RequestMapping("dashboard")
+    @RequestMapping("index_v2")
     public String dashboard(HttpServletRequest request) {
-        return "dashboard";
+        return "index_v2";
     }
 
-    @RequestMapping("user")
+    @RequestMapping("index_v3")
     public String user(HttpServletRequest request) {
-        return "user";
+        return "index_v3";
     }
 
-    @RequestMapping("table")
+    @RequestMapping("index_v4")
     public String table(HttpServletRequest request) {
-        return "table";
+        return "index_v4";
     }
 
-    @RequestMapping("typography")
+    @RequestMapping("index_v5")
     public String typography(HttpServletRequest request) {
-        return "typography";
+        return "index_v5";
     }
 
     @RequestMapping("icons")
