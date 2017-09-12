@@ -20,7 +20,7 @@
 					<div class="content">
 						<div class="author">
 							<img class="avatar border-white"
-								src="assets/img/faces/face-2.jpg" alt="..." />
+								src="assets/img/zdLogo.png" alt="..." />
 							<h4 class="title">
 								Rojay<br /> <a href="#"><small>@Rojay</small></a>
 							</h4>
@@ -36,19 +36,19 @@
 							<div class="col-md-3 col-md-offset-1">
 								<h5>
 									12<br />
-									<small>文件</small>
+									<small>项目</small>
 								</h5>
 							</div>
 							<div class="col-md-4">
 								<h5>
-									2GB<br />
-									<small>Used</small>
+									20<br />
+									<small>测点</small>
 								</h5>
 							</div>
 							<div class="col-md-3">
 								<h5>
-									24,6$<br />
-									<small>余额</small>
+									2<br />
+									<small>预警</small>
 								</h5>
 							</div>
 						</div>
@@ -69,7 +69,7 @@
 										</div>
 									</div>
 									<div class="col-xs-6">
-										DJ Khaled <br /> <span class="text-muted"><small>Offline</small></span>
+										湘潭农田 <br /> <span class="text-muted"><small>正常</small></span>
 									</div>
 									<div class="col-xs-3 text-right">
 										<!-- <button class="btn btn-sm btn-success btn-icon"><i class="fa fa-envelope"></i></button> -->
@@ -87,7 +87,7 @@
 										</div>
 									</div>
 									<div class="col-xs-6">
-										Creative Tim <br /> <span class="text-success"><small>Available</small></span>
+										长沙隧道 <br /> <span class="text-success"><small>正常</small></span>
 									</div>
 									<div class="col-xs-3 text-right">
 										<btn class="btn btn-sm btn-success btn-icon">
@@ -104,7 +104,7 @@
 										</div>
 									</div>
 									<div class="col-xs-6">
-										Flume <br /> <span class="text-danger"><small>Busy</small></span>
+										宁乡农田 <br /> <span class="text-danger"><small>正常</small></span>
 									</div>
 									<div class="col-xs-3 text-right">
 										<btn class="btn btn-sm btn-success btn-icon">
@@ -149,46 +149,71 @@
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
-										<label>姓氏</label> <input type="text"
+										<label>姓名</label> <input type="text"
 											class="form-control border-input" placeholder="Company"
 											value="${userInfo.linkman}">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<label>名字</label> <input type="text"
+										<label>联系电话</label> <input type="text"
 											class="form-control border-input" placeholder="Last Name"
-											value="${userInfo.linkman}">
+											value="${userInfo.phone}">
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-										<label>地址</label> <input type="text"
+										<label>详细地址</label> <input type="text"
 											class="form-control border-input" placeholder="Home Address"
-											value="Melbourne, Australia">
+											value="洋湖街道学士路755号中大检测">
 									</div>
 								</div>
 							</div>
+							
+							 <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>省</label>
+                                                <input type="text" class="form-control border-input" placeholder="Province" value="湖南省">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>市</label>
+                                                <input type="text" class="form-control border-input" placeholder="City" value="长沙市">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>区、县</label>
+                                                <input type="text" class="form-control border-input" placeholder="	
+Region" value="岳麓区">
+                                            </div>
+                                        </div>
+                                    </div>
+							
+							
+							
 							<div class="row">
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>市</label> <input type="text"
-											class="form-control border-input" placeholder="City"
-											value="Melbourne">
+										<label>原始密码</label> <input type="password"
+											class="form-control border-input" placeholder="old_pwd"
+											value="${userInfo.password}">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>国家</label> <input type="text"
-											class="form-control border-input" placeholder="Country"
+										<label>新密码</label> <input type="password"
+											class="form-control border-input" placeholder="newpwd"
 											value="Australia">
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
-										<label>邮政编码</label> <input type="number"
+										<label>确认密码</label> <input type="password"
 											class="form-control border-input" placeholder="ZIP Code">
 									</div>
 								</div>
