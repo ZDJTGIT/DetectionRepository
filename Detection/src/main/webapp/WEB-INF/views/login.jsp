@@ -14,101 +14,84 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- BEGIN HEAD -->
 <head>
 <base href="<%=basePath%>">
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-<link rel="icon" type="image/png" sizes="96x96" href="assets/img/zdLogo.png">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
+<meta charset="UTF-8">
 <title>登录到Decetion</title>
-<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-<meta name="viewport" content="width=device-width" />
-<!-- Bootstrap core CSS     -->
-<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-<!-- Animation library for notifications   -->
-<link href="assets/css/animate.min.css" rel="stylesheet"/>
-<!--  Paper Dashboard core CSS    -->
+<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
 <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
-<!--  CSS for Demo Purpose, don't include it in your project     -->
-<link href="assets/css/demo.css" rel="stylesheet" />
-<!--  Fonts and icons     -->
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-<link href="assets/css/themify-icons.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="assets/css/mylogin.css">
+<script type="text/javascript" src="assets/plugin/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="assets/js/login.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
-<body class="login">
-<!-- BEGIN LOGO -->
-<div class="logo">
-	<img src="assets/img/zdLogo.png" alt=""/>
-</div>
-<!-- END LOGO -->
+
 <!-- BEGIN LOGIN -->
-<body style="background: url(assets/img/background/backgroud-3.jpg);" class="blur" >
-    <nav class="navbar navbar-transparent navbar-absolute">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href=""><font><font>中大检测自动检测</font></font></a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                       <a href=""><font><font>
-                            注册
-                        </font></font></a>
-                    </li>
-                    <li>
-                       <a href=""><font><font>
-                            首页
-                        </font></font></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- 登录层 -->
-    <div class="content" style="position:absolute;left:50%;margin-left:-600px;top:50%;margin-top:-300px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                	<!-- BEGIN LOGIN FORM -->
-                    <form method="post" action="rest/user/login">
-                        <div class="card" >
-                            <div style="text-align: center;">
-                            <br>
-                                <h3 class="card-title"><font><font>登录</font></font></h3>
-                                <br>
-                            </div>
-                            <div class="form-group">
-                                <label ><font style="color: #010101">&ensp;用户名</font></label>
-                                <input type="text" name="name" placeholder="请输入用户名" class="form-control input-no-border">
-                            </div>
-                            <div class="form-group">
-                                <label ><font style="color: #010101">&ensp;密码</font></label>
-                                &ensp;<input type="password" name="password" placeholder="请输入密码" class="form-control input-no-border">
-                            </div>
-                            <div class="card-footer text-center">
-                                <button type="submit" class="btn btn-fill btn-wd "><font><font>我们走吧</font></font></button>
-                                <div class="forgot">
-                                    <a href=""><font><font>忘记密码了吗？</font></font></a>
-                                </div>
-                                <br>
-                            </div>
-                        </div>
-                        <div class="dd">
+<body>
+    <div class="container" style="width: 100%">
+
+		<div class="row" >
+			<div class="col-lg-6 col-lg-myself">
+				<ul class="list-inline " style="margin-left: 20%;">
+					<li>
+						<img src="assets/img/zdLogo.png"  alt="图片未加载">
+					</li>
+					<li>
+						<p class="text-left fontzd">中大检测自动检测平台</p>
+					</li>
+				</ul>
+			</div>
+			<div class="col-lg-6 col-lg-myself">
+				<ul class="list-inline" style="margin-left: 50%">
+					<li>
+						<p><a href="#" class="a-fontstyle" >注册</a></p>
+					</li>
+					<li>
+						<p ><a href="rest/page/dashboard" class="a-fontstyle" >首页</a></p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row" >
+			<div class="row rowlogin" >
+				<h3><font class="fontlogin">登 录</font></h3>
+				<!-- BEGIN LOGIN FORM -->
+				<form class="form-horizontal" method="post" action="rest/user/login">
+						<div class="row rowuser" >
+							<label  >账号</label>
+						</div>
+						 <div class="row rowuser">
+						      <input type="text" class="inputuser" name="name" value="admin" style="" id="name" placeholder="请输入账号" size="30">
+						 </div>
+						<div class="row rowpassword" >
+							<label  >密码</label>
+						</div>
+						 <div class="row rowuser">
+						      <input type="password" name="password" value="123456" class="inputuser" id="password" placeholder="请输入密码" size="30">
+						 </div>
+						 <div class="row rowpassword" >
+						 	<div style="text-align: center;">
+						 		<input type="submit" style="font-size: 15px" class="btn btn-fill btn-wd "  value="我们走">
+						 	</div>
+						 </div>
+						 <div class="dd">
 							<span><font color="red" size="5">${error}</font></span>
 						</div>
-                    </form>
-                    <!-- END LOGIN FORM -->
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- END LOGIN -->
-<!-- BEGIN COPYRIGHT -->
-<div class="copyright">
-	 2017 &copy; Detection by zhongda
-</div>
+				</form>
+				<!-- END LOGIN FORM -->
+				<div class="row rowuser" >
+					<div class="fogetpassword-div">
+						<p class="text-center a-fogetpassword"><a href="#" >忘记密码了吗?</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- END LOGIN -->
+		<!-- BEGIN COPYRIGHT -->
+		<div class="row row-bottomdiv" >
+				<p class="text-center" style="color: #FFFFFF">2017 &copy; Detection by zhongda</p>
+		</div>
+	</div>
+	
 </body>
 </html>

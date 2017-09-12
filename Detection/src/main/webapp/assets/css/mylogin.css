@@ -1,0 +1,79 @@
+
+body{
+	background-color: #8E8E8E;
+}
+
+.a-fontstyle{
+	font-size: 20px;
+	color: #E6E6E6;
+}
+
+.a-fontstyle:link{
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+.a-fontstyle:hover{
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+.a-fogetpassword{
+	font-size: 12px;
+}
+
+.fogetpassword-div{
+	margin: 0 auto;
+	width: 100px;
+	height: 30px;
+	margin-top: 10px;
+}
+
+.row-bottomdiv{
+	height: 35px;
+	width: 100%;
+	position:absolute;
+	bottom:0;
+}
+
+.col-lg-myself{
+	height:100px;
+	line-height:100px;
+	margin: 0 auto;
+}
+.fontzd{
+	font-size: 25px;
+	font-family: 黑体;
+	color: #FFFFFF;
+}
+
+.rowlogin{
+	width: 360px;
+	height: 320px;
+	background-color: #FFFFFF;
+	margin: 0 auto;
+	border-radius: 
+	10px;margin-top: 80px;
+}
+.fontlogin{
+	font-family: 楷体;
+	margin-left: 20px;
+}
+.rowuser{
+	margin: 0 auto;
+	width: 90%;
+}
+.inputuser{
+	border-radius: 5px;
+	border:0;
+	outline:none;
+	background-color: #F3F2EE;
+	height: 40px;
+	width:100%;
+	padding-left:15px; 
+}
+.rowpassword{
+	margin: 0 auto;
+	width: 90%;
+	margin-top: 20px
+}
