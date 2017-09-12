@@ -599,7 +599,7 @@
             </div>
         </div>
     </script>
-    <script src="js/content.min.js"></script>
-    <script src="js/welcome.min.js"></script>
+    <script src="assets/js/content.min.js"></script>
+    <script src="assets/js/welcome.min.js"></script>
 </body>
 </html>
