@@ -66,7 +66,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="echarts-line-chart"></div>
+                       <div class="echarts" id="echarts-line-chart"></div>
                     </div>
                 </div>
             </div>
