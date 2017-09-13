@@ -103,7 +103,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="J_menuItem" href="rest/graph_echarts">百度ECharts</a>
+                                <a class="J_menuItem" href="rest/graph_echarts">数据分析图</a>
                             </li>
                             <li>
                                 <a class="J_menuItem" href="rest/graph_flot">Flot</a>
