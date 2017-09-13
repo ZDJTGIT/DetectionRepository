@@ -44,24 +44,44 @@
 	<div class="middle-box text-center loginscreen   animated fadeInDown">
 		<div>
 			<div>
-
-				<h1 class="logo-name">H+</h1>
-
+				<img src="assets/img/zdLogo.png"  alt="图片未加载">
+                <h1 class="logo-name">Detection</h1>
 			</div>
-			<h3>欢迎注册 H+</h3>
-			<p>创建一个H+新账户</p>
+			<h3>欢迎注册中大检测平台账户</h3>
+			<p>创建一个中大检测新账户</p>
 			<form class="m-t" role="form"
 				action="http://www.zi-han.net/theme/hplus/login.html">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="请输入用户名"
+					<input type="text" class="form-control" placeholder="请输入用户名（例：中大检测）"
 						required="">
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" placeholder="请输入密码"
+					<input type="password" class="form-control" placeholder="请设置您的密码(6-16个字符，区分大小写)"
 						required="">
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" placeholder="请再次输入密码"
+					<input type="text" class="form-control" placeholder="请输入您的邮箱地址(例：1234567890@qq.com)"
+						required="">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="请输入您常用的手机号码"
+						required="">
+				</div>
+				<div class="input-group">
+                    <input type="text"  id="input_color"  placeholder="输入验证码" class="form-control">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">
+                                            获取验证码
+                    </button>
+                    </span>
+                </div>
+				<br>
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="选填：公司名称(默认：中大检测)"
+						required="">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="选填：联系人(默认：罗杰)"
 						required="">
 				</div>
 				<div class="form-group text-left">
