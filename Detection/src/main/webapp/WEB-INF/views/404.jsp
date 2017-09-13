@@ -5,13 +5,6 @@ String path = request.getContextPath();
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <!DOCTYPE html>
-<!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.0.3
-Version: 1.5.5
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
--->
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
@@ -71,7 +64,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
     <!-- BEGIN CORE PLUGINS -->
     <!--[if lt IE 9]>
 <script src="assets/plugins/respond.min.js"></script>
-<script src="assets/plugins/excanvas.min.js"></script> 
+<script src="assets/plugins/excanvas.min.js"></script>
 <![endif]-->
     <script src="assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>

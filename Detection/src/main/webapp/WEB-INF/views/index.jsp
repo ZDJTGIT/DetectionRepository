@@ -27,10 +27,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
     <![endif]-->
 
     <link rel="icon" type="image/png" sizes="96x96" href="assets/img/zdLogo.png">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="assets/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="assets/css/animate.min.css" rel="stylesheet">
-    <link href="assets/css/style.min.css" rel="stylesheet">
+    <link href="assets/css/style.min.css?v=4.1.0" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -43,8 +43,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                 <ul class="nav" id="side-menu">
                     <li class="nav-header">
                         <div class="dropdown profile-element">
-                            <span><img alt="image" class="img-circle" src="img/profile_small.jpg" /></span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span><img alt="image" class="img-circle" src="assets/img/profile_small.jpg" /></span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:;">
                                 <span class="clear">
                                <span class="block m-t-xs"><strong class="font-bold">${userInfo.linkman}</strong></span>
                                 <span class="text-muted text-xs block">${userInfo.name}<b class="caret"></b></span>
@@ -68,35 +68,36 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         </div>
                     </li>
                     <li>
-                        <a href="#">
+                        <a class="J_menuItem" href="rest/home" id="btn-home">
                             <i class="fa fa-home"></i>
                             <span class="nav-label">主页</span>
                             <span class="fa arrow"></span>
                         </a>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="javascript:;">
+                        	<i class="fa fa-columns"></i> <span class="nav-label">我的项目</span>
+                        </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="J_menuItem" href="rest/index_v1" data-index="0">主页示例一</a>
+                                <a class="J_menuItem" href="rest/index_v2">项目进展</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="rest/index_v2">主页示例二</a>
+                                <a class="J_menuItem" href="rest/index_v3">农田</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="rest/index_v3">主页示例三</a>
+                                <a class="J_menuItem" href="rest/index_v4">隧道</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="rest/index_v4">主页示例四</a>
-                            </li>
-                            <li>
-                                <a href="rest/index_v5" target="_blank">主页示例五</a>
+                            	<a class="J_menuItem" href="rest/index_v5">桥梁</a>
                             </li>
                         </ul>
-
                     </li>
                     <li>
                         <a class="J_menuItem" href="rest/layouts"><i class="fa fa-columns"></i> <span class="nav-label">布局</span></a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="javascript:;">
                             <i class="fa fa fa-bar-chart-o"></i>
                             <span class="nav-label">统计图表</span>
                             <span class="fa arrow"></span>
@@ -138,7 +139,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">表单</span><span class="fa arrow"></span></a>
+                        <a href="javascript:;"><i class="fa fa-edit"></i> <span class="nav-label">表单</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem" href="rest/form_basic">基本表单</a>
                             </li>
@@ -149,7 +150,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <li><a class="J_menuItem" href="rest/form_wizard">表单向导</a>
                             </li>
                             <li>
-                                <a href="#">文件上传 <span class="fa arrow"></span></a>
+                                <a href="javascript:;">文件上传 <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a class="J_menuItem" href="rest/form_webuploader">百度WebUploader</a>
                                     </li>
@@ -160,7 +161,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">编辑器 <span class="fa arrow"></span></a>
+                                <a href="javascript:;">编辑器 <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a class="J_menuItem" href="rest/form_editors">富文本编辑器</a>
                                     </li>
@@ -179,14 +180,14 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">页面</span><span class="fa arrow"></span></a>
+                        <a href="javascript:;"><i class="fa fa-desktop"></i> <span class="nav-label">页面</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem" href="rest/contacts">联系人</a>
                             </li>
                             <li><a class="J_menuItem" href="rest/profile">个人资料</a>
                             </li>
                             <li>
-                                <a href="#">项目管理 <span class="fa arrow"></span></a>
+                                <a href="javascript:;">项目管理 <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a class="J_menuItem" href="rest/projects">项目</a>
                                     </li>
@@ -205,7 +206,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <li><a class="J_menuItem" href="rest/calendar">日历</a>
                             </li>
                             <li>
-                                <a href="#">博客 <span class="fa arrow"></span></a>
+                                <a href="javascript:;">博客 <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a class="J_menuItem" href="rest/blog">文章列表</a>
                                     </li>
@@ -216,7 +217,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <li><a class="J_menuItem" href="rest/faq">FAQ</a>
                             </li>
                             <li>
-                                <a href="#">时间轴 <span class="fa arrow"></span></a>
+                                <a href="javascript:;">时间轴 <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a class="J_menuItem" href="rest/timeline">时间轴</a>
                                     </li>
@@ -227,7 +228,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <li><a class="J_menuItem" href="rest/pin_board">标签墙</a>
                             </li>
                             <li>
-                                <a href="#">单据 <span class="fa arrow"></span></a>
+                                <a href="javascript:;">单据 <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a class="J_menuItem" href="rest/invoice">单据</a>
                                     </li>
@@ -240,7 +241,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <li><a class="J_menuItem" href="rest/forum_main">论坛</a>
                             </li>
                             <li>
-                                <a href="#">即时通讯 <span class="fa arrow"></span></a>
+                                <a href="javascript:;">即时通讯 <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a class="J_menuItem" href="rest/chat_view">聊天窗口</a>
                                     </li>
@@ -249,7 +250,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">登录注册相关 <span class="fa arrow"></span></a>
+                                <a href="javascript:;">登录注册相关 <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a href="rest/page/login" target="_blank">登录页面</a>
                                     </li>
@@ -270,12 +271,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-flask"></i> <span class="nav-label">UI元素</span><span class="fa arrow"></span></a>
+                        <a href="javascript:;"><i class="fa fa-flask"></i> <span class="nav-label">UI元素</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem" href="rest/typography">排版</a>
                             </li>
                             <li>
-                                <a href="#">字体图标 <span class="fa arrow"></span></a>
+                                <a href="javascript:;">字体图标 <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li>
                                         <a class="J_menuItem" href="rest/fontawesome">Font Awesome</a>
@@ -289,7 +290,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">拖动排序 <span class="fa arrow"></span></a>
+                                <a href="javascript:;">拖动排序 <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a class="J_menuItem" href="rest/draggable_panels">拖动面板</a>
                                     </li>
@@ -311,7 +312,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <li><a class="J_menuItem" href="rest/plyr">视频、音频</a>
                             </li>
                             <li>
-                                <a href="#">弹框插件 <span class="fa arrow"></span></a>
+                                <a href="javascript:;">弹框插件 <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a class="J_menuItem" href="rest/layer">Web弹层组件layer</a>
                                     </li>
@@ -322,7 +323,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">树形视图 <span class="fa arrow"></span></a>
+                                <a href="javascript:;">树形视图 <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a class="J_menuItem" href="rest/jstree">jsTree</a>
                                     </li>
@@ -343,7 +344,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-table"></i> <span class="nav-label">表格</span><span class="fa arrow"></span></a>
+                        <a href="javascript:;"><i class="fa fa-table"></i> <span class="nav-label">表格</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem" href="rest/table_basic">用户&告警联系人
                             <span class="label label-danger pull-right">管理员可见</span></a>
@@ -359,7 +360,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">相册</span><span class="fa arrow"></span></a>
+                        <a href="javascript:;"><i class="fa fa-picture-o"></i> <span class="nav-label">相册</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem" href="rest/basic_gallery">基本图库</a>
                             </li>
@@ -373,7 +374,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         <a class="J_menuItem" href="rest/css_animation"><i class="fa fa-magic"></i> <span class="nav-label">CSS动画</span></a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-cutlery"></i> <span class="nav-label">工具 </span><span class="fa arrow"></span></a>
+                        <a href="javascript:;"><i class="fa fa-cutlery"></i> <span class="nav-label">工具 </span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li><a class="J_menuItem" href="rest/form_builder">表单构建器</a>
                             </li>
@@ -389,22 +390,21 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                        <form role="search" class="navbar-form-custom" method="post" action="http://www.zi-han.net/theme/hplus/search_results.html">
-                            <div class="form-group">
-                                <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
-                            </div>
-                        </form>
+                        <div class="logo">
+                        	<img src="assets/img/zdLogo.png" alt="logo" class="logo">
+							<a href="#" class="navbar-brand">中国大检测数据在线监控平台</a>
+						</div>
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:;">
                                 <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
                             </a>
                             <ul class="dropdown-menu dropdown-messages">
                                 <li class="m-t-xs">
                                     <div class="dropdown-messages-box">
                                         <a href="rest/profile" class="pull-left">
-                                            <img alt="image" class="img-circle" src="img/a7.jpg">
+                                            <img alt="image" class="img-circle" src="assets/img/a7.jpg">
                                         </a>
                                         <div class="media-body">
                                             <small class="pull-right">46小时前</small>
@@ -418,7 +418,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 <li>
                                     <div class="dropdown-messages-box">
                                         <a href="rest/profile" class="pull-left">
-                                            <img alt="image" class="img-circle" src="img/a4.jpg">
+                                            <img alt="image" class="img-circle" src="assets/img/a4.jpg">
                                         </a>
                                         <div class="media-body ">
                                             <small class="pull-right text-navy">25小时前</small>
@@ -439,7 +439,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:;">
                                 <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
                             </a>
                             <ul class="dropdown-menu dropdown-alerts">
@@ -487,7 +487,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                 </button>
                 <nav class="page-tabs J_menuTabs">
                     <div class="page-tabs-content">
-                        <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
+                        <a href="rest/home" class="J_menuTab">主页</a>
                     </div>
                 </nav>
                 <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
@@ -589,21 +589,21 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <div class="title">皮肤选择</div>
                             <div class="setings-item default-skin nb">
                                 <span class="skin-name ">
-                         <a href="#" class="s-skin-0">
+                         <a href="javascript:;" class="s-skin-0">
                              默认皮肤
                          </a>
                     </span>
                             </div>
                             <div class="setings-item blue-skin nb">
                                 <span class="skin-name ">
-                        <a href="#" class="s-skin-1">
+                        <a href="javascript:;" class="s-skin-1">
                             蓝色主题
                         </a>
                     </span>
                             </div>
                             <div class="setings-item yellow-skin nb">
                                 <span class="skin-name ">
-                        <a href="#" class="s-skin-3">
+                        <a href="javascript:;" class="s-skin-3">
                             黄色/紫色主题
                         </a>
                     </span>
@@ -620,9 +620,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         <div>
 
                             <div class="sidebar-message">
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="pull-left text-center">
-                                        <img alt="image" class="img-circle message-avatar" src="img/a1.jpg">
+                                        <img alt="image" class="img-circle message-avatar" src="assets/img/a1.jpg">
 
                                         <div class="m-t-xs">
                                             <i class="fa fa-star text-warning"></i>
@@ -638,9 +638,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </div>
                             <div class="sidebar-message">
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="pull-left text-center">
-                                        <img alt="image" class="img-circle message-avatar" src="img/a2.jpg">
+                                        <img alt="image" class="img-circle message-avatar" src="assets/img/a2.jpg">
                                     </div>
                                     <div class="media-body">
                                         HCY48之音乐大魔王会员专属皮肤已上线，快来一键换装拥有他，宣告你对华晨宇的爱吧！
@@ -650,9 +650,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </div>
                             <div class="sidebar-message">
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="pull-left text-center">
-                                        <img alt="image" class="img-circle message-avatar" src="img/a3.jpg">
+                                        <img alt="image" class="img-circle message-avatar" src="assets/img/a3.jpg">
 
                                         <div class="m-t-xs">
                                             <i class="fa fa-star text-warning"></i>
@@ -668,9 +668,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </div>
                             <div class="sidebar-message">
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="pull-left text-center">
-                                        <img alt="image" class="img-circle message-avatar" src="img/a4.jpg">
+                                        <img alt="image" class="img-circle message-avatar" src="assets/img/a4.jpg">
                                     </div>
 
                                     <div class="media-body">
@@ -681,9 +681,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </div>
                             <div class="sidebar-message">
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="pull-left text-center">
-                                        <img alt="image" class="img-circle message-avatar" src="img/a8.jpg">
+                                        <img alt="image" class="img-circle message-avatar" src="assets/img/a8.jpg">
                                     </div>
                                     <div class="media-body">
 
@@ -694,9 +694,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </div>
                             <div class="sidebar-message">
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="pull-left text-center">
-                                        <img alt="image" class="img-circle message-avatar" src="img/a7.jpg">
+                                        <img alt="image" class="img-circle message-avatar" src="assets/img/a7.jpg">
                                     </div>
                                     <div class="media-body">
                                         这哥们的新视频又来了，创意杠杠滴，帅炸了！
@@ -706,9 +706,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </div>
                             <div class="sidebar-message">
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="pull-left text-center">
-                                        <img alt="image" class="img-circle message-avatar" src="img/a3.jpg">
+                                        <img alt="image" class="img-circle message-avatar" src="assets/img/a3.jpg">
 
                                         <div class="m-t-xs">
                                             <i class="fa fa-star text-warning"></i>
@@ -724,9 +724,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </div>
                             <div class="sidebar-message">
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="pull-left text-center">
-                                        <img alt="image" class="img-circle message-avatar" src="img/a4.jpg">
+                                        <img alt="image" class="img-circle message-avatar" src="assets/img/a4.jpg">
                                     </div>
                                     <div class="media-body">
                                         我发起了一个投票 【你认为下午大盘会翻红吗？】
@@ -747,7 +747,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
                         <ul class="sidebar-list">
                             <li>
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="small pull-right m-t-xs">9小时以后</div>
                                     <h4>市场调研</h4> 按要求接收教材；
 
@@ -759,7 +759,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="small pull-right m-t-xs">9小时以后</div>
                                     <h4>可行性报告研究报上级批准 </h4> 编写目的编写本项目进度报告的目的在于更好的控制软件开发的时间,对团队成员的 开发进度作出一个合理的比对
 
@@ -770,7 +770,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="small pull-right m-t-xs">9小时以后</div>
                                     <h4>立项阶段</h4> 东风商用车公司 采购综合综合查询分析系统项目进度阶段性报告武汉斯迪克科技有限公司
 
@@ -781,7 +781,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="javascript:;">
                                     <span class="label label-primary pull-right">NEW</span>
                                     <h4>设计阶段</h4>
                                     <!--<div class="small pull-right m-t-xs">9小时以后</div>-->
@@ -791,7 +791,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="small pull-right m-t-xs">9小时以后</div>
                                     <h4>拆迁阶段</h4> 科研项目研究进展报告 项目编号: 项目名称: 项目负责人:
 
@@ -803,7 +803,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="small pull-right m-t-xs">9小时以后</div>
                                     <h4>建设阶段 </h4> 编写目的编写本项目进度报告的目的在于更好的控制软件开发的时间,对团队成员的 开发进度作出一个合理的比对
 
@@ -814,7 +814,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="javascript:;">
                                     <div class="small pull-right m-t-xs">9小时以后</div>
                                     <h4>获证开盘</h4> 编写目的编写本项目进度报告的目的在于更好的控制软件开发的时间,对团队成员的 开发进度作出一个合理的比对
 
@@ -928,11 +928,28 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=45d7aee2c7ba665d7c3445f4209fe885"></script>
+    <script src="assets/js/bootstrap-notify.js"></script>
     <script src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="assets/js/plugins/layer/layer.min.js"></script>
     <script src="assets/js/plugins/pace/pace.min.js"></script>
     <script src="assets/js/hplus.js" type="text/javascript"></script>
     <script src="assets/js/contabs.js" type="text/javascript"></script>
+    <script type="text/javascript">
+	$(document).ready(function(){
+
+	    $.notify({
+	        icon: 'fa user',
+	        message: "欢迎来到<b>中大检测在线监控平台</b>."
+
+	    },{
+	        type: 'success',
+	        timer: 4000
+	    });
+
+	});
+
+	</script>
 </body>
 </html>

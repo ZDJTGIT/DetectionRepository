@@ -35,9 +35,9 @@ public class CommonController {
         return "index";
     }
 
-    @RequestMapping("index_v1")
-    public String index_v1(HttpServletRequest request) {
-        return "index_v1";
+    @RequestMapping("home")
+    public String home(HttpServletRequest request) {
+        return "home";
     }
 
     @RequestMapping("index_v2")

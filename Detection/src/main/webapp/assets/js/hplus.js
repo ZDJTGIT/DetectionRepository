@@ -276,36 +276,3 @@ $(function () {
 function localStorageSupport() {
     return (('localStorage' in window) && window['localStorage'] !== null)
 }
-
-//菜单点击事件
-$(function() {
-
-	var Index = (function() {
-		var me = {};
-
-        // 处理子菜单点击
-        me.handleSubMenuClick = function() {
-            $('#side-menu li a').click(function(e) {
-                e.preventDefault();
-                var url = this.href;
-                if (url != null && url.indexOf('#') <= 0) {
-                    $.get(url, function(data) {
-                        $('#content-main').html(data);
-                    });
-                }
-            });
-        };
-
-        me.init = function() {
-            me.handleSubMenuClick();
-        };
-
-        return me;
-    })();
-
-    Index.init();
-
-    $('#btn-home').trigger("click");
-
-});
-

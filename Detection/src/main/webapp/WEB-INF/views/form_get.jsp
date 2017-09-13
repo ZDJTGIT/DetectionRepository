@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -13,7 +12,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
-    	    <meta http-equiv="X-UA-Compatible" content="IE=9;IE=8;IE=7" />
+	<base href="<%=basePath%>">
+   	<meta http-equiv="X-UA-Compatible" content="IE=9;IE=8;IE=7" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
                                     <title>404 - Zihan&#039;s Blog</title>        <meta name="keywords" content="" />
     <meta name="description" content="" />

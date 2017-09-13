@@ -5,7 +5,6 @@
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -63,7 +62,7 @@
 	<!-- BEGIN CORE PLUGINS -->
 	<!--[if lt IE 9]>
 <script src="assets/plugins/respond.min.js"></script>
-<script src="assets/plugins/excanvas.min.js"></script> 
+<script src="assets/plugins/excanvas.min.js"></script>
 <![endif]-->
 	<script src="assets/plugins/jquery-1.10.2.min.js"
 		type="text/javascript"></script>

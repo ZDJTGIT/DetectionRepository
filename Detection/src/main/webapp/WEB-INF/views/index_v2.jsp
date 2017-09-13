@@ -1,6 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -9,7 +12,7 @@
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
-
+	<base href="<%=basePath%>">
     <!-- Morris -->
     <link href="assets/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
 

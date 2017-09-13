@@ -1,6 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -14,14 +13,9 @@
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
-
+<base href="<%=basePath%>">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
-<meta name="description"
-	content="中大检测平台">
-
-
 
     <title> 数据分析图</title>
     <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
@@ -39,7 +33,7 @@
 </head>
 
 <body class="gray-bg">
-    
+
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-sm-12">
