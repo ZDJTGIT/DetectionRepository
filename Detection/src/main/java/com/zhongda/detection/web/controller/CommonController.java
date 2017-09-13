@@ -449,7 +449,7 @@ public class CommonController {
     public String tabs_panels(HttpServletRequest request) {
         return "tabs_panels";
     }
-
+    
     @RequestMapping("teams_board")
     public String teams_board(HttpServletRequest request) {
         return "teams_board";

@@ -19,7 +19,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>H+ 后台主题UI框架 - jqGird</title>
+<title>告警处理表</title>
 <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
 <meta name="description"
 	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
@@ -47,410 +47,186 @@
 	<div class="wrapper wrapper-content  animated fadeInRight">
 		<div class="row">
 			<div class="col-sm-12">
-				<div class="ibox ">
+				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<h5>jQuery Grid Plugin – jqGrid</h5>
+						<h5>告警处理表</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+							</a> <a class="dropdown-toggle" data-toggle="dropdown"
+								href="table_data_tables.html#"> <i class="fa fa-wrench"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="table_data_tables.html#">选项1</a></li>
+								<li><a href="table_data_tables.html#">选项2</a></li>
+							</ul>
+							<a class="close-link"> <i class="fa fa-times"></i>
+							</a>
+						</div>
 					</div>
 					<div class="ibox-content">
-						<p>
-							<strong>jqGrid</strong> 是一个用来显示网格数据的jQuery插件，文档比较全面，附带中文版本。访问<a
-								target="_blank" href="http://www.trirand.com/blog/"> 官网</a>
-						</p>
-						<p>jqGrid的主要特点为：</p>
-						<ol>
-							<li>基于jquery UI主题，开发者可以根据客户要求更换不同的主题</li>
-							<li>兼容目前所有流行的web浏览器</li>
-							<li>Ajax分页，可以控制每页显示的记录数</li>
-							<li>支持XML，JSON，数组形式的数据源</li>
-							<li>提供丰富的选项配置及方法事件接口</li>
-							<li>支持表格排序，支持拖动列、隐藏列</li>
-							<li>支持滚动加载数据</li>
-							<li>支持实时编辑保存数据内容</li>
-							<li>支持子表格及树形表格</li>
-							<li>支持多语言</li>
-							<li>免费</li>
-						</ol>
-						<hr>
-						<h4>基本示例</h4>
-
-						<div class="jqGrid_wrapper">
-							<table id="table_list_1"></table>
-							<div id="pager_list_1"></div>
+						<div class="">
+							<a onclick="fnClickAddRow();" href="javascript:void(0);"
+								class="btn btn-primary ">添加行</a>
 						</div>
-						<p>&nbsp;</p>
-						<h4 class="m-t">高级用法</h4>
-
-
-						<div class="jqGrid_wrapper">
-							<table id="table_list_2"></table>
-							<div id="pager_list_2"></div>
-						</div>
+						<table class="table table-striped table-bordered table-hover "
+							id="editable">
+							<thead>
+								<tr>
+									<td>设备名称</td>
+									<td>设备编号</td>
+									<td>参数名</td>
+									<td>告警描述</td>
+									<td>告警时间</td>
+									<td>所属系统</td>
+									<td>告警等级</td>
+									<td>操作</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="gradeX">
+									<td>水深检测器</td>
+									<td>20801</td>
+									<td>灌水田</td>
+									<td>水位过低</td>
+									<td>2017/7/27 13:16:41</td>
+									<td>中大自动检测系统</td>
+									<td>2</td>
+									<td>已处理</td>
+								</tr>
+								<tr class="gradeC">
+									<td>PH值检测器</td>
+									<td>20821</td>
+									<td>灌水田</td>
+									<td>PH值过低</td>
+									<td>2017/8/27 13:16:41</td>
+									<td>中大自动检测系统</td>
+									<td>3</td>
+									<td>未处理</td>
+								</tr>
+								<tr class="gradeA">
+									<td>水深检测器</td>
+									<td>20801</td>
+									<td>灌水田</td>
+									<td>水位过低</td>
+									<td>2017/7/27 13:16:41</td>
+									<td>中大自动检测系统</td>
+									<td>2</td>
+									<td>已处理</td>
+								</tr>
+								<tr class="gradeA">
+									<td>水深检测器</td>
+									<td>20801</td>
+									<td>灌水田</td>
+									<td>水位过低</td>
+									<td>2017/7/27 13:16:41</td>
+									<td>中大自动检测系统</td>
+									<td>2</td>
+									<td>已处理</td>
+								</tr>
+								<tr class="gradeA">
+									<td>水深检测器</td>
+									<td>20801</td>
+									<td>灌水田</td>
+									<td>水位过低</td>
+									<td>2017/7/27 13:16:41</td>
+									<td>中大自动检测系统</td>
+									<td>2</td>
+									<td>已处理</td>
+								</tr>
+								<tr class="gradeA">
+									<td>水深检测器</td>
+									<td>20801</td>
+									<td>灌水田</td>
+									<td>水位过低</td>
+									<td>2017/7/27 13:16:41</td>
+									<td>中大自动检测系统</td>
+									<td>2</td>
+									<td>已处理</td>
+								</tr>
+								<tr class="gradeA">
+									<td>PH值检测器</td>
+									<td>20821</td>
+									<td>灌水田</td>
+									<td>PH值过低</td>
+									<td>2017/8/27 13:16:41</td>
+									<td>中大自动检测系统</td>
+									<td>3</td>
+									<td>未处理</td>
+								</tr>
+								<tr class="gradeA">
+									<td>PH值检测器</td>
+									<td>20821</td>
+									<td>灌水田</td>
+									<td>PH值过低</td>
+									<td>2017/8/27 13:16:41</td>
+									<td>中大自动检测系统</td>
+									<td>3</td>
+									<td>已处理</td>
+								</tr>
+								<tr class="gradeA">
+									<td>PH值检测器</td>
+									<td>20821</td>
+									<td>灌水田</td>
+									<td>PH值过低</td>
+									<td>2017/8/27 13:16:41</td>
+									<td>中大自动检测系统</td>
+									<td>3</td>
+									<td>未处理</td>
+								</tr>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<script src="assets/js/jquery.min.js?v=2.1.4"></script>
 	<script src="assets/js/bootstrap.min.js?v=3.3.6"></script>
-	<script src="assets/js/plugins/peity/jquery.peity.min.js"></script>
-	<script src="assets/js/plugins/jqgrid/i18n/grid.locale-cnffe4.js?0820"></script>
-	<script src="assets/js/plugins/jqgrid/jquery.jqGrid.minffe4.js?0820"></script>
+	<script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
+	<script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
+	<script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 	<script src="assets/js/content.min.js?v=1.0.0"></script>
 	<script>
-		$(document).ready(function() {
-			$.jgrid.defaults.styleUI = "Bootstrap";
-			var mydata = [ {
-				id : "1",
-				invdate : "2010-05-24",
-				name : "test",
-				note : "note",
-				tax : "10.00",
-				total : "2111.00"
-			}, {
-				id : "2",
-				invdate : "2010-05-25",
-				name : "test2",
-				note : "note2",
-				tax : "20.00",
-				total : "320.00"
-			}, {
-				id : "3",
-				invdate : "2007-09-01",
-				name : "test3",
-				note : "note3",
-				tax : "30.00",
-				total : "430.00"
-			}, {
-				id : "4",
-				invdate : "2007-10-04",
-				name : "test",
-				note : "note",
-				tax : "10.00",
-				total : "210.00"
-			}, {
-				id : "5",
-				invdate : "2007-10-05",
-				name : "test2",
-				note : "note2",
-				tax : "20.00",
-				total : "320.00"
-			}, {
-				id : "6",
-				invdate : "2007-09-06",
-				name : "test3",
-				note : "note3",
-				tax : "30.00",
-				total : "430.00"
-			}, {
-				id : "7",
-				invdate : "2007-10-04",
-				name : "test",
-				note : "note",
-				tax : "10.00",
-				total : "210.00"
-			}, {
-				id : "8",
-				invdate : "2007-10-03",
-				name : "test2",
-				note : "note2",
-				amount : "300.00",
-				tax : "21.00",
-				total : "320.00"
-			}, {
-				id : "9",
-				invdate : "2007-09-01",
-				name : "test3",
-				note : "note3",
-				amount : "400.00",
-				tax : "30.00",
-				total : "430.00"
-			}, {
-				id : "11",
-				invdate : "2007-10-01",
-				name : "test",
-				note : "note",
-				amount : "200.00",
-				tax : "10.00",
-				total : "210.00"
-			}, {
-				id : "12",
-				invdate : "2007-10-02",
-				name : "test2",
-				note : "note2",
-				amount : "300.00",
-				tax : "20.00",
-				total : "320.00"
-			}, {
-				id : "13",
-				invdate : "2007-09-01",
-				name : "test3",
-				note : "note3",
-				amount : "400.00",
-				tax : "30.00",
-				total : "430.00"
-			}, {
-				id : "14",
-				invdate : "2007-10-04",
-				name : "test",
-				note : "note",
-				amount : "200.00",
-				tax : "10.00",
-				total : "210.00"
-			}, {
-				id : "15",
-				invdate : "2007-10-05",
-				name : "test2",
-				note : "note2",
-				amount : "300.00",
-				tax : "20.00",
-				total : "320.00"
-			}, {
-				id : "16",
-				invdate : "2007-09-06",
-				name : "test3",
-				note : "note3",
-				amount : "400.00",
-				tax : "30.00",
-				total : "430.00"
-			}, {
-				id : "17",
-				invdate : "2007-10-04",
-				name : "test",
-				note : "note",
-				amount : "200.00",
-				tax : "10.00",
-				total : "210.00"
-			}, {
-				id : "18",
-				invdate : "2007-10-03",
-				name : "test2",
-				note : "note2",
-				amount : "300.00",
-				tax : "20.00",
-				total : "320.00"
-			}, {
-				id : "19",
-				invdate : "2007-09-01",
-				name : "test3",
-				note : "note3",
-				amount : "400.00",
-				tax : "30.00",
-				total : "430.00"
-			}, {
-				id : "21",
-				invdate : "2007-10-01",
-				name : "test",
-				note : "note",
-				amount : "200.00",
-				tax : "10.00",
-				total : "210.00"
-			}, {
-				id : "22",
-				invdate : "2007-10-02",
-				name : "test2",
-				note : "note2",
-				amount : "300.00",
-				tax : "20.00",
-				total : "320.00"
-			}, {
-				id : "23",
-				invdate : "2007-09-01",
-				name : "test3",
-				note : "note3",
-				amount : "400.00",
-				tax : "30.00",
-				total : "430.00"
-			}, {
-				id : "24",
-				invdate : "2007-10-04",
-				name : "test",
-				note : "note",
-				amount : "200.00",
-				tax : "10.00",
-				total : "210.00"
-			}, {
-				id : "25",
-				invdate : "2007-10-05",
-				name : "test2",
-				note : "note2",
-				amount : "300.00",
-				tax : "20.00",
-				total : "320.00"
-			}, {
-				id : "26",
-				invdate : "2007-09-06",
-				name : "test3",
-				note : "note3",
-				amount : "400.00",
-				tax : "30.00",
-				total : "430.00"
-			}, {
-				id : "27",
-				invdate : "2007-10-04",
-				name : "test",
-				note : "note",
-				amount : "200.00",
-				tax : "10.00",
-				total : "210.00"
-			}, {
-				id : "28",
-				invdate : "2007-10-03",
-				name : "test2",
-				note : "note2",
-				amount : "300.00",
-				tax : "20.00",
-				total : "320.00"
-			}, {
-				id : "29",
-				invdate : "2007-09-01",
-				name : "test3",
-				note : "note3",
-				amount : "400.00",
-				tax : "30.00",
-				total : "430.00"
-			} ];
-			$("#table_list_1").jqGrid({
-				data : mydata,
-				datatype : "local",
-				height : 250,
-				autowidth : true,
-				shrinkToFit : true,
-				rowNum : 14,
-				rowList : [ 10, 20, 30 ],
-				colNames : [ "序号", "日期", "客户", "金额", "运费", "总额", "备注" ],
-				colModel : [ {
-					name : "id",
-					index : "id",
-					width : 60,
-					sorttype : "int"
-				}, {
-					name : "invdate",
-					index : "invdate",
-					width : 90,
-					sorttype : "date",
-					formatter : "date"
-				}, {
-					name : "name",
-					index : "name",
-					width : 100
-				}, {
-					name : "amount",
-					index : "amount",
-					width : 80,
-					align : "right",
-					sorttype : "float",
-					formatter : "number"
-				}, {
-					name : "tax",
-					index : "tax",
-					width : 80,
-					align : "right",
-					sorttype : "float"
-				}, {
-					name : "total",
-					index : "total",
-					width : 80,
-					align : "right",
-					sorttype : "float"
-				}, {
-					name : "note",
-					index : "note",
-					width : 150,
-					sortable : false
-				} ],
-				pager : "#pager_list_1",
-				viewrecords : true,
-				caption : "jqGrid 示例1",
-				hidegrid : false
-			});
-			$("#table_list_2").jqGrid({
-				data : mydata,
-				datatype : "local",
-				height : 450,
-				autowidth : true,
-				shrinkToFit : true,
-				rowNum : 20,
-				rowList : [ 10, 20, 30 ],
-				colNames : [ "序号", "日期", "客户", "金额", "运费", "总额", "备注" ],
-				colModel : [ {
-					name : "id",
-					index : "id",
-					editable : true,
-					width : 60,
-					sorttype : "int",
-					search : true
-				}, {
-					name : "invdate",
-					index : "invdate",
-					editable : true,
-					width : 90,
-					sorttype : "date",
-					formatter : "date"
-				}, {
-					name : "name",
-					index : "name",
-					editable : true,
-					width : 100
-				}, {
-					name : "amount",
-					index : "amount",
-					editable : true,
-					width : 80,
-					align : "right",
-					sorttype : "float",
-					formatter : "number"
-				}, {
-					name : "tax",
-					index : "tax",
-					editable : true,
-					width : 80,
-					align : "right",
-					sorttype : "float"
-				}, {
-					name : "total",
-					index : "total",
-					editable : true,
-					width : 80,
-					align : "right",
-					sorttype : "float"
-				}, {
-					name : "note",
-					index : "note",
-					editable : true,
-					width : 100,
-					sortable : false
-				} ],
-				pager : "#pager_list_2",
-				viewrecords : true,
-				caption : "jqGrid 示例2",
-				add : true,
-				edit : true,
-				addtext : "Add",
-				edittext : "Edit",
-				hidegrid : false
-			});
-			$("#table_list_2").setSelection(4, true);
-			$("#table_list_2").jqGrid("navGrid", "#pager_list_2", {
-				edit : true,
-				add : true,
-				del : true,
-				search : true
-			}, {
-				height : 200,
-				reloadAfterSubmit : true
-			});
-			$(window).bind("resize", function() {
-				var width = $(".jqGrid_wrapper").width();
-				$("#table_list_1").setGridWidth(width);
-				$("#table_list_2").setGridWidth(width)
-			})
-		});
+		$(document)
+				.ready(
+						function() {
+							$(".dataTables-example").dataTable();
+							var oTable = $("#editable").dataTable();
+							oTable
+									.$("td")
+									.editable(
+											"http://www.zi-han.net/theme/example_ajax.php",
+											{
+												"callback" : function(sValue, y) {
+													var aPos = oTable
+															.fnGetPosition(this);
+													oTable.fnUpdate(sValue,
+															aPos[0], aPos[1])
+												},
+												"submitdata" : function(value,
+														settings) {
+													return {
+														"row_id" : this.parentNode
+																.getAttribute("id"),
+														"column" : oTable
+																.fnGetPosition(this)[2]
+													}
+												},
+												"width" : "90%",
+												"height" : "100%"
+											})
+						});
+		function fnClickAddRow() {
+			$("#editable").dataTable()
+					.fnAddData(
+							[ "Custom row", "New row", "New row", "New row",
+									"New row" ])
+		};
 	</script>
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+
 </body>
 
 
-<!-- Mirrored from www.zi-han.net/theme/hplus/table_jqgrid.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_data_tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
 </html>

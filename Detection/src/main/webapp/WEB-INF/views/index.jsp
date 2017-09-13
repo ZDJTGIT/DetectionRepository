@@ -345,16 +345,16 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                     <li>
                         <a href="#"><i class="fa fa-table"></i> <span class="nav-label">表格</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="rest/table_basic">基本表格</a>
+                            <li><a class="J_menuItem" href="rest/table_basic">用户&告警联系人
+                            <span class="label label-danger pull-right">管理员可见</span></a>
                             </li>
-                            <li><a class="J_menuItem" href="rest/table_data_tables">DataTables</a>
+                            <li><a class="J_menuItem" href="rest/table_data_tables">详细检验数据展示分析</a>
                             </li>
-                            <li><a class="J_menuItem" href="rest/table_jqgrid">jqGrid</a>
+                            <li><a class="J_menuItem" href="rest/table_jqgrid">告警处理表</a>
                             </li>
-                            <li><a class="J_menuItem" href="rest/table_foo_table">Foo Tables</a>
+                            <li><a class="J_menuItem" href="rest/table_foo_table">操作日志</a>
                             </li>
-                            <li><a class="J_menuItem" href="rest/table_bootstrap">Bootstrap Table
-                                <span class="label label-danger pull-right">推荐</span></a>
+                            <li><a class="J_menuItem" href="rest/table_bootstrap">其他</a>
                             </li>
                         </ul>
                     </li>
