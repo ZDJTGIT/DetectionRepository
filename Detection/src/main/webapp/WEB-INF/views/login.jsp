@@ -36,8 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-				<img src="assets/img/zdLogo.png"  alt="图片未加载">
-                <h1 class="logo-name">Detection</h1>
+                <img alt="" src="assets/img/zdLogo.png">
+                <h2 class="logo-name">Detection</h2>
             </div>
             <h3>欢迎使用中大检测平台</h3>
 

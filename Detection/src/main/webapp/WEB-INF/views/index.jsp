@@ -53,7 +53,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a class="J_menuItem" href="rest/form_avatar">修改头像</a>
                                 </li>
-                                <li><a class="J_menuItem" href="rest/profile">个人资料</a>
+                                <li><a class="J_menuItem" href="rest/user">个人资料</a>
                                 </li>
                                 <li><a class="J_menuItem" href="rest/contacts">联系我们</a>
                                 </li>
@@ -482,7 +482,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                     </ul>
                 </nav>
             </div>
-            <div class="row content-tabs">
+            <div class="row content-tabs" >
                 <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
                 </button>
                 <nav class="page-tabs J_menuTabs">
