@@ -13841,7 +13841,7 @@
 	};
 
 	// All properties that are available to $.fn.dataTable should also be
-	// available on $.fn.DataTable
+	// avai on $.fn.DataTable
 	$.each( DataTable, function ( prop, val ) {
 		$.fn.DataTable[ prop ] = val;
 	} );

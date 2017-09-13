@@ -14,6 +14,7 @@
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
+<base href="<%=basePath%>">
 <meta http-equiv="X-UA-Compatible" content="IE=9;IE=8;IE=7" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>404 - Zihan&#039;s Blog</title>

@@ -375,9 +375,9 @@ public class CommonController {
         return "plyr";
     }
 
-    @RequestMapping("profile")
+    @RequestMapping("user")
     public String profile(HttpServletRequest request) {
-        return "profile";
+        return "user";
     }
 
     @RequestMapping("project_detail")
