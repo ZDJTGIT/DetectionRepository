@@ -235,40 +235,20 @@ public class CommonController {
         return "glyphicons";
     }
 
-    @RequestMapping("graph_echarts")
-    public String graph_echarts(HttpServletRequest request) {
-        return "graph_echarts";
+    @RequestMapping("graph_echarts_farmland")
+    public String graph_echarts_farmland(HttpServletRequest request) {
+        return "graph_echarts_farmland";
+    }
+    
+    @RequestMapping("graph_echarts_bridge")
+    public String graph_echarts_bridge(HttpServletRequest request) {
+        return "graph_echarts_bridge";
+    }
+    @RequestMapping("graph_echarts_tunnel")
+    public String graph_echarts_tunnel(HttpServletRequest request) {
+        return "graph_echarts_tunnel";
     }
 
-    @RequestMapping("graph_flot")
-    public String graph_flot(HttpServletRequest request) {
-        return "graph_flot";
-    }
-
-    @RequestMapping("graph_metrics")
-    public String graph_metrics(HttpServletRequest request) {
-        return "graph_metrics";
-    }
-
-    @RequestMapping("graph_morris")
-    public String graph_morris(HttpServletRequest request) {
-        return "graph_morris";
-    }
-
-    @RequestMapping("graph_peity")
-    public String graph_peity(HttpServletRequest request) {
-        return "graph_peity";
-    }
-
-    @RequestMapping("graph_rickshaw")
-    public String graph_rickshaw(HttpServletRequest request) {
-        return "graph_rickshaw";
-    }
-
-    @RequestMapping("graph_sparkline")
-    public String graph_sparkline(HttpServletRequest request) {
-        return "graph_sparkline";
-    }
 
     @RequestMapping("grid_options")
     public String grid_options(HttpServletRequest request) {

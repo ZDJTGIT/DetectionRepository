@@ -156,34 +156,37 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<i class="fa fa-home"></i> <span class="nav-label">主页</span> <span
 							class="fa arrow"></span>
 					</a></li>
-					<li><a class="J_menuItem" href="javascript:;"> <i
-							class="fa fa-columns"></i> <span class="nav-label">我的项目</span>
-					</a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/index_v2">项目进展</a></li>
-							<li><a class="J_menuItem" href="rest/index_v3">农田</a></li>
-							<li><a class="J_menuItem" href="rest/index_v4">隧道</a></li>
-							<li><a class="J_menuItem" href="rest/index_v5">桥梁</a></li>
-						</ul></li>
-					<li><a class="J_menuItem" href="rest/layouts"><i
-							class="fa fa-columns"></i> <span class="nav-label">布局</span></a></li>
-					<li><a href="javascript:;"> <i
-							class="fa fa fa-bar-chart-o"></i> <span class="nav-label">统计图表</span>
-							<span class="fa arrow"></span>
-					</a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/graph_echarts">数据分析图</a>
-							</li>
-							<li><a class="J_menuItem" href="rest/graph_flot">Flot</a></li>
-							<li><a class="J_menuItem" href="rest/graph_morris">Morris.js</a>
-							</li>
-							<li><a class="J_menuItem" href="rest/graph_rickshaw">Rickshaw</a>
-							</li>
-							<li><a class="J_menuItem" href="rest/graph_peity">Peity</a>
-							</li>
-							<li><a class="J_menuItem" href="rest/graph_sparkline">Sparkline</a>
-							</li>
-							<li><a class="J_menuItem" href="rest/graph_metrics">图表组合</a>
+					<li>
+                        <a class="J_menuItem" href="javascript:;">
+                        	<i class="fa fa-columns"></i> <span class="nav-label">我的项目</span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <!-- <li>
+                                <a class="J_menuItem" href="rest/index_v2">项目进展</a>
+                            </li> -->
+                            <li>
+                                <a class="J_menuItem" href="rest/graph_echarts_farmland">农田</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道</a>
+                            </li>
+                            <li>
+                            	<a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="rest/layouts"><i class="fa fa-columns"></i> <span class="nav-label">布局</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="fa fa fa-bar-chart-o"></i>
+                            <span class="nav-label">统计图表</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="rest/graph_echarts">数据分析图</a>
 							</li>
 						</ul></li>
 
