@@ -65,29 +65,9 @@ public class CommonController {
         return "agile_board";
     }
 
-    @RequestMapping("article")
-    public String article(HttpServletRequest request) {
-        return "article";
-    }
-
     @RequestMapping("badges_labels")
     public String badges_labels(HttpServletRequest request) {
         return "badges_labels";
-    }
-
-    @RequestMapping("basic_gallery")
-    public String basic_gallery(HttpServletRequest request) {
-        return "basic_gallery";
-    }
-
-    @RequestMapping("blog")
-    public String blog(HttpServletRequest request) {
-        return "blog";
-    }
-
-    @RequestMapping("blueimp")
-    public String blueimp(HttpServletRequest request) {
-        return "blueimp";
     }
 
     @RequestMapping("buttons")
@@ -98,11 +78,6 @@ public class CommonController {
     @RequestMapping("calendar")
     public String calendar(HttpServletRequest request) {
         return "calendar";
-    }
-
-    @RequestMapping("carousel")
-    public String carousel(HttpServletRequest request) {
-        return "carousel";
     }
 
     @RequestMapping("chat_view")
@@ -138,16 +113,6 @@ public class CommonController {
     @RequestMapping("draggable_panels")
     public String draggable_panels(HttpServletRequest request) {
         return "draggable_panels";
-    }
-
-    @RequestMapping("empty_page")
-    public String empty_page(HttpServletRequest request) {
-        return "empty_page";
-    }
-
-    @RequestMapping("faq")
-    public String faq(HttpServletRequest request) {
-        return "faq";
     }
 
     @RequestMapping("file_manager")
@@ -215,11 +180,6 @@ public class CommonController {
         return "form_wizard";
     }
 
-    @RequestMapping("form_main")
-    public String form_main(HttpServletRequest request) {
-        return "form_main";
-    }
-
     @RequestMapping("form_post")
     public String form_post(HttpServletRequest request) {
         return "form_post";
@@ -239,7 +199,7 @@ public class CommonController {
     public String graph_echarts_farmland(HttpServletRequest request) {
         return "graph_echarts_farmland";
     }
-    
+
     @RequestMapping("graph_echarts_bridge")
     public String graph_echarts_bridge(HttpServletRequest request) {
         return "graph_echarts_bridge";
@@ -298,16 +258,6 @@ public class CommonController {
     @RequestMapping("layerdate")
     public String layerdate(HttpServletRequest request) {
         return "layerdate";
-    }
-
-    @RequestMapping("layouts")
-    public String layouts(HttpServletRequest request) {
-        return "layouts";
-    }
-
-    @RequestMapping("lockscreen")
-    public String lockscreen(HttpServletRequest request) {
-        return "lockscreen";
     }
 
     @RequestMapping("login_v2")
@@ -375,16 +325,6 @@ public class CommonController {
         return "register";
     }
 
-    @RequestMapping("search_results")
-    public String search_results(HttpServletRequest request) {
-        return "search_results";
-    }
-
-    @RequestMapping("social_feed")
-    public String social_feed(HttpServletRequest request) {
-        return "social_feed";
-    }
-
     @RequestMapping("spinners")
     public String spinners(HttpServletRequest request) {
         return "spinners";
@@ -429,20 +369,10 @@ public class CommonController {
     public String tabs_panels(HttpServletRequest request) {
         return "tabs_panels";
     }
-    
+
     @RequestMapping("teams_board")
     public String teams_board(HttpServletRequest request) {
         return "teams_board";
-    }
-
-    @RequestMapping("timeline_v2")
-    public String timeline_v2(HttpServletRequest request) {
-        return "timeline_v2";
-    }
-
-    @RequestMapping("timeline")
-    public String timeline(HttpServletRequest request) {
-        return "timeline";
     }
 
     @RequestMapping("toastr_notifications")

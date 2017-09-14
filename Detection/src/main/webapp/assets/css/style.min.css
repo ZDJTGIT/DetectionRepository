@@ -204,9 +204,10 @@ body.body-small .navbar-top-links li:last-child {
 	color: #8095a8
 }
 
-.minimalize-styl-2 {
-	padding: 4px 12px;
-	margin: 14px 5px 5px 20px;
+.minimalize-styl-3 {
+	padding: 9px 14px;
+	margin:0;
+	position:absolute;
 	font-size: 14px;
 	float: left
 }
@@ -3212,7 +3213,7 @@ body.body-small .footer.fixed {
 }
 
 .content-tabs .roll-left {
-	left: 0;
+	left: 43px;
 	border-right: solid 1px #eee
 }
 
@@ -3234,7 +3235,7 @@ body.body-small .footer.fixed {
 }
 
 nav.page-tabs {
-	margin-left: 40px;
+	margin-left: 83px;
 	width: 100000px;
 	height: 40px;
 	overflow: hidden
@@ -3262,11 +3263,11 @@ nav.page-tabs .page-tabs-content {
 }
 
 .roll-right.J_tabRight {
-	right: 140px
+	right: 80px
 }
 
 .roll-right.btn-group {
-	right: 60px;
+	right: 0;
 	width: 80px;
 	padding: 0
 }
@@ -3288,7 +3289,6 @@ nav.page-tabs .page-tabs-content {
 
 #content-main {
 	height: calc(100% - 140px);
-	overflow: hidden;
 	overflow:scroll
 }
 
@@ -5274,40 +5274,40 @@ del {
 50%{
 -webkit-transform
 :perspective(120px)
- 
+
 rotateX
 (-180
 .1deg
 )
- 
+
 rotateY
 (0deg);transform
 :perspective(120px)
- 
+
 rotateX
 (-180
 .1deg
 )
- 
+
 rotateY
 (0deg)
 }
 100%{
 -webkit-transform
 :perspective(120px)
- 
+
 rotateX
 (-180deg)
- 
+
 rotateY
 (-179
 .9deg
 );transform
 :perspective(120px)
- 
+
 rotateX
 (-180deg)
- 
+
 rotateY
 (-179
 .9deg
@@ -5323,40 +5323,40 @@ keyframes sk-rotatePlane { 0%{
 50%{
 -webkit-transform
 :perspective(120px)
- 
+
 rotateX
 (-180
 .1deg
 )
- 
+
 rotateY
 (0deg);transform
 :perspective(120px)
- 
+
 rotateX
 (-180
 .1deg
 )
- 
+
 rotateY
 (0deg)
 }
 100%{
 -webkit-transform
 :perspective(120px)
- 
+
 rotateX
 (-180deg)
- 
+
 rotateY
 (-179
 .9deg
 );transform
 :perspective(120px)
- 
+
 rotateX
 (-180deg)
- 
+
 rotateY
 (-179
 .9deg
@@ -5511,17 +5511,17 @@ keyframes sk-waveStretchDelay { 0%,100%,40%{
 50%{
 -webkit-transform
 :translateX(42px)
- 
+
 translateY
 (42px)
- 
+
 rotate
 (-179deg);transform
 :translateX(42px)
- 
+
 translateY
 (42px)
- 
+
 rotate
 (-179deg)
 }
@@ -5534,25 +5534,25 @@ rotate
 75%{
 -webkit-transform
 :translateX(0px)
- 
+
 translateY
 (42px)
- 
+
 rotate
 (-270deg)
- 
+
 scale
 (0
 .5
 );transform
 :translateX(0px)
- 
+
 translateY
 (42px)
- 
+
 rotate
 (-270deg)
- 
+
 scale
 (0
 .5
@@ -5574,17 +5574,17 @@ keyframes sk-wanderingCubeMove { 25%{
 50%{
 -webkit-transform
 :translateX(42px)
- 
+
 translateY
 (42px)
- 
+
 rotate
 (-179deg);transform
 :translateX(42px)
- 
+
 translateY
 (42px)
- 
+
 rotate
 (-179deg)
 }
@@ -5597,25 +5597,25 @@ rotate
 75%{
 -webkit-transform
 :translateX(0px)
- 
+
 translateY
 (42px)
- 
+
 rotate
 (-270deg)
- 
+
 scale
 (0
 .5
 );transform
 :translateX(0px)
- 
+
 translateY
 (42px)
- 
+
 rotate
 (-270deg)
- 
+
 scale
 (0
 .5

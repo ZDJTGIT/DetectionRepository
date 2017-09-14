@@ -1,14 +1,5 @@
 
 $(function () {
-	String.prototype.endWith=function(str){
-	    if(str==null||str==""||this.length==0||str.length>this.length)
-	    	 return false;
-	    if(this.substring(this.length-str.length)==str)
-	    	 return true;
-	    else
-	    	 return false;
-	    return true;
-	}
 
     //计算元素集合的总宽度
     function calSumWidth(elements) {
@@ -120,7 +111,7 @@ $(function () {
 
         	// 选项卡菜单已存在
             $('.J_menuTab').each(function () {
-                if (url.endWith($(this).attr('href'))) {
+                if (url.indexOf($(this).attr('href')) >= 0) {
                     if (!$(this).hasClass('active')) {
                         $(this).addClass('active').siblings('.J_menuTab').removeClass('active');
                         scrollToTab(this);

@@ -13,10 +13,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <!-- BEGIN HEAD -->
 <head>
 <base href="<%=basePath%>">
-<link href="assets/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-<link href="assets/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-<link href="assets/css/animate.min.css" rel="stylesheet">
-<link href="assets/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 <!--  AMap CSS  -->
 <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
 <style type="text/css">

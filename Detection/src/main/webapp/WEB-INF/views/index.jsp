@@ -29,11 +29,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 <link rel="icon" type="image/png" sizes="96x96"
 	href="assets/img/zdLogo.png">
-<link href="assets/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-<link href="assets/css/font-awesome.min93e3.css?v=4.4.0"
-	rel="stylesheet">
+<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/font-awesome.min.css" rel="stylesheet">
 <link href="assets/css/animate.min.css" rel="stylesheet">
-<link href="assets/css/style.min.css?v=4.1.0" rel="stylesheet">
+<link href="assets/css/style.min.css" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg"
@@ -45,8 +44,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			<nav class="navbar navbar-static-top" role="navigation"
 				style="margin-bottom: 0">
 				<div class="navbar-header">
-					<a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
-						href="#"><i class="fa fa-bars"></i> </a>
+					<!-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
+						href="#"><i class="fa fa-bars"></i> </a> -->
 					<div class="logo">
 						<img src="assets/img/zdLogo.png" alt="logo" class="logo"> <a
 							href="#" class="navbar-brand">中国大检测数据在线监控平台</a>
@@ -121,7 +120,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						</ul></li>
 					<li class="hidden-xs">
 						<a class="J_menuItem dropdown-toggle" data-toggle="dropdown" href="javascript:;">
-							<i class="fa fa-user"></i>${userInfo.name}
+							<i class="fa fa-user"></i>${userInfo.name}<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a class="J_menuItem" href="rest/form_avatar">修改头像</a>
@@ -174,9 +173,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             	<a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁</a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="rest/layouts"><i class="fa fa-columns"></i> <span class="nav-label">布局</span></a>
                     </li>
                     <li>
                         <a href="javascript:;">
@@ -251,23 +247,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 									</li>
 								</ul></li>
 							<li><a class="J_menuItem" href="rest/teams_board">团队管理</a></li>
-							<li><a class="J_menuItem" href="rest/social_feed">信息流</a></li>
 							<li><a class="J_menuItem" href="rest/clients">客户管理</a></li>
 							<li><a class="J_menuItem" href="rest/file_manager">文件管理器</a>
 							</li>
 							<li><a class="J_menuItem" href="rest/calendar">日历</a></li>
-							<li><a href="javascript:;">博客 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/blog">文章列表</a></li>
-									<li><a class="J_menuItem" href="rest/article">文章详情</a></li>
-								</ul></li>
-							<li><a class="J_menuItem" href="rest/faq">FAQ</a></li>
-							<li><a href="javascript:;">时间轴 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/timeline">时间轴</a></li>
-									<li><a class="J_menuItem" href="rest/timeline_v2">时间轴v2</a>
-									</li>
-								</ul></li>
 							<li><a class="J_menuItem" href="rest/pin_board">标签墙</a></li>
 							<li><a href="javascript:;">单据 <span class="fa arrow"></span></a>
 								<ul class="nav nav-third-level">
@@ -275,9 +258,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 									<li><a class="J_menuItem" href="rest/invoice_print">单据打印</a>
 									</li>
 								</ul></li>
-							<li><a class="J_menuItem" href="rest/search_results">搜索结果</a>
-							</li>
-							<li><a class="J_menuItem" href="rest/forum_main">论坛</a></li>
 							<li><a href="javascript:;">即时通讯 <span class="fa arrow"></span></a>
 								<ul class="nav nav-third-level">
 									<li><a class="J_menuItem" href="rest/chat_view">聊天窗口</a></li>
@@ -288,11 +268,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 									<li><a href="rest/page/login" target="_blank">登录页面</a></li>
 									<li><a href="rest/login_v2" target="_blank">登录页面v2</a></li>
 									<li><a href="rest/register" target="_blank">注册页面</a></li>
-									<li><a href="rest/lockscreen" target="_blank">登录超时</a></li>
 								</ul></li>
 							<li><a class="J_menuItem" href="rest/404">404页面</a></li>
 							<li><a class="J_menuItem" href="rest/500">500页面</a></li>
-							<li><a class="J_menuItem" href="rest/empty_page">空白页</a></li>
 						</ul></li>
 					<li><a href="javascript:;"><i class="fa fa-flask"></i> <span
 							class="nav-label">UI元素</span><span class="fa arrow"></span></a>
@@ -361,15 +339,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<li><a class="J_menuItem" href="rest/table_bootstrap">其他</a>
 							</li>
 						</ul></li>
-					<li><a href="javascript:;"><i class="fa fa-picture-o"></i>
-							<span class="nav-label">相册</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/basic_gallery">基本图库</a>
-							</li>
-							<li><a class="J_menuItem" href="rest/carousel">图片切换</a></li>
-							<li><a class="J_menuItem" href="rest/blueimp">Blueimp相册</a>
-							</li>
-						</ul></li>
 					<li><a class="J_menuItem" href="rest/css_animation"><i
 							class="fa fa-magic"></i> <span class="nav-label">CSS动画</span></a></li>
 					<li><a href="javascript:;"><i class="fa fa-cutlery"></i> <span
@@ -385,102 +354,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		<!--左侧导航结束-->
 		<!--右侧部分开始-->
 		<div id="page-wrapper" class="gray-bg dashbard-1">
-			<!-- <div class="row border-bottom">
-                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                    <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                        <div class="logo">
-                        	<img src="assets/img/zdLogo.png" alt="logo" class="logo">
-							<a href="#" class="navbar-brand">中国大检测数据在线监控平台</a>
-						</div>
-                    </div>
-                    <ul class="nav navbar-top-links navbar-right">
-                        <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:;">
-                                <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <li class="m-t-xs">
-                                    <div class="dropdown-messages-box">
-                                        <a href="rest/profile" class="pull-left">
-                                            <img alt="image" class="img-circle" src="assets/img/a7.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <small class="pull-right">46小时前</small>
-                                            <strong>小四</strong> 这个在日本投降书上签字的军官，建国后一定是个不小的干部吧？
-                                            <br>
-                                            <small class="text-muted">3天前 2014.11.8</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="dropdown-messages-box">
-                                        <a href="rest/profile" class="pull-left">
-                                            <img alt="image" class="img-circle" src="assets/img/a4.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right text-navy">25小时前</small>
-                                            <strong>国民岳父</strong> 如何看待“男子不满自己爱犬被称为狗，刺伤路人”？——这人比犬还凶
-                                            <br>
-                                            <small class="text-muted">昨天</small>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="text-center link-block">
-                                        <a class="J_menuItem" href="rest/mailbox">
-                                            <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:;">
-                                <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                <li>
-                                    <a href="rest/mailbox">
-                                        <div>
-                                            <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
-                                            <span class="pull-right text-muted small">4分钟前</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="rest/profile">
-                                        <div>
-                                            <i class="fa fa-qq fa-fw"></i> 3条新回复
-                                            <span class="pull-right text-muted small">12分钟钱</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="text-center link-block">
-                                        <a class="J_menuItem" href="rest/notifications">
-                                            <strong>查看所有 </strong>
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="hidden-xs">
-                            <a href="rest/index_v1" class="J_menuItem" data-index="0"><i class="fa fa-cart-arrow-down"></i> 购买</a>
-                        </li>
-                        <li class="dropdown hidden-xs">
-                            <a class="right-sidebar-toggle" aria-expanded="false">
-                                <i class="fa fa-tasks"></i> 主题
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div> -->
 			<div class="row content-tabs">
+				<a class="navbar-minimalize minimalize-styl-3 btn btn-primary "
+						href="#"><i class="fa fa-bars"></i> </a>
 				<button class="roll-nav roll-left J_tabLeft">
 					<i class="fa fa-backward"></i>
 				</button>
@@ -492,8 +368,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<button class="roll-nav roll-right J_tabRight">
 					<i class="fa fa-forward"></i>
 				</button>
-				<div class="btn-group roll-nav roll-right">
-					<button class="dropdown J_tabClose" data-toggle="dropdown">
+				<div class="btn-group roll-nav roll-right dropdown">
+					<button class="dropdown-toggle J_tabClose" data-toggle="dropdown">
 						关闭操作<span class="caret"></span>
 
 					</button>
@@ -504,8 +380,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						<li class="J_tabCloseOther"><a>关闭其他选项卡</a></li>
 					</ul>
 				</div>
-				<a href="rest/page/login" class="roll-nav roll-right J_tabExit"><i
-					class="fa fa fa-sign-out"></i> 退出</a>
 			</div>
 			<div class="row J_mainContent" id="content-main">
 				<!-- 填充内容 -->
