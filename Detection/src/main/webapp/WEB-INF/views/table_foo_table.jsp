@@ -180,11 +180,11 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 	<script src="assets/js/jquery.min.js?v=2.1.4"></script>
 	<script src="assets/js/bootstrap.min.js?v=3.3.6"></script>
 	<script src="assets/js/plugins/footable/footable.all.min.js"></script>
-	<script src="assets/js/content.min.js?v=1.0.0"></script>
+	<script src="assets/js/content.js"></script>
 	<script>
 		$(document).ready(function() {
 			$(".footable").footable();

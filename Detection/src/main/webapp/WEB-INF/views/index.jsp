@@ -190,66 +190,19 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<li>
                                 <a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁数据分析图</a>
 							</li>
-							
+
 						</ul>
 					</li>
-
-					<li><a href="rest/mailbox"><i class="fa fa-envelope"></i>
-							<span class="nav-label">信箱 </span><span
-							class="label label-warning pull-right">16</span></a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/mailbox">收件箱</a></li>
-							<li><a class="J_menuItem" href="rest/mail_detail">查看邮件</a></li>
-							<li><a class="J_menuItem" href="rest/mail_compose">写信</a></li>
-						</ul></li>
-					<li><a href="javascript:;"><i class="fa fa-edit"></i> <span
-							class="nav-label">表单</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/form_basic">基本表单</a></li>
-							<li><a class="J_menuItem" href="rest/form_validate">表单验证</a>
-							</li>
-							<li><a class="J_menuItem" href="rest/form_advanced">高级插件</a>
-							</li>
-							<li><a class="J_menuItem" href="rest/form_wizard">表单向导</a></li>
-							<li><a href="javascript:;">文件上传 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/form_webuploader">百度WebUploader</a>
-									</li>
-									<li><a class="J_menuItem" href="rest/form_file_upload">DropzoneJS</a>
-									</li>
-									<li><a class="J_menuItem" href="rest/form_avatar">头像裁剪上传</a>
-									</li>
-								</ul></li>
-							<li><a href="javascript:;">编辑器 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/form_editors">富文本编辑器</a>
-									</li>
-									<li><a class="J_menuItem" href="rest/form_simditor">simditor</a>
-									</li>
-									<li><a class="J_menuItem" href="rest/form_markdown">MarkDown编辑器</a>
-									</li>
-									<li><a class="J_menuItem" href="rest/code_editor">代码编辑器</a>
-									</li>
-								</ul></li>
-							<li><a class="J_menuItem" href="rest/suggest">搜索自动补全</a></li>
-							<li><a class="J_menuItem" href="rest/layerdate">日期选择器layerDate</a>
-							</li>
-						</ul></li>
 					<li><a href="javascript:;"><i class="fa fa-desktop"></i> <span
 							class="nav-label">页面</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/contacts">联系人</a></li>
-							<li><a class="J_menuItem" href="rest/profile">个人资料</a></li>
+							<li><a class="J_menuItem" href="rest/user">个人资料</a></li>
 							<li><a href="javascript:;">项目管理 <span class="fa arrow"></span></a>
 								<ul class="nav nav-third-level">
 									<li><a class="J_menuItem" href="rest/projects">项目</a></li>
 									<li><a class="J_menuItem" href="rest/project_detail">项目详情</a>
 									</li>
 								</ul></li>
-							<li><a class="J_menuItem" href="rest/teams_board">团队管理</a></li>
-							<li><a class="J_menuItem" href="rest/clients">客户管理</a></li>
-							<li><a class="J_menuItem" href="rest/file_manager">文件管理器</a>
-							</li>
 							<li><a class="J_menuItem" href="rest/calendar">日历</a></li>
 							<li><a class="J_menuItem" href="rest/pin_board">标签墙</a></li>
 							<li><a href="javascript:;">单据 <span class="fa arrow"></span></a>
@@ -271,58 +224,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								</ul></li>
 							<li><a class="J_menuItem" href="rest/404">404页面</a></li>
 							<li><a class="J_menuItem" href="rest/500">500页面</a></li>
-						</ul></li>
-					<li><a href="javascript:;"><i class="fa fa-flask"></i> <span
-							class="nav-label">UI元素</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/typography">排版</a></li>
-							<li><a href="javascript:;">字体图标 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/fontawesome">Font
-											Awesome</a></li>
-									<li><a class="J_menuItem" href="rest/glyphicons">Glyphicon</a>
-									</li>
-									<li><a class="J_menuItem" href="rest/iconfont">阿里巴巴矢量图标库</a>
-									</li>
-								</ul></li>
-							<li><a href="javascript:;">拖动排序 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/draggable_panels">拖动面板</a>
-									</li>
-									<li><a class="J_menuItem" href="rest/agile_board">任务清单</a>
-									</li>
-								</ul></li>
-							<li><a class="J_menuItem" href="rest/buttons">按钮</a></li>
-							<li><a class="J_menuItem" href="rest/tabs_panels">选项卡
-									&amp; 面板</a></li>
-							<li><a class="J_menuItem" href="rest/notifications">通知
-									&amp; 提示</a></li>
-							<li><a class="J_menuItem" href="rest/badges_labels">徽章，标签，进度条</a>
-							</li>
-							<li><a class="J_menuItem" href="rest/grid_options">栅格</a></li>
-							<li><a class="J_menuItem" href="rest/plyr">视频、音频</a></li>
-							<li><a href="javascript:;">弹框插件 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/layer">Web弹层组件layer</a>
-									</li>
-									<li><a class="J_menuItem" href="rest/modal_window">模态窗口</a>
-									</li>
-									<li><a class="J_menuItem" href="rest/sweetalert">SweetAlert</a>
-									</li>
-								</ul></li>
-							<li><a href="javascript:;">树形视图 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/jstree">jsTree</a></li>
-									<li><a class="J_menuItem" href="rest/tree_view">Bootstrap
-											Tree View</a></li>
-									<li><a class="J_menuItem" href="rest/nestable_list">nestable</a>
-									</li>
-								</ul></li>
-							<li><a class="J_menuItem" href="rest/toastr_notifications">Toastr通知</a>
-							</li>
-							<li><a class="J_menuItem" href="rest/diff">文本对比</a></li>
-							<li><a class="J_menuItem" href="rest/spinners">加载动画</a></li>
-							<li><a class="J_menuItem" href="rest/widgets">小部件</a></li>
 						</ul></li>
 					<li><a href="javascript:;"><i class="fa fa-table"></i> <span
 							class="nav-label">表格</span><span class="fa arrow"></span></a>

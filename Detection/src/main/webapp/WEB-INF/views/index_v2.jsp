@@ -323,7 +323,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
     <script src="assets/js/plugins/flot/jquery.flot.pie.js"></script>
     <script src="assets/js/plugins/peity/jquery.peity.min.js"></script>
     <script src="assets/js/demo/peity-demo.min.js"></script>
-    <script src="assets/js/content.min.js?v=1.0.0"></script>
+    <script src="assets/js/content.js"></script>
     <script src="assets/js/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script src="assets/js/plugins/gritter/jquery.gritter.min.js"></script>
     <script src="assets/js/plugins/easypiechart/jquery.easypiechart.js"></script>

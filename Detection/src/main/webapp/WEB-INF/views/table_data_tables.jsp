@@ -822,7 +822,7 @@
 	<script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
 	<script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
 	<script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-	<script src="assets/js/content.min.js?v=1.0.0"></script>
+	<script src="assets/js/content.js"></script>
 	<script>
 		$(document)
 				.ready(

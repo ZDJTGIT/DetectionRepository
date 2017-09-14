@@ -160,14 +160,11 @@ var config = {
 	</div>
 	<script src="assets/js/jquery.min.js?v=2.1.4"></script>
 	<script src="assets/js/bootstrap.min.js?v=3.3.6"></script>
-	<script src="assets/js/content.min.js?v=1.0.0"></script>
+	<script src="assets/js/content.js"></script>
 	<!-- 疑问 -->
 	<script src="../../../res.sentsin.com/lay/lib/layer/1.8.5/layer.min.js"></script>
 	<script src="assets/js/plugins/layer/layim/layim.js"></script>
 	<script type="assets/text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>
-
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/webim.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:49 GMT -->
 </html>

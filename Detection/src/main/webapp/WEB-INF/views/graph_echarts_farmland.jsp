@@ -38,7 +38,7 @@
 </head>
 
 <body class="gray-bg">
-    
+
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-sm-12">
@@ -816,7 +816,7 @@
 
 
     <!-- 自定义js -->
-    <script src="assets/js/content.min.js"></script>
+    <script src="assets/js/content.js"></script>
 
 
     <!-- ECharts demo data -->
@@ -827,8 +827,8 @@
     <!-- Data Tables -->
     <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-	
-	
+
+
      <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function () {

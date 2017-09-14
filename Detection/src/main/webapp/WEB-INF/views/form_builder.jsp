@@ -168,7 +168,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
     </div>
     <script src="assets/js/jquery.min.js?v=2.1.4"></script>
     <script src="assets/js/bootstrap.min.js?v=3.3.6"></script>
-    <script src="assets/js/content.min.js?v=1.0.0"></script>
+    <script src="assets/js/content.js"></script>
     <script src="assets/js/jquery-ui-1.10.4.min.js"></script>
     <script src="assets/js/plugins/beautifyhtml/beautifyhtml.js"></script>
     <script>
