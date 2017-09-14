@@ -185,10 +185,18 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <li>
-                                <a class="J_menuItem" href="rest/graph_echarts">数据分析图</a>
+                        	<li>
+                                <a class="J_menuItem" href="rest/graph_echarts_farmland">农田数据分析图</a>
 							</li>
-						</ul></li>
+							<li>
+                                <a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道数据分析图</a>
+							</li>
+							<li>
+                                <a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁数据分析图</a>
+							</li>
+							
+						</ul>
+					</li>
 
 					<li><a href="rest/mailbox"><i class="fa fa-envelope"></i>
 							<span class="nav-label">信箱 </span><span

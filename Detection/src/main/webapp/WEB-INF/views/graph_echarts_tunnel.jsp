@@ -22,8 +22,7 @@
 	content="中大检测平台">
 
 
-
-    <title> 隧道数据分析图 </title>
+    <title> 隧道数据分析图</title>
     <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
     <meta name="description" content="中大检测平台">
 
@@ -34,7 +33,7 @@
     <link href="assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
 
     <link href="assets/css/animate.min.css" rel="stylesheet">
-    <link href="assets/css/style.min.css?v=4.1.0" rel="stylesheet">
+    <link href="assets/css/style.min.css" rel="stylesheet">
 
 </head>
 
@@ -53,7 +52,12 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
                                 <i class="fa fa-wrench"></i>
                             </a>
-                            
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="graph_flot.html#">选项1</a>
+                                </li>
+                                <li><a href="graph_flot.html#">选项2</a>
+                                </li>
+                            </ul>
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
                             </a>
@@ -75,6 +79,12 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
                                 <i class="fa fa-wrench"></i>
                             </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="graph_flot.html#">选项1</a>
+                                </li>
+                                <li><a href="graph_flot.html#">选项2</a>
+                                </li>
+                            </ul>
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
                             </a>
@@ -99,6 +109,12 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
                                 <i class="fa fa-wrench"></i>
                             </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="graph_flot.html#">选项1</a>
+                                </li>
+                                <li><a href="graph_flot.html#">选项2</a>
+                                </li>
+                            </ul>
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
                             </a>
@@ -120,6 +136,12 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
                                 <i class="fa fa-wrench"></i>
                             </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="graph_flot.html#">选项1</a>
+                                </li>
+                                <li><a href="graph_flot.html#">选项2</a>
+                                </li>
+                            </ul>
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
                             </a>
@@ -142,7 +164,12 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
                                 <i class="fa fa-wrench"></i>
                             </a>
-                   
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="table_data_tables.html#">选项1</a>
+                                </li>
+                                <li><a href="table_data_tables.html#">选项2</a>
+                                </li>
+                            </ul>
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
                             </a>
@@ -800,7 +827,8 @@
     <!-- Data Tables -->
     <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-
+	
+	
      <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function () {
