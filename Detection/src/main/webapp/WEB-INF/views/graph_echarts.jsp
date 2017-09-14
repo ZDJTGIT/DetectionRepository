@@ -30,6 +30,8 @@
     <link href="assets/css/animate.min.css" rel="stylesheet">
     <link href="assets/css/style.min.css?v=4.1.0" rel="stylesheet">
 
+
+
 </head>
 
 <body class="gray-bg">
@@ -40,6 +42,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>水位变化图</h5>
+
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -123,7 +126,7 @@
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>K线图</h5>
+                        <h5>力导向布局图</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -143,15 +146,14 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="echarts-k-chart"></div>
+                        <div class="echarts" id="echarts-force-chart"></div>
                     </div>
                 </div>
             </div>
-            <div class="row">
             <div class="col-sm-12">
-                <div class="ibox float-e-margins">
+                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>可编辑表格</h5>
+                        <h5>测点数据表</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -173,6 +175,7 @@
                     <div class="ibox-content">
                         <div class="">
                             <a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary ">添加行</a>
+                            <input type="button" name="" value="导出到Excel" class="btn btn-primary" style="float: right;">
                         </div>
                         <table class="table table-striped table-bordered table-hover " id="editable">
                             <thead>
@@ -604,7 +607,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+            
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -864,7 +867,6 @@
 
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
     <!--统计代码，可删除-->
-
 </body>
 
 </html>
