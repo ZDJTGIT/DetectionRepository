@@ -58,4 +58,11 @@ public class PageController {
     	return "register";
     }
 
+    /**
+     * 添加联系人
+     */
+    @RequestMapping("/table_adduser")
+    public String table_adduser(){
+    	return "table_adduser";
+    }
 }

@@ -33,7 +33,6 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-
 	@Override
 	public List<User> selectList() {
 		// TODO Auto-generated method stub
@@ -75,4 +74,14 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectByUsername(username);
 	}
 
+	@Override
+	public boolean deleteUser(String name) {
+		return userMapper.deleteUser(name);
+	}
+
+
+	@Override
+	public int updateByPrimaryKeySelective(User record) {
+		return userMapper.updateByPrimaryKeySelective(record);
+	}
 }

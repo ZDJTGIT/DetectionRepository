@@ -51,7 +51,7 @@
 			<form class="m-t" role="form"
 				action="http://www.zi-han.net/theme/hplus/login.html">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="请输入用户名（例：中大检测）"
+					<input type="text"  class="form-control" placeholder="请输入用户名（例：中大检测）"
 						required="">
 				</div>
 				<div class="form-group">
