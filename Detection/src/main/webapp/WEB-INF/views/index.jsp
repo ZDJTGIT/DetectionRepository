@@ -44,11 +44,11 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			<nav class="navbar navbar-static-top" role="navigation"
 				style="margin-bottom: 0">
 				<div class="navbar-header">
-					<!-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
-						href="#"><i class="fa fa-bars"></i> </a> -->
 					<div class="logo">
-						<img src="assets/img/zdLogo.png" alt="logo" class="logo"> <a
-							href="#" class="navbar-brand">中国大检测数据在线监控平台</a>
+						<img src="assets/img/zdLogo.png" alt="logo" class="pull-right">
+					</div>
+					<div class="logo-title">
+						<a href="#" class="navbar-brand ">中国大检测数据在线监控平台</a>
 					</div>
 				</div>
 				<ul class="nav navbar-top-links navbar-right">
@@ -123,21 +123,14 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<i class="fa fa-user"></i>${userInfo.name}<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a class="J_menuItem" href="rest/form_avatar">修改头像</a>
-                            </li>
                             <li><a class="J_menuItem" href="rest/user">个人资料</a>
                             </li>
-                            <li><a class="J_menuItem" href="rest/contacts">联系我们</a>
-                            </li>
-                            <li><a class="J_menuItem" href="rest/mailbox">信箱</a>
-                            </li>
-                            <li class="divider"></li>
                             <li><a href="rest/page/login">安全退出</a>
                             </li>
                         </ul>
 					</li>
 					<li class="dropdown hidden-xs"><a class="right-sidebar-toggle"
-						aria-expanded="false"> <i class="fa fa-tasks"></i> 主题
+						aria-expanded="false"> <i class="fa fa-gear"></i>设置<span class="caret"></span>
 					</a></li>
 				</ul>
 			</nav>
@@ -157,7 +150,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					</a></li>
 					<li>
                         <a class="J_menuItem" href="javascript:;">
-                        	<i class="fa fa-columns"></i> <span class="nav-label">我的项目</span>
+                        	<i class="fa fa-columns"></i>
+                        	<span class="nav-label">我的项目</span>
+                        	<span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
                             <!-- <li>
@@ -251,6 +246,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 				</ul>
 			</div>
+			<div class="dislpayArrow hidden-xs">
+				<a class="pngfix" href="javascript:void(0);"></a>
+			</div>
 		</nav>
 		<!--左侧导航结束-->
 		<!--右侧部分开始-->
@@ -263,7 +261,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</button>
 				<nav class="page-tabs J_menuTabs">
 					<div class="page-tabs-content">
-						<a href="rest/home" class="J_menuTab">主页</a>
+						<a href="rest/home" class="J_menuTab">主页<em></em></a>
 					</div>
 				</nav>
 				<button class="roll-nav roll-right J_tabRight">
@@ -272,7 +270,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<div class="btn-group roll-nav roll-right dropdown">
 					<button class="dropdown-toggle J_tabClose" data-toggle="dropdown">
 						关闭操作<span class="caret"></span>
-
 					</button>
 					<ul role="menu" class="dropdown-menu dropdown-menu-right">
 						<li class="J_tabShowActive"><a>定位当前选项卡</a></li>
@@ -299,7 +296,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<ul class="nav nav-tabs navs-3">
 
 					<li class="active"><a data-toggle="tab" href="#tab-1"> <i
-							class="fa fa-gear"></i> 主题
+							class="fa fa-gear"></i> 设置
 					</a></li>
 					<li class=""><a data-toggle="tab" href="#tab-2"> 通知 </a></li>
 					<li><a data-toggle="tab" href="#tab-3"> 项目进度 </a></li>
@@ -657,6 +654,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			</a>
 		</div>
 	</div>
+
+	<div class="easyui-menu" id=clickMenu>
+		<ul>
+			<li id="closeOther">关闭其他选项卡 </li>
+			<li id="closeAll">关闭全部选项卡 </li>
+		</ul>
+	</div>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
@@ -666,6 +670,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="assets/js/plugins/layer/layer.min.js"></script>
 	<script src="assets/js/plugins/pace/pace.min.js"></script>
+	<script src="assets/js/jquery-ui-1.10.4.min.js"></script>
+	<script src="assets/js/plugins/easyui/jquery.easyui.min.js"></script>
 	<script src="assets/js/hplus.js" type="text/javascript"></script>
 	<script src="assets/js/contabs.js" type="text/javascript"></script>
 	<script type="text/javascript">

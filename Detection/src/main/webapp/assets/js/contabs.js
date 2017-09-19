@@ -127,7 +127,7 @@ $(function () {
 
             // 选项卡菜单不存在
             if (flag) {
-                var str = '<a href="'+url+'" class="active J_menuTab">' + menuName + ' <i class="fa fa-times-circle"></i></a>';
+                var str = '<a href="'+url+'" class="active J_menuTab">' + menuName + ' <i></i><em></em></a>';
                 $('.J_menuTab').removeClass('active');
 
                 //显示loading提示
@@ -224,20 +224,15 @@ $(function () {
     });
 
     //关闭其他选项卡
-    $('.J_tabCloseOther').click(function(){
+    $('#closeOther').click(function(){
     	$('.page-tabs-content').children(".J_menuTab").not(":first").not(".active").each(function () {
             $(this).remove();
         });
         $('.page-tabs-content').css("margin-left", "0");
     });
 
-    //定位当前选项卡 滚动到已激活的选项卡
-    $('.J_tabShowActive').click(function(){
-    	scrollToTab($('.J_menuTab.active'));
-    });
-
     // 关闭全部选项卡
-    $('.J_tabCloseAll').click(function (){
+    $('#closeAll').click(function (){
         $('.page-tabs-content').children(".J_menuTab").not(":first").each(function () {
             $(this).remove();
         });
@@ -251,5 +246,15 @@ $(function () {
         });
         $('.page-tabs-content').css("margin-left", "0");
     });
+
+    //绑定右击菜单事件
+    $(".page-tabs-content a").on('contextmenu',function(e){
+        $('#clickMenu').menu('show', {
+            left: e.pageX,
+            top: e.pageY,
+        });
+        return false;
+    });
+
 });
 

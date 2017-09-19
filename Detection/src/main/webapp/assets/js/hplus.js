@@ -57,6 +57,14 @@ $(document).ready(function () {
         SmoothlyMenu();
     });
 
+    // 菜单切换
+    $('.pngfix').click(function () {
+    	$(this).toggleClass("open");
+        $("body").toggleClass("mini-navbar");
+        $(this).parent().toggleClass("dislpayArrow-change");
+        SmoothlyMenu();
+    });
+
 
     // 侧边栏高度
     function fix_height() {

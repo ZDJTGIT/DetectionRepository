@@ -205,9 +205,10 @@ body.body-small .navbar-top-links li:last-child {
 }
 
 .minimalize-styl-3 {
-	padding: 9px 14px;
-	margin:0;
 	position:absolute;
+	padding: 3px 6px;
+	width:26px;
+	height:26px;
 	font-size: 14px;
 	float: left
 }
@@ -3115,6 +3116,46 @@ video {
 	margin: 0 0 0 220px
 }
 
+.logo{
+	display:inline;
+	float:left;
+	width:30%
+}
+
+.logo-title{
+	width:70%
+}
+
+/*菜单收缩切换*/
+.dislpayArrow{-webkit-transition: all .5s;transition: all .5s}
+.dislpayArrow{position: absolute;top: 0;bottom: 0;left:220px;width:0px; height:100%;z-index:10}
+.dislpayArrow a{background:url(../img/icon_arrow.png) no-repeat 0 0}
+.dislpayArrow a{ position:absolute; display:block; width:17px; height:61px;top:50%; margin-top:-30px;outline:none}
+.dislpayArrow a.open{ background-position:0 -61px}
+.dislpayArrow a:hover{ text-decoration:none; background-position:right 0}
+.dislpayArrow a.open:hover{background-position:right -61px}
+.dislpayArrow-change{left:70px}
+
+/*选项卡样式*/
+.page-tabs{position:relative; height:35px;overflow:hidden}
+.page-tabs .page-tabs-content a,.page-tabs .page-tabs-content a em{background-image:url(../img/acrossTab.png)}
+.page-tabs{height:35px; padding-right:75px;overflow:hidden; position:relative;background-color:#efeef0; background-repeat: repeat-x; background-position: 0 -175px;}
+.page-tabs .page-tabs-content{ position:absolute; height:26px; line-height:26px; background:none; top:2px; left:0;padding-top:0}
+.page-tabs .page-tabs-content a{height:26px;line-height:26px;}
+.page-tabs .page-tabs-content a em{ right:-16px; height: 26px; width: 16px}
+
+.page-tabs-content,.page-tabs-content a,.page-tabs-content a em{ background-image:url(../img/acrossTab-bg.png)}
+.page-tabs-content{height:29px; background-repeat: repeat-x; background-position: 0 0; padding-top:1px}
+.page-tabs-content a,.page-tabs-content a em{ background-repeat:no-repeat; background-position:0 0}
+.page-tabs-content a{position:relative;float:left; display:inline-block; height:29px; line-height:29px; font-size:12px;cursor:pointer;padding:0 30px; white-space:nowrap;color:#282828; background-position:0 0}
+.page-tabs-content a em{position:absolute; width:23px;height:29px;right:-20px; top:0;z-index:50; background-position:right -30px}
+.page-tabs-content a:hover{background-position:0 -60px}
+.page-tabs-content a:hover em{background-position:right -90px}
+.page-tabs-content a.active{background-position:0 -120px; z-index:99}
+.page-tabs-content a.active em{background-position:right -150px}
+.page-tabs-content a i{position:absolute; display:block; width:13px; height:13px; top:50%; margin-top:-6px; right:5px; font-size:0; line-height:0; cursor:pointer; background-image:url(../img/acrossTab-close.png); background-repeat:no-repeat; background-position:0 0}
+.page-tabs-content a i:hover{background-position:0 bottom}
+
 .title-action {
 	text-align: right;
 	padding-top: 30px
@@ -3197,15 +3238,14 @@ body.body-small .footer.fixed {
 
 .content-tabs {
 	position: relative;
-	height: 42px;
+	height: 28px;
 	background: #fafafa;
-	line-height: 40px
 }
 
 .content-tabs .roll-nav, .page-tabs-list {
 	position: absolute;
-	width: 40px;
-	height: 40px;
+	width: 26px;
+	height: 26px;
 	text-align: center;
 	color: #999;
 	z-index: 2;
@@ -3213,7 +3253,7 @@ body.body-small .footer.fixed {
 }
 
 .content-tabs .roll-left {
-	left: 43px;
+	left: 26px;
 	border-right: solid 1px #eee
 }
 
@@ -3225,8 +3265,8 @@ body.body-small .footer.fixed {
 .content-tabs button {
 	background: #fff;
 	border: 0;
-	height: 40px;
-	width: 40px;
+	height: 26px;
+	width: 26px;
 	outline: 0
 }
 
@@ -3235,9 +3275,9 @@ body.body-small .footer.fixed {
 }
 
 nav.page-tabs {
-	margin-left: 83px;
+	margin-left: 52px;
 	width: 100000px;
-	height: 40px;
+	height: 28px;
 	overflow: hidden
 }
 
@@ -3245,18 +3285,11 @@ nav.page-tabs .page-tabs-content {
 	float: left
 }
 
-.page-tabs a {
-	display: block;
-	float: left;
-	border-right: solid 1px #eee;
-	padding: 0 15px
-}
-
 .page-tabs a i:hover {
 	color: #c00
 }
 
-.content-tabs .roll-nav:hover, .page-tabs a:hover {
+.content-tabs .roll-nav:hover{
 	color: #777;
 	background: #f2f2f2;
 	cursor: pointer
@@ -6571,22 +6604,8 @@ body.rtls .top-navigation #page-wrapper, body.rtls .top-navigation .footer.fixed
 	border-bottom: solid 2px #2f4050
 }
 
-.page-tabs a {
-	color: #999
-}
-
 .page-tabs a i {
 	color: #ccc
-}
-
-.page-tabs a.active {
-	background: #2f4050;
-	color: #a7b1c2
-}
-
-.page-tabs a.active i:hover, .page-tabs a.active:hover {
-	background: #293846;
-	color: #fff
 }
 
 .skin-1 .minimalize-styl-2 {
@@ -7123,11 +7142,6 @@ body.skin-3 {
 
 .navbar-toggle {
 	background-color: #fff
-}
-
-.J_menuTab {
-	-webkit-transition: all .3s ease-out 0s;
-	transition: all .3s ease-out 0s
 }
 
 ::-webkit-scrollbar-track {
