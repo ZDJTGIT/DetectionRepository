@@ -603,7 +603,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<small class="chat-date pull-right"> 2015.9.1 </small> 与 Beau-zihan
 				聊天中
 			</div>
-
 			<div class="content">
 
 				<div class="left">
@@ -611,7 +610,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						Beau-zihan <small class="chat-date"> 10:02 </small>
 					</div>
 					<div class="chat-message active">你好</div>
-
 				</div>
 				<div class="right">
 					<div class="author-name">
@@ -641,8 +639,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						4.必要的技术支持； <br> 5.付费二次开发服务； <br> 6.授权许可； <br> …… <br>
 					</div>
 				</div>
-
-
 			</div>
 			<div class="form-chat">
 				<div class="input-group input-group-sm">
