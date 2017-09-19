@@ -3106,7 +3106,7 @@ video {
 }
 
 .wrapper-content {
-	padding: 20px
+	padding:5px 15px 15px 15px
 }
 
 #page-wrapper {
@@ -3289,7 +3289,7 @@ nav.page-tabs .page-tabs-content {
 
 #content-main {
 	height: calc(100% - 140px);
-	overflow:scroll
+	overflow-y:scroll
 }
 
 .fixed-nav #content-main {
@@ -3578,7 +3578,7 @@ code {
 .ibox-content {
 	background-color: #fff;
 	color: inherit;
-	padding: 15px 20px 20px;
+	padding: 10px 10px 10px 10px;
 	border-color: #e7eaec;
 	-webkit-border-image: none;
 	-o-border-image: none;
