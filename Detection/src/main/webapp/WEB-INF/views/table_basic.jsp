@@ -472,20 +472,14 @@
 			  layer.msg('已取消', {icon: 1});
 			  
 			}, function(){
-				$.ajax({
-					  type: 'POST',
-		    		  url: 'rest/user/delete',
-		    		  data: '{"name":"namevalue"}',//需取得当前选中user。name
-		    		  success: function (data){
+				
+				$('#userTableDeatil').empty();
 		    			  layer.msg('删除成功（该提示5s后自动关闭）', {
 		    				    time: 5000, //5s后自动关闭
 		    				    btn: ['知道了']
 		    				  });
-		    		  },
-		    		  error: function(){
-		    			  alert("删除失败");
-		    		  }
-		    		  });
+		    		 
+		    		  
 				});
 			 
 			});
