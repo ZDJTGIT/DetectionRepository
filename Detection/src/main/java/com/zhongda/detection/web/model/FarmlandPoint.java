@@ -3,7 +3,11 @@ package com.zhongda.detection.web.model;
 import java.util.Date;
 
 public class FarmlandPoint {
+    private Integer timeId;
+
     private Integer farmlandPointId;
+
+    private Integer farmlandId;
 
     private String detectionPosition;
 
@@ -17,7 +21,13 @@ public class FarmlandPoint {
 
     private Float effectiveCadmium;
 
-    private Integer farmlandId;
+    public Integer getTimeId() {
+        return timeId;
+    }
+
+    public void setTimeId(Integer timeId) {
+        this.timeId = timeId;
+    }
 
     public Integer getFarmlandPointId() {
         return farmlandPointId;
@@ -25,6 +35,14 @@ public class FarmlandPoint {
 
     public void setFarmlandPointId(Integer farmlandPointId) {
         this.farmlandPointId = farmlandPointId;
+    }
+
+    public Integer getFarmlandId() {
+        return farmlandId;
+    }
+
+    public void setFarmlandId(Integer farmlandId) {
+        this.farmlandId = farmlandId;
     }
 
     public String getDetectionPosition() {
@@ -73,13 +91,5 @@ public class FarmlandPoint {
 
     public void setEffectiveCadmium(Float effectiveCadmium) {
         this.effectiveCadmium = effectiveCadmium;
-    }
-
-    public Integer getFarmlandId() {
-        return farmlandId;
-    }
-
-    public void setFarmlandId(Integer farmlandId) {
-        this.farmlandId = farmlandId;
     }
 }
