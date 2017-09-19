@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.detection.web.dao.FarmlandPointMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.detection.web.model.FarmlandPoint">
+    <id column="farmland_point_id" jdbcType="INTEGER" property="farmlandPointId" />
+    <result column="detection_position" jdbcType="VARCHAR" property="detectionPosition" />
+    <result column="detection_time" jdbcType="TIMESTAMP" property="detectionTime" />
+    <result column="water_depth" jdbcType="REAL" property="waterDepth" />
+    <result column="earth_ph" jdbcType="REAL" property="earthPh" />
+    <result column="total_cadmium" jdbcType="REAL" property="totalCadmium" />
+    <result column="effective_cadmium" jdbcType="REAL" property="effectiveCadmium" />
+    <result column="farmland_id" jdbcType="INTEGER" property="farmlandId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    farmland_point_id, detection_position, detection_time, water_depth, earth_ph, total_cadmium, 
+    effective_cadmium, farmland_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from farmland_point
+    where farmland_point_id = #{farmlandPointId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from farmland_point
+    where farmland_point_id = #{farmlandPointId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhongda.detection.web.model.FarmlandPoint">
+    insert into farmland_point (farmland_point_id, detection_position, 
+      detection_time, water_depth, earth_ph, 
+      total_cadmium, effective_cadmium, farmland_id
+      )
+    values (#{farmlandPointId,jdbcType=INTEGER}, #{detectionPosition,jdbcType=VARCHAR}, 
+      #{detectionTime,jdbcType=TIMESTAMP}, #{waterDepth,jdbcType=REAL}, #{earthPh,jdbcType=REAL}, 
+      #{totalCadmium,jdbcType=REAL}, #{effectiveCadmium,jdbcType=REAL}, #{farmlandId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.FarmlandPoint">
+    insert into farmland_point
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="farmlandPointId != null">
+        farmland_point_id,
+      </if>
+      <if test="detectionPosition != null">
+        detection_position,
+      </if>
+      <if test="detectionTime != null">
+        detection_time,
+      </if>
+      <if test="waterDepth != null">
+        water_depth,
+      </if>
+      <if test="earthPh != null">
+        earth_ph,
+      </if>
+      <if test="totalCadmium != null">
+        total_cadmium,
+      </if>
+      <if test="effectiveCadmium != null">
+        effective_cadmium,
+      </if>
+      <if test="farmlandId != null">
+        farmland_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="farmlandPointId != null">
+        #{farmlandPointId,jdbcType=INTEGER},
+      </if>
+      <if test="detectionPosition != null">
+        #{detectionPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="detectionTime != null">
+        #{detectionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="waterDepth != null">
+        #{waterDepth,jdbcType=REAL},
+      </if>
+      <if test="earthPh != null">
+        #{earthPh,jdbcType=REAL},
+      </if>
+      <if test="totalCadmium != null">
+        #{totalCadmium,jdbcType=REAL},
+      </if>
+      <if test="effectiveCadmium != null">
+        #{effectiveCadmium,jdbcType=REAL},
+      </if>
+      <if test="farmlandId != null">
+        #{farmlandId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongda.detection.web.model.FarmlandPoint">
+    update farmland_point
+    <set>
+      <if test="detectionPosition != null">
+        detection_position = #{detectionPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="detectionTime != null">
+        detection_time = #{detectionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="waterDepth != null">
+        water_depth = #{waterDepth,jdbcType=REAL},
+      </if>
+      <if test="earthPh != null">
+        earth_ph = #{earthPh,jdbcType=REAL},
+      </if>
+      <if test="totalCadmium != null">
+        total_cadmium = #{totalCadmium,jdbcType=REAL},
+      </if>
+      <if test="effectiveCadmium != null">
+        effective_cadmium = #{effectiveCadmium,jdbcType=REAL},
+      </if>
+      <if test="farmlandId != null">
+        farmland_id = #{farmlandId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where farmland_point_id = #{farmlandPointId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongda.detection.web.model.FarmlandPoint">
+    update farmland_point
+    set detection_position = #{detectionPosition,jdbcType=VARCHAR},
+      detection_time = #{detectionTime,jdbcType=TIMESTAMP},
+      water_depth = #{waterDepth,jdbcType=REAL},
+      earth_ph = #{earthPh,jdbcType=REAL},
+      total_cadmium = #{totalCadmium,jdbcType=REAL},
+      effective_cadmium = #{effectiveCadmium,jdbcType=REAL},
+      farmland_id = #{farmlandId,jdbcType=INTEGER}
+    where farmland_point_id = #{farmlandPointId,jdbcType=INTEGER}
+  </update>
+</mapper>

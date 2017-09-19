@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.detection.web.dao.FarmlandThresholdMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.detection.web.model.FarmlandThreshold">
+    <id column="farmland_threshold_id" jdbcType="INTEGER" property="farmlandThresholdId" />
+    <result column="max_ph" jdbcType="REAL" property="maxPh" />
+    <result column="min_ph" jdbcType="REAL" property="minPh" />
+    <result column="max_depth" jdbcType="REAL" property="maxDepth" />
+    <result column="min_depth" jdbcType="REAL" property="minDepth" />
+    <result column="max_total_cadmium" jdbcType="REAL" property="maxTotalCadmium" />
+    <result column="min_total_cadmium" jdbcType="REAL" property="minTotalCadmium" />
+    <result column="max_effective_cadmium" jdbcType="REAL" property="maxEffectiveCadmium" />
+    <result column="min_effective_cadmium" jdbcType="REAL" property="minEffectiveCadmium" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    farmland_threshold_id, max_ph, min_ph, max_depth, min_depth, max_total_cadmium, min_total_cadmium, 
+    max_effective_cadmium, min_effective_cadmium
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from farmland_threshold
+    where farmland_threshold_id = #{farmlandThresholdId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from farmland_threshold
+    where farmland_threshold_id = #{farmlandThresholdId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhongda.detection.web.model.FarmlandThreshold">
+    insert into farmland_threshold (farmland_threshold_id, max_ph, min_ph, 
+      max_depth, min_depth, max_total_cadmium, 
+      min_total_cadmium, max_effective_cadmium, min_effective_cadmium
+      )
+    values (#{farmlandThresholdId,jdbcType=INTEGER}, #{maxPh,jdbcType=REAL}, #{minPh,jdbcType=REAL}, 
+      #{maxDepth,jdbcType=REAL}, #{minDepth,jdbcType=REAL}, #{maxTotalCadmium,jdbcType=REAL}, 
+      #{minTotalCadmium,jdbcType=REAL}, #{maxEffectiveCadmium,jdbcType=REAL}, #{minEffectiveCadmium,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.FarmlandThreshold">
+    insert into farmland_threshold
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="farmlandThresholdId != null">
+        farmland_threshold_id,
+      </if>
+      <if test="maxPh != null">
+        max_ph,
+      </if>
+      <if test="minPh != null">
+        min_ph,
+      </if>
+      <if test="maxDepth != null">
+        max_depth,
+      </if>
+      <if test="minDepth != null">
+        min_depth,
+      </if>
+      <if test="maxTotalCadmium != null">
+        max_total_cadmium,
+      </if>
+      <if test="minTotalCadmium != null">
+        min_total_cadmium,
+      </if>
+      <if test="maxEffectiveCadmium != null">
+        max_effective_cadmium,
+      </if>
+      <if test="minEffectiveCadmium != null">
+        min_effective_cadmium,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="farmlandThresholdId != null">
+        #{farmlandThresholdId,jdbcType=INTEGER},
+      </if>
+      <if test="maxPh != null">
+        #{maxPh,jdbcType=REAL},
+      </if>
+      <if test="minPh != null">
+        #{minPh,jdbcType=REAL},
+      </if>
+      <if test="maxDepth != null">
+        #{maxDepth,jdbcType=REAL},
+      </if>
+      <if test="minDepth != null">
+        #{minDepth,jdbcType=REAL},
+      </if>
+      <if test="maxTotalCadmium != null">
+        #{maxTotalCadmium,jdbcType=REAL},
+      </if>
+      <if test="minTotalCadmium != null">
+        #{minTotalCadmium,jdbcType=REAL},
+      </if>
+      <if test="maxEffectiveCadmium != null">
+        #{maxEffectiveCadmium,jdbcType=REAL},
+      </if>
+      <if test="minEffectiveCadmium != null">
+        #{minEffectiveCadmium,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongda.detection.web.model.FarmlandThreshold">
+    update farmland_threshold
+    <set>
+      <if test="maxPh != null">
+        max_ph = #{maxPh,jdbcType=REAL},
+      </if>
+      <if test="minPh != null">
+        min_ph = #{minPh,jdbcType=REAL},
+      </if>
+      <if test="maxDepth != null">
+        max_depth = #{maxDepth,jdbcType=REAL},
+      </if>
+      <if test="minDepth != null">
+        min_depth = #{minDepth,jdbcType=REAL},
+      </if>
+      <if test="maxTotalCadmium != null">
+        max_total_cadmium = #{maxTotalCadmium,jdbcType=REAL},
+      </if>
+      <if test="minTotalCadmium != null">
+        min_total_cadmium = #{minTotalCadmium,jdbcType=REAL},
+      </if>
+      <if test="maxEffectiveCadmium != null">
+        max_effective_cadmium = #{maxEffectiveCadmium,jdbcType=REAL},
+      </if>
+      <if test="minEffectiveCadmium != null">
+        min_effective_cadmium = #{minEffectiveCadmium,jdbcType=REAL},
+      </if>
+    </set>
+    where farmland_threshold_id = #{farmlandThresholdId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongda.detection.web.model.FarmlandThreshold">
+    update farmland_threshold
+    set max_ph = #{maxPh,jdbcType=REAL},
+      min_ph = #{minPh,jdbcType=REAL},
+      max_depth = #{maxDepth,jdbcType=REAL},
+      min_depth = #{minDepth,jdbcType=REAL},
+      max_total_cadmium = #{maxTotalCadmium,jdbcType=REAL},
+      min_total_cadmium = #{minTotalCadmium,jdbcType=REAL},
+      max_effective_cadmium = #{maxEffectiveCadmium,jdbcType=REAL},
+      min_effective_cadmium = #{minEffectiveCadmium,jdbcType=REAL}
+    where farmland_threshold_id = #{farmlandThresholdId,jdbcType=INTEGER}
+  </update>
+</mapper>
