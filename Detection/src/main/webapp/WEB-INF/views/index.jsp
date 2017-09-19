@@ -120,7 +120,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						</ul></li>
 					<li class="hidden-xs">
 						<a class="J_menuItem dropdown-toggle" data-toggle="dropdown" href="javascript:;">
-							<i class="fa fa-user"></i>${userInfo.name}<span class="caret"></span>
+							<i class="fa fa-user"></i>${userInfo.userName}<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a class="J_menuItem" href="rest/form_avatar">修改头像</a>
@@ -132,7 +132,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <li><a class="J_menuItem" href="rest/mailbox">信箱</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="rest/page/login">安全退出</a>
+                            <li><a href="rest/user/logout">安全退出</a>
                             </li>
                         </ul>
 					</li>

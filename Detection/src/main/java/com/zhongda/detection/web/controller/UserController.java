@@ -61,7 +61,7 @@ public class UserController {
 
 	/**
 	 * 用户登录
-	 * 
+	 *
 	 * @param user
 	 * @param result
 	 * @return
@@ -91,7 +91,7 @@ public class UserController {
 
 			// 设置rememberMe
 			UsernamePasswordToken shiroToken = new UsernamePasswordToken(
-					user.getName(), user.getPassword());
+					user.getUserName(), user.getPassword());
 
 			// 身份验证
 			subject.login(shiroToken);
@@ -111,7 +111,7 @@ public class UserController {
 			 */
 			// 验证成功在Session中保存用户信息
 			final User authUserInfo = userService.selectByUsername(user
-					.getName());
+					.getUserName());
 			WebUtils.setSessionAttribute(request, "userInfo", authUserInfo);
 
 		} catch (LockedAccountException e) {
@@ -135,7 +135,7 @@ public class UserController {
 
 	/**
 	 * 用户登出
-	 * 
+	 *
 	 * @param session
 	 * @return
 	 */
@@ -267,7 +267,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/findUser")
 	public String findUser(User user, Model model) {
-		List<User> userList = userService.selectAllByUsername(user.getName());
+		List<User> userList = userService.selectAllByUsername(user.getUserName());
 		if (null == userList || userList.size() == 0) {
 			model.addAttribute("error", "没有匹配的用户名 ！");
 		} else {
@@ -283,7 +283,7 @@ public class UserController {
 	@RequestMapping(value = "/addUser", method=RequestMethod.POST)
 	@ResponseBody
 	public User addUser(@RequestBody User user){
-		user.setId(60);
+		user.setUserId(60);
 		user.setPassword("123456");
 		user.setLinkman("罗杰");
 		user.setStatus("ture");
@@ -291,7 +291,7 @@ public class UserController {
 	    // userService.insertUser(user);
 		return user;
 	}
-	
+
 
 	/**
 	 * 根据当前选中的用户名删除用户
@@ -300,7 +300,7 @@ public class UserController {
 	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, User> delete(String name){
-		
+
 		Map<String, User> modelMap = new HashMap<String,User>();
 		UserServiceImpl usiml = new UserServiceImpl();
 		if(usiml.deleteUser(name)){
@@ -312,7 +312,7 @@ public class UserController {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * 修改用户信息
 	 */
@@ -320,7 +320,7 @@ public class UserController {
 	@ResponseBody
 	public User modify(@RequestBody User user){
 		//传入user修改用户信息
-		user.setId(50);
+		user.setUserId(50);
 		user.setPassword("223456");
 		user.setLinkman("杰皆");
 		user.setStatus("ture");
@@ -328,8 +328,8 @@ public class UserController {
 		//userService.updateByPrimaryKeySelective(user);
 		return user;
 	}
-	
-	
+
+
 	/**
 	 * 根据用户名禁用用户
 	 */
@@ -353,8 +353,8 @@ public class UserController {
 	 * session.stop();; break; } } return activeUserList(model); }
 	 */
 
-	
-	
+
+
 	/**
 	 * 显示所有在线用户
 	 */

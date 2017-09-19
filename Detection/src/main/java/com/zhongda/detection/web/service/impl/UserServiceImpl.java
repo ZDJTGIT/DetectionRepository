@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean insertUser(User user) {
-		String cryptedPwd = new Md5Hash(user.getPassword(),user.getName(),1024).toString();
+		String cryptedPwd = new Md5Hash(user.getPassword(),user.getUserName(),1024).toString();
 		System.out.println("register cryptedPwd:"+cryptedPwd);
 		user.setPassword(cryptedPwd);
 		int index = userMapper.insert(user);

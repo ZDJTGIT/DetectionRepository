@@ -79,7 +79,7 @@ public class SecurityRealm extends AuthorizingRealm {
         }else if("禁用".equals(user.getStatus())){
         	throw new DisabledAccountException("该账户已被禁用 ，请联系管理员！");
         }
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getName(), user.getPassword(), ByteSource.Util.bytes(username), getName());
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), ByteSource.Util.bytes(username), getName());
         return authenticationInfo;
     }
 

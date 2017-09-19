@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
             <form class="m-t" role="form" action="rest/user/login" method="post">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="用户名" name="name">
+                    <input type="text" class="form-control" placeholder="用户名" name="userName">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="密码" name="password">
