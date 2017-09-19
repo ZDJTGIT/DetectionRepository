@@ -60,5 +60,14 @@ public interface UserService {
 	 * @return
 	 */
 	List<User> selectList();
-
+	
+	/*
+	 * 修改用户信息
+	 */
+	int updateByPrimaryKeySelective(User record);
+	
+	/*
+	 * 根据用户名删除用户
+	 */
+	boolean deleteUser(String name);
 }

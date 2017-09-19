@@ -49,5 +49,20 @@ public class PageController {
     public String error500() {
         return "500";
     }
+    
+    /**
+     * 注册页
+     */
+    @RequestMapping("/register")
+    public String register(){
+    	return "register";
+    }
 
+    /**
+     * 添加联系人
+     */
+    @RequestMapping("/table_adduser")
+    public String table_adduser(){
+    	return "table_adduser";
+    }
 }

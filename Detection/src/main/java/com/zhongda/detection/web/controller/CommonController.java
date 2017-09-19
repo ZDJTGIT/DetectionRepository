@@ -40,24 +40,38 @@ public class CommonController {
         return "home";
     }
 
-    @RequestMapping("dashboard")
-    public String dashboard(HttpServletRequest request) {
-        return "dashboard";
+    @RequestMapping("index_v2")
+    public String index_v2(HttpServletRequest request) {
+        return "index_v2";
     }
 
-    @RequestMapping("user")
-    public String user(HttpServletRequest request) {
-        return "user";
+    @RequestMapping("calendar")
+    public String calendar(HttpServletRequest request) {
+        return "calendar";
     }
 
-    @RequestMapping("table")
-    public String table(HttpServletRequest request) {
-        return "table";
+    @RequestMapping("chat_view")
+    public String chat_view(HttpServletRequest request) {
+        return "chat_view";
     }
 
-    @RequestMapping("typography")
-    public String typography(HttpServletRequest request) {
-        return "typography";
+    @RequestMapping("css_animation")
+    public String css_animation(HttpServletRequest request) {
+        return "css_animation";
+    }
+
+    @RequestMapping("graph_echarts_farmland")
+    public String graph_echarts_farmland(HttpServletRequest request) {
+        return "graph_echarts_farmland";
+    }
+
+    @RequestMapping("graph_echarts_bridge")
+    public String graph_echarts_bridge(HttpServletRequest request) {
+        return "graph_echarts_bridge";
+    }
+    @RequestMapping("graph_echarts_tunnel")
+    public String graph_echarts_tunnel(HttpServletRequest request) {
+        return "graph_echarts_tunnel";
     }
 
     @RequestMapping("icons")
@@ -65,19 +79,84 @@ public class CommonController {
         return "icons";
     }
 
-    @RequestMapping("maps")
-    public String maps(HttpServletRequest request) {
-        return "maps";
+    @RequestMapping("invoice_print")
+    public String invoice_print(HttpServletRequest request) {
+        return "invoice_print";
     }
 
-    @RequestMapping("notifications")
-    public String notifications(HttpServletRequest request) {
-        return "notifications";
+    @RequestMapping("invoice")
+    public String invoice(HttpServletRequest request) {
+        return "invoice";
     }
 
-    @RequestMapping("upgrade")
-    public String upgrade(HttpServletRequest request) {
-        return "upgrade";
+    @RequestMapping("javascript")
+    public String javascript(HttpServletRequest request) {
+        return "javascript";
+    }
+
+    @RequestMapping("login_v2")
+    public String login_v2(HttpServletRequest request) {
+        return "login_v2";
+    }
+
+    @RequestMapping("pin_board")
+    public String pin_board(HttpServletRequest request) {
+        return "pin_board";
+    }
+
+    @RequestMapping("user")
+    public String user(HttpServletRequest request) {
+        return "user";
+    }
+
+    @RequestMapping("project_detail")
+    public String project_detail(HttpServletRequest request) {
+        return "project_detail";
+    }
+
+    @RequestMapping("projects")
+    public String projects(HttpServletRequest request) {
+        return "projects";
+    }
+
+    @RequestMapping("register")
+    public String register(HttpServletRequest request) {
+        return "register";
+    }
+
+    @RequestMapping("table_basic")
+    public String table_basic(HttpServletRequest request) {
+        return "table_basic";
+    }
+
+    @RequestMapping("table_bootstrap")
+    public String table_bootstrap(HttpServletRequest request) {
+        return "table_bootstrap";
+    }
+
+    @RequestMapping("table_data_tables")
+    public String table_data_tables(HttpServletRequest request) {
+        return "table_data_tables";
+    }
+
+    @RequestMapping("table_foo_table")
+    public String table_foo_table(HttpServletRequest request) {
+        return "table_foo_table";
+    }
+
+    @RequestMapping("table_jqgrid")
+    public String table_jqgrid(HttpServletRequest request) {
+        return "table_jqgrid";
+    }
+
+    @RequestMapping("webim")
+    public String webim(HttpServletRequest request) {
+        return "webim";
+    }
+
+    @RequestMapping("form_builder")
+    public String form_builder(HttpServletRequest request) {
+        return "form_builder";
     }
 
     /**

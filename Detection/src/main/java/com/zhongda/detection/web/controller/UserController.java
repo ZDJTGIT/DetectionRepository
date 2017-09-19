@@ -1,7 +1,9 @@
 package com.zhongda.detection.web.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,6 +38,7 @@ import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.PermissionSign;
 import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.UserService;
+import com.zhongda.detection.web.service.impl.UserServiceImpl;
 
 /**
  * 用户控制器
@@ -273,6 +277,60 @@ public class UserController {
 	}
 
 	/**
+	 * 输入用户信息添加用户
+	 */
+
+	@RequestMapping(value = "/addUser", method=RequestMethod.POST)
+	@ResponseBody
+	public User addUser(@RequestBody User user){
+		user.setId(60);
+		user.setPassword("123456");
+		user.setLinkman("罗杰");
+		user.setStatus("ture");
+		//将user存入数据库
+	    // userService.insertUser(user);
+		return user;
+	}
+	
+
+	/**
+	 * 根据当前选中的用户名删除用户
+	 */
+
+	@RequestMapping(value = "/delete", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, User> delete(String name){
+		
+		Map<String, User> modelMap = new HashMap<String,User>();
+		UserServiceImpl usiml = new UserServiceImpl();
+		if(usiml.deleteUser(name)){
+			User user = userService.selectByUsername(name);
+			modelMap.put("adept", user);
+			System.out.println(modelMap);
+			return modelMap;
+		}else{
+			return null;
+		}
+	}
+	
+	/**
+	 * 修改用户信息
+	 */
+	@RequestMapping(value = "/modify", method=RequestMethod.POST)
+	@ResponseBody
+	public User modify(@RequestBody User user){
+		//传入user修改用户信息
+		user.setId(50);
+		user.setPassword("223456");
+		user.setLinkman("杰皆");
+		user.setStatus("ture");
+		//根据选中的用户修改用户信息
+		//userService.updateByPrimaryKeySelective(user);
+		return user;
+	}
+	
+	
+	/**
 	 * 根据用户名禁用用户
 	 */
 	/*
@@ -290,11 +348,13 @@ public class UserController {
 	 * forceUserLogout(String username, Model model){ Collection<Session>
 	 * sessions = sessionDAO.getActiveSessions(); for(Session session:sessions){
 	 * Object userObj =
-	 * session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+0	 * session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
 	 * if(null == userObj){ continue; } if(userObj.toString().equals(username)){
 	 * session.stop();; break; } } return activeUserList(model); }
 	 */
 
+	
+	
 	/**
 	 * 显示所有在线用户
 	 */

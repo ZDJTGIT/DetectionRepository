@@ -131,7 +131,7 @@ demo = {
             var y = e.lnglat.getLat();
             //alert(x+":"+y);
             //document.getElementById("lnglat").innerHTML = x + "," + y;
-        }    
+        }
     },
 
 	showNotification: function(from, align){
