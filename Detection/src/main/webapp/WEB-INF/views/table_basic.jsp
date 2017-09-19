@@ -365,14 +365,14 @@
 				e.preventDefault();
 				
 				$('#modify').show();
-				var tdid=document.getElementById ("tdid").innerHTML;
-				var tdaccount = document.getElementById ("tdaccount").innerHTML;
-				var tdname = document.getElementById ("tdname").innerHTML; 
-				var tdsysname = document.getElementById ("tdsysname").innerHTML;  
-				var tdidentity = document.getElementById ("tdidentity").innerHTML;
-				var tdemail = document.getElementById ("tdemail").innerHTML; 
-				var tdphone = document.getElementById ("tdphone").innerHTML; 
-				var tdcompany = document.getElementById ("tdcompany").innerHTML; 
+				var tdid=$('#tdid').text();
+				var tdaccount = $('#tdaccount').text();
+				var tdname = $('#tdname').text(); 
+				var tdsysname = $('#tdsysname').text();  
+				var tdidentity = $('#tdidentity').text(); 
+				var tdemail = $('#tdemail').text(); 
+				var tdphone = $('#tdphone').text(); 
+				var tdcompany = $('#tdcompany').text(); 
 				$('#mdname').val(tdname);
 				$('#mdaccount').val(tdaccount);
 				$('#mdsysname').val(tdsysname);
@@ -380,7 +380,6 @@
 				$('#mdphone').val(tdphone);
 				$('#mdemail').val(tdemail);
 				$('#mdidentity').get(0).selectedIndex=0;
-				
 			});
 			
 			//关闭修改用户div
@@ -438,26 +437,26 @@
 		    var emailvalue =  $("#mdemail").val();
 		    var selectvalue = $("#mdidentity").val();
 		    var jsonData= '{"name":"'+namevalue+'","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue+'"}';
-			
+					    
 			$('#modify').hide();
 	    	$.ajax({
-	    		  type: 'POST',
+	    		  type: 'post',
 	    		  url: 'rest/user/modify',
-	    		  //传入输入新信息
+	    		  contentType:'application/json',
+		          dataType:'json',
 	    		  data: jsonData,
 	    		  success: function (data){
-	    			  if(data){
-	    				  
-	    	var secenduser = "<tr><th>"+data.id+"</th><th>"+data.account+"</th><th>"+data.name
-			  				+"</th><th>"+data.sysname+"</th><th>"+data.identity+"</th><th>"+data.email
-			  				+"</th><th>"+data.phone+"</th><th>"+data.company+"</th><th>"+"2017/9/19 10:26:35"
-			  				+"</th><td>"+"<a href='javascript:;'id='deleteuser'><b>删除用户</b></a>"+"</td></tr>";
-	    				  
-	    				  alert("数据加载成功"+ data.name +"11111");
-	    				  $("#userTableDeatil").replace(secenduser)
-	    			  }else{
-	    				  alert("数据异常");
-	    			  }
+	    			       if(data){
+	    			    	  $("#tdname").text(namevalue);
+	    			  		  $("#tdaccount").text(accountvalue);
+	    			  		  $("#tdsysname").text(sysnamevalue);
+	    			  		  $("#tdcompany").text(companyvalue);
+	    			  		  $("#tdphone").text(phonevalue);
+	    			  		  $("#tdemail").text(emailvalue);
+	    			  		  $('#mdidentity').set(0).selectedIndex=0;
+	    			       }else{
+	    				   alert("数据异常");
+	    			      }
 	    		  },
 	    		  error: function(){
 	    			  alert("数据加载失败");
