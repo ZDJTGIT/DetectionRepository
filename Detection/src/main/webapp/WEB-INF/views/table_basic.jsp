@@ -32,34 +32,34 @@
 <link href="assets/css/animate.min.css" rel="stylesheet">
 <link href="assets/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 
-            <style>   
-            .black_overlay{   
-                display: none;   
-                position: absolute;   
-                top: 0%;   
-                left: 0%;   
-                width: 100%;   
-                height: 100%;   
-                background-color: black;   
-                z-index:1001;   
-                -moz-opacity: 0.8;   
-                opacity:.80;   
-                filter: alpha(opacity=88);   
-            }   
-            .white_content {   
-                display: none;   
-                position: absolute;   
-                top: 25%;   
-                left: 25%;   
-                width: 55%;   
-                height: 55%;   
-                padding: 20px;   
-                border: 10px solid orange;   
-                background-color: white;   
-                z-index:1002;   
-                overflow: auto;   
-            }   
-          </style>  
+            <style>
+            .black_overlay{
+                display: none;
+                position: absolute;
+                top: 0%;
+                left: 0%;
+                width: 100%;
+                height: 100%;
+                background-color: black;
+                z-index:1001;
+                -moz-opacity: 0.8;
+                opacity:.80;
+                filter: alpha(opacity=88);
+            }
+            .white_content {
+                display: none;
+                position: absolute;
+                top: 25%;
+                left: 25%;
+                width: 55%;
+                height: 55%;
+                padding: 20px;
+                border: 10px solid orange;
+                background-color: white;
+                z-index:1002;
+                overflow: auto;
+            }
+          </style>
 </head>
 
 <body class="gray-bg">
@@ -88,7 +88,7 @@
 								<p>详细记录用户各项基本信息(用户初始密码：123456)</p>
 								<a href = "javascript:;" id="popupAddUser">添加用户</a>
 								<a href = "javascript:;" id="popupModfiyUser">修改用户信息</a>
-								<div id="modify" class="white_content" style="width:500px;height:460px;margin-left:200px;margin-top:-50px; 
+								<div id="modify" class="white_content" style="width:500px;height:460px;margin-left:200px;margin-top:-50px;
 								background-color:#eeeeee ; border:2px;solid #000;filter:alpha(Opacity=80);-moz-opacity:0.8;opacity: 0.8;">
  								    <div >
  								    <h5>修改用户信息（根据您输入的用户名修改！用户信息输入不完整不予修改）</h5>
@@ -112,8 +112,8 @@
  								    </div>
  								    <input type="button" id="sureMdy" value="确定修改">
 							        <a href = "javascript:;" id="closeModfiyUser">关闭窗口</a>
-							    </div>   
-							    
+							    </div>
+
 							    <div id="adduser" class="white_content" style="width:500px;height:460px;margin-left:200px;margin-top:-50px;
 							     background-color:#eeeeee ; border:2px;solid #000;filter:alpha(Opacity=80);-moz-opacity:0.8;opacity: 0.8;">
  								    <div >
@@ -138,7 +138,7 @@
  								    </div>
  								    <input type="button" id="sureAdd" value="确定添加">
 							        <a href = "javascript:;" id="closeAddUser">关闭窗口</a>
-							    </div>   
+							    </div>
 							</div>
 							<div class="col-sm-4 m-b-xs">
 								<div data-toggle="buttons" class="btn-group">
@@ -160,32 +160,28 @@
 								<thead>
 									<tr>
 										<th>序号</th>
-									    <th>账户</th>
 									    <th>用户名</th>
-									    <th>所属系统名称</th>
-									    <th>用户角色</th>
 									    <th>邮箱</th>
 										<th>手机号码</th>
 										<th>所属公司</th>
-										<th>创建时间</th>
+										<th>联系人</th>
 										<th>操作</th>
 									</tr>
 								</thead>
 								<tbody  id="userTableDeatil">
-									<tr>
-										<td id="tdid">055</td>
-										<td id="tdaccount">mmmy</td>
-										<td id="tdname">罗杰</td>
-										<td id="tdsysname">农田自动检测系统</td>
-										<td id="tdidentity">系统管理员</td>
-										<td id="tdemail">794948489@qq.com</td>
-					 					<td id="tdphone">18546474587</td>
-										<td id="tdcompany">中大检测</td>
-										<td>2017/9/18 16:26:35</td>
-										<td><a href="javascript:;" id="deleteuser">
-										    <b>删除用户</b></a>
-										</td>
-									</tr>
+									<c:forEach items="${userList}" var="singleUser">
+										<tr>
+											<td id="tdid">${singleUser.userId}</td>
+											<td id="tdname">${singleUser.userName}</td>
+											<td id="tdemail">${singleUser.email}</td>
+											<td id="tdphone">${singleUser.phone}</td>
+						 					<td id="tdcompany">${singleUser.company}</td>
+											<td id="tdlinkman">${singleUser.linkman}</td>
+											<td><a href="javascript:;" id="deleteuser">
+											    <b>删除用户</b></a>
+											</td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>
@@ -337,43 +333,43 @@
 	<script src="assets/js/demo/peity-demo.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
+
 			//打开表格发送请求到控制器查数据库获取表格信息返回加载，
 			//增删改都是通过发送请求到控制器查数据库获取表格信息返回加载
 			$(".i-checks").iCheck({
 				checkboxClass : "icheckbox_square-green",
 				radioClass : "iradio_square-green",
 			});
-			
+
 			//获取系统时间
 			$()
-			
-			
+
+
 			//打开添加用户div
 			$('#popupAddUser').click(function(e){
 				e.preventDefault();
 				$('#adduser').show();
 			});
-			
+
 			//关闭添加用户div
 			$('#closeAddUser').click(function(e){
 				e.preventDefault();
 				$('#adduser').hide();
 			});
-			
+
 			//打开修改用户div
 			$('#popupModfiyUser').click(function(e){
 				e.preventDefault();
-				
+
 				$('#modify').show();
 				var tdid=$('#tdid').text();
 				var tdaccount = $('#tdaccount').text();
-				var tdname = $('#tdname').text(); 
-				var tdsysname = $('#tdsysname').text();  
-				var tdidentity = $('#tdidentity').text(); 
-				var tdemail = $('#tdemail').text(); 
-				var tdphone = $('#tdphone').text(); 
-				var tdcompany = $('#tdcompany').text(); 
+				var tdname = $('#tdname').text();
+				var tdsysname = $('#tdsysname').text();
+				var tdidentity = $('#tdidentity').text();
+				var tdemail = $('#tdemail').text();
+				var tdphone = $('#tdphone').text();
+				var tdcompany = $('#tdcompany').text();
 				$('#mdname').val(tdname);
 				$('#mdaccount').val(tdaccount);
 				$('#mdsysname').val(tdsysname);
@@ -382,13 +378,13 @@
 				$('#mdemail').val(tdemail);
 				$('#mdidentity').get(0).selectedIndex=0;
 			});
-			
+
 			//关闭修改用户div
 			$('#closeModfiyUser').click(function(e){
 				$('#modify').hide();
 			});
-			
-			
+
+
 			//添加用户
 		    $('#sureAdd').click(function(){
 		    	var namevalue =  $("#name").val();
@@ -423,13 +419,13 @@
 		    			  alert(XMLHttpRequest.readyState);
 		    			  alert(textStatus);
 		    			    }
-		    			 
+
 		    		  });
 		        });
-		        
+
 		    //确定修改（修改操作稍后改成看信息修改）
 		$('#sureMdy').click(function(){
-			
+
 			var namevalue =  $("#mdname").val();
 		    var accountvalue =  $("#mdaccount").val();
 		    var sysnamevalue =  $("#mdsysname").val();
@@ -438,7 +434,7 @@
 		    var emailvalue =  $("#mdemail").val();
 		    var selectvalue = $("#mdidentity").val();
 		    var jsonData= '{"name":"'+namevalue+'","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue+'"}';
-					    
+
 			$('#modify').hide();
 	    	$.ajax({
 	    		  type: 'post',
@@ -464,27 +460,27 @@
 	    		  }
 	    		  });
 	        });
-		
+
 		//删除用户
 		$('#deleteuser').click(function(){
 		layer.confirm('确定要删除该用户么？', {
 			  btn: ['取消删除','确定删除'] //按钮
 			}, function(){
 			  layer.msg('已取消', {icon: 1});
-			  
+
 			}, function(){
-				
+
 				$('#userTableDeatil').empty();
 		    			  layer.msg('删除成功（该提示5s后自动关闭）', {
 		    				    time: 5000, //5s后自动关闭
 		    				    btn: ['知道了']
 		    				  });
 				});
-			 
+
 			});
-	        
+
 		});
-      
+
 	</script>
 	<!--  -->
 	<script type="text/javascript"

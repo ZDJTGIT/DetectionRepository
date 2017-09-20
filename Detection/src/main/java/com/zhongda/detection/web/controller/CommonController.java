@@ -129,11 +129,6 @@ public class CommonController {
         return "register";
     }
 
-    @RequestMapping("table_basic")
-    public String table_basic(HttpServletRequest request) {
-        return "table_basic";
-    }
-
     @RequestMapping("table_bootstrap")
     public String table_bootstrap(HttpServletRequest request) {
         return "table_bootstrap";
