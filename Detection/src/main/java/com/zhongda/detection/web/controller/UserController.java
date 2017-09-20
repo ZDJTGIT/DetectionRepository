@@ -24,6 +24,8 @@ import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,6 +58,8 @@ public class UserController {
 	@Resource(name = "shiroEhcacheManager")
 	private CacheManager cacheManager;
 	private Cache<String, String> changePasswordCache;
+
+	public static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	// private Cache<String,String> vcodeCache;
 
@@ -238,7 +242,7 @@ public class UserController {
 
 	/**
 	 * 修改密码
-	 */
+	 */ 
 	@RequestMapping(value = "/changPassword", method = RequestMethod.POST)
 	public String changPassword(@Valid User user, BindingResult result,
 			Model model, HttpServletRequest reques) {
@@ -259,7 +263,9 @@ public class UserController {
 	public String userList(Model model) {
 		List<User> userList = userService.selectList();
 		model.addAttribute("userList", userList);
-		return "user/userList";
+		logger.info("进入userList");
+		logger.info("userList的大小"+userList.size());
+		return "table_basic";
 	}
 
 	/**
@@ -328,7 +334,16 @@ public class UserController {
 		//userService.updateByPrimaryKeySelective(user);
 		return user;
 	}
-
+	
+	/*
+	 * 用户修改用户信息
+	 */
+	@RequestMapping(value = "/updataUser", method=RequestMethod.POST)
+	@ResponseBody
+	public User updataUser(@RequestBody User user){
+		userService.updateByPrimaryKeySelective(user);
+		return user;
+	}
 
 	/**
 	 * 根据用户名禁用用户

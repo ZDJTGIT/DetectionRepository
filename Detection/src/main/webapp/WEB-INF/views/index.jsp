@@ -53,7 +53,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
                                <span class="block m-t-xs"><strong class="font-bold">ZDJC</strong></span>
-                                
+
                                 </span>
                             </a>
                         </div>
@@ -167,7 +167,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<li><a href="javascript:;"><i class="fa fa-table"></i> <span
 							class="nav-label">表格</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/table_basic">用户&告警联系人
+							<li><a class="J_menuItem" href="rest/user/userList">用户&告警联系人
 									<span class="label label-danger pull-right">管理员可见</span>
 							</a></li>
 							<li><a class="J_menuItem" href="rest/table_data_tables">详细检验数据展示分析</a>
@@ -639,7 +639,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 			</div>
 		</div>
-		
+
 	<!-- 	mini聊天窗口开始 -->
 		<div class="small-chat-box fadeInRight animated">
 
