@@ -73,7 +73,11 @@ public class CommonController {
     public String graph_echarts_tunnel(HttpServletRequest request) {
         return "graph_echarts_tunnel";
     }
-
+   
+    @RequestMapping("graph_echarts_slope")
+    public String graph_echarts_slope(HttpServletRequest request) {
+        return "graph_echarts_slope";
+    }
     @RequestMapping("icons")
     public String icons(HttpServletRequest request) {
         return "icons";

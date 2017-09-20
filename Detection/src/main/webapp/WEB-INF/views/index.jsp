@@ -36,7 +36,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg"
-	style="overflow-y:hidden">
+	style="overflow-y:hidden  margin: 0
+    padding: 0">
 	<div id="wrapper">
 
 		<!--左侧导航开始-->
@@ -46,30 +47,15 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			</div>
 			<div class="sidebar-collapse">
 				<ul class="nav" id="side-menu">
-					<li class="nav-header">
+					<li class="nav-header" style="text-align:center">
                         <div class="dropdown profile-element">
-                            <span><img alt="image" class="img-circle" src="img/profile_small.jpg" /></span>
+                            <span><img alt="image" class="img-circle" src="assets/img/zdLogo.png" /></span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
-                                <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                               <span class="block m-t-xs"><strong class="font-bold">ZDJC</strong></span>
+                                
                                 </span>
                             </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
-                                </li>
-                                <li><a class="J_menuItem" href="profile.html">个人资料</a>
-                                </li>
-                                <li><a class="J_menuItem" href="contacts.html">联系我们</a>
-                                </li>
-                                <li><a class="J_menuItem" href="mailbox.html">信箱</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li><a href="login.html">安全退出</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="logo-element">H+
                         </div>
                     </li>
 					<li><a class="J_menuItem" href="rest/home" id="btn-home">
@@ -92,6 +78,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                             </li>
                             <li>
                             	<a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁</a>
+                            </li>
+                             <li>
+                                <a class="J_menuItem" href="rest/graph_echarts_slope">边坡</a>
                             </li>
                         </ul>
                     </li>
@@ -621,8 +610,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 			</div>
 		</div>
-		右侧边栏结束
-		mini聊天窗口开始
+		
+	<!-- 	mini聊天窗口开始 -->
 		<div class="small-chat-box fadeInRight animated">
 
 			<div class="heading" draggable="true">
