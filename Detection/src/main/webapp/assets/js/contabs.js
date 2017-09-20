@@ -109,6 +109,16 @@ $(function () {
         flag = true;
         if (url != null && url.indexOf('javascript:;') < 0) {
 
+        	if($(this).hasClass("supMenu")){
+        		$.ajax({url:url,dataType:"json",success:function(data){
+        			$.each(data,function(idx,item){
+        				var projectItem = '<li><a class="J_menuItem" href="rest/graph_echarts_'+item.projectType+'">'+item.projectType+'</a></li>';
+        				$('#my_project').append(projectItem);
+        			});
+        	    }});
+        		return false;
+        	}
+
         	// 选项卡菜单已存在
             $('.J_menuTab').each(function () {
                 if (url.indexOf($(this).attr('href')) >= 0) {

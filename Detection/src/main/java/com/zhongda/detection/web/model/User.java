@@ -1,5 +1,7 @@
 package com.zhongda.detection.web.model;
 
+import java.util.Date;
+
 public class User {
     private Integer userId;
 
@@ -14,6 +16,8 @@ public class User {
     private String company;
 
     private String linkman;
+
+    private Date createTime;
 
     private String status;
 
@@ -71,6 +75,14 @@ public class User {
 
     public void setLinkman(String linkman) {
         this.linkman = linkman == null ? null : linkman.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getStatus() {
