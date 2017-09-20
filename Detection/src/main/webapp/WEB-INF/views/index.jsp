@@ -65,6 +65,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<li>
                         <a class="J_menuItem" href="javascript:;">
                         	<i class="fa fa-columns"></i> <span class="nav-label">我的项目</span>
+                        	<span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
