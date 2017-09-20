@@ -63,33 +63,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							class="fa arrow"></span>
 					</a></li>
 					<li>
-                        <a class="J_menuItem" href="javascript:;">
+                        <a class="J_menuItem supMenu" href="rest/myProject">
                         	<i class="fa fa-columns"></i> <span class="nav-label">我的项目</span>
                         	<span class="fa arrow"></span>
                         </a>
-                        <ul class="nav nav-second-level">
-                            <!-- <li>
-                                <a class="J_menuItem" href="rest/index_v2">项目进展</a>
-                            </li> -->
-                           <li>
-		                        <a class="J_menuItem" href="javascript:;">
-		                        	<i class="fa fa-columns"></i> <span class="nav-label" id="farmspan">农田项目</span>
-		                        </a>
-		                        <ul class="nav nav-second-level" id="farmpointli">
-		                           <li id="licontent">
-		                           	
-		                           </li>
-		                        </ul>
-		                    </li>
-                            <li>
-                            	<a class="J_menuItem" href="javascript:;">
-		                        	<i class="fa fa-columns"></i> <span class="nav-label">隧道项目</span>
-		                        </a>
-		                        <ul class="nav nav-second-level">
-		                            <li>
-		                                <a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道</a>
-		                            </li>
-		                        </ul>
+						<ul id="my_project" class="nav nav-second-level">
+                           <!--  <li>
+                                <a class="J_menuItem" href="rest/graph_echarts_farmland">农田</a>
                             </li>
                             <li>
                             	<a class="J_menuItem" href="javascript:;">
@@ -111,7 +91,11 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		                            </li>
 		                        </ul>
                             </li>
-                             
+                            	<a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁</a>
+                            </li>
+                             <li>
+                                <a class="J_menuItem" href="rest/graph_echarts_slope">边坡</a>
+                            </li> -->
                         </ul>
                     </li>
                     <li>
@@ -732,7 +716,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	});
 	</script>
 	<script type="text/javascript">
-		
+
 		/* var farmspan = document.getElementById("farmspan");
 		var farmpointli = document.getElementById("farmpointli");
 		farmspan.onclick = function(){
@@ -748,9 +732,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			li.appendChild(a);
 			li.appendChild(a2);
 			farmpointli.appendChild(li);
-			
+
 		} */
 	</script>
-	
+
 </body>
 </html>

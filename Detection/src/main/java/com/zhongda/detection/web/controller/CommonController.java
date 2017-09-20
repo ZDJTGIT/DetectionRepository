@@ -1,5 +1,7 @@
 package com.zhongda.detection.web.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,9 +13,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
 
 import com.zhongda.detection.core.utils.vcode.Captcha;
 import com.zhongda.detection.core.utils.vcode.GifCaptcha;
+import com.zhongda.detection.web.model.User;
+import com.zhongda.detection.web.model.UserProject;
+import com.zhongda.detection.web.service.UserProjectService;
 
 /**
  * 公共视图控制器
@@ -27,6 +34,9 @@ public class CommonController {
     private CacheManager cacheManager;
     private Cache<String,String> vcodeCache;
 
+    @Resource
+	private UserProjectService userProjectService;
+
     /**
      * 首页
      */
@@ -38,6 +48,14 @@ public class CommonController {
     @RequestMapping("home")
     public String home(HttpServletRequest request) {
         return "home";
+    }
+
+    @RequestMapping("myProject")
+    @ResponseBody
+    public List<UserProject> myProject(HttpServletRequest request) {
+    	User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
+    	List<UserProject> userProjectList = userProjectService.selectAllProjectTypeByUserId(user.getUserId());
+        return userProjectList;
     }
 
     @RequestMapping("index_v2")
@@ -73,7 +91,7 @@ public class CommonController {
     public String graph_echarts_tunnel(HttpServletRequest request) {
         return "graph_echarts_tunnel";
     }
-   
+
     @RequestMapping("graph_echarts_slope")
     public String graph_echarts_slope(HttpServletRequest request) {
         return "graph_echarts_slope";
@@ -110,7 +128,7 @@ public class CommonController {
 
     @RequestMapping("user")
     public String user(HttpServletRequest request) {
-    	
+
         return "user";
     }
 

@@ -11,19 +11,25 @@
     user_project_id, project_type, user_id, projcet_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from user_project
     where user_project_id = #{userProjectId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllProjectTypeByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_project
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_project
     where user_project_id = #{userProjectId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.UserProject">
-    insert into user_project (user_project_id, project_type, user_id, 
+    insert into user_project (user_project_id, project_type, user_id,
       projcet_id)
-    values (#{userProjectId,jdbcType=INTEGER}, #{projectType,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+    values (#{userProjectId,jdbcType=INTEGER}, #{projectType,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
       #{projcetId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.UserProject">
