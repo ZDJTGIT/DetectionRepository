@@ -238,7 +238,7 @@ public class UserController {
 
 	/**
 	 * 修改密码
-	 */
+	 */ 
 	@RequestMapping(value = "/changPassword", method = RequestMethod.POST)
 	public String changPassword(@Valid User user, BindingResult result,
 			Model model, HttpServletRequest reques) {
@@ -328,7 +328,16 @@ public class UserController {
 		//userService.updateByPrimaryKeySelective(user);
 		return user;
 	}
-
+	
+	/*
+	 * 用户修改用户信息
+	 */
+	@RequestMapping(value = "/updataUser", method=RequestMethod.POST)
+	@ResponseBody
+	public User updataUser(@RequestBody User user){
+		userService.updateByPrimaryKeySelective(user);
+		return user;
+	}
 
 	/**
 	 * 根据用户名禁用用户

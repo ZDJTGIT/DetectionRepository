@@ -110,6 +110,7 @@ public class CommonController {
 
     @RequestMapping("user")
     public String user(HttpServletRequest request) {
+    	
         return "user";
     }
 

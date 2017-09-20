@@ -339,6 +339,9 @@
 	<script src="assets/js/demo/peity-demo.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			//打开表格发送请求到控制器查数据库获取表格信息返回加载，
+			//增删改都是通过发送请求到控制器查数据库获取表格信息返回加载
 			$(".i-checks").iCheck({
 				checkboxClass : "icheckbox_square-green",
 				radioClass : "iradio_square-green",
@@ -478,14 +481,12 @@
 		    				    time: 5000, //5s后自动关闭
 		    				    btn: ['知道了']
 		    				  });
-		    		 
-		    		  
 				});
 			 
 			});
 	        
 		});
-
+      
 	</script>
 	<!--  -->
 	<script type="text/javascript"
