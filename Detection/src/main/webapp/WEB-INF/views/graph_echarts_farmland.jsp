@@ -36,9 +36,7 @@
     <link href="assets/css/style.min.css" rel="stylesheet">
 
 </head>
-
 <body class="gray-bg">
-
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-sm-12">
@@ -818,7 +816,9 @@
     <!-- 自定义js -->
     <script src="assets/js/content.js"></script>
 
-
+	<script type="text/javascript">
+	var ss = "${test}";
+	</script>
     <!-- ECharts demo data -->
     <script src="assets/js/demo/echarts-demo.min.js"></script>
 
@@ -831,6 +831,7 @@
 
      <!-- Page-Level Scripts -->
     <script>
+    	
         $(document).ready(function () {
             $('.dataTables-example').dataTable();
 

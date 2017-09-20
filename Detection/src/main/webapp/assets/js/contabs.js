@@ -102,7 +102,7 @@ $(function () {
     });
 
     //给每一个导航项，添加对应的选项卡以及显示对应的内容
-    $('.J_menuItem').click(function(e) {
+    $('.J_menuItem').on('click',function(e) {
         e.preventDefault();
         var url = this.href;
         menuName = $.trim($(this).text());
