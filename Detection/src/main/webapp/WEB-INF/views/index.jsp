@@ -68,18 +68,50 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                         	<span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
+                            <!-- <li>
+                                <a class="J_menuItem" href="rest/index_v2">项目进展</a>
+                            </li> -->
+                           <li>
+		                        <a class="J_menuItem" href="javascript:;">
+		                        	<i class="fa fa-columns"></i> <span class="nav-label" id="farmspan">农田项目</span>
+		                        </a>
+		                        <ul class="nav nav-second-level" id="farmpointli">
+		                           <li id="licontent">
+		                           	
+		                           </li>
+		                        </ul>
+		                    </li>
                             <li>
-                                <a class="J_menuItem" href="rest/graph_echarts_farmland">农田</a>
+                            	<a class="J_menuItem" href="javascript:;">
+		                        	<i class="fa fa-columns"></i> <span class="nav-label">隧道项目</span>
+		                        </a>
+		                        <ul class="nav nav-second-level">
+		                            <li>
+		                                <a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道</a>
+		                            </li>
+		                        </ul>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道</a>
+                            	<a class="J_menuItem" href="javascript:;">
+		                        	<i class="fa fa-columns"></i> <span class="nav-label">桥梁项目</span>
+		                        </a>
+		                        <ul class="nav nav-second-level">
+		                            <li>
+		                                <a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁</a>
+		                            </li>
+		                        </ul>
                             </li>
                             <li>
-                            	<a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁</a>
+                            	<a class="J_menuItem" href="javascript:;">
+		                        	<i class="fa fa-columns"></i> <span class="nav-label">边坡项目</span>
+		                        </a>
+		                        <ul class="nav nav-second-level">
+		                            <li>
+		                                <a class="J_menuItem" href="rest/graph_echarts_slope">边坡</a>
+		                            </li>
+		                        </ul>
                             </li>
-                             <li>
-                                <a class="J_menuItem" href="rest/graph_echarts_slope">边坡</a>
-                            </li>
+                             
                         </ul>
                     </li>
                     <li>
@@ -699,5 +731,26 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 	});
 	</script>
+	<script type="text/javascript">
+		
+		/* var farmspan = document.getElementById("farmspan");
+		var farmpointli = document.getElementById("farmpointli");
+		farmspan.onclick = function(){
+			$("#licontent").remove();
+			var li = document.createElement("li");
+			li.setAttribute("id","licontent");
+			var a = document.createElement("a");
+			a.innerHTML = "农田";
+			a.setAttribute("class","J_menuItem");
+			a.setAttribute("href","rest/graph_echarts_bridge");
+			var a2 = document.createElement("a");
+			a2.innerHTML = "农田1";
+			li.appendChild(a);
+			li.appendChild(a2);
+			farmpointli.appendChild(li);
+			
+		} */
+	</script>
+	
 </body>
 </html>
