@@ -295,6 +295,11 @@
 	    		  success: function (data){
 	    			       if(data){
 	    			    	   alert("数据正常");
+	    			    	      $("#company").text(companyvalue);
+		    			  		  $("#user_name").text(namevalue);
+		    			  		  $("#linkman").text(linkmanvalue);
+		    			  		  $("#email").text(emailvalue);
+		    			  		  $("#phone").text(phonevalue);
 	    			       }else{
 	    				   alert("数据异常");
 	    			      }
