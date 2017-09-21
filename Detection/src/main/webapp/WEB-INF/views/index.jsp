@@ -187,8 +187,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						<!-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
 							href="#"><i class="fa fa-bars"></i> </a> -->
 						<div class="logo">
-							<img src="assets/img/zdLogo.png" alt="logo" class="logo"> <a
-								href="#" class="navbar-brand">中国大检测数据在线监控平台</a>
+						
+						<!-- 	<img src="assets/img/zdLogo.png" alt="logo" class="logo"> -->
+							<a href="#" class="navbar-brand">中国大检测数据在线监控平台</a>
 						</div>
 					</div>
 					<ul class="nav navbar-top-links navbar-right">

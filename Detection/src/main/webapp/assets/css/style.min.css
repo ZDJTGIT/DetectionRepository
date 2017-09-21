@@ -2967,7 +2967,7 @@ body.boxed-layout {
 }
 
 body.boxed-layout #wrapper {
-	background-color: #2f4050;
+	background-color: #0d3b6c;
 	max-width: 1200px;
 	margin: 0 auto
 }
@@ -3098,7 +3098,7 @@ video {
 #wrapper {
 	width: 100%;
 	overflow-x: hidden;
-	background-color: #2f4050
+	background-color: #0d3b6c
 }
 
 .wrapper {
@@ -3288,7 +3288,7 @@ nav.page-tabs .page-tabs-content {
 }
 
 #content-main {
-	height: calc(100% - 124px);
+	height: calc(100% - 140px);
 	overflow-y:scroll
 }
 
@@ -3584,7 +3584,9 @@ code {
 	-o-border-image: none;
 	border-image: none;
 	border-style: solid solid none;
-	border-width: 1px 0
+	border-width: 1px 0;
+	heigth:750px
+	
 }
 
 table.table-mail tr td {

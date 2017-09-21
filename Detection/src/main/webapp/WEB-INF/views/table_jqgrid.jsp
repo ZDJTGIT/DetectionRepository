@@ -181,7 +181,7 @@
 	</div>
 	<script src="assets/js/jquery.min.js?v=2.1.4"></script>
 	<script src="assets/js/bootstrap.min.js?v=3.3.6"></script>
-	<script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
+    <script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
 	<script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
 	<script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 	<script src="assets/js/content.js"></script>

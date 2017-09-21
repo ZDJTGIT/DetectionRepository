@@ -3,11 +3,13 @@ package com.zhongda.detection.web.model;
 public class UserProject {
     private Integer userProjectId;
 
-    private String projectType;
+    private String projectTypeCode;
 
     private Integer userId;
 
     private Integer projcetId;
+
+    private String projectTypeValue;
 
     public Integer getUserProjectId() {
         return userProjectId;
@@ -17,12 +19,12 @@ public class UserProject {
         this.userProjectId = userProjectId;
     }
 
-    public String getProjectType() {
-        return projectType;
+    public String getProjectTypeCode() {
+        return projectTypeCode;
     }
 
-    public void setProjectType(String projectType) {
-        this.projectType = projectType == null ? null : projectType.trim();
+    public void setProjectTypeCode(String projectTypeCode) {
+        this.projectTypeCode = projectTypeCode == null ? null : projectTypeCode.trim();
     }
 
     public Integer getUserId() {
@@ -39,5 +41,13 @@ public class UserProject {
 
     public void setProjcetId(Integer projcetId) {
         this.projcetId = projcetId;
+    }
+
+    public String getProjectTypeValue() {
+        return projectTypeValue;
+    }
+
+    public void setProjectTypeValue(String projectTypeValue) {
+        this.projectTypeValue = projectTypeValue == null ? null : projectTypeValue.trim();
     }
 }
