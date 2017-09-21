@@ -88,27 +88,16 @@
 								<p>详细记录用户各项基本信息(用户初始密码：123456)</p>
 								<a href = "javascript:;" id="popupAddUser">添加用户</a>
 								<a href = "javascript:;" id="popupModfiyUser">修改用户信息</a>
+								
 								<div id="modify" class="white_content" style="width:500px;height:460px;margin-left:200px;margin-top:-50px;
 								background-color:#eeeeee ; border:2px;solid #000;filter:alpha(Opacity=80);-moz-opacity:0.8;opacity: 0.8;">
  								    <div >
  								    <h5>修改用户信息（根据您输入的用户名修改！用户信息输入不完整不予修改）</h5>
- 								    <input type="text" id="mdname" name="name" style="width:100%;" class="form-control" placeholder="您要修改的用户名"><br>
- 								    <input type="text" id="mdaccount" name="account" style="width:100%;" placeholder="账户名" class="form-control"><br>
- 								    <input type="text" id="mdsysname" name="sysname" style="width:100%;" placeholder="所属系统名" class="form-control"><br>
+ 								    <input type="text" id="mdname" name="name" style="width:100%;"  placeholder="用户名" class="form-control"><br>
+ 								    <input type="text" id="mdlinkman" name="linkman" style="width:100%;" placeholder="联系人" class="form-control"><br>
  								    <input type="text" id="mdcompany" name="company" style="width:100%;" placeholder="邮箱" class="form-control"><br>
  								    <input type="text" id="mdphone" name="phone" style="width:100%;" placeholder="手机号码" class="form-control"><br>
  								    <input type="text" id="mdemail" name="email" style="width:100%;" placeholder="所属公司" class="form-control">
- 								    <div class="item item-input item-select">
-                                    <div class="input-label" style="height:18px">
-                                  	 用户角色
-              	  					</div>
-                					<select id="mdidentity" name="identity">
-                					<option>系统管理员</option>
-                					<option>管理员</option>
-                					<option selected="">普通用户</option>
-                					<option>告警联系人</option>
-                					</select>
-                					</div>
  								    </div>
  								    <input type="button" id="sureMdy" value="确定修改">
 							        <a href = "javascript:;" id="closeModfiyUser">关闭窗口</a>
@@ -119,22 +108,10 @@
  								    <div >
  								    <h5>添加新用户</h5>
  								    <input type="text" id="name" name="name" style="width:100%;" class="form-control" placeholder="用户名"><br>
- 								    <input type="text" id="account" name="account" style="width:100%;" class="form-control" placeholder="账户名"><br>
- 								    <input type="text" id="sysname" name="sysname" style="width:100%;" class="form-control" placeholder="所属系统名称"><br>
+ 								    <input type="text" id="sysname" name="sysname" style="width:100%;" class="form-control" placeholder="联系人"><br>
  								    <input type="text" id="company" name="company" style="width:100%;" class="form-control" placeholder="所属公司名称"><br>
  								    <input type="text" id="phone" name="phone" style="width:100%;" class="form-control" placeholder="手机号码"><br>
  								    <input type="text" id="email" name="email" style="width:100%;" class="form-control" placeholder="邮箱地址">
- 								    <div class="item item-input item-select">
-                                    <div class="input-label" style="height:18px">
-                                  	 用户角色
-              	  					</div>
-                					<select id="identity" name="identity">
-                					<option>系统管理员</option>
-                					<option>管理员</option>
-                					<option selected="">普通用户</option>
-                					<option>告警联系人</option>
-                					</select>
-                					</div>
  								    </div>
  								    <input type="button" id="sureAdd" value="确定添加">
 							        <a href = "javascript:;" id="closeAddUser">关闭窗口</a>
@@ -165,6 +142,7 @@
 										<th>手机号码</th>
 										<th>所属公司</th>
 										<th>联系人</th>
+										<th>创建时间</th>
 										<th>操作</th>
 									</tr>
 								</thead>
@@ -177,6 +155,7 @@
 											<td id="tdphone">${singleUser.phone}</td>
 						 					<td id="tdcompany">${singleUser.company}</td>
 											<td id="tdlinkman">${singleUser.linkman}</td>
+											<td id="">${singleUser.creatTime}</td>
 											<td><a href="javascript:;" id="deleteuser">
 											    <b>删除用户</b></a>
 											</td>
@@ -341,10 +320,6 @@
 				radioClass : "iradio_square-green",
 			});
 
-			//获取系统时间
-			$()
-
-
 			//打开添加用户div
 			$('#popupAddUser').click(function(e){
 				e.preventDefault();
@@ -362,21 +337,16 @@
 				e.preventDefault();
 
 				$('#modify').show();
-				var tdid=$('#tdid').text();
-				var tdaccount = $('#tdaccount').text();
+				var tdlinkman = $('#tdlinkman').text();
 				var tdname = $('#tdname').text();
-				var tdsysname = $('#tdsysname').text();
-				var tdidentity = $('#tdidentity').text();
 				var tdemail = $('#tdemail').text();
 				var tdphone = $('#tdphone').text();
 				var tdcompany = $('#tdcompany').text();
+				$('#mdlinkman').val(tdlinkman);
 				$('#mdname').val(tdname);
-				$('#mdaccount').val(tdaccount);
-				$('#mdsysname').val(tdsysname);
 				$('#mdcompany').val(tdcompany);
 				$('#mdphone').val(tdphone);
 				$('#mdemail').val(tdemail);
-				$('#mdidentity').get(0).selectedIndex=0;
 			});
 
 			//关闭修改用户div

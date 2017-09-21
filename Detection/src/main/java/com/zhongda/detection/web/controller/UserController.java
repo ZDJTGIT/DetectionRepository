@@ -340,8 +340,9 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/updataUser", method=RequestMethod.POST)
 	@ResponseBody
-	public User updataUser(@RequestBody User user){
+	public User updataUser(@RequestBody User user, HttpServletRequest request){
 		userService.updateByPrimaryKeySelective(user);
+		WebUtils.setSessionAttribute(request, "userInfo", user);
 		return user;
 	}
 
