@@ -134,7 +134,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<li>
                                 <a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁数据分析图</a>
 							</li>
-
+							<li>
+                                <a class="J_menuItem" href="rest/graph_echarts_slope">边坡数据分析图</a>
+							</li>
 						</ul>
 					</li>
 					<li><a href="javascript:;"><i class="fa fa-desktop"></i> <span
