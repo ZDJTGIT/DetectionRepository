@@ -141,12 +141,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							class="nav-label">页面</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							<li><a class="J_menuItem" href="rest/user">个人资料</a></li>
-							<li><a href="javascript:;">项目管理 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/projects">项目</a></li>
-									<li><a class="J_menuItem" href="rest/project_detail">项目详情</a>
-									</li>
-								</ul></li>
 							<li><a class="J_menuItem" href="rest/calendar">日历</a></li>
 							<li><a class="J_menuItem" href="rest/pin_board">标签墙</a></li>
 							<li><a href="javascript:;">单据 <span class="fa arrow"></span></a>
@@ -182,6 +176,14 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<li><a class="J_menuItem" href="rest/table_bootstrap">其他</a>
 							</li>
 						</ul></li>
+					<li><a href="javascript:;"><i class="fa fa-tasks"></i> <span
+							class="nav-label">项目管理</span><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li><a class="J_menuItem" href="rest/projects">项目</a>
+							</li>
+							<li><a class="J_menuItem" href="rest/project_detail">项目详情</a>
+							</li>
+						</ul></li>	
 					<li><a class="J_menuItem" href="rest/table_jqgrid"><i
 							class="fa fa-bell"></i> <span class="nav-label">告警信息</span></a></li>
 					<li><a class="J_menuItem" href="rest/css_animation"><i

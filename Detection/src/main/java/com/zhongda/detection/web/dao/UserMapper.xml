@@ -32,6 +32,12 @@
     from user
     where user_name = #{userName,jdbcType=VARCHAR}
   </select>
+  <select id="selectIdByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    user_id 
+    from user 
+    where user_name = #{userName,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}

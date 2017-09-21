@@ -1,6 +1,9 @@
 package com.zhongda.detection.web.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -289,15 +292,19 @@ public class UserController {
 	@RequestMapping(value = "/addUser", method=RequestMethod.POST)
 	@ResponseBody
 	public User addUser(@RequestBody User user){
-		user.setUserId(60);
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String string = sdf.format(date); 
 		user.setPassword("123456");
-		user.setLinkman("罗杰");
-		user.setStatus("ture");
+		user.setStatus("正常");
+		user.setCreateTime(date);
+		System.out.println("+-+-+-+-+-+-+-"+user.getCompany()+user.getEmail()+user.getLinkman()+user.getPassword()+user.getPhone()+user.getStatus()+user.getCreateTime()+string);
 		//将user存入数据库
-	    // userService.insertUser(user);
+	    userService.insertUser(user);
+//	    System.out.println("8787878787878787788"+userService.selectIdByUserName(user.getUserName()));
+//	    user.setUserId(userService.selectIdByUserName(user.getUserName()));
 		return user;
 	}
-
 
 	/**
 	 * 根据当前选中的用户名删除用户

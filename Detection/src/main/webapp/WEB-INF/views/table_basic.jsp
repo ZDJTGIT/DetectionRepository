@@ -89,7 +89,7 @@
 								<a href = "javascript:;" id="popupAddUser">添加用户</a>
 								<a href = "javascript:;" id="popupModfiyUser">修改用户信息</a>
 								
-								<div id="modify" class="white_content" style="width:500px;height:460px;margin-left:200px;margin-top:-50px;
+								<div id="modifyuser" class="white_content" style="width:500px;height:460px;margin-left:200px;margin-top:-50px;
 								background-color:#eeeeee ; border:2px;solid #000;filter:alpha(Opacity=80);-moz-opacity:0.8;opacity: 0.8;">
  								    <div >
  								    <h5>修改用户信息（根据您输入的用户名修改！用户信息输入不完整不予修改）</h5>
@@ -107,8 +107,8 @@
 							     background-color:#eeeeee ; border:2px;solid #000;filter:alpha(Opacity=80);-moz-opacity:0.8;opacity: 0.8;">
  								    <div >
  								    <h5>添加新用户</h5>
- 								    <input type="text" id="name" name="name" style="width:100%;" class="form-control" placeholder="用户名"><br>
- 								    <input type="text" id="sysname" name="sysname" style="width:100%;" class="form-control" placeholder="联系人"><br>
+ 								    <input type="text" id="userName" name="name" style="width:100%;" class="form-control" placeholder="用户名"><br>
+ 								    <input type="text" id="linkman" name="linkman" style="width:100%;" class="form-control" placeholder="联系人"><br>
  								    <input type="text" id="company" name="company" style="width:100%;" class="form-control" placeholder="所属公司名称"><br>
  								    <input type="text" id="phone" name="phone" style="width:100%;" class="form-control" placeholder="手机号码"><br>
  								    <input type="text" id="email" name="email" style="width:100%;" class="form-control" placeholder="邮箱地址">
@@ -149,13 +149,13 @@
 								<tbody  id="userTableDeatil">
 									<c:forEach items="${userList}" var="singleUser">
 										<tr>
-											<td id="tdid">${singleUser.userId}</td>
-											<td id="tdname">${singleUser.userName}</td>
-											<td id="tdemail">${singleUser.email}</td>
-											<td id="tdphone">${singleUser.phone}</td>
-						 					<td id="tdcompany">${singleUser.company}</td>
-											<td id="tdlinkman">${singleUser.linkman}</td>
-											<td id="">${singleUser.creatTime}</td>
+											<td>${singleUser.userId}</td>
+											<td>${singleUser.userName}</td>
+											<td>${singleUser.email}</td>
+											<td>${singleUser.phone}</td>
+						 					<td>${singleUser.company}</td>
+											<td>${singleUser.linkman}</td>
+											<td>${singleUser.createTime}</td>
 											<td><a href="javascript:;" id="deleteuser">
 											    <b>删除用户</b></a>
 											</td>
@@ -336,7 +336,7 @@
 			$('#popupModfiyUser').click(function(e){
 				e.preventDefault();
 
-				$('#modify').show();
+				$('#modifyuser').show();
 				var tdlinkman = $('#tdlinkman').text();
 				var tdname = $('#tdname').text();
 				var tdemail = $('#tdemail').text();
@@ -351,21 +351,18 @@
 
 			//关闭修改用户div
 			$('#closeModfiyUser').click(function(e){
-				$('#modify').hide();
+				$('#modifyuser').hide();
 			});
 
 
 			//添加用户
 		    $('#sureAdd').click(function(){
-		    	var namevalue =  $("#name").val();
-			    var accountvalue =  $("#account").val();
-			    var sysnamevalue =  $("#sysname").val();
+		    	var userNamevalue =  $("#userName").val();
 			    var companyvalue =  $("#company").val();
 			    var phonevalue =  $("#phone").val();
+			    var linkmanvalue = $("#linkman").val();
 			    var emailvalue =  $("#email").val();
-			    var selectvalue = $("#identity").val();
-			    var jsonData= '{"name":"'+namevalue+'","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue+'"}';
-
+			    var jsonData= '{"userName":"'+userNamevalue+'","company":"'+companyvalue+'","phone":"'+phonevalue+'","linkman":"'+linkmanvalue+'","email":"'+emailvalue+'"}';
 			    $('#adduser').hide();
 		    	$.ajax({
 		    		  type: 'post',
@@ -375,9 +372,9 @@
 		    		  data: jsonData,
 		    		  success: function (data){
 		    			  if(data){
-		    				  var xxx = "<tr><th>"+data.id+"</th><th>"+data.account+"</th><th>"+data.name
-		    				  +"</th><th>"+data.sysname+"</th><th>"+data.identity+"</th><th>"+data.email
-		    				  +"</th><th>"+data.phone+"</th><th>"+data.company+"</th><th>"+"2017/9/18 16:26:35"
+		    				  alert("添加成功！");
+		    				  var xxx = "<tr><th>"+data.userId+"</th><th>"+data.userName+"</th><th>"+data.email
+		    				  +"</th><th>"+data.phone+"</th><th>"+data.company+"</th><th>"+data.linkman+"</th><th>"+ data.createTime
 		    				  +"</th><td>"+"<a href='javascript:;'id='deleteuser'><b>删除用户</b></a>"+"</td></tr>";
 		    				  $('#userTableDeatil').append(xxx);
 		    			  }else{
@@ -389,7 +386,6 @@
 		    			  alert(XMLHttpRequest.readyState);
 		    			  alert(textStatus);
 		    			    }
-
 		    		  });
 		        });
 

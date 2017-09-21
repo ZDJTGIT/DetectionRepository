@@ -70,4 +70,9 @@ public interface UserService {
 	 * 根据用户名删除用户
 	 */
 	boolean deleteUser(String name);
+	
+	/*
+	 * 根据用户名查ID
+	 */
+	int selectIdByUserName(String userName);
 }
