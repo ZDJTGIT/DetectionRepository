@@ -43,7 +43,7 @@
 								<div class="m-b-md">
 									<a href="project_detail.html#"
 										class="btn btn-white btn-xs pull-right">编辑项目</a>
-									<h2>阿里巴巴集团</h2>
+									<h2>中大检测集团公司</h2>
 								</div>
 								<dl class="dl-horizontal">
 									<dt>状态：</dt>

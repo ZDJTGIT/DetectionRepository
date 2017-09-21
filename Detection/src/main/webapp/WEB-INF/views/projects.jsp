@@ -74,7 +74,7 @@
 									<tr>
 										<td class="project-status"><span
 											class="label label-primary">进行中 </td>
-										<td class="project-title"><a href="project_detail.html">LIKE－一款能够让用户快速获得认同感的兴趣社交应用</a>
+										<td class="project-title"><a href="project_detail.html">长沙橘子洲西边坡A工程</a>
 											<br /> <small>创建于 2014.08.15</small></td>
 										<td class="project-completion"><small>当前进度： 48%</small>
 											<div class="progress progress-mini">
@@ -96,8 +96,7 @@
 									<tr>
 										<td class="project-status"><span
 											class="label label-primary">进行中 </td>
-										<td class="project-title"><a href="project_detail.html">米莫说｜MiMO
-												Show</a> <br /> <small>创建于 2014.08.15</small></td>
+										<td class="project-title"><a href="project_detail.html">长沙橘子洲边坡B工程</a> <br /> <small>创建于 2014.08.15</small></td>
 										<td class="project-completion"><small>当前进度： 28%</small>
 											<div class="progress progress-mini">
 												<div style="width: 28%;" class="progress-bar"></div>
@@ -115,7 +114,7 @@
 									<tr>
 										<td class="project-status"><span
 											class="label label-default">已取消 </td>
-										<td class="project-title"><a href="project_detail.html">商家与购物用户的交互试衣应用</a>
+										<td class="project-title"><a href="project_detail.html">长沙橘子洲边坡=C工程</a>
 											<br /> <small>创建于 2014.08.15</small></td>
 										<td class="project-completion"><small>当前进度： 8%</small>
 											<div class="progress progress-mini">
@@ -133,7 +132,7 @@
 									<tr>
 										<td class="project-status"><span
 											class="label label-primary">进行中 </td>
-										<td class="project-title"><a href="project_detail.html">天狼---智能硬件项目</a>
+										<td class="project-title"><a href="project_detail.html">长沙岳麓区边坡A工程</a>
 											<br /> <small>创建于 2014.08.15</small></td>
 										<td class="project-completion"><small>当前进度： 83%</small>
 											<div class="progress progress-mini">
@@ -154,7 +153,7 @@
 									<tr>
 										<td class="project-status"><span
 											class="label label-primary">进行中 </td>
-										<td class="project-title"><a href="project_detail.html">乐活未来</a>
+										<td class="project-title"><a href="project_detail.html">长沙岳麓区四水厂边坡A工程</a>
 											<br /> <small>创建于 2014.08.15</small></td>
 										<td class="project-completion"><small>当前进度： 97%</small>
 											<div class="progress progress-mini">
@@ -170,7 +169,7 @@
 									<tr>
 										<td class="project-status"><span
 											class="label label-primary">进行中 </td>
-										<td class="project-title"><a href="project_detail.html">【私人医生项目】</a>
+										<td class="project-title"><a href="project_detail.html">长沙岳麓区四水厂边坡b工程</a>
 											<br /> <small>创建于 2014.08.15</small></td>
 										<td class="project-completion"><small>当前进度： 48%</small>
 											<div class="progress progress-mini">
@@ -191,7 +190,7 @@
 									<tr>
 										<td class="project-status"><span
 											class="label label-primary">进行中 </td>
-										<td class="project-title"><a href="project_detail.html">快狗家居</a>
+										<td class="project-title"><a href="project_detail.html">长沙岳麓区四水厂边坡c工程</a>
 											<br /> <small>创建于 2014.08.15</small></td>
 										<td class="project-completion"><small>当前进度： 28%</small>
 											<div class="progress progress-mini">
@@ -210,7 +209,7 @@
 									<tr>
 										<td class="project-status"><span
 											class="label label-default">已取消 </td>
-										<td class="project-title"><a href="project_detail.html">线下超市+线上商城+物流配送互联系统</a>
+										<td class="project-title"><a href="project_detail.html">郴州东江湖边坡A工程</a>
 											<br /> <small>创建于 2014.08.15</small></td>
 										<td class="project-completion"><small>当前进度： 8%</small>
 											<div class="progress progress-mini">
@@ -228,7 +227,7 @@
 									<tr>
 										<td class="project-status"><span
 											class="label label-primary">进行中 </td>
-										<td class="project-title"><a href="project_detail.html">P司机汽车省钱专家</a>
+										<td class="project-title"><a href="project_detail.html">P郴州东江湖边坡A工程家</a>
 											<br /> <small>创建于 2014.08.15</small></td>
 										<td class="project-completion"><small>当前进度： 83%</small>
 											<div class="progress progress-mini">
@@ -247,8 +246,7 @@
 									<tr>
 										<td class="project-status"><span
 											class="label label-primary">进行中 </td>
-										<td class="project-title"><a href="project_detail.html">左左
-												靠谱男同交友</a> <br /> <small>创建于 2014.08.15</small></td>
+										<td class="project-title"><a href="project_detail.html">郴州东江湖边坡B工程</a> <br /> <small>创建于 2014.08.15</small></td>
 										<td class="project-completion"><small>当前进度： 97%</small>
 											<div class="progress progress-mini">
 												<div style="width: 97%;" class="progress-bar"></div>
@@ -263,7 +261,7 @@
 									<tr>
 										<td class="project-status"><span
 											class="label label-primary">进行中 </td>
-										<td class="project-title"><a href="project_detail.html">程序员私活圈</a>
+										<td class="project-title"><a href="project_detail.html">郴州东江湖边坡c工程</a>
 											<br /> <small>创建于 2014.08.15</small></td>
 										<td class="project-completion"><small>当前进度： 28%</small>
 											<div class="progress progress-mini">
