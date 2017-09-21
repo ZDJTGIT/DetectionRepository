@@ -221,12 +221,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								<li class="m-t-xs">
 									<div class="dropdown-messages-box">
 										<a href="rest/profile" class="pull-left"> <img alt="image"
-											class="img-circle" src="assets/img/a7.jpg">
+											class="img-circle" src="assets/img/zdLogo.png">
 										</a>
 										<div class="media-body">
-											<small class="pull-right">46小时前</small> <strong>小四</strong>
-											这个在日本投降书上签字的军官，建国后一定是个不小的干部吧？ <br> <small
-												class="text-muted">3天前 2014.11.8</small>
+											<small class="pull-right">46小时前</small> <strong>李四</strong>
+											XX边坡项目深部位移监测55米孔深处，编号JCZ1测点位移量为XXmm,超出阀值，请及时处理<br> <small
+												class="text-muted">1天前 2017.9.20</small>
 										</div>
 									</div>
 								</li>
@@ -234,12 +234,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								<li>
 									<div class="dropdown-messages-box">
 										<a href="rest/profile" class="pull-left"> <img alt="image"
-											class="img-circle" src="assets/img/a4.jpg">
+											class="img-circle" src="assets/img/zdLogo.png">
 										</a>
 										<div class="media-body ">
-											<small class="pull-right text-navy">25小时前</small> <strong>国民岳父</strong>
-											如何看待“男子不满自己爱犬被称为狗，刺伤路人”？——这人比犬还凶 <br> <small
-												class="text-muted">昨天</small>
+											<small class="pull-right text-navy">2小时前</small> <strong>王五</strong>
+											XX边坡项目地下水位位监测，编号JCZ1 90m处水位达到XXmm，临近阀值，请及时采取措施预防 <br> <small
+												class="text-muted">今天 2017.9.21</small>
 										</div>
 									</div>
 								</li>
@@ -650,7 +650,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		<div class="small-chat-box fadeInRight animated">
 
 			<div class="heading" draggable="true">
-				<small class="chat-date pull-right"> 2015.9.1 </small> 与 Beau-zihan
+				<small class="chat-date pull-right"> 2017.9.20 </small> 与 中大客服咨询
 				聊天中
 			</div>
 
@@ -658,37 +658,36 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 				<div class="left">
 					<div class="author-name">
-						Beau-zihan <small class="chat-date"> 10:02 </small>
+						客服 <small class="chat-date"> 10:02 </small>
 					</div>
 					<div class="chat-message active">你好</div>
 
 				</div>
 				<div class="right">
 					<div class="author-name">
-						游客 <small class="chat-date"> 11:24 </small>
+						Rojay <small class="chat-date"> 11:24 </small>
 					</div>
-					<div class="chat-message">你好，请问H+有帮助文档吗？</div>
+					<div class="chat-message">你好，请问中大有关于边坡检测业务吗？</div>
 				</div>
 				<div class="left">
 					<div class="author-name">
-						Beau-zihan <small class="chat-date"> 08:45 </small>
+						客服 <small class="chat-date"> 08:45 </small>
 					</div>
-					<div class="chat-message active">有，购买的H+源码包中有帮助文档，位于docs文件夹下
+					<div class="chat-message active">有，您需要了解关于边坡的的哪些技术？
 					</div>
 				</div>
 				<div class="right">
 					<div class="author-name">
-						游客 <small class="chat-date"> 11:24 </small>
+						Rojay <small class="chat-date"> 11:24 </small>
 					</div>
-					<div class="chat-message">那除了帮助文档还提供什么样的服务？</div>
+					<div class="chat-message">关于深部位移、渗压、雨量的</div>
 				</div>
 				<div class="left">
 					<div class="author-name">
-						Beau-zihan <small class="chat-date"> 08:45 </small>
+						客服 <small class="chat-date"> 08:45 </small>
 					</div>
 					<div class="chat-message active">
-						1.所有源码(未压缩、带注释版本)； <br> 2.说明文档； <br> 3.终身免费升级服务； <br>
-						4.必要的技术支持； <br> 5.付费二次开发服务； <br> 6.授权许可； <br> …… <br>
+						1.到中大官网下载：www.hnzdjc.com； <br> 2.预留您的联系方式，邮箱，公司信息； <br> …… <br>
 					</div>
 				</div>
 
