@@ -18,14 +18,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>H+ 后台主题UI框架 - 项目详情</title>
-<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-<meta name="description"
-	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+<title>项目详情</title>
+<meta name="keywords"
+	content="detection,plat,inspection,ZDJT,zhongdajiance">
+<meta name="description" content="中大检测平台">
 
 <link rel="shortcut icon" href="favicon.ico">
 <link href="assets/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-<link href="assets/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+<link href="assets/css/font-awesome.min93e3.css?v=4.4.0"
+	rel="stylesheet">
 
 <link href="assets/css/animate.min.css" rel="stylesheet">
 <link href="assets/css/style.min862f.css?v=4.1.0" rel="stylesheet">
@@ -43,7 +44,9 @@
 								<div class="m-b-md">
 									<a href="project_detail.html#"
 										class="btn btn-white btn-xs pull-right">编辑项目</a>
+
 									<h2>中大检测集团公司</h2>
+
 								</div>
 								<dl class="dl-horizontal">
 									<dt>状态：</dt>

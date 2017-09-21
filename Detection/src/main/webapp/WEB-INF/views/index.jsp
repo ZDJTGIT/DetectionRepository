@@ -2,8 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -36,8 +37,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg"
-	style="overflow-y:hidden  margin: 0
-    padding: 0">
+	style="overflow-y: hidden margin: 0 padding: 0">
 	<div id="wrapper">
 
 		<!--左侧导航开始-->
@@ -47,102 +47,97 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			</div>
 			<div class="sidebar-collapse">
 				<ul class="nav" id="side-menu">
-					<li class="nav-header" style="text-align:center">
-                        <div class="dropdown profile-element">
-                            <span><img alt="image" class="img-circle" src="assets/img/zdLogo.png" /></span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">ZDJC</strong></span>
+					<li class="nav-header" style="text-align: center">
+						<div class="dropdown profile-element">
+							<span><img alt="image" class="img-circle"
+								src="assets/img/zdLogo.png" /></span> <a data-toggle="dropdown"
+								class="dropdown-toggle" href="#"> <span class="clear">
+									<span class="block m-t-xs"><strong class="font-bold">ZDJC</strong></span>
 
-                                </span>
-                            </a>
-                        </div>
-                    </li>
+							</span>
+							</a>
+						</div>
+					</li>
 					<li><a class="J_menuItem" href="rest/home" id="btn-home">
 							<i class="fa fa-home"></i> <span class="nav-label">主页</span> <span
 							class="fa arrow"></span>
 					</a></li>
-					<li>
-                        <a href="javascript:;">
-                            <i class="fa fa-columns"></i>
-                            <span class="nav-label">我的项目</span>
-                            <span class="fa arrow"></span>
-                        </a>
+					<li><a href="javascript:;"> <i class="fa fa-columns"></i>
+							<span class="nav-label">我的项目</span> <span class="fa arrow"></span>
+					</a>
 						<ul id="my_project" class="nav nav-second-level">
-                            <li>
-                            	<a class="J_menuItem" href="javascript:;">
-		                        	<i class="fa fa-columns"></i> <span class="nav-label">农田项目</span>
-		                        </a>
-		                        <ul class="nav nav-second-level">
-		                            <li>
-		                                <a class="J_menuItem" href="rest/graph_echarts_farmland">农田</a>
-		                            </li>
-		                        </ul>
-                                
-                            </li>
-                            <li>
-                            	<a class="J_menuItem" href="javascript:;">
-		                        	<i class="fa fa-columns"></i> <span class="nav-label">桥梁项目</span>
-		                        </a>
-		                        <ul class="nav nav-second-level">
-		                            <li>
-		                                <a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁</a>
-		                            </li>
-		                        </ul>
-                            </li>
-                             <li>
-                            	<a class="J_menuItem" href="javascript:;">
-		                        	<i class="fa fa-columns"></i> <span class="nav-label">隧道项目</span>
-		                        </a>
-		                        <ul class="nav nav-second-level">
-		                            <li>
-		                                <a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道</a>
-		                            </li>
-		                        </ul>
-                            </li>
-                            <li>
-                            	<a class="J_menuItem" href="javascript:;">
-		                        	<i class="fa fa-columns"></i> <span class="nav-label">边坡项目</span>
-		                        </a>
-		                        <ul class="nav nav-second-level">
-		                            <li>
-		                                <a class="J_menuItem" href="rest/graph_echarts_deep">深部位移</a>
-		                            </li>
-		                            <li>
-		                                <a class="J_menuItem" href="rest/graph_echarts_osmotic">渗压</a>
-		                            </li>
-		                            <li>
-		                                <a class="J_menuItem" href="rest/graph_echarts_rainwater">雨量</a>
-		                            </li>
-		                        </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">统计图表</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                        	<li>
-                                <a class="J_menuItem" href="rest/graph_echarts_farmland">农田数据分析图</a>
+							<li><a class="J_menuItem" href="javascript:;"> <i
+									class="fa fa-columns"></i> <span class="nav-label">农田项目</span>
+							</a>
+								<ul class="nav nav-second-level">
+									<li><a class="J_menuItem"
+										href="rest/graph_echarts_farmland">农田</a></li>
+								</ul></li>
+							<li><a class="J_menuItem" href="javascript:;"> <i
+									class="fa fa-columns"></i> <span class="nav-label">桥梁项目</span>
+							</a>
+								<ul class="nav nav-second-level">
+									<li><a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁</a>
+									</li>
+								</ul></li>
+							<li><a class="J_menuItem" href="javascript:;"> <i
+									class="fa fa-columns"></i> <span class="nav-label">隧道项目</span>
+							</a>
+								<ul class="nav nav-second-level">
+									<li><a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道</a>
+									</li>
+								</ul></li>
+							<li><a class="J_menuItem" href="javascript:;"> <i
+									class="fa fa-columns"></i> <span class="nav-label">边坡项目</span>
+							</a>
+								<ul class="nav nav-second-level">
+									<li><a class="J_menuItem" href="rest/graph_echarts_deep">深部位移</a>
+									</li>
+									<li><a class="J_menuItem"
+										href="rest/graph_echarts_osmotic">渗压</a></li>
+									<li><a class="J_menuItem"
+										href="rest/graph_echarts_rainwater">雨量</a></li>
+								</ul></li>
+						</ul></li>
+					<li><a href="javascript:;"> <i
+							class="fa fa fa-bar-chart-o"></i> <span class="nav-label">统计图表</span>
+							<span class="fa arrow"></span>
+					</a>
+						<ul class="nav nav-second-level">
+							<li><a class="J_menuItem" href="rest/graph_echarts_farmland">农田数据分析图</a>
 							</li>
-							<li>
-                                <a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道数据分析图</a>
+							<li><a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道数据分析图</a>
 							</li>
-							<li>
-                                <a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁数据分析图</a>
+							<li><a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁数据分析图</a>
 							</li>
-							<li>
-                                <a class="J_menuItem" href="rest/graph_echarts_slope">边坡数据分析图</a>
+							<li><a class="J_menuItem" href="rest/graph_echarts_slope">边坡数据分析图</a>
 							</li>
+						</ul></li>
+
+
+					<li>
+						<a href="javascript:;"> <i class="fa fa fa-user"></i>
+							<span class="nav-label">用户资料</span> <span class="fa arrow"></span>
+						</a>
+						<ul class="nav nav-second-level">
+							<li><a class="J_menuItem" href="rest/user">个人资料</a></li>
 						</ul>
 					</li>
+
+
+
 					<li><a href="javascript:;"><i class="fa fa-desktop"></i> <span
 							class="nav-label">页面</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/user">个人资料</a></li>
+
+							<li><a href="javascript:;">项目管理 <span class="fa arrow"></span></a>
+								<ul class="nav nav-third-level">
+									<li><a class="J_menuItem" href="rest/projects">项目</a></li>
+									<li><a class="J_menuItem" href="rest/project_detail">项目详情</a>
+									</li>
+								</ul>
+							</li>
+								
 							<li><a class="J_menuItem" href="rest/calendar">日历</a></li>
 							<li><a class="J_menuItem" href="rest/pin_board">标签墙</a></li>
 							<li><a href="javascript:;">单据 <span class="fa arrow"></span></a>
@@ -181,11 +176,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<li><a href="javascript:;"><i class="fa fa-tasks"></i> <span
 							class="nav-label">项目管理</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/projects">项目</a>
-							</li>
+							<li><a class="J_menuItem" href="rest/projects">项目</a></li>
 							<li><a class="J_menuItem" href="rest/project_detail">项目详情</a>
 							</li>
-						</ul></li>	
+						</ul></li>
 					<li><a class="J_menuItem" href="rest/table_jqgrid"><i
 							class="fa fa-bell"></i> <span class="nav-label">告警信息</span></a></li>
 					<li><a class="J_menuItem" href="rest/css_animation"><i
@@ -211,8 +205,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						<!-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
 							href="#"><i class="fa fa-bars"></i> </a> -->
 						<div class="logo">
-						
-						<!-- 	<img src="assets/img/zdLogo.png" alt="logo" class="logo"> -->
+
+							<!-- 	<img src="assets/img/zdLogo.png" alt="logo" class="logo"> -->
 							<a href="#" class="navbar-brand">中国大检测数据在线监控平台</a>
 						</div>
 					</div>
@@ -283,26 +277,22 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 									</div>
 								</li>
 							</ul></li>
-						<li class="hidden-xs">
-							<a class="J_menuItem dropdown-toggle" data-toggle="dropdown" href="javascript:;">
-								<i class="fa fa-user"></i>${userInfo.userName}<span class="caret"></span>
-							</a>
+						<li class="hidden-xs"><a class="J_menuItem dropdown-toggle"
+							data-toggle="dropdown" href="javascript:;"> <i
+								class="fa fa-user"></i>${userInfo.userName}<span class="caret"></span>
+						</a>
 							<ul class="dropdown-menu animated fadeInRight m-t-xs">
-	                            <li><a class="J_menuItem" href="rest/form_avatar">修改头像</a>
-	                            </li>
-	                            <li><a class="J_menuItem" href="rest/user">个人资料</a>
-	                            </li>
-	                            <li><a class="J_menuItem" href="rest/contacts">联系我们</a>
-	                            </li>
-	                            <li><a class="J_menuItem" href="rest/mailbox">信箱</a>
-	                            </li>
-	                            <li class="divider"></li>
-	                            <li><a href="rest/user/logout">安全退出</a>
-	                            </li>
-	                        </ul>
-						</li>
-						<li class="dropdown hidden-xs"><a class="right-sidebar-toggle"
-							aria-expanded="false"> <i class="fa fa-tasks"></i> 主题
+								<li><a class="J_menuItem" href="rest/form_avatar">修改头像</a>
+								</li>
+								<li><a class="J_menuItem" href="rest/user">个人资料</a></li>
+								<li><a class="J_menuItem" href="rest/contacts">联系我们</a></li>
+								<li><a class="J_menuItem" href="rest/mailbox">信箱</a></li>
+								<li class="divider"></li>
+								<li><a href="rest/user/logout">安全退出</a></li>
+							</ul></li>
+						<li class="dropdown hidden-xs"><a
+							class="right-sidebar-toggle" aria-expanded="false"> <i
+								class="fa fa-tasks"></i> 主题
 						</a></li>
 					</ul>
 				</nav>
@@ -311,7 +301,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 			<div class="row content-tabs">
 				<a class="navbar-minimalize minimalize-styl-3 btn btn-primary "
-						href="#"><i class="fa fa-bars"></i> </a>
+					href="#"><i class="fa fa-bars"></i> </a>
 				<button class="roll-nav roll-left J_tabLeft">
 					<i class="fa fa-backward"></i>
 				</button>
@@ -602,8 +592,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							</a></li>
 							<li><a href="javascript:;"> <span
 									class="label label-primary pull-right">NEW</span>
-									<h4>设计阶段</h4> <div class="small pull-right m-t-xs">9小时以后</div>
-									项目进度报告(Project Progress Report)
+									<h4>设计阶段</h4>
+									<div class="small pull-right m-t-xs">9小时以后</div> 项目进度报告(Project
+									Progress Report)
 									<div class="small">已完成： 22%</div>
 									<div class="small text-muted m-t-xs">项目截止： 4:00 -
 										2015.10.01</div>
@@ -650,12 +641,11 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			</div>
 		</div>
 
-	<!-- 	mini聊天窗口开始 -->
+		<!-- 	mini聊天窗口开始 -->
 		<div class="small-chat-box fadeInRight animated">
 
 			<div class="heading" draggable="true">
-				<small class="chat-date pull-right"> 2017.9.20 </small> 与 中大客服咨询
-				聊天中
+				<small class="chat-date pull-right"> 2017.9.20 </small> 与 中大客服咨询 聊天中
 			</div>
 
 			<div class="content">
@@ -677,8 +667,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<div class="author-name">
 						客服 <small class="chat-date"> 08:45 </small>
 					</div>
-					<div class="chat-message active">有，您需要了解关于边坡的的哪些技术？
-					</div>
+					<div class="chat-message active">有，您需要了解关于边坡的的哪些技术？</div>
 				</div>
 				<div class="right">
 					<div class="author-name">
@@ -691,7 +680,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						客服 <small class="chat-date"> 08:45 </small>
 					</div>
 					<div class="chat-message active">
-						1.到中大官网下载：www.hnzdjc.com； <br> 2.预留您的联系方式，邮箱，公司信息； <br> …… <br>
+						1.到中大官网下载：www.hnzdjc.com； <br> 2.预留您的联系方式，邮箱，公司信息； <br>
+						…… <br>
 					</div>
 				</div>
 
@@ -726,39 +716,37 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<script src="assets/js/hplus.js" type="text/javascript"></script>
 	<script src="assets/js/contabs.js" type="text/javascript"></script>
 	<script type="text/javascript">
-	$(document).ready(function(){
+		$(document).ready(function() {
 
-	    $.notify({
-	        icon: 'fa user',
-	        message: "欢迎来到<b>中大检测在线监控平台</b>."
+			$.notify({
+				icon : 'fa user',
+				message : "欢迎来到<b>中大检测在线监控平台</b>."
 
-	    },{
-	        type: 'success',
-	        timer: 4000
-	    });
+			}, {
+				type : 'success',
+				timer : 4000
+			});
 
-	});
+		});
 	</script>
 	<script type="text/javascript">
-
-		
 		var farmspan = document.getElementById("farmspan");
 		var farmpointli = document.getElementById("farmpointli");
-		farmspan.onclick = function(){
+		farmspan.onclick = function() {
 			$("#licontent").remove();
 			var li = document.createElement("li");
-			li.setAttribute("id","licontent");
+			li.setAttribute("id", "licontent");
 			var a = document.createElement("a");
 			a.innerHTML = "农田";
-			a.setAttribute("class","J_menuItem");
-			a.setAttribute("href","rest/graph_echarts_bridge");
+			a.setAttribute("class", "J_menuItem");
+			a.setAttribute("href", "rest/graph_echarts_bridge");
 			var a2 = document.createElement("a");
 			a2.innerHTML = "农田1";
 			li.appendChild(a);
 			li.appendChild(a2);
 			farmpointli.appendChild(li);
 
-		} 
+		}
 	</script>
 
 </body>
