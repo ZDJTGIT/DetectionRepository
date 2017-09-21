@@ -141,7 +141,7 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="echarts-line-chart"></div>
+                        <div class="echarts" id="echarts-rate-chart"></div>
                     </div>
                 </div>
             </div>
@@ -169,7 +169,7 @@
                     </div>
                     <div class="ibox-content">
 
-                        <div class="echarts" id="echarts-bar-chart"></div>
+                        <div class="echarts" id="echarts-single-chart"></div>
                     </div>
                 </div>
             </div>
@@ -198,7 +198,7 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="echarts-scatter-chart"></div>
+                        <div class="echarts" id="echarts-grandtotal-chart"></div>
                     </div>
                 </div>
             </div>
@@ -248,7 +248,7 @@
 
 
     <!-- ECharts demo data -->
-    <script src="assets/js/demo/echarts-demo.min.js"></script>
+    <script src="assets/js/plugins/myecharts/osmotic_ecahrts.js"></script> 
 
      <script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
 

@@ -120,7 +120,7 @@
             <div class="col-sm-6" >
                 <div class="ibox float-e-margins" >
                     <div class="ibox-title">
-                        <h5>深部位移变化速率检测数据</h5>
+                        <h5>深部监测总位移</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                     <div class="ibox-content" >
-                        <div class="echarts" id="echarts-line-chart" style="height: 680px"></div>
+                        <div class="echarts" id="echarts-rate-chart" style="height: 680px"></div>
                     </div>
                 </div>
             </div>
@@ -150,7 +150,7 @@
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>深部位移累计变化检测数据</h5>
+                        <h5>深部本次位移监测</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -170,14 +170,14 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="echarts-scatter-chart"></div>
+                        <div class="echarts" id="echarts-grandtotal-chart"></div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>深部位移单次变化检测数据</h5>
+                        <h5>深部位移变化速率监测</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -198,14 +198,14 @@
                     </div>
                     <div class="ibox-content">
 
-                        <div class="echarts" id="echarts-bar-chart"></div>
+                        <div class="echarts" id="echarts-single-chart"></div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>深部位移变化速率检测数据</h5>
+                        <h5>深部水平位移监测值</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -225,7 +225,7 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="echarts-line-chart"></div>
+                        <div class="echarts" id="echarts-displacement-chart"></div>
                     </div>
                 </div>
             </div>
@@ -248,7 +248,7 @@
 
 
     <!-- ECharts demo data -->
-    <script src="assets/js/demo/echarts-demo.min.js"></script>
+     <script src="assets/js/plugins/myecharts/deep_echarts.js"></script>
 
      <script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
 
