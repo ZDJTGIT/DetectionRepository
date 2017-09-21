@@ -90,7 +90,7 @@
 	</div>
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>深部位移变化图</h5>
@@ -113,11 +113,11 @@
                         </div>
                     </div>
                     <div class="ibox-content" style="text-align: center;">
-                        <img class="pimg" alt="图片未加载" src="assets/img/farmmap.jpg" style="width: 100%;height: 100%" >
+                        <img class="pimg" alt="图片未加载" src="assets/img/farmmap.jpg" style="width: 100%;height: 480px" >
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6" >
+            <div class="col-sm-8" >
                 <div class="ibox float-e-margins" >
                     <div class="ibox-title">
                         <h5>深部监测总位移</h5>
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                     <div class="ibox-content" >
-                        <div class="echarts" id="echarts-rate-chart" style="height: 680px"></div>
+                        <div class="echarts" id="echarts-rate-chart" style="height: 480px"></div>
                     </div>
                 </div>
             </div>
