@@ -63,13 +63,22 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							class="fa arrow"></span>
 					</a></li>
 					<li>
-                        <a class="J_menuItem supMenu" href="rest/myProject">
-                        	<i class="fa fa-columns"></i> <span class="nav-label">我的项目</span>
-                        	<span class="fa arrow"></span>
+                        <a href="javascript:;">
+                            <i class="fa fa-columns"></i>
+                            <span class="nav-label">我的项目</span>
+                            <span class="fa arrow"></span>
                         </a>
 						<ul id="my_project" class="nav nav-second-level">
-                           <!--  <li>
-                                <a class="J_menuItem" href="rest/graph_echarts_farmland">农田</a>
+                            <li>
+                            	<a class="J_menuItem" href="javascript:;">
+		                        	<i class="fa fa-columns"></i> <span class="nav-label">农田项目</span>
+		                        </a>
+		                        <ul class="nav nav-second-level">
+		                            <li>
+		                                <a class="J_menuItem" href="rest/graph_echarts_farmland">农田</a>
+		                            </li>
+		                        </ul>
+                                
                             </li>
                             <li>
                             	<a class="J_menuItem" href="javascript:;">
@@ -81,21 +90,32 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		                            </li>
 		                        </ul>
                             </li>
+                             <li>
+                            	<a class="J_menuItem" href="javascript:;">
+		                        	<i class="fa fa-columns"></i> <span class="nav-label">隧道项目</span>
+		                        </a>
+		                        <ul class="nav nav-second-level">
+		                            <li>
+		                                <a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道</a>
+		                            </li>
+		                        </ul>
+                            </li>
                             <li>
                             	<a class="J_menuItem" href="javascript:;">
 		                        	<i class="fa fa-columns"></i> <span class="nav-label">边坡项目</span>
 		                        </a>
 		                        <ul class="nav nav-second-level">
 		                            <li>
-		                                <a class="J_menuItem" href="rest/graph_echarts_slope">边坡</a>
+		                                <a class="J_menuItem" href="rest/graph_echarts_deep">深部位移</a>
+		                            </li>
+		                            <li>
+		                                <a class="J_menuItem" href="rest/graph_echarts_osmotic">渗压</a>
+		                            </li>
+		                            <li>
+		                                <a class="J_menuItem" href="rest/graph_echarts_rainwater">雨量</a>
 		                            </li>
 		                        </ul>
                             </li>
-                            	<a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁</a>
-                            </li>
-                             <li>
-                                <a class="J_menuItem" href="rest/graph_echarts_slope">边坡</a>
-                            </li> -->
                         </ul>
                     </li>
                     <li>
@@ -718,7 +738,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	</script>
 	<script type="text/javascript">
 
-		/* var farmspan = document.getElementById("farmspan");
+		
+		var farmspan = document.getElementById("farmspan");
 		var farmpointli = document.getElementById("farmpointli");
 		farmspan.onclick = function(){
 			$("#licontent").remove();
@@ -734,7 +755,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			li.appendChild(a2);
 			farmpointli.appendChild(li);
 
-		} */
+		} 
 	</script>
 
 </body>

@@ -28,176 +28,196 @@ import com.zhongda.detection.web.service.UserProjectService;
 @Controller
 public class CommonController {
 
-	public static final Logger logger = LoggerFactory.getLogger(CommonController.class);
+	public static final Logger logger = LoggerFactory
+			.getLogger(CommonController.class);
 
-	@Resource(name="shiroEhcacheManager")
-    private CacheManager cacheManager;
-    private Cache<String,String> vcodeCache;
+	@Resource(name = "shiroEhcacheManager")
+	private CacheManager cacheManager;
+	private Cache<String, String> vcodeCache;
 
-    @Resource
+	@Resource
 	private UserProjectService userProjectService;
 
-    /**
-     * 首页
-     */
-    @RequestMapping("index")
-    public String index(HttpServletRequest request) {
-        return "index";
-    }
+	/**
+	 * 首页
+	 */
+	@RequestMapping("index")
+	public String index(HttpServletRequest request) {
+		return "index";
+	}
 
-    @RequestMapping("home")
-    public String home(HttpServletRequest request) {
-        return "home";
-    }
+	@RequestMapping("home")
+	public String home(HttpServletRequest request) {
+		return "home";
+	}
 
-    @RequestMapping("myProject")
-    @ResponseBody
-    public List<UserProject> myProject(HttpServletRequest request) {
-    	User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
-    	List<UserProject> userProjectList = userProjectService.selectAllProjectTypeByUserId(user.getUserId());
-        return userProjectList;
-    }
+	@RequestMapping("myProject")
+	@ResponseBody
+	public List<UserProject> myProject(HttpServletRequest request) {
+		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
+		List<UserProject> userProjectList = userProjectService
+				.selectAllProjectTypeByUserId(user.getUserId());
+		return userProjectList;
+	}
 
-    @RequestMapping("index_v2")
-    public String index_v2(HttpServletRequest request) {
-        return "index_v2";
-    }
+	@RequestMapping("index_v2")
+	public String index_v2(HttpServletRequest request) {
+		return "index_v2";
+	}
 
-    @RequestMapping("calendar")
-    public String calendar(HttpServletRequest request) {
-        return "calendar";
-    }
+	@RequestMapping("calendar")
+	public String calendar(HttpServletRequest request) {
+		return "calendar";
+	}
 
-    @RequestMapping("chat_view")
-    public String chat_view(HttpServletRequest request) {
-        return "chat_view";
-    }
+	@RequestMapping("chat_view")
+	public String chat_view(HttpServletRequest request) {
+		return "chat_view";
+	}
 
-    @RequestMapping("css_animation")
-    public String css_animation(HttpServletRequest request) {
-        return "css_animation";
-    }
+	@RequestMapping("css_animation")
+	public String css_animation(HttpServletRequest request) {
+		return "css_animation";
+	}
 
-    @RequestMapping("graph_echarts_farmland")
-    public String graph_echarts_farmland(HttpServletRequest request) {
-        return "graph_echarts_farmland";
-    }
+	@RequestMapping("graph_echarts_farmland")
+	public String graph_echarts_farmland(HttpServletRequest request) {
+		return "graph_echarts_farmland";
+	}
 
-    @RequestMapping("graph_echarts_bridge")
-    public String graph_echarts_bridge(HttpServletRequest request) {
-        return "graph_echarts_bridge";
-    }
-    @RequestMapping("graph_echarts_tunnel")
-    public String graph_echarts_tunnel(HttpServletRequest request) {
-        return "graph_echarts_tunnel";
-    }
+	@RequestMapping("graph_echarts_bridge")
+	public String graph_echarts_bridge(HttpServletRequest request) {
+		return "graph_echarts_bridge";
+	}
 
-    @RequestMapping("graph_echarts_slope")
-    public String graph_echarts_slope(HttpServletRequest request) {
-        return "graph_echarts_slope";
-    }
-    @RequestMapping("icons")
-    public String icons(HttpServletRequest request) {
-        return "icons";
-    }
+	@RequestMapping("graph_echarts_tunnel")
+	public String graph_echarts_tunnel(HttpServletRequest request) {
+		return "graph_echarts_tunnel";
+	}
 
-    @RequestMapping("invoice_print")
-    public String invoice_print(HttpServletRequest request) {
-        return "invoice_print";
-    }
+	@RequestMapping("graph_echarts_slope")
+	public String graph_echarts_slope(HttpServletRequest request) {
+		return "graph_echarts_slope";
+	}
 
-    @RequestMapping("invoice")
-    public String invoice(HttpServletRequest request) {
-        return "invoice";
-    }
+	@RequestMapping("icons")
+	public String icons(HttpServletRequest request) {
+		return "icons";
+	}
 
-    @RequestMapping("javascript")
-    public String javascript(HttpServletRequest request) {
-        return "javascript";
-    }
+	@RequestMapping("invoice_print")
+	public String invoice_print(HttpServletRequest request) {
+		return "invoice_print";
+	}
 
-    @RequestMapping("login_v2")
-    public String login_v2(HttpServletRequest request) {
-        return "login_v2";
-    }
+	@RequestMapping("invoice")
+	public String invoice(HttpServletRequest request) {
+		return "invoice";
+	}
 
-    @RequestMapping("pin_board")
-    public String pin_board(HttpServletRequest request) {
-        return "pin_board";
-    }
+	@RequestMapping("javascript")
+	public String javascript(HttpServletRequest request) {
+		return "javascript";
+	}
 
-    @RequestMapping("user")
-    public String user(HttpServletRequest request) {
+	@RequestMapping("login_v2")
+	public String login_v2(HttpServletRequest request) {
+		return "login_v2";
+	}
 
-        return "user";
-    }
+	@RequestMapping("pin_board")
+	public String pin_board(HttpServletRequest request) {
+		return "pin_board";
+	}
 
-    @RequestMapping("project_detail")
-    public String project_detail(HttpServletRequest request) {
-        return "project_detail";
-    }
+	@RequestMapping("user")
+	public String user(HttpServletRequest request) {
 
-    @RequestMapping("projects")
-    public String projects(HttpServletRequest request) {
-        return "projects";
-    }
+		return "user";
+	}
 
-    @RequestMapping("register")
-    public String register(HttpServletRequest request) {
-        return "register";
-    }
+	@RequestMapping("project_detail")
+	public String project_detail(HttpServletRequest request) {
+		return "project_detail";
+	}
 
-    @RequestMapping("table_bootstrap")
-    public String table_bootstrap(HttpServletRequest request) {
-        return "table_bootstrap";
-    }
+	@RequestMapping("projects")
+	public String projects(HttpServletRequest request) {
+		return "projects";
+	}
 
-    @RequestMapping("table_data_tables")
-    public String table_data_tables(HttpServletRequest request) {
-        return "table_data_tables";
-    }
+	@RequestMapping("register")
+	public String register(HttpServletRequest request) {
+		return "register";
+	}
 
-    @RequestMapping("table_foo_table")
-    public String table_foo_table(HttpServletRequest request) {
-        return "table_foo_table";
-    }
+	@RequestMapping("table_bootstrap")
+	public String table_bootstrap(HttpServletRequest request) {
+		return "table_bootstrap";
+	}
 
-    @RequestMapping("table_jqgrid")
-    public String table_jqgrid(HttpServletRequest request) {
-        return "table_jqgrid";
-    }
+	@RequestMapping("table_data_tables")
+	public String table_data_tables(HttpServletRequest request) {
+		return "table_data_tables";
+	}
 
-    @RequestMapping("webim")
-    public String webim(HttpServletRequest request) {
-        return "webim";
-    }
+	@RequestMapping("table_foo_table")
+	public String table_foo_table(HttpServletRequest request) {
+		return "table_foo_table";
+	}
 
-    @RequestMapping("form_builder")
-    public String form_builder(HttpServletRequest request) {
-        return "form_builder";
-    }
+	@RequestMapping("table_jqgrid")
+	public String table_jqgrid(HttpServletRequest request) {
+		return "table_jqgrid";
+	}
 
-    /**
-     * 获取验证码（Gif版本）
-     */
-    @RequestMapping(value="/getGifCode",method=RequestMethod.GET)
-    public void getGifCode(HttpServletRequest request,HttpServletResponse response){
-    	try {
-    		response.setHeader("Pragma", "No-cache");
-            response.setHeader("Cache-Control", "no-cache");
-            response.setDateHeader("Expires", 0);
-            response.setContentType("image/gif");
-            //gif格式动画验证码   宽，高，位数
-            Captcha captcha = new GifCaptcha(120,34,4);
-            //输出
-            captcha.out(response.getOutputStream());
-            //存入cache
-            vcodeCache = cacheManager.getCache("vcodeCache");
-            String vcode_flag = request.getParameter("nocache");
-            vcodeCache.put(vcode_flag, captcha.text().toLowerCase());
-    	} catch (Exception e) {
-    		logger.error( "获取验证码异常："+e.getMessage());
-    	}
-    }
+	@RequestMapping("webim")
+	public String webim(HttpServletRequest request) {
+		return "webim";
+	}
+
+	@RequestMapping("form_builder")
+	public String form_builder(HttpServletRequest request) {
+		return "form_builder";
+	}
+
+	@RequestMapping("graph_echarts_deep")
+	public String graph_echarts_deep(HttpServletRequest request) {
+		return "graph_echarts_deep";
+	}
+
+	@RequestMapping("graph_echarts_osmotic")
+	public String graph_echarts_osmotic(HttpServletRequest request) {
+		return "graph_echarts_osmotic";
+	}
+
+	@RequestMapping("graph_echarts_rainwater")
+	public String graph_echarts_rainwater(HttpServletRequest request) {
+		return "graph_echarts_rainwater";
+	}
+
+	/**
+	 * 获取验证码（Gif版本）
+	 */
+	@RequestMapping(value = "/getGifCode", method = RequestMethod.GET)
+	public void getGifCode(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			response.setHeader("Pragma", "No-cache");
+			response.setHeader("Cache-Control", "no-cache");
+			response.setDateHeader("Expires", 0);
+			response.setContentType("image/gif");
+			// gif格式动画验证码 宽，高，位数
+			Captcha captcha = new GifCaptcha(120, 34, 4);
+			// 输出
+			captcha.out(response.getOutputStream());
+			// 存入cache
+			vcodeCache = cacheManager.getCache("vcodeCache");
+			String vcode_flag = request.getParameter("nocache");
+			vcodeCache.put(vcode_flag, captcha.text().toLowerCase());
+		} catch (Exception e) {
+			logger.error("获取验证码异常：" + e.getMessage());
+		}
+	}
 
 }
