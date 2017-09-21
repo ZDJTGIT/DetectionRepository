@@ -3,12 +3,13 @@
 <mapper namespace="com.zhongda.detection.web.dao.UserProjectMapper">
   <resultMap id="BaseResultMap" type="com.zhongda.detection.web.model.UserProject">
     <id column="user_project_id" jdbcType="INTEGER" property="userProjectId" />
-    <result column="project_type" jdbcType="VARCHAR" property="projectType" />
+    <result column="project_type_code" jdbcType="VARCHAR" property="projectTypeCode" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="projcet_id" jdbcType="INTEGER" property="projcetId" />
+    <result column="project_type_value" jdbcType="VARCHAR" property="projectTypeValue" />
   </resultMap>
   <sql id="Base_Column_List">
-    user_project_id, project_type, user_id, projcet_id
+    user_project_id, project_type_code, user_id, projcet_id, project_type_value
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -27,10 +28,10 @@
     where user_project_id = #{userProjectId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.UserProject">
-    insert into user_project (user_project_id, project_type, user_id,
-      projcet_id)
-    values (#{userProjectId,jdbcType=INTEGER}, #{projectType,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
-      #{projcetId,jdbcType=INTEGER})
+    insert into user_project (user_project_id, project_type_code, user_id,
+      projcet_id, project_type_value)
+    values (#{userProjectId,jdbcType=INTEGER}, #{projectTypeCode,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
+      #{projcetId,jdbcType=INTEGER}, #{projectTypeValue,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.UserProject">
     insert into user_project
@@ -38,8 +39,8 @@
       <if test="userProjectId != null">
         user_project_id,
       </if>
-      <if test="projectType != null">
-        project_type,
+      <if test="projectTypeCode != null">
+        project_type_code,
       </if>
       <if test="userId != null">
         user_id,
@@ -47,13 +48,16 @@
       <if test="projcetId != null">
         projcet_id,
       </if>
+      <if test="projectTypeValue != null">
+        project_type_value,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userProjectId != null">
         #{userProjectId,jdbcType=INTEGER},
       </if>
-      <if test="projectType != null">
-        #{projectType,jdbcType=VARCHAR},
+      <if test="projectTypeCode != null">
+        #{projectTypeCode,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
@@ -61,13 +65,16 @@
       <if test="projcetId != null">
         #{projcetId,jdbcType=INTEGER},
       </if>
+      <if test="projectTypeValue != null">
+        #{projectTypeValue,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.zhongda.detection.web.model.UserProject">
     update user_project
     <set>
-      <if test="projectType != null">
-        project_type = #{projectType,jdbcType=VARCHAR},
+      <if test="projectTypeCode != null">
+        project_type_code = #{projectTypeCode,jdbcType=VARCHAR},
       </if>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
@@ -75,14 +82,18 @@
       <if test="projcetId != null">
         projcet_id = #{projcetId,jdbcType=INTEGER},
       </if>
+      <if test="projectTypeValue != null">
+        project_type_value = #{projectTypeValue,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_project_id = #{userProjectId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zhongda.detection.web.model.UserProject">
     update user_project
-    set project_type = #{projectType,jdbcType=VARCHAR},
+    set project_type_code = #{projectTypeCode,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
-      projcet_id = #{projcetId,jdbcType=INTEGER}
+      projcet_id = #{projcetId,jdbcType=INTEGER},
+      project_type_value = #{projectTypeValue,jdbcType=VARCHAR}
     where user_project_id = #{userProjectId,jdbcType=INTEGER}
   </update>
 </mapper>

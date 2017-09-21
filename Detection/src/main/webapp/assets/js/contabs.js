@@ -102,7 +102,7 @@ $(function () {
     });
 
     //给每一个导航项，添加对应的选项卡以及显示对应的内容
-    $('.J_menuItem').on('click',function(e) {
+    $('body').on('click', '.J_menuItem', function(e) {
         e.preventDefault();
         var url = this.href;
         menuName = $.trim($(this).text());
@@ -112,7 +112,7 @@ $(function () {
         	if($(this).hasClass("supMenu")){
         		$.ajax({url:url,dataType:"json",success:function(data){
         			$.each(data,function(idx,item){
-        				var projectItem = '<li><a class="J_menuItem" href="rest/graph_echarts_'+item.projectType+'">'+item.projectType+'</a></li>';
+        				var projectItem = '<li><a class="J_menuItem" href="rest/graph_echarts_'+item.projectTypeCode+'">'+item.projectTypeValue+'</a></li>';
         				$('#my_project').append(projectItem);
         			});
         	    }});
