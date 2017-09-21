@@ -262,7 +262,7 @@
 							</div>
 						</form>
 					</div>
-					<button id="determineDelete" class="btn btn-primary btn-block m">
+					<button id="determineDelete" class="btn btn-primary btn-block m" style="width:96%">
 						<i class="fa fa-arrow-down"></i> 确认修改
 					</button>
 				</div>
