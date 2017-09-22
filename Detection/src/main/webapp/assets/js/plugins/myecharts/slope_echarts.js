@@ -63,7 +63,7 @@ $(function() {
 			},
 			axisLabel : {
 				show : true,
-				formatter : '{value} 时'
+				formatter : '{value} m'
 			},
 			splitLine : { // 分隔线
 				show : true, // 默认显示，属性show控制显示与否
@@ -94,9 +94,9 @@ $(function() {
 					value : 5,
 					xAxis : 0,
 					yAxis : 5
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				// {name: '标线1终点', xAxis: '周日', yAxis:5}, //
-				// 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				// 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 			splitArea : { // 分隔区域
@@ -162,12 +162,12 @@ $(function() {
 					value : 9,
 					xAxis : -1,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MAX终点',
 					xAxis : 9,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 
@@ -189,12 +189,12 @@ $(function() {
 					value : 3,
 					xAxis : -1,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MIN终点',
 					xAxis : 9,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			}
 		}, {
@@ -423,7 +423,7 @@ $(function() {
 			},
 			axisLabel : {
 				show : true,
-				formatter : '{value} 时'
+				formatter : '{value} m'
 			},
 			splitLine : { // 分隔线
 				show : true, // 默认显示，属性show控制显示与否
@@ -454,9 +454,9 @@ $(function() {
 					value : 5,
 					xAxis : 0,
 					yAxis : 5
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				// {name: '标线1终点', xAxis: '周日', yAxis:5}, //
-				// 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				// 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 			splitArea : { // 分隔区域
@@ -522,12 +522,12 @@ $(function() {
 					value : 9,
 					xAxis : -1,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MAX终点',
 					xAxis : 9,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 
@@ -549,12 +549,12 @@ $(function() {
 					value : 3,
 					xAxis : -1,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MIN终点',
 					xAxis : 9,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			}
 		}, {
@@ -782,7 +782,7 @@ $(function() {
 			},
 			axisLabel : {
 				show : true,
-				formatter : '{value} 时'
+				formatter : '{value} m'
 			},
 			splitLine : { // 分隔线
 				show : true, // 默认显示，属性show控制显示与否
@@ -813,9 +813,9 @@ $(function() {
 					value : 5,
 					xAxis : 0,
 					yAxis : 5
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				// {name: '标线1终点', xAxis: '周日', yAxis:5}, //
-				// 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				// 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 			splitArea : { // 分隔区域
@@ -881,12 +881,12 @@ $(function() {
 					value : 9,
 					xAxis : -1,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MAX终点',
 					xAxis : 9,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 
@@ -908,12 +908,12 @@ $(function() {
 					value : 3,
 					xAxis : -1,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MIN终点',
 					xAxis : 9,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			}
 		}, {
@@ -1172,9 +1172,9 @@ $(function() {
 					value : 5,
 					xAxis : 0,
 					yAxis : 5
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				// {name: '标线1终点', xAxis: '周日', yAxis:5}, //
-				// 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				// 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 			splitArea : { // 分隔区域
@@ -1478,7 +1478,7 @@ $(function() {
 			},
 			axisLabel : {
 				show : true,
-				formatter : '{value} 时'
+				formatter : '{value} m'
 			},
 			splitLine : { // 分隔线
 				show : true, // 默认显示，属性show控制显示与否
@@ -1509,9 +1509,9 @@ $(function() {
 					value : 5,
 					xAxis : 0,
 					yAxis : 5
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				// {name: '标线1终点', xAxis: '周日', yAxis:5}, //
-				// 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				// 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 			splitArea : { // 分隔区域
@@ -1577,12 +1577,12 @@ $(function() {
 					value : 9,
 					xAxis : -1,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MAX终点',
 					xAxis : 9,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 
@@ -1604,12 +1604,12 @@ $(function() {
 					value : 3,
 					xAxis : -1,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MIN终点',
 					xAxis : 9,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			}
 		}, {
@@ -1838,7 +1838,7 @@ $(function() {
 			},
 			axisLabel : {
 				show : true,
-				formatter : '{value} 时'
+				formatter : '{value} m'
 			},
 			splitLine : { // 分隔线
 				show : true, // 默认显示，属性show控制显示与否
@@ -1869,9 +1869,9 @@ $(function() {
 					value : 5,
 					xAxis : 0,
 					yAxis : 5
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				// {name: '标线1终点', xAxis: '周日', yAxis:5}, //
-				// 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				// 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 			splitArea : { // 分隔区域
@@ -1937,12 +1937,12 @@ $(function() {
 					value : 9,
 					xAxis : -1,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MAX终点',
 					xAxis : 9,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 
@@ -1964,12 +1964,12 @@ $(function() {
 					value : 3,
 					xAxis : -1,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MIN终点',
 					xAxis : 9,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			}
 		}, {
@@ -2198,7 +2198,7 @@ $(function() {
 			},
 			axisLabel : {
 				show : true,
-				formatter : '{value} 时'
+				formatter : '{value} m'
 			},
 			splitLine : { // 分隔线
 				show : true, // 默认显示，属性show控制显示与否
@@ -2229,9 +2229,9 @@ $(function() {
 					value : 5,
 					xAxis : 0,
 					yAxis : 5
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				// {name: '标线1终点', xAxis: '周日', yAxis:5}, //
-				// 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				// 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 			splitArea : { // 分隔区域
@@ -2297,12 +2297,12 @@ $(function() {
 					value : 9,
 					xAxis : -1,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MAX终点',
 					xAxis : 9,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 
@@ -2324,12 +2324,12 @@ $(function() {
 					value : 3,
 					xAxis : -1,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MIN终点',
 					xAxis : 9,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			}
 		}, {
@@ -2588,9 +2588,9 @@ $(function() {
 					value : 5,
 					xAxis : 0,
 					yAxis : 5
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				// {name: '标线1终点', xAxis: '周日', yAxis:5}, //
-				// 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				// 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 			splitArea : { // 分隔区域
@@ -2894,7 +2894,7 @@ $(function() {
 			},
 			axisLabel : {
 				show : true,
-				formatter : '{value} 时'
+				formatter : '{value} m'
 			},
 			splitLine : { // 分隔线
 				show : true, // 默认显示，属性show控制显示与否
@@ -2925,9 +2925,9 @@ $(function() {
 					value : 5,
 					xAxis : 0,
 					yAxis : 5
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				// {name: '标线1终点', xAxis: '周日', yAxis:5}, //
-				// 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				// 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 			splitArea : { // 分隔区域
@@ -2993,12 +2993,12 @@ $(function() {
 					value : 9,
 					xAxis : -1,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MAX终点',
 					xAxis : 9,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 
@@ -3020,12 +3020,12 @@ $(function() {
 					value : 3,
 					xAxis : -1,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MIN终点',
 					xAxis : 9,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			}
 		}, {
@@ -3254,7 +3254,7 @@ $(function() {
 			},
 			axisLabel : {
 				show : true,
-				formatter : '{value} 时'
+				formatter : '{value} m'
 			},
 			splitLine : { // 分隔线
 				show : true, // 默认显示，属性show控制显示与否
@@ -3285,9 +3285,9 @@ $(function() {
 					value : 5,
 					xAxis : 0,
 					yAxis : 5
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				// {name: '标线1终点', xAxis: '周日', yAxis:5}, //
-				// 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				// 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 			splitArea : { // 分隔区域
@@ -3353,12 +3353,12 @@ $(function() {
 					value : 9,
 					xAxis : -1,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MAX终点',
 					xAxis : 9,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 
@@ -3380,12 +3380,12 @@ $(function() {
 					value : 3,
 					xAxis : -1,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MIN终点',
 					xAxis : 9,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			}
 		}, {
@@ -3614,7 +3614,7 @@ $(function() {
 			},
 			axisLabel : {
 				show : true,
-				formatter : '{value} 时'
+				formatter : '{value} m'
 			},
 			splitLine : { // 分隔线
 				show : true, // 默认显示，属性show控制显示与否
@@ -3645,9 +3645,9 @@ $(function() {
 					value : 5,
 					xAxis : 0,
 					yAxis : 5
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				// {name: '标线1终点', xAxis: '周日', yAxis:5}, //
-				// 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				// 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 			splitArea : { // 分隔区域
@@ -3713,12 +3713,12 @@ $(function() {
 					value : 9,
 					xAxis : -1,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MAX终点',
 					xAxis : 9,
 					yAxis : 9
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 
@@ -3740,12 +3740,12 @@ $(function() {
 					value : 3,
 					xAxis : -1,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				{
 					name : '警戒值MIN终点',
 					xAxis : 9,
 					yAxis : 3
-				}, // 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				}, // 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			}
 		}, {
@@ -4004,9 +4004,9 @@ $(function() {
 					value : 5,
 					xAxis : 0,
 					yAxis : 5
-				}, // 当xAxis为类目轴时，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
+				}, // 当xAxis为类目轴m，数值1会被理解为类目轴的index，通过xAxis:-1|MAXNUMBER可以让线到达grid边缘
 				// {name: '标线1终点', xAxis: '周日', yAxis:5}, //
-				// 当xAxis为类目轴时，字符串'周三'会被理解为与类目轴的文本进行匹配
+				// 当xAxis为类目轴m，字符串'周三'会被理解为与类目轴的文本进行匹配
 				] ]
 			},
 			splitArea : { // 分隔区域
