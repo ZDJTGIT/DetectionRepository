@@ -84,9 +84,4 @@ public class UserServiceImpl implements UserService {
 		return userMapper.updateByPrimaryKeySelective(record);
 	}
 
-	@Override
-	public int selectIdByUserName(String userName) {
-		return userMapper.selectIdByUserName(userName);
-	}
-
 }

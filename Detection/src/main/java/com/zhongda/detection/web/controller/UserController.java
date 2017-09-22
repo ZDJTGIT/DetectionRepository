@@ -29,9 +29,12 @@ import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -285,6 +288,16 @@ public class UserController {
 		return "user/userList";
 	}
 
+	/*
+	 * String Date 转化
+	 */
+	@InitBinder
+	public void initBinder(ServletRequestDataBinder bin){
+	         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	         CustomDateEditor cust = new CustomDateEditor(sdf, true);
+	         bin.registerCustomEditor(Date.class,cust);
+	}
+	
 	/**
 	 * 输入用户信息添加用户
 	 */
@@ -298,11 +311,10 @@ public class UserController {
 		user.setPassword("123456");
 		user.setStatus("正常");
 		user.setCreateTime(date);
-		System.out.println("+-+-+-+-+-+-+-"+user.getCompany()+user.getEmail()+user.getLinkman()+user.getPassword()+user.getPhone()+user.getStatus()+user.getCreateTime()+string);
+		System.out.println("+-+-+-+-+-+-+-"+user.getCreateTime()+"--------------"+string);
 		//将user存入数据库
 	    userService.insertUser(user);
-//	    System.out.println("8787878787878787788"+userService.selectIdByUserName(user.getUserName()));
-//	    user.setUserId(userService.selectIdByUserName(user.getUserName()));
+	    user.setUserId(userService.selectByUsername(user.getUserName()).getUserId());
 		return user;
 	}
 

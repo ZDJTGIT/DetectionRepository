@@ -129,15 +129,6 @@
 					<li><a href="javascript:;"><i class="fa fa-desktop"></i> <span
 							class="nav-label">页面</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-
-							<li><a href="javascript:;">项目管理 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/projects">项目</a></li>
-									<li><a class="J_menuItem" href="rest/project_detail">项目详情</a>
-									</li>
-								</ul>
-							</li>
-								
 							<li><a class="J_menuItem" href="rest/calendar">日历</a></li>
 							<li><a class="J_menuItem" href="rest/pin_board">标签墙</a></li>
 							<li><a href="javascript:;">单据 <span class="fa arrow"></span></a>

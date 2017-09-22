@@ -23,8 +23,6 @@ public interface UserMapper {
 
 	boolean deleteUser(String name);
 	
-	int selectIdByUserName(String userName);
-	
 	/**
 	 * 查询所有的用户
 	 * @return

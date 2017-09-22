@@ -71,8 +71,4 @@ public interface UserService {
 	 */
 	boolean deleteUser(String name);
 	
-	/*
-	 * 根据用户名查ID
-	 */
-	int selectIdByUserName(String userName);
 }

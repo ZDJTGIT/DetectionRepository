@@ -87,7 +87,7 @@
 							<div class="col-sm-5 m-b-xs">
 								<p>详细记录用户各项基本信息(用户初始密码：123456)</p>
 								<a href = "javascript:;" id="popupAddUser">添加用户</a>
-								<a href = "javascript:;" id="popupModfiyUser">修改用户信息</a>
+								<!--a href = "javascript:;" id="popupModfiyUser">修改用户</a-->
 								
 								<div id="modifyuser" class="white_content" style="width:500px;height:460px;margin-left:200px;margin-top:-50px;
 								background-color:#eeeeee ; border:2px;solid #000;filter:alpha(Opacity=80);-moz-opacity:0.8;opacity: 0.8;">
@@ -156,8 +156,12 @@
 						 					<td>${singleUser.company}</td>
 											<td>${singleUser.linkman}</td>
 											<td>${singleUser.createTime}</td>
-											<td><a href="javascript:;" id="deleteuser">
-											    <b>删除用户</b></a>
+											<td>
+											<!--id="popupModfiyUser"  id="deleteuser" 
+											onclick="selectRow('${singleUser.userId}',this)" 
+											onclick="deleteRow('${singleUser.userId}',this)"-->
+											<a href="javascript:;" class="selectRow" onclick="selectRow(this)"><b>修改用户</b></a>
+											<a href="javascript:;" class="deteteRow" onclick="deleteRow(this)"><b>删除用户</b></a>
 											</td>
 										</tr>
 									</c:forEach>
@@ -311,6 +315,15 @@
 	<script src="assets/js/plugins/iCheck/icheck.min.js"></script>
 	<script src="assets/js/demo/peity-demo.min.js"></script>
 	<script type="text/javascript">
+	
+	function selectRow(s){
+		alert(s.parentNode.parentNode.rowIndex);
+	}
+	
+	function deleteRow(s){
+		alert(s.parentNode.parentNode.rowIndex);
+	}
+	
 		$(document).ready(function() {
 
 			//打开表格发送请求到控制器查数据库获取表格信息返回加载，
@@ -333,6 +346,7 @@
 			});
 
 			//打开修改用户div
+			
 			$('#popupModfiyUser').click(function(e){
 				e.preventDefault();
 
@@ -374,7 +388,7 @@
 		    			  if(data){
 		    				  alert("添加成功！");
 		    				  var xxx = "<tr><th>"+data.userId+"</th><th>"+data.userName+"</th><th>"+data.email
-		    				  +"</th><th>"+data.phone+"</th><th>"+data.company+"</th><th>"+data.linkman+"</th><th>"+ data.createTime
+		    				  +"</th><th>"+data.phone+"</th><th>"+data.company+"</th><th>"+data.linkman+"</th><th>"+data.createTime
 		    				  +"</th><td>"+"<a href='javascript:;'id='deleteuser'><b>删除用户</b></a>"+"</td></tr>";
 		    				  $('#userTableDeatil').append(xxx);
 		    			  }else{
@@ -428,25 +442,44 @@
 	        });
 
 		//删除用户
-		$('#deleteuser').click(function(){
+		
+           $(document).ready(function(){
+  				$("a").on("click",function(){
+    				alert("段落被点击了。");
+    				
+  				});
+		   });
+
+		 /*$('#deleteuser').click(function(){
+			layer.confirm('确定要删除该用户么？', {
+				  btn: ['取消删除','确定删除'] //按钮
+				}, function(){
+				  layer.msg('已取消', {icon: 1});
+				}, function(){
+					$('#userTableDeatil').empty();
+			    	    layer.msg('删除成功（该提示5s后自动关闭）',{
+			    			time: 5000, //5s后自动关闭
+			    			btn: ['知道了']
+			    		});
+					});
+				});
+			}); */
+		
+		/*function deleteRow(id, obj){
 		layer.confirm('确定要删除该用户么？', {
 			  btn: ['取消删除','确定删除'] //按钮
 			}, function(){
 			  layer.msg('已取消', {icon: 1});
-
 			}, function(){
-
-				$('#userTableDeatil').empty();
-		    			  layer.msg('删除成功（该提示5s后自动关闭）', {
-		    				    time: 5000, //5s后自动关闭
-		    				    btn: ['知道了']
-		    				  });
+				var rowIndex = obj.parentElement.rowIndex;
+			    document.getElementById(id).deleteRow(rowIndex);
+		    	    layer.msg('删除成功（该提示5s后自动关闭）',{
+		    			time: 5000, //5s后自动关闭
+		    			btn: ['知道了']
+		    		});
 				});
-
-			});
-
+			}*/
 		});
-
 	</script>
 	<!--  -->
 	<script type="text/javascript"
