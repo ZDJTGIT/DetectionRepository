@@ -388,9 +388,7 @@
     <script src="assets/js/plugins/echarts/echarts-all.js"></script>
 
 
-
-    
-    <!-- ECharts demo data -->
+    <!-- ECharts 表加载js路径 -->
     <script src="assets/js/plugins/myecharts/slope_echarts.js"></script> 
 
      <script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
