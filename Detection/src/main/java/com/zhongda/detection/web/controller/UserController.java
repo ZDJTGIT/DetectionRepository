@@ -288,16 +288,6 @@ public class UserController {
 		return "user/userList";
 	}
 
-	/*
-	 * String Date 转化
-	 */
-	@InitBinder
-	public void initBinder(ServletRequestDataBinder bin){
-	         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	         CustomDateEditor cust = new CustomDateEditor(sdf, true);
-	         bin.registerCustomEditor(Date.class,cust);
-	}
-	
 	/**
 	 * 输入用户信息添加用户
 	 */
@@ -306,12 +296,11 @@ public class UserController {
 	@ResponseBody
 	public User addUser(@RequestBody User user){
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		String string = sdf.format(date); 
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//		String string = sdf.format(date); 
 		user.setPassword("123456");
 		user.setStatus("正常");
 		user.setCreateTime(date);
-		System.out.println("+-+-+-+-+-+-+-"+user.getCreateTime()+"--------------"+string);
 		//将user存入数据库
 	    userService.insertUser(user);
 	    user.setUserId(userService.selectByUsername(user.getUserName()).getUserId());
@@ -324,18 +313,9 @@ public class UserController {
 
 	@RequestMapping(value = "/delete", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, User> delete(String name){
-
-		Map<String, User> modelMap = new HashMap<String,User>();
-		UserServiceImpl usiml = new UserServiceImpl();
-		if(usiml.deleteUser(name)){
-			User user = userService.selectByUsername(name);
-			modelMap.put("adept", user);
-			System.out.println(modelMap);
-			return modelMap;
-		}else{
-			return null;
-		}
+	public User delete(@RequestBody User user){
+		userService.deleteUser(user.getUserName());
+		return user;
 	}
 
 	/**
@@ -343,14 +323,10 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/modify", method=RequestMethod.POST)
 	@ResponseBody
-	public User modify(@RequestBody User user){
-		//传入user修改用户信息
-		user.setUserId(50);
-		user.setPassword("223456");
-		user.setLinkman("杰皆");
-		user.setStatus("ture");
+	public User modify(@RequestBody User user,HttpServletRequest request){
 		//根据选中的用户修改用户信息
-		//userService.updateByPrimaryKeySelective(user);
+		userService.updateByPrimaryKeySelective(user);
+		WebUtils.setSessionAttribute(request, "userInfo", user);
 		return user;
 	}
 	

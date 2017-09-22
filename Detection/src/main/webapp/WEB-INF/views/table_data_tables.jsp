@@ -73,9 +73,9 @@
 									<td>测点详细位置</td>
 									<td>传感器编号</td>
 									<td>传感器状态</td>
-									<td>水深(cm)</td>
-									<td>PH值</td>
-									<td>镉含量(mg/kg)</td>
+									<td>雨量(mm)</td>
+									<td>渗压(MPa)</td>
+									<td>位移(mm)</td>
 									<td>日期</td>
 								</tr>
 							</thead>
