@@ -328,9 +328,14 @@
 	<script src="assets/js/plugins/iCheck/icheck.min.js"></script>
 	<script src="assets/js/demo/peity-demo.min.js"></script>
 	<script type="text/javascript">
+	
+		$(document).on('click','#prohibitMdy',function(){
+			alert("禁止修改新建用户！");
+		});
+		
 	    //修改用户信息
 		function selectRow(s) {
-			var b = s.parentNode.parentNode.rowIndex
+			var b = s.parentNode.parentNode.rowIndexbc
 			alert("这是表格第" + b + "行");
 			var name = $("table tr:eq(" + b + ") td:eq(1)").text();
 			var email= $("table tr:eq(" + b + ") td:eq(2)").text();
@@ -360,6 +365,7 @@
 								var companyvalue = $("#mdcompany").val();
 								var phonevalue = $("#mdphone").val();
 								var emailvalue = $("#mdemail").val();
+								//函数验证修改之后用户名唯一性，电话号码格式，邮箱格式。其他输入框不能为空
 								var jsonData = '{"userId":"'+idvalue+'","linkman":"'+linkmanvalue+'","userName":"'+namevalue+
 									'","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue +'"}';
 								$('#modifyuser').hide();
@@ -455,6 +461,8 @@
 														.val();
 												var emailvalue = $("#email")
 														.val();
+												//函数验证用户名唯一，电话号码格式，邮箱格式，其他输入不能为空
+												
 												var jsonData = '{"userName":"'
 														+ userNamevalue
 														+ '","company":"'
@@ -492,7 +500,7 @@
 																			+ "</th><th>"
 																			+ '${userInfo.createTime}'
 																			+ "</th><td>"
-																			+ "<a href='javascript:;'id='deleteuser'><b>禁止修改</b></a>"
+																			+ "<a href='javascript:;' id='prohibitMdy'><b>禁止修改</b></a>"
 																			+ "</td></tr>";
 																	$(
 																			'#userTableDeatil')
@@ -512,6 +520,7 @@
 															}
 														});
 											});
+							//提示新建用户禁止修改
 						});
 	</script>
 	<script type="text/javascript"

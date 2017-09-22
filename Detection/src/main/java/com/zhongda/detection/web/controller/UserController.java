@@ -296,8 +296,6 @@ public class UserController {
 	@ResponseBody
 	public User addUser(@RequestBody User user){
 		Date date = new Date();
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//		String string = sdf.format(date); 
 		user.setPassword("123456");
 		user.setStatus("正常");
 		user.setCreateTime(date);
