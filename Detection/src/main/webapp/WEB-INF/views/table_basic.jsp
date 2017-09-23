@@ -92,25 +92,25 @@
 								<!--a href = "javascript:;" id="popupModfiyUser">修改用户</a-->
 
 								<div id="modifyuser" class="white_content"
-									style="width: 500px; height: 430px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 0.8; opacity: 0.8;">
+									style="width: 500px; height: 430px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 1; opacity: 1;">
 									<div>
 										<p><h3><strong>修改用户信息</strong></h3>（请确保修改之后用户名唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
-										<input type="text" id="mdid" name="user_id"
+										<input type="text" id="mdid" name="mdid"
 											style="display:none; border-radius:8px" placeholder="id" class="form-control"><br>
 											
-										<input type="text" id="mdname" name="name"
+										<input type="text" id="mdname" name="mdname"
 											style="width: 100%; border-radius:8px" placeholder="用户名" class="form-control"><br>
 											
-										<input type="text" id="mdlinkman" name="linkman"
+										<input type="text" id="mdlinkman" name="mdlinkman"
 											style="width: 100%; border-radius:8px" placeholder="联系人" class="form-control"><br>
 											
-										<input type="text" id="mdcompany" name="company"
+										<input type="text" id="mdcompany" name="mdcompany"
 											style="width: 100%; border-radius:8px" placeholder="邮箱" class="form-control"><br>
 											
-										<input type="text" id="mdphone" name="phone"
+										<input type="text" id="mdphone" name="mdphone"
 											style="width: 100%; border-radius:8px" placeholder="手机号码" class="form-control"><br>
 											
-										<input type="text" id="mdemail" name="email"
+										<input type="text" id="mdemail" name="mdemail"
 											style="width: 100%; border-radius:8px" placeholder="所属公司" class="form-control">
 									</div>
 									<br>
@@ -119,28 +119,35 @@
 								</div>
 
 								<div id="adduser" class="white_content"
-									style="width: 500px; height: 420px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 0.8; opacity: 0.8;">
-									<div>
+									style="width: 500px; height: 480px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 1; opacity: 1;">
+								    <form id="form_adduser">
+								    <div>
 										<p><h3><strong>添加新用户</strong></h3>(请确保用户名的唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
 										<br>
-										<input type="text" id="userName" name="name"
-											style="width: 100%; border-radius:8px" class="form-control" placeholder="用户名"><br>
+										<label for="userName" style="width: 30%; margin-left: 5px">用户名:</label>
+										<input type="text" id="userName" name="userName" style="width: 75%; border-radius:8px;
+										margin-left: 92px; margin-top: -39px" class="form-control"><br><br>
+										
+										<label for="linkman" style="width: 30%; margin-left: 5px">联系人:</label>	
+										<input type="text" id="linkman" name="linkman" style="width: 75%; border-radius:8px; 
+										margin-left: 92px; margin-top: -39px" class="form-control"><br><br>
 											
-										<input type="text" id="linkman" name="linkman"
-											style="width: 100%; border-radius:8px" class="form-control" placeholder="联系人"><br>
-											
-										<input type="text" id="company" name="company"
-										    style="width: 100%; border-radius:8px" class="form-control"placeholder="所属公司名称"><br>
+										<label for="company" style="width: 30%; margin-left: 5px">所属公司名称:</label>	
+										<input type="text" id="company" name="company" style="width: 75%; border-radius:8px;
+										margin-left: 92px; margin-top: -39px" class="form-control"><br><br>
 										    
-										<input type="text"id="phone" name="phone" 
-										    style="width: 100%; border-radius:8px" class="form-control" placeholder="手机号码"><br>
+										<label for="phone" style="width: 30%; margin-left: 5px">手机号码:</label>    
+										<input type="text"id="phone" name="phone" style="width: 75%; border-radius:8px; 
+										margin-left: 92px; margin-top: -39px" class="form-control"><br><br>
 										    
-										<input type="text" id="email" name="email" 
-										    style="width: 100%; border-radius:8px" class="form-control" placeholder="邮箱地址">
+										<label for="email" style="width: 30%; margin-left: 5px">邮箱地址:</label>    
+										<input type="text" id="email" name="email"  style="width: 75%; border-radius:8px; 
+										margin-left: 92px; margin-top: -39px" class="form-control">
 									</div>
 									<br>
 									<input type="button" id="sureAdd" style="margin-left:30px; width:130px; height:40px" value="确定添加"> 
 									<input type="button" id="closeAddUser" style="margin-left:120px; width:130px; height:40px" value="关闭窗口">
+								    </form>
 								</div>
 							</div>
 							<div class="col-sm-4 m-b-xs">
@@ -331,8 +338,10 @@
 			</div>
 		</div>
 	</div>
+	
 	<script src="assets/js/plugins/layer/layer.min.js"></script>
 	<script src="assets/js/jquery.min.js?v=2.1.4"></script>
+	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
 	<script src="assets/js/bootstrap.min.js?v=3.3.6"></script>
 	<script src="assets/js/plugins/peity/jquery.peity.min.js"></script>
 	<script src="assets/js/content.js"></script>
@@ -374,10 +383,6 @@
 						var companyvalue = $("#mdcompany").val();
 						var phonevalue = $("#mdphone").val();
 						var emailvalue = $("#mdemail").val();
-						//函数验证修改之后用户名唯一性，电话号码格式，邮箱格式。其他输入框不能为空
-						if(1<2){
-							
-						}	
 					    var jsonData = '{"userId":"'+idvalue+'","linkman":"'+linkmanvalue+'","userName":"'+namevalue+
 							           '","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue +'"}';
 						               $('#modifyuser').hide();
@@ -454,15 +459,14 @@
 
 			//确定添加用户
 			$('#sureAdd').click(function(){
+				if(!$('#form_adduser').valid()){
+					return false;
+				}
 				var userNamevalue = $("#userName").val();
 				var companyvalue = $("#company").val();
 				var phonevalue = $("#phone").val();
 				var linkmanvalue = $("#linkman").val();
 				var emailvalue = $("#email").val();
-				//函数验证用户名唯一，电话号码格式，邮箱格式，其他输入不能为空
-				if(1>2){
-													
-				}else{
 				var jsonData = '{"userName":"'
 							+ userNamevalue
 							+ '","company":"'
@@ -498,18 +502,12 @@
 								} else {
 									alert("数据异常");
 								}
-							},
-							error:function(XMLHttpRequest,textStatus,errorThrown){
-									alert(XMLHttpRequest.status);
-									alert(XMLHttpRequest.readyState);
-									alert(textStatus);
-								}
+							}
 						});
-						}
 				});
-							
 		});
 	</script>
+	<script src="assets/js/customerValidate.js"></script>
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>
