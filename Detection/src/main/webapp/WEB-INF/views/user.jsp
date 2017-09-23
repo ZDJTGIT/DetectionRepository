@@ -268,7 +268,6 @@
 				</div>
 			</div>
 		</div>
-
       </div>
 	</div>
 	<script src="assets/js/jquery.min.js?v=2.1.4"></script>
@@ -279,15 +278,8 @@
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
     <script type="text/javascript">
-    
-       //点击输入框,边框变色事件
-       
-       
-    
        //点击确定修改，提交修改的user信息，提交到控制器修改数据库数据
-       
        $('#determineDelete').click(function(){
-    	   
     	   var companyvalue = $('#company').val();
     	   var namevalue = $('#user_name').val();
 		   var linkmanvalue = $('#linkman').val();

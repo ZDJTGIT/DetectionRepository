@@ -92,44 +92,55 @@
 								<!--a href = "javascript:;" id="popupModfiyUser">修改用户</a-->
 
 								<div id="modifyuser" class="white_content"
-									style="width: 500px; height: 460px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 0.8; opacity: 0.8;">
+									style="width: 500px; height: 430px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 0.8; opacity: 0.8;">
 									<div>
-										<h5>修改用户信息（根据您输入的用户名修改！用户信息输入不完整不予修改）</h5>
+										<p><h3><strong>修改用户信息</strong></h3>（请确保修改之后用户名唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
 										<input type="text" id="mdid" name="user_id"
-											style="display:none" placeholder="id" class="form-control"><br>
+											style="display:none; border-radius:8px" placeholder="id" class="form-control"><br>
+											
 										<input type="text" id="mdname" name="name"
-											style="width: 100%;" placeholder="用户名" class="form-control"><br>
+											style="width: 100%; border-radius:8px" placeholder="用户名" class="form-control"><br>
+											
 										<input type="text" id="mdlinkman" name="linkman"
-											style="width: 100%;" placeholder="联系人" class="form-control"><br>
+											style="width: 100%; border-radius:8px" placeholder="联系人" class="form-control"><br>
+											
 										<input type="text" id="mdcompany" name="company"
-											style="width: 100%;" placeholder="邮箱" class="form-control"><br>
+											style="width: 100%; border-radius:8px" placeholder="邮箱" class="form-control"><br>
+											
 										<input type="text" id="mdphone" name="phone"
-											style="width: 100%;" placeholder="手机号码" class="form-control"><br>
+											style="width: 100%; border-radius:8px" placeholder="手机号码" class="form-control"><br>
+											
 										<input type="text" id="mdemail" name="email"
-											style="width: 100%;" placeholder="所属公司" class="form-control">
+											style="width: 100%; border-radius:8px" placeholder="所属公司" class="form-control">
 									</div>
-									<input type="button" id="sureMdy" value="确定修改"> <a
-										href="javascript:;" id="closeModfiyUser">关闭窗口</a>
+									<br>
+									<input type="button" id="sureMdy" style="margin-left:30px; width:130px; height:40px" value="确定修改"> 
+									<input type="button" id="closeModfiyUser" style="margin-left:120px; width:130px; height:40px" value="关闭窗口">
 								</div>
 
 								<div id="adduser" class="white_content"
-									style="width: 500px; height: 460px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 0.8; opacity: 0.8;">
+									style="width: 500px; height: 420px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 0.8; opacity: 0.8;">
 									<div>
-										<h5>添加新用户</h5>
+										<p><h3><strong>添加新用户</strong></h3>(请确保用户名的唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
+										<br>
 										<input type="text" id="userName" name="name"
-											style="width: 100%;" class="form-control" placeholder="用户名"><br>
+											style="width: 100%; border-radius:8px" class="form-control" placeholder="用户名"><br>
+											
 										<input type="text" id="linkman" name="linkman"
-											style="width: 100%;" class="form-control" placeholder="联系人"><br>
+											style="width: 100%; border-radius:8px" class="form-control" placeholder="联系人"><br>
+											
 										<input type="text" id="company" name="company"
-											style="width: 100%;" class="form-control"
-											placeholder="所属公司名称"><br> <input type="text"
-											id="phone" name="phone" style="width: 100%;"
-											class="form-control" placeholder="手机号码"><br> <input
-											type="text" id="email" name="email" style="width: 100%;"
-											class="form-control" placeholder="邮箱地址">
+										    style="width: 100%; border-radius:8px" class="form-control"placeholder="所属公司名称"><br>
+										    
+										<input type="text"id="phone" name="phone" 
+										    style="width: 100%; border-radius:8px" class="form-control" placeholder="手机号码"><br>
+										    
+										<input type="text" id="email" name="email" 
+										    style="width: 100%; border-radius:8px" class="form-control" placeholder="邮箱地址">
 									</div>
-									<input type="button" id="sureAdd" value="确定添加"> <a
-										href="javascript:;" id="closeAddUser">关闭窗口</a>
+									<br>
+									<input type="button" id="sureAdd" style="margin-left:30px; width:130px; height:40px" value="确定添加"> 
+									<input type="button" id="closeAddUser" style="margin-left:120px; width:130px; height:40px" value="关闭窗口">
 								</div>
 							</div>
 							<div class="col-sm-4 m-b-xs">
@@ -150,7 +161,7 @@
 							<table class="table table-striped" id="mytable"> 
 								<thead>
 									<tr>
-										<th>序号</th>
+										<th>ID</th>
 										<th>用户名</th>
 										<th>邮箱</th>
 										<th>手机号码</th>
@@ -334,9 +345,8 @@
 		});
 		
 	    //修改用户信息
-		function selectRow(s) {
-			var b = s.parentNode.parentNode.rowIndexbc
-			alert("这是表格第" + b + "行");
+		function selectRow(s){
+			var b = s.parentNode.parentNode.rowIndex;
 			var name = $("table tr:eq(" + b + ") td:eq(1)").text();
 			var email= $("table tr:eq(" + b + ") td:eq(2)").text();
 			var phone = $("table tr:eq(" + b + ") td:eq(3)").text();
@@ -357,47 +367,47 @@
 			}); 
 			
 			//确定修改（修改操作稍后改成看信息修改）--------mdname/mdlinkman/mdcompany/mdphone/mdemail
-			$('#sureMdy')
-					.click(function() {
-								var idvalue = $('#mdid').val();
-								var namevalue = $("#mdname").val();
-								var linkmanvalue = $("#mdlinkman").val();
-								var companyvalue = $("#mdcompany").val();
-								var phonevalue = $("#mdphone").val();
-								var emailvalue = $("#mdemail").val();
-								//函数验证修改之后用户名唯一性，电话号码格式，邮箱格式。其他输入框不能为空
-								var jsonData = '{"userId":"'+idvalue+'","linkman":"'+linkmanvalue+'","userName":"'+namevalue+
-									'","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue +'"}';
-								$('#modifyuser').hide();
-								$.ajax({
-											type : 'post',
-											url : 'rest/user/modify',
-											contentType : 'application/json',
-											dataType : 'json',
-											data : jsonData,
-											success : function(data) {
-												if (data) {
-													$("table tr:eq(" + b + ") td:eq(1)").text(data.userName);
-													$("table tr:eq(" + b + ") td:eq(2)").text(data.email);
-													$("table tr:eq(" + b + ") td:eq(3)").text(data.phone);
-													$("table tr:eq(" + b + ") td:eq(4)").text(data.company);
-													$("table tr:eq(" + b + ") td:eq(5)").text(data.linkman);
-													alert("修改成功");
-												} else {
-													alert("数据异常");
-												}
-											},
-											error : function() {
-												alert("数据加载失败");
-											}
-										});
-							});
+			$('#sureMdy').click(function() {
+						var idvalue = $('#mdid').val();
+						var namevalue = $("#mdname").val();
+						var linkmanvalue = $("#mdlinkman").val();
+						var companyvalue = $("#mdcompany").val();
+						var phonevalue = $("#mdphone").val();
+						var emailvalue = $("#mdemail").val();
+						//函数验证修改之后用户名唯一性，电话号码格式，邮箱格式。其他输入框不能为空
+						if(1<2){
+							
+						}	
+					    var jsonData = '{"userId":"'+idvalue+'","linkman":"'+linkmanvalue+'","userName":"'+namevalue+
+							           '","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue +'"}';
+						               $('#modifyuser').hide();
+						$.ajax({
+							type : 'post',
+							url : 'rest/user/modify',
+							contentType : 'application/json',
+							dataType : 'json',
+							data : jsonData,
+							success : function(data) {
+								if (data) {
+									$("table tr:eq(" + b + ") td:eq(1)").text(data.userName);
+									$("table tr:eq(" + b + ") td:eq(2)").text(data.email);
+									$("table tr:eq(" + b + ") td:eq(3)").text(data.phone);
+									$("table tr:eq(" + b + ") td:eq(4)").text(data.company);
+									$("table tr:eq(" + b + ") td:eq(5)").text(data.linkman);
+									alert("修改成功");
+								} else {
+									alert("数据异常");
+								}
+							},
+							error : function() {
+								alert("数据加载失败");
+							}
+						});
+			});
 		}
-
 		//删除用户
 		function deleteRow(s) {
 			var b = s.parentNode.parentNode.rowIndex;
-			alert("这是表格第" + b + "行");
 			var t = $("table tr:eq(" + b + ") td:eq(1)").text();
 			var jsonData = '{"userName":"' + t + '"}';
 			layer.confirm('确定要删除该用户么？', {
@@ -423,105 +433,82 @@
 				});
 			});
 		}
-
 		//添加新用户
-		$(document)
-				.ready(
-						function() {
-							//打开表格发送请求到控制器查数据库获取表格信息返回加载，
-							//增删改都是通过发送请求到控制器查数据库获取表格信息返回加载
-							$(".i-checks").iCheck({
-								checkboxClass : "icheckbox_square-green",
-								radioClass : "iradio_square-green",
-							});
+		$(document).ready(function() {
+			//打开表格发送请求到控制器查数据库获取表格信息返回加载，
+			//增删改都是通过发送请求到控制器查数据库获取表格信息返回加载
+			$(".i-checks").iCheck({
+				checkboxClass : "icheckbox_square-green",
+				radioClass : "iradio_square-green",
+			});
+			//打开添加用户div
+			$('#popupAddUser').click(function(e) {
+				e.preventDefault();
+				$('#adduser').show();
+			});
+			//关闭添加用户div
+			$('#closeAddUser').click(function(e) {
+				e.preventDefault();
+				$('#adduser').hide();
+			});
 
-							//打开添加用户div
-							$('#popupAddUser').click(function(e) {
-								e.preventDefault();
-								$('#adduser').show();
-							});
-
-							//关闭添加用户div
-							$('#closeAddUser').click(function(e) {
-								e.preventDefault();
-								$('#adduser').hide();
-							});
-
-							//确定添加用户
-							$('#sureAdd')
-									.click(
-											function() {
-												var userNamevalue = $(
-														"#userName").val();
-												var companyvalue = $("#company")
-														.val();
-												var phonevalue = $("#phone")
-														.val();
-												var linkmanvalue = $("#linkman")
-														.val();
-												var emailvalue = $("#email")
-														.val();
-												//函数验证用户名唯一，电话号码格式，邮箱格式，其他输入不能为空
-												
-												var jsonData = '{"userName":"'
-														+ userNamevalue
-														+ '","company":"'
-														+ companyvalue
-														+ '","phone":"'
-														+ phonevalue
-														+ '","linkman":"'
-														+ linkmanvalue
-														+ '","email":"'
-														+ emailvalue + '"}';
-												$('#adduser').hide();
-												$
-														.ajax({
-															type : 'post',
-															url : 'rest/user/addUser',
-															contentType : 'application/json',
-															dataType : 'json',
-															data : jsonData,
-															success : function(
-																	data) {
-																if (data) {
-																	alert("添加成功！");
-																	var xxx = "<tr><th>"
-																			+ data.userId
-																			+ "</th><th>"
-																			+ data.userName
-																			+ "</th><th>"
-																			+ data.email
-																			+ "</th><th>"
-																			+ data.phone
-																			+ "</th><th>"
-																			+ data.company
-																			+ "</th><th>"
-																			+ data.linkman
-																			+ "</th><th>"
-																			+ '${userInfo.createTime}'
-																			+ "</th><td>"
-																			+ "<a href='javascript:;' id='prohibitMdy'><b>禁止修改</b></a>"
-																			+ "</td></tr>";
-																	$(
-																			'#userTableDeatil')
-																			.append(
-																					xxx);
-																} else {
-																	alert("数据异常");
-																}
-															},
-															error : function(
-																	XMLHttpRequest,
-																	textStatus,
-																	errorThrown) {
-																alert(XMLHttpRequest.status);
-																alert(XMLHttpRequest.readyState);
-																alert(textStatus);
-															}
-														});
-											});
-							//提示新建用户禁止修改
+			//确定添加用户
+			$('#sureAdd').click(function(){
+				var userNamevalue = $("#userName").val();
+				var companyvalue = $("#company").val();
+				var phonevalue = $("#phone").val();
+				var linkmanvalue = $("#linkman").val();
+				var emailvalue = $("#email").val();
+				//函数验证用户名唯一，电话号码格式，邮箱格式，其他输入不能为空
+				if(1>2){
+													
+				}else{
+				var jsonData = '{"userName":"'
+							+ userNamevalue
+							+ '","company":"'
+							+ companyvalue
+							+ '","phone":"'
+							+ phonevalue
+							+ '","linkman":"'
+							+ linkmanvalue
+							+ '","email":"'
+							+ emailvalue + '"}';
+					$('#adduser').hide();
+					$.ajax({
+						type : 'post',
+						url : 'rest/user/addUser',
+						contentType : 'application/json',
+						dataType : 'json',
+						data : jsonData,
+						success : function(data) {
+							if(data) {
+								alert("添加成功！");
+							var viewData = "<tr><th>"+ data.userId
+										+ "</th><th>"+ data.userName
+										+ "</th><th>"+ data.email
+										+ "</th><th>"+ data.phone
+										+ "</th><th>"+ data.company
+										+ "</th><th>"+ data.linkman
+										+ "</th><th>"
+										+ '${userInfo.createTime}'
+										+ "</th><td>"
+										+ "<a href='javascript:;' id='prohibitMdy'><b>禁止修改</b></a>"
+										+ "</td></tr>";
+								$('#userTableDeatil').append(viewData);
+								} else {
+									alert("数据异常");
+								}
+							},
+							error:function(XMLHttpRequest,textStatus,errorThrown){
+									alert(XMLHttpRequest.status);
+									alert(XMLHttpRequest.readyState);
+									alert(textStatus);
+								}
 						});
+						}
+				});
+							
+		});
 	</script>
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
