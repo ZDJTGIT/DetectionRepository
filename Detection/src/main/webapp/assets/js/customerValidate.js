@@ -77,11 +77,14 @@ $('#form_modifyuser').validate({
 				minlength : 2,
 				//验证用户名是否存在
 				remote: {
-				    url: "rest/user/OnlyUserName",     //后台处理程序
+				    url: "rest/user/mdOnlyUserName",     //后台处理程序
 				    type: "post",               //数据发送方式  
 				    data: {                     //要传递的数据
 				        userName: function() {
-				            return $("#userName").val();
+				            return $("#mdname").val();
+				        },
+				        userId: function() {
+					        return $("#mdid").val();
 				        }
 				    }
 				}

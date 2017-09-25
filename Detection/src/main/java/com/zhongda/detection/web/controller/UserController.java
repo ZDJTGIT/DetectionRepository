@@ -334,7 +334,7 @@ public class UserController {
 	}
 	
 	/*
-	 * 验证用户名是否唯一
+	 * 验证用户名是否唯一(添加验证)
 	 */
 	@RequestMapping(value = "/OnlyUserName", method=RequestMethod.POST)
 	public void OnlyUserName(String userName, HttpServletResponse response){
@@ -347,6 +347,31 @@ public class UserController {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	/*
+	 * 验证用户名是否唯一(修改验证)
+	 */
+	@RequestMapping(value = "/mdOnlyUserName", method=RequestMethod.POST)
+	public void mdOnlyUserName(String userName, Integer userId, HttpServletResponse response){
+		if(userName.equals(userService.selectByPrimaryKey(userId).getUserName())){
+			try {
+				response.getWriter().print(true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
+			User user = userService.selectByUsername(userName);
+			try {
+				if(user==null){
+					response.getWriter().print(true);
+				}else{
+					response.getWriter().print(false);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

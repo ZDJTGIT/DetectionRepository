@@ -88,6 +88,7 @@
 									<form id="form_modifyuser">
 									<div>
 										<p><h3><strong>修改用户信息</strong></h3>（请确保修改之后用户名唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
+										<label for="mdid" style="display:none"></label>	
 										<input type="text" id="mdid" name="mdid"
 											style="display:none; border-radius:8px" placeholder="id" class="form-control"><br>
 										
@@ -372,7 +373,7 @@
 
 			//确定修改（修改操作稍后改成看信息修改）--------mdname/mdlinkman/mdcompany/mdphone/mdemail
 			$('#sureMdy').click(function() {
-				if(!$('#form_adduser').valid()){
+				if(!$('#form_modifyuser').valid()){
 					return false;
 				}
 						var idvalue = $('#mdid').val();
@@ -492,7 +493,7 @@
 										+ "</th><th>"+ data.company
 										+ "</th><th>"+ data.linkman
 										+ "</th><th>"
-										+ '${userInfo.createTime}'
+										+ <fmt:formatDate value='${singleUser.createTime}' type="both" dateStyle="default"/>
 										+ "</th><td>"
 										+ "<a href='javascript:;' id='prohibitMdy'><b>禁止修改</b></a>"
 										+ "</td></tr>";

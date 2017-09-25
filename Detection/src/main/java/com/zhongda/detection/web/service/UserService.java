@@ -71,4 +71,8 @@ public interface UserService {
 	 */
 	boolean deleteUser(String name);
 	
+	/*
+	 * 根据Id查用户
+	 */
+	User selectByPrimaryKey(Integer userId);
 }
