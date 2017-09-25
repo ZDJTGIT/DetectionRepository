@@ -66,16 +66,19 @@
 							<span class="nav-label">我的项目</span> <span class="fa arrow"></span>
 					</a>
 						<ul id="my_project" class="nav nav-second-level">
-							<li><a class="J_menuItem" href="javascript:;"> <i
+							<li>
+								<a class="J_menuItem" href="javascript:;"> <i
 									class="fa fa-columns"></i> <span class="nav-label">农田项目</span>
-							</a>
+								</a>
 								<ul class="nav nav-second-level">
 									<li><a class="J_menuItem"
 										href="rest/graph_echarts_farmland">农田</a></li>
-								</ul></li>
-							<li><a class="J_menuItem" href="javascript:;"> <i
+								</ul>
+							</li>
+							<li>
+								<a class="J_menuItem" href="javascript:;"> <i
 									class="fa fa-columns"></i> <span class="nav-label">桥梁项目</span>
-							</a>
+								</a>
 								<ul class="nav nav-second-level">
 									<li><a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁</a>
 									</li>
@@ -89,7 +92,7 @@
 								</ul></li>
 							<li><a class="J_menuItem" href="javascript:;"> <i
 									class="fa fa-columns"></i> <span class="nav-label">边坡项目</span>
-							</a>
+								</a>
 								<ul class="nav nav-second-level">
 									<li><a class="J_menuItem" href="rest/graph_echarts_deep">深部位移</a>
 									</li>
@@ -97,8 +100,21 @@
 										href="rest/graph_echarts_osmotic">渗压</a></li>
 									<li><a class="J_menuItem"
 										href="rest/graph_echarts_rainwater">雨量</a></li>
-								</ul></li>
-						</ul></li>
+								</ul>
+							</li>
+							<!-- 测试数据 -->
+							<li >
+								<a  href="javascript:;" class="selecttype"> 
+									<i class="fa fa-columns"></i> <span class="nav-label">test项目</span>
+								</a>
+								<ul class="nav nav-second-level" >
+									<li class="dynamic_loading">
+										
+									</li>
+								</ul>
+							</li>
+						</ul>
+						</li>
 					<li><a href="javascript:;"> <i
 							class="fa fa fa-bar-chart-o"></i> <span class="nav-label">统计图表</span>
 							<span class="fa arrow"></span>
@@ -720,25 +736,40 @@
 
 		});
 	</script>
+	
 	<script type="text/javascript">
-		var farmspan = document.getElementById("farmspan");
-		var farmpointli = document.getElementById("farmpointli");
-		farmspan.onclick = function() {
-			$("#licontent").remove();
-			var li = document.createElement("li");
-			li.setAttribute("id", "licontent");
-			var a = document.createElement("a");
-			a.innerHTML = "农田";
-			a.setAttribute("class", "J_menuItem");
-			a.setAttribute("href", "rest/graph_echarts_bridge");
-			var a2 = document.createElement("a");
-			a2.innerHTML = "农田1";
-			li.appendChild(a);
-			li.appendChild(a2);
-			farmpointli.appendChild(li);
-
-		}
+		$(document).ready(function(){
+			var key = true;
+			var longding = true;
+			$(".selecttype").click(function(){
+				if(key){
+					key = false;
+					if(longding){
+						longding = false;
+						var userId = "${sessionScope.userInfo.userId}";
+						$.ajax({
+							type: 'POST',
+							url: 'rest/farmlanpoint/projectType',
+							data: 'userId='+userId,
+							dataType: 'json', 
+							success: function(date){
+								$(date).each(function(index,val){
+									var farmeach1 = "<a class='J_menuItem' href='rest/graph_echarts_tunnel'>";
+									var farmeach2 = val.projectTypeValue+(index+1);
+									var farmeach3 = "</a>";
+									$(".dynamic_loading").append(farmeach1+farmeach2+farmeach3);
+								});
+							},
+						});
+					}
+					
+					
+				}else{
+					key = true;
+				}
+				
+			});
+		});
 	</script>
-
 </body>
 </html>

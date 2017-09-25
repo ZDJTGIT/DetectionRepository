@@ -11,7 +11,7 @@ import com.zhongda.detection.web.model.UserProject;
 import com.zhongda.detection.web.service.UserProjectService;
 
 @Service
-public class UserProjectServiceImpl implements UserProjectService{
+public class UserProjectServiceImpl implements UserProjectService {
 
 	@Resource
 	private UserProjectMapper userProjectMapper;
@@ -24,7 +24,8 @@ public class UserProjectServiceImpl implements UserProjectService{
 	@Override
 	public List<UserProject> selectAllProjectByUserIdAndProjectType(
 			Integer userId, String projectType) {
-		return userProjectMapper.selectAllProjectByUserIdAndProjectType(userId, projectType);
+		return userProjectMapper.selectAllProjectByUserIdAndProjectType(userId,
+				projectType);
 	}
 
 	@Override
@@ -34,5 +35,10 @@ public class UserProjectServiceImpl implements UserProjectService{
 		return null;
 	}
 
+	public List<UserProject> selectAllProjectByIdAndType(Integer userId,
+			String projectType) {
+		return userProjectMapper.selectAllProjectByIdAndType(userId,
+				projectType);
+	}
 
 }

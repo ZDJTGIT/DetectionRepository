@@ -59,7 +59,8 @@ public class UserController {
 	private CacheManager cacheManager;
 	private Cache<String, String> changePasswordCache;
 
-	public static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	public static final Logger logger = LoggerFactory
+			.getLogger(UserController.class);
 
 	// private Cache<String,String> vcodeCache;
 
@@ -242,7 +243,7 @@ public class UserController {
 
 	/**
 	 * 修改密码
-	 */ 
+	 */
 	@RequestMapping(value = "/changPassword", method = RequestMethod.POST)
 	public String changPassword(@Valid User user, BindingResult result,
 			Model model, HttpServletRequest reques) {
@@ -264,7 +265,7 @@ public class UserController {
 		List<User> userList = userService.selectList();
 		model.addAttribute("userList", userList);
 		logger.info("进入userList");
-		logger.info("userList的大小"+userList.size());
+		logger.info("userList的大小" + userList.size());
 		return "table_basic";
 	}
 
@@ -273,7 +274,8 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/findUser")
 	public String findUser(User user, Model model) {
-		List<User> userList = userService.selectAllByUsername(user.getUserName());
+		List<User> userList = userService.selectAllByUsername(user
+				.getUserName());
 		if (null == userList || userList.size() == 0) {
 			model.addAttribute("error", "没有匹配的用户名 ！");
 		} else {
@@ -286,16 +288,17 @@ public class UserController {
 	 * 输入用户信息添加用户
 	 */
 
-	@RequestMapping(value = "/addUser", method=RequestMethod.POST)
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	@ResponseBody
-	public User addUser(@RequestBody User user){
+	public User addUser(@RequestBody User user) {
 		Date date = new Date();
 		user.setPassword("123456");
 		user.setStatus("正常");
 		user.setCreateTime(date);
-		//将user存入数据库
-	    userService.insertUser(user);
-	    user.setUserId(userService.selectByUsername(user.getUserName()).getUserId());
+		// 将user存入数据库
+		userService.insertUser(user);
+		user.setUserId(userService.selectByUsername(user.getUserName())
+				.getUserId());
 		return user;
 	}
 
@@ -303,9 +306,9 @@ public class UserController {
 	 * 根据当前选中的用户名删除用户
 	 */
 
-	@RequestMapping(value = "/delete", method=RequestMethod.POST)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public User delete(@RequestBody User user){
+	public User delete(@RequestBody User user) {
 		userService.deleteUser(user.getUserName());
 		return user;
 	}
@@ -313,36 +316,37 @@ public class UserController {
 	/**
 	 * 修改用户信息
 	 */
-	@RequestMapping(value = "/modify", method=RequestMethod.POST)
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	@ResponseBody
-	public User modify(@RequestBody User user,HttpServletRequest request){
-		//根据选中的用户修改用户信息
+	public User modify(@RequestBody User user, HttpServletRequest request) {
+		// 根据选中的用户修改用户信息
 		userService.updateByPrimaryKeySelective(user);
 		WebUtils.setSessionAttribute(request, "userInfo", user);
+
 		return user;
 	}
-	
+
 	/*
 	 * 用户修改用户信息
 	 */
-	@RequestMapping(value = "/updataUser", method=RequestMethod.POST)
+	@RequestMapping(value = "/updataUser", method = RequestMethod.POST)
 	@ResponseBody
-	public User updataUser(@RequestBody User user, HttpServletRequest request){
+	public User updataUser(@RequestBody User user, HttpServletRequest request) {
 		userService.updateByPrimaryKeySelective(user);
 		WebUtils.setSessionAttribute(request, "userInfo", user);
 		return user;
 	}
-	
+
 	/*
 	 * 验证用户名是否唯一
 	 */
-	@RequestMapping(value = "/OnlyUserName", method=RequestMethod.POST)
-	public void OnlyUserName(String userName, HttpServletResponse response){
+	@RequestMapping(value = "/OnlyUserName", method = RequestMethod.POST)
+	public void OnlyUserName(String userName, HttpServletResponse response) {
 		User user = userService.selectByUsername(userName);
 		try {
-			if(user==null){
+			if (user == null) {
 				response.getWriter().print(true);
-			}else{
+			} else {
 				response.getWriter().print(false);
 			}
 		} catch (IOException e) {
@@ -367,13 +371,11 @@ public class UserController {
 	 * @RequestMapping(value = "/forceUserLogout") public String
 	 * forceUserLogout(String username, Model model){ Collection<Session>
 	 * sessions = sessionDAO.getActiveSessions(); for(Session session:sessions){
-	 * Object userObj =
-0	 * session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+	 * Object userObj = 0 *
+	 * session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
 	 * if(null == userObj){ continue; } if(userObj.toString().equals(username)){
 	 * session.stop();; break; } } return activeUserList(model); }
 	 */
-
-
 
 	/**
 	 * 显示所有在线用户

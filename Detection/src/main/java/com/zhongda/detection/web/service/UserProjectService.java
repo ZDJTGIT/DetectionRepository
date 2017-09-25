@@ -8,6 +8,7 @@ public interface UserProjectService {
 
 	/**
 	 * 查出当前用户下所有的项目类型
+	 * 
 	 * @param userId
 	 * @return
 	 */
@@ -15,15 +16,17 @@ public interface UserProjectService {
 
 	/**
 	 * 查出当前用户下对应项目类型的所有项目
+	 * 
 	 * @param userId
 	 * @param projectType
 	 * @return
 	 */
-	List<UserProject> selectAllProjectByUserIdAndProjectType(
-			Integer userId, String projectType);
+	List<UserProject> selectAllProjectByUserIdAndProjectType(Integer userId,
+			String projectType);
 
 	/**
 	 * 查出当前用户下对应项目类型和项目id的项目
+	 * 
 	 * @param userId
 	 * @param projectType
 	 * @param projectId
@@ -31,4 +34,14 @@ public interface UserProjectService {
 	 */
 	UserProject selectProjectByUserIdAndProjectInfo(Integer userId,
 			String projectType, Integer projectId);
+
+	/**
+	 * 查出当前用户下对应项目类型的所有项目 查询所有通过用户ID和项目类型
+	 * 
+	 * @param userId
+	 * @param projectType
+	 * @return
+	 */
+	List<UserProject> selectAllProjectByIdAndType(Integer userId,
+			String projectType);
 }

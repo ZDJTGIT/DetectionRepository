@@ -31,7 +31,7 @@
    			<div class="col-sm-6" >
                 <div class="ibox float-e-margins" >
                     <div class="ibox-title">
-                        <h5>渗压监测总位移</h5>
+                        <h5>渗压累计变化</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -58,7 +58,7 @@
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>渗压本次位移监测</h5>
+                        <h5>渗压单次变化</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -85,7 +85,7 @@
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>渗压位移变化速率监测</h5>
+                        <h5>渗压变化率</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -113,7 +113,7 @@
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>渗压水平位移监测值</h5>
+                        <h5>渗压监测值</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -259,7 +259,7 @@
    			<div class="col-sm-6" >
                 <div class="ibox float-e-margins" >
                     <div class="ibox-title">
-                        <h5>雨量监测总位移</h5>
+                        <h5>雨量累计变化</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -286,7 +286,7 @@
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>雨量本次位移监测</h5>
+                        <h5>雨量单次变化</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -313,7 +313,7 @@
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>雨量位移变化速率监测</h5>
+                        <h5>雨量变化率</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -341,7 +341,7 @@
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>雨量水平位移监测值</h5>
+                        <h5>雨量监测值</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>

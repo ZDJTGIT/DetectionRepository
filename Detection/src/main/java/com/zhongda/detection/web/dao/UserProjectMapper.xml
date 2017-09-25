@@ -31,6 +31,12 @@
     where user_id = #{0}
     and project_type_code = #{1}
   </select>
+  <select id="selectAllProjectByIdAndType" resultMap="BaseResultMap">
+  	select
+    up.*
+    from user_project up
+    where user_id = #{userId,jdbcType=INTEGER} and project_type_code = #{projectType,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_project
     where user_project_id = #{userProjectId,jdbcType=INTEGER}
