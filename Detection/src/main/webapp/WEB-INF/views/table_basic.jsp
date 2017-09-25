@@ -83,9 +83,9 @@
 								<a href="javascript:;" id="popupAddUser">添加用户</a>
 								<!--a href = "javascript:;" id="popupModfiyUser">修改用户</a-->
 
-								<div id="modifyuser" class="white_content"
-									style="width: 500px; height: 480px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 1; opacity: 1;">
+								<div id="modifyuser" class="white_content" style="width: 500px; height: 480px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 1; opacity: 1;">
 									<form id="form_modifyuser">
+
 									<div>
 										<p><h3><strong>修改用户信息</strong></h3>（请确保修改之后用户名唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
 										<label for="mdid" style="display:none"></label>	
@@ -119,10 +119,10 @@
 								    </form>
 								</div>
 
-								<div id="adduser" class="white_content"
-									style="width: 500px; height: 480px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 1; opacity: 1;">
+								<div id="adduser" class="white_content" style="width: 500px; height: 480px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 1; opacity: 1;">
 								    <form id="form_adduser">
 								    <div>
+
 										<p><h3><strong>添加新用户</strong></h3>(请确保用户名的唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
 										<br>
 										<label for="userName" style="width: 30%; margin-left: 5px">用户名:</label>

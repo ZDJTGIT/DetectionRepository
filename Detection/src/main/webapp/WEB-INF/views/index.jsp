@@ -213,7 +213,7 @@
 											class="img-circle" src="assets/img/zdLogo.png">
 										</a>
 										<div class="media-body">
-											<small class="pull-right">46小时前</small> <strong>李四</strong>
+											<small class="pull-right">46小时前</small> <strong>admin</strong>
 											XX边坡项目深部位移监测55米孔深处，编号JCZ1测点位移量为XXmm,超出阀值，请及时处理<br> <small
 												class="text-muted">1天前 2017.9.20</small>
 										</div>
@@ -226,7 +226,7 @@
 											class="img-circle" src="assets/img/zdLogo.png">
 										</a>
 										<div class="media-body ">
-											<small class="pull-right text-navy">2小时前</small> <strong>王五</strong>
+											<small class="pull-right text-navy">2小时前</small> <strong>admin</strong>
 											XX边坡项目地下水位位监测，编号JCZ1 90m处水位达到XXmm，临近阀值，请及时采取措施预防 <br> <small
 												class="text-muted">今天 2017.9.21</small>
 										</div>
