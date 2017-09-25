@@ -15,14 +15,15 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<base href="<%=basePath%>">
     <meta http-equiv="X-UA-Compatible" content="IE=9;IE=8;IE=7" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-                                    <title>404 - Zihan&#039;s Blog</title>        <meta name="keywords" content="" />
-    <meta name="description" content="" />
+    <title>Icons</title>
+    <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
+	<meta name="description" content="中大检测平台">
     <meta name="viewport" content="initial-scale=1.0,user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <link rel="Shortcut Icon" href="http://www.zi-han.net/favicon.ico" type="image/x-icon" />
     <link rel="alternate" type="application/rss+xml" title="Zihan&#039;s Blog &raquo; Feed" href="http://www.zi-han.net/feed" />
-<link rel="alternate" type="application/rss+xml" title="Zihan&#039;s Blog &raquo; 评论Feed" href="http://www.zi-han.net/comments/feed" />
+	<link rel="alternate" type="application/rss+xml" title="Zihan&#039;s Blog &raquo; 评论Feed" href="http://www.zi-han.net/comments/feed" />
 		<script type="text/javascript">
 			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/www.zi-han.net\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.4.1"}};
 			!function(a,b,c){function d(a){var c,d=b.createElement("canvas"),e=d.getContext&&d.getContext("2d");return e&&e.fillText?(e.textBaseline="top",e.font="600 32px Arial","flag"===a?(e.fillText(String.fromCharCode(55356,56806,55356,56826),0,0),d.toDataURL().length>3e3):"diversity"===a?(e.fillText(String.fromCharCode(55356,57221),0,0),c=e.getImageData(16,16,1,1).data.toString(),e.fillText(String.fromCharCode(55356,57221,55356,57343),0,0),c!==e.getImageData(16,16,1,1).data.toString()):("simple"===a?e.fillText(String.fromCharCode(55357,56835),0,0):e.fillText(String.fromCharCode(55356,57135),0,0),0!==e.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag"),unicode8:d("unicode8"),diversity:d("diversity")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag&&c.supports.unicode8&&c.supports.diversity||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);

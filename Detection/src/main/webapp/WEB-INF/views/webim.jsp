@@ -17,32 +17,19 @@
 <base href="<%=basePath%>">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<title>H+ 后台主题UI框架 - WebIM 即时通信</title>
-<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-<meta name="description"
-	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+<title>WebIM 即时通信</title>
+<meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
+<meta name="description" content="中大检测平台">
 
 <link rel="shortcut icon" href="favicon.ico">
-<link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-<link href="assets/css/font-awesome.min93e3.css?v=4.4.0"
-	rel="stylesheet">
-
 <!-- Morris -->
 <link href="assets/css/plugins/morris/morris-0.4.3.min.css"
 	rel="stylesheet">
-
 <!-- Gritter -->
 <link href="assets/js/plugins/gritter/jquery.gritter.css"
 	rel="stylesheet">
-
-<link href="assets/css/animate.min.css" rel="stylesheet">
-<link href="assets/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 <link href="assets/js/plugins/layer/layim/layim.css" rel="stylesheet">
-
 </head>
-
 <body class="gray-bg">
 	<div class="row">
 		<div class="col-sm-12">
@@ -158,8 +145,6 @@ var config = {
 
 		</div>
 	</div>
-	<script src="assets/js/jquery.min.js?v=2.1.4"></script>
-	<script src="assets/js/bootstrap.min.js?v=3.3.6"></script>
 	<script src="assets/js/content.js"></script>
 	<!-- 疑问 -->
 	<script src="../../../res.sentsin.com/lay/lib/layer/1.8.5/layer.min.js"></script>

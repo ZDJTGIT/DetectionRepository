@@ -21,5 +21,18 @@ public class UserProjectServiceImpl implements UserProjectService{
 		return userProjectMapper.selectAllProjectTypeByUserId(userId);
 	}
 
+	@Override
+	public List<UserProject> selectAllProjectByUserIdAndProjectType(
+			Integer userId, String projectType) {
+		return userProjectMapper.selectAllProjectByUserIdAndProjectType(userId, projectType);
+	}
+
+	@Override
+	public UserProject selectProjectByUserIdAndProjectInfo(Integer userId,
+			String projectType, Integer projectId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

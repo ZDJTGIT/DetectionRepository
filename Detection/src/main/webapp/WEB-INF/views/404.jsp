@@ -17,12 +17,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <title>404 Not Found</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<meta content="" name="description" />
-<meta content="" name="author" />
+<meta name="keywords"
+	content="detection,plat,inspection,ZDJT,zhongdajiance">
+<meta name="description" content="中大检测平台">
 <meta name="MobileOptimized" content="320">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css" />
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN THEME STYLES -->
@@ -66,11 +66,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <script src="assets/plugins/respond.min.js"></script>
 <script src="assets/plugins/excanvas.min.js"></script>
 <![endif]-->
-    <script src="assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery.cokie.min.js" type="text/javascript"></script>
     <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>

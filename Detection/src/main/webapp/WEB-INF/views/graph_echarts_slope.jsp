@@ -17,21 +17,13 @@
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
     <title> 边坡数据分析图</title>
     <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
     <meta name="description" content="中大检测平台">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min93e3.css" rel="stylesheet">
-
+    <link rel="shortcut icon" href="favicon.ico">
     <!-- Data Tables -->
     <link href="assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-
-    <link href="assets/css/animate.min.css" rel="stylesheet">
-    <link href="assets/css/style.min.css" rel="stylesheet">
-
 </head>
 <body class="gray-bg">
    <div class="wrapper wrapper-content animated fadeInRight">
@@ -145,8 +137,8 @@
                     </div>
                 </div>
             </div>
-            
-        
+
+
    		</div>
    		<!-- 深部 -->
    		<div class="row">
@@ -259,8 +251,8 @@
                     </div>
                 </div>
             </div>
-            
-        
+
+
    		</div>
    		<!-- 雨量 -->
    		<div class="row">
@@ -373,31 +365,14 @@
                     </div>
                 </div>
             </div>
-            
-        
+
+
    		</div>
    </div>
-    
-    <!-- 全局js -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-
-
-
     <!-- ECharts -->
     <script src="assets/js/plugins/echarts/echarts-all.js"></script>
-
-
     <!-- ECharts 表加载js路径 -->
-    <script src="assets/js/plugins/myecharts/slope_echarts.js"></script> 
-
-     <script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
-
-   
-
-
-     
-
+    <script src="assets/js/plugins/myecharts/slope_echarts.js"></script>
+    <script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
 </body>
-
 </html>

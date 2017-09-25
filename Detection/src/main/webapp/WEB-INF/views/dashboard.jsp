@@ -144,7 +144,7 @@
 						<div class="header">
                             <h4 class="title">镉变化</h4>
                             <p class="category">24 Hours performance</p>
-                        </div> 
+                        </div>
 						<div class="content">
 							<div id="cadmium" style="height: 300px"></div>
 						</div>
@@ -182,7 +182,7 @@
 											</div>
 										</div>
 									</div>
-									
+
 								</div>
 							</div>
 							<div class="content table-responsive table-full-width">
@@ -276,26 +276,23 @@
 		</div>
 	</div>
 </body>
-	<script src="echarts-2.2.7/doc/example/www/js/echarts.js"></script>
-	<script src = "echarts-2.2.7/js/dashboard.js"></script>
 	<script type="text/javascript">
 		water();
 		ph();
 		cadmium();
 		$(document).ready(function() {
-		
+
 			demo.initChartist();
-		
+
 			$.notify({
 				icon : 'ti-gift',
 				message : "欢迎进入我的项目 ."
-		
+
 			}, {
 				type : 'success',
 				timer : 4000
 			});
-		
+
 		});
 	</script>
-
 </html>

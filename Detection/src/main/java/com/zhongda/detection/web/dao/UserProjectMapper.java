@@ -23,4 +23,13 @@ public interface UserProjectMapper {
      * @return
      */
 	List<UserProject> selectAllProjectTypeByUserId(Integer userId);
+
+	/**
+	 * 查出当前用户下对应项目类型的所有项目
+	 * @param userId
+	 * @param projectType
+	 * @return
+	 */
+	List<UserProject> selectAllProjectByUserIdAndProjectType(
+			Integer userId, String projectType);
 }

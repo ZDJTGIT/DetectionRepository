@@ -18,26 +18,11 @@
 <base href="<%=basePath%>">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<title>H+ 后台主题UI框架 - 个人资料</title>
-<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-<meta name="description"
-	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
-
+<title>个人资料</title>
+<meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
+<meta name="description" content="中大检测平台">
 <link rel="shortcut icon" href="favicon.ico">
-<link href="assets/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-<link href="assets/css/font-awesome.min93e3.css?v=4.4.0"
-	rel="stylesheet">
-<link href="assets/css/animate.min.css" rel="stylesheet">
-<link href="assets/css/style.min862f.css?v=4.1.0" rel="stylesheet">
-
-<style>
-   
-</style>
-
 </head>
-
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
 
@@ -66,7 +51,7 @@
 								<p class="signature" id="" style="margin-left: 6px">
 								我很帅，而且我还很温柔,能砍树，能造飞机,上得厅堂，跪得澡堂,嘿嘿不要崇拜哥，哥只是个程序员
 							    </p>
-					        </div>   
+					        </div>
 						</div>
 						<div class="ibox-content profile-content">
 							<div>
@@ -181,7 +166,7 @@
 									style="padding: 6px; float: left; width: 27%; position: relative">
 									<div class="" style="margin-bottom:0">
 									  <font size="3" color=#585858>用户名</font>
-									  <input class="form-control" id="user_name" type="text" value="${userInfo.userName}" style=" 
+									  <input class="form-control" id="user_name" type="text" value="${userInfo.userName}" style="
 									  border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 100%;border-radius:8px">
 									</div>
 								</div>
@@ -189,7 +174,7 @@
 									style="padding-right: 15px; padding: 6px; float: left; width: 30%; position: relative">
 									  <div class="" style="margin-bottom:0">
 									  <font size="3" color=#585858>联系人</font>
-									  <input class="form-control" id="linkman" type="text" value="${userInfo.linkman}" style=" 
+									  <input class="form-control" id="linkman" type="text" value="${userInfo.linkman}" style="
 									  border: 1px solid #CCC5B9; height: 40px;padding: 9px 3px;width: 88%;border-radius:8px">
 									  </div>
 								</div>
@@ -199,7 +184,7 @@
 									style="padding-left: 15px; padding: 6px; float: left; width: 50%; position: relative">
 								    <div class="" style="margin-bottom:0">
 									<font size="3" color=#585858>邮箱地址</font>
-									<input class="form-control" id="email" type="text" value="${userInfo.email}" style=" 
+									<input class="form-control" id="email" type="text" value="${userInfo.email}" style="
 								    border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 100%;border-radius:8px">
 									</div>
 							    </div>
@@ -207,7 +192,7 @@
 									style="padding-left: 15px; padding: 6px; float: left; width: 50%; position: relative">
 								    <div class="" style="margin-bottom:0">
 									<font size="3" color=#585858>手机号码</font>
-									<input class="form-control" id="phone" type="text" value="${userInfo.phone}" style=" 
+									<input class="form-control" id="phone" type="text" value="${userInfo.phone}" style="
 								    border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 93%;border-radius:8px">
 									</div>
 							    </div>
@@ -217,10 +202,10 @@
 									style="padding-left: 15px; padding: 6px; float: left; width: 33.33%; position: relative">
 								    <div class="" style="margin-bottom:0">
 									<font size="3" color=#585858>请输入原密码</font>
-									<input class="form-control" id="password" type="password" style=" 
+									<input class="form-control" id="password" type="password" style="
 								    border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 100%;border-radius:8px">
 									</div>
-							    </div> 
+							    </div>
 							    <div class=""
 									style="padding-left: 15px; padding: 6px; float: left; width: 33.33%; position: relative">
 								    <div class="" style="margin-bottom:0">
@@ -228,15 +213,15 @@
 									<input class="form-control" id="new_password" type="password"  style="
 								    border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 100%;border-radius:8px">
 									</div>
-							    </div> 
+							    </div>
 							    <div class=""
 									style="padding-left: 15px; padding: 6px; float: left; width: 33.33%; position: relative">
 								    <div class="" style="margin-bottom:0">
 									<font size="3" color=#585858>请再次输入新密码</font>
-									<input class="form-control" id="new_passwords" type="password"  style=" 
+									<input class="form-control" id="new_passwords" type="password"  style="
 								    border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 90%;border-radius:8px">
 									</div>
-							    </div> 
+							    </div>
 							</div>
 							<div class="" style="height:20% ;margin-top: 15px; margin-right: -15px; margin-left: 9px;">
 							    <div class=""
@@ -245,7 +230,7 @@
 									<font size="3" color=#585858>个人说明</font>
 									<textarea class="form-control"  rows="4" style="
 								     border: 1px solid #CCC5B9;height: 100px;padding: 10px 0px;width: 100%;border-radius:8px"
-								     >Oh so, your weak rhyme You doubt I'll bother,reading into it I'll probably won't, left to my own devices But that's the difference in our opinions." 
+								     >Oh so, your weak rhyme You doubt I'll bother,reading into it I'll probably won't, left to my own devices But that's the difference in our opinions."
 								    </textarea>
 									</div>
 							    </div>
@@ -270,10 +255,7 @@
 		</div>
       </div>
 	</div>
-	<script src="assets/js/jquery.min.js?v=2.1.4"></script>
-	<script src="assets/js/bootstrap.min.js?v=3.3.6"></script>
 	<script src="assets/js/content.js"></script>
-	<script src="assets/js/plugins/peity/jquery.peity.min.js"></script>
 	<script src="assets/js/demo/peity-demo.min.js"></script>
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>

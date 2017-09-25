@@ -12,4 +12,23 @@ public interface UserProjectService {
 	 * @return
 	 */
 	List<UserProject> selectAllProjectTypeByUserId(Integer userId);
+
+	/**
+	 * 查出当前用户下对应项目类型的所有项目
+	 * @param userId
+	 * @param projectType
+	 * @return
+	 */
+	List<UserProject> selectAllProjectByUserIdAndProjectType(
+			Integer userId, String projectType);
+
+	/**
+	 * 查出当前用户下对应项目类型和项目id的项目
+	 * @param userId
+	 * @param projectType
+	 * @param projectId
+	 * @return
+	 */
+	UserProject selectProjectByUserIdAndProjectInfo(Integer userId,
+			String projectType, Integer projectId);
 }

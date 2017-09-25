@@ -109,13 +109,37 @@ $(function () {
         flag = true;
         if (url != null && url.indexOf('javascript:;') < 0) {
 
-        	if($(this).hasClass("supMenu")){
+        	var supMenu = $(this);
+        	if($(supMenu).hasClass("firstMenu")){
         		$.ajax({url:url,dataType:"json",success:function(data){
         			$.each(data,function(idx,item){
-        				var projectItem = '<li><a class="J_menuItem" href="rest/graph_echarts_'+item.projectTypeCode+'">'+item.projectTypeValue+'</a></li>';
-        				$('#my_project').append(projectItem);
+        				var	labelItem = '<li><a class="secondMenu J_menuItem" href="rest/project/'+item.projectTypeCode+'">'+item.projectTypeValue+'项目</a><ul class="nav nav-third-level"></ul></li>';
+        				$(supMenu).next().append(labelItem);
         			});
         	    }});
+        		$(supMenu).removeClass("firstMenu");
+        		this.href = 'javascript:;';
+        		return false;
+        	}else if($(supMenu).hasClass("secondMenu")){
+        		$.ajax({url:url,dataType:"json",success:function(data){
+        			$.each(data,function(idx,item){
+        				//var labelItem = '<li><a class="thirdMenu J_menuItem" href="rest/project/'+item.projectTypeCode+'/'+item.projectId+'">'+item.projectTypeValue+item.projectId+'</a><ul class="nav nav-four-level"></ul></li>';
+        				var labelItem = '<li><a class="thirdMenu J_menuItem" href="rest/project/'+item.projectTypeCode+'/'+item.projectId+'">'+item.projectTypeValue+item.projectId+'</a><ul class="nav nav-four-level"></ul></li>';
+        				$(supMenu).next().append(labelItem);
+        			});
+        	    }});
+        		$(supMenu).removeClass("secondMenu");
+        		this.href = 'javascript:;';
+        		return false;
+        	}else if($(supMenu).hasClass("thirdMenu")){
+        		$.ajax({url:url,dataType:"json",success:function(data){
+        			$.each(data,function(idx,item){
+        				var labelItem = '<li><a class="fourMenu J_menuItem" href="rest/project/'+item.projectTypeCode+'/'+item.projectId+'">'+item.projectTypeValue+item.projectId+'</a><ul class="nav nav-five-level"></ul></li>';
+        				$(supMenu).next().append(labelItem);
+        			});
+        	    }});
+        		$(supMenu).removeClass("thirdMenu");
+        		this.href = 'javascript:;';
         		return false;
         	}
 

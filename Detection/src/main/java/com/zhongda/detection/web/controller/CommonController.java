@@ -11,6 +11,7 @@ import org.apache.shiro.cache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,12 +54,31 @@ public class CommonController {
 
 	@RequestMapping("myProject")
 	@ResponseBody
-	public List<UserProject> myProject(HttpServletRequest request) {
+	public List<UserProject> myproject(HttpServletRequest request) {
 		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
 		List<UserProject> userProjectList = userProjectService
 				.selectAllProjectTypeByUserId(user.getUserId());
 		return userProjectList;
 	}
+
+	@RequestMapping("project/{projectType}")
+	@ResponseBody
+	public List<UserProject> projectType(HttpServletRequest request, @PathVariable("projectType") String projectType) {
+		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
+		List<UserProject> userProjectList = userProjectService
+				.selectAllProjectByUserIdAndProjectType(user.getUserId(), projectType);
+		return userProjectList;
+	}
+
+	@RequestMapping("project/{projectType}/{projectId}")
+	@ResponseBody
+	public UserProject specificProject(HttpServletRequest request, @PathVariable("projectType") String projectType, @PathVariable("projectId") Integer projectId) {
+		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
+		UserProject userProject = userProjectService
+				.selectProjectByUserIdAndProjectInfo(user.getUserId(), projectType, projectId);
+		return userProject;
+	}
+
 
 	@RequestMapping("index_v2")
 	public String index_v2(HttpServletRequest request) {

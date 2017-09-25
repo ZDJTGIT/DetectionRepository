@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -19,20 +20,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="refresh" content="5">
-
-
 <title>用户&告警联系人信息表</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-
+<meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
+<meta name="description" content="中大检测平台">
 <link rel="shortcut icon" href="favicon.ico">
-<link href="assets/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-<link href="assets/css/font-awesome.min93e3.css?v=4.4.0"
-	rel="stylesheet">
 <link href="assets/css/plugins/iCheck/custom.css" rel="stylesheet">
-<link href="assets/css/animate.min.css" rel="stylesheet">
-<link href="assets/css/style.min862f.css?v=4.1.0" rel="stylesheet">
-
 <style>
 .black_overlay {
 	display: none;
@@ -97,24 +89,24 @@
 										<p><h3><strong>修改用户信息</strong></h3>（请确保修改之后用户名唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
 										<input type="text" id="mdid" name="mdid"
 											style="display:none; border-radius:8px" placeholder="id" class="form-control"><br>
-											
+
 										<input type="text" id="mdname" name="mdname"
 											style="width: 100%; border-radius:8px" placeholder="用户名" class="form-control"><br>
-											
+
 										<input type="text" id="mdlinkman" name="mdlinkman"
 											style="width: 100%; border-radius:8px" placeholder="联系人" class="form-control"><br>
-											
+
 										<input type="text" id="mdcompany" name="mdcompany"
 											style="width: 100%; border-radius:8px" placeholder="邮箱" class="form-control"><br>
-											
+
 										<input type="text" id="mdphone" name="mdphone"
 											style="width: 100%; border-radius:8px" placeholder="手机号码" class="form-control"><br>
-											
+
 										<input type="text" id="mdemail" name="mdemail"
 											style="width: 100%; border-radius:8px" placeholder="所属公司" class="form-control">
 									</div>
 									<br>
-									<input type="button" id="sureMdy" style="margin-left:30px; width:130px; height:40px" value="确定修改"> 
+									<input type="button" id="sureMdy" style="margin-left:30px; width:130px; height:40px" value="确定修改">
 									<input type="button" id="closeModfiyUser" style="margin-left:120px; width:130px; height:40px" value="关闭窗口">
 								</div>
 
@@ -127,25 +119,25 @@
 										<label for="userName" style="width: 30%; margin-left: 5px">用户名:</label>
 										<input type="text" id="userName" name="userName" style="width: 75%; border-radius:8px;
 										margin-left: 92px; margin-top: -39px" class="form-control"><br><br>
-										
-										<label for="linkman" style="width: 30%; margin-left: 5px">联系人:</label>	
-										<input type="text" id="linkman" name="linkman" style="width: 75%; border-radius:8px; 
+
+										<label for="linkman" style="width: 30%; margin-left: 5px">联系人:</label>
+										<input type="text" id="linkman" name="linkman" style="width: 75%; border-radius:8px;
 										margin-left: 92px; margin-top: -39px" class="form-control"><br><br>
-											
-										<label for="company" style="width: 30%; margin-left: 5px">所属公司名称:</label>	
+
+										<label for="company" style="width: 30%; margin-left: 5px">所属公司名称:</label>
 										<input type="text" id="company" name="company" style="width: 75%; border-radius:8px;
 										margin-left: 92px; margin-top: -39px" class="form-control"><br><br>
-										    
-										<label for="phone" style="width: 30%; margin-left: 5px">手机号码:</label>    
-										<input type="text"id="phone" name="phone" style="width: 75%; border-radius:8px; 
+
+										<label for="phone" style="width: 30%; margin-left: 5px">手机号码:</label>
+										<input type="text"id="phone" name="phone" style="width: 75%; border-radius:8px;
 										margin-left: 92px; margin-top: -39px" class="form-control"><br><br>
-										    
-										<label for="email" style="width: 30%; margin-left: 5px">邮箱地址:</label>    
-										<input type="text" id="email" name="email"  style="width: 75%; border-radius:8px; 
+
+										<label for="email" style="width: 30%; margin-left: 5px">邮箱地址:</label>
+										<input type="text" id="email" name="email"  style="width: 75%; border-radius:8px;
 										margin-left: 92px; margin-top: -39px" class="form-control">
 									</div>
 									<br>
-									<input type="button" id="sureAdd" style="margin-left:30px; width:130px; height:40px" value="确定添加"> 
+									<input type="button" id="sureAdd" style="margin-left:30px; width:130px; height:40px" value="确定添加">
 									<input type="button" id="closeAddUser" style="margin-left:120px; width:130px; height:40px" value="关闭窗口">
 								    </form>
 								</div>
@@ -165,7 +157,7 @@
 							</div>
 						</div>
 						<div class="table-responsive">
-							<table class="table table-striped" id="mytable"> 
+							<table class="table table-striped" id="mytable">
 								<thead>
 									<tr>
 										<th>ID</th>
@@ -187,10 +179,10 @@
 											<td>${singleUser.phone}</td>
 											<td>${singleUser.company}</td>
 											<td>${singleUser.linkman}</td>
-											<td>${singleUser.createTime}</td>
+											<td><fmt:formatDate value="${singleUser.createTime}" type="both" dateStyle="default"/></td>
 											<td>
 												<a href="javascript:;" class="selectRow"
-												onclick="selectRow(this)"><b>修改用户</b></a> 
+												onclick="selectRow(this)"><b>修改用户</b></a>
 												<a href="javascript:;" class="deteteRow"
 												onclick="deleteRow(this)"><b>删除用户</b></a>
 											</td>
@@ -338,21 +330,16 @@
 			</div>
 		</div>
 	</div>
-	
-	<script src="assets/js/plugins/layer/layer.min.js"></script>
-	<script src="assets/js/jquery.min.js?v=2.1.4"></script>
+
 	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
-	<script src="assets/js/bootstrap.min.js?v=3.3.6"></script>
-	<script src="assets/js/plugins/peity/jquery.peity.min.js"></script>
 	<script src="assets/js/content.js"></script>
 	<script src="assets/js/plugins/iCheck/icheck.min.js"></script>
-	<script src="assets/js/demo/peity-demo.min.js"></script>
 	<script type="text/javascript">
-	
+
 		$(document).on('click','#prohibitMdy',function(){
 			alert("禁止修改新建用户！");
 		});
-		
+
 	    //修改用户信息
 		function selectRow(s){
 			var b = s.parentNode.parentNode.rowIndex;
@@ -369,12 +356,12 @@
 			$('#mdphone').val(phone);
 			$('#mdemail').val(email);
 			$('#mdid').val(id);
-			
+
 			//关闭修改用户div
 			$('#closeModfiyUser').click(function(e) {
 				$('#modifyuser').hide();
-			}); 
-			
+			});
+
 			//确定修改（修改操作稍后改成看信息修改）--------mdname/mdlinkman/mdcompany/mdphone/mdemail
 			$('#sureMdy').click(function() {
 						var idvalue = $('#mdid').val();
@@ -511,5 +498,4 @@
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>
-<!-- Mirrored from www.zi-han.net/theme/hplus/table_basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:01 GMT -->
 </html>

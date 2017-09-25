@@ -18,25 +18,9 @@
 <base href="<%=basePath%>">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
 <title>告警信息表</title>
-<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-<meta name="description"
-	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
-
-<link rel="shortcut icon" href="favicon.ico">
-<link href="assets/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-<link href="assets/css/font-awesome.min93e3.css?v=4.4.0"
-	rel="stylesheet">
-
-<!-- jqgrid-->
-<link href="assets/css/plugins/jqgrid/ui.jqgridffe4.css?0820"
-	rel="stylesheet">
-
-<link href="assets/css/animate.min.css" rel="stylesheet">
-<link href="assets/css/style.min862f.css?v=4.1.0" rel="stylesheet">
-
+<meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
+<meta name="description" content="中大检测平台">
 <style>
 /* Additional style to fix warning dialog position */
 #alertmod_table_list_2 {
@@ -224,12 +208,9 @@
 		</div>
 
 	</div>
-	<script src="assets/js/jquery.min.js?v=2.1.4"></script>
-	<script src="assets/js/bootstrap.min.js?v=3.3.6"></script>
 	<script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
 	<script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
 	<script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-	<script src="assets/js/content.js"></script>
 	<script>
 		$(document).ready(function() {
 			$(".dataTables-example").dataTable({"searching" : false});
@@ -238,7 +219,4 @@
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>
-
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/table_data_tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:02 GMT -->
 </html>

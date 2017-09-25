@@ -18,20 +18,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>添加新用户</title>
-<meta name="keywords" content="">
-<meta name="description"
-	content="">
+<meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
+<meta name="description" content="中大检测平台">
 <link rel="shortcut icon" href="favicon.ico">
-<link href="assets/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-<link href="assets/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
 <link href="assets/css/plugins/iCheck/custom.css" rel="stylesheet">
-<link href="assets/css/animate.min.css" rel="stylesheet">
-<link href="assets/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 <link href="https://cdn.bootcss.com/ionic/1.3.2/css/ionic.css" rel="stylesheet">
 <style>
   #footer {
  	    clear:both;
-	    text-align:center;	 	 
+	    text-align:center;
 	}
 </style>
 </head>
@@ -70,7 +65,7 @@
 						required="">
 				</div>
 				<br>
-				
+
 				<div class="item item-input item-select">
                 <div class="input-label" style="height:18px">
                                    用户角色
@@ -92,9 +87,7 @@
 			</form>
 		</div>
 	</div>
-	
-	<script src="assets/js/jquery.min.js?v=2.1.4"></script>
-	<script src="assets/js/bootstrap.min.js?v=3.3.6"></script>
+
 	<script src="assets/js/plugins/iCheck/icheck.min.js"></script>
 	<script src="https://cdn.bootcss.com/ionic/1.3.2/js/ionic.bundle.min.js"></script>
 	<script>

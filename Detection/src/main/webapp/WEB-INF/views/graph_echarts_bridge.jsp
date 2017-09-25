@@ -15,25 +15,15 @@
 <!-- BEGIN HEAD -->
 <head>
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
-<meta name="description"
-	content="中大检测平台">
-
-
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> 桥梁数据分析图</title>
     <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
     <meta name="description" content="中大检测平台">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min93e3.css" rel="stylesheet">
-
+    <link rel="shortcut icon" href="favicon.ico">
     <!-- Data Tables -->
     <link href="assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-
-    <link href="assets/css/animate.min.css" rel="stylesheet">
-    <link href="assets/css/style.min.css" rel="stylesheet">
 
 </head>
 
@@ -804,58 +794,19 @@
             </div>
         </div>
     </div>
-    <!-- 全局js -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-
-
-
     <!-- ECharts -->
     <script src="assets/js/plugins/echarts/echarts-all.js"></script>
-
-
-
     <!-- 自定义js -->
     <script src="assets/js/content.js"></script>
-
-
     <!-- ECharts demo data -->
     <script src="assets/js/demo/echarts-demo.min.js"></script>
-
      <script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
-
     <!-- Data Tables -->
     <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
 
-
      <!-- Page-Level Scripts -->
     <script>
-        $(document).ready(function () {
-            $('.dataTables-example').dataTable();
-
-            /* Init DataTables */
-            var oTable = $('#editable').dataTable();
-
-            /* Apply the jEditable handlers to the table */
-            oTable.$('td').editable('../example_ajax.php', {
-                "callback": function (sValue, y) {
-                    var aPos = oTable.fnGetPosition(this);
-                    oTable.fnUpdate(sValue, aPos[0], aPos[1]);
-                },
-                "submitdata": function (value, settings) {
-                    return {
-                        "row_id": this.parentNode.getAttribute('id'),
-                        "column": oTable.fnGetPosition(this)[2]
-                    };
-                },
-
-                "width": "90%",
-                "height": "100%"
-            });
-
-
-        });
 
         function fnClickAddRow() {
             $('#editable').dataTable().fnAddData([

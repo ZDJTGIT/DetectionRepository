@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <link rel="icon" type="image/png" sizes="96x96" href="assets/img/zdLogo.png">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 	<link href="assets/css/animate.min.css" rel="stylesheet">
     <link href="assets/css/style.min.css" rel="stylesheet">
     <!--[if lt IE 9]>

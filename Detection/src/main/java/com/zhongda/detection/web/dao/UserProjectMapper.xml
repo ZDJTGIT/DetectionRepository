@@ -5,11 +5,11 @@
     <id column="user_project_id" jdbcType="INTEGER" property="userProjectId" />
     <result column="project_type_code" jdbcType="VARCHAR" property="projectTypeCode" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="projcet_id" jdbcType="INTEGER" property="projcetId" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
     <result column="project_type_value" jdbcType="VARCHAR" property="projectTypeValue" />
   </resultMap>
   <sql id="Base_Column_List">
-    user_project_id, project_type_code, user_id, projcet_id, project_type_value
+    user_project_id, project_type_code, user_id, project_id, project_type_value
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -22,6 +22,14 @@
     <include refid="Base_Column_List" />
     from user_project
     where user_id = #{userId,jdbcType=INTEGER}
+    group by project_type_code
+  </select>
+  <select id="selectAllProjectByUserIdAndProjectType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_project
+    where user_id = #{0}
+    and project_type_code = #{1}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_project
@@ -29,9 +37,9 @@
   </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.UserProject">
     insert into user_project (user_project_id, project_type_code, user_id,
-      projcet_id, project_type_value)
+      project_id, project_type_value)
     values (#{userProjectId,jdbcType=INTEGER}, #{projectTypeCode,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
-      #{projcetId,jdbcType=INTEGER}, #{projectTypeValue,jdbcType=VARCHAR})
+      #{projectId,jdbcType=INTEGER}, #{projectTypeValue,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.UserProject">
     insert into user_project
@@ -45,8 +53,8 @@
       <if test="userId != null">
         user_id,
       </if>
-      <if test="projcetId != null">
-        projcet_id,
+      <if test="projectId != null">
+        project_id,
       </if>
       <if test="projectTypeValue != null">
         project_type_value,
@@ -62,8 +70,8 @@
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="projcetId != null">
-        #{projcetId,jdbcType=INTEGER},
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
       </if>
       <if test="projectTypeValue != null">
         #{projectTypeValue,jdbcType=VARCHAR},
@@ -79,8 +87,8 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="projcetId != null">
-        projcet_id = #{projcetId,jdbcType=INTEGER},
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
       </if>
       <if test="projectTypeValue != null">
         project_type_value = #{projectTypeValue,jdbcType=VARCHAR},
@@ -92,7 +100,7 @@
     update user_project
     set project_type_code = #{projectTypeCode,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
-      projcet_id = #{projcetId,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=INTEGER},
       project_type_value = #{projectTypeValue,jdbcType=VARCHAR}
     where user_project_id = #{userProjectId,jdbcType=INTEGER}
   </update>

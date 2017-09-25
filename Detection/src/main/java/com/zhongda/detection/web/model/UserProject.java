@@ -7,7 +7,7 @@ public class UserProject {
 
     private Integer userId;
 
-    private Integer projcetId;
+    private Integer projectId;
 
     private String projectTypeValue;
 
@@ -35,12 +35,12 @@ public class UserProject {
         this.userId = userId;
     }
 
-    public Integer getProjcetId() {
-        return projcetId;
+    public Integer getProjectId() {
+        return projectId;
     }
 
-    public void setProjcetId(Integer projcetId) {
-        this.projcetId = projcetId;
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
     }
 
     public String getProjectTypeValue() {

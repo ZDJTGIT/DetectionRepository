@@ -13,6 +13,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <!-- BEGIN HEAD -->
 <head>
 <base href="<%=basePath%>">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>Home</title>
+<meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
+<meta name="description" content="中大检测平台">
 <!--  AMap CSS  -->
 <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css" />
 <style type="text/css">
@@ -24,13 +31,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 <body class="gray-bg">
     <div class="wrapper wrapper-content">
-   
+
         <div class="row">
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>当前项目所在地图</h5>
-                        
+
                     </div>
                     <div class="ibox-content">
                         <div class="content" id="mapContent"></div>

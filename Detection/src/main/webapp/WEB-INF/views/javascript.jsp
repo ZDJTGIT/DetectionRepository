@@ -17,9 +17,9 @@
 <base href="<%=basePath%>">
 <meta http-equiv="X-UA-Compatible" content="IE=9;IE=8;IE=7" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>404 - Zihan&#039;s Blog</title>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
+<title>404</title>
+<meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
+<meta name="description" content="中大检测平台">
 <meta name="viewport" content="initial-scale=1.0,user-scalable=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="renderer" content="webkit|ie-comp|ie-stand">
