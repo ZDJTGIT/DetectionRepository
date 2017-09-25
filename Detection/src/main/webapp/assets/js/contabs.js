@@ -110,21 +110,10 @@ $(function () {
         if (url != null && url.indexOf('javascript:;') < 0) {
 
         	var supMenu = $(this);
-        	if($(supMenu).hasClass("firstMenu")){
+        	if($(supMenu).hasClass("secondMenu")){
         		$.ajax({url:url,dataType:"json",success:function(data){
         			$.each(data,function(idx,item){
-        				var	labelItem = '<li><a class="secondMenu J_menuItem" href="rest/project/'+item.projectTypeCode+'">'+item.projectTypeValue+'项目</a><ul class="nav nav-third-level"></ul></li>';
-        				$(supMenu).next().append(labelItem);
-        			});
-        	    }});
-        		$(supMenu).removeClass("firstMenu");
-        		this.href = 'javascript:;';
-        		return false;
-        	}else if($(supMenu).hasClass("secondMenu")){
-        		$.ajax({url:url,dataType:"json",success:function(data){
-        			$.each(data,function(idx,item){
-        				//var labelItem = '<li><a class="thirdMenu J_menuItem" href="rest/project/'+item.projectTypeCode+'/'+item.projectId+'">'+item.projectTypeValue+item.projectId+'</a><ul class="nav nav-four-level"></ul></li>';
-        				var labelItem = '<li><a class="thirdMenu J_menuItem" href="rest/project/'+item.projectTypeCode+'/'+item.projectId+'">'+item.projectTypeValue+item.projectId+'</a><ul class="nav nav-four-level"></ul></li>';
+        				var labelItem = '<li><a class="thirdMenu J_menuItem" href="rest/sensor/'+item.projectId+'">'+item.projectName+'</a><ul class="nav nav-four-level"></ul></li>';
         				$(supMenu).next().append(labelItem);
         			});
         	    }});
@@ -134,7 +123,7 @@ $(function () {
         	}else if($(supMenu).hasClass("thirdMenu")){
         		$.ajax({url:url,dataType:"json",success:function(data){
         			$.each(data,function(idx,item){
-        				var labelItem = '<li><a class="fourMenu J_menuItem" href="rest/project/'+item.projectTypeCode+'/'+item.projectId+'">'+item.projectTypeValue+item.projectId+'</a><ul class="nav nav-five-level"></ul></li>';
+        				var labelItem = '<li><a class="fourMenu J_menuItem" href="rest/'+item.sysDictionary.typeValue+'/project/'+item.projectId+'">'+item.sysDictionary.itemName+'</a><ul class="nav nav-five-level"></ul></li>';
         				$(supMenu).next().append(labelItem);
         			});
         	    }});

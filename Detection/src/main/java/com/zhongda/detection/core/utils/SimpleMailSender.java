@@ -149,7 +149,7 @@ public class SimpleMailSender {
     /**
      * 发送邮件
      * @param recipient 收件人邮箱地址
-     * @param properties 邮件配置文件
+     * @param template 邮件配置文件中的模板
      */
     public void send(String recipient , String template){
     	properties.setProperty("toEmailAddress", recipient);
@@ -159,7 +159,7 @@ public class SimpleMailSender {
     /**
      * 群发邮件
      * @param recipients 收件人们的邮箱地址
-     * @param properties 邮件配置文件
+     * @param template 邮件配置文件中的模板
      */
     public void send(List<String> recipients , String template){
     	send(recipients, PropertiesTool.get(properties, "mailSubject"+template) , PropertiesTool.get(properties, "mailContent"+template));

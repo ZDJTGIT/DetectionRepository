@@ -1,5 +1,6 @@
 package com.zhongda.detection.web.security;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Resource;
@@ -20,9 +21,15 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.zhongda.detection.web.model.Permission;
+import com.zhongda.detection.web.model.Role;
 import com.zhongda.detection.web.model.User;
+import com.zhongda.detection.web.service.PermissionService;
+import com.zhongda.detection.web.service.RoleService;
 import com.zhongda.detection.web.service.UserService;
 
 /**
@@ -31,8 +38,16 @@ import com.zhongda.detection.web.service.UserService;
 @Component(value = "securityRealm")
 public class SecurityRealm extends AuthorizingRealm {
 
+	public static final Logger logger = LoggerFactory.getLogger(SecurityRealm.class);
+
     @Resource
     private UserService userService;
+
+    @Resource
+    private RoleService roleService;
+
+    @Resource
+    private PermissionService permissionService;
 
     @Resource(name="shiroEhcacheManager")
     private CacheManager cacheManager;
@@ -45,21 +60,22 @@ public class SecurityRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-//        String username = String.valueOf(principals.getPrimaryPrincipal());
-       /* final User user = userService.selectByUsername(username);
-        final List<Role> roleInfos = roleService.selectRolesByUserId(user.getId());
+        String username = String.valueOf(principals.getPrimaryPrincipal());
+        logger.error(username);
+        final User user = userService.selectByUsername(username);
+        final List<Role> roleInfos = roleService.selectRolesByUserId(user.getUserId());
         for (Role role : roleInfos) {
             // 添加角色
-            System.err.println(role);
+        	logger.info(role.toString());
             authorizationInfo.addRole(role.getRoleSign());
 
-            final List<Permission> permissions = permissionService.selectPermissionsByRoleId(role.getId());
+            final List<Permission> permissions = permissionService.selectPermissionsByRoleId(role.getRoleId());
             for (Permission permission : permissions) {
                 // 添加权限
-                System.err.println(permission);
+            	logger.info(permission.toString());
                 authorizationInfo.addStringPermission(permission.getPermissionSign());
             }
-        }*/
+        }
         return authorizationInfo;
     }
 

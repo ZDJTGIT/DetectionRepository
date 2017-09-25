@@ -5,8 +5,10 @@ import java.util.List;
 import com.zhongda.detection.web.model.User;
 
 /**
- * 用户 业务 接口
- **/
+ *<p>用户 业务 接口</p>
+ * @author zmdeng
+ * @date 2017年9月25日
+ */
 public interface UserService {
 
     /**
@@ -60,17 +62,17 @@ public interface UserService {
 	 * @return
 	 */
 	List<User> selectList();
-	
+
 	/*
 	 * 修改用户信息
 	 */
 	int updateByPrimaryKeySelective(User record);
-	
+
 	/*
 	 * 根据用户名删除用户
 	 */
 	boolean deleteUser(String name);
-	
+
 	/*
 	 * 根据Id查用户
 	 */
