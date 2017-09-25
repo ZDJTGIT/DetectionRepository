@@ -384,7 +384,7 @@
 						var emailvalue = $("#mdemail").val();
 					    var jsonData = '{"userId":"'+idvalue+'","linkman":"'+linkmanvalue+'","userName":"'+namevalue+
 							           '","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue +'"}';
-						               $('#modifyuser').hide();
+						$('#modifyuser').hide();
 						$.ajax({
 							type : 'post',
 							url : 'rest/user/modify',

@@ -22,6 +22,37 @@
 <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
 <meta name="description" content="中大检测平台">
 <link rel="shortcut icon" href="favicon.ico">
+
+<style>
+.black_overlay {
+	display: none;
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index: 1001;
+	-moz-opacity: 0.8;
+	opacity: .80;
+	filter: alpha(opacity = 88);
+}
+
+.white_content {
+	display: none;
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	width: 55%;
+	height: 55%;
+	padding: 20px;
+	border: 3px solid orange;
+	background-color: white;
+	z-index: 1002;
+	overflow: auto;
+}
+</style>
+
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
@@ -152,7 +183,6 @@
 				</div>
 				<div class="ibox-content">
 					<div class="feed-activity-list">
-						<form>
 							<div class="" style="height:20% ; margin-right: -15px; margin-left: 10px;">
 								<div class=""
 									style="padding-left: 15px; padding: 6px; float: left; width: 43%; position: relative">
@@ -197,32 +227,41 @@
 									</div>
 							    </div>
 							</div>
-							<div class="" style="height:20% ;margin-top: 15px; margin-right: -15px; margin-left: 9px;">
-							   <div class=""
-									style="padding-left: 15px; padding: 6px; float: left; width: 33.33%; position: relative">
-								    <div class="" style="margin-bottom:0">
-									<font size="3" color=#585858>请输入原密码</font>
-									<input class="form-control" id="password" type="password" style="
+							<input type="button" id="modifyPW" value="我要修改密码" style="border: 1px solid #CCC5B9;height: 39px;padding: 9px 3px;width: 80%; margin-left: 63px; margin-top: 14px;border-radius:8px">
+							<form id="from_modifyPassWord"> 
+							<div class="white_content" id="modifyPassWord" style="width:80%; height:24% ;margin-top: 62px; margin-right: -15px; margin-left: -116px; solid #000; filter: alpha(Opacity = 80)">
+							    
+							    <label for="passId" style="display:none"></label>	
+								<input type="text" id="passId" name="passId" value="${userInfo.userId}"
+								style="display:none; border-radius:8px" placeholder="id" class="form-control">
+							    
+							    <div class="" style="padding-left: 15px; padding: 6px; float: left; width: 33.33%; margin-top: -16px; position: relative">
+									<label for="password" style="width: 100%; margin-left: 5px">请输入原密码:</label>
+									<input class="form-control" id="password" name="password" type="password" style="
 								    border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 100%;border-radius:8px">
-									</div>
 							    </div>
-							    <div class=""
-									style="padding-left: 15px; padding: 6px; float: left; width: 33.33%; position: relative">
-								    <div class="" style="margin-bottom:0">
-									<font size="3" color=#585858>请输入新密码</font>
-									<input class="form-control" id="new_password" type="password"  style="
+							    
+							    <div class="" style="padding-left: 15px; padding: 6px; float: left; width: 33.33%; margin-top: -16px; position: relative">
+									<label for="new_password" style="width: 100%; margin-left: 5px">请输入新密码:</label>
+									<input class="form-control" id="new_password" name="new_password" type="password"  style="
 								    border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 100%;border-radius:8px">
-									</div>
 							    </div>
-							    <div class=""
-									style="padding-left: 15px; padding: 6px; float: left; width: 33.33%; position: relative">
-								    <div class="" style="margin-bottom:0">
-									<font size="3" color=#585858>请再次输入新密码</font>
-									<input class="form-control" id="new_passwords" type="password"  style="
+							    
+							    <div class="" style="padding-left: 15px; padding: 6px; float: left; width: 33.33%; margin-top: -16px; position: relative">
+									<label for="new_passwords" style="width: 100%; margin-left: 5px">请确认新密码:</label>
+									<input class="form-control" id="new_passwords" name="new_passwords" type="password"  style="
 								    border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 90%;border-radius:8px">
-									</div>
+							    </div>
+							    
+							    <div class="" style="padding-left: 15px; padding: 6px; float: left; width: 100%; position: relative">
+								    <input type="button" id="sureModifyPW" value="确认修改"  style="border: 1px solid #CCC5B9;height: 36px; float: left; 
+								    margin-left: 40px; padding: 9px 3px;width: 36%;border-radius:8px">
+								    <input type="button" id="cancelModifyPW" value="取消修改"  style="border: 1px solid #CCC5B9;height: 36px; float: left; 
+								    margin-left: 56px; padding: 9px 3px;width: 36%;border-radius:8px">
 							    </div>
 							</div>
+							</form>
+							
 							<div class="" style="height:20% ;margin-top: 15px; margin-right: -15px; margin-left: 9px;">
 							    <div class=""
 									style="padding-left: 15px; padding: 6px; float: left; width: 97%; position: relative">
@@ -245,7 +284,6 @@
 									</div>
 							    </div>
 							</div>
-						</form>
 					</div>
 					<button id="determineDelete" class="btn btn-primary btn-block m" style="width:96%">
 						<i class="fa fa-arrow-down"></i> 确认修改
@@ -255,11 +293,57 @@
 		</div>
       </div>
 	</div>
+	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
 	<script src="assets/js/content.js"></script>
 	<script src="assets/js/demo/peity-demo.min.js"></script>
+	<script src="assets/js/customerValidate.js"></script>
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
     <script type="text/javascript">
+    
+	    //打开修改密码div并发送验证码到邮箱
+		$('#modifyPW').click(function(e) {
+			e.preventDefault();
+			$('#modifyPassWord').show();
+			var emailvalue = $('#email').val();
+			var namelvalue = $('#user_name').val();
+			var data={emailAddress:emailvalue,userName:namelvalue};
+			$.ajax({
+				  type: 'post',
+	    		  url: 'rest/user/sedemail',
+	    		  data: data
+			});
+		});  
+	    
+	    //确认修改密码
+		$('#sureModifyPW').click(function(){
+			if(!$('#from_modifyPassWord').valid()){
+				return false;
+			}
+			var newpassword = $('#new_passwords').val();
+			var user_idvalue = '${userInfo.userId}';
+			var jsonData = '{"password":"'+newpassword+'","userId":"'+user_idvalue+'"}';
+			$('#modifyPassWord').hide();
+			$.ajax({
+				  type: 'post',
+	    		  url: 'rest/user/updataPassword',
+	    		  contentType:'application/json',
+		          dataType:'json',
+	    		  data: jsonData,
+	    		  success: function (data){
+	    			  alert("修改成功！");
+	    		  },
+	    		  error: function(){
+	    			  alert("修改失败");
+	    		  }
+			});
+		});
+	    
+	    //取消修改密码
+		$('#cancelModifyPW').click(function(){
+			$('#modifyPassWord').hide();
+		});
+    
        //点击确定修改，提交修改的user信息，提交到控制器修改数据库数据
        $('#determineDelete').click(function(){
     	   var companyvalue = $('#company').val();
@@ -270,7 +354,7 @@
            var user_idvalue = '${userInfo.userId}';
            var jsonData= '{"userId":"'+user_idvalue+'","linkman":"'+linkmanvalue+'","userName":"'+namevalue+'","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue+'"}';
            $.ajax({
-        	   type: 'post',
+        	      type: 'post',
 	    		  url: 'rest/user/updataUser',
 	    		  contentType:'application/json',
 		          dataType:'json',
