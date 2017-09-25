@@ -84,30 +84,38 @@
 								<!--a href = "javascript:;" id="popupModfiyUser">修改用户</a-->
 
 								<div id="modifyuser" class="white_content"
-									style="width: 500px; height: 430px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 1; opacity: 1;">
+									style="width: 500px; height: 480px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 1; opacity: 1;">
+									<form id="form_modifyuser">
 									<div>
 										<p><h3><strong>修改用户信息</strong></h3>（请确保修改之后用户名唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
 										<input type="text" id="mdid" name="mdid"
 											style="display:none; border-radius:8px" placeholder="id" class="form-control"><br>
-
-										<input type="text" id="mdname" name="mdname"
-											style="width: 100%; border-radius:8px" placeholder="用户名" class="form-control"><br>
-
-										<input type="text" id="mdlinkman" name="mdlinkman"
-											style="width: 100%; border-radius:8px" placeholder="联系人" class="form-control"><br>
-
-										<input type="text" id="mdcompany" name="mdcompany"
-											style="width: 100%; border-radius:8px" placeholder="邮箱" class="form-control"><br>
-
-										<input type="text" id="mdphone" name="mdphone"
-											style="width: 100%; border-radius:8px" placeholder="手机号码" class="form-control"><br>
-
-										<input type="text" id="mdemail" name="mdemail"
-											style="width: 100%; border-radius:8px" placeholder="所属公司" class="form-control">
+										
+										<label for="mdname" style="width: 30%; margin-left: 5px">用户名:</label>	
+										<input type="text" id="mdname" name="mdname" style="width: 82%; border-radius:8px;
+										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
+										
+										<label for="mdlinkman" style="width: 30%; margin-left: 5px">联系人:</label>	
+										<input type="text" id="mdlinkman" name="mdlinkman" style="width: 82%; border-radius:8px;
+										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
+										
+										<label for="mdcompany" style="width: 30%; margin-left: 5px">所属公司:</label>	
+										<input type="text" id="mdcompany" name="mdcompany" style="width: 82%; border-radius:8px;
+										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
+										
+										<label for="mdphone" style="width: 30%; margin-left: 5px">手机号码:</label>	
+										<input type="text" id="mdphone" name="mdphone" style="width: 82%; border-radius:8px;
+										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
+										
+										<label for="mdemail" style="width: 30%; margin-left: 5px">邮箱地址:</label>	
+										<input type="text" id="mdemail" name="mdemail" style="width: 82%; border-radius:8px;
+										margin-left: 75px; margin-top: -39px" class="form-control">
+										
 									</div>
 									<br>
 									<input type="button" id="sureMdy" style="margin-left:30px; width:130px; height:40px" value="确定修改">
 									<input type="button" id="closeModfiyUser" style="margin-left:120px; width:130px; height:40px" value="关闭窗口">
+								    </form>
 								</div>
 
 								<div id="adduser" class="white_content"
@@ -117,24 +125,24 @@
 										<p><h3><strong>添加新用户</strong></h3>(请确保用户名的唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
 										<br>
 										<label for="userName" style="width: 30%; margin-left: 5px">用户名:</label>
-										<input type="text" id="userName" name="userName" style="width: 75%; border-radius:8px;
-										margin-left: 92px; margin-top: -39px" class="form-control"><br><br>
+										<input type="text" id="userName" name="userName" style="width: 82%; border-radius:8px;
+										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
 
 										<label for="linkman" style="width: 30%; margin-left: 5px">联系人:</label>
-										<input type="text" id="linkman" name="linkman" style="width: 75%; border-radius:8px;
-										margin-left: 92px; margin-top: -39px" class="form-control"><br><br>
-
-										<label for="company" style="width: 30%; margin-left: 5px">所属公司名称:</label>
-										<input type="text" id="company" name="company" style="width: 75%; border-radius:8px;
-										margin-left: 92px; margin-top: -39px" class="form-control"><br><br>
+										<input type="text" id="linkman" name="linkman" style="width: 82%; border-radius:8px;
+										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
+											
+										<label for="company" style="width: 30%; margin-left: 5px">所属公司:</label>	
+										<input type="text" id="company" name="company" style="width: 82%; border-radius:8px;
+										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
 
 										<label for="phone" style="width: 30%; margin-left: 5px">手机号码:</label>
-										<input type="text"id="phone" name="phone" style="width: 75%; border-radius:8px;
-										margin-left: 92px; margin-top: -39px" class="form-control"><br><br>
+										<input type="text"id="phone" name="phone" style="width: 82%; border-radius:8px;
+										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
 
 										<label for="email" style="width: 30%; margin-left: 5px">邮箱地址:</label>
-										<input type="text" id="email" name="email"  style="width: 75%; border-radius:8px;
-										margin-left: 92px; margin-top: -39px" class="form-control">
+										<input type="text" id="email" name="email"  style="width: 82%; border-radius:8px;
+										margin-left: 75px; margin-top: -39px" class="form-control">
 									</div>
 									<br>
 									<input type="button" id="sureAdd" style="margin-left:30px; width:130px; height:40px" value="确定添加">
@@ -364,6 +372,9 @@
 
 			//确定修改（修改操作稍后改成看信息修改）--------mdname/mdlinkman/mdcompany/mdphone/mdemail
 			$('#sureMdy').click(function() {
+				if(!$('#form_adduser').valid()){
+					return false;
+				}
 						var idvalue = $('#mdid').val();
 						var namevalue = $("#mdname").val();
 						var linkmanvalue = $("#mdlinkman").val();
