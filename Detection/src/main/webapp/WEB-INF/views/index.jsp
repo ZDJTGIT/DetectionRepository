@@ -468,9 +468,8 @@
 										</div>
 									</div>
 									<div class="media-body">
-
-										据天津日报报道：瑞海公司董事长于学伟，副董事长董社轩等10人在13日上午已被控制。 <br> <small
-											class="text-muted">今天 4:21</small>
+										据天津日报报道：瑞海公司董事长于学伟，副董事长董社轩等10人在13日上午已被控制。 <br> 
+										<small class="text-muted">今天 4:21</small>
 									</div>
 								</a>
 							</div>
