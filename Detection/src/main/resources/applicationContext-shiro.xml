@@ -21,6 +21,7 @@
                 /rest/getGifCode = anon
                 <!-- 登录页,注册页允许访问 -->
                 /rest/user/login = anon
+                /rest/user/turnpassword = anon
                 <!-- 其他资源需要认证 -->
                 /** = authc
             </value>

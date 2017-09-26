@@ -433,6 +433,23 @@ public class UserController {
 		// Sender.send(emailAddress, SimpleMailSender.CHANGES_PWD);
 	}
 
+	/*
+	 * 找回密码retpassword
+	 */
+	@RequestMapping(value = "/retpassword", method=RequestMethod.POST)
+	public void retpassword(String contect){
+		//判定传来的phone的格式，为phone或email
+		System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-"+contect);
+	}
+	
+	/*
+	 * 跳转到找回密码页面
+	 */
+	@RequestMapping(value = "/turnpassword")
+	public String turnpassword(){
+		return "retpassword";
+	}
+	
 	/**
 	 * 根据用户名禁用用户
 	 */
