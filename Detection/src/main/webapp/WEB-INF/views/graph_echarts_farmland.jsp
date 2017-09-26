@@ -60,6 +60,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>PH变化图</h5>
+                        <span id="currentDate"></span>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -797,8 +798,8 @@
     <!-- 自定义js -->
     <script src="assets/js/content.js"></script>
 
-	<script type="text/javascript">
-	var ss = "${test}";
+	<script>
+		var phJson = '${phJson}';
 	</script>
     <!-- ECharts demo data -->
     <script src="assets/js/demo/echarts-demo.min.js"></script>
@@ -835,7 +836,6 @@
                 "height": "100%"
             });
 
-
         });
 
         function fnClickAddRow() {
@@ -847,6 +847,7 @@
                 "New row"]);
 
         }
+
     </script>
 
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>

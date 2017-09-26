@@ -2,6 +2,8 @@ package com.zhongda.detection.web.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class User {
     private Integer userId;
 
@@ -77,6 +79,7 @@ public class User {
         this.linkman = linkman == null ? null : linkman.trim();
     }
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getCreateTime() {
         return createTime;
     }

@@ -19,7 +19,6 @@
 <base href="<%=basePath%>">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="refresh" content="5">
 <title>用户&告警联系人信息表</title>
 <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
 <meta name="description" content="中大检测平台">
@@ -57,24 +56,23 @@
 									<form id="form_modifyuser">
 									<div>
 										<p><h3><strong>修改用户信息</strong></h3>（请确保修改之后用户名唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
-										<label for="mdid" style="display:none"></label>	
+										<label for="mdid" style="display:none"></label>
 										<input type="text" id="mdid" name="mdid" style="display:none"><br>
-										
-										<label class="md_lable" for="mdname">用户名:</label>	
+
+										<label class="md_lable" for="mdname">用户名:</label>
 										<input class="md_input" type="text" id="mdname" name="mdname"><br><br>
-										
-										<label class="md_lable" for="mdlinkman">联系人:</label>	
+
+										<label class="md_lable" for="mdlinkman">联系人:</label>
 										<input class="md_input" type="text" id="mdlinkman" name="mdlinkman"><br><br>
-										
-										<label class="md_lable" for="mdcompany">所属公司:</label>	
+
+										<label class="md_lable" for="mdcompany">所属公司:</label>
 										<input class="md_input" type="text" id="mdcompany" name="mdcompany"><br><br>
-										
-										<label class="md_lable" for="mdphone">手机号码:</label>	
+
+										<label class="md_lable" for="mdphone">手机号码:</label>
 										<input class="md_input" type="text" id="mdphone" name="mdphone"><br><br>
-										
-										<label class="md_lable" for="mdemail">邮箱地址:</label>	
+
+										<label class="md_lable" for="mdemail">邮箱地址:</label>
 										<input class="md_input" type="text" id="mdemail" name="mdemail">
-										
 									</div>
 									<br>
 									<input class="md_input_sure" type="button" id="sureMdy" value="确定修改">
@@ -93,8 +91,8 @@
 
 										<label class="md_lable" for="linkman">联系人:</label>
 										<input class="md_input" type="text" id="linkman" name="linkman"><br><br>
-											
-										<label class="md_lable" for="company">所属公司:</label>	
+
+										<label class="md_lable" for="company">所属公司:</label>
 										<input class="md_input" type="text" id="company" name="company"><br><br>
 
 										<label class="md_lable" for="phone">手机号码:</label>
@@ -146,7 +144,7 @@
 											<td>${singleUser.phone}</td>
 											<td>${singleUser.company}</td>
 											<td>${singleUser.linkman}</td>
-											<td><fmt:formatDate value="${singleUser.createTime}" type="both" dateStyle="default"/></td>
+											<td><fmt:formatDate value="${singleUser.createTime}" type="both" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 											<td>
 												<a href="javascript:;" class="selectRow"
 												onclick="selectRow(this)"><b>修改用户</b></a>
@@ -444,16 +442,16 @@
 						success : function(data) {
 							if(data) {
 								alert("添加成功！");
-							var viewData = "<tr><th>"+ data.userId
-										+ "</th><th>"+ data.userName
-										+ "</th><th>"+ data.email
-										+ "</th><th>"+ data.phone
-										+ "</th><th>"+ data.company
-										+ "</th><th>"+ data.linkman
-										+ "</th><th>"
-										+ <fmt:formatDate value='${singleUser.createTime}' type="both" dateStyle="default"/>
-										+ "</th><td>"
-										+ "<a href='javascript:;' id='prohibitMdy'><b>禁止修改</b></a>"
+							var viewData = "<tr><td>"+ data.userId
+										+ "</td><td>"+ data.userName
+										+ "</td><td>"+ data.email
+										+ "</td><td>"+ data.phone
+										+ "</td><td>"+ data.company
+										+ "</td><td>"+ data.linkman
+										+ "</td><td>"+ data.createTime
+										+ "</td><td>"
+										+ "<a href='javascript:;' class='selectRow' onclick='selectRow(this)'><b>修改用户</b></a> "
+										+ "<a href='javascript:;' class='deteteRow' onclick='deleteRow(this)'><b>删除用户</b></a>"
 										+ "</td></tr>";
 								$('#userTableDeatil').append(viewData);
 								} else {

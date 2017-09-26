@@ -113,7 +113,7 @@ $(function () {
         	if($(supMenu).hasClass("secondMenu")){
         		$.ajax({url:url,dataType:"json",success:function(data){
         			$.each(data,function(idx,item){
-        				var labelItem = '<li><a class="thirdMenu J_menuItem" href="rest/sensor/'+item.projectId+'">'+item.projectName+'</a><ul class="nav nav-four-level"></ul></li>';
+        				var labelItem = '<li class="dropdown"><a class="dropdown-toggle thirdMenu J_menuItem" data-toggle="dropdown" href="rest/sensor/'+item.projectId+'"><i class="fa fa-columns"></i><span class="nav-label">'+item.projectName+'</span><span class="fa arrow"></span></a><ul class="nav nav-four-level dropdown-menu"></ul></li>';
         				$(supMenu).next().append(labelItem);
         			});
         	    }});
@@ -123,7 +123,7 @@ $(function () {
         	}else if($(supMenu).hasClass("thirdMenu")){
         		$.ajax({url:url,dataType:"json",success:function(data){
         			$.each(data,function(idx,item){
-        				var labelItem = '<li><a class="fourMenu J_menuItem" href="rest/'+item.sysDictionary.typeValue+'/project/'+item.projectId+'">'+item.sysDictionary.itemName+'</a><ul class="nav nav-five-level"></ul></li>';
+        				var labelItem = '<li><a class="fourMenu J_menuItem" href="rest/'+item.sysDictionary.typeValue+item.sysDictionary.itemValue+'/project/'+item.projectId+'">'+item.sysDictionary.itemName+'</a><ul class="nav nav-five-level"></ul></li>';
         				$(supMenu).next().append(labelItem);
         			});
         	    }});

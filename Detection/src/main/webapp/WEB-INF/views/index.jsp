@@ -63,42 +63,43 @@
 					</a></li>
 					<shiro:hasPermission name="project:manager:*">
 						<li>
-							<a class="firstMenu" href="javascript:;">
+							<a class="firstMenu" href="javascript:;" aria-expanded="false">
 	                            <i class="fa fa-columns"></i>
 	                            <span class="nav-label">我的项目</span>
 	                            <span class="fa arrow"></span>
 	                        </a>
-							<ul class="nav nav-second-level">
+							<ul class="nav nav-second-level" aria-expanded="false">
 								<shiro:hasPermission name="farmland:query:*">
 									<li>
-										<a class="secondMenu J_menuItem" href="rest/project/1">
+										<a class="secondMenu J_menuItem" href="rest/project/1" aria-expanded="false">
 											<i class="fa fa-columns"></i><span class="nav-label">农田项目</span>
+											<span class="fa arrow"></span>
 										</a>
-										<ul class="nav nav-third-level"></ul>
+										<ul class="nav nav-third-level" aria-expanded="false"></ul>
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="bridge:query:*">
 									<li>
-										<a class="secondMenu J_menuItem" href="rest/project/2">
+										<a class="secondMenu J_menuItem" href="rest/project/2" aria-expanded="false">
 											<i class="fa fa-columns"></i><span class="nav-label">桥梁项目</span>
 										</a>
-										<ul class="nav nav-third-level"></ul>
+										<ul class="nav nav-third-level" aria-expanded="false"></ul>
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="tunnel:query:*">
 									<li>
-										<a class="secondMenu J_menuItem" href="rest/project/3">
+										<a class="secondMenu J_menuItem" href="rest/project/3" aria-expanded="false">
 											<i class="fa fa-columns"></i><span class="nav-label">隧道项目</span>
 										</a>
-										<ul class="nav nav-third-level"></ul>
+										<ul class="nav nav-third-level" aria-expanded="false"></ul>
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="slope:query:*">
 									<li>
-										<a class="secondMenu J_menuItem" href="rest/project/4">
+										<a class="secondMenu J_menuItem" href="rest/project/4" aria-expanded="false">
 											<i class="fa fa-columns"></i><span class="nav-label">边坡项目</span>
 										</a>
-										<ul class="nav nav-third-level">
+										<ul class="nav nav-third-level" aria-expanded="false">
 											<!-- <li>
 												<a class="J_menuItem" href="rest/graph_echarts_deep">深部位移</a>
 											</li>
@@ -751,6 +752,8 @@
 				type : 'success',
 				timer : 4000
 			});
+
+			$("#side-menu").metisMenu();
 
 		});
 	</script>
