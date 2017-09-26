@@ -5,9 +5,13 @@ public class SysDictionary {
 
     private String typeName;
 
+    private String typeValue;
+
     private Integer typeCode;
 
-    private String typeValue;
+    private String itemName;
+
+    private String itemValue;
 
     public Integer getDicId() {
         return dicId;
@@ -25,6 +29,14 @@ public class SysDictionary {
         this.typeName = typeName == null ? null : typeName.trim();
     }
 
+    public String getTypeValue() {
+        return typeValue;
+    }
+
+    public void setTypeValue(String typeValue) {
+        this.typeValue = typeValue == null ? null : typeValue.trim();
+    }
+
     public Integer getTypeCode() {
         return typeCode;
     }
@@ -33,11 +45,19 @@ public class SysDictionary {
         this.typeCode = typeCode;
     }
 
-    public String getTypeValue() {
-        return typeValue;
+    public String getItemName() {
+        return itemName;
     }
 
-    public void setTypeValue(String typeValue) {
-        this.typeValue = typeValue == null ? null : typeValue.trim();
+    public void setItemName(String itemName) {
+        this.itemName = itemName == null ? null : itemName.trim();
+    }
+
+    public String getItemValue() {
+        return itemValue;
+    }
+
+    public void setItemValue(String itemValue) {
+        this.itemValue = itemValue == null ? null : itemValue.trim();
     }
 }

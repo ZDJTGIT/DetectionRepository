@@ -25,35 +25,7 @@
 <meta name="description" content="中大检测平台">
 <link rel="shortcut icon" href="favicon.ico">
 <link href="assets/css/plugins/iCheck/custom.css" rel="stylesheet">
-<style>
-.black_overlay {
-	display: none;
-	position: absolute;
-	top: 0%;
-	left: 0%;
-	width: 100%;
-	height: 100%;
-	background-color: black;
-	z-index: 1001;
-	-moz-opacity: 0.8;
-	opacity: .80;
-	filter: alpha(opacity = 88);
-}
-
-.white_content {
-	display: none;
-	position: absolute;
-	top: 25%;
-	left: 25%;
-	width: 55%;
-	height: 55%;
-	padding: 20px;
-	border: 10px solid orange;
-	background-color: white;
-	z-index: 1002;
-	overflow: auto;
-}
-</style>
+<link href="assets/css/plugins/table/basic.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
@@ -81,72 +53,59 @@
 							<div class="col-sm-5 m-b-xs">
 								<p>详细记录用户各项基本信息(用户初始密码：123456)</p>
 								<a href="javascript:;" id="popupAddUser">添加用户</a>
-								<!--a href = "javascript:;" id="popupModfiyUser">修改用户</a-->
-
-								<div id="modifyuser" class="white_content"
-									style="width: 500px; height: 480px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 1; opacity: 1;">
+								<div id="modifyuser" class="white_content">
 									<form id="form_modifyuser">
 									<div>
 										<p><h3><strong>修改用户信息</strong></h3>（请确保修改之后用户名唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
-										<input type="text" id="mdid" name="mdid"
-											style="display:none; border-radius:8px" placeholder="id" class="form-control"><br>
+										<label for="mdid" style="display:none"></label>	
+										<input type="text" id="mdid" name="mdid" style="display:none"><br>
 										
-										<label for="mdname" style="width: 30%; margin-left: 5px">用户名:</label>	
-										<input type="text" id="mdname" name="mdname" style="width: 82%; border-radius:8px;
-										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
+										<label class="md_lable" for="mdname">用户名:</label>	
+										<input class="md_input" type="text" id="mdname" name="mdname"><br><br>
 										
-										<label for="mdlinkman" style="width: 30%; margin-left: 5px">联系人:</label>	
-										<input type="text" id="mdlinkman" name="mdlinkman" style="width: 82%; border-radius:8px;
-										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
+										<label class="md_lable" for="mdlinkman">联系人:</label>	
+										<input class="md_input" type="text" id="mdlinkman" name="mdlinkman"><br><br>
 										
-										<label for="mdcompany" style="width: 30%; margin-left: 5px">所属公司:</label>	
-										<input type="text" id="mdcompany" name="mdcompany" style="width: 82%; border-radius:8px;
-										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
+										<label class="md_lable" for="mdcompany">所属公司:</label>	
+										<input class="md_input" type="text" id="mdcompany" name="mdcompany"><br><br>
 										
-										<label for="mdphone" style="width: 30%; margin-left: 5px">手机号码:</label>	
-										<input type="text" id="mdphone" name="mdphone" style="width: 82%; border-radius:8px;
-										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
+										<label class="md_lable" for="mdphone">手机号码:</label>	
+										<input class="md_input" type="text" id="mdphone" name="mdphone"><br><br>
 										
-										<label for="mdemail" style="width: 30%; margin-left: 5px">邮箱地址:</label>	
-										<input type="text" id="mdemail" name="mdemail" style="width: 82%; border-radius:8px;
-										margin-left: 75px; margin-top: -39px" class="form-control">
+										<label class="md_lable" for="mdemail">邮箱地址:</label>	
+										<input class="md_input" type="text" id="mdemail" name="mdemail">
 										
 									</div>
 									<br>
-									<input type="button" id="sureMdy" style="margin-left:30px; width:130px; height:40px" value="确定修改">
-									<input type="button" id="closeModfiyUser" style="margin-left:120px; width:130px; height:40px" value="关闭窗口">
+									<input class="md_input_sure" type="button" id="sureMdy" value="确定修改">
+									<input class="md_input_cancel" type="button" id="closeModfiyUser" value="关闭窗口">
 								    </form>
 								</div>
 
-								<div id="adduser" class="white_content"
-									style="width: 500px; height: 480px; margin-left: 200px; margin-top: -50px; background-color: #eeeeee; border: 2px; solid #000; filter: alpha(Opacity = 80); -moz-opacity: 1; opacity: 1;">
+								<div id="adduser" class="white_content" >
 								    <form id="form_adduser">
 								    <div>
+
 										<p><h3><strong>添加新用户</strong></h3>(请确保用户名的唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
 										<br>
-										<label for="userName" style="width: 30%; margin-left: 5px">用户名:</label>
-										<input type="text" id="userName" name="userName" style="width: 82%; border-radius:8px;
-										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
+										<label class="md_lable" for="userName">用户名:</label>
+										<input class="md_input" type="text" id="userName" name="userName"><br><br>
 
-										<label for="linkman" style="width: 30%; margin-left: 5px">联系人:</label>
-										<input type="text" id="linkman" name="linkman" style="width: 82%; border-radius:8px;
-										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
+										<label class="md_lable" for="linkman">联系人:</label>
+										<input class="md_input" type="text" id="linkman" name="linkman"><br><br>
 											
-										<label for="company" style="width: 30%; margin-left: 5px">所属公司:</label>	
-										<input type="text" id="company" name="company" style="width: 82%; border-radius:8px;
-										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
+										<label class="md_lable" for="company">所属公司:</label>	
+										<input class="md_input" type="text" id="company" name="company"><br><br>
 
-										<label for="phone" style="width: 30%; margin-left: 5px">手机号码:</label>
-										<input type="text"id="phone" name="phone" style="width: 82%; border-radius:8px;
-										margin-left: 75px; margin-top: -39px" class="form-control"><br><br>
+										<label class="md_lable" for="phone">手机号码:</label>
+										<input class="md_input" type="text"id="phone" name="phone"><br><br>
 
-										<label for="email" style="width: 30%; margin-left: 5px">邮箱地址:</label>
-										<input type="text" id="email" name="email"  style="width: 82%; border-radius:8px;
-										margin-left: 75px; margin-top: -39px" class="form-control">
+										<label class="md_lable" for="email">邮箱地址:</label>
+										<input class="md_input" type="text" id="email" name="email">
 									</div>
 									<br>
-									<input type="button" id="sureAdd" style="margin-left:30px; width:130px; height:40px" value="确定添加">
-									<input type="button" id="closeAddUser" style="margin-left:120px; width:130px; height:40px" value="关闭窗口">
+									<input class="md_input_sure" type="button" id="sureAdd" value="确定添加">
+									<input class="md_input_cancel" type="button" id="closeAddUser" value="关闭窗口">
 								    </form>
 								</div>
 							</div>
@@ -372,7 +331,7 @@
 
 			//确定修改（修改操作稍后改成看信息修改）--------mdname/mdlinkman/mdcompany/mdphone/mdemail
 			$('#sureMdy').click(function() {
-				if(!$('#form_adduser').valid()){
+				if(!$('#form_modifyuser').valid()){
 					return false;
 				}
 						var idvalue = $('#mdid').val();
@@ -383,7 +342,7 @@
 						var emailvalue = $("#mdemail").val();
 					    var jsonData = '{"userId":"'+idvalue+'","linkman":"'+linkmanvalue+'","userName":"'+namevalue+
 							           '","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue +'"}';
-						               $('#modifyuser').hide();
+						$('#modifyuser').hide();
 						$.ajax({
 							type : 'post',
 							url : 'rest/user/modify',
@@ -492,7 +451,7 @@
 										+ "</th><th>"+ data.company
 										+ "</th><th>"+ data.linkman
 										+ "</th><th>"
-										+ '${userInfo.createTime}'
+										+ <fmt:formatDate value='${singleUser.createTime}' type="both" dateStyle="default"/>
 										+ "</th><td>"
 										+ "<a href='javascript:;' id='prohibitMdy'><b>禁止修改</b></a>"
 										+ "</td></tr>";

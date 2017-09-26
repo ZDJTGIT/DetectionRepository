@@ -23,6 +23,7 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.codec.Base64;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -287,7 +288,6 @@ public class UserController {
 	/**
 	 * 输入用户信息添加用户
 	 */
-
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	@ResponseBody
 	public User addUser(@RequestBody User user) {
@@ -305,7 +305,6 @@ public class UserController {
 	/**
 	 * 根据当前选中的用户名删除用户
 	 */
-
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public User delete(@RequestBody User user) {
@@ -327,18 +326,8 @@ public class UserController {
 	}
 
 	/*
-	 * 用户修改用户信息
-	 */
-	@RequestMapping(value = "/updataUser", method = RequestMethod.POST)
-	@ResponseBody
-	public User updataUser(@RequestBody User user, HttpServletRequest request) {
-		userService.updateByPrimaryKeySelective(user);
-		WebUtils.setSessionAttribute(request, "userInfo", user);
-		return user;
-	}
-
-	/*
-	 * 验证用户名是否唯一
+	 * 验证用户名是否唯一 ======= 验证用户名是否唯一(添加验证) >>>>>>>
+	 * 97511cabb41373f31b753f57d26de61ff4fd7b0b
 	 */
 	@RequestMapping(value = "/OnlyUserName", method = RequestMethod.POST)
 	public void OnlyUserName(String userName, HttpServletResponse response) {
@@ -352,6 +341,96 @@ public class UserController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/*
+	 * 验证用户名是否唯一(修改验证)
+	 */
+	@RequestMapping(value = "/mdOnlyUserName", method = RequestMethod.POST)
+	public void mdOnlyUserName(String userName, Integer userId,
+			HttpServletResponse response) {
+		if (userName.equals(userService.selectByPrimaryKey(userId)
+				.getUserName())) {
+			try {
+				response.getWriter().print(true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			User user = userService.selectByUsername(userName);
+			try {
+				if (user == null) {
+					response.getWriter().print(true);
+				} else {
+					response.getWriter().print(false);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/*
+	 * 验证原密码输入
+	 */
+	@RequestMapping(value = "/OnlyPassword", method = RequestMethod.POST)
+	public void OnlyPassword(String password, Integer userId,
+			HttpServletResponse response) {
+		String sqlpassword = userService.selectByPrimaryKey(userId)
+				.getPassword();
+		String username = userService.selectByPrimaryKey(userId).getUserName();
+		String cryptedPwd = new Md5Hash(password, username, 1024).toString();
+		if (cryptedPwd.equals(sqlpassword)) {
+			try {
+				response.getWriter().print(true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				response.getWriter().print(false);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/*
+	 * 用户修改用户信息
+	 */
+	@RequestMapping(value = "/updataUser", method = RequestMethod.POST)
+	@ResponseBody
+	public User updataUser(@RequestBody User user, HttpServletRequest request) {
+		userService.updateByPrimaryKeySelective(user);
+		WebUtils.setSessionAttribute(request, "userInfo", user);
+		return user;
+	}
+
+	/*
+	 * 用户修改密码
+	 */
+	@RequestMapping(value = "/updataPassword", method = RequestMethod.POST)
+	@ResponseBody
+	public User updataPassword(@RequestBody User user) {
+		String name = userService.selectByPrimaryKey(user.getUserId())
+				.getUserName();
+		String cryptedPwd = new Md5Hash(user.getPassword(), name, 1024)
+				.toString();
+		user.setPassword(cryptedPwd);
+		userService.updateByPrimaryKeySelective(user);
+		return user;
+	}
+
+	/*
+	 * 发送邮件及验证码
+	 */
+	@RequestMapping(value = "/sedemail", method = RequestMethod.POST)
+	public void sendemail(String emailAddress, String userName) {
+		SimpleMailSender Sender = new SimpleMailSender();
+		String congtent = userName
+				+ ": 你好，您正在进行改密操作，请确认是你本人操作！    ---中大检测数据监测平台";
+		Sender.send(emailAddress, "修改密码提醒", congtent);
+		// Sender.send(emailAddress, SimpleMailSender.CHANGES_PWD);
 	}
 
 	/**

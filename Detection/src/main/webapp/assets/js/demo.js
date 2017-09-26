@@ -123,7 +123,8 @@ demo = {
             });
              AMap.event.addListener(mapObj,'click',getLnglat); //点击事件
             satellLayer.setMap(mapObj); //在map中添加卫星图
-            mapObj.setZoom(18);
+            mapObj.setZoom(4);
+            
         })();
         //鼠标点击，获取经纬度坐标
         function getLnglat(e){

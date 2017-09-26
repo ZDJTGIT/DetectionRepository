@@ -22,12 +22,11 @@
 <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
 <meta name="description" content="中大检测平台">
 <link rel="shortcut icon" href="favicon.ico">
+<link href="assets/css/plugins/table/user.css" rel="stylesheet">
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
-
       <div class="row animated fadeInDown">
-      <!-- class="row animated fadeInRight" style="margin-left:2%;width: 35%; float: left" -->
 		<div class="col-sm-4" >
 			  <!-- style="height: 48%; width: 94%;" -->
 			<div class="ibox float-e-margins" >
@@ -39,14 +38,15 @@
 					</div>
 					<div>
 					     <div class="ibox-content no-padding border-left-right">
-					        <div style="height:80px; width:25%;float:left">
-					           <img src="assets/img/rojoy.jpg" alt="image"
-							      style="height:80px; width:100%;">
+					        <div class="img_head">
+					           <img class="img_head_jpj" src="assets/img/rojoy.jpg" alt="image">
 							</div>
-							<div style="height:80px; width:75%;float:left;background-color:#fff">
-					           <h4 class="" id="username" style="margin-left: 4px">
+							<div class="head_basicmessage">
+					            <h4 class="head_basicmessage_h" id="username">
 								<img alt="status" src="assets/img/user.png" style="height:17px; width:17px">
-								<b id="status"><small>${userInfo.status}</small></b>&ensp;&ensp;${userInfo.userName}<b>&ensp;&ensp;<small>系统管理员</small></b>
+								<b id="status"><small>${userInfo.status}</small></b>
+								&ensp;&ensp;${userInfo.userName}
+								<b>&ensp;&ensp;<small>系统管理员</small></b>
 								</h4>
 								<p class="signature" id="" style="margin-left: 6px">
 								我很帅，而且我还很温柔,能砍树，能造飞机,上得厅堂，跪得澡堂,嘿嘿不要崇拜哥，哥只是个程序员
@@ -61,9 +61,6 @@
 					</div>
 				</div>
 			</div>
-
-
-             <!-- style="height: 48%; width: 94%;" -->
 			<div class="ibox float-e-margins" >
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
@@ -77,61 +74,57 @@
 							   style="height:80px; width:100%">
 						</div>
 						<div class="ibox-content profile-content" style="height: 260px">
-							<div style="width: 100%">
-								<div style="width: 25%; float: left">
-									<img src="assets/img/face-0.jpg" alt="face"
-										style="height:40px; width:40px">
+							<div class="poj_External_div">
+								<div class="poj_layer">
+									<img class="poj_img" src="assets/img/face-0.jpg" alt="face">
 								</div>
-								<div style="width: 50%; float: left">
+								<div class="poj_description_div">
 									<label>项目1</label>
-									<br /> <span class=""><small>时间/负责人/想写啥写啥</small></span>
+									<br/><span class=""><small>时间/负责人/想写啥写啥</small></span>
 								</div>
-								<div style="width: 25%; float: left">
+								<div class="poj_layer">
 									<a class="btn btn-primary " onclick="" href="">查看项目</a>
 								</div>
 							</div>
 							<br>
 							<hr>
-							<div style="width: 100%">
-								<div style="width: 25%; float: left">
-									<img src="assets/img/face-1.jpg" alt="face"
-										style="height:40px; width:40px">
+							<div class="poj_External_div">
+								<div class="poj_layer">
+									<img class="poj_img" src="assets/img/face-1.jpg" alt="face">
 								</div>
-								<div style="width: 50%; float: left">
+								<div class="poj_description_div">
 									<label>项目2</label>
-									<br /> <span class=""><small>时间/负责人/想写啥写啥</small></span>
+									<br/><span class=""><small>时间/负责人/想写啥写啥</small></span>
 								</div>
-								<div style="width: 25%; float: left">
+								<div class="poj_layer">
 									<a class="btn btn-primary " onclick="" href="">查看项目</a>
 								</div>
 							</div>
 							<br>
 							<hr>
-							<div style="width: 100%">
-								<div style="width: 25%; float: left">
-									<img src="assets/img/face-2.jpg" alt="face"
-										style="height:40px; width:40px">
+							<div class="poj_External_div">
+								<div class="poj_layer">
+									<img class="poj_img" src="assets/img/face-2.jpg" alt="face">
 								</div>
-								<div style="width: 50%; float: left">
+								<div class="poj_description_div">
 									<label>项目3</label>
-									<br /> <span class=""><small>时间/负责人/想写啥写啥</small></span>
+									<br/><span class=""><small>时间/负责人/想写啥写啥</small></span>
 								</div>
-								<div style="width: 25%; float: left">
+								<div class="poj_layer">
 									<a class="btn btn-primary " onclick="" href="">查看项目</a>
 								</div>
 							</div>
 							<br>
 							<hr>
-							<div style="width: 100%">
-								<div style="width: 25%; float: left">
-									<img src="assets/img/face-3.jpg" alt="face"
-										style="height:40px; width:40px">
+							<div class="poj_External_div">
+								<div class="poj_layer">
+									<img class="poj_img" src="assets/img/face-3.jpg" alt="face">
 								</div>
-								<div style="width: 50%; float: left">
+								<div class="poj_description_div">
 									<label>项目4</label>
-									<br /> <span class=""><small>时间/负责人/想写啥写啥</small></span>
+									<br/><span class=""><small>时间/负责人/想写啥写啥</small></span>
 								</div>
-								<div style="width: 25%; float: left">
+								<div class="poj_layer">
 									<a class="btn btn-primary " onclick="" href="">查看项目</a>
 								</div>
 							</div>
@@ -140,9 +133,6 @@
 				</div>
 			</div>
 		</div>
-
-
-        <!-- style=" width: 62%; float:left" -->
 		<div class="col-sm-8">
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
@@ -152,100 +142,85 @@
 				</div>
 				<div class="ibox-content">
 					<div class="feed-activity-list">
-						<form>
-							<div class="" style="height:20% ; margin-right: -15px; margin-left: 10px;">
-								<div class=""
-									style="padding-left: 15px; padding: 6px; float: left; width: 43%; position: relative">
-								<div class="" style="margin-bottom:0 ;color:#252422;">
-									  <font size="3" color=#585858>公司</font>
-									  <input class="form-control"  id="company" type="text" value="${userInfo.company}" style="
-									  border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 100%;border-radius:8px">
+							<div class="data_basic">
+								<div class="data_content_1">
+								    <div class="data_content_8">
+									 <font size="3" color=#585858>公司</font>
+									 <input class="data_content_input_1" id="company" type="text" value="${userInfo.company}">
 									</div>
 							    </div>
-								<div class=""
-									style="padding: 6px; float: left; width: 27%; position: relative">
-									<div class="" style="margin-bottom:0">
-									  <font size="3" color=#585858>用户名</font>
-									  <input class="form-control" id="user_name" type="text" value="${userInfo.userName}" style="
-									  border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 100%;border-radius:8px">
+								<div class="data_content_2">
+									<div class="data_content_8">
+									 <font size="3" color=#585858>用户名</font>
+									 <input class="data_content_input_1" id="user_name" type="text" value="${userInfo.userName}">
 									</div>
 								</div>
-								<div class=""
-									style="padding-right: 15px; padding: 6px; float: left; width: 30%; position: relative">
-									  <div class="" style="margin-bottom:0">
-									  <font size="3" color=#585858>联系人</font>
-									  <input class="form-control" id="linkman" type="text" value="${userInfo.linkman}" style="
-									  border: 1px solid #CCC5B9; height: 40px;padding: 9px 3px;width: 88%;border-radius:8px">
-									  </div>
+								<div class="data_content_3">
+									 <div class="data_content_8">
+									 <font size="3" color=#585858>联系人</font>
+									 <input class="data_content_input_2" id="linkman" type="text" value="${userInfo.linkman}"> 
+									 </div>
 								</div>
 							</div>
-							<div class="" style="height:20% ;margin-top: 15px; margin-right: -15px; margin-left: 9px;">
-							    <div class=""
-									style="padding-left: 15px; padding: 6px; float: left; width: 50%; position: relative">
-								    <div class="" style="margin-bottom:0">
+							<div class="data_basic">
+							    <div class="data_content_4">
+								    <div class="data_content_8">
 									<font size="3" color=#585858>邮箱地址</font>
-									<input class="form-control" id="email" type="text" value="${userInfo.email}" style="
-								    border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 100%;border-radius:8px">
+									<input class="data_content_input_2" id="email" type="text" value="${userInfo.email}">
 									</div>
 							    </div>
-							    <div class=""
-									style="padding-left: 15px; padding: 6px; float: left; width: 50%; position: relative">
-								    <div class="" style="margin-bottom:0">
+							    <div class="data_content_4">
+								    <div class="data_content_8">
 									<font size="3" color=#585858>手机号码</font>
-									<input class="form-control" id="phone" type="text" value="${userInfo.phone}" style="
-								    border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 93%;border-radius:8px">
+									<input class="data_content_input_2" id="phone" type="text" value="${userInfo.phone}">
 									</div>
 							    </div>
 							</div>
-							<div class="" style="height:20% ;margin-top: 15px; margin-right: -15px; margin-left: 9px;">
-							   <div class=""
-									style="padding-left: 15px; padding: 6px; float: left; width: 33.33%; position: relative">
-								    <div class="" style="margin-bottom:0">
-									<font size="3" color=#585858>请输入原密码</font>
-									<input class="form-control" id="password" type="password" style="
-								    border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 100%;border-radius:8px">
-									</div>
+							<input class="data_input_updatapassword" type="button" id="modifyPW" value="我要修改密码">
+							<form id="from_modifyPassWord"> 
+							<div class="white_content" id="modifyPassWord">
+							    
+							        <label for="passId" style="display:none"></label>	
+									<input type="text" id="passId" name="passId" value="${userInfo.userId}" style="display:none;">
+							    
+							    <div class="data_content_5">
+									<label class="data_content_lable" for="password">请输入原密码:</label>
+									<input class="data_content_input_3" id="password" name="password" type="password">
 							    </div>
-							    <div class=""
-									style="padding-left: 15px; padding: 6px; float: left; width: 33.33%; position: relative">
-								    <div class="" style="margin-bottom:0">
-									<font size="3" color=#585858>请输入新密码</font>
-									<input class="form-control" id="new_password" type="password"  style="
-								    border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 100%;border-radius:8px">
-									</div>
+							    
+							    <div class="data_content_5">
+									<label class="data_content_lable" for="new_password">请输入新密码:</label>
+									<input class="data_content_input_3" id="new_password" name="new_password" type="password">
 							    </div>
-							    <div class=""
-									style="padding-left: 15px; padding: 6px; float: left; width: 33.33%; position: relative">
-								    <div class="" style="margin-bottom:0">
-									<font size="3" color=#585858>请再次输入新密码</font>
-									<input class="form-control" id="new_passwords" type="password"  style="
-								    border: 1px solid #CCC5B9;height: 40px;padding: 9px 3px;width: 90%;border-radius:8px">
-									</div>
+							    
+							    <div class="data_content_5">
+									<label class="data_content_lable" for="new_passwords">请确认新密码:</label>
+									<input class="data_content_input_3" id="new_passwords" name="new_passwords" type="password">
+							    </div>
+							    
+							    <div class="data_content_6">
+								    <input class="data_content_input_4" type="button" id="sureModifyPW" value="确认修改">
+								    <input class="data_content_input_4" type="button" id="cancelModifyPW" value="取消修改" style="margin-left: 56px">
 							    </div>
 							</div>
-							<div class="" style="height:20% ;margin-top: 15px; margin-right: -15px; margin-left: 9px;">
-							    <div class=""
-									style="padding-left: 15px; padding: 6px; float: left; width: 97%; position: relative">
-								    <div class="" style="margin-bottom:0">
+							</form>
+							<div class="data_basic">
+							    <div class="data_content_7">
+								    <div class="data_content_8">
 									<font size="3" color=#585858>个人说明</font>
-									<textarea class="form-control"  rows="4" style="
-								     border: 1px solid #CCC5B9;height: 100px;padding: 10px 0px;width: 100%;border-radius:8px"
-								     >Oh so, your weak rhyme You doubt I'll bother,reading into it I'll probably won't, left to my own devices But that's the difference in our opinions."
+									<textarea class="data_content_input_5"  rows="4">
 								    </textarea>
 									</div>
 							    </div>
 							</div>
-							<div class="" style="height:20% ;margin-top: 15px; margin-right: -15px; margin-left: 9px;">
-							     <div class=""
-									style="padding-left: 15px; padding: 6px; float: left; width: 100%; position: relative">
-								    <div class="" style="margin-bottom:0">
+							<div class="data_basic">
+							     <div class="data_content_7">
+								    <div class="data_content_8">
 									<font size="3" color=#585858>预留区域</font>
-									<input class="form-control" type="text" style="
-								     border: 1px solid #CCC5B9;height: 160px;padding: 10px 0px;width: 97%;border-radius:8px">
+									<input class="data_content_input_6" type="text">
 									</div>
 							    </div>
 							</div>
-						</form>
 					</div>
 					<button id="determineDelete" class="btn btn-primary btn-block m" style="width:96%">
 						<i class="fa fa-arrow-down"></i> 确认修改
@@ -255,11 +230,57 @@
 		</div>
       </div>
 	</div>
+	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
 	<script src="assets/js/content.js"></script>
 	<script src="assets/js/demo/peity-demo.min.js"></script>
+	<script src="assets/js/customerValidate.js"></script>
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
     <script type="text/javascript">
+    
+	    //打开修改密码div并发送验证码到邮箱
+		$('#modifyPW').click(function(e) {
+			e.preventDefault();
+			$('#modifyPassWord').show();
+			var emailvalue = $('#email').val();
+			var namelvalue = $('#user_name').val();
+			var data={emailAddress:emailvalue,userName:namelvalue};
+			$.ajax({
+				  type: 'post',
+	    		  url: 'rest/user/sedemail',
+	    		  data: data
+			});
+		});  
+	    
+	    //确认修改密码
+		$('#sureModifyPW').click(function(){
+			if(!$('#from_modifyPassWord').valid()){
+				return false;
+			}
+			var newpassword = $('#new_passwords').val();
+			var user_idvalue = '${userInfo.userId}';
+			var jsonData = '{"password":"'+newpassword+'","userId":"'+user_idvalue+'"}';
+			$('#modifyPassWord').hide();
+			$.ajax({
+				  type: 'post',
+	    		  url: 'rest/user/updataPassword',
+	    		  contentType:'application/json',
+		          dataType:'json',
+	    		  data: jsonData,
+	    		  success: function (data){
+	    			  alert("修改成功！");
+	    		  },
+	    		  error: function(){
+	    			  alert("修改失败");
+	    		  }
+			});
+		});
+	    
+	    //取消修改密码
+		$('#cancelModifyPW').click(function(){
+			$('#modifyPassWord').hide();
+		});
+    
        //点击确定修改，提交修改的user信息，提交到控制器修改数据库数据
        $('#determineDelete').click(function(){
     	   var companyvalue = $('#company').val();
@@ -270,7 +291,7 @@
            var user_idvalue = '${userInfo.userId}';
            var jsonData= '{"userId":"'+user_idvalue+'","linkman":"'+linkmanvalue+'","userName":"'+namevalue+'","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue+'"}';
            $.ajax({
-        	   type: 'post',
+        	      type: 'post',
 	    		  url: 'rest/user/updataUser',
 	    		  contentType:'application/json',
 		          dataType:'json',

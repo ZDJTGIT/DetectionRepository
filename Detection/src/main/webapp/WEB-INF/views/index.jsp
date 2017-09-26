@@ -20,8 +20,7 @@
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <title>Detection</title>
-<meta name="keywords"
-	content="detection,plat,inspection,ZDJT,zhongdajiance">
+<meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
 <meta name="description" content="中大检测平台">
 
 <!--[if lt IE 9]>
@@ -62,6 +61,7 @@
 							<i class="fa fa-home"></i> <span class="nav-label">主页</span> <span
 							class="fa arrow"></span>
 					</a></li>
+<<<<<<< HEAD
 					<li><a href="javascript:;"> <i class="fa fa-columns"></i>
 							<span class="nav-label">我的项目</span> <span class="fa arrow"></span>
 					</a>
@@ -81,14 +81,32 @@
 								</a>
 								<ul class="nav nav-second-level">
 									<li><a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁</a>
+=======
+					<shiro:hasPermission name="project:manager:*">
+						<li>
+							<a class="firstMenu" href="javascript:;">
+	                            <i class="fa fa-columns"></i>
+	                            <span class="nav-label">我的项目</span>
+	                            <span class="fa arrow"></span>
+	                        </a>
+							<ul class="nav nav-second-level">
+								<shiro:hasPermission name="farmland:query:*">
+									<li>
+										<a class="secondMenu J_menuItem" href="rest/project/1">
+											<i class="fa fa-columns"></i><span class="nav-label">农田项目</span>
+										</a>
+										<ul class="nav nav-third-level"></ul>
+>>>>>>> 97511cabb41373f31b753f57d26de61ff4fd7b0b
 									</li>
-								</ul></li>
-							<li><a class="J_menuItem" href="javascript:;"> <i
-									class="fa fa-columns"></i> <span class="nav-label">隧道项目</span>
-							</a>
-								<ul class="nav nav-second-level">
-									<li><a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道</a>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="bridge:query:*">
+									<li>
+										<a class="secondMenu J_menuItem" href="rest/project/2">
+											<i class="fa fa-columns"></i><span class="nav-label">桥梁项目</span>
+										</a>
+										<ul class="nav nav-third-level"></ul>
 									</li>
+<<<<<<< HEAD
 								</ul></li>
 							<li><a class="J_menuItem" href="javascript:;"> <i
 									class="fa fa-columns"></i> <span class="nav-label">边坡项目</span>
@@ -131,17 +149,76 @@
 						</ul></li>
 
 
+=======
+								</shiro:hasPermission>
+								<shiro:hasPermission name="tunnel:query:*">
+									<li>
+										<a class="secondMenu J_menuItem" href="rest/project/3">
+											<i class="fa fa-columns"></i><span class="nav-label">隧道项目</span>
+										</a>
+										<ul class="nav nav-third-level"></ul>
+									</li>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="slope:query:*">
+									<li>
+										<a class="secondMenu J_menuItem" href="rest/project/4">
+											<i class="fa fa-columns"></i><span class="nav-label">边坡项目</span>
+										</a>
+										<ul class="nav nav-third-level">
+											<!-- <li>
+												<a class="J_menuItem" href="rest/graph_echarts_deep">深部位移</a>
+											</li>
+											<li>
+												<a class="J_menuItem" href="rest/graph_echarts_osmotic">渗压</a>
+											</li>
+											<li>
+												<a class="J_menuItem" href="rest/graph_echarts_rainwater">雨量</a>
+											</li> -->
+										</ul>
+									</li>
+								</shiro:hasPermission>
+							</ul>
+						</li>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="project:manager:*">
+						<li>
+							<a href="javascript:;">
+								<i class="fa fa fa-bar-chart-o"></i><span class="nav-label">统计图表</span>
+								<span class="fa arrow"></span>
+							</a>
+							<ul class="nav nav-second-level">
+								<shiro:hasPermission name="farmland:query:*">
+									<li>
+										<a class="J_menuItem" href="rest/graph_echarts_farmland">农田数据分析图</a>
+									</li>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="bridge:query:*">
+									<li>
+										<a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁数据分析图</a>
+									</li>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="tunnel:query:*">
+									<li>
+										<a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道数据分析图</a>
+									</li>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="slope:query:*">
+									<li>
+										<a class="J_menuItem" href="rest/graph_echarts_slope">边坡数据分析图</a>
+									</li>
+								</shiro:hasPermission>
+							</ul>
+						</li>
+					</shiro:hasPermission>
+>>>>>>> 97511cabb41373f31b753f57d26de61ff4fd7b0b
 					<li>
 						<a href="javascript:;"> <i class="fa fa fa-user"></i>
-							<span class="nav-label">用户资料</span> <span class="fa arrow"></span>
+							<span class="nav-label">个人资料</span> <span class="fa arrow"></span>
 						</a>
 						<ul class="nav nav-second-level">
 							<li><a class="J_menuItem" href="rest/user">个人资料</a></li>
 						</ul>
 					</li>
-
-
-
 					<li><a href="javascript:;"><i class="fa fa-desktop"></i> <span
 							class="nav-label">页面</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
@@ -166,20 +243,30 @@
 								</ul></li>
 							<li><a class="J_menuItem" href="rest/404">404页面</a></li>
 							<li><a class="J_menuItem" href="rest/500">500页面</a></li>
-						</ul></li>
-					<li><a href="javascript:;"><i class="fa fa-table"></i> <span
-							class="nav-label">表格</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/user/userList">用户&告警联系人
-									<span class="label label-danger pull-right">管理员可见</span>
-							</a></li>
-							<li><a class="J_menuItem" href="rest/table_data_tables">详细检验数据展示分析</a>
-							</li>
-							<li><a class="J_menuItem" href="rest/table_foo_table">操作日志</a>
-							</li>
-							<li><a class="J_menuItem" href="rest/table_bootstrap">其他</a>
-							</li>
-						</ul></li>
+						</ul>
+					</li>
+					<shiro:hasAnyRoles name="superAdmin, admin">
+						<li><a href="javascript:;"><i class="fa fa-table"></i> <span
+							class="nav-label">用户管理</span><span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a class="J_menuItem" href="rest/user/userList">用户&告警联系人
+										<span class="label label-danger pull-right">管理员可见</span>
+									</a>
+								</li>
+								<li>
+									<a class="J_menuItem" href="rest/table_data_tables">详细检验数据展示分析</a>
+								</li>
+								<li>
+									<a class="J_menuItem" href="rest/table_foo_table">操作日志</a>
+								</li>
+								<li>
+									<a class="J_menuItem" href="rest/table_bootstrap">其他</a>
+								</li>
+							</ul>
+						</li>
+					</shiro:hasAnyRoles>
+
 					<li><a href="javascript:;"><i class="fa fa-tasks"></i> <span
 							class="nav-label">项目管理</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
@@ -212,7 +299,6 @@
 						<!-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
 							href="#"><i class="fa fa-bars"></i> </a> -->
 						<div class="logo">
-
 							<!-- 	<img src="assets/img/zdLogo.png" alt="logo" class="logo"> -->
 							<a href="#" class="navbar-brand">中国大检测数据在线监控平台</a>
 						</div>
@@ -229,7 +315,7 @@
 											class="img-circle" src="assets/img/zdLogo.png">
 										</a>
 										<div class="media-body">
-											<small class="pull-right">46小时前</small> <strong>李四</strong>
+											<small class="pull-right">46小时前</small> <strong>admin</strong>
 											XX边坡项目深部位移监测55米孔深处，编号JCZ1测点位移量为XXmm,超出阀值，请及时处理<br> <small
 												class="text-muted">1天前 2017.9.20</small>
 										</div>
@@ -242,7 +328,7 @@
 											class="img-circle" src="assets/img/zdLogo.png">
 										</a>
 										<div class="media-body ">
-											<small class="pull-right text-navy">2小时前</small> <strong>王五</strong>
+											<small class="pull-right text-navy">2小时前</small> <strong>admin</strong>
 											XX边坡项目地下水位位监测，编号JCZ1 90m处水位达到XXmm，临近阀值，请及时采取措施预防 <br> <small
 												class="text-muted">今天 2017.9.21</small>
 										</div>
@@ -258,11 +344,11 @@
 								</li>
 							</ul></li>
 						<li class="dropdown"><a class="dropdown-toggle count-info"
-							data-toggle="dropdown" href="javascript:;"> <i
+							data-toggle="dropdown" href="#"> <i
 								class="fa fa-bell"></i> <span class="label label-primary">8</span>
 						</a>
 							<ul class="dropdown-menu dropdown-alerts">
-								<li><a href="rest/mailbox">
+								<li><a class="J_menuItem" href="rest/table_jqgrid">
 										<div>
 											<i class="fa fa-envelope fa-fw"></i> 您有16条未读消息 <span
 												class="pull-right text-muted small">4分钟前</span>
@@ -449,9 +535,8 @@
 										</div>
 									</div>
 									<div class="media-body">
-
-										据天津日报报道：瑞海公司董事长于学伟，副董事长董社轩等10人在13日上午已被控制。 <br> <small
-											class="text-muted">今天 4:21</small>
+										据天津日报报道：瑞海公司董事长于学伟，副董事长董社轩等10人在13日上午已被控制。 <br> 
+										<small class="text-muted">今天 4:21</small>
 									</div>
 								</a>
 							</div>
@@ -738,6 +823,7 @@
 	</script>
 	
 	<script type="text/javascript">
+<<<<<<< HEAD
 		$(document).ready(function(){
 			var key = true;
 			var longding = true;
@@ -770,6 +856,31 @@
 				
 			});
 		});
+=======
+		var farmspan = document.getElementById("farmspan");
+		var farmpointli = document.getElementById("farmpointli");
+		farmspan.onclick = function() {
+			$("#licontent").remove();
+			var li = document.createElement("li");
+			li.setAttribute("id", "licontent");
+			var a = document.createElement("a");
+			a.innerHTML = "农田";
+			a.setAttribute("class", "J_menuItem");
+			a.setAttribute("href", "rest/graph_echarts_bridge");
+			var a2 = document.createElement("a");
+			a2.innerHTML = "农田1";
+			li.appendChild(a);
+			li.appendChild(a2);
+			farmpointli.appendChild(li);
+
+		}
+
+		$('#userBtn').click(function(){
+			$(this).collapse('toggle');
+		});
+
+
+>>>>>>> 97511cabb41373f31b753f57d26de61ff4fd7b0b
 	</script>
 </body>
 </html>

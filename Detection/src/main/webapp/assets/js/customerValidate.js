@@ -77,11 +77,14 @@ $('#form_modifyuser').validate({
 				minlength : 2,
 				//验证用户名是否存在
 				remote: {
-				    url: "rest/user/OnlyUserName",     //后台处理程序
+				    url: "rest/user/mdOnlyUserName",     //后台处理程序
 				    type: "post",               //数据发送方式  
 				    data: {                     //要传递的数据
 				        userName: function() {
-				            return $("#userName").val();
+				            return $("#mdname").val();
+				        },
+				        userId: function() {
+					        return $("#mdid").val();
 				        }
 				    }
 				}
@@ -116,7 +119,7 @@ $('#form_modifyuser').validate({
 				remote: "用户名已经被注册"
 			},
 		
-			linkman : {
+			mdlinkman : {
 				required : "请输入联系人",
 				minlength :"用户名为2-10个字符"
 			},
@@ -138,6 +141,61 @@ $('#form_modifyuser').validate({
 		}
 		
 	});
+
+$('#from_modifyPassWord').validate({
 	
-})
+		rules : {
+			password: {
+				required: true,
+	            minlength: 6,
+				remote: {
+				    url: "rest/user/OnlyPassword",     //后台处理程序
+				    type: "post",               //数据发送方式  
+				    data: {                     //要传递的数据
+				    	password: function() {
+				            return $("#password").val();
+				        },
+				        userId: function() {
+					        return $("#passId").val();
+				        }
+				    }
+				}
+			},
+			
+			new_password: {
+		        required: true,
+		        minlength: 6
+		    },
+		      
+		    new_passwords: {
+			    required: true,
+			    minlength: 6,
+			    equalTo: "#new_password"
+			}
+		},
+		
+		messages : {
+		
+			password: {
+		        required: "请输入密码",
+		        minlength: "密码长度不能小于 6 个字符",
+		        remote: "原密码输入错误"	
+		    },
+			
+			new_password: {
+		        required: "请输入密码",
+		        minlength: "密码长度不能小于 6 个字符"
+		    },
+		      
+		    new_passwords: {
+		        required: "请输入密码",
+		        minlength: "密码长度不能小于 6 个字符",
+		        equalTo: "两次密码输入不一致"
+		    }
+		}
+	});
+});
+
+
+
 

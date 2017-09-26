@@ -19,9 +19,11 @@ import org.springframework.web.util.WebUtils;
 
 import com.zhongda.detection.core.utils.vcode.Captcha;
 import com.zhongda.detection.core.utils.vcode.GifCaptcha;
+import com.zhongda.detection.web.model.Project;
+import com.zhongda.detection.web.model.SensorInfo;
 import com.zhongda.detection.web.model.User;
-import com.zhongda.detection.web.model.UserProject;
-import com.zhongda.detection.web.service.UserProjectService;
+import com.zhongda.detection.web.service.ProjectService;
+import com.zhongda.detection.web.service.SensorInfoService;
 
 /**
  * 公共视图控制器
@@ -32,12 +34,16 @@ public class CommonController {
 	public static final Logger logger = LoggerFactory
 			.getLogger(CommonController.class);
 
+	@Resource
+	private ProjectService projectService;
+
+	@Resource
+	private SensorInfoService sensorInfoService;
+
 	@Resource(name = "shiroEhcacheManager")
 	private CacheManager cacheManager;
 	private Cache<String, String> vcodeCache;
 
-	@Resource
-	private UserProjectService userProjectService;
 
 	/**
 	 * 首页
@@ -52,31 +58,19 @@ public class CommonController {
 		return "home";
 	}
 
-	@RequestMapping("myProject")
+	@RequestMapping("project/{projectTypeId}")
 	@ResponseBody
-	public List<UserProject> myproject(HttpServletRequest request) {
+	public List<Project> projectType(HttpServletRequest request, @PathVariable("projectTypeId") Integer projectTypeId) {
 		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
-		List<UserProject> userProjectList = userProjectService
-				.selectAllProjectTypeByUserId(user.getUserId());
-		return userProjectList;
+		List<Project> projectList = projectService.selectProjectsByUserIdAndProjectType(user.getUserId(), projectTypeId);
+		return projectList;
 	}
 
-	@RequestMapping("project/{projectType}")
+	@RequestMapping("sensor/{projectId}")
 	@ResponseBody
-	public List<UserProject> projectType(HttpServletRequest request, @PathVariable("projectType") String projectType) {
-		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
-		List<UserProject> userProjectList = userProjectService
-				.selectAllProjectByUserIdAndProjectType(user.getUserId(), projectType);
-		return userProjectList;
-	}
-
-	@RequestMapping("project/{projectType}/{projectId}")
-	@ResponseBody
-	public UserProject specificProject(HttpServletRequest request, @PathVariable("projectType") String projectType, @PathVariable("projectId") Integer projectId) {
-		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
-		UserProject userProject = userProjectService
-				.selectProjectByUserIdAndProjectInfo(user.getUserId(), projectType, projectId);
-		return userProject;
+	public List<SensorInfo> sensorType(@PathVariable("projectId") Integer projectId) {
+		List<SensorInfo> sensorList = sensorInfoService.selectSensorTypeByProjectId(projectId);
+		return sensorList;
 	}
 
 
@@ -98,11 +92,6 @@ public class CommonController {
 	@RequestMapping("css_animation")
 	public String css_animation(HttpServletRequest request) {
 		return "css_animation";
-	}
-
-	@RequestMapping("graph_echarts_farmland")
-	public String graph_echarts_farmland(HttpServletRequest request) {
-		return "graph_echarts_farmland";
 	}
 
 	@RequestMapping("graph_echarts_bridge")

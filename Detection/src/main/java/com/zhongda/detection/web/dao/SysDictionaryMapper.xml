@@ -4,11 +4,13 @@
   <resultMap id="BaseResultMap" type="com.zhongda.detection.web.model.SysDictionary">
     <id column="dic_id" jdbcType="INTEGER" property="dicId" />
     <result column="type_name" jdbcType="VARCHAR" property="typeName" />
-    <result column="type_code" jdbcType="INTEGER" property="typeCode" />
     <result column="type_value" jdbcType="VARCHAR" property="typeValue" />
+    <result column="type_code" jdbcType="INTEGER" property="typeCode" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="item_value" jdbcType="VARCHAR" property="itemValue" />
   </resultMap>
   <sql id="Base_Column_List">
-    dic_id, type_name, type_code, type_value
+    dic_id, type_name, type_value, type_code, item_name, item_value
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -21,10 +23,12 @@
     where dic_id = #{dicId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.SysDictionary">
-    insert into sys_dictionary (dic_id, type_name, type_code, 
-      type_value)
-    values (#{dicId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{typeCode,jdbcType=INTEGER}, 
-      #{typeValue,jdbcType=VARCHAR})
+    insert into sys_dictionary (dic_id, type_name, type_value, 
+      type_code, item_name, item_value
+      )
+    values (#{dicId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{typeValue,jdbcType=VARCHAR}, 
+      #{typeCode,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{itemValue,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.SysDictionary">
     insert into sys_dictionary
@@ -35,11 +39,17 @@
       <if test="typeName != null">
         type_name,
       </if>
+      <if test="typeValue != null">
+        type_value,
+      </if>
       <if test="typeCode != null">
         type_code,
       </if>
-      <if test="typeValue != null">
-        type_value,
+      <if test="itemName != null">
+        item_name,
+      </if>
+      <if test="itemValue != null">
+        item_value,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -49,11 +59,17 @@
       <if test="typeName != null">
         #{typeName,jdbcType=VARCHAR},
       </if>
+      <if test="typeValue != null">
+        #{typeValue,jdbcType=VARCHAR},
+      </if>
       <if test="typeCode != null">
         #{typeCode,jdbcType=INTEGER},
       </if>
-      <if test="typeValue != null">
-        #{typeValue,jdbcType=VARCHAR},
+      <if test="itemName != null">
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemValue != null">
+        #{itemValue,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -63,11 +79,17 @@
       <if test="typeName != null">
         type_name = #{typeName,jdbcType=VARCHAR},
       </if>
+      <if test="typeValue != null">
+        type_value = #{typeValue,jdbcType=VARCHAR},
+      </if>
       <if test="typeCode != null">
         type_code = #{typeCode,jdbcType=INTEGER},
       </if>
-      <if test="typeValue != null">
-        type_value = #{typeValue,jdbcType=VARCHAR},
+      <if test="itemName != null">
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemValue != null">
+        item_value = #{itemValue,jdbcType=VARCHAR},
       </if>
     </set>
     where dic_id = #{dicId,jdbcType=INTEGER}
@@ -75,8 +97,10 @@
   <update id="updateByPrimaryKey" parameterType="com.zhongda.detection.web.model.SysDictionary">
     update sys_dictionary
     set type_name = #{typeName,jdbcType=VARCHAR},
+      type_value = #{typeValue,jdbcType=VARCHAR},
       type_code = #{typeCode,jdbcType=INTEGER},
-      type_value = #{typeValue,jdbcType=VARCHAR}
+      item_name = #{itemName,jdbcType=VARCHAR},
+      item_value = #{itemValue,jdbcType=VARCHAR}
     where dic_id = #{dicId,jdbcType=INTEGER}
   </update>
 </mapper>
