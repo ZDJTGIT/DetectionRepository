@@ -23,4 +23,12 @@ public interface FarmlandPHMapper {
      * @return
      */
 	List<FarmlandPH> selectFarmlandPHByProjectIdAndToday(Integer projectId);
+
+	/**
+	 * 获取超过最小或最大阈值的PH数据对象
+	 * @param minData 最小值
+	 * @param maxData 最大值
+	 * @return
+	 */
+	List<FarmlandPH> selectFarmlandPHWithExceedThreshold(float minData, float maxData);
 }

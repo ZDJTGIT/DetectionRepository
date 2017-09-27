@@ -17,6 +17,12 @@ public class FarmlandPH {
 
     private String sensorStatus;
 
+    private SensorInfo sensorInfo;
+
+    private Project project;
+
+    private User user;
+
     public Integer getPhId() {
         return phId;
     }
@@ -65,4 +71,28 @@ public class FarmlandPH {
     public void setSensorStatus(String sensorStatus) {
         this.sensorStatus = sensorStatus == null ? null : sensorStatus.trim();
     }
+
+	public SensorInfo getSensorInfo() {
+		return sensorInfo;
+	}
+
+	public void setSensorInfo(SensorInfo sensorInfo) {
+		this.sensorInfo = sensorInfo;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

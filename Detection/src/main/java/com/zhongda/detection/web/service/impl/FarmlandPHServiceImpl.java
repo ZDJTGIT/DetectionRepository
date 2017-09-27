@@ -33,4 +33,10 @@ public class FarmlandPHServiceImpl implements FarmlandPHService{
 		return multimap;
 	}
 
+	@Override
+	public List<FarmlandPH> selectFarmlandPHWithExceedThreshold(float minData,
+			float maxData) {
+		return farmlandPHMapper.selectFarmlandPHWithExceedThreshold(minData, maxData);
+	}
+
 }

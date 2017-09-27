@@ -1,5 +1,7 @@
 package com.zhongda.detection.web.service;
 
+import java.util.List;
+
 import com.google.common.collect.Multimap;
 import com.zhongda.detection.web.model.FarmlandPH;
 
@@ -16,5 +18,13 @@ public interface FarmlandPHService {
 	 * @return
 	 */
 	Multimap<Integer, FarmlandPH> selectFarmlandPHByProjectIdAndToday(Integer projectId);
+
+	/**
+	 * 获取超过最小或最大阈值的PH数据对象
+	 * @param minData 最小值
+	 * @param maxData 最大值
+	 * @return
+	 */
+	List<FarmlandPH> selectFarmlandPHWithExceedThreshold(float minData, float maxData);
 
 }

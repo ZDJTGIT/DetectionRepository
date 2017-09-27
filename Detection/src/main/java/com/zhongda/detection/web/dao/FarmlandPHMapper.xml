@@ -9,6 +9,46 @@
     <result column="detection_time" jdbcType="TIMESTAMP" property="detectionTime" />
     <result column="sensor_status" jdbcType="VARCHAR" property="sensorStatus" />
   </resultMap>
+  <resultMap id="LinkMessageMap" type="com.zhongda.detection.web.model.FarmlandPH">
+    <id column="ph_id" jdbcType="INTEGER" property="phId" />
+    <result column="detection_id" jdbcType="INTEGER" property="detectionId" />
+    <result column="sensor_id" jdbcType="INTEGER" property="sensorId" />
+    <result column="detection_data" jdbcType="REAL" property="detectionData" />
+    <result column="detection_time" jdbcType="TIMESTAMP" property="detectionTime" />
+    <result column="sensor_status" jdbcType="VARCHAR" property="sensorStatus" />
+    <association property="sensorInfo" javaType="SensorInfo">
+	    <id column="sensor_id" jdbcType="INTEGER" property="sensorId" />
+	    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+	    <result column="detection_id" jdbcType="INTEGER" property="detectionId" />
+	    <result column="sensor_longitude" jdbcType="VARCHAR" property="sensorLongitude" />
+	    <result column="sensor_latitude" jdbcType="VARCHAR" property="sensorLatitude" />
+	    <result column="sensor_num" jdbcType="VARCHAR" property="sensorNum" />
+	    <result column="sensor_type" jdbcType="VARCHAR" property="sensorType" />
+	    <result column="sensor_model" jdbcType="VARCHAR" property="sensorModel" />
+	    <result column="detection_type_id" jdbcType="INTEGER" property="detectionTypeId" />
+   	</association>
+   	<association property="project" javaType="Project">
+	    <id column="project_id" jdbcType="INTEGER" property="projectId" />
+	    <result column="user_id" jdbcType="INTEGER" property="userId" />
+	    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+	    <result column="project_type_id" jdbcType="INTEGER" property="projectTypeId" />
+	    <result column="project_address" jdbcType="VARCHAR" property="projectAddress" />
+	    <result column="project_time" jdbcType="TIMESTAMP" property="projectTime" />
+	    <result column="project_status" jdbcType="VARCHAR" property="projectStatus" />
+	    <result column="project_description" jdbcType="VARCHAR" property="projectDescription" />
+   	</association>
+   	<association property="user" javaType="User">
+	    <id column="user_id" jdbcType="INTEGER" property="userId" />
+	    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+	    <result column="password" jdbcType="VARCHAR" property="password" />
+	    <result column="phone" jdbcType="VARCHAR" property="phone" />
+	    <result column="email" jdbcType="VARCHAR" property="email" />
+	    <result column="company" jdbcType="VARCHAR" property="company" />
+	    <result column="linkman" jdbcType="VARCHAR" property="linkman" />
+	    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	    <result column="status" jdbcType="VARCHAR" property="status" />
+   	</association>
+  </resultMap>
   <sql id="Base_Column_List">
     ph_id, detection_id, sensor_id, detection_data, detection_time, sensor_status
   </sql>
@@ -23,7 +63,15 @@
     fp.*
     from farmland_ph fp, sensor_info si
     where fp.sensor_id = si.sensor_id and si.project_id = #{projectId,jdbcType=INTEGER}
-    and fp.detection_time &gt;= date_sub(now(), INTERVAL 24 HOUR) and fp.detection_time &lt; now()
+    <!-- and fp.detection_time &gt;= date_sub(now(), INTERVAL 24 HOUR) and fp.detection_time &lt; now() -->
+    and to_days(fp.detection_time) = to_days(now())
+  </select>
+  <select id="selectFarmlandPHWithExceedThreshold" resultMap="LinkMessageMap">
+    select
+    fp.*,si.*,p.*,u.*
+    from farmland_ph fp, sensor_info si, project p, user u
+    where fp.sensor_id = si.sensor_id and si.project_id = p.project_id and p.user_id = u.user_id
+    and (fp.detection_data &lt;= #{0} or fp.detection_data &gt;= #{1})
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from farmland_ph

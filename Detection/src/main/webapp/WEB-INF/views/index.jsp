@@ -246,32 +246,28 @@
 								class="fa fa-envelope"></i> <span class="label label-warning">16</span>
 						</a>
 							<ul class="dropdown-menu dropdown-messages">
-								<li class="m-t-xs">
-									<div class="dropdown-messages-box">
-										<a href="rest/profile" class="pull-left"> <img alt="image"
-											class="img-circle" src="assets/img/zdLogo.png">
-										</a>
-										<div class="media-body">
-											<small class="pull-right">46小时前</small> <strong>admin</strong>
-											XX边坡项目深部位移监测55米孔深处，编号JCZ1测点位移量为XXmm,超出阀值，请及时处理<br> <small
-												class="text-muted">1天前 2017.9.20</small>
+								<c:forEach items="${messageList}" var="message" varStatus="status">
+									<c:choose>
+										<c:when test="${status.first}">
+											<li class="m-t-xs">
+										</c:when>
+										<c:otherwise>
+											<li>
+										</c:otherwise>
+									</c:choose>
+										<div class="dropdown-messages-box">
+											<a href="rest/profile" class="pull-left"> <img alt="image"
+												class="img-circle" src="assets/img/zdLogo.png">
+											</a>
+											<div class="media-body">
+												<small class="pull-right">46小时前</small> <strong>${userInfo.userName}</strong>
+												${message.messageContext}<br> <small
+													class="text-muted">${message.createTime}</small>
+											</div>
 										</div>
-									</div>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<div class="dropdown-messages-box">
-										<a href="rest/profile" class="pull-left"> <img alt="image"
-											class="img-circle" src="assets/img/zdLogo.png">
-										</a>
-										<div class="media-body ">
-											<small class="pull-right text-navy">2小时前</small> <strong>admin</strong>
-											XX边坡项目地下水位位监测，编号JCZ1 90m处水位达到XXmm，临近阀值，请及时采取措施预防 <br> <small
-												class="text-muted">今天 2017.9.21</small>
-										</div>
-									</div>
-								</li>
-								<li class="divider"></li>
+									</li>
+									<li class="divider"></li>
+								</c:forEach>
 								<li>
 									<div class="text-center link-block">
 										<a class="J_menuItem" href="rest/mailbox"> <i
@@ -472,7 +468,7 @@
 										</div>
 									</div>
 									<div class="media-body">
-										据天津日报报道：瑞海公司董事长于学伟，副董事长董社轩等10人在13日上午已被控制。 <br> 
+										据天津日报报道：瑞海公司董事长于学伟，副董事长董社轩等10人在13日上午已被控制。 <br>
 										<small class="text-muted">今天 4:21</small>
 									</div>
 								</a>
