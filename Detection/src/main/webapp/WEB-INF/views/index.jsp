@@ -154,6 +154,8 @@
 							<li><a class="J_menuItem" href="rest/user">个人资料</a></li>
 						</ul>
 					</li>
+					
+					
 					<li><a href="javascript:;"><i class="fa fa-desktop"></i> <span
 							class="nav-label">页面</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">

@@ -121,6 +121,7 @@ demo = {
                 center : point, //地图中心点
                 level : 15  //地图显示的缩放级别
             });
+           
              AMap.event.addListener(mapObj,'click',getLnglat); //点击事件
             satellLayer.setMap(mapObj); //在map中添加卫星图
             mapObj.setZoom(4);
