@@ -37,8 +37,8 @@
 
 <body class="fixed-sidebar full-height-layout gray-bg"
 	style="overflow-y: hidden margin: 0 padding: 0">
+	
 	<div id="wrapper">
-
 		<!--左侧导航开始-->
 		<nav class="navbar-default navbar-static-side" role="navigation">
 			<div class="nav-close">
@@ -92,6 +92,7 @@
 											<i class="fa fa-columns"></i><span class="nav-label">隧道项目</span>
 										</a>
 										<ul class="nav nav-third-level" aria-expanded="false"></ul>
+
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="slope:query:*">
@@ -757,5 +758,6 @@
 
 		});
 	</script>
+	
 </body>
 </html>
