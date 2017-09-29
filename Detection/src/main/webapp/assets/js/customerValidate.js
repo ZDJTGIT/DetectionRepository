@@ -5,7 +5,7 @@ $(document).ready(function() {
 			userName : {
 				required : true,
 				minlength : 2,
-				//验证用户名是否存在
+				//验证用户名是否已存在
 				remote: {
 				    url: "rest/user/OnlyUserName",     //后台处理程序
 				    type: "post",               //数据发送方式  
@@ -29,12 +29,32 @@ $(document).ready(function() {
 			
 			phone : {
 				required : true,
-				minlength : 11
+				minlength : 11,
+				//验证手机号码是否已注册
+				remote: {
+				    url: "rest/user/OnlyPhone",     //后台处理程序
+				    type: "post",               //数据发送方式  
+				    data: {                     //要传递的数据
+				    	phone: function() {
+				            return $("#phone").val();
+				        }
+				    }
+				}
 			},
 			
 			email : {
 				required : true,
-				email : true
+				email : true,
+				//验证邮箱号是否已注册
+				remote: {
+				    url: "rest/user/OnlyEmail",     //后台处理程序
+				    type: "post",               //数据发送方式  
+				    data: {                     //要传递的数据
+				    	email: function() {
+				            return $("#email").val();
+				        }
+				    }
+				}
 			}
 		},
 		
@@ -58,12 +78,14 @@ $(document).ready(function() {
 		
 			phone : {
 				required : "输入常用手机号码",
-				minlength : "请输入一个正确的手机号码"
+				minlength : "请输入一个正确的手机号码",
+				remote: "手机号已经被注册"
 			},
 		
 			email :{
 				required : "请输入邮箱",
-				email : "请输入一个正确的邮箱"
+				email : "请输入一个正确的邮箱",
+				remote: "邮箱号已经被注册"	
 			}
 		}
 		
@@ -102,12 +124,38 @@ $('#form_modifyuser').validate({
 			
 			mdphone : {
 				required : true,
-				minlength : 11
+				minlength : 11,
+				//验证手机号码是否被注册
+				remote: {
+				    url: "rest/user/mdOnlyPhone",     //后台处理程序
+				    type: "post",               //数据发送方式  
+				    data: {                     //要传递的数据
+				    	mdphone: function() {
+				            return $("#mdphone").val();
+				        },
+				        userId: function() {
+					        return $("#mdid").val();
+				        }
+				    }
+				}
 			},
 			
 			mdemail : {
 				required : true,
-				email : true
+				email : true,
+				//验证电子邮箱是否被注册
+				remote: {
+				    url: "rest/user/mdOnlyEmail",     //后台处理程序
+				    type: "post",               //数据发送方式  
+				    data: {                     //要传递的数据
+				    	mdemail: function() {
+				            return $("#mdemail").val();
+				        },
+				        userId: function() {
+					        return $("#mdid").val();
+				        }
+				    }
+				}
 			}
 		},
 		
@@ -131,12 +179,14 @@ $('#form_modifyuser').validate({
 		
 			mdphone : {
 				required : "输入常用手机号码",
-				minlength : "请输入一个正确的手机号码"
+				minlength : "请输入一个正确的手机号码",
+				remote: "手机号码已经被注册"
 			},
 		
 			mdemail :{
 				required : "请输入邮箱",
-				email : "请输入一个正确的邮箱"
+				email : "请输入一个正确的邮箱",
+				remote: "电子邮箱已经被注册"
 			}
 		}
 		

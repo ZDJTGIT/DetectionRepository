@@ -23,6 +23,9 @@ public interface UserMapper {
 
 	boolean deleteUser(String name);
 	
+	User selectByEmail(String email);
+	
+	User selectByPhone(String phone);
 	/**
 	 * 查询所有的用户
 	 * @return

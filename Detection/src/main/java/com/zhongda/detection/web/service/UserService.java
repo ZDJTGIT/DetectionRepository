@@ -63,18 +63,28 @@ public interface UserService {
 	 */
 	List<User> selectList();
 
-	/*
+	/**
 	 * 修改用户信息
 	 */
 	int updateByPrimaryKeySelective(User record);
 
-	/*
+	/**
 	 * 根据用户名删除用户
 	 */
 	boolean deleteUser(String name);
 
-	/*
+	/**
 	 * 根据Id查用户
 	 */
 	User selectByPrimaryKey(Integer userId);
+	
+	/**
+	 * 根据邮箱号查用户
+	 */
+	User selectByEmail(String email);
+	
+	/**
+	 * 根据手机号码查用户
+	 */
+	User selectByPhone(String phone);
 }

@@ -3,7 +3,11 @@ package com.zhongda.detection.web.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +41,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
+import com.zhongda.detection.core.utils.GetVerificationCode;
 import com.zhongda.detection.core.utils.SimpleMailSender;
 import com.zhongda.detection.web.model.Message;
 import com.zhongda.detection.web.model.User;
@@ -330,13 +335,11 @@ public class UserController {
 		// 根据选中的用户修改用户信息
 		userService.updateByPrimaryKeySelective(user);
 		WebUtils.setSessionAttribute(request, "userInfo", user);
-
 		return user;
 	}
 
-	/*
-	 * 验证用户名是否唯一 ======= 验证用户名是否唯一(添加验证) >>>>>>>
-	 * 97511cabb41373f31b753f57d26de61ff4fd7b0b
+	/**
+	 * 验证用户名是否唯一(添加验证)
 	 */
 	@RequestMapping(value = "/OnlyUserName", method = RequestMethod.POST)
 	public void OnlyUserName(String userName, HttpServletResponse response) {
@@ -351,8 +354,42 @@ public class UserController {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 验证手机号码是否唯一(添加验证)
+	 */
+	@RequestMapping(value = "/OnlyPhone", method = RequestMethod.POST)
+	public void Onlyphone(String phone, HttpServletResponse response) {
+		User user = userService.selectByPhone(phone);
+		try {
+			if (user == null) {
+				response.getWriter().print(true);
+			} else {
+				response.getWriter().print(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 验证电子邮件是否唯一(添加验证)
+	 */
+	@RequestMapping(value = "/OnlyEmail", method = RequestMethod.POST)
+	public void Onlyemail(String email, HttpServletResponse response) {
+		User user = userService.selectByEmail(email);
+		try {
+			if (user == null) {
+				response.getWriter().print(true);
+			} else {
+				response.getWriter().print(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-	/*
+	/**
 	 * 验证用户名是否唯一(修改验证)
 	 */
 	@RequestMapping(value = "/mdOnlyUserName", method = RequestMethod.POST)
@@ -379,7 +416,60 @@ public class UserController {
 		}
 	}
 
-	/*
+	/**
+	 * 验证手机号码是否唯一(修改验证)
+	 */
+	@RequestMapping(value = "/mdOnlyPhone", method = RequestMethod.POST)
+	public void mdOnlyPhone(String mdphone, Integer userId,
+			HttpServletResponse response) {
+		if (mdphone.equals(userService.selectByPrimaryKey(userId)
+				.getPhone())) {
+			try {
+				response.getWriter().print(true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			User user = userService.selectByPhone(mdphone);
+			try {
+				if (user == null) {
+					response.getWriter().print(true);
+				} else {
+					response.getWriter().print(false);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * 验证电子邮箱是否唯一(修改验证)
+	 */
+	@RequestMapping(value = "/mdOnlyEmail", method = RequestMethod.POST)
+	public void mdOnlyEmail(String mdemail, Integer userId,
+			HttpServletResponse response) {
+		if (mdemail.equals(userService.selectByPrimaryKey(userId)
+				.getEmail())) {
+			try {
+				response.getWriter().print(true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			User user = userService.selectByEmail(mdemail);
+			try {
+				if (user == null) {
+					response.getWriter().print(true);
+				} else {
+					response.getWriter().print(false);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
 	 * 验证原密码输入
 	 */
 	@RequestMapping(value = "/OnlyPassword", method = RequestMethod.POST)
@@ -404,7 +494,7 @@ public class UserController {
 		}
 	}
 
-	/*
+	/**
 	 * 用户修改用户信息
 	 */
 	@RequestMapping(value = "/updataUser", method = RequestMethod.POST)
@@ -415,7 +505,7 @@ public class UserController {
 		return user;
 	}
 
-	/*
+	/**
 	 * 用户修改密码
 	 */
 	@RequestMapping(value = "/updataPassword", method = RequestMethod.POST)
@@ -430,7 +520,7 @@ public class UserController {
 		return user;
 	}
 
-	/*
+	/**
 	 * 发送邮件及验证码
 	 */
 	@RequestMapping(value = "/sedemail", method = RequestMethod.POST)
@@ -442,19 +532,104 @@ public class UserController {
 		// Sender.send(emailAddress, SimpleMailSender.CHANGES_PWD);
 	}
 
-	/*
+	/**
 	 * 找回密码retpassword
 	 */
-	@RequestMapping(value = "/retpassword", method=RequestMethod.POST)
-	public void retpassword(String contect){
+	@RequestMapping(value = "/retunpassword", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> retpassword(String contect){
+		Map<String, String> model = new HashMap<String, String>();
 		//判定传来的phone的格式，为phone或email
-		System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-"+contect);
+		//邮箱格式验证
+		String expr = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$";
+		//手机号码格式验证
+		Pattern pattern = Pattern.compile("^(13[0-9]|15[0-9]|153|15[6-9]|180|18[23]|18[5-9])\\d{8}$");
+		//获取六位数随机验证码
+		String code = GetVerificationCode.getRandom();
+		Matcher matcher = pattern.matcher(contect);
+		 if (matcher.matches()) {
+			if(userService.selectByPhone(contect)!=null){
+				//手机号码格式验证通过，发送手机验证码	
+				System.out.println("手机号码验证通过！"+code);
+				model.put("code", code);
+				return model;
+			}else{
+			model.put("code", null);
+			return model;
+			}
+	     }else{
+	        //手机号码格式验证失败，进行邮箱验证
+	        System.out.println("手机号码验证失败，正在进行邮箱验证...");
+	        if (contect.matches(expr)) {
+	        	if(userService.selectByEmail(contect)!=null){
+	        		//邮箱格式验证通过，发送邮箱验证码
+	        		SimpleMailSender Sender = new SimpleMailSender();
+	        		String congtent = userService.selectByEmail(contect).getUserName()
+	        					    +": 您好，您的验证码是:"+code+"---中大检测数据监测平台";
+	        		Sender.send(contect, "找回密码", congtent);
+	        		System.out.println(userService.selectByEmail(contect).getUserName());
+	        		System.out.println(contect);
+	        		System.out.println(congtent);
+		        	System.out.println("邮箱验证通过！"+code);	
+		        	model.put("code", code);
+					return model;
+	        	
+	        	}else{
+	        	model.put("code", null);
+	            return model;
+	        	}
+	        }else{
+	            //邮箱格式验证失败
+	            System.out.println("邮箱验证失败");
+	            model.put("code", null);
+				return model;
+	        }
+	    }
 	}
-
-	/*
+	
+	/**
+	 * 用户输入验证码是否正确
+	 */
+	@RequestMapping(value = "/verIsQqual" ,method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> verIsQqual(String inputVerification,String temporaryVerification){
+		Map<String, String> model = new HashMap<String, String>();
+		if(inputVerification.equals(temporaryVerification)){
+			model.put("bool", "1");
+			return model;
+		}else{
+			model.put("bool", "0");
+			return model;
+		}
+	}
+	
+	/**
+	 * 用户通过验证找回密码-修改密码
+	 */
+	@RequestMapping(value = "/selfChangPassword" ,method=RequestMethod.POST)
+	public void changPassword(String newpassword, String contect){
+		//手机号码格式验证
+		Pattern pattern = Pattern.compile("^(13[0-9]|15[0-9]|153|15[6-9]|180|18[23]|18[5-9])\\d{8}$");
+		Matcher matcher = pattern.matcher(contect);
+		User user;
+		if (matcher.matches()) {
+			//手机号找回密码
+			user = userService.selectByPhone(contect);
+		}else{
+			//邮箱找回密码
+			user = userService.selectByEmail(contect);
+		}
+			String name = user.getUserName();
+			String cryptedPwd = new Md5Hash(newpassword, name, 1024).toString();
+			user.setPassword(cryptedPwd);
+			userService.updateByPrimaryKeySelective(user);
+			System.out.println("修改成功");
+	}
+	
+	/**
 	 * 跳转到找回密码页面
 	 */
-	@RequestMapping(value = "/turnpassword")
+	@RequestMapping(value = "/retpassword")
 	public String turnpassword(){
 		return "retpassword";
 	}

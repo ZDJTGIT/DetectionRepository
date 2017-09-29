@@ -181,7 +181,7 @@
 							<div class="white_content" id="modifyPassWord">
 							    
 							        <label for="passId" style="display:none"></label>	
-									<input type="text" id="passId" name="passId" value="${userInfo.userId}" style="display:none;">
+									<input type="text" id="passId" name="passId" value="${userInfo.userId}" style="display:none">
 							    
 							    <div class="data_content_5">
 									<label class="data_content_lable" for="password">请输入原密码:</label>

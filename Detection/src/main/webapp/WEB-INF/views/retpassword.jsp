@@ -46,9 +46,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="form-group">
                     <input type="text" class="form-control" id="verification" name="verification" style="width:65%; float: left" placeholder="请输入验证码" name="verification">
                 	<input type="button" id="putverification" class="btn btn-primary" style="width:35%; float: left" value="发送验证码">
+                	<input type="text" class="data_content_input_1" id="temporaryVerification" name="temporaryVerification" value="123" style="display:none">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="password" name="password" style="margin-top:65px" placeholder="请输入新密码(6-13位数字)" >
+                    <input type="password" class="form-control" id="password" name="password" style="margin-top:65px" placeholder="请输入新密码(6-13位数字)" >
                 </div>
                 <button type="button" id="submitpw" class="btn btn-primary block full-width m-b">提交</button>
                 <p class="text-muted text-center"> <a href="">
@@ -66,18 +67,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 	<script type="text/javascript">
 		$('#putverification').click(function(){
-			alert("正在发送验证码");
+			//校验输入的邮箱或手机号码是否存在			
 			var contect = $('#contect').val();
 			$.ajax({
 				  type: 'post',
-	    		  url: 'rest/user/retpassword',
+	    		  url: 'rest/user/retunpassword',
 	    		  data: {contect:contect},
+	    		  contextType:"application/json",
+	    		  success: function (data){
+	    			  if(data.code!=null){
+	    				  $("input[name=temporaryVerification]").val(data.code);
+	    				  alert("验证码发送成功,请将收到的验证码填入");
+	    			  }else{
+	    				  alert("您输入的手机号/邮箱号有误,请确保您的输入格式正确且已绑定用户");
+	    			  }
+	    		  },
+	    		  error: function(){
+	    			  alert("验证码返回失败");
+	    		  }
 			      });
 		});
 		
   		$('#submitpw').click(function(){
-			alert("正在提交新密码");
-			
+  			//提交时检测验证码是否正确
+  			var inputVerification = $('#verification').val();
+  			var temporaryVerification = $('#temporaryVerification').val();
+  			$.ajax({
+  				type: 'post',
+	    		url: 'rest/user/verIsQqual',
+	    		data: {inputVerification:inputVerification,temporaryVerification:temporaryVerification},
+	    		contextType:"application/json",
+	    		success: function (data){
+	    			if(data.bool=="1"){
+			  				var newpassword = $('#password').val();
+			  				var contect = $('#contect').val();
+			  				alert("密码修改成功，您的新密码为："+newpassword);
+			  				$.ajax({
+			  					  type: 'post',
+			  		    		  url: 'rest/user/selfChangPassword',
+			  		    		  data: {newpassword:newpassword, contect:contect}
+			  				});
+	    			}else{
+	    				alert("验证码输入有误，请核对后重新输入");
+	    			}
+	    		}
+  			});
 		});
 	</script>
 </body>

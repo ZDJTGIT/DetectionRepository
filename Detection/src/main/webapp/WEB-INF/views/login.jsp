@@ -40,28 +40,24 @@
 
 <body class="gray-bg"
 	style="background: url(assets/img/lg.jpg); background-size: 100% 100%;">
-
-	<div class="middle-box text-center loginscreen  animated fadeInDown">
-		<div>
-			<div>
-				<img alt="" src="assets/img/zdLogo.png">
-				<h2 class="logo-name">Detection</h2>
-			</div>
-			<h3>欢迎使用中大检测平台</h3>
-			<form class="m-t" role="form" action="rest/user/login" method="post">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="用户名"
-						name="userName">
-				</div>
-				<div class="form-group">
-					<input type="password" class="form-control" placeholder="密码"
-						name="password">
-				</div>
-				<button type="submit" class="btn btn-primary block full-width m-b">登
-					录</button>
-				<p class="text-muted text-center">
-					<a href="rest/user/turnpassword"> <small>忘记密码了？</small></a>
-				</p>
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+                <img alt="" src="assets/img/zdLogo.png">
+                <h2 class="logo-name">Detection</h2>
+            </div>
+            <h3>欢迎使用中大检测平台</h3>
+            <form class="m-t" role="form" action="rest/user/login" method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="用户名" name="userName">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="密码" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+                <p class="text-muted text-center"> <a href="rest/user/retpassword">
+                <small>忘记密码了？</small></a>
+                </p>
 				<div class="dd">
 					<span><font color="red" size="5">${error}</font></span>
 				</div>
