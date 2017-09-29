@@ -20,7 +20,8 @@
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <title>Detection</title>
-<meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
+<meta name="keywords"
+	content="detection,plat,inspection,ZDJT,zhongdajiance">
 <meta name="description" content="中大检测平台">
 
 <!--[if lt IE 9]>
@@ -37,7 +38,7 @@
 
 <body class="fixed-sidebar full-height-layout gray-bg"
 	style="overflow-y: hidden margin: 0 padding: 0">
-	
+
 	<div id="wrapper">
 		<!--左侧导航开始-->
 		<nav class="navbar-default navbar-static-side" role="navigation">
@@ -62,44 +63,37 @@
 							class="fa arrow"></span>
 					</a></li>
 					<shiro:hasPermission name="project:manager:*">
-						<li>
-							<a class="firstMenu" href="javascript:;" aria-expanded="false">
-	                            <i class="fa fa-columns"></i>
-	                            <span class="nav-label">我的项目</span>
-	                            <span class="fa arrow"></span>
-	                        </a>
+						<li><a class="firstMenu" href="javascript:;"
+							aria-expanded="false"> <i class="fa fa-columns"></i> <span
+								class="nav-label">我的项目</span> <span class="fa arrow"></span>
+						</a>
 							<ul class="nav nav-second-level" aria-expanded="false">
 								<shiro:hasPermission name="farmland:query:*">
-									<li>
-										<a class="secondMenu J_menuItem" href="rest/project/1" aria-expanded="false">
-											<i class="fa fa-columns"></i><span class="nav-label">农田项目</span>
-											<span class="fa arrow"></span>
-										</a>
-										<ul class="nav nav-third-level" aria-expanded="false"></ul>
-									</li>
+									<li><a class="secondMenu J_menuItem" href="rest/project/1"
+										aria-expanded="false"> <i class="fa fa-columns"></i><span
+											class="nav-label">农田项目</span> <span class="fa arrow"></span>
+									</a>
+										<ul class="nav nav-third-level" aria-expanded="false"></ul></li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="bridge:query:*">
-									<li>
-										<a class="secondMenu J_menuItem" href="rest/project/2" aria-expanded="false">
-											<i class="fa fa-columns"></i><span class="nav-label">桥梁项目</span>
-										</a>
-										<ul class="nav nav-third-level" aria-expanded="false"></ul>
-									</li>
+									<li><a class="secondMenu J_menuItem" href="rest/project/2"
+										aria-expanded="false"> <i class="fa fa-columns"></i><span
+											class="nav-label">桥梁项目</span>
+									</a>
+										<ul class="nav nav-third-level" aria-expanded="false"></ul></li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="tunnel:query:*">
-									<li>
-										<a class="secondMenu J_menuItem" href="rest/project/3" aria-expanded="false">
-											<i class="fa fa-columns"></i><span class="nav-label">隧道项目</span>
-										</a>
-										<ul class="nav nav-third-level" aria-expanded="false"></ul>
-
-									</li>
+									<li><a class="secondMenu J_menuItem" href="rest/project/3"
+										aria-expanded="false"> <i class="fa fa-columns"></i><span
+											class="nav-label">隧道项目</span>
+									</a>
+										<ul class="nav nav-third-level" aria-expanded="false"></ul></li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="slope:query:*">
-									<li>
-										<a class="secondMenu J_menuItem" href="rest/project/4" aria-expanded="false">
-											<i class="fa fa-columns"></i><span class="nav-label">边坡项目</span>
-										</a>
+									<li><a class="secondMenu J_menuItem" href="rest/project/4"
+										aria-expanded="false"> <i class="fa fa-columns"></i><span
+											class="nav-label">边坡项目</span>
+									</a>
 										<ul class="nav nav-third-level" aria-expanded="false">
 											<!-- <li>
 												<a class="J_menuItem" href="rest/graph_echarts_deep">深部位移</a>
@@ -110,52 +104,42 @@
 											<li>
 												<a class="J_menuItem" href="rest/graph_echarts_rainwater">雨量</a>
 											</li> -->
-										</ul>
-									</li>
+										</ul></li>
 								</shiro:hasPermission>
-							</ul>
-						</li>
+							</ul></li>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="project:manager:*">
-						<li>
-							<a href="javascript:;">
-								<i class="fa fa fa-bar-chart-o"></i><span class="nav-label">统计图表</span>
+						<li><a href="javascript:;"> <i
+								class="fa fa fa-bar-chart-o"></i><span class="nav-label">统计图表</span>
 								<span class="fa arrow"></span>
-							</a>
+						</a>
 							<ul class="nav nav-second-level">
 								<shiro:hasPermission name="farmland:query:*">
-									<li>
-										<a class="J_menuItem" href="rest/graph_echarts_farmland">农田数据分析图</a>
-									</li>
+									<li><a class="J_menuItem"
+										href="rest/graph_echarts_farmland">农田数据分析图</a></li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="bridge:query:*">
-									<li>
-										<a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁数据分析图</a>
+									<li><a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁数据分析图</a>
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="tunnel:query:*">
-									<li>
-										<a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道数据分析图</a>
+									<li><a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道数据分析图</a>
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="slope:query:*">
-									<li>
-										<a class="J_menuItem" href="rest/graph_echarts_slope">边坡数据分析图</a>
+									<li><a class="J_menuItem" href="rest/graph_echarts_slope">边坡数据分析图</a>
 									</li>
 								</shiro:hasPermission>
-							</ul>
-						</li>
+							</ul></li>
 					</shiro:hasPermission>
-					<li>
-						<a href="javascript:;"> <i class="fa fa fa-user"></i>
+					<li><a href="javascript:;"> <i class="fa fa fa-user"></i>
 							<span class="nav-label">个人资料</span> <span class="fa arrow"></span>
-						</a>
+					</a>
 						<ul class="nav nav-second-level">
 							<li><a class="J_menuItem" href="rest/user">个人资料</a></li>
-						</ul>
-					</li>
-					
-					
+						</ul></li>
+
+
 					<li><a href="javascript:;"><i class="fa fa-desktop"></i> <span
 							class="nav-label">页面</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
@@ -180,28 +164,21 @@
 								</ul></li>
 							<li><a class="J_menuItem" href="rest/404">404页面</a></li>
 							<li><a class="J_menuItem" href="rest/500">500页面</a></li>
-						</ul>
-					</li>
+						</ul></li>
 					<shiro:hasAnyRoles name="superAdmin, admin">
 						<li><a href="javascript:;"><i class="fa fa-table"></i> <span
-							class="nav-label">用户管理</span><span class="fa arrow"></span></a>
+								class="nav-label">用户管理</span><span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li>
-									<a class="J_menuItem" href="rest/user/userList">用户&告警联系人
+								<li><a class="J_menuItem" href="rest/user/userList">用户&告警联系人
 										<span class="label label-danger pull-right">管理员可见</span>
-									</a>
+								</a></li>
+								<li><a class="J_menuItem" href="rest/table_data_tables">详细检验数据展示分析</a>
 								</li>
-								<li>
-									<a class="J_menuItem" href="rest/table_data_tables">详细检验数据展示分析</a>
+								<li><a class="J_menuItem" href="rest/table_foo_table">操作日志</a>
 								</li>
-								<li>
-									<a class="J_menuItem" href="rest/table_foo_table">操作日志</a>
+								<li><a class="J_menuItem" href="rest/table_bootstrap">其他</a>
 								</li>
-								<li>
-									<a class="J_menuItem" href="rest/table_bootstrap">其他</a>
-								</li>
-							</ul>
-						</li>
+							</ul></li>
 					</shiro:hasAnyRoles>
 
 					<li><a href="javascript:;"><i class="fa fa-tasks"></i> <span
@@ -246,7 +223,8 @@
 								class="fa fa-envelope"></i> <span class="label label-warning">16</span>
 						</a>
 							<ul class="dropdown-menu dropdown-messages">
-								<c:forEach items="${messageList}" var="message" varStatus="status">
+								<c:forEach items="${messageList}" var="message"
+									varStatus="status">
 									<c:choose>
 										<c:when test="${status.first}">
 											<li class="m-t-xs">
@@ -255,71 +233,68 @@
 											<li>
 										</c:otherwise>
 									</c:choose>
-										<div class="dropdown-messages-box">
-											<a href="rest/profile" class="pull-left"> <img alt="image"
-												class="img-circle" src="assets/img/zdLogo.png">
-											</a>
-											<div class="media-body">
-												<small class="pull-right">46小时前</small> <strong>${userInfo.userName}</strong>
-												${message.messageContext}<br> <small
-													class="text-muted">${message.createTime}</small>
-											</div>
-										</div>
-									</li>
-									<li class="divider"></li>
-								</c:forEach>
-								<li>
-									<div class="text-center link-block">
-										<a class="J_menuItem" href="rest/mailbox"> <i
-											class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
+									<div class="dropdown-messages-box">
+										<a href="rest/profile" class="pull-left"> <img alt="image"
+											class="img-circle" src="assets/img/zdLogo.png">
 										</a>
-									</div>
-								</li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle count-info"
-							data-toggle="dropdown" href="#"> <i
-								class="fa fa-bell"></i> <span class="label label-primary">8</span>
-						</a>
-							<ul class="dropdown-menu dropdown-alerts">
-								<li><a class="J_menuItem" href="rest/table_jqgrid">
-										<div>
-											<i class="fa fa-envelope fa-fw"></i> 您有16条未读消息 <span
-												class="pull-right text-muted small">4分钟前</span>
+										<div class="media-body">
+											<small class="pull-right">46小时前</small> <strong>${userInfo.userName}</strong>
+											${message.messageContext}<br> <small class="text-muted">${message.createTime}</small>
 										</div>
-								</a></li>
-								<li class="divider"></li>
-								<li><a href="rest/profile">
-										<div>
-											<i class="fa fa-qq fa-fw"></i> 3条新回复 <span
-												class="pull-right text-muted small">12分钟钱</span>
-										</div>
-								</a></li>
-								<li class="divider"></li>
-								<li>
-									<div class="text-center link-block">
-										<a class="J_menuItem" href="rest/notifications"> <strong>查看所有
-										</strong> <i class="fa fa-angle-right"></i>
-										</a>
+									</div></li>
+						<li class="divider"></li>
+						</c:forEach>
+						<li>
+							<div class="text-center link-block">
+								<a class="J_menuItem" href="rest/mailbox"> <i
+									class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
+								</a>
+							</div>
+						</li>
+					</ul>
+					</li>
+					<li class="dropdown"><a class="dropdown-toggle count-info"
+						data-toggle="dropdown" href="#"> <i class="fa fa-bell"></i> <span
+							class="label label-primary">8</span>
+					</a>
+						<ul class="dropdown-menu dropdown-alerts">
+							<li><a class="J_menuItem" href="rest/table_jqgrid">
+									<div>
+										<i class="fa fa-envelope fa-fw"></i> 您有16条未读消息 <span
+											class="pull-right text-muted small">4分钟前</span>
 									</div>
-								</li>
-							</ul></li>
-						<li class="hidden-xs"><a class="J_menuItem dropdown-toggle"
-							data-toggle="dropdown" href="javascript:;"> <i
-								class="fa fa-user"></i>${userInfo.userName}<span class="caret"></span>
-						</a>
-							<ul class="dropdown-menu animated fadeInRight m-t-xs">
-								<li><a class="J_menuItem" href="rest/form_avatar">修改头像</a>
-								</li>
-								<li><a class="J_menuItem" href="rest/user">个人资料</a></li>
-								<li><a class="J_menuItem" href="rest/contacts">联系我们</a></li>
-								<li><a class="J_menuItem" href="rest/mailbox">信箱</a></li>
-								<li class="divider"></li>
-								<li><a href="rest/user/logout">安全退出</a></li>
-							</ul></li>
-						<li class="dropdown hidden-xs"><a
-							class="right-sidebar-toggle" aria-expanded="false"> <i
-								class="fa fa-tasks"></i> 主题
-						</a></li>
+							</a></li>
+							<li class="divider"></li>
+							<li><a href="rest/profile">
+									<div>
+										<i class="fa fa-qq fa-fw"></i> 3条新回复 <span
+											class="pull-right text-muted small">12分钟钱</span>
+									</div>
+							</a></li>
+							<li class="divider"></li>
+							<li>
+								<div class="text-center link-block">
+									<a class="J_menuItem" href="rest/notifications"> <strong>查看所有
+									</strong> <i class="fa fa-angle-right"></i>
+									</a>
+								</div>
+							</li>
+						</ul></li>
+					<li class="hidden-xs"><a class="J_menuItem dropdown-toggle"
+						data-toggle="dropdown" href="javascript:;"> <i
+							class="fa fa-user"></i>${userInfo.userName}<span class="caret"></span>
+					</a>
+						<ul class="dropdown-menu animated fadeInRight m-t-xs">
+							<li><a class="J_menuItem" href="rest/form_avatar">修改头像</a></li>
+							<li><a class="J_menuItem" href="rest/user">个人资料</a></li>
+							<li><a class="J_menuItem" href="rest/contacts">联系我们</a></li>
+							<li><a class="J_menuItem" href="rest/mailbox">信箱</a></li>
+							<li class="divider"></li>
+							<li><a href="rest/user/logout">安全退出</a></li>
+						</ul></li>
+					<li class="dropdown hidden-xs"><a class="right-sidebar-toggle"
+						aria-expanded="false"> <i class="fa fa-tasks"></i> 主题
+					</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -468,8 +443,8 @@
 										</div>
 									</div>
 									<div class="media-body">
-										据天津日报报道：瑞海公司董事长于学伟，副董事长董社轩等10人在13日上午已被控制。 <br>
-										<small class="text-muted">今天 4:21</small>
+										据天津日报报道：瑞海公司董事长于学伟，副董事长董社轩等10人在13日上午已被控制。 <br> <small
+											class="text-muted">今天 4:21</small>
 									</div>
 								</a>
 							</div>
@@ -731,8 +706,10 @@
 	</div>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
+	<!-- 百度地图key -->
 	<script type="text/javascript"
-		src="http://webapi.amap.com/maps?v=1.3&key=45d7aee2c7ba665d7c3445f4209fe885"></script>
+		src="http://api.map.baidu.com/api?v=2.0&ak=lDSAFnztqS94cdBKPqgQUwTXuciyxpGa">
+	</script>
 	<script src="assets/js/bootstrap-notify.js"></script>
 	<script src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
@@ -756,6 +733,6 @@
 
 		});
 	</script>
-	
+
 </body>
 </html>
