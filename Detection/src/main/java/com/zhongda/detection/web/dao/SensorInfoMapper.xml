@@ -52,6 +52,12 @@
     group by detection_type_id) si, sys_dictionary sd
     where si.detection_type_id = sd.dic_id
   </select>
+  <select id="selectsenInfoAndSysdicByProjectId" parameterType="java.lang.Integer" resultMap="LinkDictionayrMap">
+  	select 
+  	si.*,sd.* 
+  	from sensor_info si,sys_dictionary sd 
+  	where si.detection_type_id=sd.dic_id and si.project_id = #{projectId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sensor_info
     where sensor_id = #{sensorId,jdbcType=INTEGER}

@@ -3,83 +3,96 @@ package com.zhongda.detection.web.model;
 import java.util.Date;
 
 public class Project {
-    private Integer projectId;
+	private Integer projectId;
 
-    private Integer userId;
+	private Integer userId;
 
-    private String projectName;
+	private String projectName;
 
-    private Integer projectTypeId;
+	private Integer projectTypeId;
 
-    private String projectAddress;
+	private String projectAddress;
 
-    private Date projectTime;
+	private Date projectTime;
 
-    private String projectStatus;
+	private String projectStatus;
 
-    private String projectDescription;
+	private String projectDescription;
 
-    public Integer getProjectId() {
-        return projectId;
-    }
+	private SysDictionary sysDictionary;
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
-    }
+	public Integer getProjectId() {
+		return projectId;
+	}
 
-    public Integer getUserId() {
-        return userId;
-    }
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
+	}
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+	public Integer getUserId() {
+		return userId;
+	}
 
-    public String getProjectName() {
-        return projectName;
-    }
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName == null ? null : projectName.trim();
-    }
+	public String getProjectName() {
+		return projectName;
+	}
 
-    public Integer getProjectTypeId() {
-        return projectTypeId;
-    }
+	public void setProjectName(String projectName) {
+		this.projectName = projectName == null ? null : projectName.trim();
+	}
 
-    public void setProjectTypeId(Integer projectTypeId) {
-        this.projectTypeId = projectTypeId;
-    }
+	public Integer getProjectTypeId() {
+		return projectTypeId;
+	}
 
-    public String getProjectAddress() {
-        return projectAddress;
-    }
+	public void setProjectTypeId(Integer projectTypeId) {
+		this.projectTypeId = projectTypeId;
+	}
 
-    public void setProjectAddress(String projectAddress) {
-        this.projectAddress = projectAddress == null ? null : projectAddress.trim();
-    }
+	public String getProjectAddress() {
+		return projectAddress;
+	}
 
-    public Date getProjectTime() {
-        return projectTime;
-    }
+	public void setProjectAddress(String projectAddress) {
+		this.projectAddress = projectAddress == null ? null : projectAddress
+				.trim();
+	}
 
-    public void setProjectTime(Date projectTime) {
-        this.projectTime = projectTime;
-    }
+	public Date getProjectTime() {
+		return projectTime;
+	}
 
-    public String getProjectStatus() {
-        return projectStatus;
-    }
+	public void setProjectTime(Date projectTime) {
+		this.projectTime = projectTime;
+	}
 
-    public void setProjectStatus(String projectStatus) {
-        this.projectStatus = projectStatus == null ? null : projectStatus.trim();
-    }
+	public String getProjectStatus() {
+		return projectStatus;
+	}
 
-    public String getProjectDescription() {
-        return projectDescription;
-    }
+	public void setProjectStatus(String projectStatus) {
+		this.projectStatus = projectStatus == null ? null : projectStatus
+				.trim();
+	}
 
-    public void setProjectDescription(String projectDescription) {
-        this.projectDescription = projectDescription == null ? null : projectDescription.trim();
-    }
+	public String getProjectDescription() {
+		return projectDescription;
+	}
+
+	public void setProjectDescription(String projectDescription) {
+		this.projectDescription = projectDescription == null ? null
+				: projectDescription.trim();
+	}
+
+	public SysDictionary getSysDictionary() {
+		return sysDictionary;
+	}
+
+	public void setSysDictionary(SysDictionary sysDictionary) {
+		this.sysDictionary = sysDictionary;
+	}
 }

@@ -10,6 +10,14 @@
     <result column="project_time" jdbcType="TIMESTAMP" property="projectTime" />
     <result column="project_status" jdbcType="VARCHAR" property="projectStatus" />
     <result column="project_description" jdbcType="VARCHAR" property="projectDescription" />
+    <association property="sysDictionary" javaType="SysDictionary">
+      	<id column="dic_id" jdbcType="INTEGER" property="dicId" />
+	    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+	    <result column="type_value" jdbcType="VARCHAR" property="typeValue" />
+	    <result column="type_code" jdbcType="INTEGER" property="typeCode" />
+	    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+	    <result column="item_value" jdbcType="VARCHAR" property="itemValue" />
+   	</association>
   </resultMap>
   <sql id="Base_Column_List">
     project_id, user_id, project_name, project_type_id, project_address, project_time,
@@ -26,6 +34,20 @@
     <include refid="Base_Column_List" />
     from project
     where user_id = #{0} and project_type_id = #{1}
+  </select>
+  <select id="selectProjectAndSysDicByUserId" resultMap="BaseResultMap">
+  	select
+    p.*,sd.*
+    from project p,sys_dictionary sd
+    where p.project_type_id = sd.dic_id and user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectLotOfProjectsByProjectId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from project where project_id in
+    <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
+	 #{item}  
+	</foreach>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from project

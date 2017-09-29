@@ -108,6 +108,23 @@
 								</shiro:hasPermission>
 							</ul></li>
 					</shiro:hasPermission>
+					
+					
+					<shiro:hasPermission name="project:manager:*">
+						<li id="accordion">
+							<a data-toggle="collapse" data-parent="#accordion"  href="#collapseOne" class="queryproject">
+	                            <i class="fa fa-columns"></i>
+	                            <span class="nav-label">我的项目(测试)</span>
+	                            <span class="fa arrow"></span>
+	                        </a>
+							<ul id='collapseOne' class='collapse nav nav-second-level filling'>
+								
+							</ul>
+						</li>
+					</shiro:hasPermission>
+					
+					
+					 
 					<shiro:hasPermission name="project:manager:*">
 						<li><a href="javascript:;"> <i
 								class="fa fa fa-bar-chart-o"></i><span class="nav-label">统计图表</span>
@@ -712,7 +729,7 @@
 	<script src="assets/js/contabs.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-
+			
 			$.notify({
 				icon : 'fa user',
 				message : "欢迎来到<b>中大检测在线监控平台</b>."
@@ -725,6 +742,80 @@
 			$("#side-menu").metisMenu();
 
 		});
+	</script>
+
+	<!-- 动态加载左导航栏我的项目 -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var btainUserId = "${sessionScope.userInfo.userId}";
+			var userId = btainUserId;
+			var key = true;
+			var projectData = null;
+			$(".queryproject").click(function(){
+				if(key){
+					key = false;
+					var itemName  = "";
+					$.ajax({
+						url: 'rest/project/myproject',
+						dataType : 'json',
+						data: 'userId='+userId,
+						success: function(data){
+							$.each(data,function(key,value){
+								projectData = data;
+								var label = "<li><a class='secondbind' data-toggle='collapse' data-parent='#accordion'  href='#"+key+"' name='"+key+"'><i class='fa fa-columns'></i><span class='nav-label'>"+key+"</span><span class='fa arrow'></span></a><ul class='collapse nav nav-second-level' id='"+key+"' ></ul></li>";
+								$(".filling").append(label);
+							});
+						}
+					});
+				}
+			});
+			var key2 = true;
+			var map = {};
+			$(document).on('click','.secondbind',function(){
+				var dataKey = $(this).attr("name");
+				var value = projectData[dataKey];
+				if(map[dataKey]==null){
+					map[dataKey] = 1;
+					key2 = true;
+				}else{
+					key2 = false;
+				}
+				if(key2){
+					$(value).each(function(index,val){
+						var projectName = val.projectName;
+						index++;
+						var label = "<li><a class='thirdbind' data-toggle='collapse' data-target='#"+projectName+"' name='"+val.projectId+"'><i>"+index+":"+"</i><span class='nav-label'>"+projectName+"</span><span class='fa arrow'></span></a><ul class='collapse nav nav-second-level' id='"+projectName+"' ></ul></li>";
+						$("#"+dataKey).append(label);
+					});
+				}
+			});
+			
+			
+			 $(document).on('click','.thirdbind',function(){
+					var projectId = $(this).attr("name");
+					var projectName = $(this).attr("data-target");
+					if(map[projectName]==null){
+						map[projectName] = 1;
+						key2 = true;
+					}else{
+						key2 = false;
+					}
+					if(key2){
+						$.ajax({
+							url: 'rest/project/queryItem',
+							dataType: 'json',
+							data : 'projectId='+projectId,
+							success: function(data){
+								$.each(data,function(key,value){
+									var label = "<li><a class='J_menuItem' href='rest/graph_echarts_"+value[0].sysDictionary.itemValue+"'><i>—</i><span class='nav-label'>"+key+"</span><span class='fa arrow'></span></a></li>";
+									$(projectName).append(label);
+								});
+							}
+						}); 
+					}
+				}); 
+		})
+		
 	</script>
 
 </body>

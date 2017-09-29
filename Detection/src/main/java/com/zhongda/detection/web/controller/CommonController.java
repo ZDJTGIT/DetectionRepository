@@ -44,7 +44,6 @@ public class CommonController {
 	private CacheManager cacheManager;
 	private Cache<String, String> vcodeCache;
 
-
 	/**
 	 * 首页
 	 */
@@ -60,19 +59,23 @@ public class CommonController {
 
 	@RequestMapping("project/{projectTypeId}")
 	@ResponseBody
-	public List<Project> projectType(HttpServletRequest request, @PathVariable("projectTypeId") Integer projectTypeId) {
+	public List<Project> projectType(HttpServletRequest request,
+			@PathVariable("projectTypeId") Integer projectTypeId) {
 		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
-		List<Project> projectList = projectService.selectProjectsByUserIdAndProjectType(user.getUserId(), projectTypeId);
+		List<Project> projectList = projectService
+				.selectProjectsByUserIdAndProjectType(user.getUserId(),
+						projectTypeId);
 		return projectList;
 	}
 
 	@RequestMapping("sensor/{projectId}")
 	@ResponseBody
-	public List<SensorInfo> sensorType(@PathVariable("projectId") Integer projectId) {
-		List<SensorInfo> sensorList = sensorInfoService.selectSensorTypeByProjectId(projectId);
+	public List<SensorInfo> sensorType(
+			@PathVariable("projectId") Integer projectId) {
+		List<SensorInfo> sensorList = sensorInfoService
+				.selectSensorTypeByProjectId(projectId);
 		return sensorList;
 	}
-
 
 	@RequestMapping("index_v2")
 	public String index_v2(HttpServletRequest request) {
@@ -88,7 +91,6 @@ public class CommonController {
 	public String chat_view(HttpServletRequest request) {
 		return "chat_view";
 	}
-
 
 	@RequestMapping("graph_echarts_bridge")
 	public String graph_echarts_bridge(HttpServletRequest request) {
@@ -180,10 +182,15 @@ public class CommonController {
 	public String webim(HttpServletRequest request) {
 		return "webim";
 	}
-	
-	@RequestMapping("graph_echarts_deep")
+
+	@RequestMapping("form_builder")
+	public String form_builder(HttpServletRequest request) {
+		return "form_builder";
+	}
+
+	@RequestMapping("graph_echarts_displacement")
 	public String graph_echarts_deep(HttpServletRequest request) {
-		return "graph_echarts_deep";
+		return "graph_echarts_displacement";
 	}
 
 	@RequestMapping("graph_echarts_osmotic")
@@ -191,9 +198,9 @@ public class CommonController {
 		return "graph_echarts_osmotic";
 	}
 
-	@RequestMapping("graph_echarts_rainwater")
+	@RequestMapping("graph_echarts_rainfall")
 	public String graph_echarts_rainwater(HttpServletRequest request) {
-		return "graph_echarts_rainwater";
+		return "graph_echarts_rainfall";
 	}
 
 	/**

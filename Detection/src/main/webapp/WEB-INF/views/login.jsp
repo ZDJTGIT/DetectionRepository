@@ -37,6 +37,7 @@
 	}
 </script>
 </head>
+
 <body class="gray-bg"
 	style="background: url(assets/img/lg.jpg); background-size: 100% 100%;">
 
