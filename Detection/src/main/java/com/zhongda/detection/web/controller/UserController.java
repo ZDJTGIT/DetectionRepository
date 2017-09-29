@@ -567,9 +567,6 @@ public class UserController {
 	        		String congtent = userService.selectByEmail(contect).getUserName()
 	        					    +": 您好，您的验证码是:"+code+"---中大检测数据监测平台";
 	        		Sender.send(contect, "找回密码", congtent);
-	        		System.out.println(userService.selectByEmail(contect).getUserName());
-	        		System.out.println(contect);
-	        		System.out.println(congtent);
 		        	System.out.println("邮箱验证通过！"+code);	
 		        	model.put("code", code);
 					return model;

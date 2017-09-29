@@ -31,7 +31,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <![endif]-->
     <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
 </head>
-<body class="gray-bg">
+<body class="gray-bg"
+      style="background: url(assets/img/lg.jpg); background-size: 100% 100%;">
 	<div class="middle-box text-center loginscreen  animated fadeInDown">
 		<div>
             <div>
