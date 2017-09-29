@@ -190,14 +190,6 @@
 						</ul></li>
 					<li><a class="J_menuItem" href="rest/table_jqgrid"><i
 							class="fa fa-bell"></i> <span class="nav-label">告警信息</span></a></li>
-					<li><a class="J_menuItem" href="rest/css_animation"><i
-							class="fa fa-magic"></i> <span class="nav-label">CSS动画</span></a></li>
-					<li><a href="javascript:;"><i class="fa fa-cutlery"></i> <span
-							class="nav-label">工具 </span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/form_builder">表单构建器</a>
-							</li>
-						</ul></li>
 
 				</ul>
 			</div>
@@ -709,6 +701,7 @@
 	<!-- 百度地图key -->
 	<script type="text/javascript"
 		src="http://api.map.baidu.com/api?v=2.0&ak=lDSAFnztqS94cdBKPqgQUwTXuciyxpGa">
+		
 	</script>
 	<script src="assets/js/bootstrap-notify.js"></script>
 	<script src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>

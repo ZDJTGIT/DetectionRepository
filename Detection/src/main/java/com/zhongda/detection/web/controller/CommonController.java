@@ -89,10 +89,6 @@ public class CommonController {
 		return "chat_view";
 	}
 
-	@RequestMapping("css_animation")
-	public String css_animation(HttpServletRequest request) {
-		return "css_animation";
-	}
 
 	@RequestMapping("graph_echarts_bridge")
 	public String graph_echarts_bridge(HttpServletRequest request) {
@@ -184,12 +180,7 @@ public class CommonController {
 	public String webim(HttpServletRequest request) {
 		return "webim";
 	}
-
-	@RequestMapping("form_builder")
-	public String form_builder(HttpServletRequest request) {
-		return "form_builder";
-	}
-
+	
 	@RequestMapping("graph_echarts_deep")
 	public String graph_echarts_deep(HttpServletRequest request) {
 		return "graph_echarts_deep";
