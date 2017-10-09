@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.detection.web.dao.SlopeDisplacementDataMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.detection.web.model.SlopeDisplacementData">
+    <id column="slope_displacement_id" jdbcType="INTEGER" property="slopeDisplacementId" />
+    <result column="sensor_id" jdbcType="INTEGER" property="sensorId" />
+    <result column="detection_id" jdbcType="INTEGER" property="detectionId" />
+    <result column="sensor_status" jdbcType="VARCHAR" property="sensorStatus" />
+    <result column="first_time" jdbcType="TIMESTAMP" property="firstTime" />
+    <result column="first_data" jdbcType="REAL" property="firstData" />
+    <result column="previous_time" jdbcType="TIMESTAMP" property="previousTime" />
+    <result column="previous_data" jdbcType="REAL" property="previousData" />
+    <result column="current_time" jdbcType="TIMESTAMP" property="currentTime" />
+    <result column="current_data" jdbcType="REAL" property="currentData" />
+    <result column="current_displacement" jdbcType="REAL" property="currentDisplacement" />
+    <result column="total_displacement" jdbcType="REAL" property="totalDisplacement" />
+    <result column="speed_change" jdbcType="REAL" property="speedChange" />
+    <result column="detection_hole_name" jdbcType="VARCHAR" property="detectionHoleName" />
+    <result column="detection_standard" jdbcType="VARCHAR" property="detectionStandard" />
+    <result column="detection_nums" jdbcType="INTEGER" property="detectionNums" />
+    <result column="detection_space" jdbcType="REAL" property="detectionSpace" />
+    <result column="tester" jdbcType="VARCHAR" property="tester" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    slope_displacement_id, sensor_id, detection_id, sensor_status, first_time, first_data, 
+    previous_time, previous_data, current_time, current_data, current_displacement, total_displacement, 
+    speed_change, detection_hole_name, detection_standard, detection_nums, detection_space, 
+    tester
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from slope_displacement_data
+    where slope_displacement_id = #{slopeDisplacementId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from slope_displacement_data
+    where slope_displacement_id = #{slopeDisplacementId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhongda.detection.web.model.SlopeDisplacementData">
+    insert into slope_displacement_data (slope_displacement_id, sensor_id, detection_id, 
+      sensor_status, first_time, first_data, 
+      previous_time, previous_data, current_time, 
+      current_data, current_displacement, total_displacement, 
+      speed_change, detection_hole_name, detection_standard, 
+      detection_nums, detection_space, tester
+      )
+    values (#{slopeDisplacementId,jdbcType=INTEGER}, #{sensorId,jdbcType=INTEGER}, #{detectionId,jdbcType=INTEGER}, 
+      #{sensorStatus,jdbcType=VARCHAR}, #{firstTime,jdbcType=TIMESTAMP}, #{firstData,jdbcType=REAL}, 
+      #{previousTime,jdbcType=TIMESTAMP}, #{previousData,jdbcType=REAL}, #{currentTime,jdbcType=TIMESTAMP}, 
+      #{currentData,jdbcType=REAL}, #{currentDisplacement,jdbcType=REAL}, #{totalDisplacement,jdbcType=REAL}, 
+      #{speedChange,jdbcType=REAL}, #{detectionHoleName,jdbcType=VARCHAR}, #{detectionStandard,jdbcType=VARCHAR}, 
+      #{detectionNums,jdbcType=INTEGER}, #{detectionSpace,jdbcType=REAL}, #{tester,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.SlopeDisplacementData">
+    insert into slope_displacement_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="slopeDisplacementId != null">
+        slope_displacement_id,
+      </if>
+      <if test="sensorId != null">
+        sensor_id,
+      </if>
+      <if test="detectionId != null">
+        detection_id,
+      </if>
+      <if test="sensorStatus != null">
+        sensor_status,
+      </if>
+      <if test="firstTime != null">
+        first_time,
+      </if>
+      <if test="firstData != null">
+        first_data,
+      </if>
+      <if test="previousTime != null">
+        previous_time,
+      </if>
+      <if test="previousData != null">
+        previous_data,
+      </if>
+      <if test="currentTime != null">
+        current_time,
+      </if>
+      <if test="currentData != null">
+        current_data,
+      </if>
+      <if test="currentDisplacement != null">
+        current_displacement,
+      </if>
+      <if test="totalDisplacement != null">
+        total_displacement,
+      </if>
+      <if test="speedChange != null">
+        speed_change,
+      </if>
+      <if test="detectionHoleName != null">
+        detection_hole_name,
+      </if>
+      <if test="detectionStandard != null">
+        detection_standard,
+      </if>
+      <if test="detectionNums != null">
+        detection_nums,
+      </if>
+      <if test="detectionSpace != null">
+        detection_space,
+      </if>
+      <if test="tester != null">
+        tester,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="slopeDisplacementId != null">
+        #{slopeDisplacementId,jdbcType=INTEGER},
+      </if>
+      <if test="sensorId != null">
+        #{sensorId,jdbcType=INTEGER},
+      </if>
+      <if test="detectionId != null">
+        #{detectionId,jdbcType=INTEGER},
+      </if>
+      <if test="sensorStatus != null">
+        #{sensorStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="firstTime != null">
+        #{firstTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstData != null">
+        #{firstData,jdbcType=REAL},
+      </if>
+      <if test="previousTime != null">
+        #{previousTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="previousData != null">
+        #{previousData,jdbcType=REAL},
+      </if>
+      <if test="currentTime != null">
+        #{currentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentData != null">
+        #{currentData,jdbcType=REAL},
+      </if>
+      <if test="currentDisplacement != null">
+        #{currentDisplacement,jdbcType=REAL},
+      </if>
+      <if test="totalDisplacement != null">
+        #{totalDisplacement,jdbcType=REAL},
+      </if>
+      <if test="speedChange != null">
+        #{speedChange,jdbcType=REAL},
+      </if>
+      <if test="detectionHoleName != null">
+        #{detectionHoleName,jdbcType=VARCHAR},
+      </if>
+      <if test="detectionStandard != null">
+        #{detectionStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="detectionNums != null">
+        #{detectionNums,jdbcType=INTEGER},
+      </if>
+      <if test="detectionSpace != null">
+        #{detectionSpace,jdbcType=REAL},
+      </if>
+      <if test="tester != null">
+        #{tester,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongda.detection.web.model.SlopeDisplacementData">
+    update slope_displacement_data
+    <set>
+      <if test="sensorId != null">
+        sensor_id = #{sensorId,jdbcType=INTEGER},
+      </if>
+      <if test="detectionId != null">
+        detection_id = #{detectionId,jdbcType=INTEGER},
+      </if>
+      <if test="sensorStatus != null">
+        sensor_status = #{sensorStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="firstTime != null">
+        first_time = #{firstTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstData != null">
+        first_data = #{firstData,jdbcType=REAL},
+      </if>
+      <if test="previousTime != null">
+        previous_time = #{previousTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="previousData != null">
+        previous_data = #{previousData,jdbcType=REAL},
+      </if>
+      <if test="currentTime != null">
+        current_time = #{currentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentData != null">
+        current_data = #{currentData,jdbcType=REAL},
+      </if>
+      <if test="currentDisplacement != null">
+        current_displacement = #{currentDisplacement,jdbcType=REAL},
+      </if>
+      <if test="totalDisplacement != null">
+        total_displacement = #{totalDisplacement,jdbcType=REAL},
+      </if>
+      <if test="speedChange != null">
+        speed_change = #{speedChange,jdbcType=REAL},
+      </if>
+      <if test="detectionHoleName != null">
+        detection_hole_name = #{detectionHoleName,jdbcType=VARCHAR},
+      </if>
+      <if test="detectionStandard != null">
+        detection_standard = #{detectionStandard,jdbcType=VARCHAR},
+      </if>
+      <if test="detectionNums != null">
+        detection_nums = #{detectionNums,jdbcType=INTEGER},
+      </if>
+      <if test="detectionSpace != null">
+        detection_space = #{detectionSpace,jdbcType=REAL},
+      </if>
+      <if test="tester != null">
+        tester = #{tester,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where slope_displacement_id = #{slopeDisplacementId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongda.detection.web.model.SlopeDisplacementData">
+    update slope_displacement_data
+    set sensor_id = #{sensorId,jdbcType=INTEGER},
+      detection_id = #{detectionId,jdbcType=INTEGER},
+      sensor_status = #{sensorStatus,jdbcType=VARCHAR},
+      first_time = #{firstTime,jdbcType=TIMESTAMP},
+      first_data = #{firstData,jdbcType=REAL},
+      previous_time = #{previousTime,jdbcType=TIMESTAMP},
+      previous_data = #{previousData,jdbcType=REAL},
+      current_time = #{currentTime,jdbcType=TIMESTAMP},
+      current_data = #{currentData,jdbcType=REAL},
+      current_displacement = #{currentDisplacement,jdbcType=REAL},
+      total_displacement = #{totalDisplacement,jdbcType=REAL},
+      speed_change = #{speedChange,jdbcType=REAL},
+      detection_hole_name = #{detectionHoleName,jdbcType=VARCHAR},
+      detection_standard = #{detectionStandard,jdbcType=VARCHAR},
+      detection_nums = #{detectionNums,jdbcType=INTEGER},
+      detection_space = #{detectionSpace,jdbcType=REAL},
+      tester = #{tester,jdbcType=VARCHAR}
+    where slope_displacement_id = #{slopeDisplacementId,jdbcType=INTEGER}
+  </update>
+</mapper>
