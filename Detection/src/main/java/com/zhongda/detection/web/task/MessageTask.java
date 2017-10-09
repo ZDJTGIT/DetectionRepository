@@ -38,9 +38,8 @@ public class MessageTask {
 			//构建消息内容
 			StringBuffer messageContext = new StringBuffer();
 			messageContext.append("你好，对位于");
-			messageContext.append(farmlandPH.getProject().getProjectAddress()+"的");
-			messageContext.append(farmlandPH.getProject().getProjectName()+"项目下的的");
-			messageContext.append(farmlandPH.getProject().getProjectName()+"项目PH值监控发现，编号为");
+			messageContext.append(farmlandPH.getProject().getProjectAddress()+"的农田项目下的的");
+			messageContext.append(farmlandPH.getProject().getProjectName()+"的PH值监控发现，编号为");
 			messageContext.append(farmlandPH.getSensorInfo().getDetectionId()+"的测点处的PH值为");
 			messageContext.append(farmlandPH.getDetectionData()+"，超过警戒值范围（4.5-6.5），对应传感器编号为");
 			messageContext.append(farmlandPH.getSensorInfo().getSensorNum()+"，型号为");

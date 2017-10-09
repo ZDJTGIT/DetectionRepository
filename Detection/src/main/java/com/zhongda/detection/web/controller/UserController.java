@@ -43,11 +43,9 @@ import org.springframework.web.util.WebUtils;
 
 import com.zhongda.detection.core.utils.GetVerificationCode;
 import com.zhongda.detection.core.utils.SimpleMailSender;
-import com.zhongda.detection.web.model.Message;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.PermissionSign;
 import com.zhongda.detection.web.security.RoleSign;
-import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.UserService;
 
 /**
@@ -59,9 +57,6 @@ public class UserController {
 
 	@Resource
 	private UserService userService;
-
-	@Resource
-	private MessageService messageService;
 
 	@Resource(name = "sessionDAO")
 	private SessionDAO sessionDAO;
@@ -129,10 +124,6 @@ public class UserController {
 			final User authUserInfo = userService.selectByUsername(user
 					.getUserName());
 			WebUtils.setSessionAttribute(request, "userInfo", authUserInfo);
-
-			//查出当前用户下所有未读的消息
-			List<Message> messageList = messageService.selectMessagesByUserIdAndNotRead(authUserInfo.getUserId());
-			model.addAttribute("messageList", messageList);
 
 		} catch (LockedAccountException e) {
 			error = "登录失败3次，账户已被锁定 ，请3分钟后再试！";

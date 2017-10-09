@@ -39,7 +39,6 @@ public class FarmlandPHController {
 		} catch (JsonProcessingException e) {
 			logger.error(e.getMessage());
 		}
-		logger.warn(phJson);
 		model.addAttribute("phJson", phJson);
 		return "graph_echarts_farmland";
 	}

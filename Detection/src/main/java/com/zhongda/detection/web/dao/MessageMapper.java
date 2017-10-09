@@ -23,4 +23,11 @@ public interface MessageMapper {
      * @return
      */
 	List<Message> selectMessagesByUserIdAndNotRead(Integer userId);
+
+	/**
+     * 查出当前用户下部分未读的消息（默认两条）
+     * @param userId
+     * @return
+     */
+	List<Message> selectPartMessagesByUserIdAndNotRead(Integer userId);
 }

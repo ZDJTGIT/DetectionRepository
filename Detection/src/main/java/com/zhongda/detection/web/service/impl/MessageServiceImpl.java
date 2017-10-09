@@ -28,7 +28,12 @@ public class MessageServiceImpl implements MessageService{
 
 	@Override
 	public List<Message> selectMessagesByUserIdAndNotRead(Integer userId) {
-		return messageMapper.selectMessagesByUserIdAndNotRead(userId);
+		return  messageMapper.selectMessagesByUserIdAndNotRead(userId);
+	}
+
+	@Override
+	public List<Message> selectPartMessagesByUserIdAndNotRead(Integer userId) {
+		return messageMapper.selectPartMessagesByUserIdAndNotRead(userId);
 	}
 
 }

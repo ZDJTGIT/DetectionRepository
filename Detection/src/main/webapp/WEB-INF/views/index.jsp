@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%
 	String path = request.getContextPath();
@@ -108,8 +110,8 @@
 								</shiro:hasPermission>
 							</ul></li>
 					</shiro:hasPermission>
-					
-					
+
+
 					<shiro:hasPermission name="project:manager:*">
 						<li id="accordion">
 							<a data-toggle="collapse" data-parent="#accordion"  href="#collapseOne" class="queryproject">
@@ -118,13 +120,13 @@
 	                            <span class="fa arrow"></span>
 	                        </a>
 							<ul id='collapseOne' class='collapse nav nav-second-level filling'>
-								
+
 							</ul>
 						</li>
 					</shiro:hasPermission>
-					
-					
-					 
+
+
+
 					<shiro:hasPermission name="project:manager:*">
 						<li><a href="javascript:;"> <i
 								class="fa fa fa-bar-chart-o"></i><span class="nav-label">统计图表</span>
@@ -154,8 +156,8 @@
 					</a>
 						<ul class="nav nav-second-level">
 							<li><a class="J_menuItem" href="rest/user">个人资料</a></li>
-						</ul></li>
-
+						</ul>
+					</li>
 
 					<li><a href="javascript:;"><i class="fa fa-desktop"></i> <span
 							class="nav-label">页面</span><span class="fa arrow"></span></a>
@@ -229,22 +231,28 @@
 					<ul class="nav navbar-top-links navbar-right">
 						<li class="dropdown"><a class="dropdown-toggle count-info"
 							data-toggle="dropdown" href="javascript:;"> <i
-								class="fa fa-envelope"></i> <span class="label label-warning">16</span>
+								class="fa fa-envelope"></i> <span class="label label-warning">${fn:length(messageList)}</span>
 						</a>
 							<ul class="dropdown-menu dropdown-messages">
-								<c:forEach items="${messageList}" var="message"
-									varStatus="status">
-									<c:choose>
-										<c:when test="${status.first}">
-											<li class="m-t-xs">
-										</c:when>
-										<c:otherwise>
-											<li>
-										</c:otherwise>
-									</c:choose>
-									<div class="dropdown-messages-box">
-										<a href="rest/profile" class="pull-left"> <img alt="image"
-											class="img-circle" src="assets/img/zdLogo.png">
+								<c:forEach items="${messageList}" var="message" varStatus="status">
+									<li class="m-t-xs">
+										<div class="dropdown-messages-box">
+											<a href="rest/profile" class="pull-left"> <img alt="image"
+												class="img-circle" src="assets/img/zdLogo.png">
+											</a>
+											<div class="media-body">
+												<small class="pull-right">46小时前</small> <strong>${userInfo.userName}</strong>
+												${message.messageContext}<br> <small
+													class="text-muted"><fmt:formatDate value="${message.createTime}" type="both"/></small>
+											</div>
+										</div>
+									</li>
+									<li class="divider"></li>
+								</c:forEach>
+								<li>
+									<div class="text-center link-block">
+										<a class="J_menuItem" href="rest/message/messageList"> <i
+											class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
 										</a>
 										<div class="media-body">
 											<small class="pull-right">46小时前</small> <strong>${userInfo.userName}</strong>
@@ -252,7 +260,6 @@
 										</div>
 									</div></li>
 						<li class="divider"></li>
-						</c:forEach>
 						<li>
 							<div class="text-center link-block">
 								<a class="J_menuItem" href="rest/mailbox"> <i
@@ -718,18 +725,19 @@
 	<!-- 百度地图key -->
 	<script type="text/javascript"
 		src="http://api.map.baidu.com/api?v=2.0&ak=lDSAFnztqS94cdBKPqgQUwTXuciyxpGa">
-		
+
 	</script>
 	<script src="assets/js/bootstrap-notify.js"></script>
 	<script src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-	<script src="assets/js/plugins/layer/layer.min.js"></script>
 	<script src="assets/js/plugins/pace/pace.min.js"></script>
+	<script src="assets/js/sockjs.min.js" type="text/javascript"></script>
+    <script src="assets/js/stomp.min.js" type="text/javascript"></script>
 	<script src="assets/js/hplus.js" type="text/javascript"></script>
 	<script src="assets/js/contabs.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
+
 			$.notify({
 				icon : 'fa user',
 				message : "欢迎来到<b>中大检测在线监控平台</b>."
@@ -742,6 +750,58 @@
 			$("#side-menu").metisMenu();
 
 		});
+
+		var socket = new SockJS('/Detection/rest/webSocket');
+
+        /**
+         * 建立成功的回调函数
+         */
+        socket.onopen = function() {
+            console.log('open');
+        };
+
+        /**
+         * 服务器有消息返回的回调函数
+         */
+        socket.onmessage = function(e) {
+            console.log('message', e.data);
+        };
+
+        /**
+         * websocket链接关闭的回调函数
+         */
+        socket.onclose = function() {
+            console.log('close');
+        };
+
+        var stompClient = Stomp.over(socket);
+        stompClient.connect({}, function(frame) {
+        	console.log("connected-------:"+frame);
+            stompClient.subscribe('/topic/hello',  function(data) { //订阅消息
+            	alert("AAA");
+                alert(data);
+            });
+
+            console.log("connected++++++:"+frame);
+            stompClient.subscribe('/topic/message',  function(data) { //订阅消息
+            	alert("BBB");
+                alert(data.body);
+            });
+
+            console.log("connected======:"+frame);
+            stompClient.subscribe('/user/queue/single',  function(data) { //订阅消息
+            	alert("CCC");
+                alert(data.body);
+            });
+        });
+
+//        stompClient.send("/ws/singlemessage", {}, JSON.stringify({
+//            name : "nane",
+//            taskName : "taskName",
+//            taskDetail : "taskDetail"
+//       }));
+
+
 	</script>
 
 	<!-- 动态加载左导航栏我的项目 -->
@@ -789,8 +849,8 @@
 					});
 				}
 			});
-			
-			
+
+
 			 $(document).on('click','.thirdbind',function(){
 					var projectId = $(this).attr("name");
 					var projectName = $(this).attr("data-target");
@@ -811,11 +871,11 @@
 									$(projectName).append(label);
 								});
 							}
-						}); 
+						});
 					}
-				}); 
+				});
 		})
-		
+
 	</script>
 
 </body>

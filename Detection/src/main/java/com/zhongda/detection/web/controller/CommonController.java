@@ -11,6 +11,7 @@ import org.apache.shiro.cache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,20 +20,27 @@ import org.springframework.web.util.WebUtils;
 
 import com.zhongda.detection.core.utils.vcode.Captcha;
 import com.zhongda.detection.core.utils.vcode.GifCaptcha;
+import com.zhongda.detection.web.model.Message;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SensorInfo;
 import com.zhongda.detection.web.model.User;
+import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.SensorInfoService;
 
 /**
- * 公共视图控制器
- **/
+ *<p>公共视图控制器</p>
+ * @author zmdeng
+ * @date 2017年9月28日
+ */
 @Controller
 public class CommonController {
 
 	public static final Logger logger = LoggerFactory
 			.getLogger(CommonController.class);
+
+	@Resource
+	private MessageService messageService;
 
 	@Resource
 	private ProjectService projectService;
@@ -48,7 +56,11 @@ public class CommonController {
 	 * 首页
 	 */
 	@RequestMapping("index")
-	public String index(HttpServletRequest request) {
+	public String index(HttpServletRequest request, Model model) {
+		//查出当前用户下所有未读的消息
+		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
+		List<Message> messageList = messageService.selectPartMessagesByUserIdAndNotRead(user.getUserId());
+		model.addAttribute("messageList", messageList);
 		return "index";
 	}
 
