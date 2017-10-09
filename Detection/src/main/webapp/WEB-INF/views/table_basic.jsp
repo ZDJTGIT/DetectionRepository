@@ -300,13 +300,10 @@
 	<script src="assets/js/plugins/iCheck/icheck.min.js"></script>
 	<script type="text/javascript">
 
-		$(document).on('click','#prohibitMdy',function(){
-			alert("禁止修改新建用户！");
-		});
-
+	        var b;
 	    //修改用户信息
 		function selectRow(s){
-			var b = s.parentNode.parentNode.rowIndex;
+			b = s.parentNode.parentNode.rowIndex;
 			var name = $("table tr:eq(" + b + ") td:eq(1)").text();
 			var email= $("table tr:eq(" + b + ") td:eq(2)").text();
 			var phone = $("table tr:eq(" + b + ") td:eq(3)").text();
@@ -320,50 +317,54 @@
 			$('#mdphone').val(phone);
 			$('#mdemail').val(email);
 			$('#mdid').val(id);
-
-			//关闭修改用户div
-			$('#closeModfiyUser').click(function(e) {
-				$('#modifyuser').hide();
-			});
-
-			//确定修改（修改操作稍后改成看信息修改）--------mdname/mdlinkman/mdcompany/mdphone/mdemail
-			$('#sureMdy').click(function() {
-				if(!$('#form_modifyuser').valid()){
-					return false;
-				}
-						var idvalue = $('#mdid').val();
-						var namevalue = $("#mdname").val();
-						var linkmanvalue = $("#mdlinkman").val();
-						var companyvalue = $("#mdcompany").val();
-						var phonevalue = $("#mdphone").val();
-						var emailvalue = $("#mdemail").val();
-					    var jsonData = '{"userId":"'+idvalue+'","linkman":"'+linkmanvalue+'","userName":"'+namevalue+
-							           '","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue +'"}';
-						$('#modifyuser').hide();
-						$.ajax({
-							type : 'post',
-							url : 'rest/user/modify',
-							contentType : 'application/json',
-							dataType : 'json',
-							data : jsonData,
-							success : function(data) {
-								if (data) {
-									$("table tr:eq(" + b + ") td:eq(1)").text(data.userName);
-									$("table tr:eq(" + b + ") td:eq(2)").text(data.email);
-									$("table tr:eq(" + b + ") td:eq(3)").text(data.phone);
-									$("table tr:eq(" + b + ") td:eq(4)").text(data.company);
-									$("table tr:eq(" + b + ") td:eq(5)").text(data.linkman);
-									alert("修改成功");
-								} else {
-									alert("数据异常");
-								}
-							},
-							error : function() {
-								alert("数据加载失败");
-							}
-						});
-			});
+			return;
 		}
+	    
+		//确定修改（修改操作稍后改成看信息修改）
+		$('#sureMdy').click(function() {
+			if(!$('#form_modifyuser').valid()){
+				return false;
+			}
+			        var t=b;
+					var idvalue = $('#mdid').val();
+					var namevalue = $("#mdname").val();
+					var linkmanvalue = $("#mdlinkman").val();
+					var companyvalue = $("#mdcompany").val();
+					var phonevalue = $("#mdphone").val();
+					var emailvalue = $("#mdemail").val();
+				    var jsonData = '{"userId":"'+idvalue+'","linkman":"'+linkmanvalue+'","userName":"'+namevalue+
+						           '","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue +'"}';
+					$('#modifyuser').hide();
+					$.ajax({
+						type : 'post',
+						url : 'rest/user/modify',
+						contentType : 'application/json',
+						dataType : 'json',
+						data : jsonData,
+						success : function(data) {
+							if (data) {
+								alert("ssss"+t);
+								$("table tr:eq(" + t + ") td:eq(1)").text(data.userName);
+								$("table tr:eq(" + t + ") td:eq(2)").text(data.email);
+								$("table tr:eq(" + t + ") td:eq(3)").text(data.phone);
+								$("table tr:eq(" + t + ") td:eq(4)").text(data.company);
+								$("table tr:eq(" + t + ") td:eq(5)").text(data.linkman);
+								alert("修改成功");
+							} else {
+								alert("数据异常");
+							}
+						},
+						error : function() {
+							alert("数据加载失败");
+						}
+					});
+		});
+	    
+		//关闭修改用户div
+		$('#closeModfiyUser').click(function(e) {
+			$('#modifyuser').hide();
+		});
+	    
 		//删除用户
 		function deleteRow(s) {
 			var b = s.parentNode.parentNode.rowIndex;

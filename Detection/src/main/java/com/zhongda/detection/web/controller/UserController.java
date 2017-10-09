@@ -335,6 +335,7 @@ public class UserController {
 		// 根据选中的用户修改用户信息
 		userService.updateByPrimaryKeySelective(user);
 		WebUtils.setSessionAttribute(request, "userInfo", user);
+		System.out.println("我被执行了" + user);
 		return user;
 	}
 
