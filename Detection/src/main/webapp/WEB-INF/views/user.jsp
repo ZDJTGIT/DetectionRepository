@@ -67,80 +67,9 @@
 						</h3>
 					</div>
 					<div style="margin-top: -20px">
-						<div class="ibox-content profile-content">
+						<div class="ibox-content profile-content" id="allProject">
 							<hr>
-							<div class="poj_External_div">
-								<div class="poj_layer">
-									<input type="text" class="input_noborder_2"value="项目正常">
-								</div>
-								
-								<div class="poj_description_div">
-										<div style="width:30%;height:40%;float: left">
-										<label class="input_noborder">项目名称：</label>
-										</div>
-										<div style="width:70%;height:40%;float: left">
-										<input type="text" class="input_noborder" value="张家界永定超级大农田">
-										</div>
-										<div style="width:30%;height:40%;float: left">
-										<label class="input_noborder">创建时间：</label>
-										</div>
-										<div style="width:70%;height:40%;float: left">
-										<input type="text" class="input_noborder" value="2017-09-24 19:17:11">
-										</div>
-								</div>
-								
-								<div class="poj_layer">
-									<a class="btn btn-primary " onclick="" href="">查看项目</a>
-								</div>
-							</div>
-							
-							<!--br>
-							<hr>
-							<div class="poj_External_div">
-								<div class="poj_layer">
-									<img class="poj_img" src="assets/img/face-1.jpg" alt="face">
-								</div>
-								<div class="poj_description_div">
-									<input type="text" class="input_noborder" value="项目2">
-									<br/><span class=""><small>时间/负责人/想写啥写啥</small></span>
-								</div>
-								<div class="poj_layer">
-									<a class="btn btn-primary " onclick="" href="">查看项目</a>
-								</div>
-							</div>
-							
-							<br>
-							<hr>
-							<div class="poj_External_div">
-								<div class="poj_layer">
-									<img class="poj_img" src="assets/img/face-2.jpg" alt="face">
-								</div>
-								<div class="poj_description_div">
-									<input type="text" class="input_noborder" value="项目2">
-									<br/><span class=""><small>时间/负责人/想写啥写啥</small></span>
-								</div>
-								<div class="poj_layer">
-									<a class="btn btn-primary " onclick="" href="">查看项目</a>
-								</div>
-							</div>
-							
-							<br>
-							<hr>
-							<div class="poj_External_div">
-								<div class="poj_layer">
-									<img class="poj_img" src="assets/img/face-3.jpg" alt="face">
-								</div>
-								<div class="poj_description_div">
-									<input type="text" class="input_noborder" value="项目2">
-									<br/><span class=""><small>时间/负责人/想写啥写啥</small></span>
-								</div>
-								<div class="poj_layer">
-									<a class="btn btn-primary " onclick="" href="">查看项目</a>
-								</div>
-							</div-->
-							
-							<br>
-							<div class="poj_External_div">
+							<div style="height:20px">
 							</div>
 						</div>
 						
@@ -264,6 +193,58 @@
   			    alert("数据加载失败");
   		      }
     	  });
+    	  
+    	  $.ajax({
+    		  type:'post',
+    	  	  url: 'rest/user/selectUserproject',
+    	  	  data: {userId:user_idvalue},
+    	  	  contextType:"application/json",
+    	  	  success: function(data){
+    	  		       if(data){
+    	  		    	 var  asthtml="";
+    	  		    	 $.each(data,function(idx,item){
+        	  		    	
+    	  		    		asthtml += '<div class="poj_External_div">'+
+							   			 	'<div class="poj_layer">'+
+					    						'<input type="text" id="projectItem_name" name="projectItem_name" class="input_noborder" value="'+item.sysDictionary.itemName+'">'+
+											'</div>'+
+											'<div class="poj_layer">'+
+												'<input type="text" id="projectStatus" name="projectStatus" class="input_noborder_2" value="'+item.projectStatus+'">'+
+											'</div>'+
+											'<div class="poj_description_div">'+
+												'<div>'+
+						        					'<div style="width:20%;float: left">'+
+														'<input type="text" class="input_noborder" value="名称："><br>'+
+														'<input type="text" class="input_noborder" value="时间：">'+
+													'</div>'+
+													'<div style="width:80%;float: left">'+
+														'<input type="text" id="projectName" name="projectName" class="input_noborder" value="'+item.projectName+'">'+
+													'</div>'+
+												'</div>'+
+												'<div>'+
+													'<div style="width:80%;float: left">'+
+														'<input type="text" id="projectTime" name="projectTime" class="input_noborder" value="'+item.projectTime+'">'+
+													'</div>'+
+												'</div>'+	
+											'</div>'+
+											'<div class="poj_layer">'+
+												'<a class="J_menuItem" style="font-size: 15px" onclick="" href="rest/project_detail">查看项目</a>'+
+											'</div>'+
+									'</div><br>';
+							
+    	  		    	 });
+        	  		    	
+        	  		    $('#allProject').append(asthtml); 	
+    	  		    	
+    	  		       }else{
+    	  		    	alert("数据异常");
+    	  		       }
+    	  	  },
+    	  	  error: function(){
+  			    alert("数据加载失败");
+  		      }
+    	  });
+    	  
        });
        
        //点击确定修改，提交修改的user信息，提交到控制器修改数据库数据

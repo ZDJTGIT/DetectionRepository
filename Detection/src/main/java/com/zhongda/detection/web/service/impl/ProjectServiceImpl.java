@@ -51,4 +51,9 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		return projectMap;
 	}
+	@Override
+	public List<Project> selectProjectAndSysDicByUserIds(Integer userId) {
+		return projectMapper.selectProjectAndSysDicByUserId(userId);
+	}
+	
 }

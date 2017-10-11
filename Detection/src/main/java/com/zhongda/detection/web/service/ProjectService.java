@@ -32,5 +32,7 @@ public interface ProjectService {
 	 * @return
 	 */
 	Map<String, List<Project>> selectProjectAndSysDicByUserId(Integer userId);
+	
+	List<Project> selectProjectAndSysDicByUserIds(Integer userId);
 
 }

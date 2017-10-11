@@ -43,13 +43,14 @@ import org.springframework.web.util.WebUtils;
 
 import com.zhongda.detection.core.utils.GetVerificationCode;
 import com.zhongda.detection.core.utils.SimpleMailSender;
+import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.Role;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.PermissionSign;
 import com.zhongda.detection.web.security.RoleSign;
+import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
 import com.zhongda.detection.web.service.UserService;
-import com.zhongda.detection.web.service.impl.RoleServiceImpl;
 
 /**
  * 用户控制器
@@ -63,6 +64,9 @@ public class UserController {
 	
 	@Resource
 	private RoleService roleService;
+	
+	@Resource
+	private ProjectService projectService;
 
 	@Resource(name = "sessionDAO")
 	private SessionDAO sessionDAO;
@@ -518,14 +522,22 @@ public class UserController {
 	@RequestMapping(value = "/selectUserRole", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> selectUserRole(Integer userId){
-		System.out.println("---------------------：：：：：：：：！"+userId);
 		Map<String, String> model = new HashMap<String, String>();
 		List<Role> roleInfos = roleService.selectRolesByUserId(userId);
 		 for (Role role : roleInfos) {
-			 System.out.println("权限为：：：：：：：：！"+role.getRoleName());
 			 model.put("role", role.getRoleName());
 		 }
 		 return model;
+	}
+	
+	/**
+	 * 查找用户所属项目
+	 */
+	@RequestMapping(value = "/selectUserproject", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Project> selectUserproject(Integer userId){
+		 List<Project> projectList = projectService.selectProjectAndSysDicByUserIds(userId);
+		 return projectList; 
 	}
 
 	/**
