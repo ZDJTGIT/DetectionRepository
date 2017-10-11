@@ -343,7 +343,6 @@
 						data : jsonData,
 						success : function(data) {
 							if (data) {
-								alert("ssss"+t);
 								$("table tr:eq(" + t + ") td:eq(1)").text(data.userName);
 								$("table tr:eq(" + t + ") td:eq(2)").text(data.email);
 								$("table tr:eq(" + t + ") td:eq(3)").text(data.phone);

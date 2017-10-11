@@ -150,9 +150,13 @@ public class CommonController {
 	}
 
 	@RequestMapping("user")
-	public String user(HttpServletRequest request) {
-
+	public String form_avatar(HttpServletRequest request) {
 		return "user";
+	}
+	
+	@RequestMapping("form_avatar")
+	public String user(HttpServletRequest request) {
+		return "form_avatar";
 	}
 
 	@RequestMapping("project_detail")

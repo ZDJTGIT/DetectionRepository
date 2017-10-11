@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
                 <button type="button" id="submitpw" class="btn btn-primary block full-width m-b">提交</button>
                 <p class="text-muted text-center"> <a href="">
-                <small>手机邮箱更换了？</small></a>
+                <small>返回登陆页面</small></a>
                 </p>
 				<div class="dd">
 					<span><font color="red" size="5">${error}</font></span>

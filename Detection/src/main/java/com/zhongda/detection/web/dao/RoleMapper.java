@@ -22,5 +22,5 @@ public interface RoleMapper {
      * @param userId
      * @return
      */
-	List<Role> selectRolesByUserId(Integer userId);
+    List<Role> selectRolesByUserId(Integer userId);
 }

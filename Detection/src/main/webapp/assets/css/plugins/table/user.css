@@ -33,25 +33,25 @@
 }
 
 .img_head{
-	height: 80px;
+	height: 100px;
 	width: 25%;
 	float: left;
 }
 
 .img_head_jpj{
-	height: 80px; 
-	width: 100%;
+	height: 100%; 
+	width: 120%;
 }
 
 .head_basicmessage{
-	height: 80px; 
+	height: 100px; 
 	width: 75%;
 	float: left;
 	background-color: #fff;
 }
 
 .head_basicmessage_h{
-	margin-left: 4px;
+	margin-left: 40px;
 }
 
 .poj_External_div{
@@ -61,6 +61,7 @@
 .poj_description_div{
 	width: 50%; 
 	float: left;
+	font-size: 14px; 
 }
 
 .poj_layer{
@@ -93,14 +94,14 @@
 	padding-left: 15px; 
 	padding: 6px; 
 	float: left; 
-	width: 43%; 
+	width: 33.3%; 
 	position: relative;
 }
 
 .data_content_2{
 	padding: 6px; 
 	float: left; 
-	width: 27%; 
+	width: 33.3%; 
 	position: relative;
 }
 
@@ -108,7 +109,7 @@
 	padding-right: 15px; 
 	padding: 6px; 
 	float: left; 
-	width: 30%; 
+	width: 33.3%; 
 	position: relative;
 }
 
@@ -116,7 +117,7 @@
 	padding-left: 15px; 
 	padding: 6px; 
 	float: left; 
-	width: 50%; 
+	width: 49.82%; 
 	position: relative;
 }
 
@@ -124,8 +125,9 @@
 	padding-left: 15px; 
 	padding: 6px; 
 	float: left; 
-	width: 33.33%; 
-	margin-top: -16px; 
+	width: 31.52%; 
+	margin-top: -1px; 
+	margin-left: 10px; 
 	position: relative;
 }
 
@@ -157,7 +159,7 @@
 	border-radius: 8px;
 }
 
-.data_content_input_2{
+.data_content_input_0{
 	border: 1px solid #CCC5B9; 
 	height: 40px;
 	padding: 9px 3px;
@@ -210,4 +212,19 @@
 	padding: 10px 0px;
 	width: 97%;
 	border-radius: 8px;
+}
+
+.input_noborder{
+	border-left:0px;
+	border-top:0px;
+	border-right:0px;
+	border-bottom:1px;
+}
+
+.input_noborder_2{
+	border-left:0px;
+	border-top:0px;
+	border-right:0px;
+	border-bottom:1px;
+	font-size: 17px; 
 }

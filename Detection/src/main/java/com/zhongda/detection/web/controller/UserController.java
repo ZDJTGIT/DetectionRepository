@@ -43,10 +43,13 @@ import org.springframework.web.util.WebUtils;
 
 import com.zhongda.detection.core.utils.GetVerificationCode;
 import com.zhongda.detection.core.utils.SimpleMailSender;
+import com.zhongda.detection.web.model.Role;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.PermissionSign;
 import com.zhongda.detection.web.security.RoleSign;
+import com.zhongda.detection.web.service.RoleService;
 import com.zhongda.detection.web.service.UserService;
+import com.zhongda.detection.web.service.impl.RoleServiceImpl;
 
 /**
  * 用户控制器
@@ -57,6 +60,9 @@ public class UserController {
 
 	@Resource
 	private UserService userService;
+	
+	@Resource
+	private RoleService roleService;
 
 	@Resource(name = "sessionDAO")
 	private SessionDAO sessionDAO;
@@ -325,8 +331,9 @@ public class UserController {
 	public User modify(@RequestBody User user, HttpServletRequest request) {
 		// 根据选中的用户修改用户信息
 		userService.updateByPrimaryKeySelective(user);
-		WebUtils.setSessionAttribute(request, "userInfo", user);
-		System.out.println("我被执行了" + user);
+		if(((User)WebUtils.getSessionAttribute(request, "userInfo")).getUserName().equals(user.getUserName())){
+			WebUtils.setSessionAttribute(request, "userInfo", user);
+		}
 		return user;
 	}
 
@@ -492,36 +499,33 @@ public class UserController {
 	@RequestMapping(value = "/updataUser", method = RequestMethod.POST)
 	@ResponseBody
 	public User updataUser(@RequestBody User user, HttpServletRequest request) {
+		
+		String name = userService.selectByPrimaryKey(user.getUserId()).getUserName();
+		SimpleMailSender Sender = new SimpleMailSender();
+		String congtent = name
+				+ ": 你好，您正在进行改密操作，请确认是你本人操作！    ---中大检测数据监测平台";
+		Sender.send(userService.selectByPrimaryKey(user.getUserId()).getEmail(), "修改密码提醒", congtent);
+		String cryptedPwd = new Md5Hash(user.getPassword(), name, 1024).toString();
+		user.setPassword(cryptedPwd);
 		userService.updateByPrimaryKeySelective(user);
 		WebUtils.setSessionAttribute(request, "userInfo", user);
 		return user;
 	}
-
+	
 	/**
-	 * 用户修改密码
+	 * 查找用户权限
 	 */
-	@RequestMapping(value = "/updataPassword", method = RequestMethod.POST)
+	@RequestMapping(value = "/selectUserRole", method=RequestMethod.POST)
 	@ResponseBody
-	public User updataPassword(@RequestBody User user) {
-		String name = userService.selectByPrimaryKey(user.getUserId())
-				.getUserName();
-		String cryptedPwd = new Md5Hash(user.getPassword(), name, 1024)
-				.toString();
-		user.setPassword(cryptedPwd);
-		userService.updateByPrimaryKeySelective(user);
-		return user;
-	}
-
-	/**
-	 * 发送邮件及验证码
-	 */
-	@RequestMapping(value = "/sedemail", method = RequestMethod.POST)
-	public void sendemail(String emailAddress, String userName) {
-		SimpleMailSender Sender = new SimpleMailSender();
-		String congtent = userName
-				+ ": 你好，您正在进行改密操作，请确认是你本人操作！    ---中大检测数据监测平台";
-		Sender.send(emailAddress, "修改密码提醒", congtent);
-		// Sender.send(emailAddress, SimpleMailSender.CHANGES_PWD);
+	public Map<String, String> selectUserRole(Integer userId){
+		System.out.println("---------------------：：：：：：：：！"+userId);
+		Map<String, String> model = new HashMap<String, String>();
+		List<Role> roleInfos = roleService.selectRolesByUserId(userId);
+		 for (Role role : roleInfos) {
+			 System.out.println("权限为：：：：：：：：！"+role.getRoleName());
+			 model.put("role", role.getRoleName());
+		 }
+		 return model;
 	}
 
 	/**
@@ -562,7 +566,6 @@ public class UserController {
 		        	System.out.println("邮箱验证通过！"+code);	
 		        	model.put("code", code);
 					return model;
-	        	
 	        	}else{
 	        	model.put("code", null);
 	            return model;
