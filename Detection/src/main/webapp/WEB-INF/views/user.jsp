@@ -38,7 +38,10 @@
 					<div>
 					     <div class="ibox-content no-padding border-left-right">
 					        <div class="img_head">
-					           <img class="img_head_jpj" src="assets/img/rojoy.jpg" alt="image">
+					        <label class="btn-file" data-role="add">  
+                                 <img id = "#avatarImg" src="assets/img/rojoy.jpg" width="130" height="100" alt=""/>  
+                                 <input id="avatarFile" accept="image/*" name="avatarFile" type="file" style="display:none;" />  
+                            </label>
 							</div>
 							<div class="head_basicmessage">
 					            <h4 class="head_basicmessage_h" id="username">
@@ -124,7 +127,10 @@
 									</div>
 							    </div>
 							</div>
-							    
+							</form>
+							
+							<form id="from_modifyuserpassword">
+							<div class="data_basic">    
 							    <div class="data_content_5">
 									<label class="data_content_lable" for="password">请输入原密码:</label>
 									<input class="data_content_input_3" id="password" name="password" type="password">
@@ -139,6 +145,7 @@
 									<label class="data_content_lable" for="new_passwords">请确认新密码:</label>
 									<input class="data_content_input_3" id="new_passwords" name="new_passwords" type="password">
 							    </div>
+							</div>   
 							</form>
 							
 							<div class="data_basic">
@@ -230,7 +237,7 @@
 											'<div class="poj_layer">'+
 												'<a class="J_menuItem" style="font-size: 15px" onclick="" href="rest/project_detail">查看项目</a>'+
 											'</div>'+
-									'</div><br>';
+									'</div><hr>';
 							
     	  		    	 });
         	  		    	
@@ -249,10 +256,16 @@
        
        //点击确定修改，提交修改的user信息，提交到控制器修改数据库数据
        $('#determineDelete').click(function(){
-    	   if(!$('#from_modifyusermassage').valid()){
-				return false;
-			}
-    	   var newpassword = $('#new_passwords').val();
+    	   var newpassword = '${userInfo.password}';
+    	   if($('#password').val()!=''|$('#new_password').val()!=''|$('#new_passwords').val()!=''){
+    		   if(!$('#from_modifyuserpassword').valid()){
+      				return false;
+      			}
+    		   newpassword = $('#new_passwords').val();
+    	   }
+	       	   if(!$('#from_modifyusermassage').valid()){
+	   				return false;
+	   			}
     	   var companyvalue = $('#self_company').val();
     	   var namevalue = $('#self_name').val();
 		   var linkmanvalue = $('#self_linkman').val();

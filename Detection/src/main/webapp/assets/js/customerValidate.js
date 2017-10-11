@@ -1,3 +1,11 @@
+
+// 手机号码验证
+jQuery.validator.addMethod("isMobile", function(value, element) {
+    var length = value.length;
+    var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
+    return this.optional(element) || (length == 11 && mobile.test(value));
+}, "请正确填写您的手机号码");
+
 //添加用户校验用户信息唯一性
 $(document).ready(function() {
 	$('#form_adduser').validate({
@@ -31,6 +39,7 @@ $(document).ready(function() {
 			phone : {
 				required : true,
 				minlength : 11,
+				isMobile : true,
 				//验证手机号码是否已注册
 				remote: {
 				    url: "rest/user/OnlyPhone",     //后台处理程序
@@ -80,6 +89,7 @@ $(document).ready(function() {
 			phone : {
 				required : "输入常用手机号码",
 				minlength : "请输入一个正确的手机号码",
+				isMobile : "请正确填写您的手机号码",
 				remote: "手机号已经被注册"
 			},
 		
@@ -127,11 +137,12 @@ $('#form_modifyuser').validate({
 			mdphone : {
 				required : true,
 				minlength : 11,
+				isMobile : true,
 				//验证手机号码是否被注册
 				remote: {
-				    url: "rest/user/mdOnlyPhone",     //后台处理程序
-				    type: "post",               //数据发送方式  
-				    data: {                     //要传递的数据
+				    url: "rest/user/mdOnlyPhone",//后台处理程序
+				    type: "post",                //数据发送方式  
+				    data: {                      //要传递的数据
 				    	mdphone: function() {
 				            return $("#mdphone").val();
 				        },
@@ -147,9 +158,9 @@ $('#form_modifyuser').validate({
 				email : true,
 				//验证电子邮箱是否被注册
 				remote: {
-				    url: "rest/user/mdOnlyEmail",     //后台处理程序
-				    type: "post",               //数据发送方式  
-				    data: {                     //要传递的数据
+				    url: "rest/user/mdOnlyEmail",//后台处理程序
+				    type: "post",                //数据发送方式  
+				    data: {                      //要传递的数据
 				    	mdemail: function() {
 				            return $("#mdemail").val();
 				        },
@@ -182,6 +193,7 @@ $('#form_modifyuser').validate({
 			mdphone : {
 				required : "输入常用手机号码",
 				minlength : "请输入一个正确的手机号码",
+				isMobile : "请正确填写您的手机号码",
 				remote: "手机号码已经被注册"
 			},
 		
@@ -193,6 +205,61 @@ $('#form_modifyuser').validate({
 		}
 		
 	});
+
+$('#from_modifyuserpassword').validate({
+	
+	rules : {
+		password: {
+			required: true,
+            minlength: 6,
+			remote: {
+			    url: "rest/user/OnlyPassword",     //后台处理程序
+			    type: "post",               //数据发送方式  
+			    data: {                     //要传递的数据
+			    	password: function() {
+			            return $("#password").val();
+			        },
+			        userId: function() {
+				        return $("#self_Id").val();
+			        }
+			    }
+			}
+		},
+		
+		new_password: {
+	        required: true,
+	        minlength: 6
+	    },
+	      
+	    new_passwords: {
+		    required: true,
+		    minlength: 6,
+		    equalTo: "#new_password"
+		}
+	},
+
+	messages : {
+		password: {
+	        required: "三空全空可修改其他信息",
+	        minlength: "密码长度不能小于 6 个字符",
+	        remote: "原密码输入错误"	
+	    },
+		
+		new_password: {
+	        required: "三空全空可修改其他信息",
+	        minlength: "密码长度不能小于 6 个字符"
+	    },
+	      
+	    new_passwords: {
+	        required: "三空全空可修改其他信息",
+	        minlength: "密码长度不能小于 6 个字符",
+	        equalTo: "两次密码输入不一致"
+	    }
+	}
+
+});
+
+
 
 //用户修改用户信息时校验用户信息是否唯一
 $('#from_modifyusermassage').validate({
@@ -229,6 +296,7 @@ $('#from_modifyusermassage').validate({
 		self_phone : {
 			required : true,
 			minlength : 11,
+			isMobile : true,
 			//验证手机号码是否被注册
 			remote: {
 			    url: "rest/user/mdOnlyPhone",     //后台处理程序
@@ -260,36 +328,7 @@ $('#from_modifyusermassage').validate({
 			        }
 			    }
 			}
-		},
-		
-		password: {
-			required: true,
-            minlength: 6,
-			remote: {
-			    url: "rest/user/OnlyPassword",     //后台处理程序
-			    type: "post",               //数据发送方式  
-			    data: {                     //要传递的数据
-			    	password: function() {
-			            return $("#password").val();
-			        },
-			        userId: function() {
-				        return $("#self_Id").val();
-			        }
-			    }
-			}
-		},
-		
-		new_password: {
-	        required: true,
-	        minlength: 6
-	    },
-	      
-	    new_passwords: {
-		    required: true,
-		    minlength: 6,
-		    equalTo: "#new_password"
 		}
-		
 	},
 	
 	messages : {
@@ -313,6 +352,7 @@ $('#from_modifyusermassage').validate({
 		self_phone : {
 			required : "输入常用手机号码",
 			minlength : "请输入一个正确的手机号码",
+			isMobile : "请正确填写您的手机号码",
 			remote: "手机号码已经被注册"
 		},
 	
@@ -320,24 +360,7 @@ $('#from_modifyusermassage').validate({
 			required : "请输入邮箱",
 			email : "请输入一个正确的邮箱",
 			remote: "电子邮箱已经被注册"
-		},
-		
-		password: {
-	        required: "请输入密码",
-	        minlength: "密码长度不能小于 6 个字符",
-	        remote: "原密码输入错误"	
-	    },
-		
-		new_password: {
-	        required: "请输入密码",
-	        minlength: "密码长度不能小于 6 个字符"
-	    },
-	      
-	    new_passwords: {
-	        required: "请输入密码",
-	        minlength: "密码长度不能小于 6 个字符",
-	        equalTo: "两次密码输入不一致"
-	    }
+		}
 		
 	}
 	
