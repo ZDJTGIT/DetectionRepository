@@ -366,14 +366,10 @@
 	    
 		//删除用户
 		function deleteRow(s) {
-			alert("妈的智障");
 			var b = s.parentNode.parentNode.rowIndex;
-			alert("妈的智障"+b);
 			var t = $("table tr:eq(" + b + ") td:eq(1)").text();
-			alert("妈的智障"+t);
 			//layer.msg('玩命提示中');
 			var jsonData = '{"userName":"' + t + '"}';
-			alert("妈的智障a ");
 			$.ajax({
 				type : 'post',
 				url : 'rest/user/delete',
