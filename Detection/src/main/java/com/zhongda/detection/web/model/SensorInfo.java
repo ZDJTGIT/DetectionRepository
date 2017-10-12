@@ -1,97 +1,103 @@
 package com.zhongda.detection.web.model;
 
 public class SensorInfo {
-    private Integer sensorId;
+	private Integer sensorId;
 
-    private Integer projectId;
+	private Integer projectId;
 
-    private Integer detectionId;
+	private Integer detectionId;
 
-    private String sensorLongitude;
+	private String sensorLongitude;
 
-    private String sensorLatitude;
+	private String sensorLatitude;
 
-    private String sensorNum;
+	private String sensorNum;
 
-    private String sensorType;
+	private String sensorType;
 
-    private String sensorModel;
+	private String sensorModel;
 
-    private Integer detectionTypeId;
+	private Integer detectionTypeId;
 
-    private SysDictionary sysDictionary;
+	private SysDictionary sysDictionary;
 
-    public Integer getSensorId() {
-        return sensorId;
-    }
+	private SlopeDisplacementData slopeDisplacementData;
 
-    public void setSensorId(Integer sensorId) {
-        this.sensorId = sensorId;
-    }
+	private Float sensorDepth;
 
-    public Integer getProjectId() {
-        return projectId;
-    }
+	public Integer getSensorId() {
+		return sensorId;
+	}
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
-    }
+	public void setSensorId(Integer sensorId) {
+		this.sensorId = sensorId;
+	}
 
-    public Integer getDetectionId() {
-        return detectionId;
-    }
+	public Integer getProjectId() {
+		return projectId;
+	}
 
-    public void setDetectionId(Integer detectionId) {
-        this.detectionId = detectionId;
-    }
+	public void setProjectId(Integer projectId) {
+		this.projectId = projectId;
+	}
 
-    public String getSensorLongitude() {
-        return sensorLongitude;
-    }
+	public Integer getDetectionId() {
+		return detectionId;
+	}
 
-    public void setSensorLongitude(String sensorLongitude) {
-        this.sensorLongitude = sensorLongitude == null ? null : sensorLongitude.trim();
-    }
+	public void setDetectionId(Integer detectionId) {
+		this.detectionId = detectionId;
+	}
 
-    public String getSensorLatitude() {
-        return sensorLatitude;
-    }
+	public String getSensorLongitude() {
+		return sensorLongitude;
+	}
 
-    public void setSensorLatitude(String sensorLatitude) {
-        this.sensorLatitude = sensorLatitude == null ? null : sensorLatitude.trim();
-    }
+	public void setSensorLongitude(String sensorLongitude) {
+		this.sensorLongitude = sensorLongitude == null ? null : sensorLongitude
+				.trim();
+	}
 
-    public String getSensorNum() {
-        return sensorNum;
-    }
+	public String getSensorLatitude() {
+		return sensorLatitude;
+	}
 
-    public void setSensorNum(String sensorNum) {
-        this.sensorNum = sensorNum == null ? null : sensorNum.trim();
-    }
+	public void setSensorLatitude(String sensorLatitude) {
+		this.sensorLatitude = sensorLatitude == null ? null : sensorLatitude
+				.trim();
+	}
 
-    public String getSensorType() {
-        return sensorType;
-    }
+	public String getSensorNum() {
+		return sensorNum;
+	}
 
-    public void setSensorType(String sensorType) {
-        this.sensorType = sensorType == null ? null : sensorType.trim();
-    }
+	public void setSensorNum(String sensorNum) {
+		this.sensorNum = sensorNum == null ? null : sensorNum.trim();
+	}
 
-    public String getSensorModel() {
-        return sensorModel;
-    }
+	public String getSensorType() {
+		return sensorType;
+	}
 
-    public void setSensorModel(String sensorModel) {
-        this.sensorModel = sensorModel == null ? null : sensorModel.trim();
-    }
+	public void setSensorType(String sensorType) {
+		this.sensorType = sensorType == null ? null : sensorType.trim();
+	}
 
-    public Integer getDetectionTypeId() {
-        return detectionTypeId;
-    }
+	public String getSensorModel() {
+		return sensorModel;
+	}
 
-    public void setDetectionTypeId(Integer detectionTypeId) {
-        this.detectionTypeId = detectionTypeId;
-    }
+	public void setSensorModel(String sensorModel) {
+		this.sensorModel = sensorModel == null ? null : sensorModel.trim();
+	}
+
+	public Integer getDetectionTypeId() {
+		return detectionTypeId;
+	}
+
+	public void setDetectionTypeId(Integer detectionTypeId) {
+		this.detectionTypeId = detectionTypeId;
+	}
 
 	public SysDictionary getSysDictionary() {
 		return sysDictionary;
@@ -100,4 +106,34 @@ public class SensorInfo {
 	public void setSysDictionary(SysDictionary sysDictionary) {
 		this.sysDictionary = sysDictionary;
 	}
+
+	public SlopeDisplacementData getSlopeDisplacementData() {
+		return slopeDisplacementData;
+	}
+
+	public void setSlopeDisplacementData(
+			SlopeDisplacementData slopeDisplacementData) {
+		this.slopeDisplacementData = slopeDisplacementData;
+	}
+
+	public Float getSensorDepth() {
+		return sensorDepth;
+	}
+
+	public void setSensorDepth(Float sensorDepth) {
+		this.sensorDepth = sensorDepth;
+	}
+
+	@Override
+	public String toString() {
+		return "SensorInfo [sensorId=" + sensorId + ", projectId=" + projectId
+				+ ", detectionId=" + detectionId + ", sensorLongitude="
+				+ sensorLongitude + ", sensorLatitude=" + sensorLatitude
+				+ ", sensorNum=" + sensorNum + ", sensorType=" + sensorType
+				+ ", sensorModel=" + sensorModel + ", detectionTypeId="
+				+ detectionTypeId + ", sysDictionary=" + sysDictionary
+				+ ", slopeDisplacementData=" + slopeDisplacementData
+				+ ", sensorDepth=" + sensorDepth + "]";
+	}
+
 }

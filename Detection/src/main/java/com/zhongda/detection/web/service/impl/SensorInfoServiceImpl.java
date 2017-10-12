@@ -50,4 +50,11 @@ public class SensorInfoServiceImpl implements SensorInfoService {
 		}
 		return sensorMap;
 	}
+
+	@Override
+	public List<SensorInfo> selectInfoAndDisplacementData(Integer projectId,
+			Integer detectionTypeId) {
+		return sensorInfoMapper.selectInfoAndDisplacementData(projectId,
+				detectionTypeId);
+	}
 }

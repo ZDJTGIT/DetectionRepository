@@ -32,4 +32,14 @@ public interface SensorInfoService {
 	Map<String, List<SensorInfo>> selectsenInfoAndSysdicByProjectId(
 			Integer projectId);
 
+	/**
+	 * 查询传感器数据通过项目ID和字典编号
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	List<SensorInfo> selectInfoAndDisplacementData(Integer projectId,
+			Integer detectionTypeId);
+
 }

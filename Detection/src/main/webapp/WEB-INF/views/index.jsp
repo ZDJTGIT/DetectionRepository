@@ -867,7 +867,7 @@
 							data : 'projectId='+projectId,
 							success: function(data){
 								$.each(data,function(key,value){
-									var label = "<li><a class='J_menuItem' href='rest/graph_echarts_"+value[0].sysDictionary.itemValue+"'><i>—</i><span class='nav-label'>"+key+"</span><span class='fa arrow'></span></a></li>";
+									var label = "<li><a class='J_menuItem' href='rest/project/"+value[0].sysDictionary.itemValue+"?projectId="+projectId+"&detectionTypeId="+value[0].detectionTypeId+"'><i>—</i><span class='nav-label'>"+key+"</span><span class='fa arrow'></span></a></li>";
 									$(projectName).append(label);
 								});
 							}
@@ -875,7 +875,7 @@
 					}
 				});
 		})
-
+		
 	</script>
 
 </body>

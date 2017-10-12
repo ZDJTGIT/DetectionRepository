@@ -10,7 +10,7 @@
     <result column="first_data" jdbcType="REAL" property="firstData" />
     <result column="previous_time" jdbcType="TIMESTAMP" property="previousTime" />
     <result column="previous_data" jdbcType="REAL" property="previousData" />
-    <result column="current_time" jdbcType="TIMESTAMP" property="currentTime" />
+    <result column="current_times" jdbcType="TIMESTAMP" property="currentTime" />
     <result column="current_data" jdbcType="REAL" property="currentData" />
     <result column="current_displacement" jdbcType="REAL" property="currentDisplacement" />
     <result column="total_displacement" jdbcType="REAL" property="totalDisplacement" />
@@ -23,7 +23,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     slope_displacement_id, sensor_id, detection_id, sensor_status, first_time, first_data, 
-    previous_time, previous_data, current_time, current_data, current_displacement, total_displacement, 
+    previous_time, previous_data, current_times, current_data, current_displacement, total_displacement, 
     speed_change, detection_hole_name, detection_standard, detection_nums, detection_space, 
     tester
   </sql>

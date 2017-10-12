@@ -11,6 +11,7 @@
     <result column="sensor_type" jdbcType="VARCHAR" property="sensorType" />
     <result column="sensor_model" jdbcType="VARCHAR" property="sensorModel" />
     <result column="detection_type_id" jdbcType="INTEGER" property="detectionTypeId" />
+    <result column="sensor_depth" jdbcType="REAL" property="sensorDepth" />
   </resultMap>
   <resultMap id="LinkDictionayrMap" type="com.zhongda.detection.web.model.SensorInfo">
     <id column="sensor_id" jdbcType="INTEGER" property="sensorId" />
@@ -22,6 +23,7 @@
     <result column="sensor_type" jdbcType="VARCHAR" property="sensorType" />
     <result column="sensor_model" jdbcType="VARCHAR" property="sensorModel" />
     <result column="detection_type_id" jdbcType="INTEGER" property="detectionTypeId" />
+    <result column="sensor_depth" jdbcType="REAL" property="sensorDepth" />
     <association property="sysDictionary" javaType="SysDictionary">
 	    <id column="dic_id" jdbcType="INTEGER" property="dicId" />
 	    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
@@ -31,9 +33,41 @@
 	    <result column="item_value" jdbcType="VARCHAR" property="itemValue" />
    	</association>
   </resultMap>
+  <resultMap id="LinkDisplacementDataMap" type="com.zhongda.detection.web.model.SensorInfo">
+    <id column="sensor_id" jdbcType="INTEGER" property="sensorId" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="detection_id" jdbcType="INTEGER" property="detectionId" />
+    <result column="sensor_longitude" jdbcType="VARCHAR" property="sensorLongitude" />
+    <result column="sensor_latitude" jdbcType="VARCHAR" property="sensorLatitude" />
+    <result column="sensor_num" jdbcType="VARCHAR" property="sensorNum" />
+    <result column="sensor_type" jdbcType="VARCHAR" property="sensorType" />
+    <result column="sensor_model" jdbcType="VARCHAR" property="sensorModel" />
+    <result column="detection_type_id" jdbcType="INTEGER" property="detectionTypeId" />
+    <result column="sensor_depth" jdbcType="REAL" property="sensorDepth" />
+    <association property="slopeDisplacementData" javaType="SlopeDisplacementData">
+	    <id column="slope_displacement_id" jdbcType="INTEGER" property="slopeDisplacementId" />
+	    <result column="sensor_id" jdbcType="INTEGER" property="sensorId" />
+	    <result column="detection_id" jdbcType="INTEGER" property="detectionId" />
+	    <result column="sensor_status" jdbcType="VARCHAR" property="sensorStatus" />
+	    <result column="first_time" jdbcType="TIMESTAMP" property="firstTime" />
+	    <result column="first_data" jdbcType="REAL" property="firstData" />
+	    <result column="previous_time" jdbcType="TIMESTAMP" property="previousTime" />
+	    <result column="previous_data" jdbcType="REAL" property="previousData" />
+	    <result column="current_times" jdbcType="TIMESTAMP" property="currentTimes" />
+	    <result column="current_data" jdbcType="REAL" property="currentData" />
+	    <result column="current_displacement" jdbcType="REAL" property="currentDisplacement" />
+	    <result column="total_displacement" jdbcType="REAL" property="totalDisplacement" />
+	    <result column="speed_change" jdbcType="REAL" property="speedChange" />
+	    <result column="detection_hole_name" jdbcType="VARCHAR" property="detectionHoleName" />
+	    <result column="detection_standard" jdbcType="VARCHAR" property="detectionStandard" />
+	    <result column="detection_nums" jdbcType="INTEGER" property="detectionNums" />
+	    <result column="detection_space" jdbcType="REAL" property="detectionSpace" />
+	    <result column="tester" jdbcType="VARCHAR" property="tester" />
+   	</association>
+  </resultMap>
   <sql id="Base_Column_List">
     sensor_id, project_id, detection_id, sensor_longitude, sensor_latitude, sensor_num,
-    sensor_type, sensor_model, detection_type_id
+    sensor_type, sensor_model, detection_type_id,sensor_depth
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -58,6 +92,12 @@
   	from sensor_info si,sys_dictionary sd 
   	where si.detection_type_id=sd.dic_id and si.project_id = #{projectId,jdbcType=INTEGER}
   </select>
+  <select id="selectInfoAndDisplacementData" parameterType="java.lang.Integer" resultMap="LinkDisplacementDataMap">
+  	select
+  	si.*,sdd.*
+  	from sensor_info si,slope_displacement_data sdd
+  	where si.sensor_id = sdd.sensor_id and si.project_id = #{projectId,jdbcType=INTEGER} and si.detection_type_id = #{detectionTypeId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sensor_info
     where sensor_id = #{sensorId,jdbcType=INTEGER}
@@ -65,11 +105,12 @@
   <insert id="insert" parameterType="com.zhongda.detection.web.model.SensorInfo">
     insert into sensor_info (sensor_id, project_id, detection_id,
       sensor_longitude, sensor_latitude, sensor_num,
-      sensor_type, sensor_model, detection_type_id
+      sensor_type, sensor_model, detection_type_id,sensor_depth
       )
     values (#{sensorId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{detectionId,jdbcType=INTEGER},
       #{sensorLongitude,jdbcType=VARCHAR}, #{sensorLatitude,jdbcType=VARCHAR}, #{sensorNum,jdbcType=VARCHAR},
-      #{sensorType,jdbcType=VARCHAR}, #{sensorModel,jdbcType=VARCHAR}, #{detectionTypeId,jdbcType=INTEGER}
+      #{sensorType,jdbcType=VARCHAR}, #{sensorModel,jdbcType=VARCHAR}, #{detectionTypeId,jdbcType=INTEGER},
+      #{sensorDepth,jdbcType=REAL}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.SensorInfo">
@@ -102,6 +143,9 @@
       <if test="detectionTypeId != null">
         detection_type_id,
       </if>
+      <if test="sensorDepth != null">
+        sensor_depth,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="sensorId != null">
@@ -130,6 +174,9 @@
       </if>
       <if test="detectionTypeId != null">
         #{detectionTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="sensorDepth != null">
+        #{sensorDepth,jdbcType=REAL},
       </if>
     </trim>
   </insert>
@@ -160,6 +207,9 @@
       <if test="detectionTypeId != null">
         detection_type_id = #{detectionTypeId,jdbcType=INTEGER},
       </if>
+      <if test="sensorDepth != null">
+        sensor_depth = #{sensorDepth,jdbcType=REAL},
+      </if>
     </set>
     where sensor_id = #{sensorId,jdbcType=INTEGER}
   </update>
@@ -172,7 +222,8 @@
       sensor_num = #{sensorNum,jdbcType=VARCHAR},
       sensor_type = #{sensorType,jdbcType=VARCHAR},
       sensor_model = #{sensorModel,jdbcType=VARCHAR},
-      detection_type_id = #{detectionTypeId,jdbcType=INTEGER}
+      detection_type_id = #{detectionTypeId,jdbcType=INTEGER},
+      sensor_depth = #{sensorDepth,jdbcType=REAL}
     where sensor_id = #{sensorId,jdbcType=INTEGER}
   </update>
 </mapper>

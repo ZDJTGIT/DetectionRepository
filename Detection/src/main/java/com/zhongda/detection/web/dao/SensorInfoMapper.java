@@ -2,6 +2,8 @@ package com.zhongda.detection.web.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.zhongda.detection.web.model.SensorInfo;
 
 public interface SensorInfoMapper {
@@ -32,4 +34,15 @@ public interface SensorInfoMapper {
 	 * @return
 	 */
 	List<SensorInfo> selectsenInfoAndSysdicByProjectId(Integer projectId);
+
+	/**
+	 * 查询传感器数据通过项目ID和字典编号
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	List<SensorInfo> selectInfoAndDisplacementData(
+			@Param("projectId") Integer projectId,
+			@Param("detectionTypeId") Integer detectionTypeId);
 }
