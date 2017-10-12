@@ -6,8 +6,10 @@ jQuery.validator.addMethod("isMobile", function(value, element) {
     return this.optional(element) || (length == 11 && mobile.test(value));
 }, "请正确填写您的手机号码");
 
+
 //添加用户校验用户信息唯一性
 $(document).ready(function() {
+	
 	$('#form_adduser').validate({
 		
 		rules : {
@@ -208,9 +210,12 @@ $('#form_modifyuser').validate({
 
 $('#from_modifyuserpassword').validate({
 	
+	onkeyup:false,
+	focusCleanup:true,
+	//onfocusout:false,
+	
 	rules : {
 		password: {
-			required: true,
             minlength: 6,
 			remote: {
 			    url: "rest/user/OnlyPassword",     //后台处理程序
@@ -227,12 +232,10 @@ $('#from_modifyuserpassword').validate({
 		},
 		
 		new_password: {
-	        required: true,
 	        minlength: 6
 	    },
 	      
 	    new_passwords: {
-		    required: true,
 		    minlength: 6,
 		    equalTo: "#new_password"
 		}
@@ -240,23 +243,20 @@ $('#from_modifyuserpassword').validate({
 
 	messages : {
 		password: {
-	        required: "三空全空可修改其他信息",
-	        minlength: "密码长度不能小于 6 个字符",
+	        minlength: "原密码输入错误",
 	        remote: "原密码输入错误"	
 	    },
 		
 		new_password: {
-	        required: "三空全空可修改其他信息",
 	        minlength: "密码长度不能小于 6 个字符"
 	    },
 	      
 	    new_passwords: {
-	        required: "三空全空可修改其他信息",
 	        minlength: "密码长度不能小于 6 个字符",
 	        equalTo: "两次密码输入不一致"
 	    }
-	}
 
+	}
 });
 
 

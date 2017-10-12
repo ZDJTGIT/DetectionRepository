@@ -1,5 +1,7 @@
 package com.zhongda.detection.web.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -323,7 +325,6 @@ public class UserController {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public User delete(@RequestBody User user) {
-		System.out.println("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+");
 		userService.deleteUser(user.getUserName());
 		return user;
 	}

@@ -40,7 +40,7 @@
 					        <div class="img_head">
 					        <label class="btn-file" data-role="add">  
                                  <img id = "#avatarImg" src="assets/img/rojoy.jpg" width="130" height="100" alt=""/>  
-                                 <input id="avatarFile" accept="image/*" name="avatarFile" type="file" style="display:none;" />  
+                                 <input id="avatarFile" accept="image/png,image/gif" name="avatarFile" type="file" style="display:none;" />  
                             </label>
 							</div>
 							<div class="head_basicmessage">
