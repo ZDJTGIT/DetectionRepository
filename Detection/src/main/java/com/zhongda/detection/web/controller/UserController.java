@@ -508,12 +508,16 @@ public class UserController {
 		
 		String name = userService.selectByPrimaryKey(user.getUserId()).getUserName();
 		if(!userService.selectByPrimaryKey(user.getUserId()).getPassword().equals(user.getPassword())){
-			SimpleMailSender Sender = new SimpleMailSender();
-			String congtent = name
-					+ ": 你好，您正在进行改密操作，请确认是你本人操作！    ---中大检测数据监测平台";
-			Sender.send(userService.selectByPrimaryKey(user.getUserId()).getEmail(), "修改密码提醒", congtent);
-			String cryptedPwd = new Md5Hash(user.getPassword(), name, 1024).toString();
-			user.setPassword(cryptedPwd);
+			if(user.getPassword()==""|user.getPassword()==null){
+				user.setPassword(userService.selectByPrimaryKey(user.getUserId()).getPassword());
+			}else{
+				SimpleMailSender Sender = new SimpleMailSender();
+				String congtent = name
+						+ ": 你好，您正在进行改密操作，请确认是你本人操作！    ---中大检测数据监测平台";
+				Sender.send(userService.selectByPrimaryKey(user.getUserId()).getEmail(), "修改密码提醒", congtent);
+				String cryptedPwd = new Md5Hash(user.getPassword(), name, 1024).toString();
+				user.setPassword(cryptedPwd);
+			}
 		}
 		userService.updateByPrimaryKeySelective(user);
 		WebUtils.setSessionAttribute(request, "userInfo", user);

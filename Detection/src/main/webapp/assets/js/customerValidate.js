@@ -216,6 +216,7 @@ $('#from_modifyuserpassword').validate({
 	
 	rules : {
 		password: {
+			required: true,
             minlength: 6,
 			remote: {
 			    url: "rest/user/OnlyPassword",     //后台处理程序
@@ -243,6 +244,7 @@ $('#from_modifyuserpassword').validate({
 
 	messages : {
 		password: {
+	        required: "请输入原始密码",
 	        minlength: "原密码输入错误",
 	        remote: "原密码输入错误"	
 	    },

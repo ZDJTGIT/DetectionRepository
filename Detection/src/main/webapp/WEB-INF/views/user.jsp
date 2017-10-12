@@ -133,17 +133,17 @@
 							<div class="data_basic">    
 							    <div class="data_content_5">
 									<label class="data_content_lable" for="password">请输入原密码:</label>
-									<input class="data_content_input_3" id="password" name="password" type="password">
+									<input class="data_content_input_3" autocomplete="off" id="password" name="password" type="password">
 							    </div>
 							    
 							    <div class="data_content_5">
 									<label class="data_content_lable" for="new_password">请输入新密码:</label>
-									<input class="data_content_input_3" id="new_password" name="new_password" type="password">
+									<input class="data_content_input_3" autocomplete="off" id="new_password" name="new_password" type="password">
 							    </div>
 							    
 							    <div class="data_content_5">
 									<label class="data_content_lable" for="new_passwords">请确认新密码:</label>
-									<input class="data_content_input_3" id="new_passwords" name="new_passwords" type="password">
+									<input class="data_content_input_3" autocomplete="off" id="new_passwords" name="new_passwords" type="password">
 							    </div>
 							</div>   
 							</form>
@@ -153,6 +153,7 @@
 								    <div class="data_content_8">
 									<font size="3" color=#585858>个人说明</font>
 									<textarea class="data_content_input_5"  rows="4">
+若做成光标移开提示信息消失，因为三个输入框是同一个表单，当三个中有一个或两个为空，或者一个或两个填错，只要光标移开，提示信息消失，用户无法得知准确提示信息若不设置光标，用户打开界面在三个输入框均无输入时，提示信息不会加载，没任何问题。但在其中一个输入框输入过错误信息，之后删除输入，提示的错误信息仍旧存在，此时只要仍保证三个输入框同时为空，即可进行其他信息修改操作。此时提示的错误信息是在输入框有错误输入时激发了验证代码的加载，也就是validate中的所有密码验证加载，但是当用户删除输入之后，输入框为空，触发的仅仅只有required这一条rules验证，且该验证提示信息会一直存在到刷新页面之前或信息输入正确之前【若输入为空，删除提示信息（若一个不为空且输入正确，另外两个为空的情况下也无提示信息）】所以，采用将这一条提示信息改写成绿色提示信息，且注明------当三个输入框同时为空时，可进行其他信息的修改操作。-------{bug1-不输入原密码也可以修改密码，bug2-不输入密码可以修改邮箱和手机号码。可以通过邮箱和手机号码找回密码来修改密码}		
 								    </textarea>
 									</div>
 							    </div>
