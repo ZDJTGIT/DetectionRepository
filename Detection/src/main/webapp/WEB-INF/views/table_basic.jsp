@@ -299,7 +299,7 @@
 	<script src="assets/js/plugins/iCheck/icheck.min.js"></script>
 	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
 	<script type="text/javascript">
-
+	
 	        var b;
 	    //修改用户信息
 		function selectRow(s){

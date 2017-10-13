@@ -18,11 +18,21 @@ public interface MessageService {
 	void insertMessage(Message message);
 
 	/**
-	 * 查出当前用户下所有未读的消息
+	 * 分页查出当前用户下未读的消息
+	 * 默认第一页，每页10条记录
 	 * @param userId
 	 * @return
 	 */
 	List<Message> selectMessagesByUserIdAndNotRead(Integer userId);
+	
+	/**
+	 * 分页查出当前用户下未读的消息
+	 * @param userId 当前用户id
+	 * @param pageNum 当前页码
+	 * @param pageSize 每页多少条记录
+	 * @return
+	 */
+	List<Message> selectMessagesByUserIdAndNotRead(Integer userId, Integer pageNum, Integer pageSize);
 
 	/**
 	 * 查出当前用户下部分未读的消息（默认两条）
@@ -30,5 +40,12 @@ public interface MessageService {
 	 * @return
 	 */
 	List<Message> selectPartMessagesByUserIdAndNotRead(Integer userId);
+	
+	/**
+	 * 根据查询条件查询当前用户下的消息
+	 * @param message
+	 * @return
+	 */
+	List<Message> selectMessagesByUserIdAndOther(Message message);
 
 }

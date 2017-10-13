@@ -2,6 +2,8 @@ package com.zhongda.detection.web.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Message {
     private Integer messageId;
 
@@ -16,6 +18,18 @@ public class Message {
     private Date createTime;
 
     private String status;
+    
+    //数据库不存在该字段，只作为分页时存储当前页数据时使用
+    private Integer pageNum;
+    
+    //数据库不存在该字段，只作为分页时存储每页记录条数数据时使用
+    private Integer pageSize;
+    
+    //数据库不存在该字段，只作为查询时判断查询条件创建时间是否在该范围内时使用
+    private Date startCreateTime;
+    
+    //数据库不存在该字段，只作为查询时判断查询条件创建时间是否在该范围内时使用
+    private Date endCreateTime;
 
     public Integer getMessageId() {
         return messageId;
@@ -56,7 +70,8 @@ public class Message {
     public void setMessageContext(String messageContext) {
         this.messageContext = messageContext == null ? null : messageContext.trim();
     }
-
+    
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getCreateTime() {
         return createTime;
     }
@@ -72,4 +87,38 @@ public class Message {
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
     }
+
+	public Integer getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	public Date getStartCreateTime() {
+		return startCreateTime;
+	}
+
+	public void setStartCreateTime(Date startCreateTime) {
+		this.startCreateTime = startCreateTime;
+	}
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	public Date getEndCreateTime() {
+		return endCreateTime;
+	}
+
+	public void setEndCreateTime(Date endCreateTime) {
+		this.endCreateTime = endCreateTime;
+	}
 }

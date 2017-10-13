@@ -30,4 +30,12 @@ public interface MessageMapper {
      * @return
      */
 	List<Message> selectPartMessagesByUserIdAndNotRead(Integer userId);
+	
+	/**
+	 * 根据查询条件查询当前用户下的消息
+	 * @param userId 
+	 * @param message
+	 * @return
+	 */
+	List<Message> selectMessagesByUserIdAndOther(Message message);
 }
