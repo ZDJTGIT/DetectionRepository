@@ -94,7 +94,7 @@
                                     <option value="3">选项3</option>
                                 </select>
                             </div> -->
-                            
+
 							<form class="form-inline" role="form" id="formSearch">
 							  <div class="form-group col-sm-2">
 							    <label for="messageId">消息ID:</label>
@@ -129,7 +129,7 @@
                                 <button type="button" id="btnSearch" class="btn btn-sm btn-primary">提交</button>
 							  </div>
 							</form>
-                            
+
                         </div>
 						<table id="messageTable" class="table table-striped table-bordered table-hover">
 							<thead>
@@ -152,10 +152,8 @@
 	<script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/datepicker/bootstrap-datetimepicker.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/layui/layui.all.js" charset="utf-8"></script>
-	<!-- <script src="assets/js/demo.js"></script> -->
 	<script type="text/javascript">
-
-	$(function(){
+	$(document).ready(function(){
 		$('#startCreateTime').datetimepicker({
             locale: moment.locale('zh-cn'),
             showTodayButton:true,
@@ -170,149 +168,100 @@
             }
         }).on('dp.change', function (ev) {
         	$('#endCreateTime').data("DateTimePicker").minDate(ev.date);
-            //var newDateTime = ev.date ? ev.date.format('yyyy-MM-dd HH:mm:ss') : "";
-            //var oldDateTime = ev.oldDate ? ev.oldDate.format('yyyy-MM-dd HH:mm:ss') : "";
             var newDateTime = ev.date ? ev.date.format('YYYY-MM-DD') : "";
             var oldDateTime = ev.oldDate ? ev.oldDate.format('YYYY-MM-DD') : "";
             if (newDateTime != oldDateTime) {
                 $(this).data("DateTimePicker").hide();
             }
         });
-		
+
 		$('#endCreateTime').datetimepicker({
-            locale: moment.locale('zh-cn'),
+			locale: moment.locale('zh-cn'),
             showTodayButton:true,
-            format: "YYYY-MM-DD HH:mm:ss"
+            showClose:true,
+            showClear:true,
+            format: "YYYY-MM-DD HH:mm:ss",
+            tooltips: {
+                today: '选择今天',
+                clear: '清除所选日期',
+                close: '关闭日期选择器',
+                selectTime: '选择时间',
+            }
         }).on('dp.change', function (ev) {
         	$('#startCreateTime').data("DateTimePicker").maxDate(ev.date);
-            //var newDateTime = ev.date ? ev.date.format('yyyy-MM-dd HH:mm:ss') : "";
-            //var oldDateTime = ev.oldDate ? ev.oldDate.format('yyyy-MM-dd HH:mm:ss') : "";
             var newDateTime = ev.date ? ev.date.format('YYYY-MM-DD') : "";
             var oldDateTime = ev.oldDate ? ev.oldDate.format('YYYY-MM-DD') : "";
             if (newDateTime != oldDateTime) {
                 $(this).data("DateTimePicker").hide();
             }
         });
-		
-		 var jsonData = {};	  
-		 var laypage = layui.laypage;
-		 function loadLaypage(dataTotal){
-			 laypage.render({
-				 elem: 'pageComponent',
-				 count: dataTotal,
-			     groups: 10, //连续显示分页数
-			     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
-			     jump: function(obj, first, fnCallback){  //触发分页后的回调
-			         if(!first){ //一定要加此判断，否则初始时会无限刷新
-			        	 jsonData.pageNum = obj.curr;
-			 			 jsonData.pageSize = obj.limit;
-			 			 alert(JSON.stringify(jsonData));
-			        	 $.ajax({
-								type : 'post',
-								url : 'rest/message/messagePageList',
-								dataType : 'json',
-								contentType : 'application/json',
-								data : JSON.stringify(jsonData),
-								success : function(data) {
-									if (data) {
-										var htmlData = '';
-										$.each(data.messageList,function(idx,item){
-											htmlData +='<tr><td>'+item.messageId+'</td><td>'+item.messageType+'</td><td>'+item.messageContext+'</td><td>'+item.createTime+'</td><td>'+item.status+'</td></tr>'
-										});
-										$("#messageTable tbody").html(htmlData);
-									} else {
-										alert("数据异常");
-									}
-								},
-								error : function() {
-									alert("数据加载失败");
+
+		(function(){
+			//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
+			function messagePageAjax(jsonData, loadLaypage){
+				 $.ajax({
+						type : 'post',
+						url : 'rest/message/messagePageList',
+						dataType : 'json',
+						contentType : 'application/json',
+						data : JSON.stringify(jsonData),
+						success : function(data) {
+							if (data) {
+								var htmlData = '';
+								$.each(data.messageList,function(idx,item){
+									htmlData +='<tr><td>'+item.messageId+'</td><td>'+item.messageType+'</td><td>'+item.messageContext+'</td><td>'+item.createTime+'</td><td>'+item.status+'</td></tr>'
+								});
+								$("#messageTable tbody").html(htmlData);
+								if(loadLaypage){ //如果该参数有值
+									loadLaypage(data.total, jsonData); //有查询条件时请求数据，需重新初始化分页组件
 								}
-							});
-			        	 console.log(obj);
-			         }
-			     }
-			 });	 
-		 }
-		 
-		 $('#btnSearch').click(function(){
-				var jsonData = {};
-				$('#formSearch .form-control').each(function(index,item){
-					if($(this).val() && $(this).val()!=0){
-						jsonData[$(this).attr("name")] = $(this).val();
-					}
-				});
-				jsonData.pageNum = 1;
-				jsonData.pageSize = 10;
-				$.ajax({
-					type : 'post',
-					url : 'rest/message/messagePageList',
-					dataType : 'json',
-					contentType : 'application/json',
-					data : JSON.stringify(jsonData),
-					success : function(data) {
-						if (data) {
-							var htmlData = '';
-							$.each(data.messageList,function(idx,item){
-								htmlData +='<tr><td>'+item.messageId+'</td><td>'+item.messageType+'</td><td>'+item.messageContext+'</td><td>'+item.createTime+'</td><td>'+item.status+'</td></tr>'
-							});
-							$("#messageTable tbody").html(htmlData);
-							loadLaypage(data.total);
-						} else {
-							alert("数据异常");
+							} else {
+								alert("数据异常");
+							}
+						},
+						error : function() {
+							alert("数据加载失败");
 						}
-					},
-					error : function() {
-						alert("数据加载失败");
-					}
+					});
+			 }
+
+			 //初始化分页组件函数
+			 function loadLaypage(dataTotal, jsonData){
+				 var laypage = layui.laypage;
+				 laypage.render({
+					 elem: 'pageComponent', //分页组件div的id
+					 count: dataTotal, //记录总条数
+				     groups: 10, //连续显示分页数
+				     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+				     jump: function(obj, first){  //触发分页后的回调
+				         if(!first){ //一定要加此判断，否则初始时会无限刷新
+				        	 jsonData.pageNum = obj.curr;
+				 			 jsonData.pageSize = obj.limit;
+				 			 alert(JSON.stringify(jsonData));
+				 			 messagePageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数
+				        	 console.log(obj);
+				         }
+				     }
+				 });
+			 }
+
+			 $('#btnSearch').click(function(){
+					var jsonData = {};
+					$('#formSearch .form-control').each(function(index,item){
+						if($(this).val() && $(this).val()!=0){
+							jsonData[$(this).attr("name")] = $(this).val();
+						}
+					});
+					jsonData.pageNum = 1;
+					jsonData.pageSize = 10;
+					alert(JSON.stringify(jsonData));
+					messagePageAjax(jsonData, loadLaypage);
 				});
-			});
-		 
-		 $('#btnSearch').trigger("click");
-		
-	/* 	demo.initLaypage('pageComponent',111,messagePageAjax(jsonData));	
-			
-		function messagePageAjax(jsonData){
-			$.ajax({
-				type : 'post',
-				url : 'rest/message/messagePageList',
-				dataType : 'json',
-				contentType : 'application/json',
-				data : JSON.stringify(jsonData),
-				success : function(data) {
-					if (data) {
-						var htmlData = '';
-						$.each(data.messageList,function(idx,item){
-							htmlData +='<tr><td>'+item.messageId+'</td><td>'+item.messageType+'</td><td>'+item.messageContext+'</td><td>'+item.createTime+'</td><td>'+item.status+'</td></tr>'
-						});
-						$("#messageTable tbody").html(htmlData);
-						demo.initLaypage('pageComponent',data.total,messagePageAjax(jsonData));
-					} else {
-						alert("数据异常");
-					}
-				},
-				error : function() {
-					alert("数据加载失败");
-				}
-			});	
-		}
-			
-			
-			
-		$('#btnSearch').click(function(){
-			jsonData = {};
-			$('#formSearch .form-control').each(function(index,item){
-				alert($(this).attr("name")+":"+$(this).val());
-				if($(this).val() && $(this).val()!=0){
-					jsonData[$(this).attr("name")] = $(this).val();
-				}
-			});
-			jsonData.pageNum = 1;
-			jsonData.pageSize = 10;
-			alert(JSON.stringify(jsonData));
-			messagePageAjax(jsonData);
-		});  */
+			 //首次加载页面触发查询按钮初始化列表（无查询参数）
+			 $('#btnSearch').trigger("click");
+		})();
+
 	});
-		 
 	</script>
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>

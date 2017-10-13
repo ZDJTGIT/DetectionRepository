@@ -63,7 +63,7 @@ demo = {
 		$.notify({
 				icon : "ti-gift",
 				message : "Welcome to <b>Paper Dashboard</b> - a beautiful freebie for every web developer."
-			}, 
+			},
 			{
 				type : type[color],
 				timer : 4000,
@@ -73,24 +73,6 @@ demo = {
 				}
 			}
 		);
-	},
-	
-	initLaypage : function(pageComponent, dataTotal, fnCallback){
-		laypage.render({
-			 elem: pageComponent,
-			 count: dataTotal,
-		     groups: 10, //连续显示分页数
-		     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
-		     jump: function(obj, first){  //触发分页后的回调
-		         if(!first){ //一定要加此判断，否则初始时会无限刷新
-		        	 jsonData.pageNum = obj.curr;
-		 			 jsonData.pageSize = obj.limit;
-		 			 alert(JSON.stringify(jsonData));
-		 			// fnCallback(jsonData);
-		        	 console.log(obj);
-		         }
-		     }
-		 });
 	}
 
 }
