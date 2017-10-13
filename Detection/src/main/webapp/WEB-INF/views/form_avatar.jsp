@@ -25,6 +25,6 @@
 <link href="assets/css/plugins/table/user.css" rel="stylesheet">
 </head>
 <body>
-  <h3>修改头像</h3>
+  <h1>修改头像</h1>
 </body>
 </html>

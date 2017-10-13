@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="form-group">
                     <input type="password" class="form-control" id="password" name="password" style="margin-top:65px" placeholder="请输入新密码(6-13位数字)" >
                 </div>
-                <button type="button" id="submitpw" class="btn btn-primary block full-width m-b">提交</button>
+                <button type="button" id="submitpw" class="btn btn-primary block full-width m-b" >提交</button>
                 <p class="text-muted text-center"> <a href="">
                 <small>返回登陆页面</small></a>
                 </p>

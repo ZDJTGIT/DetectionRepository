@@ -2,6 +2,8 @@ package com.zhongda.detection.web.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Project {
 	private Integer projectId;
 
@@ -62,6 +64,7 @@ public class Project {
 				.trim();
 	}
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getProjectTime() {
 		return projectTime;
 	}

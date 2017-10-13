@@ -38,10 +38,16 @@
 					<div>
 					     <div class="ibox-content no-padding border-left-right">
 					        <div class="img_head">
-					        <label class="btn-file" data-role="add">  
+					        <!--label class="btn-file" data-role="add">  
                                  <img id = "#avatarImg" src="assets/img/rojoy.jpg" width="130" height="100" alt=""/>  
                                  <input id="avatarFile" accept="image/png,image/gif" name="avatarFile" type="file" style="display:none;" />  
-                            </label>
+                            </label-->
+                            <div class="ge_pic_icon_Infor">  
+                                    <img src="assets/img/rojoy.jpg" width="130" height="100">  
+							</div>  
+							<div class="Infor_file">  
+    								<input type="file" name="uploadPicture" id="file" value="上传照片" title="上传照片" onchange="getPhoto(this)"/>  
+							</div>
 							</div>
 							<div class="head_basicmessage">
 					            <h4 class="head_basicmessage_h" id="username">
@@ -55,6 +61,7 @@
 					        </div>
 						</div>
 						<div class="ibox-content profile-content">
+						    <br><hr>
 							<div>
 								<h6>预留DIV</h6>
 							</div>
@@ -132,18 +139,18 @@
 							<form id="from_modifyuserpassword">
 							<div class="data_basic">    
 							    <div class="data_content_5">
-									<label class="data_content_lable" for="password">原始密码</label>
-									<input class="data_content_input_3" autocomplete="off" id="password" name="password" type="password">
+									<label class="data_content_lable" for="password">请输入原密码:</label>
+									<input class="data_content_input_3" id="password" name="password" type="password" >
 							    </div>
 							    
 							    <div class="data_content_5">
-									<label class="data_content_lable" for="new_password">输入新密码</label>
-									<input class="data_content_input_3" autocomplete="off" id="new_password" name="new_password" type="password">
+									<label class="data_content_lable" for="new_password">请输入新密码:</label>
+									<input class="data_content_input_3" id="new_password" name="new_password" type="password" >
 							    </div>
 							    
 							    <div class="data_content_5">
-									<label class="data_content_lable" for="new_passwords">确认新密码</label>
-									<input class="data_content_input_3" autocomplete="off" id="new_passwords" name="new_passwords" type="password">
+									<label class="data_content_lable" for="new_passwords">请确认新密码:</label>
+									<input class="data_content_input_3" id="new_passwords" name="new_passwords" type="password" >
 							    </div>
 							</div>   
 							</form>
@@ -153,7 +160,6 @@
 								    <div class="data_content_8">
 									<font size="3" color=#585858>个人说明</font>
 									<textarea class="data_content_input_5"  rows="4">
-若做成光标移开提示信息消失，因为三个输入框是同一个表单，当三个中有一个或两个为空，或者一个或两个填错，只要光标移开，提示信息消失，用户无法得知准确提示信息若不设置光标，用户打开界面在三个输入框均无输入时，提示信息不会加载，没任何问题。但在其中一个输入框输入过错误信息，之后删除输入，提示的错误信息仍旧存在，此时只要仍保证三个输入框同时为空，即可进行其他信息修改操作。此时提示的错误信息是在输入框有错误输入时激发了验证代码的加载，也就是validate中的所有密码验证加载，但是当用户删除输入之后，输入框为空，触发的仅仅只有required这一条rules验证，且该验证提示信息会一直存在到刷新页面之前或信息输入正确之前【若输入为空，删除提示信息（若一个不为空且输入正确，另外两个为空的情况下也无提示信息）】所以，采用将这一条提示信息改写成绿色提示信息，且注明------当三个输入框同时为空时，可进行其他信息的修改操作。-------{bug1-不输入原密码也可以修改密码，bug2-不输入密码可以修改邮箱和手机号码。可以通过邮箱和手机号码找回密码来修改密码}		
 								    </textarea>
 									</div>
 							    </div>
@@ -182,7 +188,41 @@
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
     <script type="text/javascript">
-      
+    
+    //上传图片并及时展示 
+    var imgurl = "";  
+    function getPhoto(node) {  
+        var imgURL = "";  
+        try{  
+            var file = null;  
+            if(node.files && node.files[0] ){  
+                file = node.files[0];  
+            }else if(node.files && node.files.item(0)) {  
+                file = node.files.item(0);  
+            }  
+            try{  
+                imgURL =  file.getAsDataURL();  
+            }catch(e){  
+                imgRUL = window.URL.createObjectURL(file);  
+            }  
+        }catch(e){  
+            if (node.files && node.files[0]) {  
+                var reader = new FileReader();  
+                reader.onload = function (e) {  
+                    imgURL = e.target.result;  
+                };  
+                reader.readAsDataURL(node.files[0]);  
+            }  
+        }  
+        creatImg(imgRUL);  
+        return imgURL;  
+    }  
+    function creatImg(imgRUL){  
+        var textHtml = "<img src='"+imgRUL+"'width='130px' height='100px'/>";  
+        $(".ge_pic_icon_Infor").html(textHtml);  
+    }  
+    
+    
        $(document).ready(function(){
     	  var user_idvalue = '${userInfo.userId}';
     	  $.ajax({
@@ -239,7 +279,6 @@
 												'<a class="J_menuItem" style="font-size: 15px" onclick="" href="rest/project_detail">查看项目</a>'+
 											'</div>'+
 									'</div><hr>';
-							
     	  		    	 });
         	  		    	
         	  		    $('#allProject').append(asthtml); 	
