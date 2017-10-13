@@ -23,7 +23,9 @@
 <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
 <meta name="description" content="中大检测平台">
 <link rel="stylesheet" href="assets/js/plugins/layui/css/layui.css" media="all"></link>
+<link href="assets/css/plugins/datepicker/datepicker3.css" rel="stylesheet">
 <link href="assets/css/plugins/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
 
 </head>
 
@@ -109,7 +111,7 @@
 							    <label for="messageContext">消息内容:</label>
 							    <input type="text" class="form-control" id="messageContext" name="messageContext" value="" placeholder="消息内容">
 							  </div>
-							  <div class="form-group col-sm-2">
+							  <div class="form-group col-sm-2 date">
 							    <label for="startCreateTime">起始时间:</label>
 							    <input type="datetime" class="form-control" id="startCreateTime" name="startCreateTime" placeholder="起始时间">
 							  </div>
@@ -139,17 +141,7 @@
 							      <th>消息状态</th>
 							    </tr>
 							</thead>
-							<tbody>
-								<c:forEach items="${messageList}" var="message">
-									<tr>
-										<td>${message.messageId}</td>
-										<td>${message.messageType}</td>
-										<td>${message.messageContext}</td>
-										<td><fmt:formatDate value="${message.createTime}" type="both"/></td>
-										<td>${message.status}</td>
-									</tr>
-								</c:forEach>
-							</tbody>
+							<tbody></tbody>
 						</table>
 						<div style="margin-top:15px; text-align:center;" id="pageComponent"></div>
 					</div>
@@ -160,14 +152,22 @@
 	<script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/datepicker/bootstrap-datetimepicker.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/layui/layui.all.js" charset="utf-8"></script>
+	<!-- <script src="assets/js/demo.js"></script> -->
 	<script type="text/javascript">
 
-	(function(){
-		
+	$(function(){
 		$('#startCreateTime').datetimepicker({
             locale: moment.locale('zh-cn'),
             showTodayButton:true,
-            format: "YYYY-MM-DD HH:mm:ss"
+            showClose:true,
+            showClear:true,
+            format: "YYYY-MM-DD HH:mm:ss",
+            tooltips: {
+                today: '选择今天',
+                clear: '清除所选日期',
+                close: '关闭日期选择器',
+                selectTime: '选择时间',
+            }
         }).on('dp.change', function (ev) {
         	$('#endCreateTime').data("DateTimePicker").minDate(ev.date);
             //var newDateTime = ev.date ? ev.date.format('yyyy-MM-dd HH:mm:ss') : "";
@@ -194,44 +194,9 @@
             }
         });
 		
-		var jsonData = {};
-		$('#btnSearch').click(function(){
-			jsonData = {};
-			$('#formSearch .form-control').each(function(index,item){
-				alert($(this).attr("name")+":"+$(this).val());
-				if($(this).val() && $(this).val()!=0){
-					jsonData[$(this).attr("name")] = $(this).val();
-				}
-			});
-			jsonData.pageNum = 1;
-			jsonData.pageSize = 10;
-			alert(JSON.stringify(jsonData));
-			$.ajax({
-				type : 'post',
-				url : 'rest/message/messagePageList',
-				dataType : 'json',
-				contentType : 'application/json',
-				data : JSON.stringify(jsonData),
-				success : function(data) {
-					if (data) {
-						var htmlData = '';
-						$.each(data.messageList,function(idx,item){
-							htmlData +='<tr><td>'+item.messageId+'</td><td>'+item.messageType+'</td><td>'+item.messageContext+'</td><td>'+item.createTime+'</td><td>'+item.status+'</td></tr>'
-						});
-						$("#messageTable tbody").html(htmlData);
-					} else {
-						alert("数据异常");
-					}
-				},
-				error : function() {
-					alert("数据加载失败");
-				}
-			});
-		});
-		  
+		 var jsonData = {};	  
 		 var laypage = layui.laypage;
-		 var dataTotal = ${messagePage.total};
-		 (function loadLaypage(dataTotal){
+		 function loadLaypage(dataTotal){
 			 laypage.render({
 				 elem: 'pageComponent',
 				 count: dataTotal,
@@ -247,7 +212,6 @@
 								url : 'rest/message/messagePageList',
 								dataType : 'json',
 								contentType : 'application/json',
-								//data : {pageNum:obj.curr,pageSize:obj.limit},
 								data : JSON.stringify(jsonData),
 								success : function(data) {
 									if (data) {
@@ -256,7 +220,6 @@
 											htmlData +='<tr><td>'+item.messageId+'</td><td>'+item.messageType+'</td><td>'+item.messageContext+'</td><td>'+item.createTime+'</td><td>'+item.status+'</td></tr>'
 										});
 										$("#messageTable tbody").html(htmlData);
-										loadLaypage(data.total);
 									} else {
 										alert("数据异常");
 									}
@@ -269,9 +232,86 @@
 			         }
 			     }
 			 });	 
-		 })(dataTotal);
+		 }
 		 
-	})();
+		 $('#btnSearch').click(function(){
+				var jsonData = {};
+				$('#formSearch .form-control').each(function(index,item){
+					if($(this).val() && $(this).val()!=0){
+						jsonData[$(this).attr("name")] = $(this).val();
+					}
+				});
+				jsonData.pageNum = 1;
+				jsonData.pageSize = 10;
+				$.ajax({
+					type : 'post',
+					url : 'rest/message/messagePageList',
+					dataType : 'json',
+					contentType : 'application/json',
+					data : JSON.stringify(jsonData),
+					success : function(data) {
+						if (data) {
+							var htmlData = '';
+							$.each(data.messageList,function(idx,item){
+								htmlData +='<tr><td>'+item.messageId+'</td><td>'+item.messageType+'</td><td>'+item.messageContext+'</td><td>'+item.createTime+'</td><td>'+item.status+'</td></tr>'
+							});
+							$("#messageTable tbody").html(htmlData);
+							loadLaypage(data.total);
+						} else {
+							alert("数据异常");
+						}
+					},
+					error : function() {
+						alert("数据加载失败");
+					}
+				});
+			});
+		 
+		 $('#btnSearch').trigger("click");
+		
+	/* 	demo.initLaypage('pageComponent',111,messagePageAjax(jsonData));	
+			
+		function messagePageAjax(jsonData){
+			$.ajax({
+				type : 'post',
+				url : 'rest/message/messagePageList',
+				dataType : 'json',
+				contentType : 'application/json',
+				data : JSON.stringify(jsonData),
+				success : function(data) {
+					if (data) {
+						var htmlData = '';
+						$.each(data.messageList,function(idx,item){
+							htmlData +='<tr><td>'+item.messageId+'</td><td>'+item.messageType+'</td><td>'+item.messageContext+'</td><td>'+item.createTime+'</td><td>'+item.status+'</td></tr>'
+						});
+						$("#messageTable tbody").html(htmlData);
+						demo.initLaypage('pageComponent',data.total,messagePageAjax(jsonData));
+					} else {
+						alert("数据异常");
+					}
+				},
+				error : function() {
+					alert("数据加载失败");
+				}
+			});	
+		}
+			
+			
+			
+		$('#btnSearch').click(function(){
+			jsonData = {};
+			$('#formSearch .form-control').each(function(index,item){
+				alert($(this).attr("name")+":"+$(this).val());
+				if($(this).val() && $(this).val()!=0){
+					jsonData[$(this).attr("name")] = $(this).val();
+				}
+			});
+			jsonData.pageNum = 1;
+			jsonData.pageSize = 10;
+			alert(JSON.stringify(jsonData));
+			messagePageAjax(jsonData);
+		});  */
+	});
 		 
 	</script>
 	<script type="text/javascript"

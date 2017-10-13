@@ -37,26 +37,10 @@ public class MessageController {
 	private MessageService messageService;
 
 	@RequestMapping("/messageList")
-	public String messageList(HttpServletRequest request, Model model) {
-		//查出当前用户下所有未读的消息
-		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
-		List<Message> messageList = messageService.selectMessagesByUserIdAndNotRead(user.getUserId());
-		PageInfo<Message> messagePageInfo=new PageInfo<Message>(messageList);
-		model.addAttribute("messageList", messageList);
-		model.addAttribute("messagePage", messagePageInfo);
+	public String messageList() {
+		//进入消息列表页
 		return "messageList";
-	}
-	
-	/*@RequestMapping("/messagePageList")
-	@ResponseBody
-	public List<Message> messagePageList(HttpServletRequest request, Integer pageNum, Integer pageSize) {
-		System.out.println("pageNum:"+pageNum+" -------------------------- pageSize："+pageSize);
-		//查出当前用户下所有未读的消息
-		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
-		List<Message> messageList = messageService.selectMessagesByUserIdAndNotRead(user.getUserId(), pageNum, pageSize);
-		//PageInfo<Message> messagePageInfo=new PageInfo<Message>(messageList);
-		return messageList;
-	}*/
+	}	
 	
 	@RequestMapping("/messagePageList")
 	@ResponseBody
