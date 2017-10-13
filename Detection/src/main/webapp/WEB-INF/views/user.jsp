@@ -85,7 +85,7 @@
 			<div class="ibox float-e-margins">
 				<div class="ibox-title">
 					<h3>
-						<strong>编辑个人资料</strong>
+						<strong>个人资料编辑</strong>
 					</h3>
 				</div>
 				<div class="ibox-content">
@@ -132,17 +132,17 @@
 							<form id="from_modifyuserpassword">
 							<div class="data_basic">    
 							    <div class="data_content_5">
-									<label class="data_content_lable" for="password">请输入原密码:</label>
+									<label class="data_content_lable" for="password">原始密码</label>
 									<input class="data_content_input_3" autocomplete="off" id="password" name="password" type="password">
 							    </div>
 							    
 							    <div class="data_content_5">
-									<label class="data_content_lable" for="new_password">请输入新密码:</label>
+									<label class="data_content_lable" for="new_password">输入新密码</label>
 									<input class="data_content_input_3" autocomplete="off" id="new_password" name="new_password" type="password">
 							    </div>
 							    
 							    <div class="data_content_5">
-									<label class="data_content_lable" for="new_passwords">请确认新密码:</label>
+									<label class="data_content_lable" for="new_passwords">确认新密码</label>
 									<input class="data_content_input_3" autocomplete="off" id="new_passwords" name="new_passwords" type="password">
 							    </div>
 							</div>   

@@ -26,9 +26,11 @@
 	href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
 <style type="text/css">
 #mapContent {
-	height: 700px;
+	width: 100%;
+	height: 750px;
 }
 </style>
+
 </head>
 
 <body class="gray-bg">
@@ -39,7 +41,7 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<div class="content" id="mapContent"></div>
-						
+
 					</div>
 				</div>
 			</div>

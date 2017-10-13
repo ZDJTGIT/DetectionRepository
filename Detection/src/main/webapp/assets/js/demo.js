@@ -109,9 +109,10 @@ demo = {
 			mapType : BMAP_SATELLITE_MAP
 		}); // 创建地图实例
 		var point = new BMap.Point(112.59, 28.12); // 创建点坐标
-		map.centerAndZoom(point, 6); // 初始化地图，设置中心点坐标和地图级别
+		map.centerAndZoom(point, 5); // 初始化地图，设置中心点坐标和地图级别
 		map.clearOverlays();// 清空原来的标注
 		map.enableScrollWheelZoom();
+
 
 		var icon = new BMap.Icon('assets/img/tit.png', new BMap.Size(20, 32), {// 是引用图标的名字以及大小，注意大小要一样
 			anchor : new BMap.Size(10, 30)
@@ -140,7 +141,7 @@ demo = {
 			alert("marker的位置是" + lng + "," + lat);
 		}
 
-		var infoWindow;//信息窗口
+		var infoWindow;// 信息窗口
 		marker.addEventListener("onmouseover", function() {
 			lng = marker.getPosition().lng; // 获取marker的位置经度
 			lat = marker.getPosition().lat;// 获取纬度
