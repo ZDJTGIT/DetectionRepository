@@ -51,7 +51,7 @@ public class MessageController {
 		message.setUserId(user.getUserId());
 		message.setMessageType("1".equals(message.getMessageType())?"告警":null);
 		if(null != message.getStatus()){
-			message.setStatus("1".equals(message.getMessageType())?"已读":"未读");
+			message.setStatus("1".equals(message.getStatus())?"已读":"未读");
 		}
 		List<Message> messageList = messageService.selectMessagesByUserIdAndOther(message);
 		PageInfo<Message> messagePageInfo=new PageInfo<Message>(messageList);

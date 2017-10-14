@@ -45,7 +45,7 @@
         and message_type = #{messageType,jdbcType=VARCHAR}
       </if>
       <if test="messageContext != null">
-        and message_context like #{messageContext,jdbcType=VARCHAR}
+        and message_context like '%${_parameter.messageContext}%'
       </if>
       <if test="startCreateTime != null">
         and (create_time &gt;= #{startCreateTime,jdbcType=TIMESTAMP})

@@ -47,7 +47,6 @@
 			</div>
 		</div>
 	</div>
-
 	<script src="assets/js/demo.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {

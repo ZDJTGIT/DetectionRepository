@@ -725,7 +725,6 @@
 	<!-- 百度地图key -->
 	<script type="text/javascript"
 		src="http://api.map.baidu.com/api?v=2.0&ak=lDSAFnztqS94cdBKPqgQUwTXuciyxpGa">
-
 	</script>
 	<script src="assets/js/bootstrap-notify.js"></script>
 	<script src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>

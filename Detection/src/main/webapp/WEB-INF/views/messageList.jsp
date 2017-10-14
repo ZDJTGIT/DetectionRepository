@@ -237,9 +237,7 @@
 				         if(!first){ //一定要加此判断，否则初始时会无限刷新
 				        	 jsonData.pageNum = obj.curr;
 				 			 jsonData.pageSize = obj.limit;
-				 			 alert(JSON.stringify(jsonData));
 				 			 messagePageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数
-				        	 console.log(obj);
 				         }
 				     }
 				 });
@@ -254,7 +252,6 @@
 					});
 					jsonData.pageNum = 1;
 					jsonData.pageSize = 10;
-					alert(JSON.stringify(jsonData));
 					messagePageAjax(jsonData, loadLaypage);
 				});
 			 //首次加载页面触发查询按钮初始化列表（无查询参数）
