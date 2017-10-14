@@ -546,6 +546,19 @@ public class UserController {
 		 List<Project> projectList = projectService.selectProjectAndSysDicByUserIds(userId);
 		 return projectList; 
 	}
+	
+	/**
+	 * 关键词查找用户（用户名，电话，邮箱，公司，联系人，用户表按时间排序）
+	 */
+	@RequestMapping(value = "/keywordSearch", method=RequestMethod.POST)
+	@ResponseBody
+	public List<User> keywordSearch(String keyword){
+		System.out.println("我被执行了-------------");
+		List<User> userss =  userService.selectUserByKeyword(keyword);
+		System.out.println("我被执行了+++++++++++++"+ userss);
+		return userss; 
+	}
+	
 
 	/**
 	 * 找回密码retpassword

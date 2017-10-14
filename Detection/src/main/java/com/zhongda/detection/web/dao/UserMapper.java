@@ -31,4 +31,9 @@ public interface UserMapper {
 	 * @return
 	 */
 	List<User> selectAllUser();
+	/**
+	 * 根据关键字模糊查询所有字段符合关键字的用户
+	 * @return
+	 */
+	List<User> selectUserByKeyword(String keyword);
 }

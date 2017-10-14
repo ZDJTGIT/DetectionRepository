@@ -52,6 +52,7 @@
 							<div class="col-sm-5 m-b-xs">
 								<p>详细记录用户各项基本信息(用户初始密码：123456)</p>
 								<a href="javascript:;" id="popupAddUser">添加用户</a>
+								
 								<div id="modifyuser" class="white_content">
 									<form id="form_modifyuser">
 									<div>
@@ -111,11 +112,11 @@
 							</div>
 							<div class="col-sm-3">
 								<div class="input-group">
-									<input type="text" placeholder="请输入关键词"
-										class="input-sm form-control"> <span
-										class="input-group-btn">
-										<button type="button" class="btn btn-sm btn-primary">
-											搜索</button>
+									<input type="text" id="keyword" name="keyword" placeholder="请输入关键词" class="input-sm form-control"> 
+									<span class="input-group-btn">
+									<button type="button" id="sureSearch" class="btn btn-sm btn-primary">
+									搜索
+									</button>
 									</span>
 								</div>
 							</div>
@@ -298,8 +299,43 @@
 	<script src="assets/js/content.js"></script>
 	<script src="assets/js/plugins/iCheck/icheck.min.js"></script>
 	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
+	<script src="assets/js/customerValidate.js"></script>
 	<script type="text/javascript">
 	
+		$('#sureSearch').click(function(){
+			var keyword = $('#keyword').val();
+			$.ajax({
+				  type:'post',
+	    	  	  url: 'rest/user/keywordSearch',
+	    	  	  data: {keyword:keyword},
+	    	  	  contextType:"application/json",
+				  success : function(data) {
+					if (data) {
+						$("#mytable tbody").html("");
+						$.each(data,function(idx,user){
+							var viewData = "<tr><td>"+ user.userId
+							+ "</td><td>"+ user.userName
+							+ "</td><td>"+ user.email
+							+ "</td><td>"+ user.phone
+							+ "</td><td>"+ user.company
+							+ "</td><td>"+ user.linkman
+							+ "</td><td>"+ user.createTime
+							+ "</td><td>"
+							+ "<a href='javascript:;' class='selectRow' onclick='selectRow(this)'><b>修改用户</b></a> "
+							+ "<a href='javascript:;' class='deteteRow' onclick='deleteRow(this)'><b>删除用户</b></a>"
+							+ "</td></tr>";
+					$('#userTableDeatil').append(viewData);
+						});
+					} else {
+						alert("数据异常");
+					}
+				},
+				error : function() {
+					alert("查找失败");
+				}
+			});
+		});
+	    
 	        var b;
 	    //修改用户信息
 		function selectRow(s){
@@ -384,7 +420,7 @@
 					});*/
 				}
 			});
-			
+			//脚本失效
 			/*layer.confirm('确定要删除该用户么？', {
 				btn : [ '取消删除', '确定删除' ] //按钮
 			}, function() {
@@ -406,8 +442,6 @@
 			});*/
 		}
 		
-		//添加新用户
-		$(document).ready(function() {
 			//打开表格发送请求到控制器查数据库获取表格信息返回加载，
 			//增删改都是通过发送请求到控制器查数据库获取表格信息返回加载
 			$(".i-checks").iCheck({
@@ -416,6 +450,7 @@
 			});
 			//打开添加用户div
 			$('#popupAddUser').click(function(e) {
+				alert("sadasasda");
 				e.preventDefault();
 				$('#adduser').show();
 			});
@@ -424,7 +459,6 @@
 				e.preventDefault();
 				$('#adduser').hide();
 			});
-
 			//确定添加用户
 			$('#sureAdd').click(function(){
 				if(!$('#form_adduser').valid()){
@@ -473,9 +507,7 @@
 							}
 						});
 				});
-		});
 	</script>
-	<script src="assets/js/customerValidate.js"></script>
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>

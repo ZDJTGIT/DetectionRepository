@@ -26,6 +26,16 @@
     <include refid="Base_Column_List" />
     from user
   </select>
+  <select id="selectUserByKeyword" parameterType="java.lang.String" resultMap="BaseResultMap">
+   select
+   <include refid="Base_Column_List" />
+   from user 
+   where  email like '%${_parameter}%' 
+   or user_name like '%${_parameter}%' 
+   or phone like '%${_parameter}%' 
+   or company like '%${_parameter}%' 
+   or linkman like '%${_parameter}%' 
+  </select>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

@@ -99,4 +99,9 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectByPhone(phone);
 	}
 
+	@Override
+	public List<User> selectUserByKeyword(String keyword) {
+		return userMapper.selectUserByKeyword(keyword);
+	}
+
 }

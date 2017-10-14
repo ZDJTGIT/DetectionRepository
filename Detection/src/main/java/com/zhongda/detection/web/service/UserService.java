@@ -87,4 +87,10 @@ public interface UserService {
 	 * 根据手机号码查用户
 	 */
 	User selectByPhone(String phone);
+	
+	/**
+	 * 根据关键字模糊查询所有字段符合关键字的用户
+	 * @return
+	 */
+	List<User> selectUserByKeyword(String keyword);
 }

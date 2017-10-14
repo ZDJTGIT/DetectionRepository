@@ -248,7 +248,7 @@
     	  	  data: {userId:user_idvalue},
     	  	  contextType:"application/json",
     	  	  success: function(data){
-    	  		       if(data){
+    	  		         if(data){
     	  		    	 var  asthtml="";
     	  		    	 $.each(data,function(idx,item){
         	  		    	
