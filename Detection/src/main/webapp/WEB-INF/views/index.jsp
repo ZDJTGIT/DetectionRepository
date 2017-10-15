@@ -229,10 +229,11 @@
 						</div>
 					</div>
 					<ul class="nav navbar-top-links navbar-right">
-						<li class="dropdown"><a class="dropdown-toggle count-info"
-							data-toggle="dropdown" href="javascript:;"> <i
-								class="fa fa-envelope"></i> <span class="label label-warning">${fn:length(messageList)}</span>
-						</a>
+						<li class="dropdown">
+							<a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:;">
+								<i class="fa fa-envelope"></i>
+								<span class="label label-warning">${fn:length(messageList)}</span>
+							</a>
 							<ul class="dropdown-menu dropdown-messages">
 								<c:forEach items="${messageList}" var="message" varStatus="status">
 									<li class="m-t-xs">
@@ -254,32 +255,23 @@
 										<a class="J_menuItem" href="rest/message/messageList"> <i
 											class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
 										</a>
-										<div class="media-body">
-											<small class="pull-right">46小时前</small> <strong>${userInfo.userName}</strong>
-											${message.messageContext}<br> <small class="text-muted">${message.createTime}</small>
-										</div>
-									</div></li>
-						<li class="divider"></li>
-						<li>
-							<div class="text-center link-block">
-								<a class="J_menuItem" href="rest/mailbox"> <i
-									class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
-								</a>
-							</div>
-						</li>
-					</ul>
-					</li>
-					<li class="dropdown"><a class="dropdown-toggle count-info"
-						data-toggle="dropdown" href="#"> <i class="fa fa-bell"></i> <span
-							class="label label-primary">8</span>
-					</a>
-						<ul class="dropdown-menu dropdown-alerts">
-							<li><a class="J_menuItem" href="rest/table_jqgrid">
-									<div>
-										<i class="fa fa-envelope fa-fw"></i> 您有16条未读消息 <span
-											class="pull-right text-muted small">4分钟前</span>
 									</div>
-							</a></li>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+								<i class="fa fa-bell"></i>
+								<span class="label label-primary">8</span>
+							</a>
+							<ul class="dropdown-menu dropdown-alerts">
+								<li>
+									<a class="J_menuItem" href="rest/table_jqgrid">
+										<div>
+											<i class="fa fa-envelope fa-fw"></i> 您有16条未读消息 <span
+											class="pull-right text-muted small">4分钟前</span>
+										</div>
+									</a></li>
 							<li class="divider"></li>
 							<li><a href="rest/profile">
 									<div>
@@ -726,12 +718,12 @@
 	<script type="text/javascript"
 		src="http://api.map.baidu.com/api?v=2.0&ak=lDSAFnztqS94cdBKPqgQUwTXuciyxpGa">
 	</script>
+	<script src="assets/js/sockjs.min.js" type="text/javascript"></script>
+    <script src="assets/js/stomp.min.js" type="text/javascript"></script>
 	<script src="assets/js/bootstrap-notify.js"></script>
 	<script src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="assets/js/plugins/pace/pace.min.js"></script>
-	<script src="assets/js/sockjs.min.js" type="text/javascript"></script>
-    <script src="assets/js/stomp.min.js" type="text/javascript"></script>
 	<script src="assets/js/hplus.js" type="text/javascript"></script>
 	<script src="assets/js/contabs.js" type="text/javascript"></script>
 	<script type="text/javascript">
@@ -747,59 +739,65 @@
 			});
 
 			$("#side-menu").metisMenu();
+			
+			
+			var socket = new SockJS('/Detection/rest/webSocket');
+
+	        /**
+	         * 建立成功的回调函数
+	         */
+	        socket.onopen = function() {
+	            console.log('open');
+	        };
+
+	        /**
+	         * 服务器有消息返回的回调函数
+	         */
+	        socket.onmessage = function(e) {
+	            console.log('message', e.data);
+	        };
+
+	        /**
+	         * websocket链接关闭的回调函数
+	         */
+	        socket.onclose = function() {
+	            console.log('close');
+	        };
+
+	        var stompClient = Stomp.over(socket);
+	        stompClient.connect({}, function(frame) {
+	        	console.log("connected-------:"+frame);
+	            stompClient.subscribe('/user/common/message',  function(data) { //订阅消息
+	            	$('.heading').notify({
+	    				icon : 'fa user',
+	    				message : data.messageContext
+
+	    			}, {
+	    				type : 'success',
+	    				timer : 4000
+	    			});
+	            });
+
+	           /*  console.log("connected++++++:"+frame);
+	            stompClient.subscribe('/topic/message',  function(data) { //订阅消息
+	            	alert("BBB");
+	                alert(data.body);
+	            });
+
+	            console.log("connected======:"+frame);
+	            stompClient.subscribe('/user/queue/single',  function(data) { //订阅消息
+	            	alert("CCC");
+	                alert(data.body);
+	            }); */
+	        });
+
+//	        stompClient.send("/ws/singlemessage", {}, JSON.stringify({
+//	            name : "nane",
+//	            taskName : "taskName",
+//	            taskDetail : "taskDetail"
+//	       }));
 
 		});
-
-		var socket = new SockJS('/Detection/rest/webSocket');
-
-        /**
-         * 建立成功的回调函数
-         */
-        socket.onopen = function() {
-            console.log('open');
-        };
-
-        /**
-         * 服务器有消息返回的回调函数
-         */
-        socket.onmessage = function(e) {
-            console.log('message', e.data);
-        };
-
-        /**
-         * websocket链接关闭的回调函数
-         */
-        socket.onclose = function() {
-            console.log('close');
-        };
-
-        var stompClient = Stomp.over(socket);
-        stompClient.connect({}, function(frame) {
-        	console.log("connected-------:"+frame);
-            stompClient.subscribe('/topic/hello',  function(data) { //订阅消息
-            	alert("AAA");
-                alert(data);
-            });
-
-            console.log("connected++++++:"+frame);
-            stompClient.subscribe('/topic/message',  function(data) { //订阅消息
-            	alert("BBB");
-                alert(data.body);
-            });
-
-            console.log("connected======:"+frame);
-            stompClient.subscribe('/user/queue/single',  function(data) { //订阅消息
-            	alert("CCC");
-                alert(data.body);
-            });
-        });
-
-//        stompClient.send("/ws/singlemessage", {}, JSON.stringify({
-//            name : "nane",
-//            taskName : "taskName",
-//            taskDetail : "taskDetail"
-//       }));
-
 
 	</script>
 

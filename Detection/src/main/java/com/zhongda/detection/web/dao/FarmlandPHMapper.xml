@@ -72,6 +72,7 @@
     from farmland_ph fp, sensor_info si, project p, user u
     where fp.sensor_id = si.sensor_id and si.project_id = p.project_id and p.user_id = u.user_id
     and (fp.detection_data &lt;= #{0} or fp.detection_data &gt;= #{1})
+    and (fp.detection_time &gt;= date_sub(now(), INTERVAL 4 HOUR) and fp.detection_time &lt; now())
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from farmland_ph

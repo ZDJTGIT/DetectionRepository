@@ -47,11 +47,11 @@ public class WebSocketStompConfig extends
 //		registry.enableStompBrokerRelay("/topic", "/queue")
 //				.setRelayHost("192.168.1.101").setRelayPort(61613)
 //				.setClientLogin("admin").setClientPasscode("admin");
-		registry.enableSimpleBroker("/topic");
+		registry.enableSimpleBroker("/topic","/user");
 		// 设置客户端订阅消息的基础路径,这句话表示客户端向服务器端发送时的主题上面需要加"/ws"作为前缀
 		// applicationDestinationPrefixes应用前缀，所有请求的消息将会路由到@MessageMapping的controller上
 		registry.setApplicationDestinationPrefixes("/ws");
 		// 这句话表示服务端给客户端指定用户发送一对一的主题，前缀是"/user"
-		registry.setUserDestinationPrefix("/user");
+		registry.setUserDestinationPrefix("/user/");
 	}
 }

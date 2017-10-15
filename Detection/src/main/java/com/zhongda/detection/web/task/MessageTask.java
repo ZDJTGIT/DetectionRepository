@@ -21,7 +21,7 @@ public class MessageTask {
 
 	@Resource
 	private MessageService messageService;
-
+	
 	@Scheduled(cron="0 5 0/3 * * ?")
 	public void createPHMessage(){
 		float minData = 4.5F;
@@ -49,6 +49,7 @@ public class MessageTask {
 			messageService.insertMessage(message);
 			SimpleMailSender sender = new SimpleMailSender();
 			sender.send(farmlandPH.getUser().getEmail(), "中大检测平台告警", messageContext);
+			
 		}
 	}
 }
