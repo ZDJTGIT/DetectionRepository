@@ -444,30 +444,6 @@ public class UserController {
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	@ResponseBody
 	public User modify(@RequestBody User user, HttpServletRequest request) {
-//		需要传当前登陆用户信息过来（ID。name等）
-//		Map<String, String> model = new HashMap<String, String>();
-//		int roleid=0;
-//		List<Role> roleInfos = roleService.selectRolesByUserId(userService.selectByUsername(user.getUserName()).getUserId());
-//		roleid = roleInfos.get(0).getRoleId();
-//		if(roleid==1){
-//			//超级管理员，不可修改
-//			model.put("isDelete", "2");
-//			return null;
-//		}else if(roleid==2){
-//			//超级管理员才可以修改管理员
-//			if(roleService.selectRolesByUserId(user.getUserId()).get(0).getRoleId()==2){
-//				model.put("isDelete", "3");
-//				return null;
-//			}else{
-//				model.put("isDelete", "1");
-//				return null;
-//			}
-//		}else{
-//			//普通用户可以修改
-//			model.put("isDelete", "1");
-//			return null;
-//		}
-		// 根据选中的用户修改用户信息
 		userService.updateByPrimaryKeySelective(user);
 		if(((User)WebUtils.getSessionAttribute(request, "userInfo")).getUserName().equals(user.getUserName())){
 			WebUtils.setSessionAttribute(request, "userInfo", user);
@@ -685,8 +661,8 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/keywordSearch", method=RequestMethod.POST)
 	@ResponseBody
-	public List<User> keywordSearch(String keyword){
-		List<User> userss =  userService.selectUserByKeyword(keyword);
+	public List<User> keywordSearch(String keyword,Integer userId){
+		List<User> userss =  userService.selectUserByKeyword(keyword,userId);
 		return userss; 
 	}
 	

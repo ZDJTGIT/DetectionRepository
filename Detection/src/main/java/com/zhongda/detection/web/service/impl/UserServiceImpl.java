@@ -100,8 +100,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> selectUserByKeyword(String keyword) {
-		return userMapper.selectUserByKeyword(keyword);
+	public List<User> selectUserByKeyword(String keyword,Integer userId) {
+		return userMapper.selectUserByKeyword(keyword,userId);
 	}
 
 	@Override

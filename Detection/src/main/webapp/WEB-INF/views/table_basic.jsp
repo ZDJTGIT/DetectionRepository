@@ -341,10 +341,11 @@
 	
 		$('#sureSearch').click(function(){
 			var keyword = $('#keyword').val();
+			var userid = '${userInfo.userId}';
 			$.ajax({
 				  type:'post',
 	    	  	  url: 'rest/user/keywordSearch',
-	    	  	  data: {keyword:keyword},
+	    	  	  data: {keyword:keyword,userId:userid},
 	    	  	  contextType:"application/json",
 				  success : function(data) {
 					if (data) {

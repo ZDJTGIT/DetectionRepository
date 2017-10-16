@@ -35,7 +35,7 @@ public interface UserMapper {
 	 * 根据关键字模糊查询所有字段符合关键字的用户
 	 * @return
 	 */
-	List<User> selectUserByKeyword(String keyword);
+	List<User> selectUserByKeyword(String keyword ,Integer userId);
 	/**
 	 * 添加用户时在权限表为用户添加一条权限信息
 	 * @return
