@@ -22,8 +22,10 @@ public class User {
     private Date createTime;
 
     private String status;
+    
+    private Integer roleId;
 
-    public Integer getUserId() {
+	public Integer getUserId() {
         return userId;
     }
 
@@ -31,7 +33,15 @@ public class User {
         this.userId = userId;
     }
 
-    public String getUserName() {
+    public Integer getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+
+	public String getUserName() {
         return userName;
     }
 

@@ -67,7 +67,7 @@ public class UserController {
 	
 	@Resource
 	private ProjectService projectService;
-
+	
 	@Resource(name = "sessionDAO")
 	private SessionDAO sessionDAO;
 
@@ -277,8 +277,9 @@ public class UserController {
 	 * 显示所有用户
 	 */
 	@RequestMapping(value = "/userList")
-	public String userList(Model model) {
-		List<User> userList = userService.selectList();
+	public String userList(HttpServletRequest request, Model model) {
+		User currentUser = (User) WebUtils.getSessionAttribute(request, "userInfo");
+		List<User> userList = userService.selectList(currentUser.getUserId());
 		model.addAttribute("userList", userList);
 		logger.info("进入userList");
 		logger.info("userList的大小" + userList.size());
@@ -312,8 +313,8 @@ public class UserController {
 		user.setCreateTime(date);
 		// 将user存入数据库
 		userService.insertUser(user);
-		user.setUserId(userService.selectByUsername(user.getUserName())
-				.getUserId());
+		user.setUserId(userService.selectByUsername(user.getUserName()).getUserId());
+		userService.insertUser_Role(user.getUserId(), user.getRoleId());
 		return user;
 	}
 
@@ -322,22 +323,156 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public User delete(@RequestBody User user) {
-		userService.deleteUser(user.getUserName());
-		return user;
+	public Map<String, String> delete(@RequestBody User user) {
+		Map<String, String> model = new HashMap<String, String>();
+		int roleid=0;
+		List<Role> roleInfos = roleService.selectRolesByUserId(userService.selectByUsername(user.getUserName()).getUserId());
+		roleid = roleInfos.get(0).getRoleId();
+		if(roleid==1){
+			//超级管理员，不可删除
+			model.put("isDelete", "2");
+			return model;
+		}else if(roleid==2){
+			//超级管理员才可以删除管理员
+			if(roleService.selectRolesByUserId(user.getUserId()).get(0).getRoleId()==2){
+				model.put("isDelete", "3");
+				return model;
+			}else{
+				userService.deleteUser_role(userService.selectByUsername(user.getUserName()).getUserId());
+				userService.deleteUser(user.getUserName());
+				model.put("isDelete", "1");
+				return model;
+			}
+		}else{
+			//普通用户，直接删除
+			userService.deleteUser_role(userService.selectByUsername(user.getUserName()).getUserId());
+			userService.deleteUser(user.getUserName());
+			model.put("isDelete", "1");
+			return model;
+		}
 	}
-
+	
+	/**
+	 * 查找展示添加用户时的用户权限
+	 */
+	@RequestMapping(value = "/showUserRole", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Role> showUserRole(Integer userId) {
+		List<Role> roleInfos = roleService.selectLessRolesByUserId(userId);
+		return roleInfos;
+	}
+	
+	//showSelectUserRole
+	/**
+	 * 查找展示添加用户时的用户权限
+	 */
+	@RequestMapping(value = "/showSelectUserRole", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> showSelectUserRole(Integer userId,String userName) {
+		Map<String, String> model = new HashMap<String, String>();
+		System.out.println("oooooooooooooooooooooooo1o:"+userId);//当前登陆账号ID
+		System.out.println("oooooooooooooooooooooooo2o:"+userName);//要修改的用户的用户名
+		List<Role> DLrole = roleService.selectRolesByUserId(userId);
+		Integer roleid = DLrole.get(0).getRoleId();
+		System.out.println("oooooooooooooooooooooooo3o:"+roleid);//当前登陆账号权限ID
+		List<Role> selectedrole = roleService.selectRolesByUserId((userService.selectByUsername(userName)).getUserId());
+		Integer roleId = selectedrole.get(0).getRoleId();
+		System.out.println("pppppppppppppppppppppppppp"+roleId);//权限ID
+		if(roleid==1){
+		//用户权限为超级管理员
+			switch (roleId)
+			{
+			case 2:
+				model.put("roleid", "0");
+			  break;
+			case 3:
+				model.put("roleid", "1");
+			  break;
+			case 4:
+				model.put("roleid", "2");
+			  break;
+			case 5:
+				model.put("roleid", "3");
+			  break;
+			case 6:
+				model.put("roleid", "4");
+			  break;
+			case 7:
+				model.put("roleid", "5");
+		      break;
+			case 8:
+				model.put("roleid", "6");
+			  break;
+			case 9:
+				model.put("roleid", "7");
+			  break;
+			}
+			return model;
+		}else{
+		//用户权限为管理员
+			switch (roleId)
+			{
+			case 3:
+				model.put("roleid", "0");
+			  break;
+			case 4:
+				model.put("roleid", "1");
+			  break;
+			case 5:
+				model.put("roleid", "2");
+			  break;
+			case 6:
+				model.put("roleid", "3");
+			  break;
+			case 7:
+				model.put("roleid", "4");
+		      break;
+			case 8:
+				model.put("roleid", "5");
+			  break;
+			case 9:
+				model.put("roleid", "6");
+			  break;
+			}
+			return model;
+		}
+	}
+	
 	/**
 	 * 修改用户信息
 	 */
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	@ResponseBody
 	public User modify(@RequestBody User user, HttpServletRequest request) {
+//		需要传当前登陆用户信息过来（ID。name等）
+//		Map<String, String> model = new HashMap<String, String>();
+//		int roleid=0;
+//		List<Role> roleInfos = roleService.selectRolesByUserId(userService.selectByUsername(user.getUserName()).getUserId());
+//		roleid = roleInfos.get(0).getRoleId();
+//		if(roleid==1){
+//			//超级管理员，不可修改
+//			model.put("isDelete", "2");
+//			return null;
+//		}else if(roleid==2){
+//			//超级管理员才可以修改管理员
+//			if(roleService.selectRolesByUserId(user.getUserId()).get(0).getRoleId()==2){
+//				model.put("isDelete", "3");
+//				return null;
+//			}else{
+//				model.put("isDelete", "1");
+//				return null;
+//			}
+//		}else{
+//			//普通用户可以修改
+//			model.put("isDelete", "1");
+//			return null;
+//		}
 		// 根据选中的用户修改用户信息
 		userService.updateByPrimaryKeySelective(user);
 		if(((User)WebUtils.getSessionAttribute(request, "userInfo")).getUserName().equals(user.getUserName())){
 			WebUtils.setSessionAttribute(request, "userInfo", user);
 		}
+		userService.updateUsersRole(user);
 		return user;
 	}
 
@@ -551,9 +686,7 @@ public class UserController {
 	@RequestMapping(value = "/keywordSearch", method=RequestMethod.POST)
 	@ResponseBody
 	public List<User> keywordSearch(String keyword){
-		System.out.println("我被执行了-------------");
 		List<User> userss =  userService.selectUserByKeyword(keyword);
-		System.out.println("我被执行了+++++++++++++"+ userss);
 		return userss; 
 	}
 	

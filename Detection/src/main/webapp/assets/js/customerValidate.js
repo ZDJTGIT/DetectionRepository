@@ -216,7 +216,7 @@ $('#from_modifyuserpassword').validate({
 	
 	rules : {
 		password: {
-			
+			required : true,
 			rangelength: [6,12],
 			remote: {
 			    url: "rest/user/OnlyPassword",     //后台处理程序
@@ -233,29 +233,31 @@ $('#from_modifyuserpassword').validate({
 		},
 		
 		new_password: {
-			rangelength: [6,12],
-	        required: true
+			required: true,
+			rangelength: [6,12]
 	    },
 	      
 	    new_passwords: {
-	    	//rangelength: [6,12],
+	    	rangelength: [6,12],
 		    equalTo: "#new_password"
 		}
 	},
 
 	messages : {
 		password: {
-	        required: "原始密码错误",
-	        rangelength: "原密码错误",
+	        required: "请填写原密码",
+	        rangelength: "密码为6-12个字符",
 	        remote: "原密码错误"	
 	    },
 		
 		new_password: {
-			rangelength: "密码为6-12个字符",
-				required:"密码为6-12个字符"
+			required:"请填写新密码",
+			rangelength: "密码为6-12个字符"
+			
 	    },
 	      
 	    new_passwords: {
+	    	rangelength: "密码为6-12个字符",
 	        equalTo: "两次密码不一致"
 	    }
 

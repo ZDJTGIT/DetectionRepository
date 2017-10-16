@@ -23,4 +23,18 @@ public interface RoleMapper {
      * @return
      */
     List<Role> selectRolesByUserId(Integer userId);
+    
+    /**
+     * 查role表中所有
+     * @param 
+     * @return
+     */
+    List<Role> selectAllRoles();
+    
+    /**
+     * 根据用户id获取小于该用户所拥有的角色
+     * @param userId
+     * @return
+     */
+	List<Role> selectLessRolesByUserId(Integer userId);
 }

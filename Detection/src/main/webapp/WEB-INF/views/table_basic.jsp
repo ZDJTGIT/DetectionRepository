@@ -73,7 +73,11 @@
 										<input class="md_input" type="text" id="mdphone" name="mdphone"><br><br>
 
 										<label class="md_lable" for="mdemail">邮箱地址:</label>
-										<input class="md_input" type="text" id="mdemail" name="mdemail">
+										<input class="md_input" type="text" id="mdemail" name="mdemail"><br><br>
+										
+										<label class="md_lable" for="email">用户权限:</label>
+										<div id="userRole_div">
+							            </div>
 									</div>
 									<br>
 									<input class="md_input_sure" type="button" id="sureMdy" value="确定修改">
@@ -99,7 +103,11 @@
 										<input class="md_input" type="text"id="phone" name="phone"><br><br>
 
 										<label class="md_lable" for="email">邮箱地址:</label>
-										<input class="md_input" type="text" id="email" name="email">
+										<input class="md_input" type="text" id="email" name="email"><br><br>
+										
+							            <label class="md_lable" for="email">用户权限:</label>
+							            <div id="userRole_div_s">
+							            </div>
 									</div>
 									<br>
 									<input class="md_input_sure" type="button" id="sureAdd" value="确定添加">
@@ -302,6 +310,35 @@
 	<script src="assets/js/customerValidate.js"></script>
 	<script type="text/javascript">
 	
+	 $(document).ready(function(){
+		 var dlId = '${userInfo.userId}';
+		 $.ajax({
+   		  type:'post',
+   	  	  url: 'rest/user/showUserRole',
+   	  	  data: {userId:dlId},
+   	  	  contextType:"application/json",
+   	  	  success: function(data){
+   	  		       if(data){
+   	  		    	var strings = '<select class="md_input" id="userRoles" name="userRoles">';   
+   	  		    	var string = '<select class="md_input" id="userRole" name="userRole">';
+   	  		    	$.each(data,function(idx,role){
+   	  		    		//如果这个roleId和选中的user的roleId是相同的，就选中当前的option
+   	  		    	    string += '<option value="'+role.roleId+'">'+ role.roleName +'</option>';
+   	  		    	    strings += '<option value="'+role.roleId+'">'+ role.roleName +'</option>';
+   	  		    	});
+   	  		       string += '</select>';
+   	  		       $('#userRole_div').append(string);
+   	  		       $('#userRole_div_s').append(strings); 	
+   	  		       }else{
+   	  		    	alert("数据异常");
+   	  		       }
+   	  	  },
+   	  	  error: function(){
+ 			    alert("数据加载失败");
+ 		      }
+   	  });
+	 });
+	
 		$('#sureSearch').click(function(){
 			var keyword = $('#keyword').val();
 			$.ajax({
@@ -340,6 +377,7 @@
 	    //修改用户信息
 		function selectRow(s){
 			b = s.parentNode.parentNode.rowIndex;
+			var dlId = '${userInfo.userId}';
 			var name = $("table tr:eq(" + b + ") td:eq(1)").text();
 			var email= $("table tr:eq(" + b + ") td:eq(2)").text();
 			var phone = $("table tr:eq(" + b + ") td:eq(3)").text();
@@ -353,6 +391,15 @@
 			$('#mdphone').val(phone);
 			$('#mdemail').val(email);
 			$('#mdid').val(id);
+			$.ajax({
+		   		  type:'post',
+		   	  	  url: 'rest/user/showSelectUserRole',
+		   	  	  data: {userId:dlId,userName:name},
+		   	  	  contextType:"application/json",
+		   	  	  success: function(data){
+		   	  		document.getElementById("userRole")[data.roleid].selected=true;
+		   	  	  }
+			});
 			return;
 		}
 	    
@@ -362,13 +409,14 @@
 				return false;
 			}
 			        var t=b;
+			        var role = $("#userRole option:selected").val();
 					var idvalue = $('#mdid').val();
 					var namevalue = $("#mdname").val();
 					var linkmanvalue = $("#mdlinkman").val();
 					var companyvalue = $("#mdcompany").val();
 					var phonevalue = $("#mdphone").val();
 					var emailvalue = $("#mdemail").val();
-				    var jsonData = '{"userId":"'+idvalue+'","linkman":"'+linkmanvalue+'","userName":"'+namevalue+
+				    var jsonData = '{"userId":"'+idvalue+'","linkman":"'+linkmanvalue+'","roleId":"'+role+'","userName":"'+namevalue+
 						           '","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue +'"}';
 					$('#modifyuser').hide();
 					$.ajax({
@@ -404,16 +452,23 @@
 		function deleteRow(s) {
 			var b = s.parentNode.parentNode.rowIndex;
 			var t = $("table tr:eq(" + b + ") td:eq(1)").text();
+			var dlId = '${userInfo.userId}';
 			//layer.msg('玩命提示中');
-			var jsonData = '{"userName":"' + t + '"}';
+			var jsonData = '{"userName":"' + t +'","userId":"' + dlId + '"}';
 			$.ajax({
 				type : 'post',
 				url : 'rest/user/delete',
 				contentType : 'application/json',
 				data : jsonData,
 				success : function(data) {
-					document.getElementById('mytable').deleteRow(b);
-					alert("删除成功");
+					if(data.isDelete=="2"){
+						alert("超级管理员-不可删除");
+					}else if(data.isDelete=="3"){
+						alert("管理员不可操作管理员");
+					}else{
+						document.getElementById('mytable').deleteRow(b);
+						alert("删除成功");
+					}
 					/*layer.msg('删除成功（该提示3s后自动关闭）', {
 						time : 3000, //3s后自动关闭
 						btn : [ '知道了' ]
@@ -450,9 +505,14 @@
 			});
 			//打开添加用户div
 			$('#popupAddUser').click(function(e) {
-				alert("sadasasda");
 				e.preventDefault();
 				$('#adduser').show();
+				$('#userName').val("");
+				$('#linkman').val("");
+				$('#company').val("");
+				$('#phone').val("");
+				$('#email').val("");
+				
 			});
 			//关闭添加用户div
 			$('#closeAddUser').click(function(e) {
@@ -464,6 +524,7 @@
 				if(!$('#form_adduser').valid()){
 					return false;
 				}
+				var role = $("#userRoles option:selected").val();
 				var userNamevalue = $("#userName").val();
 				var companyvalue = $("#company").val();
 				var phonevalue = $("#phone").val();
@@ -477,6 +538,8 @@
 							+ phonevalue
 							+ '","linkman":"'
 							+ linkmanvalue
+							+ '","roleId":"'
+							+ role
 							+ '","email":"'
 							+ emailvalue + '"}';
 					$('#adduser').hide();

@@ -61,7 +61,7 @@ public interface UserService {
 	 * 查询所有用户
 	 * @return
 	 */
-	List<User> selectList();
+	List<User> selectList(Integer userId);
 
 	/**
 	 * 修改用户信息
@@ -93,4 +93,23 @@ public interface UserService {
 	 * @return
 	 */
 	List<User> selectUserByKeyword(String keyword);
+	
+	/**
+	 * 添加用户时在权限表为用户添加一条权限信息
+	 * @return
+	 */
+	int insertUser_Role(Integer userId, Integer roleId);
+	
+	/**
+	 * 删除用户对应的权限表中数据
+	 * @return
+	 */
+	boolean deleteUser_role(Integer userId);
+	
+	/**
+	 * 修改用户权限表中用户的权限
+	 * @return
+	 */
+	int updateUsersRole(User user);
+
 }

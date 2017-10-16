@@ -34,8 +34,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> selectList() {
-		return userMapper.selectAllUser();
+	public List<User> selectList(Integer userId) {
+		return userMapper.selectAllUser(userId);
 	}
 
 	@Override
@@ -102,6 +102,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> selectUserByKeyword(String keyword) {
 		return userMapper.selectUserByKeyword(keyword);
+	}
+
+	@Override
+	public int insertUser_Role(Integer userId, Integer roleId) {
+		return userMapper.insertUser_Role(userId, roleId);
+	}
+
+	@Override
+	public boolean deleteUser_role(Integer userId) {
+		return userMapper.deleteUser_role(userId);
+	}
+
+	@Override
+	public int updateUsersRole(User user) {
+		return userMapper.updateUsersRole(user);
 	}
 
 }

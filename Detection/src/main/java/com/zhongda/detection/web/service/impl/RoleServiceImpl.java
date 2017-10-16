@@ -26,4 +26,14 @@ public class RoleServiceImpl implements RoleService{
 		return roleMapper.selectRolesByUserId(userId);
 	}
 
+	@Override
+	public List<Role> selectAllRoles() {
+		return roleMapper.selectAllRoles();
+	}
+
+	@Override
+	public List<Role> selectLessRolesByUserId(Integer userId) {
+		return roleMapper.selectLessRolesByUserId(userId);
+	}
+
 }

@@ -94,6 +94,7 @@
 					<h3>
 						<strong>个人资料编辑</strong>
 					</h3>
+					<p>（三个密码输入框为空可直接修改其他信息）</p>
 				</div>
 				<div class="ibox-content">
 					<div class="feed-activity-list">
