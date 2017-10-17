@@ -1,5 +1,7 @@
 package com.zhongda.detection.web.model;
 
+import java.util.List;
+
 public class SensorInfo {
 	private Integer sensorId;
 
@@ -21,9 +23,11 @@ public class SensorInfo {
 
 	private SysDictionary sysDictionary;
 
-	private SlopeDisplacementData slopeDisplacementData;
+	private List<SlopeDisplacementData> slopeDisplacementDataList;
 
 	private Float sensorDepth;
+
+	private List<SlopeRainfall> slopeRainfallList;
 
 	public Integer getSensorId() {
 		return sensorId;
@@ -107,13 +111,13 @@ public class SensorInfo {
 		this.sysDictionary = sysDictionary;
 	}
 
-	public SlopeDisplacementData getSlopeDisplacementData() {
-		return slopeDisplacementData;
+	public List<SlopeDisplacementData> getSlopeDisplacementDataList() {
+		return slopeDisplacementDataList;
 	}
 
-	public void setSlopeDisplacementData(
-			SlopeDisplacementData slopeDisplacementData) {
-		this.slopeDisplacementData = slopeDisplacementData;
+	public void setSlopeDisplacementDataList(
+			List<SlopeDisplacementData> slopeDisplacementDataList) {
+		this.slopeDisplacementDataList = slopeDisplacementDataList;
 	}
 
 	public Float getSensorDepth() {
@@ -124,15 +128,18 @@ public class SensorInfo {
 		this.sensorDepth = sensorDepth;
 	}
 
+	public List<SlopeRainfall> getSlopeRainfallList() {
+		return slopeRainfallList;
+	}
+
+	public void setSlopeRainfallList(List<SlopeRainfall> slopeRainfallList) {
+		this.slopeRainfallList = slopeRainfallList;
+	}
+
 	@Override
 	public String toString() {
-		return "SensorInfo [sensorId=" + sensorId + ", projectId=" + projectId
-				+ ", detectionId=" + detectionId + ", sensorLongitude="
-				+ sensorLongitude + ", sensorLatitude=" + sensorLatitude
-				+ ", sensorNum=" + sensorNum + ", sensorType=" + sensorType
-				+ ", sensorModel=" + sensorModel + ", detectionTypeId="
-				+ detectionTypeId + ", sysDictionary=" + sysDictionary
-				+ ", slopeDisplacementData=" + slopeDisplacementData
+		return "SensorInfo [sensorId=" + sensorId
+				+ ", slopeDisplacementDataList=" + slopeDisplacementDataList
 				+ ", sensorDepth=" + sensorDepth + "]";
 	}
 

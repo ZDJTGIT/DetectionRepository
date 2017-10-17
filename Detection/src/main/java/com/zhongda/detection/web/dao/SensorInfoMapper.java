@@ -36,6 +36,17 @@ public interface SensorInfoMapper {
 	List<SensorInfo> selectsenInfoAndSysdicByProjectId(Integer projectId);
 
 	/**
+	 * 查询当前深部位移项目有没有数据
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	int selectCountByProjectAndDetectionId(
+			@Param("projectId") Integer projectId,
+			@Param("detectionTypeId") Integer detectionTypeId);
+
+	/**
 	 * 查询传感器数据通过项目ID和字典编号
 	 * 
 	 * @param projectId
@@ -43,6 +54,29 @@ public interface SensorInfoMapper {
 	 * @return
 	 */
 	List<SensorInfo> selectInfoAndDisplacementData(
+			@Param("currentTimes") String currentTimes,
+			@Param("projectId") Integer projectId,
+			@Param("detectionTypeId") Integer detectionTypeId);
+
+	/**
+	 * 查询当前雨量项目有没有数据
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	int selectCountAndRainfall(@Param("projectId") Integer projectId,
+			@Param("detectionTypeId") Integer detectionTypeId);
+
+	/**
+	 * 查询边坡雨量通过项目ID和字典编号
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	List<SensorInfo> selectInfoAndSlopeRainfall(
+			@Param("detectionTime") String detectionTime,
 			@Param("projectId") Integer projectId,
 			@Param("detectionTypeId") Integer detectionTypeId);
 }

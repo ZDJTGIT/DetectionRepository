@@ -29,7 +29,10 @@ import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.SensorInfoService;
 
 /**
- *<p>公共视图控制器</p>
+ * <p>
+ * 公共视图控制器
+ * </p>
+ * 
  * @author zmdeng
  * @date 2017年9月28日
  */
@@ -57,9 +60,10 @@ public class CommonController {
 	 */
 	@RequestMapping("index")
 	public String index(HttpServletRequest request, Model model) {
-		//查出当前用户下所有未读的消息
+		// 查出当前用户下所有未读的消息
 		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
-		List<Message> messageList = messageService.selectPartMessagesByUserIdAndNotRead(user.getUserId());
+		List<Message> messageList = messageService
+				.selectPartMessagesByUserIdAndNotRead(user.getUserId());
 		model.addAttribute("messageList", messageList);
 		return "index";
 	}
@@ -153,7 +157,7 @@ public class CommonController {
 	public String form_avatar(HttpServletRequest request) {
 		return "user";
 	}
-	
+
 	@RequestMapping("form_avatar")
 	public String user(HttpServletRequest request) {
 		return "form_avatar";

@@ -44,7 +44,7 @@
     <result column="sensor_model" jdbcType="VARCHAR" property="sensorModel" />
     <result column="detection_type_id" jdbcType="INTEGER" property="detectionTypeId" />
     <result column="sensor_depth" jdbcType="REAL" property="sensorDepth" />
-    <association property="slopeDisplacementData" javaType="SlopeDisplacementData">
+    <collection property="slopeDisplacementDataList" javaType="java.util.List" ofType="com.zhongda.detection.web.model.SlopeDisplacementData">
 	    <id column="slope_displacement_id" jdbcType="INTEGER" property="slopeDisplacementId" />
 	    <result column="sensor_id" jdbcType="INTEGER" property="sensorId" />
 	    <result column="detection_id" jdbcType="INTEGER" property="detectionId" />
@@ -63,7 +63,15 @@
 	    <result column="detection_nums" jdbcType="INTEGER" property="detectionNums" />
 	    <result column="detection_space" jdbcType="REAL" property="detectionSpace" />
 	    <result column="tester" jdbcType="VARCHAR" property="tester" />
-   	</association>
+   	</collection>
+   	<collection property="slopeRainfallList" javaType="java.util.List" ofType="com.zhongda.detection.web.model.SlopeRainfall">
+	    <id column="rainfall_id" jdbcType="INTEGER" property="rainfallId" />
+	    <result column="detection_id" jdbcType="INTEGER" property="detectionId" />
+	    <result column="sensor_id" jdbcType="INTEGER" property="sensorId" />
+	    <result column="detection_data" jdbcType="REAL" property="detectionData" />
+	    <result column="detection_time" jdbcType="TIMESTAMP" property="detectionTime" />
+	    <result column="sensor_status" jdbcType="VARCHAR" property="sensorStatus" />
+   	</collection>
   </resultMap>
   <sql id="Base_Column_List">
     sensor_id, project_id, detection_id, sensor_longitude, sensor_latitude, sensor_num,
@@ -86,17 +94,35 @@
     group by detection_type_id) si, sys_dictionary sd
     where si.detection_type_id = sd.dic_id
   </select>
-  <select id="selectsenInfoAndSysdicByProjectId" parameterType="java.lang.Integer" resultMap="LinkDictionayrMap">
+  <select id="selectsenInfoAndSysdicByProjectId" resultMap="LinkDictionayrMap">
   	select 
   	si.*,sd.* 
   	from sensor_info si,sys_dictionary sd 
   	where si.detection_type_id=sd.dic_id and si.project_id = #{projectId,jdbcType=INTEGER}
   </select>
-  <select id="selectInfoAndDisplacementData" parameterType="java.lang.Integer" resultMap="LinkDisplacementDataMap">
+  <select id="selectCountByProjectAndDetectionId" resultType="java.lang.Integer">
+ 	select
+ 	count(*)
+ 	from sensor_info si,slope_displacement_data sdd
+ 	where si.sensor_id = sdd.sensor_id and si.project_id = #{projectId,jdbcType=INTEGER} and si.detection_type_id = #{detectionTypeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectInfoAndDisplacementData" resultMap="LinkDisplacementDataMap">
   	select
   	si.*,sdd.*
   	from sensor_info si,slope_displacement_data sdd
-  	where si.sensor_id = sdd.sensor_id and si.project_id = #{projectId,jdbcType=INTEGER} and si.detection_type_id = #{detectionTypeId,jdbcType=INTEGER}
+  	where si.sensor_id = sdd.sensor_id and DATE_FORMAT(current_times,'%Y-%m-%d') = #{currentTimes,jdbcType=VARCHAR} and si.project_id = #{projectId,jdbcType=INTEGER and si.detection_type_id = #{detectionTypeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectCountAndRainfall" resultType="java.lang.Integer">
+ 	select
+ 	count(*)
+ 	from sensor_info si,slope_rainfall sr
+ 	where si.sensor_id = sr.sensor_id and si.project_id = #{projectId,jdbcType=INTEGER} and si.detection_type_id = #{detectionTypeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectInfoAndSlopeRainfall" resultMap="LinkDisplacementDataMap">
+  	select
+  	si.*,sr.*
+  	from sensor_info si,slope_rainfall sr
+  	where si.sensor_id = sr.sensor_id and DATE_FORMAT(detection_time,'%Y-%m') = #{detectionTime,jdbcType=VARCHAR} and si.project_id = #{projectId,jdbcType=INTEGER and si.detection_type_id = #{detectionTypeId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sensor_info

@@ -358,6 +358,11 @@ $(function() {
 	};
 	singleChart.setOption(singletion);
 	$(window).resize(singleChart.resize);
+	
+	$("#buttontest").click(function(){
+		
+	});
+	
 
 	var grandtotalChart = echarts.init(document
 			.getElementById("echarts-grandtotal-chart"));

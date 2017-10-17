@@ -33,13 +33,42 @@ public interface SensorInfoService {
 			Integer projectId);
 
 	/**
+	 * 查询当前项目有没有数据
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	int selectCountByProjectAndDetectionId(Integer projectId,
+			Integer detectionTypeId);
+
+	/**
 	 * 查询传感器数据通过项目ID和字典编号
 	 * 
 	 * @param projectId
 	 * @param detectionTypeId
 	 * @return
 	 */
-	List<SensorInfo> selectInfoAndDisplacementData(Integer projectId,
-			Integer detectionTypeId);
+	Map<String, Object> selectInfoAndDisplacementData(String currentTimes,
+			Integer projectId, Integer detectionTypeId);
+
+	/**
+	 * 查询当前雨量项目有没有数据
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	int selectCountAndRainfall(Integer projectId, Integer detectionTypeId);
+
+	/**
+	 * 查询边坡雨量通过项目ID和字典编号
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	Map<String, Object> selectInfoAndSlopeRainfall(String detectionTime,
+			Integer projectId, Integer detectionTypeId);
 
 }

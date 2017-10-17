@@ -1,9 +1,5 @@
 package com.zhongda.detection.web.controller;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SensorInfo;
 import com.zhongda.detection.web.security.RoleSign;
@@ -55,36 +49,65 @@ public class ProjectController {
 
 	@RequestMapping(value = "/displacement")
 	public String displacement(Model model, Integer projectId,
-			Integer detectionTypeId) throws JsonProcessingException {
-		System.out.println("-------displacement---Controller--------------"
-				+ projectId + "---" + detectionTypeId);
-		List<SensorInfo> sensorInfoList = sensorInfoService
-				.selectInfoAndDisplacementData(projectId, detectionTypeId);
-		// 对数据进行结构处理begin
-		Map<String, Map<Float, SensorInfo>> sensorMap = new HashMap<String, Map<Float, SensorInfo>>();
-		HashSet<Float> depthSet = new HashSet<Float>();
-		for (SensorInfo sensorInfo : sensorInfoList) {
-			String key = "测点" + sensorInfo.getDetectionId();
-			Map<Float, SensorInfo> value = sensorMap.get(key);
-			if (null == value) {
-				value = new HashMap<Float, SensorInfo>();
-			}
-			value.put(sensorInfo.getSensorDepth(), sensorInfo);
-			sensorMap.put(key, value);
-			depthSet.add(sensorInfo.getSensorDepth());
+			Integer detectionTypeId) {
+		System.out.println(projectId + "_--" + detectionTypeId);
+		int count = sensorInfoService.selectCountByProjectAndDetectionId(
+				projectId, detectionTypeId);
+		return generalJump(model, "graph_echarts_displacement", count,
+				projectId, detectionTypeId);
+	}
+
+	@RequestMapping(value = "/selectdisplament")
+	public @ResponseBody Map<String, Object> selectdisplament(
+			Integer projectId, Integer detectionTypeId, String currentTimes) {
+		System.out.println("currentTimes:" + currentTimes + "--projectId:"
+				+ projectId + "--detectionTypeId:" + detectionTypeId);
+		return sensorInfoService.selectInfoAndDisplacementData(currentTimes,
+				projectId, detectionTypeId);
+
+	}
+
+	@RequestMapping(value = "/rainfall")
+	public String rainfall(Model model, Integer projectId,
+			Integer detectionTypeId) {
+		System.out.println(projectId + "_--" + detectionTypeId);
+		int count = sensorInfoService.selectCountAndRainfall(projectId,
+				detectionTypeId);
+		System.out.println(count);
+		return generalJump(model, "graph_echarts_rainfall", count, projectId,
+				detectionTypeId);
+
+	}
+
+	@RequestMapping(value = "/selectrainfall")
+	public @ResponseBody Map<String, Object> selectrainfall(Integer projectId,
+			Integer detectionTypeId, String detectionTime) {
+		System.out.println("currentTimes:" + detectionTime + "--projectId:"
+				+ projectId + "--detectionTypeId:" + detectionTypeId);
+		return sensorInfoService.selectInfoAndSlopeRainfall(detectionTime,
+				projectId, detectionTypeId);
+	}
+
+	/**
+	 * 通用跳转逻辑
+	 * 
+	 * @param model
+	 * @param url
+	 * @param count
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	public String generalJump(Model model, String url, int count,
+			Integer projectId, Integer detectionTypeId) {
+		// 如果没有查询到数据则返回404
+		if (count == 0) {
+			return "nodata";
+		} else {
+			model.addAttribute("projectId", projectId);
+			model.addAttribute("detectionTypeId", detectionTypeId);
+			return url;
 		}
-		List<Float> arrayList = new ArrayList<Float>(depthSet);
-		Collections.sort(arrayList);
-		// 对数据进行结构处理begin
-		System.out.println("---------------------end");
-		// 转JSON格式
-		ObjectMapper mapper = new ObjectMapper();
-		String sensorJson = mapper.writeValueAsString(sensorMap);
-		String depth = mapper.writeValueAsString(arrayList);
-		model.addAttribute("sensorJson", sensorJson);
-		model.addAttribute("depth", depth);
-		System.out.println("------------------" + sensorJson);
-		return "graph_echarts_displacement";
 	}
 	
 	/**
@@ -119,4 +142,5 @@ public class ProjectController {
 		}
 		return projectList; 
 	}
+
 }

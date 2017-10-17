@@ -216,7 +216,5 @@
 			$(".dataTables-example").dataTable({"searching" : false});
 		});
 	</script>
-	<script type="text/javascript"
-		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>
 </html>

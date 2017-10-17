@@ -2,6 +2,8 @@ package com.zhongda.detection.web.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class SlopeDisplacementData {
 	private Integer slopeDisplacementId;
 
@@ -71,6 +73,7 @@ public class SlopeDisplacementData {
 		this.sensorStatus = sensorStatus == null ? null : sensorStatus.trim();
 	}
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getFirstTime() {
 		return firstTime;
 	}
@@ -87,6 +90,7 @@ public class SlopeDisplacementData {
 		this.firstData = firstData;
 	}
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getPreviousTime() {
 		return previousTime;
 	}
@@ -103,6 +107,7 @@ public class SlopeDisplacementData {
 		this.previousData = previousData;
 	}
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getCurrentTimes() {
 		return currentTimes;
 	}
@@ -184,4 +189,13 @@ public class SlopeDisplacementData {
 	public void setTester(String tester) {
 		this.tester = tester == null ? null : tester.trim();
 	}
+
+	@Override
+	public String toString() {
+		return "SlopeDisplacementData [slopeDisplacementId="
+				+ slopeDisplacementId + ", sensorId=" + sensorId
+				+ ", detectionId=" + detectionId + ", currentTimes="
+				+ currentTimes + ", tester=" + tester + "]";
+	}
+
 }

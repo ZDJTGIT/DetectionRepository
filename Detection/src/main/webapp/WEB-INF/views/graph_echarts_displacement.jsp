@@ -23,9 +23,11 @@
     <link rel="shortcut icon" href="favicon.ico">
     <!-- Data Tables -->
     <link href="assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-
+	<link href="assets/css/plugins/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<link href="assets/css/plugins/datepicker/datepicker3.css" rel="stylesheet">
     <script type="text/javascript" src="assets/js/slop_photo.js"></script>
-
+    <link href="assets/css/style.min.css" rel="stylesheet">
+	
 </head>
 
 <body class="gray-bg">
@@ -33,7 +35,42 @@
 		<div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="assets/img/farmmap.jpg" />
 		</div>
 	</div>
+	<label style="display: none;" id="projectId">${projectId }</label>
+	<label style="display: none;" id="detectionTypeId">${detectionTypeId }</label>
     <div class="wrapper wrapper-content animated fadeInRight">
+    	<div class="row">
+    		<div class="col-sm-12">
+                <div class="ibox float-e-margins" id="small-chat1" style="width: 100%" >
+                    <div class="ibox-content" style="background: rgba(255,255,255, 0.5);">
+                        <form class="form-inline" role="form" id="formSearch">
+                            <div class="form-group">
+                                <label for="startCreateTime">选择日期:</label>
+							   	<input type="datetime" class="form-control" id="diapladata" >
+                            </div>
+                            <button class="btn btn-primary " id="selectdispladata" type="button" style="margin-top: 5px;">&nbsp;查询</button>
+                            <div class="form-group" style="margin-left: 20px;">
+                                <label for="startCreateTime">测试次数：第</label>
+							   	<select class="form-control" id="displaallnumber">
+							   	</select>
+							   	<label>次检测数据 </label>
+                            </div>
+                            <div class="form-group" style="margin-left: 40px;">
+                                <label for="startCreateTime">时间：</label>
+							   	<select class="form-control" id="displaalltime">
+							   	</select>
+							   	<label>(PS：用时间和次数都可以查询数据)</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    	</div>
+   		 <div class="row">
+    		<div class="col-sm-12" style="height: 65px">
+                
+                </div>
+            </div>
+    	
         <div class="row">
             <div class="col-sm-5">
                 <div class="ibox float-e-margins">
@@ -65,7 +102,36 @@
             <div class="col-sm-7" >
                 <div class="ibox float-e-margins" >
                     <div class="ibox-title">
-                        <h5>深部监测总位移</h5>
+                        <h5>累计变化量</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="graph_flot.html#">选项1</a>
+                                </li>
+                                <li><a href="graph_flot.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content" >
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+        	<div class="col-sm-6" >
+                <div class="ibox float-e-margins" >
+                    <div class="ibox-title">
+                        <h5>累计变化量</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -89,13 +155,10 @@
                     </div>
                 </div>
             </div>
-
-        </div>
-        <div class="row">
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>深部本次位移监测</h5>
+                        <h5>本次位移变化量</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -115,14 +178,14 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="echarts-grandtotal-chart"></div>
+                        <div class="echarts" id="echarts-grandtotal-chart" style="height: 360px"></div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>深部位移变化速率监测</h5>
+                        <h5>变化速率</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -142,15 +205,14 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-
-                        <div class="echarts" id="echarts-single-chart"></div>
+                        <div class="echarts" id="echarts-single-chart" style="height: 360px"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>深部水平位移监测值</h5>
+                        <h5>原始数据</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -170,17 +232,117 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="echarts-displacement-chart"></div>
+                        <div class="echarts" id="echarts-displacement-chart" style="height: 360px"></div>
                     </div>
                 </div>
             </div>
 
         </div>
-       </div>
-    <script type="text/javascript">
-	 		var sensorJson = '${ sensorJson}';
-			var deeparry = '${depth}'
-    </script>
+        <div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>告警处理表</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+							</a> <a class="dropdown-toggle" data-toggle="dropdown"
+								href="table_data_tables.html#"> <i class="fa fa-wrench"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="table_data_tables.html#">选项1</a></li>
+								<li><a href="table_data_tables.html#">选项2</a></li>
+							</ul>
+							<a class="close-link"> <i class="fa fa-times"></i>
+							</a>
+						</div>
+					</div>
+					<!-- <div class="ibox-content">
+						<table
+							class="table table-striped table-bordered table-hover dataTables-example">
+							<thead>
+								<tr>
+									<td>测试深度(M)</td>
+									<td>初次测试值时间</td>
+									<td>初次测试值(MM)</td>
+									<td>前次测试时间</td>
+									<td>前次测试值(MM)</td>
+									<td>本次测试时间</td>
+									<td>本次测试值(MM)</td>
+									<td>本次位移(MM)</td>
+									<td>总 位 移(MM)</td>
+									<td>变化速率(MM/DAY)</td>
+									<td>测孔名称</td>
+									<td>测试次数</td>
+									<td>测试员</td>
+								</tr>
+							</thead>
+							<tbody id="tbodydata">
+								<tr class="gradeX">
+									<td>深部位移监测装置</td>
+									<td>JCZ1</td>
+									<td>深部位移位置</td>
+									<td>位移位置过大</td>
+									<td>2017/7/27 13:16:41</td>
+									<td>中大边坡在线自动监测系统</td>
+									<td>2</td>
+									<td>已处理</td>
+								</tr>
+								<tr class="gradeX">
+									<td>深部位移监测装置</td>
+									<td>JCZ2</td>
+									<td>深部位移位置</td>
+									<td>位移位置过大</td>
+									<td>2017/7/24 11:16:41</td>
+									<td>中大边坡在线自动监测系统</td>
+									<td>2</td>
+									<td>已处理</td>
+								</tr>
+							</tbody>
+						</table>
+					</div> -->
+					 <div class="ibox-content">
+                        <table class="table table-striped table-bordered table-hover " id="editable">
+                            <thead>
+                                <tr>
+                                	<td>测点位置</td>
+									<td>测试深度(M)</td>
+									<td>初次测试值时间</td>
+									<td>初次测试值(MM)</td>
+									<td>前次测试时间</td>
+									<td>前次测试值(MM)</td>
+									<td>本次测试时间</td>
+									<td>本次测试值(MM)</td>
+									<td>本次位移(MM)</td>
+									<td>总 位 移(MM)</td>
+									<td>变化速率(MM/DAY)</td>
+									<td>测孔名称</td>
+									<td>测试次数</td>
+									<td>测试员</td>
+								</tr>
+                            </thead>
+                            <tbody id="tbodydata">
+                                
+                            </tbody>
+                        </table>
+
+                    </div>
+				</div>
+			</div>
+		</div>
+    </div>
+    	
+    <script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
+	<script src="assets/js/plugins/datepicker/bootstrap-datetimepicker.min.js" charset="utf-8"></script>
+	<script src="assets/js/plugins/layui/layui.all.js" charset="utf-8"></script>
+	<script type="text/javascript">
+			
+			$('#diapladata').datetimepicker({
+	            locale: moment.locale('zh-cn'),
+	            showTodayButton:true,
+	            format: "YYYY-MM-DD"
+	        })
+	       
+	</script>
     <!-- ECharts -->
     <script src="assets/js/plugins/echarts/echarts-all.js"></script>
     <!-- 自定义js -->
@@ -193,6 +355,14 @@
     <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     
+    <script>
+    var oTabel;
+    $(document).ready(function() {
+    	oTabel= $('#editable').dataTable({
+    		  "sScrollX" : "100%", 
+    	});
+    });
+	</script>
 </body>
 
 </html>
