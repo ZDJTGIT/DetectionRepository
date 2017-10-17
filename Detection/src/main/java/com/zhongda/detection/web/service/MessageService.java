@@ -47,5 +47,12 @@ public interface MessageService {
 	 * @return
 	 */
 	List<Message> selectMessagesByUserIdAndOther(Message message);
-
+	
+	/**
+	 * 根据项目ID查询当前项目的所有告警信息
+	 * @param projectId
+	 * @return
+	 */
+	List<Message> selectAllMessageByProjectId(Integer projectId);
+	
 }

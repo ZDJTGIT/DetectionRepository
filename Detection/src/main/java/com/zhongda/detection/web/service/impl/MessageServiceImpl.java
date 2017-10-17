@@ -49,4 +49,8 @@ public class MessageServiceImpl implements MessageService{
 		return  messageMapper.selectMessagesByUserIdAndOther(message);
 	}
 
+	@Override
+	public List<Message> selectAllMessageByProjectId(Integer projectId) {
+		return messageMapper.selectAllMessageByProjectId(projectId);
+	}
 }

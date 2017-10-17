@@ -22,6 +22,17 @@ public class Project {
 	private String projectDescription;
 
 	private SysDictionary sysDictionary;
+	
+	//缓存告警信息的数量
+	private Integer messageCount;
+	
+	public Integer getMessageCount() {
+		return messageCount;
+	}
+
+	public void setMessageCount(Integer messageCount) {
+		this.messageCount = messageCount;
+	}
 
 	public Integer getProjectId() {
 		return projectId;

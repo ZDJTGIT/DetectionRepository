@@ -26,6 +26,14 @@
     where user_id = #{userId,jdbcType=INTEGER}
     and status = '未读'
   </select>
+  <select id="selectAllMessageByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+     m.* 
+     from message m,project_message pm 
+     where 
+     m.message_id = pm.message_id 
+     and pm.project_id=#{projectId,jdbcType=INTEGER}
+  </select>
   <select id="selectPartMessagesByUserIdAndNotRead" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

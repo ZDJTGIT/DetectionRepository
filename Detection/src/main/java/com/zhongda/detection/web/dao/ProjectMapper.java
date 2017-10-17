@@ -42,4 +42,35 @@ public interface ProjectMapper {
 	 * @return
 	 */
 	List<Project> selectLotOfProjectsByProjectId(Integer[] item);
+	
+	/**
+	 * 查询所有Project数据
+	 * @return
+	 */
+	List<Project> selectAllProject();
+	
+	/**
+	 * 根据用户id查询出当前用户下对应的所有项目包括告警消息条数
+	 * @param userId
+	 * @return
+	 */
+	List<Project> selectProjectByUserIdWithMessageCount(Integer userId);
+	
+	/**
+	 * 查询出所有项目包括告警消息条数
+	 * @return
+	 */
+	List<Project> selectAllProjectWithMessageCount();
+	
+	/**
+	 * 根据关键字查询项目(管理员)
+	 * @return
+	 */
+	List<Project> selectAllProjectByKeyWord_mana(String keyWord);
+	
+	/**
+	 * 根据关键字查询项目(非管理员)
+	 * @return
+	 */
+	List<Project> selectAllProjectByKeyWord_nomana(String keyWord,Integer userId);
 }

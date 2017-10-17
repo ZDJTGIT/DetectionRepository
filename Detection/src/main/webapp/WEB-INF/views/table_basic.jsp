@@ -304,10 +304,12 @@
 		</div>
 	</div>
 
+	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/content.js"></script>
 	<script src="assets/js/plugins/iCheck/icheck.min.js"></script>
 	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
 	<script src="assets/js/customerValidate.js"></script>
+	<script src="assets/js/plugins/layui/lay/modules/layer.js"></script>
 	<script type="text/javascript">
 	
 	 $(document).ready(function(){

@@ -7,17 +7,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SensorInfo;
+import com.zhongda.detection.web.security.RoleSign;
+import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.ProjectService;
+import com.zhongda.detection.web.service.RoleService;
 import com.zhongda.detection.web.service.SensorInfoService;
 
 @Controller
@@ -26,6 +32,12 @@ public class ProjectController {
 
 	@Autowired
 	private ProjectService projectService;
+	
+	@Autowired
+	private MessageService messageService;
+	
+	@Autowired
+	private RoleService roleService;
 
 	@Autowired
 	private SensorInfoService sensorInfoService;
@@ -74,5 +86,37 @@ public class ProjectController {
 		System.out.println("------------------" + sensorJson);
 		return "graph_echarts_displacement";
 	}
-
+	
+	/**
+	 * 查找用户所属项目
+	 */
+	@RequestMapping(value = "/showUsersProject", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Project> showUsersProject(Integer userId){
+		Subject subject = SecurityUtils.getSubject();
+		List<Project> projectList = null;
+		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
+			 //管理员用户，可查看所有项目信息
+			 projectList = projectService.selectAllProjectWithMessageCount();
+		 }else{
+			 //非管理员用户，可查看自己的项目信息
+			 projectList = projectService.selectProjectByUserIdWithMessageCount(userId);
+		 }
+		return projectList;
+	}
+	/**
+	 * 项目名查找项目
+	 */
+	@RequestMapping(value = "/keywordSearchProject", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Project> keywordSearchProject(String keyWord,Integer userId){
+		Subject subject = SecurityUtils.getSubject();
+		List<Project> projectList = null;
+		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
+			projectList = projectService.selectAllProjectByKeyWord_mana(keyWord);
+		}else{
+			projectList = projectService.selectAllProjectByKeyWord_nomana(keyWord, userId);
+		}
+		return projectList; 
+	}
 }

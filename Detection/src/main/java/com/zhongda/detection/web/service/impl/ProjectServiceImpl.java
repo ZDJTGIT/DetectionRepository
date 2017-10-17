@@ -51,9 +51,35 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		return projectMap;
 	}
+	
 	@Override
 	public List<Project> selectProjectAndSysDicByUserIds(Integer userId) {
 		return projectMapper.selectProjectAndSysDicByUserId(userId);
 	}
-	
+
+	@Override
+	public List<Project> selectAllProject() {
+		return projectMapper.selectAllProject();
+	}
+
+	@Override
+	public List<Project> selectProjectByUserIdWithMessageCount(Integer userId) {
+		return projectMapper.selectProjectByUserIdWithMessageCount(userId);
+	}
+
+	@Override
+	public List<Project> selectAllProjectWithMessageCount() {
+		return projectMapper.selectAllProjectWithMessageCount();
+	}
+
+	@Override
+	public List<Project> selectAllProjectByKeyWord_mana(String keyWord) {
+		return projectMapper.selectAllProjectByKeyWord_mana(keyWord);
+	}
+
+	@Override
+	public List<Project> selectAllProjectByKeyWord_nomana(String keyWord,
+			Integer userId) {
+		return projectMapper.selectAllProjectByKeyWord_nomana(keyWord, userId);
+	}	
 }

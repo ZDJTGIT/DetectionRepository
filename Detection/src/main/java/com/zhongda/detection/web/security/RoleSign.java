@@ -19,6 +19,11 @@ public class RoleSign {
      * 普通后台管理员 标识
      */
     public static final String ADMIN = "admin";
+    
+    /**
+     * 超级后台管理员 标识
+     */
+    public static final String SUPER_ADMIN = "superAdmin";
 
     /**
      * 客户经理 标识

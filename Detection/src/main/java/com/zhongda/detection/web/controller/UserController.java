@@ -368,17 +368,12 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/showSelectUserRole", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> showSelectUserRole(Integer userId,String userName) {
+	public Map<String, String> showSelectUserRole(Integer userId,String userName) {//当前登陆账号ID,要修改的用户的用户名
+		Subject subject = SecurityUtils.getSubject();
 		Map<String, String> model = new HashMap<String, String>();
-		System.out.println("oooooooooooooooooooooooo1o:"+userId);//当前登陆账号ID
-		System.out.println("oooooooooooooooooooooooo2o:"+userName);//要修改的用户的用户名
-		List<Role> DLrole = roleService.selectRolesByUserId(userId);
-		Integer roleid = DLrole.get(0).getRoleId();
-		System.out.println("oooooooooooooooooooooooo3o:"+roleid);//当前登陆账号权限ID
 		List<Role> selectedrole = roleService.selectRolesByUserId((userService.selectByUsername(userName)).getUserId());
 		Integer roleId = selectedrole.get(0).getRoleId();
-		System.out.println("pppppppppppppppppppppppppp"+roleId);//权限ID
-		if(roleid==1){
+		if(subject.hasRole(RoleSign.SUPER_ADMIN)){
 		//用户权限为超级管理员
 			switch (roleId)
 			{
