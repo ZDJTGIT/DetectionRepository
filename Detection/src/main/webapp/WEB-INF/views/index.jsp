@@ -36,7 +36,6 @@
 <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 <link href="assets/css/animate.min.css" rel="stylesheet">
 <link href="assets/css/style.min.css" rel="stylesheet">
-<link href="assets/js/plugins/notify/jquery.notify.css" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg"
@@ -713,7 +712,7 @@
 			</a>
 		</div>
 	</div>
-	<script src="assets/js/jquery-1.11.0.min.js"></script>
+	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<!-- 百度地图key -->
 	<script type="text/javascript"
