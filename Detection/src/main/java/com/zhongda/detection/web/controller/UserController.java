@@ -2,6 +2,7 @@ package com.zhongda.detection.web.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -28,10 +29,13 @@ import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,6 +55,7 @@ import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
 import com.zhongda.detection.web.service.UserService;
+import com.zhongda.detection.web.task.PushMessage;
 
 /**
  * 用户控制器
@@ -67,6 +72,9 @@ public class UserController {
 	
 	@Resource
 	private ProjectService projectService;
+	
+	@Resource
+	private SimpMessagingTemplate messageTemplate;
 	
 	@Resource(name = "sessionDAO")
 	private SessionDAO sessionDAO;
@@ -117,23 +125,25 @@ public class UserController {
 			// 身份验证
 			subject.login(shiroToken);
 
-			/*
-			 * //获取上一个登录用户的session Collection<Session> sessions =
-			 * sessionDAO.getActiveSessions(); for(Session session:sessions){
-			 * Object userObj =
-			 * session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY
-			 * ); if(null == userObj){ continue; }
-			 * if(userObj.toString().equals(user.getUsername()) &&
-			 * !session.getId().equals(subject.getSession().getId())){ Session
-			 * sameSession = session;
-			 * messageingTemplate.convertAndSendToUser("1", "/testUser",
-			 * "你的账户已在其他地方登录，如不是本人操作，请尽快修改密码！"); //如果当前用户上一个session有效 ,踢出上一个登录用户
-			 * sameSession.stop(); } }
-			 */
+			System.out.println("currentUser:"+subject.getSession().getId());
+			//获取所有在线的用户session
+			Collection<Session> sessions = sessionDAO.getActiveSessions(); 
+			for(Session session:sessions){
+				Object userObj = session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+				System.out.println("session:"+session.getId());
+				if(userObj.toString().equals(user.getUserName()) && !session.getId().equals(subject.getSession().getId())){
+					//如果当前用户上一个session有效 ,踢出上一个登录用户
+					System.out.println(user.getUserName()+":"+session.getId());
+					messageTemplate.convertAndSendToUser(user.getUserName(), "/message", "你的账户已在其他地方登录，如不是本人操作，请尽快修改密码！");
+					session.stop();
+				} 
+			}
 			// 验证成功在Session中保存用户信息
 			final User authUserInfo = userService.selectByUsername(user
 					.getUserName());
 			WebUtils.setSessionAttribute(request, "userInfo", authUserInfo);
+			
+			PushMessage.userSet.add(authUserInfo.getUserName());
 
 		} catch (LockedAccountException e) {
 			error = "登录失败3次，账户已被锁定 ，请3分钟后再试！";
@@ -162,6 +172,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
+		PushMessage.userSet.remove(session.getAttribute("userInfo").toString());
 		session.removeAttribute("userInfo");
 		// 登出操作
 		Subject subject = SecurityUtils.getSubject();

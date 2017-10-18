@@ -83,14 +83,13 @@ demo = {
 		});
 	},
 
-	showNotification : function(from, align) {
-		color = Math.floor((Math.random() * 4) + 1);
+	showNotification : function(from, align, type, message) {
 		$.notify({
 				icon : "ti-gift",
-				message : "Welcome to <b>Paper Dashboard</b> - a beautiful freebie for every web developer."
+				message : message
 			},
 			{
-				type : type[color],
+				type : type,
 				timer : 4000,
 				placement : {
 					from : from,

@@ -36,6 +36,7 @@
 <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 <link href="assets/css/animate.min.css" rel="stylesheet">
 <link href="assets/css/style.min.css" rel="stylesheet">
+<link href="assets/js/plugins/notify/jquery.notify.css" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg"
@@ -51,6 +52,7 @@
 				<ul class="nav" id="side-menu">
 					<li class="nav-header" style="text-align: center">
 						<div class="dropdown profile-element">
+							<div id="newMessageAudio" style="display:none;"></div>
 							<span><img alt="image" class="img-circle"
 								src="assets/img/zdLogo.png" /></span> <a data-toggle="dropdown"
 								class="dropdown-toggle" href="#"> <span class="clear">
@@ -135,18 +137,18 @@
 							<ul class="nav nav-second-level">
 								<shiro:hasPermission name="farmland:query:*">
 									<li><a class="J_menuItem"
-										href="rest/graph_echarts_farmland">农田数据分析图</a></li>
+										href="rest/graph_echarts_farmland" name="农田数据分析图">农田数据分析图</a></li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="bridge:query:*">
-									<li><a class="J_menuItem" href="rest/graph_echarts_bridge">桥梁数据分析图</a>
+									<li><a class="J_menuItem" href="rest/graph_echarts_bridge" name="桥梁数据分析图">桥梁数据分析图</a>
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="tunnel:query:*">
-									<li><a class="J_menuItem" href="rest/graph_echarts_tunnel">隧道数据分析图</a>
+									<li><a class="J_menuItem" href="rest/graph_echarts_tunnel" name="隧道数据分析图">隧道数据分析图</a>
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="slope:query:*">
-									<li><a class="J_menuItem" href="rest/graph_echarts_slope">边坡数据分析图</a>
+									<li><a class="J_menuItem" href="rest/graph_echarts_slope" name="边坡数据分析图">边坡数据分析图</a>
 									</li>
 								</shiro:hasPermission>
 							</ul></li>
@@ -155,7 +157,7 @@
 							<span class="nav-label">个人资料</span> <span class="fa arrow"></span>
 					</a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/user">个人资料</a></li>
+							<li><a class="J_menuItem" href="rest/user" name="个人资料">个人资料</a></li>
 						</ul>
 					</li>
 
@@ -252,7 +254,7 @@
 								</c:forEach>
 								<li>
 									<div class="text-center link-block">
-										<a class="J_menuItem" href="rest/message/messageList"> <i
+										<a class="J_menuItem" href="rest/message/messageList" name="消息管理"> <i
 											class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
 										</a>
 									</div>
@@ -294,7 +296,7 @@
 					</a>
 						<ul class="dropdown-menu animated fadeInRight m-t-xs">
 							<li><a class="J_menuItem" href="rest/form_avatar">修改头像</a></li>
-							<li><a class="J_menuItem" href="rest/user">个人资料</a></li>
+							<li><a class="J_menuItem" href="rest/user" name="个人资料">个人资料</a></li>
 							<li><a class="J_menuItem" href="rest/contacts">联系我们</a></li>
 							<li><a class="J_menuItem" href="rest/mailbox">信箱</a></li>
 							<li class="divider"></li>
@@ -708,11 +710,10 @@
 		<div id="small-chat">
 			<span class="badge badge-warning pull-right">5</span> <a
 				class="open-small-chat"> <i class="fa fa-comments"></i>
-
 			</a>
 		</div>
 	</div>
-	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery-1.11.0.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<!-- 百度地图key -->
 	<script type="text/javascript"
@@ -720,26 +721,19 @@
 	</script>
 	<script src="assets/js/sockjs.min.js" type="text/javascript"></script>
     <script src="assets/js/stomp.min.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap-notify.js"></script>
+	<script src="assets/js/plugins/layer/layer.js"></script>
 	<script src="assets/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="assets/js/plugins/pace/pace.min.js"></script>
 	<script src="assets/js/hplus.js" type="text/javascript"></script>
 	<script src="assets/js/contabs.js" type="text/javascript"></script>
+	<script src="assets/js/demo.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
-
-			$.notify({
-				icon : 'fa user',
-				message : "欢迎来到<b>中大检测在线监控平台</b>."
-
-			}, {
-				type : 'success',
-				timer : 4000
-			});
-
-			$("#side-menu").metisMenu();
+		$(function() {
 			
+			/* demo.showNotification('top','right', 'success', "欢迎来到<b>中大检测在线监控平台</b>."); */
+			
+			$("#side-menu").metisMenu();
 			
 			var socket = new SockJS('/Detection/rest/webSocket');
 
@@ -767,15 +761,30 @@
 	        var stompClient = Stomp.over(socket);
 	        stompClient.connect({}, function(frame) {
 	        	console.log("connected-------:"+frame);
-	            stompClient.subscribe('/user/common/message',  function(data) { //订阅消息
-	            	$('.heading').notify({
-	    				icon : 'fa user',
-	    				message : data.messageContext
-
-	    			}, {
-	    				type : 'success',
-	    				timer : 4000
-	    			});
+	            stompClient.subscribe('/user/${userInfo.userName}/message',  function(data) { //订阅消息
+	            	layer.msg('<a class="J_menuItem" name="消息管理" href="rest/message/messageList">'+JSON.parse(data.body).messageContext+'</a>', {
+	            		title: '告警消息',
+	            		closeBtn: 1,
+	            		time:30000,
+					    offset: 'rb', //右下角弹出
+					    anim: 6,
+					    icon: 0
+					  });
+	            	
+	            	$('#newMessageAudio').html('<audio autoplay="autoplay">' 
+		            		+ '<source src="assets/audio/notify.wav" type="audio/wav"/></audio>'); 
+	            
+	            	if($.browser.msie && $.browser.version=='8.0'){ 
+	            		//本来这里用的是<bgsound src="system.wav"/>,结果IE8不播放声音,于是换成了embed 
+	            		$('#newMessageAudio').html('<embed src="assets/audio/notify.wav"/>');
+	            		alert('<embed src="assets/audio/notify.wav"/>');
+	            	}else{ 
+	            		//IE9+,Firefox,Chrome均支持<audio/> 
+	            		$('#newMessageAudio').html('<audio autoplay="autoplay">' 
+	            		+ '<source src="assets/audio/notify.wav" type="audio/wav"/></audio>'); 
+	            		alert('<audio autoplay="autoplay">');
+	            	} 
+	            
 	            });
 
 	           /*  console.log("connected++++++:"+frame);
@@ -864,7 +873,7 @@
 							data : 'projectId='+projectId,
 							success: function(data){
 								$.each(data,function(key,value){
-									var label = "<li><a class='J_menuItem' href='rest/project/"+value[0].sysDictionary.itemValue+"?projectId="+projectId+"&detectionTypeId="+value[0].detectionTypeId+"'><i>—</i><span class='nav-label'>"+key+"</span><span class='fa arrow'></span></a></li>";
+									var label = "<li><a class='J_menuItem' name='"+key+"' href='rest/project/"+value[0].sysDictionary.itemValue+"?projectId="+projectId+"&detectionTypeId="+value[0].detectionTypeId+"'><i>—</i><span class='nav-label'>"+key+"</span><span class='fa arrow'></span></a></li>";
 									$(projectName).append(label);
 								});
 							}

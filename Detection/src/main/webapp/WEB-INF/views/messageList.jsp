@@ -23,12 +23,9 @@
 <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
 <meta name="description" content="中大检测平台">
 <link rel="stylesheet" href="assets/js/plugins/layui/css/layui.css" media="all"></link>
-<link href="assets/css/plugins/datepicker/datepicker3.css" rel="stylesheet">
-<link href="assets/css/plugins/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <link href="assets/css/plugins/iCheck/custom.css" rel="stylesheet">
 
 </head>
-
 <body class="gray-bg">
 	<div class="wrapper wrapper-content  animated fadeInRight">
 		<div class="row">
@@ -107,53 +104,116 @@
 		</div>
 	</div>
 	<script src="assets/js/plugins/iCheck/icheck.min.js" charset="utf-8"></script>
-	<script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
-	<script src="assets/js/plugins/datepicker/bootstrap-datetimepicker.min.js" charset="utf-8"></script>
+	<script src="assets/js/plugins/laydate/laydate.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/layui/layui.all.js" charset="utf-8"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
-		$('#startCreateTime').datetimepicker({
-            locale: moment.locale('zh-cn'),
-            showTodayButton:true,
-            showClose:true,
-            showClear:true,
-            format: "YYYY-MM-DD HH:mm:ss",
-            tooltips: {
-                today: '选择今天',
-                clear: '清除所选日期',
-                close: '关闭日期选择器',
-                selectTime: '选择时间',
-            }
-        }).on('dp.change', function (ev) {
-        	$('#endCreateTime').data("DateTimePicker").minDate(ev.date);
-            var newDateTime = ev.date ? ev.date.format('YYYY-MM-DD') : "";
-            var oldDateTime = ev.oldDate ? ev.oldDate.format('YYYY-MM-DD') : "";
-            if (newDateTime != oldDateTime) {
-                $(this).data("DateTimePicker").hide();
-            }
-        });
-
-		$('#endCreateTime').datetimepicker({
-			locale: moment.locale('zh-cn'),
-            showTodayButton:true,
-            showClose:true,
-            showClear:true,
-            format: "YYYY-MM-DD HH:mm:ss",
-            tooltips: {
-                today: '选择今天',
-                clear: '清除所选日期',
-                close: '关闭日期选择器',
-                selectTime: '选择时间',
-            }
-        }).on('dp.change', function (ev) {
-        	$('#startCreateTime').data("DateTimePicker").maxDate(ev.date);
-            var newDateTime = ev.date ? ev.date.format('YYYY-MM-DD') : "";
-            var oldDateTime = ev.oldDate ? ev.oldDate.format('YYYY-MM-DD') : "";
-            if (newDateTime != oldDateTime) {
-                $(this).data("DateTimePicker").hide();
-            }
-        });
 		
+			//日期范围限制
+	        var start = {
+	            elem: '#startCreateTime',
+	            format: 'YYYY-MM-DD hh:mm:ss',
+	            min: '1900-06-16 23:59:59', //设定最小日期为当前日期laydate.now()
+	            max: '2099-06-16 23:59:59', //最大日期
+	            istime: true,
+	            istoday: false,
+	            choose: function (datas) {
+	                end.min = datas; //开始日选好后，重置结束日的最小日期
+	                end.start = datas //将结束日的初始值设定为开始日
+	            }
+	        };
+	        var end = {
+	            elem: '#endCreateTime',
+	            format: 'YYYY-MM-DD hh:mm:ss',
+	            min: '1900-06-16 23:59:59',
+	            max: '2099-06-16 23:59:59',
+	            istime: true,
+	            istoday: false,
+	            choose: function (datas) {
+	                start.max = datas; //结束日选好后，重置开始日的最大日期
+	            }
+	        };
+	        laydate(start);
+	        laydate(end);
+	        
+	        $('#messageTable').on('click','.layerOpen',function(){
+	        	layer.open({
+		        	  type: 1,
+		        	  shade: false,
+		        	  title: '消息内容',
+		        	  anim: 6,
+		        	  content: $(this) //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+		        	});
+	        });
+	        
+	       (function(){
+				//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
+				function messagePageAjax(jsonData, loadLaypage){
+					 $.ajax({
+							type : 'post',
+							url : 'rest/message/messagePageList',
+							dataType : 'json',
+							contentType : 'application/json',
+							data : JSON.stringify(jsonData),
+							success : function(data) {
+								if (data) {
+									var htmlData = '';
+									$.each(data.messageList,function(idx,item){
+										htmlData +='<tr><td><input type="checkbox"></td><td>'+item.messageId+'</td><td>'+item.messageType+'</td><td class="layerOpen">'+item.messageContext+'</td><td>'+item.createTime+'</td><td>'+item.status+'</td></tr>'
+									});
+									$("#messageTable tbody").html(htmlData);
+									if(loadLaypage){ //如果该参数有值
+										loadLaypage(data.total, jsonData); //有查询条件时请求数据，需重新初始化分页组件
+									}
+									//对新生成的checkbox应用iCheck
+									$('input[type="checkbox"]').iCheck({
+									    checkboxClass: 'icheckbox_square-green',
+									    increaseArea: '20%' // optional
+									});
+									$('#checkbox-all').iCheck('uncheck');
+								} else {
+									alert("数据异常");
+								}
+							},
+							error : function() {
+								alert("数据加载失败");
+							}
+						});
+				 }
+
+				 //初始化分页组件函数
+				 function loadLaypage(dataTotal, jsonData){
+					 var laypage = layui.laypage;
+					 laypage.render({
+						 elem: 'pageComponent', //分页组件div的id
+						 count: dataTotal, //记录总条数
+					     groups: 10, //连续显示分页数
+					     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+					     jump: function(obj, first){  //触发分页后的回调
+					         if(!first){ //一定要加此判断，否则初始时会无限刷新
+					        	 jsonData.pageNum = obj.curr;
+					 			 jsonData.pageSize = obj.limit;
+					 			 messagePageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数
+					         }
+					     }
+					 });
+				 }
+
+				 $('#btnSearch').click(function(){
+						var jsonData = {};
+						$('#formSearch .form-control').each(function(index,item){
+							if($(this).val() && $(this).val()!=0){
+								jsonData[$(this).attr("name")] = $(this).val();
+							}
+						});
+						jsonData.pageNum = 1;
+						jsonData.pageSize = 10;
+						messagePageAjax(jsonData, loadLaypage);
+					});
+				 //首次加载页面触发查询按钮初始化列表（无查询参数）
+				 $('#btnSearch').trigger("click");
+		})();
+	
 		 //全选checkbox
 		 $('#messageTable').on("ifClicked", '#checkbox-all', function(event){
 		    if(event.target.checked){
@@ -179,75 +239,6 @@
 			 }
 		 });
 		
-
-		(function(){
-			//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
-			function messagePageAjax(jsonData, loadLaypage){
-				 $.ajax({
-						type : 'post',
-						url : 'rest/message/messagePageList',
-						dataType : 'json',
-						contentType : 'application/json',
-						data : JSON.stringify(jsonData),
-						success : function(data) {
-							if (data) {
-								var htmlData = '';
-								$.each(data.messageList,function(idx,item){
-									htmlData +='<tr><td><input type="checkbox"></td><td>'+item.messageId+'</td><td>'+item.messageType+'</td><td>'+item.messageContext+'</td><td>'+item.createTime+'</td><td>'+item.status+'</td></tr>'
-								});
-								$("#messageTable tbody").html(htmlData);
-								if(loadLaypage){ //如果该参数有值
-									loadLaypage(data.total, jsonData); //有查询条件时请求数据，需重新初始化分页组件
-								}
-								//对新生成的checkbox应用iCheck
-								$('input[type="checkbox"]').iCheck({
-								    checkboxClass: 'icheckbox_square-green',
-								    increaseArea: '20%' // optional
-								});
-								$('#checkbox-all').iCheck('uncheck');
-							} else {
-								alert("数据异常");
-							}
-						},
-						error : function() {
-							alert("数据加载失败");
-						}
-					});
-			 }
-
-			 //初始化分页组件函数
-			 function loadLaypage(dataTotal, jsonData){
-				 var laypage = layui.laypage;
-				 laypage.render({
-					 elem: 'pageComponent', //分页组件div的id
-					 count: dataTotal, //记录总条数
-				     groups: 10, //连续显示分页数
-				     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
-				     jump: function(obj, first){  //触发分页后的回调
-				         if(!first){ //一定要加此判断，否则初始时会无限刷新
-				        	 jsonData.pageNum = obj.curr;
-				 			 jsonData.pageSize = obj.limit;
-				 			 messagePageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数
-				         }
-				     }
-				 });
-			 }
-
-			 $('#btnSearch').click(function(){
-					var jsonData = {};
-					$('#formSearch .form-control').each(function(index,item){
-						if($(this).val() && $(this).val()!=0){
-							jsonData[$(this).attr("name")] = $(this).val();
-						}
-					});
-					jsonData.pageNum = 1;
-					jsonData.pageSize = 10;
-					messagePageAjax(jsonData, loadLaypage);
-				});
-			 //首次加载页面触发查询按钮初始化列表（无查询参数）
-			 $('#btnSearch').trigger("click");
-		})();
-
 	});
 	</script>
 	<script type="text/javascript"

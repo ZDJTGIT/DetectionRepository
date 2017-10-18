@@ -105,7 +105,7 @@ $(function () {
     $('body').on('click', '.J_menuItem', function(e) {
         e.preventDefault();
         var url = this.href;
-        menuName = $.trim($(this).text());
+        menuName = $.trim($(this).attr("name"));
         flag = true;
         if (url != null && url.indexOf('javascript:;') < 0) {
 
@@ -123,7 +123,7 @@ $(function () {
         	}else if($(supMenu).hasClass("thirdMenu")){
         		$.ajax({url:url,dataType:"json",success:function(data){
         			$.each(data,function(idx,item){
-        				var labelItem = '<li><a class="fourMenu J_menuItem" href="rest/'+item.sysDictionary.typeValue+item.sysDictionary.itemValue+'/project/'+item.projectId+'">'+item.sysDictionary.itemName+'</a><ul class="nav nav-five-level"></ul></li>';
+        				var labelItem = '<li><a class="fourMenu J_menuItem" name="'+item.sysDictionary.itemName+'" href="rest/'+item.sysDictionary.typeValue+item.sysDictionary.itemValue+'/project/'+item.projectId+'">'+item.sysDictionary.itemName+'</a><ul class="nav nav-five-level"></ul></li>';
         				$(supMenu).next().append(labelItem);
         			});
         	    }});
