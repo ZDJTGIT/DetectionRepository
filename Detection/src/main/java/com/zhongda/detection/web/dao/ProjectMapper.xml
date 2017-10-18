@@ -7,6 +7,8 @@
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="project_type_id" jdbcType="INTEGER" property="projectTypeId" />
     <result column="project_address" jdbcType="VARCHAR" property="projectAddress" />
+    <result column="project_longitude" jdbcType="VARCHAR" property="projectLongitude" />
+    <result column="project_latitude" jdbcType="VARCHAR" property="projectLatitude" />
     <result column="project_time" jdbcType="TIMESTAMP" property="projectTime" />
     <result column="project_status" jdbcType="VARCHAR" property="projectStatus" />
     <result column="project_description" jdbcType="VARCHAR" property="projectDescription" />
@@ -25,14 +27,16 @@
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="project_type_id" jdbcType="INTEGER" property="projectTypeId" />
     <result column="project_address" jdbcType="VARCHAR" property="projectAddress" />
+    <result column="project_longitude" jdbcType="VARCHAR" property="projectLongitude" />
+    <result column="project_latitude" jdbcType="VARCHAR" property="projectLatitude" />
     <result column="project_time" jdbcType="TIMESTAMP" property="projectTime" />
     <result column="project_status" jdbcType="VARCHAR" property="projectStatus" />
     <result column="project_description" jdbcType="VARCHAR" property="projectDescription" />
      <result column="message_count" jdbcType="VARCHAR" property="messageCount" />
   </resultMap>
   <sql id="Base_Column_List">
-    project_id, user_id, project_name, project_type_id, project_address, project_time,
-    project_status, project_description
+    project_id, user_id, project_name, project_type_id, project_address, project_longitude,
+    project_latitude, project_time, project_status, project_description
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -103,11 +107,12 @@
   </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.Project">
     insert into project (project_id, user_id, project_name,
-      project_type_id, project_address, project_time,
-      project_status, project_description)
+      project_type_id, project_address, project_longitude,
+      project_latitude, project_time, project_status, project_description)
     values (#{projectId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR},
-      #{projectTypeId,jdbcType=INTEGER}, #{projectAddress,jdbcType=VARCHAR}, #{projectTime,jdbcType=TIMESTAMP},
-      #{projectStatus,jdbcType=VARCHAR}, #{projectDescription,jdbcType=VARCHAR})
+      #{projectTypeId,jdbcType=INTEGER}, #{projectAddress,jdbcType=VARCHAR}, #{projectLongitude,jdbcType=VARCHAR},
+      #{projectLatitude,jdbcType=VARCHAR}, #{projectTime,jdbcType=TIMESTAMP}, #{projectStatus,jdbcType=VARCHAR}, 
+      #{projectDescription,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.Project">
     insert into project
@@ -126,6 +131,12 @@
       </if>
       <if test="projectAddress != null">
         project_address,
+      </if>
+      <if test="projectLongitude != null">
+        project_longitude,
+      </if>
+      <if test="projectLatitude != null">
+        project_latitude,
       </if>
       <if test="projectTime != null">
         project_time,
@@ -153,6 +164,12 @@
       <if test="projectAddress != null">
         #{projectAddress,jdbcType=VARCHAR},
       </if>
+      <if test="projectLongitude != null">
+        #{projectLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="projectLatitude != null">
+        #{projectLatitude,jdbcType=VARCHAR},
+      </if>
       <if test="projectTime != null">
         #{projectTime,jdbcType=TIMESTAMP},
       </if>
@@ -179,6 +196,12 @@
       <if test="projectAddress != null">
         project_address = #{projectAddress,jdbcType=VARCHAR},
       </if>
+      <if test="projectLongitude != null">
+        project_longitude = #{projectLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="projectLatitude != null">
+        project_latitude = #{projectLatitude,jdbcType=VARCHAR},
+      </if>
       <if test="projectTime != null">
         project_time = #{projectTime,jdbcType=TIMESTAMP},
       </if>
@@ -197,6 +220,8 @@
       project_name = #{projectName,jdbcType=VARCHAR},
       project_type_id = #{projectTypeId,jdbcType=INTEGER},
       project_address = #{projectAddress,jdbcType=VARCHAR},
+      project_longitude = #{projectLongitude,jdbcType=VARCHAR},
+      project_latitude = #{projectLatitude,jdbcType=VARCHAR},
       project_time = #{projectTime,jdbcType=TIMESTAMP},
       project_status = #{projectStatus,jdbcType=VARCHAR},
       project_description = #{projectDescription,jdbcType=VARCHAR}
