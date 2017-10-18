@@ -2,6 +2,7 @@ demo = {
 
 	/* 百度地图 */
 	initAMap : function() {
+		var titlename = "云南丽江金沙";
 		var map = new BMap.Map("mapContent", {
 			mapType : BMAP_SATELLITE_MAP
 		}); // 创建地图实例
@@ -35,7 +36,31 @@ demo = {
 		var lat;// 纬度
 		// 获取标注经纬度
 		function attribute() {
-			alert("marker的位置是" + lng + "," + lat);
+//			alert("marker的位置是" + lng + "," + lat);
+			var url = "rest/graph_echarts_slope";
+			var indexAarry = $(".J_menuTabs").find('a');
+			var isTrue = true;
+			$(indexAarry).each(function(index,val){
+				if((val+" ").indexOf(url)>=0){
+					isTrue = false;
+					if (!$(indexAarry[index]).hasClass('active')) {
+                        $(indexAarry[index]).addClass('active').siblings('.J_menuTab').removeClass('active');
+                        $.get(url, function(data) {
+                            $('#content-main').html(data);
+                        });
+                    }
+				}
+			});
+			//如果没有当前选项卡
+			if(isTrue){
+				 var str = '<a href="'+url+'" class="active J_menuTab">' + titlename + ' <i class="fa fa-times-circle"></i></a>';
+	                $('.J_menuTab').removeClass('active');
+	                $.get(url, function(data) {
+	                    $('#content-main').html(data);
+	                });
+	                // 添加选项卡
+	                $('.J_menuTabs .page-tabs-content').append(str);
+			}
 		}
 
 		var infoWindow;// 信息窗口
@@ -46,7 +71,7 @@ demo = {
 				enableAutoPan : true,
 				width : 120, // 信息窗口宽度
 				height : 90, // 信息窗口高度
-				title : "云南丽江金沙" // 信息窗口标题
+				title :  titlename// 信息窗口标题
 			}
 			var datainfo = "经度:" + lng + ", 纬度" + lat + "边坡信息......";
 			infoWindow = new BMap.InfoWindow(datainfo, opts); // 创建信息窗口对象
