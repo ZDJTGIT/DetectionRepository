@@ -67,6 +67,11 @@
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
         <property name="sessionDAO" ref="sessionDAO"/>
         <property name="sessionIdCookie" ref="simpleCookie"/>
+        <property name="sessionListeners">
+        	<list>
+        		<ref bean="shiroSessionListener"/>
+        	</list>
+        </property>
     </bean>
 
     <!-- 安全管理器 -->

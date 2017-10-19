@@ -163,40 +163,40 @@
 					<li><a href="javascript:;"><i class="fa fa-desktop"></i> <span
 							class="nav-label">页面</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/calendar">日历</a></li>
-							<li><a class="J_menuItem" href="rest/pin_board">标签墙</a></li>
+							<li><a class="J_menuItem" href="rest/calendar" name="日历">日历</a></li>
+							<li><a class="J_menuItem" href="rest/pin_board" name="标签墙">标签墙</a></li>
 							<li><a href="javascript:;">单据 <span class="fa arrow"></span></a>
 								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/invoice">单据</a></li>
-									<li><a class="J_menuItem" href="rest/invoice_print">单据打印</a>
+									<li><a class="J_menuItem" href="rest/invoice" name="单据">单据</a></li>
+									<li><a class="J_menuItem" href="rest/invoice_print" name="单据打印">单据打印</a>
 									</li>
 								</ul></li>
 							<li><a href="javascript:;">即时通讯 <span class="fa arrow"></span></a>
 								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/chat_view">聊天窗口</a></li>
-									<li><a class="J_menuItem" href="rest/webim">layIM</a></li>
+									<li><a class="J_menuItem" href="rest/chat_view" name="聊天窗口">聊天窗口</a></li>
+									<li><a class="J_menuItem" href="rest/webim" name="layIM">layIM</a></li>
 								</ul></li>
 							<li><a href="javascript:;">登录注册相关 <span class="fa arrow"></span></a>
 								<ul class="nav nav-third-level">
-									<li><a href="rest/page/login" target="_blank">登录页面</a></li>
-									<li><a href="rest/login_v2" target="_blank">登录页面v2</a></li>
-									<li><a href="rest/register" target="_blank">注册页面</a></li>
+									<li><a href="rest/page/login" target="_blank" name="登录页面">登录页面</a></li>
+									<li><a href="rest/login_v2" target="_blank" name="登录页面v2">登录页面v2</a></li>
+									<li><a href="rest/register" target="_blank" name="注册页面">注册页面</a></li>
 								</ul></li>
-							<li><a class="J_menuItem" href="rest/404">404页面</a></li>
-							<li><a class="J_menuItem" href="rest/500">500页面</a></li>
+							<li><a class="J_menuItem" href="rest/404" name="404页面">404页面</a></li>
+							<li><a class="J_menuItem" href="rest/500" name="500页面">500页面</a></li>
 						</ul></li>
 					<shiro:hasAnyRoles name="superAdmin, admin">
 						<li><a href="javascript:;"><i class="fa fa-table"></i> <span
 								class="nav-label">用户管理</span><span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a class="J_menuItem" href="rest/user/userList">用户&告警联系人
+								<li><a class="J_menuItem" href="rest/user/userList" name="用户&告警联系人">用户&告警联系人
 										<span class="label label-danger pull-right">管理员可见</span>
 								</a></li>
-								<li><a class="J_menuItem" href="rest/table_data_tables">详细检验数据展示分析</a>
+								<li><a class="J_menuItem" href="rest/table_data_tables" name="详细检验数据展示分析">详细检验数据展示分析</a>
 								</li>
-								<li><a class="J_menuItem" href="rest/table_foo_table">操作日志</a>
+								<li><a class="J_menuItem" href="rest/table_foo_table" name="操作日志">操作日志</a>
 								</li>
-								<li><a class="J_menuItem" href="rest/table_bootstrap">其他</a>
+								<li><a class="J_menuItem" href="rest/table_bootstrap" name="其他">其他</a>
 								</li>
 							</ul></li>
 					</shiro:hasAnyRoles>
@@ -204,12 +204,12 @@
 					<li><a href="javascript:;"><i class="fa fa-tasks"></i> <span
 							class="nav-label">项目管理</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/projects">项目</a></li>
-							<li><a class="J_menuItem" href="rest/project_detail">项目详情</a>
+							<li><a class="J_menuItem" href="rest/projects" name="项目">项目</a></li>
+							<li><a class="J_menuItem" href="rest/project_detail" name="项目详情">项目详情</a>
 							</li>
 						</ul></li>
 					<li><a class="J_menuItem" href="rest/table_jqgrid"><i
-							class="fa fa-bell"></i> <span class="nav-label">告警信息</span></a></li>
+							class="fa fa-bell"></i> <span class="nav-label" name="告警信息">告警信息</span></a></li>
 
 				</ul>
 			</div>
@@ -773,7 +773,7 @@
 	            	$('#newMessageAudio').html('<audio autoplay="autoplay">' 
 		            		+ '<source src="assets/audio/notify.wav" type="audio/wav"/></audio>'); 
 	            
-	            	if($.browser.msie && $.browser.version=='8.0'){ 
+	            	/* if($.browser.msie && $.browser.version=='8.0'){ 
 	            		//本来这里用的是<bgsound src="system.wav"/>,结果IE8不播放声音,于是换成了embed 
 	            		$('#newMessageAudio').html('<embed src="assets/audio/notify.wav"/>');
 	            		alert('<embed src="assets/audio/notify.wav"/>');
@@ -782,7 +782,7 @@
 	            		$('#newMessageAudio').html('<audio autoplay="autoplay">' 
 	            		+ '<source src="assets/audio/notify.wav" type="audio/wav"/></audio>'); 
 	            		alert('<audio autoplay="autoplay">');
-	            	} 
+	            	}  */
 	            
 	            });
 

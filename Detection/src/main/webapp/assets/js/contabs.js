@@ -150,7 +150,7 @@ $(function () {
 
             // 选项卡菜单不存在
             if (flag) {
-                var str = '<a href="'+url+'" class="active J_menuTab">' + menuName + ' <i class="fa fa-times-circle"></i></a>';
+                var str = '<a href="'+url+'" class="active J_menuTab">' + $(this).attr('name') + ' <i class="fa fa-times-circle"></i></a>';
                 $('.J_menuTab').removeClass('active');
 
                 //显示loading提示

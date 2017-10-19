@@ -47,6 +47,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.zhongda.detection.core.utils.GetVerificationCode;
 import com.zhongda.detection.core.utils.SimpleMailSender;
+import com.zhongda.detection.web.model.Message;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.Role;
 import com.zhongda.detection.web.model.User;
@@ -127,16 +128,21 @@ public class UserController {
 
 			System.out.println("currentUser:"+subject.getSession().getId());
 			//获取所有在线的用户session
-			Collection<Session> sessions = sessionDAO.getActiveSessions(); 
+			Collection<Session> sessions = sessionDAO.getActiveSessions();
+			System.out.println("sessions的大小"+sessions.size());
 			for(Session session:sessions){
 				Object userObj = session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
 				System.out.println("session:"+session.getId());
-				if(userObj.toString().equals(user.getUserName()) && !session.getId().equals(subject.getSession().getId())){
+				if(null == userObj){
+					session.stop();
+				}else if(userObj.toString().equals(user.getUserName()) && !session.getId().equals(subject.getSession().getId())){
 					//如果当前用户上一个session有效 ,踢出上一个登录用户
 					System.out.println(user.getUserName()+":"+session.getId());
-					messageTemplate.convertAndSendToUser(user.getUserName(), "/message", "你的账户已在其他地方登录，如不是本人操作，请尽快修改密码！");
+					Message message = new Message();
+					message.setMessageContext("你的账户已在其他地方登录，如不是本人操作，请尽快修改密码！");
+					messageTemplate.convertAndSendToUser(user.getUserName(), "/message", message);
 					session.stop();
-				} 
+				}
 			}
 			// 验证成功在Session中保存用户信息
 			final User authUserInfo = userService.selectByUsername(user
@@ -172,7 +178,6 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
-		PushMessage.userSet.remove(session.getAttribute("userInfo").toString());
 		session.removeAttribute("userInfo");
 		// 登出操作
 		Subject subject = SecurityUtils.getSubject();
