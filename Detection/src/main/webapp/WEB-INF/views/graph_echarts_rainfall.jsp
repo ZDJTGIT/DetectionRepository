@@ -163,7 +163,7 @@
 						</div>
 					</div>
 					 <div class="ibox-content">
-                        <table class="table table-striped table-bordered table-hover " id="editable">
+                        <table class="table table-striped table-bordered table-hover " id="editable"  cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                 	<td>测点位置</td>
@@ -171,7 +171,7 @@
 									<td>测试时间</td>
 								</tr>
                             </thead>
-                            <tbody id="tbodydata">
+                            <tbody>
                                 
                             </tbody>
                         </table>
@@ -181,7 +181,7 @@
 			</div>
 		</div>
     </div>
-    	
+    <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/datepicker/bootstrap-datetimepicker.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/layui/layui.all.js" charset="utf-8"></script>
@@ -208,11 +208,9 @@
     
     <script>
      var oTabelRainfall;
-    $(document).ready(function() {
-    	oTabelRainfall= $('#editable').dataTable({
-    		 "sScrollX" : "100%",
-    	});
-    }); 
+	    $(document).ready(function() {
+	    	oTabelRainfall= $('#editable').dataTable();
+	    }); 
 	</script>
 </body>
 

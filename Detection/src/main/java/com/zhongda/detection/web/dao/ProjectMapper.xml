@@ -34,6 +34,7 @@
     <result column="project_description" jdbcType="VARCHAR" property="projectDescription" />
      <result column="message_count" jdbcType="VARCHAR" property="messageCount" />
   </resultMap>
+  
   <sql id="Base_Column_List">
     project_id, user_id, project_name, project_type_id, project_address, project_longitude,
 	project_latitude, project_time, project_status, project_description

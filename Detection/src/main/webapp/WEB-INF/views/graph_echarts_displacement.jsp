@@ -256,52 +256,8 @@
 							</a>
 						</div>
 					</div>
-					<!-- <div class="ibox-content">
-						<table
-							class="table table-striped table-bordered table-hover dataTables-example">
-							<thead>
-								<tr>
-									<td>测试深度(M)</td>
-									<td>初次测试值时间</td>
-									<td>初次测试值(MM)</td>
-									<td>前次测试时间</td>
-									<td>前次测试值(MM)</td>
-									<td>本次测试时间</td>
-									<td>本次测试值(MM)</td>
-									<td>本次位移(MM)</td>
-									<td>总 位 移(MM)</td>
-									<td>变化速率(MM/DAY)</td>
-									<td>测孔名称</td>
-									<td>测试次数</td>
-									<td>测试员</td>
-								</tr>
-							</thead>
-							<tbody id="tbodydata">
-								<tr class="gradeX">
-									<td>深部位移监测装置</td>
-									<td>JCZ1</td>
-									<td>深部位移位置</td>
-									<td>位移位置过大</td>
-									<td>2017/7/27 13:16:41</td>
-									<td>中大边坡在线自动监测系统</td>
-									<td>2</td>
-									<td>已处理</td>
-								</tr>
-								<tr class="gradeX">
-									<td>深部位移监测装置</td>
-									<td>JCZ2</td>
-									<td>深部位移位置</td>
-									<td>位移位置过大</td>
-									<td>2017/7/24 11:16:41</td>
-									<td>中大边坡在线自动监测系统</td>
-									<td>2</td>
-									<td>已处理</td>
-								</tr>
-							</tbody>
-						</table>
-					</div> -->
 					 <div class="ibox-content">
-                        <table class="table table-striped table-bordered table-hover " id="editable">
+                        <table class="table table-striped table-bordered table-hover display" id="editable"  cellspacing="0" width="100%"> 
                             <thead>
                                 <tr>
                                 	<td>测点位置</td>
@@ -320,9 +276,6 @@
 									<td>测试员</td>
 								</tr>
                             </thead>
-                            <tbody id="tbodydata">
-                                
-                            </tbody>
                         </table>
 
                     </div>
@@ -330,7 +283,7 @@
 			</div>
 		</div>
     </div>
-    	
+    <script src="assets/js/jquery.min.js"></script>	
     <script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/datepicker/bootstrap-datetimepicker.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/layui/layui.all.js" charset="utf-8"></script>
@@ -356,12 +309,10 @@
     <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     
     <script>
-    var oTabel;
-    $(document).ready(function() {
-    	oTabel= $('#editable').dataTable({
-    		  "sScrollX" : "100%", 
-    	});
-    });
+	    var oTabel;
+	    $(document).ready(function() {
+	    	oTabel= $('#editable').dataTable();
+	    });
 	</script>
 </body>
 

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhongda.detection.core.utils.vcode.Captcha;
 import com.zhongda.detection.core.utils.vcode.GifCaptcha;
 import com.zhongda.detection.web.model.Message;
@@ -69,7 +71,16 @@ public class CommonController {
 	}
 
 	@RequestMapping("home")
-	public String home(HttpServletRequest request) {
+	public String home(HttpServletRequest request, Model model)
+			throws JsonProcessingException {
+		User user = (User) request.getSession().getAttribute("userInfo");
+		ObjectMapper mapper = new ObjectMapper();
+		List<Project> projects = projectService
+				.selectProjectByUserIdWithMessageCount(user.getUserId());
+		String projectList = null;
+		projectList = mapper.writeValueAsString(projects);
+		System.out.println(projectList);
+		model.addAttribute("projectList", projectList);
 		return "home";
 	}
 

@@ -12,26 +12,26 @@ import org.springframework.stereotype.Component;
 
 import com.zhongda.detection.web.model.Message;
 
-@Component
+//@Component
 public class PushMessage {
-	
-	//存放所有登录用户信息
+
+	// 存放所有登录用户信息
 	public static Set<String> userSet = new HashSet<String>();
-	
+
 	@Resource
 	private SimpMessagingTemplate template;
-	
-	@Scheduled(cron="0/30 * * * * ?")
-	public void createPHMessage(){
-		
-		//构建消息实体
+
+	@Scheduled(cron = "0/30 * * * * ?")
+	public void createPHMessage() {
+
+		// 构建消息实体
 		Message message = new Message();
 		message.setUserId(1);
 		message.setSensorId(2);
 		message.setStatus("未读");
 		message.setMessageType("告警");
 		message.setCreateTime(new Date());
-		//构建消息内容
+		// 构建消息内容
 		StringBuffer messageContext = new StringBuffer();
 		messageContext.append("你好，对位于");
 		messageContext.append("罗杰家的农田项目下的的");
@@ -41,13 +41,14 @@ public class PushMessage {
 		messageContext.append("11111，型号为");
 		messageContext.append("SM108,请及时处理!");
 		message.setMessageContext(messageContext.toString());
-		
+
 		for (String userName : userSet) {
 			System.out.println(message.getMessageContext());
-			System.out.println("向--"+userName+"--推送消息");
-			//推送消息当前登录用户的客户端
+			System.out.println("向--" + userName + "--推送消息");
+			// 推送消息当前登录用户的客户端
 			template.convertAndSendToUser(userName, "/message", message);
-			System.out.println("-----------------------------------消息已推送-------------------------------------------");
+			System.out
+					.println("-----------------------------------消息已推送-------------------------------------------");
 		}
 	}
 }

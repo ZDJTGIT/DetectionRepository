@@ -71,8 +71,6 @@
 					var singleData = [];
 					var grandtotalData = [];
 					var displacementData = [];
-//					var labels = "<tr class='gradeX'><td>"+detections+"</td></tr>";
-//					$("#tbodydata").append(labels);
 					$(xData).each(function(inde,val){
 						if(slopdata[val]==null){
 							val = val+".0"
@@ -82,10 +80,6 @@
 							singleData.push(slopdata[val].speedChange);
 							grandtotalData.push(slopdata[val].currentDisplacement);
 							displacementData.push(slopdata[val].currentData);
-							
-//							var label = "<tr class='gradeX'><td>"+val+"</td><td>"+slopdata[val].firstTime+"</td><td>"+slopdata[val].firstData+"</td><td>"+slopdata[val].previousTime+"</td><td>"+slopdata[val].previousData+"</td><td>"+slopdata[val].currentTimes+"</td><td>"+slopdata[val].currentData+"</td><td>"+slopdata[val].currentDisplacement+"</td><td>"+slopdata[val].totalDisplacement+"</td><td>"+slopdata[val].speedChange+"</td><td>"+slopdata[val].detectionHoleName+"</td><td>"+slopdata[val].detectionNums+"</td><td>"+slopdata[val].tester+"</td></tr>";
-//							
-//							$("#tbodydata").append(label);
 							oTabel.fnAddData([
 	                  						detections,
 	                                       val,
