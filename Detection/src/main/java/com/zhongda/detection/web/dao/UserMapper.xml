@@ -30,6 +30,13 @@
     				where user_id = #{userId,jdbcType=INTEGER})
 	and u.user_id = ur.user_id
   </select>
+  <select id="selectUserWithoutAdmin" resultMap="BaseResultMap">
+   select 
+   u.* 
+   from user u,user_role ur 
+   where u.user_id = ur.user_id 
+   and ur.role_id>2;
+  </select>
   <select id="selectUserByKeyword" parameterType="java.lang.String" resultMap="BaseResultMap">
    select
    u.*

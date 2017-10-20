@@ -51,4 +51,8 @@ public interface UserMapper {
 	 * @return
 	 */
 	int updateUsersRole(User user);
+	/**
+	 * 查找除管理员和非管理员的所有用户
+	 */
+	List<User> selectUserWithoutAdmin();
 }

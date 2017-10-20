@@ -75,7 +75,7 @@
 										<label class="md_lable" for="mdemail">邮箱地址:</label>
 										<input class="md_input" type="text" id="mdemail" name="mdemail"><br><br>
 										
-										<label class="md_lable" for="email">用户权限:</label>
+										<label class="md_lable" for="">用户权限:</label>
 										<div id="userRole_div">
 							            </div>
 									</div>
@@ -105,7 +105,7 @@
 										<label class="md_lable" for="email">邮箱地址:</label>
 										<input class="md_input" type="text" id="email" name="email"><br><br>
 										
-							            <label class="md_lable" for="email">用户权限:</label>
+							            <label class="md_lable" for="">用户权限:</label>
 							            <div id="userRole_div_s">
 							            </div>
 									</div>
@@ -307,9 +307,8 @@
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/content.js"></script>
 	<script src="assets/js/plugins/iCheck/icheck.min.js"></script>
-	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
 	<script src="assets/js/customerValidate.js"></script>
-	<script src="assets/js/plugins/layui/lay/modules/layer.js"></script>
+	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
 	<script type="text/javascript">
 	
 	 $(document).ready(function(){
@@ -338,7 +337,7 @@
    	  	  error: function(){
  			    alert("数据加载失败");
  		      }
-   	  });
+   	     });
 	 });
 	
 		$('#sureSearch').click(function(){
@@ -456,9 +455,9 @@
 			var b = s.parentNode.parentNode.rowIndex;
 			var t = $("table tr:eq(" + b + ") td:eq(1)").text();
 			var dlId = '${userInfo.userId}';
-			//layer.msg('玩命提示中');
 			var jsonData = '{"userName":"' + t +'","userId":"' + dlId + '"}';
-			$.ajax({
+			
+			/*&$.ajax({
 				type : 'post',
 				url : 'rest/user/delete',
 				contentType : 'application/json',
@@ -472,14 +471,14 @@
 						document.getElementById('mytable').deleteRow(b);
 						alert("删除成功");
 					}
-					/*layer.msg('删除成功（该提示3s后自动关闭）', {
+					layer.msg('删除成功（该提示3s后自动关闭）', {
 						time : 3000, //3s后自动关闭
 						btn : [ '知道了' ]
-					});*/
+					});
 				}
-			});
-			//脚本失效
-			/*layer.confirm('确定要删除该用户么？', {
+			});*/
+			
+			layer.confirm('确定要删除该用户么？', {
 				btn : [ '取消删除', '确定删除' ] //按钮
 			}, function() {
 				layer.msg('已取消', {icon : 1});
@@ -497,7 +496,7 @@
 						});
 					}
 				});
-			});*/
+			});
 		}
 		
 			//打开表格发送请求到控制器查数据库获取表格信息返回加载，

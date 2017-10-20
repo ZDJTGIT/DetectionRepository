@@ -45,6 +45,12 @@
     from project
     where project_id = #{projectId,jdbcType=INTEGER}
   </select>
+  <select id="selectByProjectName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from project
+    where project_name = #{projectName,jdbcType=VARCHAR}
+  </select>
   <select id="selectProjectsByUserIdAndProjectType" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -76,6 +82,15 @@
     p.*,sd.*
     from project p,sys_dictionary sd
     where p.project_type_id = sd.dic_id and user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectProjectByProjectNameAndUserId" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" /> 
+    from project 
+    where 
+    project_name = #{0} 
+    and 
+    user_id = #{1}
   </select>
   <select id="selectLotOfProjectsByProjectId" resultMap="BaseResultMap">
     select

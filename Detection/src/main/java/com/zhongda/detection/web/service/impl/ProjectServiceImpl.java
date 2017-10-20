@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.zhongda.detection.web.dao.ProjectMapper;
 import com.zhongda.detection.web.model.Project;
+import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.service.ProjectService;
 
 /**
@@ -81,5 +82,42 @@ public class ProjectServiceImpl implements ProjectService {
 	public List<Project> selectAllProjectByKeyWord_nomana(String keyWord,
 			Integer userId) {
 		return projectMapper.selectAllProjectByKeyWord_nomana(keyWord, userId);
-	}	
+	}
+
+	@Override
+	public int insert(Project record) {
+		return projectMapper.insert(record);
+	}
+
+	@Override
+	public int insertSelective(Project record) {
+		return projectMapper.insertSelective(record);
+	}
+
+	@Override
+	public int deleteByPrimaryKey(Integer projectId) {
+		return projectMapper.deleteByPrimaryKey(projectId);
+	}
+
+	@Override
+	public Project selectByPrimaryKey(Integer projectId) {
+		return projectMapper.selectByPrimaryKey(projectId);
+	}
+
+	@Override
+	public Project selectByProjectName(String projectName) {
+		return projectMapper.selectByProjectName(projectName);
+	}
+
+	@Override
+	public int updateByPrimaryKeySelective(Project record) {
+		return projectMapper.updateByPrimaryKeySelective(record);
+	}
+
+	@Override
+	public Project selectProjectByProjectNameAndUserId(String projectName,
+			Integer userId) {
+		return projectMapper.selectProjectByProjectNameAndUserId(projectName, userId);
+	}
+
 }

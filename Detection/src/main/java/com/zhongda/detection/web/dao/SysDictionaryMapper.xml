@@ -18,6 +18,12 @@
     from sys_dictionary
     where dic_id = #{dicId,jdbcType=INTEGER}
   </select>
+  <select id="selectSysDictionaryType" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dictionary 
+    where type_code =1;
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_dictionary
     where dic_id = #{dicId,jdbcType=INTEGER}

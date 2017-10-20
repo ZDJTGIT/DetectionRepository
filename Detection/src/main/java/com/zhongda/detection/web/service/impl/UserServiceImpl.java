@@ -119,4 +119,9 @@ public class UserServiceImpl implements UserService {
 		return userMapper.updateUsersRole(user);
 	}
 
+	@Override
+	public List<User> selectUserWithoutAdmin() {
+		return userMapper.selectUserWithoutAdmin();
+	}
+
 }

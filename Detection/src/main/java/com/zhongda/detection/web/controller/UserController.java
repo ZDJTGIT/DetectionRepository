@@ -128,22 +128,24 @@ public class UserController {
 
 			System.out.println("currentUser:"+subject.getSession().getId());
 			//获取所有在线的用户session
-			Collection<Session> sessions = sessionDAO.getActiveSessions();
-			System.out.println("sessions的大小"+sessions.size());
-			for(Session session:sessions){
-				Object userObj = session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
-				System.out.println("session:"+session.getId());
-				if(null == userObj){
-					session.stop();
-				}else if(userObj.toString().equals(user.getUserName()) && !session.getId().equals(subject.getSession().getId())){
-					//如果当前用户上一个session有效 ,踢出上一个登录用户
-					System.out.println(user.getUserName()+":"+session.getId());
-					Message message = new Message();
-					message.setMessageContext("你的账户已在其他地方登录，如不是本人操作，请尽快修改密码！");
-					messageTemplate.convertAndSendToUser(user.getUserName(), "/message", message);
-					session.stop();
-				}
-			}
+
+//			Collection<Session> sessions = sessionDAO.getActiveSessions();
+//			System.out.println("sessions的大小"+sessions.size());
+//			for(Session session:sessions){
+//				Object userObj = session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+//				System.out.println("session:"+session.getId());
+//				if(null == userObj){
+//					session.stop();
+//				}else if(userObj.toString().equals(user.getUserName()) && !session.getId().equals(subject.getSession().getId())){
+//					//如果当前用户上一个session有效 ,踢出上一个登录用户
+//					System.out.println(user.getUserName()+":"+session.getId());
+//					Message message = new Message();
+//					message.setMessageContext("你的账户已在其他地方登录，如不是本人操作，请尽快修改密码！");
+//					messageTemplate.convertAndSendToUser(user.getUserName(), "/message", message);
+//					session.stop();
+//				}
+//			}
+
 			// 验证成功在Session中保存用户信息
 			final User authUserInfo = userService.selectByUsername(user
 					.getUserName());
@@ -711,7 +713,7 @@ public class UserController {
 	        		//邮箱格式验证通过，发送邮箱验证码
 	        		SimpleMailSender Sender = new SimpleMailSender();
 	        		String congtent = userService.selectByEmail(contect).getUserName()
-	        					    +": 您好，您的验证码是:"+code+"---中大检测数据监测平台";
+	        					    +": 您好，您的验证码是:"+code+"5分钟内有效。如非本人操作，请忽略本短信。---中大检测数据监测平台";
 	        		Sender.send(contect, "找回密码", congtent);
 		        	System.out.println("邮箱验证通过！"+code);	
 		        	model.put("code", code);

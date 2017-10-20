@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.zhongda.detection.web.model.Project;
+import com.zhongda.detection.web.model.SysDictionary;
 
 /**
  * <p>
@@ -65,4 +66,52 @@ public interface ProjectService {
 	 * @return
 	 */
 	List<Project> selectAllProjectByKeyWord_nomana(String keyWord,Integer userId);
+	
+	/**
+	 * 插入一条项目信息
+	 * @param record
+	 * @return
+	 */
+	int insert(Project record);
+	
+	/**
+	 * 插入一条项目信息
+	 * @param record
+	 * @return
+	 */
+	int insertSelective(Project record);
+	
+	/**
+	 * 根据项目ID删除项目
+	 * @param projectId
+	 * @return
+	 */
+	int deleteByPrimaryKey(Integer projectId);
+	
+	/**
+	 * 根据项目ID查项目
+	 * @param projectId
+	 * @return
+	 */
+	Project selectByPrimaryKey(Integer projectId);
+	
+	/**
+	 * 根据项目名称查项目
+	 * @param projectId
+	 * @return
+	 */
+	Project selectByProjectName(String projectName);
+	
+	/**
+	 * 根据id修改项目信息
+	 * @param record
+	 * @return
+	 */
+	int updateByPrimaryKeySelective(Project record);
+	
+	/**
+	 * 根据项目名称和用户ID查询项目
+	 * 
+	 */
+	Project selectProjectByProjectNameAndUserId(String projectName ,Integer userId);
 }
