@@ -112,6 +112,7 @@
 								<label class="md_lable" for="">项目类型:</label>
 								<div id="selectProjectType_div_updetaProject">
 							    </div><br><br>
+							    <input class="md_input" type="text" style="display:none" id="projectId_updetaProject" name="projectId_updetaProject">
 								<label class="md_lable" for="projectName_updetaProject">项目名称:</label>
 								<input class="md_input" type="text" id="projectName_updetaProject" name="projectName_updetaProject"><br><br>
 								<label class="md_lable" for="projectAddress_updetaProject">项目地址:</label>
@@ -409,6 +410,7 @@
 	       	   $('#projectDescription_updetaProject').val(projectDescription);
 	       	   $('#projectLongitude_updetaProject').val(projectLongitude);
 	       	   $('#projectLatitude_updetaProject').val(projectLatitude);
+	       	   $('#projectId_updetaProject').val(projectId);
 	       	   //修改项目时显示当前选中项目的所属用户和项目类型
 	       	   $.ajax({
 		   		  type:'post',
@@ -444,8 +446,11 @@
    			   var projectDescriptions = $("#projectDescription_updetaProject").val();
    			   var projectLongitudes = $("#projectLongitude_updetaProject").val();
    			   var projectLatitudes = $("#projectLatitude_updetaProject").val();
+   			   var projectIds = $("#projectId_updetaProject").val();
    	       	   var jsonData = '{"userId":"'
    					       		+ userIds
+   					       		+ '","projectId":"'
+								+ projectIds
    								+ '","projectTypeId":"'
    								+ projectTypeIds
    								+ '","projectName":"'
@@ -459,16 +464,18 @@
    								+ '","projectDescription":"'
    								+ projectDescriptions + '"}';
    	       	 //确定修改，将数据插入数据库 
-   	       	 alert("修改");
-   	       	 alert(jsonData);
    	       	 $.ajax({
    		   		  type:'post',
    		   	  	  url: 'rest/project/selectProject',
-   		   	  	  contextType:"application/json",
+   		   	  	  contentType:"application/json",
    		   	  	  dataType : 'json',
    		   	  	  data: jsonData,
    		   	  	  success: function(data){
-   		   	  		  alert("修改成功！");
+   		   	  		  if(data){
+   		   	  		    alert("修改成功！");
+   		   	  		  }else {
+  						alert("数据异常");
+   					  }
    		   	  	  }
    			  }); 
    		}); 

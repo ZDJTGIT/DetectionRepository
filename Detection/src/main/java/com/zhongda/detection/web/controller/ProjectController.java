@@ -232,17 +232,10 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/selectProject", method = RequestMethod.POST)
 	@ResponseBody
-	public Project selectProject(Project project){
+	public Project selectProject(@RequestBody Project project){
 		Subject subject = SecurityUtils.getSubject();
 		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
-			//管理员用户，可添加项目
-			System.out.println("------++++----1"+project.getProjectName());
-			System.out.println("------++++----2"+project.getUserId());
-			System.out.println("------++++----3"+projectService.selectProjectByProjectNameAndUserId(project.getProjectName(), project.getUserId()));
-			System.out.println("------++++-ddddd---"+projectService.selectProjectByProjectNameAndUserId(project.getProjectName(), project.getUserId()).getProjectId());
-			project.setProjectId((projectService.selectProjectByProjectNameAndUserId(project.getProjectName(), project.getUserId())).getProjectId());
 			projectService.updateByPrimaryKeySelective(project);
-			
 		}
 		return project;
 	}
