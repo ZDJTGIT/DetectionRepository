@@ -9,8 +9,179 @@ jQuery.validator.addMethod("isMobile", function(value, element) {
 
 //添加用户校验用户信息唯一性
 $(document).ready(function() {
+//添加项目信息验证	
+$('#form_addProject').validate({
+		
+		rules : {
+			projectName_addProject : {
+				required : true,
+				minlength : 2,
+			},
+			projectAddress_addProject : {
+				required : true,
+				minlength : 2,
+			},
+			projectLongitude_addProject : {
+				required : true,
+				minlength : 2,
+			},
+			projectLatitude_addProject : {
+				required : true,
+				minlength : 2,
+			}
+		},
+		
+		messages : {
+		
+			projectName_addProject : {
+				required : "请输入项目名",
+				minlength:"项目名为2-15个字符",
+			},
+			projectAddress_addProject : {
+				required : "请输入项目地址",
+				minlength:"项目地址为2-15个字符",
+			},
+			projectLongitude_addProject : {
+				required : "请输入项目经度",
+				minlength:"项目经度为2-15个字符",
+			},
+			projectLatitude_addProject : {
+				required : "请输入项目纬度",
+				minlength:"项目纬度为2-15个字符",
+			}
+		}
+	});
+//修改项目信息验证
+$('#form_updetaProject').validate({
 	
-	$('#form_adduser').validate({
+	rules : {
+		projectName_addProject : {
+			required : true,
+			minlength : 2,
+		},
+		projectAddress_addProject : {
+			required : true,
+			minlength : 2,
+		},
+		projectLongitude_addProject : {
+			required : true,
+			minlength : 2,
+		},
+		projectLatitude_addProject : {
+			required : true,
+			minlength : 2,
+		}
+	},
+	
+	messages : {
+	
+		projectName_addProject : {
+			required : "项目名不能为空",
+			minlength:"项目名为2-15个字符",
+		},
+		projectAddress_addProject : {
+			required : "项目地址不能为空",
+			minlength:"项目地址为2-15个字符",
+		},
+		projectLongitude_addProject : {
+			required : "项目经度不能为空",
+			minlength:"项目经度为2-15个字符",
+		},
+		projectLatitude_addProject : {
+			required : "项目纬度不能为空",
+			minlength:"项目纬度为2-15个字符",
+		}
+	}
+});
+
+//添加测点信息验证
+$('#form_addDetection').validate({
+	
+	rules : {
+		detectionName_add : {
+			required : true,
+			minlength : 2,
+		},
+		detectionNum_add : {
+			required : true,
+			minlength : 2,
+		},
+		detectionLongitude_add : {
+			required : true,
+			minlength : 2,
+		},
+		detectionLatitude_add : {
+			required : true,
+			minlength : 2,
+		}
+	},
+	
+	messages : {
+	
+		detectionName_add : {
+			required : "测点名称不能为空",
+			minlength:"测点名称为2-15个字符",
+		},
+		detectionNum_add : {
+			required : "测点编号不能为空",
+			minlength:"测点编号为2-15个字符",
+		},
+		detectionLongitude_add : {
+			required : "测点经度不能为空",
+			minlength:"测点经度为2-15个字符",
+		},
+		detectionLatitude_add : {
+			required : "测点纬度不能为空",
+			minlength:"测点纬度为2-15个字符",
+		}
+	}
+});
+
+//修改测点信息验证
+$('#form_updetaDetection').validate({
+	
+	rules : {
+		detectionName_updeta : {
+			required : true,
+			minlength : 2,
+		},
+		detectionNum_updeta : {
+			required : true,
+			minlength : 2,
+		},
+		detectionLongitude_updeta : {
+			required : true,
+			minlength : 2,
+		},
+		detectionLatitude_updeta : {
+			required : true,
+			minlength : 2,
+		}
+	},
+	
+	messages : {
+	
+		detectionName_updeta : {
+			required : "测点名称不能为空",
+			minlength:"测点名称为2-15个字符",
+		},
+		detectionNum_updeta : {
+			required : "测点编号不能为空",
+			minlength:"测点编号为2-15个字符",
+		},
+		detectionLongitude_updeta : {
+			required : "测点经度不能为空",
+			minlength:"测点经度为2-15个字符",
+		},
+		detectionLatitude_updeta : {
+			required : "测点纬度不能为空",
+			minlength:"测点纬度为2-15个字符",
+		}
+	}
+});
+
+//添加用户验证	
+$('#form_adduser').validate({
 		
 		rules : {
 			userName : {

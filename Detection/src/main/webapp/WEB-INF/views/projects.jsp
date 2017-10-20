@@ -63,6 +63,7 @@
 						
 						<!-- Modal添加 -->
 						<div class="modal fade" id="myModal_addProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						 <form id="form_addProject">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
 						      <div class="modal-header">
@@ -84,21 +85,23 @@
 								<input class="md_input" type="text" id="projectLongitude_addProject" name="projectLongitude_addProject"><br><br>
 								<label class="md_lable" for="projectLatitude_addProject">项目纬度:</label>
 								<input class="md_input" type="text" id="projectLatitude_addProject" name="projectLatitude_addProject"><br>
-								<label class="md_lable" for="">项目描述:</label>
+								<label class="md_lable" for="projectDescription_addProject">项目描述:</label>
 								<textarea id="projectDescription_addProject" class="data_project_tar data_content_input_5" rows="4"></textarea>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" style="padding: 6px 12px" class="btn btn-primary btn-xs btn-lg" data-toggle="modal" data-target="#myModal_nextAdd">
+						        <button type="button" style="padding: 6px 12px" class="btn btn-primary btn-xs btn-lg" data-toggle="modal" data-target="#myModal_addDetection">
 						                    下一步</button>
 						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 						        <button type="button" id="sureAddProject_addProject" name="sureAddProject_addProject" class="btn btn-primary">提交</button>
 						      </div>
 						    </div>
 						  </div>
+						 </form>
 						</div>
 						
 						<!-- Modal编辑修改 -->
 						<div class="modal fade" id="myModal_updetaProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						 <form id="form_updetaProject"> 
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
 						      <div class="modal-header">
@@ -125,17 +128,19 @@
 								<textarea id="projectDescription_updetaProject" class="data_project_tar data_content_input_5" rows="4"></textarea>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" style="padding: 6px 12px" class="btn btn-primary btn-xs btn-lg" data-toggle="modal" data-target="#myModal_nextUpdeta">
+						        <button type="button" style="padding: 6px 12px" class="btn btn-primary btn-xs btn-lg" data-toggle="modal" data-target="#myModal_updetaDetection">
 						                    下一步</button>
 						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 						        <button type="button" id="sureAddProject_updetaProject" name="sureAddProject_updetaProject" class="btn btn-primary">提交</button>
 						      </div>
 						    </div>
 						  </div>
+						 </form>
 						</div>
 						
-						<!-- Modal添加-下一步 -->
-						<div class="modal fade" id="myModal_nextAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<!-- Modal添加-下一步-添加测点 -->
+						<div class="modal fade" id="myModal_addDetection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						 <form id="form_addDetection">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
 						      <div class="modal-header">
@@ -143,33 +148,35 @@
 						        <h4 class="modal-title" id="myModalLabel">添加项目测点</h4>
 						      </div>
 						      <div class="modal-body">
-						        <label class="md_lable" for="">选择用:</label>
+						        <!--label class="md_lable" for="">选择用:</label>
 								<div id="selectUser_div_updetaProjects">
 							    </div><br><br>
 								<label class="md_lable" for="">项目类:</label>
 								<div id="selectProjectType_div_updetaProjects">
-							    </div><br><br>
-								<label class="md_lable" for="projectName_updetaProject">项目名:</label>
-								<input class="md_input" type="text" id="projectName_updetaProjects" name="projectName_updetaProject"><br><br>
-								<label class="md_lable" for="projectAddress_updetaProject">项目地:</label>
-								<input class="md_input" type="text" id="projectAddress_updetaProjects" name="projectAddress_updetaProject"><br><br>
-								<label class="md_lable" for="projectLongitude_updetaProject">项目经:</label>
-								<input class="md_input" type="text" id="projectLongitude_updetaProjects" name="projectLongitude_updetaProject"><br><br>
-								<label class="md_lable" for="projectLatitude_updetaProject">项目纬:</label>
-								<input class="md_input" type="text" id="projectLatitude_updetaProjects" name="projectLatitude_updetaProject"><br>
-								<label class="md_lable" for="">项目描:</label>
-								<textarea id="projectDescription_updetaProjects" class="data_project_tar data_content_input_5" rows="4"></textarea>
+							    </div><br><br-->
+								<label class="md_lable" for="detectionName_add">测点名称:</label> 
+								<input class="md_input" type="text" id="detectionName_add" name="detectionName_add"><br><br>
+								<label class="md_lable" for="detectionNum_add">测点编号:</label>
+								<input class="md_input" type="text" id="detectionNum_add" name="detectionNum_add"><br><br>
+								<label class="md_lable" for="detectionLongitude_add">测点经度:</label>
+								<input class="md_input" type="text" id="detectionLongitude_add" name="detectionLongitude_add"><br><br>
+								<label class="md_lable" for="detectionLatitude_add">测点纬度:</label>
+								<input class="md_input" type="text" id="detectionLatitude_add" name="detectionLatitude_add"><br>
+								<label class="md_lable" for="">测点描述:</label>
+								<textarea id="detectionDescription_add" class="data_project_tar data_content_input_5" rows="4"></textarea>
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						        <button type="button" id="sureAddProject_updetaProjects" name="sureAddProject_updetaProject" class="btn btn-primary">提交</button>
+						        <button type="button" id="sureAddDetection" name="sureAddDetection" class="btn btn-primary">提交</button>
 						      </div>
 						    </div>
 						  </div>
+						 </form>
 						</div>
 						
-						<!-- Modal添加-下一步 -->
-						<div class="modal fade" id="myModal_nextUpdeta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<!-- Modal修改-下一步-编辑修改测点 -->
+						<div class="modal fade" id="myModal_updetaDetection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						 <form id="form_updetaDetection">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
 						      <div class="modal-header">
@@ -177,29 +184,30 @@
 						        <h4 class="modal-title" id="myModalLabel">修改项目测点</h4>
 						      </div>
 						      <div class="modal-body">
-						        <label class="md_lable" for="">选择用:</label>
+						        <!--label class="md_lable" for="">选择用:</label>
 								<div id="selectUser_div_updetaProjects">
 							    </div><br><br>
 								<label class="md_lable" for="">项目类:</label>
 								<div id="selectProjectType_div_updetaProjects">
-							    </div><br><br>
-								<label class="md_lable" for="projectName_updetaProject">项目名:</label>
-								<input class="md_input" type="text" id="projectName_updetaProjects" name="projectName_updetaProject"><br><br>
-								<label class="md_lable" for="projectAddress_updetaProject">项目地:</label>
-								<input class="md_input" type="text" id="projectAddress_updetaProjects" name="projectAddress_updetaProject"><br><br>
-								<label class="md_lable" for="projectLongitude_updetaProject">项目经:</label>
-								<input class="md_input" type="text" id="projectLongitude_updetaProjects" name="projectLongitude_updetaProject"><br><br>
-								<label class="md_lable" for="projectLatitude_updetaProject">项目纬:</label>
-								<input class="md_input" type="text" id="projectLatitude_updetaProjects" name="projectLatitude_updetaProject"><br>
-								<label class="md_lable" for="">项目描:</label>
-								<textarea id="projectDescription_updetaProjects" class="data_project_tar data_content_input_5" rows="4"></textarea>
+							    </div><br><br-->
+								<label class="md_lable" for="detectionName_updeta">测点名称:</label>
+								<input class="md_input" type="text" id="detectionName_updeta" name="detectionName_updeta"><br><br>
+								<label class="md_lable" for="detectionNum_updeta">测点编号:</label>
+								<input class="md_input" type="text" id="detectionNum_updeta" name="detectionNum_updeta"><br><br>
+								<label class="md_lable" for="detectionLongitude_updeta">测点经度:</label>
+								<input class="md_input" type="text" id="detectionLongitude_updeta" name="detectionLongitude_updeta"><br><br>
+								<label class="md_lable" for="detectionLatitude_updeta">测点纬度:</label>
+								<input class="md_input" type="text" id="detectionLatitude_updeta" name="detectionLatitude_updeta"><br>
+								<label class="md_lable" for="">测点描述:</label>
+								<textarea id="detectionDescription_updeta" class="data_project_tar data_content_input_5" rows="4"></textarea>
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						        <button type="button" id="sureAddProject_updetaProjects" name="sureAddProject_updetaProject" class="btn btn-primary">提交</button>
+						        <button type="button" id="sureUpdetaDetection" name="sureUpdetaDetection" class="btn btn-primary">提交</button>
 						      </div>
 						    </div>
 						  </div>
+						 </form>
 						</div>
 					</div>
 				</div>
@@ -437,8 +445,17 @@
 			}
 		};
 		
+		//确认修改测点响应事件
+   		$('#sureUpdetaDetection').click(function(){
+   			alert("修改成功！");
+   		});
+		
 	   	//确定修改项目响应事件
    		$('#sureAddProject_updetaProject').click(function(){
+   		    //修改项目验证
+			if(!$('#form_updetaProject').valid()){
+				return false;
+			}
    			   var userIds = $("#selectUser_div_updetaProject option:selected").val();
    			   var projectTypeIds = $("#selectProjectType_div_updetaProject option:selected").val();
    			   var projectNames = $("#projectName_updetaProject").val();
@@ -480,8 +497,22 @@
    			  }); 
    		}); 
 		
+	   	//确认添加测点响应事件
+   		$('#sureAddDetection').click(function(){
+   			alert("添加成功！");
+   		    $('#detectionName_add').val("");
+			$('#detectionNum_add').val("");
+			$('#detectionLongitude_add').val("");
+			$('#detectionLatitude_add').val("");
+			$('#detectionDescription_add').val("");
+   		});
+	   	
 		//确认添加项目响应事件
 		$('#sureAddProject_addProject').click(function(){
+			//添加项目验证
+			if(!$('#form_addProject').valid()){
+				return false;
+			}
 			var userId = $("#selectUser_div_addProject option:selected").val();
 			var projectTypeId = $("#selectProjectType_div_addProject option:selected").val();
 			var projectName = $("#projectName_addProject").val();
