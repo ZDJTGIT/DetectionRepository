@@ -55,19 +55,19 @@ $('#form_addProject').validate({
 $('#form_updetaProject').validate({
 	
 	rules : {
-		projectName_addProject : {
+		projectName_updetaProject : {
 			required : true,
 			minlength : 2,
 		},
-		projectAddress_addProject : {
+		projectAddress_updetaProject : {
 			required : true,
 			minlength : 2,
 		},
-		projectLongitude_addProject : {
+		projectLongitude_updetaProject : {
 			required : true,
 			minlength : 2,
 		},
-		projectLatitude_addProject : {
+		projectLatitude_updetaProject : {
 			required : true,
 			minlength : 2,
 		}
@@ -75,19 +75,19 @@ $('#form_updetaProject').validate({
 	
 	messages : {
 	
-		projectName_addProject : {
+		projectName_updetaProject : {
 			required : "项目名不能为空",
 			minlength:"项目名为2-15个字符",
 		},
-		projectAddress_addProject : {
+		projectAddress_updetaProject : {
 			required : "项目地址不能为空",
 			minlength:"项目地址为2-15个字符",
 		},
-		projectLongitude_addProject : {
+		projectLongitude_updetaProject : {
 			required : "项目经度不能为空",
 			minlength:"项目经度为2-15个字符",
 		},
-		projectLatitude_addProject : {
+		projectLatitude_updetaProject : {
 			required : "项目纬度不能为空",
 			minlength:"项目纬度为2-15个字符",
 		}
