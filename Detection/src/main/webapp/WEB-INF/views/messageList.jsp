@@ -24,7 +24,6 @@
 <meta name="description" content="中大检测平台">
 <link rel="stylesheet" href="assets/js/plugins/layui/css/layui.css" media="all"></link>
 <link href="assets/css/plugins/iCheck/custom.css" rel="stylesheet">
-
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content  animated fadeInRight">
@@ -49,37 +48,56 @@
 					<div class="ibox-content">
 						<div class="row">
 							<form class="form-inline" role="form" id="formSearch">
-							  <div class="form-group col-sm-2">
-							    <label for="messageId">消息ID:</label>
-							    <input type="text" class="form-control" id="messageId" name="messageId" placeholder="消息ID">
+							  <div class="form-group col-sm-3">
+							    <label for="alarmId">告警ID:</label>
+							    <input type="text" class="form-control" id="alarmId" name="alarmId" placeholder="告警ID">
 							  </div>
-							  <div class="form-group col-sm-2">
-							    <label for="messageType">消息类型:</label>
-							    <select class="input-sm form-control input-s-sm inline" name="messageType">
-                                    <option value="0">请选择</option>
-                                    <option value="1">告警</option>
-                                </select>
+							  <div class="form-group col-sm-3">
+							    <label for="projectId">所属项目:</label>
+							    <input type="text" class="form-control" id="projectId" name="projectName" placeholder="所属项目">
 							  </div>
-							  <div class="form-group col-sm-2">
-							    <label for="messageContext">消息内容:</label>
-							    <input type="text" class="form-control" id="messageContext" name="messageContext" value="" placeholder="消息内容">
+							  <div class="form-group col-sm-3">
+							    <label for="detectionId">所在测点:</label>
+							    <input type="text" class="form-control" id="detectionId" name="detectionId" placeholder="所在测点">
 							  </div>
-							  <div class="form-group col-sm-2 date">
-							    <label for="startCreateTime">起始时间:</label>
-							    <input type="datetime" class="form-control" id="startCreateTime" name="startCreateTime" placeholder="起始时间">
+							  <div class="form-group col-sm-3">
+							    <label for="sensorId">传感器编号:</label>
+							    <input type="text" class="form-control" id="sensorId" name="sensorId" placeholder="传感器编号">
 							  </div>
-							  <div class="form-group col-sm-2">
-							    <label for="endCreateTime">结束时间:</label>
-							    <input type="datetime" class="form-control" id="endCreateTime" name="endCreateTime" placeholder="结束时间">
+							  <div class="form-group col-sm-9">
+							  	<div class="row">
+							  		<div class="form-group col-sm-4">
+									    <label for="alarmType">告警类型:</label>
+									    <select class="input-sm form-control input-s-sm inline" name="alarmType">
+		                                    <option value="0">请选择</option>
+		                                    <option value="1">数据类告警</option>
+		                                    <option value="2">设备类告警</option>
+		                                </select>
+									 </div>
+									 <div class="form-group col-sm-4 date">
+									    <label for="startCreateTime">起始时间:</label>
+									    <input type="datetime" class="form-control" id="startCreateTime" name="startCreateTime" placeholder="起始时间">
+									 </div>
+									 <div class="form-group col-sm-4">
+									    <label for="endCreateTime">结束时间:</label>
+									    <input type="datetime" class="form-control" id="endCreateTime" name="endCreateTime" placeholder="结束时间">
+									 </div>
+									 <div class="form-group col-sm-8">
+									    <label for="alarmContext">告警内容:</label>
+									    <input type="text" class="form-control" id="alarmContext" name="alarmContext" value="" placeholder="告警内容">
+									 </div>
+									 <div class="form-group col-sm-4">
+									    <label for="alarmStatus">告警状态:</label>
+									    <select class="input-sm form-control input-s-sm inline" name="alarmStatus">
+		                                    <option value="0">请选择</option>
+		                                    <option value="1">已确认</option>
+		                                    <option value="2">未确认</option>
+		                                </select>
+									 </div>
+							  	</div>
 							  </div>
-							  <div class="form-group col-sm-2">
-							    <label for="status">消息状态:</label>
-							    <select class="input-sm form-control input-s-sm inline" name="status">
-                                    <option value="0">请选择</option>
-                                    <option value="1">已读</option>
-                                    <option value="2">未读</option>
-                                </select>
-                                <button type="button" id="btnSearch" class="btn btn-sm btn-primary" style="margin-right: 0; text-align: right">查询</button>
+							  <div class="form-group col-sm-3" style="margin-top: 10px;text-align: center">
+							  	<button type="button" id="btnSearch" class="btn btn-lg btn-primary" style="margin-right: 0; text-align: center">查询</button>
 							  </div>
 							</form>
                         </div>
@@ -88,11 +106,15 @@
 							<thead>
 							    <tr>
 							      <th><input type="checkbox" id="checkbox-all">全选</th>
-							      <th>消息ID</th>
-							      <th>消息类型</th>
-							      <th>消息内容</th>
-							      <th>创建时间</th>
-							      <th>消息状态</th>
+							      <th>告警ID</th>
+							      <th>所属项目</th>
+							      <th>所在测点</th>
+							      <th>传感器编号</th>
+							      <th>告警类型</th>
+							      <th>告警内容</th>
+							      <th>产生时间</th>
+							      <th>产生次数</th>
+							      <th>告警状态</th>
 							    </tr>
 							</thead>
 							<tbody></tbody>
@@ -103,6 +125,26 @@
 			</div>
 		</div>
 	</div>
+	<div style="background: rgba(255,255,255, 0.5);">
+        <div class="sk-spinner sk-fading-circle">
+        <div class="sk-circle1 sk-circle"></div>
+        <div class="sk-circle2 sk-circle"></div>
+        <div class="sk-circle3 sk-circle"></div>
+        <div class="sk-circle4 sk-circle"></div>
+        <div class="sk-circle5 sk-circle"></div>
+        <div class="sk-circle6 sk-circle"></div>
+        <div class="sk-circle7 sk-circle"></div>
+        <div class="sk-circle8 sk-circle"></div>
+        <div class="sk-circle9 sk-circle"></div>
+        <div class="sk-circle10 sk-circle"></div>
+        <div class="sk-circle11 sk-circle"></div>
+        <div class="sk-circle12 sk-circle"></div>
+    </div>
+</div>
+        
+ 
+	
+	
 	<script src="assets/js/plugins/iCheck/icheck.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/laydate/laydate.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/layui/layui.all.js" charset="utf-8"></script>

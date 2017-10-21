@@ -239,27 +239,17 @@
 	    	  		         if(data){
 	    	  		       // var start = new Date();
 	    	  		    	 var  asthtml="";
-	    	  		    	 
+	    	  		    	 var reStr = '<td class="project-status" style="display:none"><span class="label label-primary">';
 	    	  		    	 $.each(data,function(idx,item){
 	    	  		    	  asthtml += '<tr id="project_'+ item.projectId +'">'+
 				    	  		    	//'<td class="project-status" style="width:120px">'+
 										//'<a href="project_detail.html">' + item.sysDictionary.itemName+'</a><br />'+
 									    //'</td>'+
-										'<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.projectId + '</span>'+
-										'</td>'+
-										'<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.projectTypeId + '</span>'+
-										'</td>'+
-										'<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.projectLongitude + '</span>'+
-										'</td>'+
-										'<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.projectLatitude + '</span>'+
-										'</td>'+
-										'<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.projectAddress + '</span>'+
-									    '</td>'+
+										reStr + item.projectId + '</span></td>'+
+										reStr + item.projectTypeId + '</span></td>'+
+										reStr + item.projectLongitude + '</span></td>'+
+										reStr + item.projectLatitude + '</span></td>'+
+										reStr + item.projectAddress + '</span></td>'+
 									    
 										'<td class="project-status" style="width:80px">'+
 											'<span class="label label-primary">' + item.projectStatus + '</span>'+

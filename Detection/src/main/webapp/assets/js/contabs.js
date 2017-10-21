@@ -154,12 +154,12 @@ $(function () {
                 $('.J_menuTab').removeClass('active');
 
                 //显示loading提示
-//                var loading = layer.load();
+                var loading = layer.load();
                 // 显示tab对应的内容区
                 $.get(url, function(data) {
                     $('#content-main').html(data);
                     //加载完成后隐藏loading提示
-//                    layer.close(loading);
+                    layer.close(loading);
                 });
 
                 // 添加选项卡

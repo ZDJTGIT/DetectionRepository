@@ -208,8 +208,8 @@
 							<li><a class="J_menuItem" href="rest/project_detail" name="项目详情">项目详情</a>
 							</li>
 						</ul></li>
-					<li><a class="J_menuItem" href="rest/table_jqgrid"><i
-							class="fa fa-bell"></i> <span class="nav-label" name="告警信息">告警信息</span></a></li>
+					<li><a class="J_menuItem" href="rest/table_jqgrid"  name="告警信息"><i
+							class="fa fa-bell"></i> <span class="nav-label">告警信息</span></a></li>
 
 				</ul>
 			</div>
