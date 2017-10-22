@@ -1,8 +1,11 @@
 package com.zhongda.detection.web.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -29,10 +32,8 @@ import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.crypto.hash.Md5Hash;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -47,7 +48,6 @@ import org.springframework.web.util.WebUtils;
 
 import com.zhongda.detection.core.utils.GetVerificationCode;
 import com.zhongda.detection.core.utils.SimpleMailSender;
-import com.zhongda.detection.web.model.Message;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.Role;
 import com.zhongda.detection.web.model.User;
@@ -61,22 +61,23 @@ import com.zhongda.detection.web.task.PushMessage;
 /**
  * 用户控制器
  **/
+@Api(value = "Api控制器")
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
 
 	@Resource
 	private UserService userService;
-	
+
 	@Resource
 	private RoleService roleService;
-	
+
 	@Resource
 	private ProjectService projectService;
-	
+
 	@Resource
 	private SimpMessagingTemplate messageTemplate;
-	
+
 	@Resource(name = "sessionDAO")
 	private SessionDAO sessionDAO;
 
@@ -91,13 +92,13 @@ public class UserController {
 
 	/**
 	 * 用户登录
-	 *
 	 * @param user
 	 * @param result
 	 * @return
 	 */
+	@ApiOperation(value = "登陆", httpMethod = "POST", response = String.class, notes = "根据用户名和密码登陆程序")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@Valid User user, BindingResult result, Model model,
+	public String login(@ApiParam(required = true, name = "user", value = "用户") @Valid User user, BindingResult result, Model model,
 			HttpServletRequest request) {
 		// //验证码校验
 		// String vcode = request.getParameter("vcode");
@@ -150,7 +151,7 @@ public class UserController {
 			final User authUserInfo = userService.selectByUsername(user
 					.getUserName());
 			WebUtils.setSessionAttribute(request, "userInfo", authUserInfo);
-			
+
 			PushMessage.userSet.add(authUserInfo.getUserName());
 
 		} catch (LockedAccountException e) {
@@ -369,7 +370,7 @@ public class UserController {
 			return model;
 		}
 	}
-	
+
 	/**
 	 * 查找展示添加用户时的用户权限
 	 */
@@ -379,7 +380,7 @@ public class UserController {
 		List<Role> roleInfos = roleService.selectLessRolesByUserId(userId);
 		return roleInfos;
 	}
-	
+
 	//showSelectUserRole
 	/**
 	 * 查找展示添加用户时的用户权限
@@ -450,7 +451,7 @@ public class UserController {
 			return model;
 		}
 	}
-	
+
 	/**
 	 * 修改用户信息
 	 */
@@ -481,7 +482,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 验证手机号码是否唯一(添加验证)
 	 */
@@ -498,7 +499,7 @@ public class UserController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 验证电子邮件是否唯一(添加验证)
 	 */
@@ -595,7 +596,7 @@ public class UserController {
 			}
 		}
 	}
-	
+
 	/**
 	 * 验证原密码输入
 	 */
@@ -644,7 +645,7 @@ public class UserController {
 		WebUtils.setSessionAttribute(request, "userInfo", user);
 		return user;
 	}
-	
+
 	/**
 	 * 查找用户权限
 	 */
@@ -658,7 +659,7 @@ public class UserController {
 		 }
 		 return model;
 	}
-	
+
 	/**
 	 * 查找用户所属项目
 	 */
@@ -666,9 +667,9 @@ public class UserController {
 	@ResponseBody
 	public List<Project> selectUserproject(Integer userId){
 		 List<Project> projectList = projectService.selectProjectAndSysDicByUserIds(userId);
-		 return projectList; 
+		 return projectList;
 	}
-	
+
 	/**
 	 * 关键词查找用户（用户名，电话，邮箱，公司，联系人，用户表按时间排序）
 	 */
@@ -676,9 +677,9 @@ public class UserController {
 	@ResponseBody
 	public List<User> keywordSearch(String keyword,Integer userId){
 		List<User> userss =  userService.selectUserByKeyword(keyword,userId);
-		return userss; 
+		return userss;
 	}
-	
+
 
 	/**
 	 * 找回密码retpassword
@@ -697,7 +698,7 @@ public class UserController {
 		Matcher matcher = pattern.matcher(contect);
 		 if (matcher.matches()) {
 			if(userService.selectByPhone(contect)!=null){
-				//手机号码格式验证通过，发送手机验证码	
+				//手机号码格式验证通过，发送手机验证码
 				System.out.println("手机号码验证通过！"+code);
 				model.put("code", code);
 				return model;
@@ -715,7 +716,7 @@ public class UserController {
 	        		String congtent = userService.selectByEmail(contect).getUserName()
 	        					    +": 您好，您的验证码是:"+code+"5分钟内有效。如非本人操作，请忽略本短信。---中大检测数据监测平台";
 	        		Sender.send(contect, "找回密码", congtent);
-		        	System.out.println("邮箱验证通过！"+code);	
+		        	System.out.println("邮箱验证通过！"+code);
 		        	model.put("code", code);
 					return model;
 	        	}else{
@@ -730,7 +731,7 @@ public class UserController {
 	        }
 	    }
 	}
-	
+
 	/**
 	 * 用户输入验证码是否正确
 	 */
@@ -746,7 +747,7 @@ public class UserController {
 			return model;
 		}
 	}
-	
+
 	/**
 	 * 用户通过验证找回密码-修改密码
 	 */
@@ -769,7 +770,7 @@ public class UserController {
 			userService.updateByPrimaryKeySelective(user);
 			System.out.println("修改成功");
 	}
-	
+
 	/**
 	 * 跳转到找回密码页面
 	 */

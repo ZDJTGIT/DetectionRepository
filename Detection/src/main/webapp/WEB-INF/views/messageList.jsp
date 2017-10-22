@@ -24,6 +24,7 @@
 <meta name="description" content="中大检测平台">
 <link rel="stylesheet" href="assets/js/plugins/layui/css/layui.css" media="all"></link>
 <link href="assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="assets/css/message.css" rel="stylesheet">
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content  animated fadeInRight">
@@ -49,7 +50,7 @@
 						<div class="row">
 							<form class="form-inline" role="form" id="formSearch">
 							  <div class="form-group col-sm-3">
-							    <label for="alarmId">告警ID:</label>
+							    <label for="alarmId">&nbsp&nbsp&nbsp告警ID:</label>
 							    <input type="text" class="form-control" id="alarmId" name="alarmId" placeholder="告警ID">
 							  </div>
 							  <div class="form-group col-sm-3">
@@ -64,11 +65,12 @@
 							    <label for="sensorId">传感器编号:</label>
 							    <input type="text" class="form-control" id="sensorId" name="sensorId" placeholder="传感器编号">
 							  </div>
+
 							  <div class="form-group col-sm-9">
-							  	<div class="row">
+							  	<div class="row topy">
 							  		<div class="form-group col-sm-4">
 									    <label for="alarmType">告警类型:</label>
-									    <select class="input-sm form-control input-s-sm inline" name="alarmType">
+									    <select  class="form-control" name="alarmType" id="down1">
 		                                    <option value="0">请选择</option>
 		                                    <option value="1">数据类告警</option>
 		                                    <option value="2">设备类告警</option>
@@ -82,13 +84,13 @@
 									    <label for="endCreateTime">结束时间:</label>
 									    <input type="datetime" class="form-control" id="endCreateTime" name="endCreateTime" placeholder="结束时间">
 									 </div>
-									 <div class="form-group col-sm-8">
+									 <div class="form-group col-sm-8 topy">
 									    <label for="alarmContext">告警内容:</label>
 									    <input type="text" class="form-control" id="alarmContext" name="alarmContext" value="" placeholder="告警内容">
 									 </div>
-									 <div class="form-group col-sm-4">
+									 <div class="form-group col-sm-4 topy">
 									    <label for="alarmStatus">告警状态:</label>
-									    <select class="input-sm form-control input-s-sm inline" name="alarmStatus">
+									    <select  class="form-control"id="down" name="alarmStatus">
 		                                    <option value="0">请选择</option>
 		                                    <option value="1">已确认</option>
 		                                    <option value="2">未确认</option>
@@ -97,12 +99,12 @@
 							  	</div>
 							  </div>
 							  <div class="form-group col-sm-3" style="margin-top: 10px;text-align: center">
-							  	<button type="button" id="btnSearch" class="btn btn-lg btn-primary" style="margin-right: 0; text-align: center">查询</button>
+							  	<button type="button" id="btnSearch" class="btn btn-md btn-primary query" >查询</button>
 							  </div>
 							</form>
                         </div>
                         <div id="checkboxTip"></div>
-						<table id="messageTable" class="table table-striped table-bordered table-hover">
+						<table id="messageTable" class="table table-striped table-bordered table-hover topy">
 							<thead>
 							    <tr>
 							      <th><input type="checkbox" id="checkbox-all">全选</th>
@@ -141,16 +143,16 @@
         <div class="sk-circle12 sk-circle"></div>
     </div>
 </div>
-        
- 
-	
-	
+
+
+
+
 	<script src="assets/js/plugins/iCheck/icheck.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/laydate/laydate.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/layui/layui.all.js" charset="utf-8"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
-		
+
 			//日期范围限制
 	        var start = {
 	            elem: '#startCreateTime',
@@ -177,7 +179,7 @@
 	        };
 	        laydate(start);
 	        laydate(end);
-	        
+
 	        $('#messageTable').on('click','.layerOpen',function(){
 	        	layer.open({
 		        	  type: 1,
@@ -187,7 +189,7 @@
 		        	  content: $(this) //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
 		        	});
 	        });
-	        
+
 	       (function(){
 				//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
 				function messagePageAjax(jsonData, loadLaypage){
@@ -255,7 +257,7 @@
 				 //首次加载页面触发查询按钮初始化列表（无查询参数）
 				 $('#btnSearch').trigger("click");
 		})();
-	
+
 		 //全选checkbox
 		 $('#messageTable').on("ifClicked", '#checkbox-all', function(event){
 		    if(event.target.checked){
@@ -264,7 +266,7 @@
 		      $('#messageTable tbody').find('[type="checkbox"]').iCheck('check');
 		    }
 		 });
-		 
+
 		 //反选checkbox
 		 $('#messageTable tbody').on('ifClicked', '[type="checkbox"]', function(event){
 			 alert(event.target.checked);
@@ -280,7 +282,7 @@
 				 }
 			 }
 		 });
-		
+
 	});
 	</script>
 	<script type="text/javascript"

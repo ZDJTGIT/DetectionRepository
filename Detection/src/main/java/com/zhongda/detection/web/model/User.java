@@ -1,12 +1,21 @@
 package com.zhongda.detection.web.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class User {
-    private Integer userId;
+@ApiModel(value = "user控制器")
+public class User implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+
+	private Integer userId;
+
+    @ApiModelProperty(value = "用户名", required = true)
     private String userName;
 
     private String password;
@@ -22,7 +31,7 @@ public class User {
     private Date createTime;
 
     private String status;
-    
+
     private Integer roleId;
 
 	public Integer getUserId() {
