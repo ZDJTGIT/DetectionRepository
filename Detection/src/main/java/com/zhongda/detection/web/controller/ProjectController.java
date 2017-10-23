@@ -4,7 +4,9 @@ package com.zhongda.detection.web.controller;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +16,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.zhongda.detection.web.dao.SysDictionaryMapper;
 import com.zhongda.detection.web.model.Project;
-import com.zhongda.detection.web.model.SensorInfo;
 import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
-import com.zhongda.detection.web.service.SensorInfoService;
 import com.zhongda.detection.web.service.UserService;
 
 @Controller
@@ -45,15 +46,12 @@ public class ProjectController {
 	@Autowired
 	private RoleService roleService;
 
-	@Autowired
-	private SensorInfoService sensorInfoService;
-
 	@RequestMapping(value = "/myproject")
 	public @ResponseBody Map<String, List<Project>> queryProject(Integer userId) {
 		return projectService.selectProjectAndSysDicByUserId(userId);
 	}
 
-	@RequestMapping(value = "/queryItem")
+	/*@RequestMapping(value = "/queryItem")
 	public @ResponseBody Map<String, List<SensorInfo>> queryItem(
 			Integer projectId) {
 		return sensorInfoService.selectsenInfoAndSysdicByProjectId(projectId);
@@ -99,7 +97,7 @@ public class ProjectController {
 		return sensorInfoService.selectInfoAndSlopeRainfall(detectionTime,
 				projectId, detectionTypeId);
 	}
-
+*/
 	/**
 	 * 通用跳转逻辑
 	 * 
@@ -214,7 +212,7 @@ public class ProjectController {
 		Subject subject = SecurityUtils.getSubject();
 		Date date = new Date();
 		project.setProjectStatus("正常");
-		project.setProjectTime(date);
+		project.setProjectBeginTime(date);
 		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
 			 //管理员用户，可添加项目
 			projectService.insertSelective(project);

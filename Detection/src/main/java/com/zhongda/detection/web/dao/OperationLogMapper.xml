@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.detection.web.dao.OperationLogMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.detection.web.model.OperationLog">
+    <id column="log_id" jdbcType="INTEGER" property="logId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="operation_context" jdbcType="VARCHAR" property="operationContext" />
+    <result column="operation_description" jdbcType="VARCHAR" property="operationDescription" />
+    <result column="operation_time" jdbcType="TIMESTAMP" property="operationTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    log_id, user_name, operation_context, operation_description, operation_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from operation_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from operation_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhongda.detection.web.model.OperationLog">
+    insert into operation_log (log_id, user_name, operation_context, 
+      operation_description, operation_time)
+    values (#{logId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{operationContext,jdbcType=VARCHAR}, 
+      #{operationDescription,jdbcType=VARCHAR}, #{operationTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.OperationLog">
+    insert into operation_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        log_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="operationContext != null">
+        operation_context,
+      </if>
+      <if test="operationDescription != null">
+        operation_description,
+      </if>
+      <if test="operationTime != null">
+        operation_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationContext != null">
+        #{operationContext,jdbcType=VARCHAR},
+      </if>
+      <if test="operationDescription != null">
+        #{operationDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null">
+        #{operationTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongda.detection.web.model.OperationLog">
+    update operation_log
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="operationContext != null">
+        operation_context = #{operationContext,jdbcType=VARCHAR},
+      </if>
+      <if test="operationDescription != null">
+        operation_description = #{operationDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="operationTime != null">
+        operation_time = #{operationTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongda.detection.web.model.OperationLog">
+    update operation_log
+    set user_name = #{userName,jdbcType=VARCHAR},
+      operation_context = #{operationContext,jdbcType=VARCHAR},
+      operation_description = #{operationDescription,jdbcType=VARCHAR},
+      operation_time = #{operationTime,jdbcType=TIMESTAMP}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+</mapper>

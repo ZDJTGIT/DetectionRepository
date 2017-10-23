@@ -12,12 +12,13 @@
     <result column="alarm_type_id" jdbcType="INTEGER" property="alarmTypeId" />
     <result column="alarm_context" jdbcType="VARCHAR" property="alarmContext" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="alarm_level" jdbcType="INTEGER" property="alarmLevel" />
     <result column="frequency" jdbcType="INTEGER" property="frequency" />
   </resultMap>
   <sql id="Base_Column_List">
     alarm_id, user_id, user_name, project_id, project_name, detection_id, sensor_id, 
-    alarm_type_id, alarm_context, create_time, status, frequency
+    alarm_type_id, alarm_context, create_time, status, alarm_level, frequency
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -33,13 +34,13 @@
     insert into alarm (alarm_id, user_id, user_name, 
       project_id, project_name, detection_id, 
       sensor_id, alarm_type_id, alarm_context, 
-      create_time, status, frequency
-      )
+      create_time, status, alarm_level, 
+      frequency)
     values (#{alarmId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
       #{projectId,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{detectionId,jdbcType=INTEGER}, 
       #{sensorId,jdbcType=INTEGER}, #{alarmTypeId,jdbcType=INTEGER}, #{alarmContext,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{frequency,jdbcType=INTEGER}
-      )
+      #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{alarmLevel,jdbcType=INTEGER}, 
+      #{frequency,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.Alarm">
     insert into alarm
@@ -77,6 +78,9 @@
       <if test="status != null">
         status,
       </if>
+      <if test="alarmLevel != null">
+        alarm_level,
+      </if>
       <if test="frequency != null">
         frequency,
       </if>
@@ -113,7 +117,10 @@
         #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
-        #{status,jdbcType=VARCHAR},
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="alarmLevel != null">
+        #{alarmLevel,jdbcType=INTEGER},
       </if>
       <if test="frequency != null">
         #{frequency,jdbcType=INTEGER},
@@ -151,7 +158,10 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
-        status = #{status,jdbcType=VARCHAR},
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="alarmLevel != null">
+        alarm_level = #{alarmLevel,jdbcType=INTEGER},
       </if>
       <if test="frequency != null">
         frequency = #{frequency,jdbcType=INTEGER},
@@ -170,7 +180,8 @@
       alarm_type_id = #{alarmTypeId,jdbcType=INTEGER},
       alarm_context = #{alarmContext,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      alarm_level = #{alarmLevel,jdbcType=INTEGER},
       frequency = #{frequency,jdbcType=INTEGER}
     where alarm_id = #{alarmId,jdbcType=INTEGER}
   </update>

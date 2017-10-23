@@ -24,11 +24,9 @@ import com.zhongda.detection.core.utils.vcode.Captcha;
 import com.zhongda.detection.core.utils.vcode.GifCaptcha;
 import com.zhongda.detection.web.model.Message;
 import com.zhongda.detection.web.model.Project;
-import com.zhongda.detection.web.model.SensorInfo;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.ProjectService;
-import com.zhongda.detection.web.service.SensorInfoService;
 
 /**
  * <p>
@@ -49,9 +47,6 @@ public class CommonController {
 
 	@Resource
 	private ProjectService projectService;
-
-	@Resource
-	private SensorInfoService sensorInfoService;
 
 	@Resource(name = "shiroEhcacheManager")
 	private CacheManager cacheManager;
@@ -95,14 +90,14 @@ public class CommonController {
 		return projectList;
 	}
 
-	@RequestMapping("sensor/{projectId}")
+	/*@RequestMapping("sensor/{projectId}")
 	@ResponseBody
 	public List<SensorInfo> sensorType(
 			@PathVariable("projectId") Integer projectId) {
 		List<SensorInfo> sensorList = sensorInfoService
 				.selectSensorTypeByProjectId(projectId);
 		return sensorList;
-	}
+	}*/
 
 	@RequestMapping("index_v2")
 	public String index_v2(HttpServletRequest request) {

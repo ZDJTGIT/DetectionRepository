@@ -23,7 +23,9 @@ public class Alarm {
 
     private Date createTime;
 
-    private String status;
+    private Integer status;
+
+    private Integer alarmLevel;
 
     private Integer frequency;
 
@@ -107,12 +109,20 @@ public class Alarm {
         this.createTime = createTime;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status == null ? null : status.trim();
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getAlarmLevel() {
+        return alarmLevel;
+    }
+
+    public void setAlarmLevel(Integer alarmLevel) {
+        this.alarmLevel = alarmLevel;
     }
 
     public Integer getFrequency() {

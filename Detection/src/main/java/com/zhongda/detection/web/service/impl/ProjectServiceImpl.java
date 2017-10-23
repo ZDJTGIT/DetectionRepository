@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.zhongda.detection.web.dao.ProjectMapper;
 import com.zhongda.detection.web.model.Project;
-import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.service.ProjectService;
 
 /**

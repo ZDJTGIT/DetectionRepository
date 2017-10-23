@@ -31,7 +31,7 @@ public class MessageTask {
 			//构建消息实体
 			Message message = new Message();
 			message.setUserId(farmlandPH.getUser().getUserId());
-			message.setSensorId(farmlandPH.getSensorInfo().getSensorId());
+			//message.setSensorId(farmlandPH.getSensorInfo().getSensorId());
 			message.setStatus("未读");
 			message.setMessageType("告警");
 			message.setCreateTime(farmlandPH.getDetectionTime());
@@ -40,9 +40,9 @@ public class MessageTask {
 			messageContext.append("你好，对位于");
 			messageContext.append(farmlandPH.getProject().getProjectAddress()+"的农田项目下的的");
 			messageContext.append(farmlandPH.getProject().getProjectName()+"的PH值监控发现，编号为");
-			messageContext.append(farmlandPH.getSensorInfo().getDetectionId()+"的测点处的PH值为");
+			//messageContext.append(farmlandPH.getSensorInfo().getDetectionId()+"的测点处的PH值为");
 			messageContext.append(farmlandPH.getDetectionData()+"，超过警戒值范围（4.5-6.5），对应传感器编号为");
-			messageContext.append(farmlandPH.getSensorInfo().getSensorNum()+"，型号为");
+			//messageContext.append(farmlandPH.getSensorInfo().getSensorNum()+"，型号为");
 			messageContext.append(farmlandPH.getSensorInfo().getSensorModel()+",请及时处理!");
 			message.setMessageContext(messageContext.toString());
 

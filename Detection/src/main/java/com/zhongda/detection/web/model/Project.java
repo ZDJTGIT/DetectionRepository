@@ -19,7 +19,9 @@ public class Project {
 
 	private String projectLatitude;
 
-	private Date projectTime;
+	private Date projectBeginTime;
+	
+	private Date projectEndTime;
 
 	private String projectStatus;
 
@@ -97,8 +99,8 @@ public class Project {
 				.trim();
 	}
 
-	public void setProjectTime(Date projectTime) {
-		this.projectTime = projectTime;
+	public void setProjectBeginTime(Date projectBeginTime) {
+		this.projectBeginTime = projectBeginTime;
 	}
 
 	public String getProjectStatus() {
@@ -106,10 +108,18 @@ public class Project {
 	}
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    public Date getProjectTime() {
-        return projectTime;
+    public Date getProjectBeginTime() {
+        return projectBeginTime;
     }
+    
+    public void setProjectEndTime(Date projectEndTime) {
+		this.projectEndTime = projectEndTime;
+	}
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    public Date getProjectEndTime() {
+        return projectEndTime;
+    }
 
 	public void setProjectStatus(String projectStatus) {
 		this.projectStatus = projectStatus == null ? null : projectStatus

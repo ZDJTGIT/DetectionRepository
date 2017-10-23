@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongda.detection.web.dao.DetectionPointMapper">
+  <resultMap id="BaseResultMap" type="com.zhongda.detection.web.model.DetectionPoint">
+    <id column="detection_point_id" jdbcType="INTEGER" property="detectionPointId" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="detection_type_id" jdbcType="INTEGER" property="detectionTypeId" />
+    <result column="detection_latitude" jdbcType="VARCHAR" property="detectionLatitude" />
+    <result column="detection_longitude" jdbcType="VARCHAR" property="detectionLongitude" />
+    <result column="detection_name" jdbcType="VARCHAR" property="detectionName" />
+    <result column="detection_description" jdbcType="VARCHAR" property="detectionDescription" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    detection_point_id, project_id, detection_type_id, detection_latitude, detection_longitude, 
+    detection_name, detection_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from detection_point
+    where detection_point_id = #{detectionPointId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from detection_point
+    where detection_point_id = #{detectionPointId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhongda.detection.web.model.DetectionPoint">
+    insert into detection_point (detection_point_id, project_id, detection_type_id, 
+      detection_latitude, detection_longitude, 
+      detection_name, detection_description)
+    values (#{detectionPointId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{detectionTypeId,jdbcType=INTEGER}, 
+      #{detectionLatitude,jdbcType=VARCHAR}, #{detectionLongitude,jdbcType=VARCHAR}, 
+      #{detectionName,jdbcType=VARCHAR}, #{detectionDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.DetectionPoint">
+    insert into detection_point
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="detectionPointId != null">
+        detection_point_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="detectionTypeId != null">
+        detection_type_id,
+      </if>
+      <if test="detectionLatitude != null">
+        detection_latitude,
+      </if>
+      <if test="detectionLongitude != null">
+        detection_longitude,
+      </if>
+      <if test="detectionName != null">
+        detection_name,
+      </if>
+      <if test="detectionDescription != null">
+        detection_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="detectionPointId != null">
+        #{detectionPointId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="detectionTypeId != null">
+        #{detectionTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="detectionLatitude != null">
+        #{detectionLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="detectionLongitude != null">
+        #{detectionLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="detectionName != null">
+        #{detectionName,jdbcType=VARCHAR},
+      </if>
+      <if test="detectionDescription != null">
+        #{detectionDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhongda.detection.web.model.DetectionPoint">
+    update detection_point
+    <set>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="detectionTypeId != null">
+        detection_type_id = #{detectionTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="detectionLatitude != null">
+        detection_latitude = #{detectionLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="detectionLongitude != null">
+        detection_longitude = #{detectionLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="detectionName != null">
+        detection_name = #{detectionName,jdbcType=VARCHAR},
+      </if>
+      <if test="detectionDescription != null">
+        detection_description = #{detectionDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where detection_point_id = #{detectionPointId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhongda.detection.web.model.DetectionPoint">
+    update detection_point
+    set project_id = #{projectId,jdbcType=INTEGER},
+      detection_type_id = #{detectionTypeId,jdbcType=INTEGER},
+      detection_latitude = #{detectionLatitude,jdbcType=VARCHAR},
+      detection_longitude = #{detectionLongitude,jdbcType=VARCHAR},
+      detection_name = #{detectionName,jdbcType=VARCHAR},
+      detection_description = #{detectionDescription,jdbcType=VARCHAR}
+    where detection_point_id = #{detectionPointId,jdbcType=INTEGER}
+  </update>
+</mapper>

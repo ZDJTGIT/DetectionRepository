@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.zhongda.detection.web.model.Project;
-import com.zhongda.detection.web.model.SysDictionary;
 
 /**
  * <p>
