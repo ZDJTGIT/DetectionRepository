@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.zhongda.detection.web.dao.ProjectMapper;
 import com.zhongda.detection.web.model.Project;
-import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.service.ProjectService;
 
 /**
@@ -52,7 +51,7 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		return projectMap;
 	}
-	
+
 	@Override
 	public List<Project> selectProjectAndSysDicByUserIds(Integer userId) {
 		return projectMapper.selectProjectAndSysDicByUserId(userId);
@@ -117,7 +116,13 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public Project selectProjectByProjectNameAndUserId(String projectName,
 			Integer userId) {
-		return projectMapper.selectProjectByProjectNameAndUserId(projectName, userId);
+		return projectMapper.selectProjectByProjectNameAndUserId(projectName,
+				userId);
+	}
+
+	@Override
+	public List<Project> selectProjectWithMessageCount() {
+		return projectMapper.selectProjectWithMessageCount();
 	}
 
 }

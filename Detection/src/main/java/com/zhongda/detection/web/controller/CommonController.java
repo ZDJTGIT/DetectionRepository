@@ -75,8 +75,14 @@ public class CommonController {
 			throws JsonProcessingException {
 		User user = (User) request.getSession().getAttribute("userInfo");
 		ObjectMapper mapper = new ObjectMapper();
-		List<Project> projects = projectService
-				.selectProjectByUserIdWithMessageCount(user.getUserId());
+		int userId = user.getUserId();
+		List<Project> projects = null;
+		if (userId == 87) {
+			projects = projectService.selectProjectWithMessageCount();
+		} else {
+			projects = projectService
+					.selectProjectByUserIdWithMessageCount(user.getUserId());
+		}
 		String projectList = null;
 		projectList = mapper.writeValueAsString(projects);
 		System.out.println(projectList);

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.zhongda.detection.web.model.Project;
-import com.zhongda.detection.web.model.SysDictionary;
 
 /**
  * <p>
@@ -33,85 +32,106 @@ public interface ProjectService {
 	 * @return
 	 */
 	List<Project> selectProjectAndSysDicByUserIds(Integer userId);
-	
+
 	Map<String, List<Project>> selectProjectAndSysDicByUserId(Integer userId);
-	
+
 	/**
 	 * 查询所有Project数据
+	 * 
 	 * @return
 	 */
 	List<Project> selectAllProject();
-	
+
 	/**
 	 * 根据用户id查询出当前用户下对应的所有项目包括告警消息条数
-	 * @param userId 
+	 * 
+	 * @param userId
 	 * @return
 	 */
 	List<Project> selectProjectByUserIdWithMessageCount(Integer userId);
-	
+
+	/**
+	 * 查询出所有用户下对应的所有项目包括告警消息条数
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	List<Project> selectProjectWithMessageCount();
+
 	/**
 	 * 查询出所有项目包括告警消息条数
+	 * 
 	 * @return
 	 */
 	List<Project> selectAllProjectWithMessageCount();
 
 	/**
 	 * 根据关键字查询项目(管理员)
+	 * 
 	 * @return
 	 */
 	List<Project> selectAllProjectByKeyWord_mana(String keyWord);
-	
+
 	/**
 	 * 根据关键字查询项目(非管理员)
+	 * 
 	 * @return
 	 */
-	List<Project> selectAllProjectByKeyWord_nomana(String keyWord,Integer userId);
-	
+	List<Project> selectAllProjectByKeyWord_nomana(String keyWord,
+			Integer userId);
+
 	/**
 	 * 插入一条项目信息
+	 * 
 	 * @param record
 	 * @return
 	 */
 	int insert(Project record);
-	
+
 	/**
 	 * 插入一条项目信息
+	 * 
 	 * @param record
 	 * @return
 	 */
 	int insertSelective(Project record);
-	
+
 	/**
 	 * 根据项目ID删除项目
+	 * 
 	 * @param projectId
 	 * @return
 	 */
 	int deleteByPrimaryKey(Integer projectId);
-	
+
 	/**
 	 * 根据项目ID查项目
+	 * 
 	 * @param projectId
 	 * @return
 	 */
 	Project selectByPrimaryKey(Integer projectId);
-	
+
 	/**
 	 * 根据项目名称查项目
+	 * 
 	 * @param projectId
 	 * @return
 	 */
 	Project selectByProjectName(String projectName);
-	
+
 	/**
 	 * 根据id修改项目信息
+	 * 
 	 * @param record
 	 * @return
 	 */
 	int updateByPrimaryKeySelective(Project record);
-	
+
 	/**
 	 * 根据项目名称和用户ID查询项目
 	 * 
 	 */
-	Project selectProjectByProjectNameAndUserId(String projectName ,Integer userId);
+	Project selectProjectByProjectNameAndUserId(String projectName,
+			Integer userId);
 }

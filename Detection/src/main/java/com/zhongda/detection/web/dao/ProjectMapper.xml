@@ -70,6 +70,13 @@
      where p.user_id = #{userId,jdbcType=INTEGER}
      GROUP BY p.project_id;
   </select>
+  <select id="selectProjectWithMessageCount" parameterType="java.lang.Integer" resultMap="ProjectResultMap">
+  	 select
+     p.*,count(pm.message_id) 'message_count'
+     from project p LEFT OUTER JOIN project_message pm
+     on p.project_id = pm.project_id
+     GROUP BY p.project_id;
+  </select>
   <select id="selectAllProjectWithMessageCount" resultMap="ProjectResultMap">
   	 select
      p.*,count(pm.message_id) 'message_count'
