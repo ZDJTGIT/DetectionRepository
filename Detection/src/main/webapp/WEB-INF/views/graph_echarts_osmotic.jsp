@@ -14,63 +14,20 @@
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
-
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 深部渗压分析图</title>
+    <title> 深部位移分析图</title>
     <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
     <meta name="description" content="中大检测平台">
 
     <link rel="shortcut icon" href="favicon.ico">
     <!-- Data Tables -->
     <link href="assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-
-    <script>
-    $(function(){
-        $(".pimg").click(function(){
-
-            var _this = $(this);//将当前的pimg元素作为_this传入函数
-            // imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
-            var src = _this.attr("src");//获取当前点击的pimg元素中的src属性
-            $("#bigimg").attr("src", src);//设置#bigimg元素的src属性
-
-                /*获取当前点击图片的真实大小，并显示弹出层及大图*/
-            $("<img/>").attr("src", src).load(function(){
-                var windowW = $(window).width();//获取当前窗口宽度
-                var windowH = $(window).height();//获取当前窗口高度
-                var realWidth = this.width;//获取图片真实宽度
-                var realHeight = this.height;//获取图片真实高度
-                var imgWidth, imgHeight;
-                var scale = 0.8;//缩放尺寸，当图片真实宽度和高度大于窗口宽度和高度时进行缩放
-
-                if(realHeight>windowH*scale) {//判断图片高度
-                    imgHeight = windowH*scale;//如大于窗口高度，图片高度进行缩放
-                    imgWidth = imgHeight/realHeight*realWidth;//等比例缩放宽度
-                    if(imgWidth>windowW*scale) {//如宽度扔大于窗口宽度
-                        imgWidth = windowW*scale;//再对宽度进行缩放
-                    }
-                } else if(realWidth>windowW*scale) {//如图片高度合适，判断图片宽度
-                    imgWidth = windowW*scale;//如大于窗口宽度，图片宽度进行缩放
-                                imgHeight = imgWidth/realWidth*realHeight;//等比例缩放高度
-                } else {//如果图片真实高度和宽度都符合要求，高宽不变
-                    imgWidth = realWidth;
-                    imgHeight = realHeight;
-                }
-                        $( "#bigimg").css("width",imgWidth);//以最终的宽度对图片缩放
-
-                var w = (windowW-imgWidth)/2;//计算图片与窗口左边距
-                var h = (windowH-imgHeight)/2;//计算图片与窗口上边距
-                $("#innerdiv").css({"top":h, "left":w});//设置#innerdiv的top和left属性
-                $("#outerdiv").fadeIn("fast");//淡入显示#outerdiv及.pimg
-            });
-
-            $("#outerdiv").click(function(){//再次点击淡出消失弹出层
-                $(this).fadeOut("fast");
-            });
-        });
-    });
-</script>
-
+	<link href="assets/css/plugins/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<link href="assets/css/plugins/datepicker/datepicker3.css" rel="stylesheet">
+    <script type="text/javascript" src="assets/js/slop_photo.js"></script>
+    <link href="assets/css/style.min.css" rel="stylesheet">
+	
 </head>
 
 <body class="gray-bg">
@@ -78,12 +35,47 @@
 		<div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="assets/img/farmmap.jpg" />
 		</div>
 	</div>
+	<label style="display: none;" id="projectId">${projectId }</label>
+	<label style="display: none;" id="detectionTypeId">${detectionTypeId }</label>
     <div class="wrapper wrapper-content animated fadeInRight">
+    	<div class="row">
+    		<div class="col-sm-12">
+                <div class="ibox float-e-margins" id="small-chat1" style="width: 100%" >
+                    <div class="ibox-content" style="background: rgba(255,255,255, 0.5);">
+                        <form class="form-inline" role="form" id="formSearch">
+                            <div class="form-group">
+                                <label for="startCreateTime">选择日期:</label>
+							   	<input type="datetime" class="form-control" id="diapladata" >
+                            </div>
+                            <button class="btn btn-primary " id="selectdispladata" type="button" style="margin-top: 5px;">&nbsp;查询</button>
+                            <div class="form-group" style="margin-left: 20px;">
+                                <label for="startCreateTime">测试次数：第</label>
+							   	<select class="form-control" id="displaallnumber">
+							   	</select>
+							   	<label>次检测数据 </label>
+                            </div>
+                            <div class="form-group" style="margin-left: 40px;">
+                                <label for="startCreateTime">时间：</label>
+							   	<select class="form-control" id="displaalltime">
+							   	</select>
+							   	<label>(PS：用时间和次数都可以查询数据)</label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+    	</div>
+   		 <div class="row">
+    		<div class="col-sm-12" style="height: 65px">
+                
+                </div>
+            </div>
+    	
         <div class="row">
             <div class="col-sm-5">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>渗压位移变化图</h5>
+                        <h5>深部位移变化图</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -110,7 +102,36 @@
             <div class="col-sm-7" >
                 <div class="ibox float-e-margins" >
                     <div class="ibox-title">
-                        <h5>渗压监测总位移</h5>
+                        <h5>累计变化量</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="graph_flot.html#">选项1</a>
+                                </li>
+                                <li><a href="graph_flot.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content" >
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+        	<div class="col-sm-6" >
+                <div class="ibox float-e-margins" >
+                    <div class="ibox-title">
+                        <h5>累计变化量</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -134,13 +155,10 @@
                     </div>
                 </div>
             </div>
-
-        </div>
-        <div class="row">
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>渗压本次位移监测</h5>
+                        <h5>本次位移变化量</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -160,14 +178,14 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="echarts-grandtotal-chart"></div>
+                        <div class="echarts" id="echarts-grandtotal-chart" style="height: 360px"></div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>渗压位移变化速率监测</h5>
+                        <h5>变化速率</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -187,15 +205,14 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-
-                        <div class="echarts" id="echarts-single-chart"></div>
+                        <div class="echarts" id="echarts-single-chart" style="height: 360px"></div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>渗压水平位移监测值</h5>
+                        <h5>原始数据</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -215,25 +232,88 @@
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="echarts-displacement-chart"></div>
+                        <div class="echarts" id="echarts-displacement-chart" style="height: 360px"></div>
                     </div>
                 </div>
             </div>
 
         </div>
-       </div>
+        <div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>告警处理表</h5>
+						<div class="ibox-tools">
+							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+							</a> <a class="dropdown-toggle" data-toggle="dropdown"
+								href="table_data_tables.html#"> <i class="fa fa-wrench"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="table_data_tables.html#">选项1</a></li>
+								<li><a href="table_data_tables.html#">选项2</a></li>
+							</ul>
+							<a class="close-link"> <i class="fa fa-times"></i>
+							</a>
+						</div>
+					</div>
+					 <div class="ibox-content">
+                        <table class="table table-striped table-bordered table-hover display" id="editable"  cellspacing="0" width="100%"> 
+                            <thead>
+                                <tr>
+                                	<td>测点位置</td>
+									<td>测试深度(M)</td>
+									<td>初次测试值时间</td>
+									<td>初次测试值(MM)</td>
+									<td>前次测试时间</td>
+									<td>前次测试值(MM)</td>
+									<td>本次测试时间</td>
+									<td>本次测试值(MM)</td>
+									<td>本次位移(MM)</td>
+									<td>总 位 移(MM)</td>
+									<td>变化速率(MM/DAY)</td>
+									<td>测孔名称</td>
+									<td>测试次数</td>
+									<td>测试员</td>
+								</tr>
+                            </thead>
+                        </table>
 
+                    </div>
+				</div>
+			</div>
+		</div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>	
+    <script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
+	<script src="assets/js/plugins/datepicker/bootstrap-datetimepicker.min.js" charset="utf-8"></script>
+	<script src="assets/js/plugins/layui/layui.all.js" charset="utf-8"></script>
+	<script type="text/javascript">
+			
+			$('#diapladata').datetimepicker({
+	            locale: moment.locale('zh-cn'),
+	            showTodayButton:true,
+	            format: "YYYY-MM-DD"
+	        })
+	       
+	</script>
     <!-- ECharts -->
     <script src="assets/js/plugins/echarts/echarts-all.js"></script>
     <!-- 自定义js -->
     <script src="assets/js/content.js"></script>
-    <!-- ECharts demo data -->
-    <script src="assets/js/plugins/myecharts/osmotic_ecahrts.js"></script>
-    <script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
 
+    <!-- ECharts demo data -->
+     <script src="assets/js/deep_echarts.js"></script>
+     <script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
     <!-- Data Tables -->
     <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    
+    <script>
+	    var oTabel;
+	    $(document).ready(function() {
+	    	oTabel= $('#editable').dataTable();
+	    });
+	</script>
 </body>
 
 </html>
