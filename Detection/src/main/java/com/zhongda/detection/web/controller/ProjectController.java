@@ -1,6 +1,5 @@
 package com.zhongda.detection.web.controller;
 
-
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -32,33 +31,53 @@ public class ProjectController {
 
 	@Resource
 	private UserService userService;
-	
+
 	@Resource
 	private SysDictionaryMapper sysDictionaryMapper;
-	
+
 	@Autowired
 	private ProjectService projectService;
-	
+
 	@Autowired
 	private MessageService messageService;
-	
+
 	@Autowired
 	private RoleService roleService;
 
 	@Autowired
 	private SensorInfoService sensorInfoService;
 
+	/**
+	 * 左侧导航栏我的项目
+	 * 
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping(value = "/myproject")
 	public @ResponseBody Map<String, List<Project>> queryProject(Integer userId) {
 		return projectService.selectProjectAndSysDicByUserId(userId);
 	}
 
+	/**
+	 * 左侧导航栏我的项目
+	 * 
+	 * @param projectId
+	 * @return
+	 */
 	@RequestMapping(value = "/queryItem")
 	public @ResponseBody Map<String, List<SensorInfo>> queryItem(
 			Integer projectId) {
 		return sensorInfoService.selectsenInfoAndSysdicByProjectId(projectId);
 	}
 
+	/**
+	 * 深部位移模块查看是否有数据
+	 * 
+	 * @param model
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
 	@RequestMapping(value = "/displacement")
 	public String displacement(Model model, Integer projectId,
 			Integer detectionTypeId) {
@@ -69,6 +88,25 @@ public class ProjectController {
 				projectId, detectionTypeId);
 	}
 
+	@RequestMapping(value = "/osmotic")
+	public String osmotic(Integer projectId, Integer detectionTypeId,
+			Model model) {
+		System.out.println("projectId:" + projectId + "--detectionTypeId:"
+				+ detectionTypeId);
+		int count = sensorInfoService.selectCountByProjectAndDetectionId(
+				projectId, detectionTypeId);
+		return generalJump(model, "graph_echarts_osmotic", count, projectId,
+				detectionTypeId);
+	}
+
+	/**
+	 * 查找深部位移模块数据
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param currentTimes
+	 * @return
+	 */
 	@RequestMapping(value = "/selectdisplament")
 	public @ResponseBody Map<String, Object> selectdisplament(
 			Integer projectId, Integer detectionTypeId, String currentTimes) {
@@ -79,6 +117,14 @@ public class ProjectController {
 
 	}
 
+	/**
+	 * 雨量模块
+	 * 
+	 * @param model
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
 	@RequestMapping(value = "/rainfall")
 	public String rainfall(Model model, Integer projectId,
 			Integer detectionTypeId) {
@@ -91,6 +137,14 @@ public class ProjectController {
 
 	}
 
+	/**
+	 * 雨量模块
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param detectionTime
+	 * @return
+	 */
 	@RequestMapping(value = "/selectrainfall")
 	public @ResponseBody Map<String, Object> selectrainfall(Integer projectId,
 			Integer detectionTypeId, String detectionTime) {
@@ -121,120 +175,130 @@ public class ProjectController {
 			return url;
 		}
 	}
-	
+
 	/**
 	 * 查找用户所属项目
 	 */
-	@RequestMapping(value = "/showUsersProject", method=RequestMethod.POST)
+	@RequestMapping(value = "/showUsersProject", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Project> showUsersProject(Integer userId){
+	public List<Project> showUsersProject(Integer userId) {
 		Subject subject = SecurityUtils.getSubject();
 		List<Project> projectList = null;
-		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
-			 //管理员用户，可查看所有项目信息
-			 projectList = projectService.selectAllProjectWithMessageCount();
-		 }else{
-			 //非管理员用户，可查看自己的项目信息
-			 projectList = projectService.selectProjectByUserIdWithMessageCount(userId);
-		 }
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			// 管理员用户，可查看所有项目信息
+			projectList = projectService.selectAllProjectWithMessageCount();
+		} else {
+			// 非管理员用户，可查看自己的项目信息
+			projectList = projectService
+					.selectProjectByUserIdWithMessageCount(userId);
+		}
 		return projectList;
 	}
-	
+
 	/**
 	 * 项目名查找项目
 	 */
-	@RequestMapping(value = "/keywordSearchProject", method=RequestMethod.POST)
+	@RequestMapping(value = "/keywordSearchProject", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Project> keywordSearchProject(String keyWord,Integer userId){
+	public List<Project> keywordSearchProject(String keyWord, Integer userId) {
 		Subject subject = SecurityUtils.getSubject();
 		List<Project> projectList = null;
-		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
-			projectList = projectService.selectAllProjectByKeyWord_mana(keyWord);
-		}else{
-			projectList = projectService.selectAllProjectByKeyWord_nomana(keyWord, userId);
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			projectList = projectService
+					.selectAllProjectByKeyWord_mana(keyWord);
+		} else {
+			projectList = projectService.selectAllProjectByKeyWord_nomana(
+					keyWord, userId);
 		}
-		return projectList; 
+		return projectList;
 	}
-	
+
 	/**
 	 * 查找数据库用户
 	 */
-	@RequestMapping(value = "/showUser", method=RequestMethod.POST)
+	@RequestMapping(value = "/showUser", method = RequestMethod.POST)
 	@ResponseBody
-	public List<User> showUser(Integer userId){
-		return  userService.selectUserWithoutAdmin(); 
+	public List<User> showUser(Integer userId) {
+		return userService.selectUserWithoutAdmin();
 	}
-	
+
 	/**
 	 * 查找数据库项目类型
 	 */
-	@RequestMapping(value = "/showProjectType", method=RequestMethod.POST)
+	@RequestMapping(value = "/showProjectType", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SysDictionary> showProjectType(Integer userId){
-		return sysDictionaryMapper.selectSysDictionaryType(); 
+	public List<SysDictionary> showProjectType(Integer userId) {
+		return sysDictionaryMapper.selectSysDictionaryType();
 	}
-	
+
 	/**
 	 * 查找数据库用户(编辑项目时)
 	 */
-	@RequestMapping(value = "/showUserType_selected", method=RequestMethod.POST)
+	@RequestMapping(value = "/showUserType_selected", method = RequestMethod.POST)
 	@ResponseBody
-	public List<User> showUserType_selected(Integer userId){
-		return  userService.selectUserWithoutAdmin(); 
+	public List<User> showUserType_selected(Integer userId) {
+		return userService.selectUserWithoutAdmin();
 	}
-	
+
 	/**
 	 * 查找数据库项目类型（编辑项目时）
 	 */
-	@RequestMapping(value = "/showProjectType_selected", method=RequestMethod.POST)
+	@RequestMapping(value = "/showProjectType_selected", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SysDictionary> showProjectType_selected(Integer userId){
-		return sysDictionaryMapper.selectSysDictionaryType(); 
+	public List<SysDictionary> showProjectType_selected(Integer userId) {
+		return sysDictionaryMapper.selectSysDictionaryType();
 	}
-	
-	//showSelectUserAndProjectType
+
+	// showSelectUserAndProjectType
 	/**
 	 * 打开编辑项目时默认选中当前项目信息对应用户和项目类型
 	 */
-	@RequestMapping(value = "/showSelectUserAndProjectType", method=RequestMethod.POST)
+	@RequestMapping(value = "/showSelectUserAndProjectType", method = RequestMethod.POST)
 	@ResponseBody
-	public Project showSelectUserAndProjectType(Integer projectId ,Integer projectTypeId){//项目类型ID
-		SysDictionary sysDictionary =sysDictionaryMapper.selectByPrimaryKey(projectTypeId);
+	public Project showSelectUserAndProjectType(Integer projectId,
+			Integer projectTypeId) {// 项目类型ID
+		SysDictionary sysDictionary = sysDictionaryMapper
+				.selectByPrimaryKey(projectTypeId);
 		Project project = projectService.selectByPrimaryKey(projectId);
 		project.setSysDictionary(sysDictionary);
 		return project;
 	}
-	
+
 	/**
 	 * 新建项目
 	 */
 	@RequestMapping(value = "/addProject", method = RequestMethod.POST)
 	@ResponseBody
-	public Project addProject(@RequestBody Project project){
+	public Project addProject(@RequestBody Project project) {
 		Subject subject = SecurityUtils.getSubject();
 		Date date = new Date();
 		project.setProjectStatus("正常");
 		project.setProjectTime(date);
-		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
-			 //管理员用户，可添加项目
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			// 管理员用户，可添加项目
 			projectService.insertSelective(project);
-			project.setProjectId((projectService.selectByProjectName(project.getProjectName()).getProjectId()));
-			System.out.println("----------"+project.getProjectDescription());
-		}else{
-			//非管理员不能填写项目
+			project.setProjectId((projectService.selectByProjectName(project
+					.getProjectName()).getProjectId()));
+			System.out.println("----------" + project.getProjectDescription());
+		} else {
+			// 非管理员不能填写项目
 			project.setUserId(2);
 		}
 		return project;
 	}
-	
+
 	/**
 	 * 修改项目
 	 */
 	@RequestMapping(value = "/selectProject", method = RequestMethod.POST)
 	@ResponseBody
-	public Project selectProject(@RequestBody Project project){
+	public Project selectProject(@RequestBody Project project) {
 		Subject subject = SecurityUtils.getSubject();
-		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			projectService.updateByPrimaryKeySelective(project);
 		}
 		return project;
@@ -243,17 +307,18 @@ public class ProjectController {
 	/**
 	 * 删除用户项目
 	 */
-	@RequestMapping(value = "/deleteProject", method=RequestMethod.POST)
+	@RequestMapping(value = "/deleteProject", method = RequestMethod.POST)
 	@ResponseBody
-	public Integer deleteProject(Integer projectId){
+	public Integer deleteProject(Integer projectId) {
 		Subject subject = SecurityUtils.getSubject();
-		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
-			 //管理员用户，可删除项目
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			// 管理员用户，可删除项目
 			projectService.deleteByPrimaryKey(projectId);
-			System.out.println("aaaaaaaaaaaa"+projectId);
+			System.out.println("aaaaaaaaaaaa" + projectId);
 			return 1;
-		}else{
-			//非管理员不能删除项目
+		} else {
+			// 非管理员不能删除项目
 			return 2;
 		}
 	}

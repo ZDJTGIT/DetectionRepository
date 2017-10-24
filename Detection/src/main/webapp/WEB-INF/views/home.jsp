@@ -30,7 +30,6 @@
 	height: 750px;
 }
 </style>
-
 </head>
 
 <body class="gray-bg">
@@ -79,12 +78,16 @@
                             	</c:forEach>
                             </tbody>
                         </table>
-
                     </div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+		var homeMapProjectList = '${projectLists}';
+		var homeMapjsonObjss = JSON.parse(homeMapProjectList);
+		
+	</script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/demo.js"></script>
 	 <script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>

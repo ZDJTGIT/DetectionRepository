@@ -1,8 +1,8 @@
-demo = {
 
+demo = {
+		
 	/* 百度地图 */
 	initAMap : function() {
-		var titlename = "云南丽江金沙";
 		var map = new BMap.Map("mapContent", {
 			mapType : BMAP_SATELLITE_MAP
 		}); // 创建地图实例
@@ -11,7 +11,7 @@ demo = {
 		map.clearOverlays();// 清空原来的标注
 		map.enableScrollWheelZoom();
 
-		var icon = new BMap.Icon('assets/img/tit.png', new BMap.Size(20, 32), {// 是引用图标的名字以及大小，注意大小要一样
+		var icon = new BMap.Icon('assets/img/tit.png', new BMap.Size(22, 32), {// 是引用图标的名字以及大小，注意大小要一样
 			anchor : new BMap.Size(10, 30)
 		// 这句表示图片相对于所加的点的位置
 		});
@@ -30,6 +30,7 @@ demo = {
 		var lat;// 纬度
 		// 获取标注经纬度
 		var infoWindow;// 信息窗口
+		
 		$(homeMapjsonObjss).each(function(index,val){
 			var marker = new BMap.Marker(new BMap.Point(homeMapjsonObjss[index].projectLongitude,homeMapjsonObjss[index].projectLatitude), {
 				icon : icon
@@ -49,6 +50,7 @@ demo = {
 	                    }
 					}
 				});
+				
 				//如果没有当前选项卡
 				if(isTrue){
 					 var str = '<a href="'+url+'" class="active J_menuTab">' + homeMapjsonObjss[index].projectName + ' <i class="fa fa-times-circle"></i></a>';
@@ -60,6 +62,7 @@ demo = {
 		                $('.J_menuTabs .page-tabs-content').append(str);
 				}
 			});
+			
 			map.addOverlay(marker);// 添加标注
 			marker.addEventListener("onmouseover", function() {
 				lng = marker.getPosition().lng; // 获取marker的位置经度
@@ -82,7 +85,7 @@ demo = {
 		
 		
 	},
-
+	
 	showNotification : function(from, align, type, message) {
 		$.notify({
 				icon : "ti-gift",

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhongda.detection.core.utils.vcode.Captcha;
 import com.zhongda.detection.core.utils.vcode.GifCaptcha;
 import com.zhongda.detection.web.model.Message;
@@ -28,6 +29,7 @@ import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.SensorInfoService;
+import com.zhongda.detection.web.service.UserService;
 
 /**
  * <p>
@@ -56,6 +58,9 @@ public class CommonController {
 	private CacheManager cacheManager;
 	private Cache<String, String> vcodeCache;
 
+	@Resource
+	private UserService userService;
+
 	/**
 	 * 首页
 	 */
@@ -73,15 +78,21 @@ public class CommonController {
 	public String home(HttpServletRequest request, Model model)
 			throws JsonProcessingException {
 		User user = (User) request.getSession().getAttribute("userInfo");
+		ObjectMapper mapper = new ObjectMapper();
 		int userId = user.getUserId();
 		List<Project> projects = null;
-		if (userId == 87) {
+		int roleId = userService.selectUserRoleByUserId(userId);
+		if (roleId == 2 || roleId == 1) {
 			projects = projectService.selectProjectWithMessageCount();
 		} else {
 			projects = projectService
 					.selectProjectByUserIdWithMessageCount(user.getUserId());
 		}
+		String projectList = null;
+		projectList = mapper.writeValueAsString(projects);
+		System.out.println(projectList);
 		model.addAttribute("projectList", projects);
+		model.addAttribute("projectLists", projectList);
 		return "home";
 	}
 
