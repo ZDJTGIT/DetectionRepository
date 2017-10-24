@@ -7,7 +7,11 @@ demo = {
 			mapType : BMAP_SATELLITE_MAP
 		}); // 创建地图实例
 		var point = new BMap.Point(112.59, 28.12); // 创建点坐标
-		map.centerAndZoom(point, 5); // 初始化地图，设置中心点坐标和地图级别
+		if(null!=indexmapzoom){
+			map.centerAndZoom(indexmapcenter, indexmapzoom);
+		}else {
+			map.centerAndZoom(point, 5); // 初始化地图，设置中心点坐标和地图级别
+		}
 		map.clearOverlays();// 清空原来的标注
 		map.enableScrollWheelZoom();
 
@@ -15,8 +19,8 @@ demo = {
 			anchor : new BMap.Size(10, 30)
 		// 这句表示图片相对于所加的点的位置
 		});
-
-
+		
+		
 		map.enableContinuousZoom(); // 启用地图惯性拖拽，默认禁用
 		map.addControl(new BMap.NavigationControl()); // 添加默认缩放平移控件
 		map.addControl(new BMap.OverviewMapControl()); // 添加默认缩略地图控件
@@ -61,6 +65,9 @@ demo = {
 		                // 添加选项卡
 		                $('.J_menuTabs .page-tabs-content').append(str);
 				}
+				//保存地图比例和中心坐标
+				indexmapzoom=map.getZoom();
+				indexmapcenter=map.getCenter();
 			});
 			
 			map.addOverlay(marker);// 添加标注
