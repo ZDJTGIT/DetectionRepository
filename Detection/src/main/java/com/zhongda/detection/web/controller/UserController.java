@@ -61,7 +61,7 @@ import com.zhongda.detection.web.task.PushMessage;
 /**
  * 用户控制器
  **/
-@Api(value = "Api控制器")
+@Api(value = "用户模块", description="与用户相关的功能模块操作接口定义类")
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
@@ -179,6 +179,7 @@ public class UserController {
 	 * @param session
 	 * @return
 	 */
+	@ApiOperation(value = "退出", httpMethod = "GET", response = String.class, notes = "用户退出")
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.removeAttribute("userInfo");
@@ -211,6 +212,7 @@ public class UserController {
 	/**
 	 * 验证账号唯一
 	 */
+	@ApiOperation(value = " 验证账号唯一", httpMethod = "POST", notes = " 验证账号唯一")
 	@RequestMapping(value = "/checkUsername", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Integer> checkUsername(String username) {
@@ -295,6 +297,7 @@ public class UserController {
 	/**
 	 * 显示所有用户
 	 */
+	@ApiOperation(value = "显示所有用户", httpMethod = "POST", notes = "显示所有用户")
 	@RequestMapping(value = "/userList")
 	public String userList(HttpServletRequest request, Model model) {
 		User currentUser = (User) WebUtils.getSessionAttribute(request, "userInfo");

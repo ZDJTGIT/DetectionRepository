@@ -4,13 +4,12 @@
   <resultMap id="BaseResultMap" type="com.zhongda.detection.web.model.SlopeOsmometerData">
     <id column="slope_osmometer_id" jdbcType="INTEGER" property="slopeOsmometerId" />
     <result column="sensor_id" jdbcType="INTEGER" property="sensorId" />
-    <result column="detection_id" jdbcType="INTEGER" property="detectionId" />
     <result column="sensor_status" jdbcType="VARCHAR" property="sensorStatus" />
     <result column="first_time" jdbcType="TIMESTAMP" property="firstTime" />
     <result column="first_data" jdbcType="REAL" property="firstData" />
     <result column="previous_time" jdbcType="TIMESTAMP" property="previousTime" />
     <result column="previous_data" jdbcType="REAL" property="previousData" />
-    <result column="current_time" jdbcType="TIMESTAMP" property="currentTime" />
+    <result column="current_times" jdbcType="TIMESTAMP" property="currentTimes" />
     <result column="current_data" jdbcType="REAL" property="currentData" />
     <result column="current_osmometer" jdbcType="REAL" property="currentOsmometer" />
     <result column="total_osmometer" jdbcType="REAL" property="totalOsmometer" />
@@ -19,13 +18,12 @@
     <result column="detection_standard" jdbcType="VARCHAR" property="detectionStandard" />
     <result column="detection_nums" jdbcType="INTEGER" property="detectionNums" />
     <result column="detection_space" jdbcType="REAL" property="detectionSpace" />
-    <result column="tester" jdbcType="VARCHAR" property="tester" />
+    <result column="smu_status" jdbcType="INTEGER" property="smuStatus" />
   </resultMap>
   <sql id="Base_Column_List">
-    slope_osmometer_id, sensor_id, detection_id, sensor_status, first_time, first_data, 
-    previous_time, previous_data, current_time, current_data, current_osmometer, total_osmometer, 
-    speed_change, detection_hole_name, detection_standard, detection_nums, detection_space, 
-    tester
+    slope_osmometer_id, sensor_id, sensor_status, first_time, first_data, previous_time, 
+    previous_data, current_times, current_data, current_osmometer, total_osmometer, speed_change, 
+    detection_hole_name, detection_standard, detection_nums, detection_space, smu_status
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -38,20 +36,18 @@
     where slope_osmometer_id = #{slopeOsmometerId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.SlopeOsmometerData">
-    insert into slope_osmometer_data (slope_osmometer_id, sensor_id, detection_id, 
-      sensor_status, first_time, first_data, 
-      previous_time, previous_data, current_time, 
-      current_data, current_osmometer, total_osmometer, 
-      speed_change, detection_hole_name, detection_standard, 
-      detection_nums, detection_space, tester
-      )
-    values (#{slopeOsmometerId,jdbcType=INTEGER}, #{sensorId,jdbcType=INTEGER}, #{detectionId,jdbcType=INTEGER}, 
-      #{sensorStatus,jdbcType=VARCHAR}, #{firstTime,jdbcType=TIMESTAMP}, #{firstData,jdbcType=REAL}, 
-      #{previousTime,jdbcType=TIMESTAMP}, #{previousData,jdbcType=REAL}, #{currentTime,jdbcType=TIMESTAMP}, 
-      #{currentData,jdbcType=REAL}, #{currentOsmometer,jdbcType=REAL}, #{totalOsmometer,jdbcType=REAL}, 
-      #{speedChange,jdbcType=REAL}, #{detectionHoleName,jdbcType=VARCHAR}, #{detectionStandard,jdbcType=VARCHAR}, 
-      #{detectionNums,jdbcType=INTEGER}, #{detectionSpace,jdbcType=REAL}, #{tester,jdbcType=VARCHAR}
-      )
+    insert into slope_osmometer_data (slope_osmometer_id, sensor_id, sensor_status, 
+      first_time, first_data, previous_time, 
+      previous_data, current_times, current_data, 
+      current_osmometer, total_osmometer, speed_change, 
+      detection_hole_name, detection_standard, detection_nums, 
+      detection_space, smu_status)
+    values (#{slopeOsmometerId,jdbcType=INTEGER}, #{sensorId,jdbcType=INTEGER}, #{sensorStatus,jdbcType=VARCHAR}, 
+      #{firstTime,jdbcType=TIMESTAMP}, #{firstData,jdbcType=REAL}, #{previousTime,jdbcType=TIMESTAMP}, 
+      #{previousData,jdbcType=REAL}, #{currentTimes,jdbcType=TIMESTAMP}, #{currentData,jdbcType=REAL}, 
+      #{currentOsmometer,jdbcType=REAL}, #{totalOsmometer,jdbcType=REAL}, #{speedChange,jdbcType=REAL}, 
+      #{detectionHoleName,jdbcType=VARCHAR}, #{detectionStandard,jdbcType=VARCHAR}, #{detectionNums,jdbcType=INTEGER}, 
+      #{detectionSpace,jdbcType=REAL}, #{smuStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.SlopeOsmometerData">
     insert into slope_osmometer_data
@@ -61,9 +57,6 @@
       </if>
       <if test="sensorId != null">
         sensor_id,
-      </if>
-      <if test="detectionId != null">
-        detection_id,
       </if>
       <if test="sensorStatus != null">
         sensor_status,
@@ -80,8 +73,8 @@
       <if test="previousData != null">
         previous_data,
       </if>
-      <if test="currentTime != null">
-        current_time,
+      <if test="currentTimes != null">
+        current_times,
       </if>
       <if test="currentData != null">
         current_data,
@@ -107,8 +100,8 @@
       <if test="detectionSpace != null">
         detection_space,
       </if>
-      <if test="tester != null">
-        tester,
+      <if test="smuStatus != null">
+        smu_status,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -117,9 +110,6 @@
       </if>
       <if test="sensorId != null">
         #{sensorId,jdbcType=INTEGER},
-      </if>
-      <if test="detectionId != null">
-        #{detectionId,jdbcType=INTEGER},
       </if>
       <if test="sensorStatus != null">
         #{sensorStatus,jdbcType=VARCHAR},
@@ -136,8 +126,8 @@
       <if test="previousData != null">
         #{previousData,jdbcType=REAL},
       </if>
-      <if test="currentTime != null">
-        #{currentTime,jdbcType=TIMESTAMP},
+      <if test="currentTimes != null">
+        #{currentTimes,jdbcType=TIMESTAMP},
       </if>
       <if test="currentData != null">
         #{currentData,jdbcType=REAL},
@@ -163,8 +153,8 @@
       <if test="detectionSpace != null">
         #{detectionSpace,jdbcType=REAL},
       </if>
-      <if test="tester != null">
-        #{tester,jdbcType=VARCHAR},
+      <if test="smuStatus != null">
+        #{smuStatus,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -173,9 +163,6 @@
     <set>
       <if test="sensorId != null">
         sensor_id = #{sensorId,jdbcType=INTEGER},
-      </if>
-      <if test="detectionId != null">
-        detection_id = #{detectionId,jdbcType=INTEGER},
       </if>
       <if test="sensorStatus != null">
         sensor_status = #{sensorStatus,jdbcType=VARCHAR},
@@ -192,8 +179,8 @@
       <if test="previousData != null">
         previous_data = #{previousData,jdbcType=REAL},
       </if>
-      <if test="currentTime != null">
-        current_time = #{currentTime,jdbcType=TIMESTAMP},
+      <if test="currentTimes != null">
+        current_times = #{currentTimes,jdbcType=TIMESTAMP},
       </if>
       <if test="currentData != null">
         current_data = #{currentData,jdbcType=REAL},
@@ -219,8 +206,8 @@
       <if test="detectionSpace != null">
         detection_space = #{detectionSpace,jdbcType=REAL},
       </if>
-      <if test="tester != null">
-        tester = #{tester,jdbcType=VARCHAR},
+      <if test="smuStatus != null">
+        smu_status = #{smuStatus,jdbcType=INTEGER},
       </if>
     </set>
     where slope_osmometer_id = #{slopeOsmometerId,jdbcType=INTEGER}
@@ -228,13 +215,12 @@
   <update id="updateByPrimaryKey" parameterType="com.zhongda.detection.web.model.SlopeOsmometerData">
     update slope_osmometer_data
     set sensor_id = #{sensorId,jdbcType=INTEGER},
-      detection_id = #{detectionId,jdbcType=INTEGER},
       sensor_status = #{sensorStatus,jdbcType=VARCHAR},
       first_time = #{firstTime,jdbcType=TIMESTAMP},
       first_data = #{firstData,jdbcType=REAL},
       previous_time = #{previousTime,jdbcType=TIMESTAMP},
       previous_data = #{previousData,jdbcType=REAL},
-      current_time = #{currentTime,jdbcType=TIMESTAMP},
+      current_times = #{currentTimes,jdbcType=TIMESTAMP},
       current_data = #{currentData,jdbcType=REAL},
       current_osmometer = #{currentOsmometer,jdbcType=REAL},
       total_osmometer = #{totalOsmometer,jdbcType=REAL},
@@ -243,7 +229,7 @@
       detection_standard = #{detectionStandard,jdbcType=VARCHAR},
       detection_nums = #{detectionNums,jdbcType=INTEGER},
       detection_space = #{detectionSpace,jdbcType=REAL},
-      tester = #{tester,jdbcType=VARCHAR}
+      smu_status = #{smuStatus,jdbcType=INTEGER}
     where slope_osmometer_id = #{slopeOsmometerId,jdbcType=INTEGER}
   </update>
 </mapper>

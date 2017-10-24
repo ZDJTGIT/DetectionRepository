@@ -2,200 +2,174 @@ package com.zhongda.detection.web.model;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class SlopeDisplacementData {
-	private Integer slopeDisplacementId;
+    private Integer slopeDisplacementId;
 
-	private Integer sensorId;
+    private Integer sensorId;
 
-	private Integer detectionId;
+    private String sensorStatus;
 
-	private String sensorStatus;
+    private Date firstTime;
 
-	private Date firstTime;
+    private Float firstData;
 
-	private Float firstData;
+    private Date previousTime;
 
-	private Date previousTime;
+    private Float previousData;
 
-	private Float previousData;
+    private Date currentTimes;
 
-	private Date currentTimes;
+    private Float currentData;
 
-	private Float currentData;
+    private Float currentDisplacement;
 
-	private Float currentDisplacement;
+    private Float totalDisplacement;
 
-	private Float totalDisplacement;
+    private Float speedChange;
 
-	private Float speedChange;
+    private String detectionHoleName;
 
-	private String detectionHoleName;
+    private String detectionStandard;
 
-	private String detectionStandard;
+    private Integer detectionNums;
 
-	private Integer detectionNums;
+    private Float detectionSpace;
 
-	private Float detectionSpace;
+    private Integer smuStatus;
 
-	private String tester;
+    public Integer getSlopeDisplacementId() {
+        return slopeDisplacementId;
+    }
 
-	public Integer getSlopeDisplacementId() {
-		return slopeDisplacementId;
-	}
+    public void setSlopeDisplacementId(Integer slopeDisplacementId) {
+        this.slopeDisplacementId = slopeDisplacementId;
+    }
 
-	public void setSlopeDisplacementId(Integer slopeDisplacementId) {
-		this.slopeDisplacementId = slopeDisplacementId;
-	}
+    public Integer getSensorId() {
+        return sensorId;
+    }
 
-	public Integer getSensorId() {
-		return sensorId;
-	}
+    public void setSensorId(Integer sensorId) {
+        this.sensorId = sensorId;
+    }
 
-	public void setSensorId(Integer sensorId) {
-		this.sensorId = sensorId;
-	}
+    public String getSensorStatus() {
+        return sensorStatus;
+    }
 
-	public Integer getDetectionId() {
-		return detectionId;
-	}
+    public void setSensorStatus(String sensorStatus) {
+        this.sensorStatus = sensorStatus == null ? null : sensorStatus.trim();
+    }
 
-	public void setDetectionId(Integer detectionId) {
-		this.detectionId = detectionId;
-	}
+    public Date getFirstTime() {
+        return firstTime;
+    }
 
-	public String getSensorStatus() {
-		return sensorStatus;
-	}
+    public void setFirstTime(Date firstTime) {
+        this.firstTime = firstTime;
+    }
 
-	public void setSensorStatus(String sensorStatus) {
-		this.sensorStatus = sensorStatus == null ? null : sensorStatus.trim();
-	}
+    public Float getFirstData() {
+        return firstData;
+    }
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	public Date getFirstTime() {
-		return firstTime;
-	}
+    public void setFirstData(Float firstData) {
+        this.firstData = firstData;
+    }
 
-	public void setFirstTime(Date firstTime) {
-		this.firstTime = firstTime;
-	}
+    public Date getPreviousTime() {
+        return previousTime;
+    }
 
-	public Float getFirstData() {
-		return firstData;
-	}
+    public void setPreviousTime(Date previousTime) {
+        this.previousTime = previousTime;
+    }
 
-	public void setFirstData(Float firstData) {
-		this.firstData = firstData;
-	}
+    public Float getPreviousData() {
+        return previousData;
+    }
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	public Date getPreviousTime() {
-		return previousTime;
-	}
+    public void setPreviousData(Float previousData) {
+        this.previousData = previousData;
+    }
 
-	public void setPreviousTime(Date previousTime) {
-		this.previousTime = previousTime;
-	}
+    public Date getCurrentTimes() {
+        return currentTimes;
+    }
 
-	public Float getPreviousData() {
-		return previousData;
-	}
+    public void setCurrentTimes(Date currentTimes) {
+        this.currentTimes = currentTimes;
+    }
 
-	public void setPreviousData(Float previousData) {
-		this.previousData = previousData;
-	}
+    public Float getCurrentData() {
+        return currentData;
+    }
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	public Date getCurrentTimes() {
-		return currentTimes;
-	}
+    public void setCurrentData(Float currentData) {
+        this.currentData = currentData;
+    }
 
-	public void setCurrentTimes(Date currentTime) {
-		this.currentTimes = currentTime;
-	}
+    public Float getCurrentDisplacement() {
+        return currentDisplacement;
+    }
 
-	public Float getCurrentData() {
-		return currentData;
-	}
+    public void setCurrentDisplacement(Float currentDisplacement) {
+        this.currentDisplacement = currentDisplacement;
+    }
 
-	public void setCurrentData(Float currentData) {
-		this.currentData = currentData;
-	}
+    public Float getTotalDisplacement() {
+        return totalDisplacement;
+    }
 
-	public Float getCurrentDisplacement() {
-		return currentDisplacement;
-	}
+    public void setTotalDisplacement(Float totalDisplacement) {
+        this.totalDisplacement = totalDisplacement;
+    }
 
-	public void setCurrentDisplacement(Float currentDisplacement) {
-		this.currentDisplacement = currentDisplacement;
-	}
+    public Float getSpeedChange() {
+        return speedChange;
+    }
 
-	public Float getTotalDisplacement() {
-		return totalDisplacement;
-	}
+    public void setSpeedChange(Float speedChange) {
+        this.speedChange = speedChange;
+    }
 
-	public void setTotalDisplacement(Float totalDisplacement) {
-		this.totalDisplacement = totalDisplacement;
-	}
+    public String getDetectionHoleName() {
+        return detectionHoleName;
+    }
 
-	public Float getSpeedChange() {
-		return speedChange;
-	}
+    public void setDetectionHoleName(String detectionHoleName) {
+        this.detectionHoleName = detectionHoleName == null ? null : detectionHoleName.trim();
+    }
 
-	public void setSpeedChange(Float speedChange) {
-		this.speedChange = speedChange;
-	}
+    public String getDetectionStandard() {
+        return detectionStandard;
+    }
 
-	public String getDetectionHoleName() {
-		return detectionHoleName;
-	}
+    public void setDetectionStandard(String detectionStandard) {
+        this.detectionStandard = detectionStandard == null ? null : detectionStandard.trim();
+    }
 
-	public void setDetectionHoleName(String detectionHoleName) {
-		this.detectionHoleName = detectionHoleName == null ? null
-				: detectionHoleName.trim();
-	}
+    public Integer getDetectionNums() {
+        return detectionNums;
+    }
 
-	public String getDetectionStandard() {
-		return detectionStandard;
-	}
+    public void setDetectionNums(Integer detectionNums) {
+        this.detectionNums = detectionNums;
+    }
 
-	public void setDetectionStandard(String detectionStandard) {
-		this.detectionStandard = detectionStandard == null ? null
-				: detectionStandard.trim();
-	}
+    public Float getDetectionSpace() {
+        return detectionSpace;
+    }
 
-	public Integer getDetectionNums() {
-		return detectionNums;
-	}
+    public void setDetectionSpace(Float detectionSpace) {
+        this.detectionSpace = detectionSpace;
+    }
 
-	public void setDetectionNums(Integer detectionNums) {
-		this.detectionNums = detectionNums;
-	}
+    public Integer getSmuStatus() {
+        return smuStatus;
+    }
 
-	public Float getDetectionSpace() {
-		return detectionSpace;
-	}
-
-	public void setDetectionSpace(Float detectionSpace) {
-		this.detectionSpace = detectionSpace;
-	}
-
-	public String getTester() {
-		return tester;
-	}
-
-	public void setTester(String tester) {
-		this.tester = tester == null ? null : tester.trim();
-	}
-
-	@Override
-	public String toString() {
-		return "SlopeDisplacementData [slopeDisplacementId="
-				+ slopeDisplacementId + ", sensorId=" + sensorId
-				+ ", detectionId=" + detectionId + ", currentTimes="
-				+ currentTimes + ", tester=" + tester + "]";
-	}
-
+    public void setSmuStatus(Integer smuStatus) {
+        this.smuStatus = smuStatus;
+    }
 }

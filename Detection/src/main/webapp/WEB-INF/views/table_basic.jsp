@@ -406,7 +406,7 @@
 		}
 	    
 		//确定修改（修改操作稍后改成看信息修改）
-		$('#sureMdy').click(function() {
+		$("#sureMdy").click(function() {
 			if(!$('#form_modifyuser').valid()){
 				return false;
 			}

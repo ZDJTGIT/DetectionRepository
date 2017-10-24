@@ -8,28 +8,36 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@ApiModel(value = "user控制器")
+@ApiModel(value = "用户对象")
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@ApiModelProperty(value = "用户Id", required = true)
 	private Integer userId;
 
     @ApiModelProperty(value = "用户名", required = true)
     private String userName;
-
+    
+    @ApiModelProperty(value = "密码", required = true)
     private String password;
-
+    
+    @ApiModelProperty(value = "电话号码", required = true)
     private String phone;
-
+    
+    @ApiModelProperty(value = "邮箱", required = true)
     private String email;
-
+    
+    @ApiModelProperty(value = "所属公司", required = true)
     private String company;
-
+    
+    @ApiModelProperty(value = "联系人", required = true)
     private String linkman;
-
+    
+    @ApiModelProperty(value = "创建时间", required = true)
     private Date createTime;
-
+    
+    @ApiModelProperty(value = "用户状态", required = true)
     private String status;
 
     private Integer roleId;

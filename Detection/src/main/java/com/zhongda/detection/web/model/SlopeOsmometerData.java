@@ -7,8 +7,6 @@ public class SlopeOsmometerData {
 
     private Integer sensorId;
 
-    private Integer detectionId;
-
     private String sensorStatus;
 
     private Date firstTime;
@@ -19,7 +17,7 @@ public class SlopeOsmometerData {
 
     private Float previousData;
 
-    private Date currentTime;
+    private Date currentTimes;
 
     private Float currentData;
 
@@ -37,7 +35,7 @@ public class SlopeOsmometerData {
 
     private Float detectionSpace;
 
-    private String tester;
+    private Integer smuStatus;
 
     public Integer getSlopeOsmometerId() {
         return slopeOsmometerId;
@@ -53,14 +51,6 @@ public class SlopeOsmometerData {
 
     public void setSensorId(Integer sensorId) {
         this.sensorId = sensorId;
-    }
-
-    public Integer getDetectionId() {
-        return detectionId;
-    }
-
-    public void setDetectionId(Integer detectionId) {
-        this.detectionId = detectionId;
     }
 
     public String getSensorStatus() {
@@ -103,12 +93,12 @@ public class SlopeOsmometerData {
         this.previousData = previousData;
     }
 
-    public Date getCurrentTime() {
-        return currentTime;
+    public Date getCurrentTimes() {
+        return currentTimes;
     }
 
-    public void setCurrentTime(Date currentTime) {
-        this.currentTime = currentTime;
+    public void setCurrentTimes(Date currentTimes) {
+        this.currentTimes = currentTimes;
     }
 
     public Float getCurrentData() {
@@ -175,11 +165,11 @@ public class SlopeOsmometerData {
         this.detectionSpace = detectionSpace;
     }
 
-    public String getTester() {
-        return tester;
+    public Integer getSmuStatus() {
+        return smuStatus;
     }
 
-    public void setTester(String tester) {
-        this.tester = tester == null ? null : tester.trim();
+    public void setSmuStatus(Integer smuStatus) {
+        this.smuStatus = smuStatus;
     }
 }
