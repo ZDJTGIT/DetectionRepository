@@ -102,6 +102,7 @@
 	
 		$(document).ready(function() {
 			demo.initAMap();
+			$("input[type='search']").css({width:'100%'});
 		});
 	</script>
 </body>
