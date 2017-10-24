@@ -70,6 +70,14 @@
 									<td>告警</td>
 								</tr>
                             </thead>
+                            <tbody id="homecaveatproject">
+                            	<c:forEach items="${projectList }" var="projectsList">
+                            		<tr>
+                            			<td>${projectsList.projectName }</td>
+                            			<td><i class="fa fa-bell"></i> <span class="label label-primary">${projectsList.messageCount }</span></td>
+                            		</tr> 
+                            	</c:forEach>
+                            </tbody>
                         </table>
 
                     </div>
@@ -77,10 +85,6 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		var homeMapProjectList = '${projectList}';
-		var homeMapjsonObjss = JSON.parse(homeMapProjectList);
-	</script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/demo.js"></script>
 	 <script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
@@ -89,17 +93,17 @@
     <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     
 	<script type="text/javascript">
+		var spanlist = $("#homecaveatproject").find('span');
+		$(spanlist).each(function(){
+			 if($(this).text()>0){
+				$(this).removeClass("label label-primary");
+				$(this).addClass("label label-warning");
+			} 
+		});
 		$(document).ready(function() {
-			
-			var homeMaptabel = $('#maphometabel').dataTable();
-			$(homeMapjsonObjss).each(function(index,value){
-				homeMaptabel.fnAddData([homeMapjsonObjss[index].projectName,homeMapjsonObjss[index].messageCount]);//填充数据到表
-			});
+			$('#maphometabel').dataTable();
 			
 		});
-	</script>
-	<script type="text/javascript">
-	
 		$(document).ready(function() {
 			demo.initAMap();
 		});
