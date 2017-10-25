@@ -246,6 +246,11 @@ public class CommonController {
 		return "graph_echarts_rainfall";
 	}
 
+	@RequestMapping("graph_echarts_farmland")
+	public String graph_echarts_farmland(HttpServletRequest request) {
+		return "graph_echarts_farmland";
+	}
+
 	/**
 	 * 获取验证码（Gif版本）
 	 */
