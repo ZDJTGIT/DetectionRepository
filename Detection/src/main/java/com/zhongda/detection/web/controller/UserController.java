@@ -71,7 +71,6 @@ public class UserController {
 
 	@Resource
 	private RoleService roleService;
-
 	@Resource
 	private ProjectService projectService;
 
@@ -669,8 +668,14 @@ public class UserController {
 	@RequestMapping(value = "/selectUserproject", method=RequestMethod.POST)
 	@ResponseBody
 	public List<Project> selectUserproject(Integer userId){
-		 List<Project> projectList = projectService.selectProjectAndSysDicByUserIds(userId);
-		 return projectList;
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			return null;
+		}else{
+			List<Project> projectList = projectService.selectProjectAndSysDicByUserIds(userId);
+			return projectList;
+		}
 	}
 
 	/**

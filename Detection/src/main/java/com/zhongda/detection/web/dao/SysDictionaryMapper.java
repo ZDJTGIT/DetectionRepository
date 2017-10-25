@@ -22,4 +22,23 @@ public interface SysDictionaryMapper {
 	 * 
 	 */
 	List<SysDictionary> selectSysDictionaryType();
+	
+	/**
+	 * 查所有项目状态
+	 * 
+	 */
+	List<SysDictionary> selectSysDictionaryType_Status();
+	
+	/**
+	 * 通过ID查询项目状态
+	 * 
+	 */
+	String selectProjectStatusByDicId(Integer dicId);
+	
+	/**
+	 * 通过项目类型ID查询该项目对应所有测点类型
+	 * @param projectTypeId
+	 * @return
+	 */
+	List<SysDictionary> selectSysDictionaryByProjectTypeId(Integer projectTypeId);
 }

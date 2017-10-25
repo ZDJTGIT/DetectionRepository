@@ -86,7 +86,7 @@
 								</div>
 
 								<div id="adduser" class="white_content" >
-								    <form id="form_adduser">
+								  <form id="form_adduser">
 								    <div>
 										<p><h3><strong>添加新用户</strong></h3>(请确保用户名的唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
 										<br>
@@ -112,7 +112,7 @@
 									<br>
 									<input class="md_input_sure" type="button" id="sureAdd" value="确定添加">
 									<input class="md_input_cancel" type="button" id="closeAddUser" value="关闭窗口">
-								    </form>
+								  </form>
 								</div>
 							</div>
 							<div class="col-sm-4 m-b-xs">

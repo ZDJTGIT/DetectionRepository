@@ -252,7 +252,6 @@
     	  		         if(data){
     	  		    	 var  asthtml="";
     	  		    	 $.each(data,function(idx,item){
-        	  		    	
     	  		    		asthtml += '<div class="poj_External_div">'+
 							   			 	'<div class="poj_layer">'+
 					    						'<input type="text" id="projectItem_name" name="projectItem_name" class="input_noborder" value="'+item.sysDictionary.itemName+'">'+
@@ -281,11 +280,12 @@
 											'</div>'+
 									'</div><hr>';
     	  		    	 });
-        	  		    	
         	  		    $('#allProject').append(asthtml); 	
-    	  		    	
     	  		       }else{
-    	  		    	alert("数据异常");
+    	  		    	var  asthtmls='<div class="poj_External_div">'+
+    	  		    					'<p>管理员无项目信息</p>'
+    	  		    				  '</div>';
+    	  		    	$('#allProject').append(asthtmls); 	
     	  		       }
     	  	  },
     	  	  error: function(){

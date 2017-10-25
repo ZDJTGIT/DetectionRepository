@@ -169,11 +169,21 @@ public class CommonController {
 		return "form_avatar";
 	}
 
+	@RequestMapping("detectionPoint")
+	public String detectionPoint(HttpServletRequest request) {
+		return "detectionPoint";
+	}
+	
 	@RequestMapping("project_detail")
 	public String project_detail(HttpServletRequest request) {
 		return "project_detail";
 	}
 
+	@RequestMapping("sensor_info")
+	public String sensor_info(HttpServletRequest request) {
+		return "sensor_info";
+	}
+	
 	@RequestMapping("projects")
 	public String projects(HttpServletRequest request) {
 		return "projects";

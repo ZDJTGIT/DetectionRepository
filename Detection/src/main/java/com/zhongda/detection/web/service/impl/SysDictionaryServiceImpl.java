@@ -55,4 +55,20 @@ public class SysDictionaryServiceImpl implements SysDictionaryService {
 		return sysDictionaryMapper.selectSysDictionaryType();
 	}
 
+	@Override
+	public String selectProjectStatusByDicId(Integer dicId) {
+		return sysDictionaryMapper.selectProjectStatusByDicId(dicId);
+	}
+
+	@Override
+	public List<SysDictionary> selectSysDictionaryType_Status() {
+		return sysDictionaryMapper.selectSysDictionaryType_Status();
+	}
+
+	@Override
+	public List<SysDictionary> selectSysDictionaryByProjectTypeId(
+			Integer projectTypeId) {
+		return sysDictionaryMapper.selectSysDictionaryByProjectTypeId(projectTypeId);
+	}
+
 }

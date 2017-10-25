@@ -14,8 +14,19 @@ public class DetectionPoint {
     private String detectionName;
 
     private String detectionDescription;
+    
+    //缓存项目名，数据库无该字段
+    private String projectName;
 
-    public Integer getDetectionPointId() {
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public Integer getDetectionPointId() {
         return detectionPointId;
     }
 

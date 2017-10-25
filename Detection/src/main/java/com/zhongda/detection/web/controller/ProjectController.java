@@ -1,6 +1,5 @@
 package com.zhongda.detection.web.controller;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.zhongda.detection.web.dao.DetectionPointMapper;
 import com.zhongda.detection.web.dao.SysDictionaryMapper;
+import com.zhongda.detection.web.dao.ThresholdMapper;
+import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SysDictionary;
+import com.zhongda.detection.web.model.Threshold;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.MessageService;
@@ -35,7 +38,13 @@ public class ProjectController {
 
 	@Resource
 	private SysDictionaryMapper sysDictionaryMapper;
+	
+	@Resource
+	private DetectionPointMapper detectionPointMapper;
 
+	@Autowired
+	private ThresholdMapper thresholdService;
+	
 	@Autowired
 	private ProjectService projectService;
 
@@ -126,15 +135,21 @@ public class ProjectController {
 	public List<Project> showUsersProject(Integer userId) {
 		Subject subject = SecurityUtils.getSubject();
 		List<Project> projectList = null;
-		if (subject.hasRole(RoleSign.ADMIN)
-				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
-			// 管理员用户，可查看所有项目信息
-			projectList = projectService.selectAllProjectWithMessageCount();
-		} else {
-			// 非管理员用户，可查看自己的项目信息
-			projectList = projectService
-					.selectProjectByUserIdWithMessageCount(userId);
-		}
+		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
+			 //管理员用户，可查看所有项目信息
+			 projectList = projectService.selectAllProjectWithMessageCount();
+			 //将数据库查到的项目状态添加到项目
+			 for(Project project:projectList){
+				 project.setProjectStatusString(sysDictionaryMapper.selectProjectStatusByDicId(project.getProjectStatus()));
+			 }
+		 }else{
+			 //非管理员用户，可查看自己的项目信息
+			 projectList = projectService.selectProjectByUserIdWithMessageCount(userId);
+			 //将数据库查到的项目状态添加到项目
+			 for(Project project:projectList){
+				 project.setProjectStatusString(sysDictionaryMapper.selectProjectStatusByDicId(project.getProjectStatus()));
+			 }
+		 }
 		return projectList;
 	}
 
@@ -146,13 +161,16 @@ public class ProjectController {
 	public List<Project> keywordSearchProject(String keyWord, Integer userId) {
 		Subject subject = SecurityUtils.getSubject();
 		List<Project> projectList = null;
-		if (subject.hasRole(RoleSign.ADMIN)
-				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
-			projectList = projectService
-					.selectAllProjectByKeyWord_mana(keyWord);
-		} else {
-			projectList = projectService.selectAllProjectByKeyWord_nomana(
-					keyWord, userId);
+		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
+			projectList = projectService.selectAllProjectByKeyWord_mana(keyWord);
+			for(Project project:projectList){
+				 project.setProjectStatusString(sysDictionaryMapper.selectProjectStatusByDicId(project.getProjectStatus()));
+			}
+		}else{
+			projectList = projectService.selectAllProjectByKeyWord_nomana(keyWord, userId);
+			for(Project project:projectList){
+				 project.setProjectStatusString(sysDictionaryMapper.selectProjectStatusByDicId(project.getProjectStatus()));
+			}
 		}
 		return projectList;
 	}
@@ -176,6 +194,23 @@ public class ProjectController {
 	}
 
 	/**
+	 * 查找项目状态
+	 */
+	@RequestMapping(value = "/showProjectStatus", method=RequestMethod.POST)
+	@ResponseBody
+	public List<SysDictionary> showProjectStatus(Integer userId){
+		return sysDictionaryMapper.selectSysDictionaryType_Status();
+	}
+	/**
+	 * 查找测点类型
+	 */
+	@RequestMapping(value = "/showDetectionStatus", method=RequestMethod.POST)
+	@ResponseBody
+	public List<SysDictionary> showDetectionStatus(Integer projectTypeId){
+		return sysDictionaryMapper.selectSysDictionaryByProjectTypeId(projectTypeId);
+	}
+	
+	/**
 	 * 查找数据库用户(编辑项目时)
 	 */
 	@RequestMapping(value = "/showUserType_selected", method = RequestMethod.POST)
@@ -192,8 +227,18 @@ public class ProjectController {
 	public List<SysDictionary> showProjectType_selected(Integer userId) {
 		return sysDictionaryMapper.selectSysDictionaryType();
 	}
-
-	// showSelectUserAndProjectType
+	
+	/**
+	 * 查找数据库项目状态（编辑项目时）
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value = "/showProjectStatus_selected", method=RequestMethod.POST)
+	@ResponseBody
+	public List<SysDictionary> showProjectStatus_selected(Integer userId){
+		return sysDictionaryMapper.selectSysDictionaryType_Status(); 
+	}
+	
 	/**
 	 * 打开编辑项目时默认选中当前项目信息对应用户和项目类型
 	 */
@@ -215,23 +260,47 @@ public class ProjectController {
 	@ResponseBody
 	public Project addProject(@RequestBody Project project) {
 		Subject subject = SecurityUtils.getSubject();
-		Date date = new Date();
-		project.setProjectStatus("正常");
-		project.setProjectBeginTime(date);
-		if (subject.hasRole(RoleSign.ADMIN)
-				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
-			// 管理员用户，可添加项目
+		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
+			//管理员用户，可添加项目
 			projectService.insertSelective(project);
-			project.setProjectId((projectService.selectByProjectName(project
-					.getProjectName()).getProjectId()));
-			System.out.println("----------" + project.getProjectDescription());
-		} else {
-			// 非管理员不能填写项目
+			//项目ID自增长，取出
+			project = projectService.selectByProjectName(project.getProjectName());
+			//项目状态为int关联字典表，取出
+			project.setProjectStatusString(sysDictionaryMapper.selectProjectStatusByDicId(project.getProjectStatus()));
+		}else{
+			//非管理员不能填写项目
 			project.setUserId(2);
 		}
 		return project;
 	}
 
+	/**
+	 * 新建测点
+	 */
+	@RequestMapping(value = "/addDescription", method = RequestMethod.POST)
+	@ResponseBody
+	public DetectionPoint addDescription(@RequestBody DetectionPoint detectionPoint){
+		//根据项目名查项目ID加到测点
+		detectionPoint.setProjectId((projectService.selectByProjectName(detectionPoint.getProjectName())).getProjectId());
+		detectionPointMapper.insertSelective(detectionPoint);
+		return detectionPoint;
+	}
+	
+	/**
+	 * 新建Threshold
+	 */
+	@RequestMapping(value = "/addThreshold", method = RequestMethod.POST)
+	@ResponseBody
+	public Threshold addThreshold(@RequestBody Threshold threshold){
+		//use projectName to select userid,projectid,projecttypeid and insert into threshold
+		Project project = projectService.selectByProjectName(threshold.getProjectName());
+		threshold.setUserId(project.getUserId());
+		threshold.setProjectId(project.getProjectId());
+		threshold.setProjectTypeId(project.getProjectTypeId());
+		thresholdService.insertSelective(threshold);
+		return threshold;
+	}
+	
 	/**
 	 * 修改项目
 	 */
@@ -242,8 +311,12 @@ public class ProjectController {
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			projectService.updateByPrimaryKeySelective(project);
+			//项目状态为int关联字典表，取出
+			project.setProjectStatusString(sysDictionaryMapper.selectProjectStatusByDicId(project.getProjectStatus()));
+			return project;
+		}else{
+			return null;
 		}
-		return project;
 	}
 
 	/**
@@ -257,7 +330,6 @@ public class ProjectController {
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			// 管理员用户，可删除项目
 			projectService.deleteByPrimaryKey(projectId);
-			System.out.println("aaaaaaaaaaaa" + projectId);
 			return 1;
 		} else {
 			// 非管理员不能删除项目

@@ -65,7 +65,7 @@
 							<i class="fa fa-home"></i> <span class="nav-label">主页</span> <span
 							class="fa arrow"></span>
 					</a></li>
-					<shiro:hasPermission name="project:manager:*">
+					<%-- <shiro:hasPermission name="project:manager:*">
 						<li><a class="firstMenu" href="javascript:;"
 							aria-expanded="false"> <i class="fa fa-columns"></i> <span
 								class="nav-label">我的项目</span> <span class="fa arrow"></span>
@@ -110,14 +110,14 @@
 										</ul></li>
 								</shiro:hasPermission>
 							</ul></li>
-					</shiro:hasPermission>
+					</shiro:hasPermission> --%>
 
 
 					<shiro:hasPermission name="project:manager:*">
 						<li id="accordion">
 							<a data-toggle="collapse" data-parent="#accordion"  href="#collapseOne" class="queryproject">
 	                            <i class="fa fa-columns"></i>
-	                            <span class="nav-label">我的项目(测试)</span>
+	                            <span class="nav-label">我的项目</span>
 	                            <span class="fa arrow"></span>
 	                        </a>
 							<ul id='collapseOne' class='collapse nav nav-second-level filling'>

@@ -18,8 +18,19 @@ public class Threshold {
     private String heatImageUrl;
 
     private String physicalImageUrl;
+    
+    //用户新建时传项目名查找用户ID项目ID项目类型ID
+    private String projectName;
 
-    public Integer getThresholdId() {
+    public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public Integer getThresholdId() {
         return thresholdId;
     }
 

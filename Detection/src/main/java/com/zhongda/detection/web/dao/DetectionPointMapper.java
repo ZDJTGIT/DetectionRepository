@@ -7,6 +7,11 @@ public interface DetectionPointMapper {
 
     int insert(DetectionPoint record);
 
+    /**
+     * 添加一个测点
+     * @param record
+     * @return
+     */
     int insertSelective(DetectionPoint record);
 
     DetectionPoint selectByPrimaryKey(Integer detectionPointId);

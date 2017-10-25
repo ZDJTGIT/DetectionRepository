@@ -23,14 +23,26 @@ public class Project {
 	
 	private Date projectEndTime;
 
-	private String projectStatus;
+	private Integer projectStatus;
 
 	private String projectDescription;
 
+	//数据库无
 	private SysDictionary sysDictionary;
 
 	// 缓存告警信息的数量
 	private Integer messageCount;
+	
+	// 缓存字典表查到的状态字符串
+	private String projectStatusString;
+
+	public String getProjectStatusString() {
+		return projectStatusString;
+	}
+
+	public void setProjectStatusString(String projectStatusString) {
+		this.projectStatusString = projectStatusString;
+	}
 
 	public Integer getMessageCount() {
 		return messageCount;
@@ -103,7 +115,7 @@ public class Project {
 		this.projectBeginTime = projectBeginTime;
 	}
 
-	public String getProjectStatus() {
+	public Integer getProjectStatus() {
 		return projectStatus;
 	}
 
@@ -121,9 +133,8 @@ public class Project {
         return projectEndTime;
     }
 
-	public void setProjectStatus(String projectStatus) {
-		this.projectStatus = projectStatus == null ? null : projectStatus
-				.trim();
+	public void setProjectStatus(Integer projectStatus) {
+		this.projectStatus = projectStatus;
 	}
 
 	public String getProjectDescription() {

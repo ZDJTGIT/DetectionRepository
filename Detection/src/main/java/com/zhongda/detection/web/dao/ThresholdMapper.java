@@ -7,6 +7,11 @@ public interface ThresholdMapper {
 
     int insert(Threshold record);
 
+    /**
+     * insert a Threshold
+     * @param record
+     * @return
+     */
     int insertSelective(Threshold record);
 
     Threshold selectByPrimaryKey(Integer thresholdId);
