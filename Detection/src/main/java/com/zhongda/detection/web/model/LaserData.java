@@ -5,7 +5,27 @@ import java.util.Date;
 public class LaserData {
     private Integer id;
 
-    private Date createTime;
+    private String sensorId;
+
+    private Date firstTime;
+
+    private Double firstData;
+
+    private Date previousTime;
+
+    private Double previousData;
+
+    private Date currentTimes;
+
+    private Double currentData;
+
+    private Double currentLaserChange;
+
+    private Double totalLaserChange;
+
+    private Double speedChange;
+
+    private Integer sensorStatus;
 
     private String createType;
 
@@ -13,11 +33,7 @@ public class LaserData {
 
     private String smuCmsChannel;
 
-    private String sensorId;
-
-    private Integer sensorStatus;
-
-    private Double sensorValue;
+    private Integer smuStatus;
 
     public Integer getId() {
         return id;
@@ -27,12 +43,92 @@ public class LaserData {
         this.id = id;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public String getSensorId() {
+        return sensorId;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setSensorId(String sensorId) {
+        this.sensorId = sensorId == null ? null : sensorId.trim();
+    }
+
+    public Date getFirstTime() {
+        return firstTime;
+    }
+
+    public void setFirstTime(Date firstTime) {
+        this.firstTime = firstTime;
+    }
+
+    public Double getFirstData() {
+        return firstData;
+    }
+
+    public void setFirstData(Double firstData) {
+        this.firstData = firstData;
+    }
+
+    public Date getPreviousTime() {
+        return previousTime;
+    }
+
+    public void setPreviousTime(Date previousTime) {
+        this.previousTime = previousTime;
+    }
+
+    public Double getPreviousData() {
+        return previousData;
+    }
+
+    public void setPreviousData(Double previousData) {
+        this.previousData = previousData;
+    }
+
+    public Date getCurrentTimes() {
+        return currentTimes;
+    }
+
+    public void setCurrentTimes(Date currentTimes) {
+        this.currentTimes = currentTimes;
+    }
+
+    public Double getCurrentData() {
+        return currentData;
+    }
+
+    public void setCurrentData(Double currentData) {
+        this.currentData = currentData;
+    }
+
+    public Double getCurrentLaserChange() {
+        return currentLaserChange;
+    }
+
+    public void setCurrentLaserChange(Double currentLaserChange) {
+        this.currentLaserChange = currentLaserChange;
+    }
+
+    public Double getTotalLaserChange() {
+        return totalLaserChange;
+    }
+
+    public void setTotalLaserChange(Double totalLaserChange) {
+        this.totalLaserChange = totalLaserChange;
+    }
+
+    public Double getSpeedChange() {
+        return speedChange;
+    }
+
+    public void setSpeedChange(Double speedChange) {
+        this.speedChange = speedChange;
+    }
+
+    public Integer getSensorStatus() {
+        return sensorStatus;
+    }
+
+    public void setSensorStatus(Integer sensorStatus) {
+        this.sensorStatus = sensorStatus;
     }
 
     public String getCreateType() {
@@ -59,27 +155,11 @@ public class LaserData {
         this.smuCmsChannel = smuCmsChannel == null ? null : smuCmsChannel.trim();
     }
 
-    public String getSensorId() {
-        return sensorId;
+    public Integer getSmuStatus() {
+        return smuStatus;
     }
 
-    public void setSensorId(String sensorId) {
-        this.sensorId = sensorId == null ? null : sensorId.trim();
-    }
-
-    public Integer getSensorStatus() {
-        return sensorStatus;
-    }
-
-    public void setSensorStatus(Integer sensorStatus) {
-        this.sensorStatus = sensorStatus;
-    }
-
-    public Double getSensorValue() {
-        return sensorValue;
-    }
-
-    public void setSensorValue(Double sensorValue) {
-        this.sensorValue = sensorValue;
+    public void setSmuStatus(Integer smuStatus) {
+        this.smuStatus = smuStatus;
     }
 }
