@@ -23,10 +23,6 @@ demo = {
 		map.enableContinuousZoom(); // 启用地图惯性拖拽，默认禁用
 		map.addControl(new BMap.NavigationControl()); // 添加默认缩放平移控件
 		map.addControl(new BMap.OverviewMapControl()); // 添加默认缩略地图控件
-		map.addControl(new BMap.OverviewMapControl({
-			isOpen : true,
-			anchor : BMAP_ANCHOR_BOTTOM_RIGHT
-		})); // 右下角，打开
 		map.addControl(new BMap.ScaleControl());
 		map.addControl(new BMap.MapTypeControl());
 		var lng;// 经度
