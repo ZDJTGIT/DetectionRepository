@@ -26,6 +26,8 @@ demo = {
 		map.addControl(new BMap.OverviewMapControl()); // 添加默认缩略地图控件
 		map.addControl(new BMap.ScaleControl());
 		map.addControl(new BMap.MapTypeControl());
+		
+		
 		var lng;// 经度
 		var lat;// 纬度
 		// 获取标注经纬度
@@ -84,10 +86,14 @@ demo = {
 			marker.addEventListener("mouseout", function() {
 				this.closeInfoWindow(infoWindow);
 			});
+			
 		});
 		
 		
+		
 	},
+	
+	
 	
 	showNotification : function(from, align, type, message) {
 		$.notify({

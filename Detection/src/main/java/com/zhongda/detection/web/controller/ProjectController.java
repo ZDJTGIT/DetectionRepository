@@ -93,10 +93,12 @@ public class ProjectController {
 			Model model) {
 		System.out.println("projectId:" + projectId + "--detectionTypeId:"
 				+ detectionTypeId);
-		int count = sensorInfoService.selectCountByProjectAndDetectionId(
-				projectId, detectionTypeId);
-		return generalJump(model, "graph_echarts_osmotic", count, projectId,
-				detectionTypeId);
+		/*
+		 * int count = sensorInfoService.selectCountByProjectAndDetectionId(
+		 * projectId, detectionTypeId); return generalJump(model,
+		 * "graph_echarts_osmotic", count, projectId, detectionTypeId);
+		 */
+		return "graph_echarts_osmotic";
 	}
 
 	/**
