@@ -29,6 +29,7 @@ import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.SensorInfoService;
+import com.zhongda.detection.web.service.UserService;
 
 /**
  * <p>
@@ -57,6 +58,9 @@ public class CommonController {
 	private CacheManager cacheManager;
 	private Cache<String, String> vcodeCache;
 
+	@Resource
+	private UserService userService;
+
 	/**
 	 * 首页
 	 */
@@ -77,7 +81,8 @@ public class CommonController {
 		ObjectMapper mapper = new ObjectMapper();
 		int userId = user.getUserId();
 		List<Project> projects = null;
-		if (userId == 87) {
+		int roleId = userService.selectUserRoleByUserId(userId);
+		if (roleId == 2 || roleId == 1) {
 			projects = projectService.selectProjectWithMessageCount();
 		} else {
 			projects = projectService
@@ -86,7 +91,8 @@ public class CommonController {
 		String projectList = null;
 		projectList = mapper.writeValueAsString(projects);
 		System.out.println(projectList);
-		model.addAttribute("projectList", projectList);
+		model.addAttribute("projectList", projects);
+		model.addAttribute("projectLists", projectList);
 		return "home";
 	}
 
