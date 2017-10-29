@@ -48,7 +48,7 @@
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<h5>告警处理表</h5>
+						<h5>项目信息</h5>
 						<div class="ibox-tools">
 							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
 							</a> <a class="dropdown-toggle" data-toggle="dropdown"

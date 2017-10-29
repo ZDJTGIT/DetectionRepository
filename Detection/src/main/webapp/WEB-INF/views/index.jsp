@@ -160,31 +160,6 @@
 						</ul>
 					</li>
 
-					<li><a href="javascript:;"><i class="fa fa-desktop"></i> <span
-							class="nav-label">页面</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/calendar" name="日历">日历</a></li>
-							<li><a class="J_menuItem" href="rest/pin_board" name="标签墙">标签墙</a></li>
-							<li><a href="javascript:;">单据 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/invoice" name="单据">单据</a></li>
-									<li><a class="J_menuItem" href="rest/invoice_print" name="单据打印">单据打印</a>
-									</li>
-								</ul></li>
-							<li><a href="javascript:;">即时通讯 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="rest/chat_view" name="聊天窗口">聊天窗口</a></li>
-									<li><a class="J_menuItem" href="rest/webim" name="layIM">layIM</a></li>
-								</ul></li>
-							<li><a href="javascript:;">登录注册相关 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a href="rest/page/login" target="_blank" name="登录页面">登录页面</a></li>
-									<li><a href="rest/login_v2" target="_blank" name="登录页面v2">登录页面v2</a></li>
-									<li><a href="rest/register" target="_blank" name="注册页面">注册页面</a></li>
-								</ul></li>
-							<li><a class="J_menuItem" href="rest/404" name="404页面">404页面</a></li>
-							<li><a class="J_menuItem" href="rest/500" name="500页面">500页面</a></li>
-						</ul></li>
 					<shiro:hasAnyRoles name="superAdmin, admin">
 						<li><a href="javascript:;"><i class="fa fa-table"></i> <span
 								class="nav-label">用户管理</span><span class="fa arrow"></span></a>

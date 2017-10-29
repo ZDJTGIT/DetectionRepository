@@ -40,10 +40,13 @@
 
 <body class="gray-bg"
 	style="background: url(assets/img/lg.jpg); background-size: 100% 100%;">
+	<div>
+		<img alt="logo" src="assets/img/log.jpg">
+	</div>
+	
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-                <img alt="" src="assets/img/zdLogo.png">
                 <h2 class="logo-name">Detection</h2>
             </div>
             <h3>欢迎使用中大检测平台</h3>
