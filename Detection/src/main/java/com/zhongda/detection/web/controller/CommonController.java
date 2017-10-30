@@ -169,18 +169,33 @@ public class CommonController {
 		return "form_avatar";
 	}
 
-	@RequestMapping("detectionPoint")
-	public String detectionPoint(HttpServletRequest request) {
+	@RequestMapping("detectionPoint/{project}")
+	public String detectionPoint(Model model, @PathVariable("project") String project) {
+		String[] strings = project.split(":");
+		model.addAttribute("projectTypeId", strings[0]);
+		model.addAttribute("projectName", strings[1]);
 		return "detectionPoint";
 	}
+	
 	
 	@RequestMapping("project_detail")
 	public String project_detail(HttpServletRequest request) {
 		return "project_detail";
 	}
+	
+	@RequestMapping("thresHold/{project}")
+	public String thresHold(Model model, @PathVariable("project") String project) {
+		String[] strings = project.split(":");
+		model.addAttribute("projectId", strings[0]);
+		model.addAttribute("projectName", strings[1]);
+		return "thresHold";
+	}
 
-	@RequestMapping("sensor_info")
-	public String sensor_info(HttpServletRequest request) {
+	@RequestMapping("sensor_info/{detectionPoint}")
+	public String sensor_info(Model model, @PathVariable("detectionPoint") String detectionPoint) {
+		String[] strings = detectionPoint.split(":");
+		model.addAttribute("detectionPointId", strings[0]);
+		model.addAttribute("detectionName", strings[1]);
 		return "sensor_info";
 	}
 	

@@ -22,7 +22,7 @@
 <link rel="shortcut icon" href="favicon.ico">
 <link href="assets/css/plugins/table/basic.css" rel="stylesheet">
 <link href="assets/css/plugins/table/user.css" rel="stylesheet">
-<link href="assets/css/plugins/layuis/layui.css" rel="stylesheet" media="all">
+<!--link href="assets/css/plugins/layuis/layui.css" rel="stylesheet" media="all"-->
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInUp">
@@ -69,7 +69,7 @@
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="myModalLabel">新建项目</h4>
+						        <h4 class="modal-title" id="myModalLabel_addProject">新建项目</h4>
 						      </div>
 						      <div class="modal-body">
 						        <label class="md_lable" for="">选择用户:</label>
@@ -100,8 +100,6 @@
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						        <button type="button" style="padding: 6px 12px" class="btn btn-primary btn-xs btn-lg sureAddProject_addProject" data-toggle="modal" data-target="#myModal_addImgAndCaveat">
-						                    下一步</button>
 						        <button type="button" class="btn btn-primary sureAddProject_addProject">提交</button>
 						      </div>
 						    </div>
@@ -116,7 +114,7 @@
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="myModalLabel">编辑项目信息</h4>
+						        <h4 class="modal-title" id="myModalLabel_updetaProject">编辑项目信息</h4>
 						      </div>
 						      <div class="modal-body">
 						        <label class="md_lable" for="">选择用户:</label>
@@ -146,84 +144,7 @@
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						        <button type="button" style="padding: 6px 12px" class="btn btn-primary btn-xs btn-lg sureAddProject_updetaProject" data-toggle="modal" data-target="#myModal_updetaDetection">
-						                    下一步</button>
 						        <button type="button" class="btn btn-primary sureAddProject_updetaProject">提交</button>
-						      </div>
-						    </div>
-						  </div>
-						 </form>
-						</div>
-						
-						<!-- Modal添加-下一步-项目类型添加警戒值和图片 -->
-						<div class="modal fade" id="myModal_addImgAndCaveat" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						 <form id="form_addImgAndCaveat">
-						  <div class="modal-dialog" role="document">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="myModalLabel">设置警戒值和添加项目图片</h4>
-						      </div>
-						      <div class="modal-body">
-						        <label class="md_lable" for="">测点类型:</label>
-								<div id="selectDetection_div_addDetections">
-							    </div><br><br>
-						        <label class="md_lable" for="maxThresholdValue_add">最大警戒值:</label>
-								<input class="md_input" type="text" id="maxThresholdValue_add" name="maxThresholdValue_add"><br><br>
-								<label class="md_lable" for="minThresholdValue_add">最小警戒值:</label>
-								<input class="md_input" type="text" id="minThresholdValue_add" name="minThresholdValue_add"><br><br>
-								
-								<label class="md_lable" for="">添加**图:</label>
-							    <div class="layui-upload-list">
-									<img class="layui-upload-img" id="demo1" src="assets/img/test2.png">
-									<p id="demoText"></p>
-							    </div>
-								<button type="button" class="layui-btn" id="test1">上传</button><br><br>  
-								
-							    <label class="md_lable" for="">添加物理图:</label>
-							    <div class="layui-upload-list">
-									<img class="layui-upload-img" id="demo2" src="assets/img/test2.png">
-									<p id="demoText"></p>
-							    </div>
-								<button type="button" class="layui-btn" id="test2">上传</button>  
-	
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">上一步</button>
-						        <button type="button" style="padding: 6px 12px" class="btn btn-primary btn-xs btn-lg sureAddImgAndCaveat" data-toggle="modal" data-target="#myModal_addDetection">
-						                    下一步</button>
-						        <button type="button" id="sureAddImgAndCaveat" class="btn btn-primary sureAddImgAndCaveat">提交</button>
-						      </div>
-						    </div>
-						  </div>
-						 </form>
-						</div>
-						
-						<!-- Modal添加-下一步-添加测点 -->
-						<div class="modal fade" id="myModal_addDetection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						 <form id="form_addDetection">
-						  <div class="modal-dialog" role="document">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="myModalLabel">添加项目测点</h4>
-						      </div>
-						      <div class="modal-body">
-								<label class="md_lable" for="">测点类型:</label>
-								<div id="selectDetection_div_addDetection">
-							    </div><br><br>
-								<label class="md_lable" for="detectionName_add">测点名称:</label> 
-								<input class="md_input" type="text" id="detectionName_add" name="detectionName_add"><br><br>
-								<label class="md_lable" for="detectionLongitude_add">测点经度:</label>
-								<input class="md_input" type="text" id="detectionLongitude_add" name="detectionLongitude_add"><br><br>
-								<label class="md_lable" for="detectionLatitude_add">测点纬度:</label>
-								<input class="md_input" type="text" id="detectionLatitude_add" name="detectionLatitude_add"><br>
-								<label class="md_lable" for="">测点描述:</label>
-								<textarea id="detectionDescription_add" class="data_project_tar data_content_input_5" rows="4"></textarea>
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">上一步</button>
-						        <button type="button" id="sureAddDetection" name="sureAddDetection" class="btn btn-primary">提交</button>
 						      </div>
 						    </div>
 						  </div>
@@ -293,13 +214,13 @@
 				var upload = layui.upload;
 				
 				//heatImageUr上传
-				var uploadInst = upload.render({
+				var uploadInst1 = upload.render({
 						elem: '#test1',
-						url: 'assets/img/',
+						url: 'rest/threshold/uploadImg',
 						before: function(obj){
 						//预读本地文件示例，不支持ie8
 						obj.preview(function(index, file, result){
-							alert(result);
+							//alert(result);
 							$('#demo1').attr('src', result); //图片链接（base64）
 						});
 					},
@@ -307,25 +228,27 @@
 					done: function(res){
 						//如果上传失败
 						if(res.code > 0){
-						return layer.msg('上传失败');
+							return layer.msg('上传失败');
+						}else{
+							$('#demo1').attr('src', res.path);
 						}
 						//上传成功
 					},
 					//上传失败回调函数
 					error: function(){
 						//演示失败状态，并实现重传
-						var demoText = $('#demoText');
+						var demoText = $('#demoText1');
 						demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
 						demoText.find('.demo-reload').on('click', function(){
-						uploadInst.upload();
+							uploadInst1.upload();
 						});
 					}
 				});
 				
 				//physicalImageUrl上传
-				var uploadInst = upload.render({
+				var uploadInst2 = upload.render({
 					elem: '#test2',
-					url: '请填写你的接口url',
+					url: 'rest/threshold/uploadImg',
 					before: function(obj){
 					//预读本地文件示例，不支持ie8
 					obj.preview(function(index, file, result){
@@ -336,15 +259,17 @@
 					//如果上传失败
 					if(res.code > 0){
 					return layer.msg('上传失败');
+					}else{
+						$('#demo2').attr('src', res.path);
 					}
 					//上传成功
 				}
 				,error: function(){
 					//演示失败状态，并实现重传
-					var demoText = $('#demoText');
+					var demoText = $('#demoText2');
 					demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
 					demoText.find('.demo-reload').on('click', function(){
-					uploadInst.upload();
+						uploadInst2.upload();
 					});
 				}
 			});
@@ -463,20 +388,20 @@
 											'<span class="label label-primary">' + item.projectStatusString + '</span>'+
 										'</td>'+
 										'<td class="project-title" style="width:150px">'+
-											'<a href="project_detail.html">' + item.projectName + '</a><br />'+
+											'<a href="javascript:;">' + item.projectName + '</a><br />'+
 										'</td>'+
 										'<td class="project-title" style="width:200px">'+
-											'<a href="project_detail.html">创建时间</a><br />'+
+											'<a href="javascript:;">创建时间</a><br />'+
 											'<small>' + item.projectBeginTime + '</small>'+
 									    '</td>'+
-										'<td class="project-completion" style="width:460px">'+
+										'<td class="project-completion" style="width:320px">'+
 											'<small>当前进度： '+percentage+'%</small>'+
 											'<div class="progress progress-mini">'+
 												'<div style="width: '+percentage+'%;" class="progress-bar"></div>'+
 											'</div>'+
 										'</td>'+
 										'<td class="project-title" style="width:260px">'+
-											'<a href="project_detail.html">项目描述</a><br />'+
+											'<a href="javascript:;">项目描述</a><br />'+
 											'<small>' + item.projectDescription + '</small>'+
 									    '</td>'+
 									    '<td class="project-status" style="display:none">'+
@@ -489,19 +414,25 @@
 											'<span class="label label-primary">' + item.projectEndTime + '</span>'+
 								    	'</td>'+
 										'<td class="project-title" style="width:140px">'+
-											'<a href="project_detail.html">项目告警信息('+ item.messageCount +')</a><br />'+
+											'<a href="javascript:;">项目告警信息('+ item.messageCount +')</a><br />'+
 										'</td>'+
 										'<td class="project-title" style="width:20px">'+
 										'</td>'+
-										'<td class="project-title" style="width:150px">'+
+										'<td class="project-status" style="width:140px">'+
+										//打开页面即传item.projectName过去
+											'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="测点信息">'+
+												'测点信息 '+
+											'</a>'+
+										'</td>'+
+										'<td class="project-status" style="width:150px">'+
 										//打开页面即传item.pojectId过去
-											'<a href="rest/detectionPoint" class="J_menuItem">'+
-												'查看测点信息 '+
+											'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+'" class="J_menuItem" name="预值和图片">'+
+												'阀值和图片 '+
 											'</a>'+
 										'</td>'+
 										'<td class="project-actions">'+
 										    '<a href="javascript:;" class="J_menuItem" onclick="updetaProject(this)" data-toggle="modal" data-target="#myModal_updetaProject">'+
-												'<i class="fa fa-times-circle"></i> 编辑项目信息 '+
+												'<i class="fa fa-times-circle"></i> 修改 '+
 											'</a>'+
 										    '<a href="javascript:;" class="J_menuItem" onclick="deleteProject('+ item.projectId +')">'+
 												'<i class="fa fa-times-circle"></i> 删除 '+
@@ -718,11 +649,6 @@
 			}
 		};
 		
-		//确认修改测点响应事件
-   		$('#sureUpdetaDetection').click(function(){
-   			alert("修改成功！");
-   		});
-		
 	   	//确定修改项目响应事件
    		$(".sureAddProject_updetaProject").click(function(){
    		    //修改项目验证
@@ -773,11 +699,25 @@
    		   	  	  success: function(data){
    		   	  		  if(data){
    		   	  		    //修改成功后当前页面的当前项目修改
-			    	   $("table tr:eq(" + t + ") td:eq(5)").text(data.projectStatusString);//项目状态_String
-			    	   $("table tr:eq(" + t + ") td:eq(6)").text(data.projectName);//项目名
-			    	   $("table tr:eq(" + t + ") td:eq(9)").text(data.projectDescription);//项目描述
-			    	   $("table tr:eq(" + t + ") td:eq(7)").text(data.projectBeginTime);//创建时间
-			    	   //$("table tr:eq(" + t + ") td:eq(8)").text(data.projectStatus);//当前进度
+			    	   $("table tr:eq(" + t + ") td:eq(5) span").text(data.projectStatusString);//项目状态_String
+			    	   $("table tr:eq(" + t + ") td:eq(6) a").text(data.projectName);//项目名
+			    	   $("table tr:eq(" + t + ") td:eq(9) small").text(data.projectDescription);//项目描述
+			    	   $("table tr:eq(" + t + ") td:eq(7) small").text(data.projectBeginTime);//创建时间
+			    	   
+			    	   var nowTime = new Date().getTime();
+	  		    	   var beginTime = stringToData(data.projectBeginTime);
+	  		    	   var endTime = stringToData(data.projectEndTime);
+	  		    	   var percentage=0;;
+	  		    	   if(nowTime > endTime){
+	  		    		   percentage=100;
+	  		    	   }else if(nowTime < beginTime){
+	  		    		   percentage=0;
+	  		    	   }else{
+	  		    		   percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
+	  		    	   }	  		    
+			    	   $("table tr:eq(" + t + ") td:eq(8) small").text("当前进度： "+percentage+"%");//当前进度
+			    	   $("table tr:eq(" + t + ") td:eq(8) .progress-bar").css("width",percentage+"%");//当前进度
+			    	   
 			    	   alert("修改成功！");
    		   	  		  }else {
   						alert("抱歉！您为非管理员用户，修改项目信息请联系对应管理员！");
@@ -788,89 +728,6 @@
    	  		      }
    			  }); 
    		}); 
-		//确定添加警戒值和项目图片响应事件(点击下一步和提交)
-		$('.sureAddImgAndCaveat').click(function(){
-			var projectName = $("#projectName_addProjects").val();//项目名—查找项目ID，用户ID，项目类型ID
-			var detectionTypeId = $("#selectDetection_div_addDetections option:selected").val();//测点类型ID
-			var maxThresholdValue = $("#maxThresholdValue_add").val();//告警最大值
-			var minThresholdValue = $("#minThresholdValue_add").val();//告警最小值
-			alert(detectionTypeId);
-			alert(maxThresholdValue);
-			alert(minThresholdValue);
-			var heatImageUrl = "a";//心电图
-			var physicalImageUrl = "b";//物理图
-			var jsonData = '{"detectionTypeId":"'
-							+ detectionTypeId
-							+ '","projectName":"'
-							+ projectName
-							+ '","maxThresholdValue":"'
-							+ maxThresholdValue
-							+ '","minThresholdValue":"'
-							+ minThresholdValue 
-							+ '","heatImageUrl":"'
-							+ heatImageUrl
-							+ '","physicalImageUrl":"'
-							+ physicalImageUrl + '"}';
-			alert("sdadadasdasdaad");
-			$.ajax({
-				type:'post',
-				url: 'rest/project/addThreshold',
-				contentType:"application/json",
-				dataType : 'json',
-				data: jsonData,
-				success: function(data){
-						if(data){
-							alert("添加成功！");
-								}else {
-									  alert("数据异常");
-								      }
-								}
-				}); 					
-		});
-	   	
-	   	//确认添加测点响应事件(项目ID为当前项目)
-   		$('#sureAddDetection').click(function(){
-   		    var projectName = $("#projectName_addProjects").val();//项目名—查找项目ID
-   			var detectionTypeId = $("#selectDetection_div_addDetection option:selected").val();//测点类型ID
-   			var detectionLatitude = $("#detectionLongitude_add").val();//测点经度.
-   			var detectionLongitude = $("#detectionLatitude_add").val();//测点纬度.
-   			var detectionName = $("#detectionName_add").val();//测点名.
-   			var detectionDescription = $("#detectionDescription_add").val();//测点描述.
-   			alert("ajax");
-   			alert(projectName);
-   			alert(detectionTypeId);
-   			alert(detectionLatitude);
-   			alert(detectionLongitude);
-   			alert(detectionName);
-   			alert(detectionDescription);
-   			var jsonData = '{"projectName":"'
-							+ projectName
-							+ '","detectionTypeId":"'
-							+ detectionTypeId
-							+ '","detectionLatitude":"'
-							+ detectionLatitude
-							+ '","detectionLongitude":"'
-							+ detectionLongitude 
-							+ '","detectionName":"'
-							+ detectionName
-							+ '","detectionDescription":"'
-							+ detectionDescription + '"}';
-							alert("sdadadasdasdaad");
-			$.ajax({
-				   type:'post',
-				   url: 'rest/project/addDescription',
-				   contentType:"application/json",
-				   dataType : 'json',
-				   data: jsonData,
-				   success: function(data){
-				   		if(data){
-								alert("添加成功！");
-				   		   	    }else {
-				  				alert("数据异常");
-				   				}
-				   		}
-				   }); 				
-   		});
 	   	
 		//确认添加项目响应事件
 		$(".sureAddProject_addProject").click(function(){
@@ -918,7 +775,7 @@
 				success : function(data) {
 					if(data) {
 						if(data.userId!=2){
-						alert("添加成功！");
+						alert("项目添加成功！");
 						var nowTime = new Date().getTime();
 	  		    		var beginTime = stringToData(data.projectBeginTime);
 	  		    		var endTime = stringToData(data.projectEndTime);
@@ -954,20 +811,20 @@
 											'<span class="label label-primary">' + data.projectStatusString + '</span>'+
 										'</td>'+
 										'<td class="project-title" style="width:150px">'+
-											'<a href="project_detail.html">' + data.projectName + '</a><br />'+
+											'<a href="javascript:;">' + data.projectName + '</a><br />'+
 										'</td>'+
 										'<td class="project-title" style="width:200px">'+
-											'<a href="project_detail.html">创建时间</a><br />'+
+											'<a href="javascript:;">创建时间</a><br />'+
 											'<small>' + data.projectBeginTime + '</small>'+
 								    	'</td>'+
-										'<td class="project-completion" style="width:460px">'+
+										'<td class="project-completion" style="width:320px">'+
 											'<small>当前进度： '+percentage+'%</small>'+
 											'<div class="progress progress-mini">'+
 												'<div style="width: '+percentage+'%;" class="progress-bar"></div>'+
 											'</div>'+
 										'</td>'+
 										'<td class="project-title" style="width:260px">'+
-											'<a href="project_detail.html">项目描述</a><br />'+
+											'<a href="javascript:;">项目描述</a><br />'+
 											'<small>' + data.projectDescription + '</small>'+
 										'</td>'+
 										'<td class="project-status" style="display:none">'+
@@ -980,19 +837,26 @@
 											'<span class="label label-primary">' + data.projectEndTime + '</span>'+
 								    	'</td>'+
 										'<td class="project-title" style="width:140px">'+
-										'<a href="project_detail.html">项目告警信息(0)</a><br />'+
+										'<a href="javascript:;">项目告警信息(0)</a><br />'+
 										'</td>'+
 										'<td class="project-title" style="width:20px">'+
 										'</td>'+
 										
-										'<td class="project-title" style="width:150px">'+
-											'<a href="rest/detectionPoint" class="J_menuItem">'+
-												'查看测点信息 '+
+										'<td class="project-status" style="width:140px">'+
+										//打开页面即传item.pojectId过去
+										'<a href="rest/detectionPoint/'+data.projectTypeId+':'+data.projectName+'" class="J_menuItem" name="测点信息">'+
+											 '测点信息 '+
+										'</a>'+
+										'</td>'+
+										'<td class="project-status" style="width:150px">'+
+										//打开页面即传item.pojectId过去
+											'<a href="rest/thresHold/'+data.projectId+':'+data.projectName+'" class="J_menuItem" name="预值和图片">'+
+												'阀值和图片 '+
 											'</a>'+
 										'</td>'+
 										'<td class="project-actions">'+
 										    '<a href="javascript:;" class="J_menuItem" onclick="updetaProject(this)" data-toggle="modal" data-target="#myModal_updetaProject">'+
-												'<i class="fa fa-pencil"></i> 编辑项目信息 '+
+												'<i class="fa fa-pencil"></i> 修改 '+
 											'</a>'+
 											'<a href="javascript:;" class="J_menuItem" onclick="deleteProject('+ data.projectId +')">'+
 												'<i class="fa fa-times-circle"></i> 删除 '+
@@ -1008,6 +872,7 @@
 									$('#projectBeginTime_addProject').val("");
 									$('#projectEndTime_addProject').val("");
 									//新建测点时加载测点类型-不同项目不同测点类型(通过项目value判定)
+									
 						    	    $.ajax({
 						    	    	type:'post',
 							    	  	  url: 'rest/project/showDetectionStatus',
@@ -1030,6 +895,7 @@
 							  			    alert("数据加载失败");
 							  		      }
 						    	     });
+									
                            }else{
                             	alert("抱歉！您为非管理员用户，添加项目请联系对应管理员！");
                             	$('#projectAddress_addProject').val("");
@@ -1094,20 +960,20 @@
 												'<span class="label label-primary">' + item.projectStatusString + '</span>'+
 											'</td>'+
 											'<td class="project-title" style="width:150px">'+
-												'<a href="project_detail.html">' + item.projectName + '</a><br />'+
+												'<a href="javascript:;">' + item.projectName + '</a><br />'+
 											'</td>'+
 											'<td class="project-title" style="width:200px">'+
-												'<a href="project_detail.html">创建时间</a><br />'+
+												'<a href="javascript:;">创建时间</a><br />'+
 												'<small>' + item.projectBeginTime + '</small>'+
 								    		'</td>'+
-											'<td class="project-completion" style="width:460px">'+
+											'<td class="project-completion" style="width:320px">'+
 												'<small>当前进度： '+percentage+'%</small>'+
 												'<div class="progress progress-mini">'+
 													'<div style="width: '+percentage+'%;" class="progress-bar"></div>'+
 												'</div>'+
 											'</td>'+
 											'<td class="project-title" style="width:260px">'+
-												'<a href="project_detail.html">项目描述</a><br />'+
+												'<a href="javascript:;">项目描述</a><br />'+
 												'<small>' + item.projectDescription + '</small>'+
 											'</td>'+
 											'<td class="project-status" style="display:none">'+
@@ -1120,19 +986,26 @@
 												'<span class="label label-primary">' + item.projectEndTime + '</span>'+
 									    	'</td>'+
 											'<td class="project-title" style="width:140px">'+
-												'<a href="project_detail.html">项目告警信息('+ item.messageCount +')</a><br />'+
+												'<a href="javascript:;">项目告警信息('+ item.messageCount +')</a><br />'+
 											'</td>'+
 											'<td class="project-title" style="width:20px">'+
 											'</td>'+
 											
-											'<td class="project-title" style="width:150px">'+
-												'<a href="rest/detectionPoint" class="J_menuItem">'+
-													'查看测点信息 '+
+											'<td class="project-status" style="width:140px">'+
+											//打开页面即传item.pojectId过去
+												'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="测点信息">'+
+													'测点信息 '+
+												'</a>'+
+											'</td>'+
+											'<td class="project-status" style="width:150px">'+
+											//打开页面即传item.pojectId过去
+												'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+'" class="J_menuItem" name="预值和图片">'+
+													'阀值和图片 '+
 												'</a>'+
 											'</td>'+
 											'<td class="project-actions">'+
 											    '<a href="javascript:;" class="J_menuItem" onclick="updetaProject(this)" data-toggle="modal" data-target="#myModal_updetaProject">'+
-													'<i class="fa fa-pencil"></i> 编辑项目信息 '+
+													'<i class="fa fa-pencil"></i> 修改 '+
 												'</a>'+
 												'<a href="javascript:;" class="J_menuItem" onclick="deleteProject('+ item.projectId +')">'+
 													'<i class="fa fa-times-circle"></i> 删除 '+
@@ -1153,7 +1026,7 @@
 		//删除项目
 		function deleteProject(projectId){
 			layer.msg('玩命提示中');
-			layer.confirm('确定要删除该用户么？', {
+			layer.confirm('确定要删除该项目么？(包括项目下所有测点和传感器)', {
 				btn : [ '取消删除', '确定删除' ] //按钮
 			}, function() {
 				layer.msg('已取消', {icon : 1});

@@ -119,4 +119,9 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectMapper.selectProjectByProjectNameAndUserId(projectName, userId);
 	}
 
+	@Override
+	public int deleteByUserId(Integer userId) {
+		return projectMapper.deleteByUserId(userId);
+	}
+
 }

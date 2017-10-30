@@ -21,6 +21,17 @@ public class Threshold {
     
     //用户新建时传项目名查找用户ID项目ID项目类型ID
     private String projectName;
+    
+    //打开threshold表时缓存测点类型名
+    private String detectionTypeName;
+
+	public String getDetectionTypeName() {
+		return detectionTypeName;
+	}
+
+	public void setDetectionTypeName(String detectionTypeName) {
+		this.detectionTypeName = detectionTypeName;
+	}
 
     public String getProjectName() {
 		return projectName;

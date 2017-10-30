@@ -14,6 +14,13 @@ import com.zhongda.detection.web.model.Project;
  * @date 2017年9月25日
  */
 public interface ProjectService {
+	
+	/**
+	 * 根据用户ID删除项目（删除用户下所有项目）
+	 * @param userId
+	 * @return
+	 */
+	int deleteByUserId(Integer userId);
 
 	/**
 	 * 根据用户id和项目类型id查询出当前用户下对应项目类型的所有项目

@@ -1,5 +1,7 @@
 package com.zhongda.detection.web.service;
 
+import java.util.List;
+
 import com.zhongda.detection.web.model.DetectionPoint;
 
 /**
@@ -15,5 +17,32 @@ public interface DetectionPointService {
      * @return
      */
     int insertSelective(DetectionPoint record);
+    
+    /**
+	 * 根据测点ID删除测点
+	 * @param detectionPointId
+	 * @return
+	 */
+    int deleteByPrimaryKey(Integer detectionPointId);
+    
+    /**
+     * 根据项目ID删除测点（删除项目下对应所有测点）
+     * @param projectId
+     * @return
+     */
+    int deleteByProjectId(Integer projectId);
+    
+    /**
+     * 根据项目ID查该项目下所有测点
+     * @param projectId
+     * @return
+     */
+    List<DetectionPoint> selectByProjectId(Integer projectId);
 
+    /**
+     * 根据测点ID修改测点信息
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKeySelective(DetectionPoint record);
 }

@@ -18,9 +18,25 @@
     from sensor_info
     where sensor_info_id = #{sensorInfoId,jdbcType=INTEGER}
   </select>
+  <select id="selectByDetectionPointId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sensor_info
+    where detection_point_id = #{detectionPointId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sensor_info
     where sensor_info_id = #{sensorInfoId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByProjectId" parameterType="java.lang.Integer">
+    delete si.* 
+	from detection_point dp ,sensor_info si 
+	where dp.detection_point_id=si.detection_point_id 
+	and dp.project_id = #{projectId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByDetectionPointId" parameterType="java.lang.Integer">
+    delete from sensor_info
+    where detection_point_id = #{detectionPointId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.SensorInfo">
     insert into sensor_info (sensor_info_id, detection_point_id, sensor_id, 

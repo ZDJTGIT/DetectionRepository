@@ -123,6 +123,10 @@
     delete from project
     where project_id = #{projectId,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByUserId" parameterType="java.lang.Integer">
+    delete from project
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.Project">
     insert into project (project_id, user_id, project_name,
       project_type_id, project_address, project_longitude,

@@ -17,6 +17,17 @@ public class DetectionPoint {
     
     //缓存项目名，数据库无该字段
     private String projectName;
+    
+    //缓存测点类型名称，数据库无该字段
+    private String itemName;
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
 
 	public String getProjectName() {
 		return projectName;

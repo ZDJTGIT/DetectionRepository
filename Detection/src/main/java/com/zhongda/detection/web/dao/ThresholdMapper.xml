@@ -11,6 +11,7 @@
     <result column="max_threshold_value" jdbcType="REAL" property="maxThresholdValue" />
     <result column="heat_image_url" jdbcType="VARCHAR" property="heatImageUrl" />
     <result column="physical_image_url" jdbcType="VARCHAR" property="physicalImageUrl" />
+    <result column="detection_type_name" jdbcType="VARCHAR" property="detectionTypeName" />
   </resultMap>
   <sql id="Base_Column_List">
     threshold_id, user_id, project_id, project_type_id, detection_type_id, min_threshold_value, 
@@ -22,9 +23,26 @@
     from threshold
     where threshold_id = #{thresholdId,jdbcType=INTEGER}
   </select>
+  <select id="selectByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select t.*,sd.item_name 'detection_type_name' 
+    from threshold t, sys_dictionary sd 
+    where t.detection_type_id=sd.dic_id  
+    and t.project_id = #{projectId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByProjectIdAndDetectionTypeId" resultMap="BaseResultMap">
+     select
+     <include refid="Base_Column_List" />
+     FROM threshold 
+     where project_id = #{0} 
+     and detection_type_id = #{1} 
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from threshold
     where threshold_id = #{thresholdId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByProjectId" parameterType="java.lang.Integer">
+    delete from threshold
+    where project_id = #{projectId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.Threshold">
     insert into threshold (threshold_id, user_id, project_id, 

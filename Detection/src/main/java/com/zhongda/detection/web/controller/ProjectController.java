@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.zhongda.detection.web.dao.DetectionPointMapper;
-import com.zhongda.detection.web.dao.SysDictionaryMapper;
 import com.zhongda.detection.web.dao.ThresholdMapper;
 import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Project;
@@ -24,9 +22,12 @@ import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.model.Threshold;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.RoleSign;
+import com.zhongda.detection.web.service.DetectionPointService;
 import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
+import com.zhongda.detection.web.service.SensorInfoService;
+import com.zhongda.detection.web.service.SysDictionaryService;
 import com.zhongda.detection.web.service.UserService;
 
 @Controller
@@ -37,13 +38,16 @@ public class ProjectController {
 	private UserService userService;
 
 	@Resource
-	private SysDictionaryMapper sysDictionaryMapper;
+	private SysDictionaryService sysDictionaryServce;
 	
 	@Resource
-	private DetectionPointMapper detectionPointMapper;
+	private DetectionPointService detectionPointService;
 
 	@Autowired
 	private ThresholdMapper thresholdService;
+	
+	@Autowired
+	private SensorInfoService sensorInfoService;
 	
 	@Autowired
 	private ProjectService projectService;
@@ -140,14 +144,14 @@ public class ProjectController {
 			 projectList = projectService.selectAllProjectWithMessageCount();
 			 //将数据库查到的项目状态添加到项目
 			 for(Project project:projectList){
-				 project.setProjectStatusString(sysDictionaryMapper.selectProjectStatusByDicId(project.getProjectStatus()));
+				 project.setProjectStatusString(sysDictionaryServce.selectProjectStatusByDicId(project.getProjectStatus()));
 			 }
 		 }else{
 			 //非管理员用户，可查看自己的项目信息
 			 projectList = projectService.selectProjectByUserIdWithMessageCount(userId);
 			 //将数据库查到的项目状态添加到项目
 			 for(Project project:projectList){
-				 project.setProjectStatusString(sysDictionaryMapper.selectProjectStatusByDicId(project.getProjectStatus()));
+				 project.setProjectStatusString(sysDictionaryServce.selectProjectStatusByDicId(project.getProjectStatus()));
 			 }
 		 }
 		return projectList;
@@ -164,12 +168,12 @@ public class ProjectController {
 		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
 			projectList = projectService.selectAllProjectByKeyWord_mana(keyWord);
 			for(Project project:projectList){
-				 project.setProjectStatusString(sysDictionaryMapper.selectProjectStatusByDicId(project.getProjectStatus()));
+				 project.setProjectStatusString(sysDictionaryServce.selectProjectStatusByDicId(project.getProjectStatus()));
 			}
 		}else{
 			projectList = projectService.selectAllProjectByKeyWord_nomana(keyWord, userId);
 			for(Project project:projectList){
-				 project.setProjectStatusString(sysDictionaryMapper.selectProjectStatusByDicId(project.getProjectStatus()));
+				 project.setProjectStatusString(sysDictionaryServce.selectProjectStatusByDicId(project.getProjectStatus()));
 			}
 		}
 		return projectList;
@@ -190,7 +194,7 @@ public class ProjectController {
 	@RequestMapping(value = "/showProjectType", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SysDictionary> showProjectType(Integer userId) {
-		return sysDictionaryMapper.selectSysDictionaryType();
+		return sysDictionaryServce.selectSysDictionaryType();
 	}
 
 	/**
@@ -199,7 +203,7 @@ public class ProjectController {
 	@RequestMapping(value = "/showProjectStatus", method=RequestMethod.POST)
 	@ResponseBody
 	public List<SysDictionary> showProjectStatus(Integer userId){
-		return sysDictionaryMapper.selectSysDictionaryType_Status();
+		return sysDictionaryServce.selectSysDictionaryType_Status();
 	}
 	/**
 	 * 查找测点类型
@@ -207,7 +211,7 @@ public class ProjectController {
 	@RequestMapping(value = "/showDetectionStatus", method=RequestMethod.POST)
 	@ResponseBody
 	public List<SysDictionary> showDetectionStatus(Integer projectTypeId){
-		return sysDictionaryMapper.selectSysDictionaryByProjectTypeId(projectTypeId);
+		return sysDictionaryServce.selectSysDictionaryByProjectTypeId(projectTypeId);
 	}
 	
 	/**
@@ -225,7 +229,7 @@ public class ProjectController {
 	@RequestMapping(value = "/showProjectType_selected", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SysDictionary> showProjectType_selected(Integer userId) {
-		return sysDictionaryMapper.selectSysDictionaryType();
+		return sysDictionaryServce.selectSysDictionaryType();
 	}
 	
 	/**
@@ -236,7 +240,7 @@ public class ProjectController {
 	@RequestMapping(value = "/showProjectStatus_selected", method=RequestMethod.POST)
 	@ResponseBody
 	public List<SysDictionary> showProjectStatus_selected(Integer userId){
-		return sysDictionaryMapper.selectSysDictionaryType_Status(); 
+		return sysDictionaryServce.selectSysDictionaryType_Status(); 
 	}
 	
 	/**
@@ -244,10 +248,8 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/showSelectUserAndProjectType", method = RequestMethod.POST)
 	@ResponseBody
-	public Project showSelectUserAndProjectType(Integer projectId,
-			Integer projectTypeId) {// 项目类型ID
-		SysDictionary sysDictionary = sysDictionaryMapper
-				.selectByPrimaryKey(projectTypeId);
+	public Project showSelectUserAndProjectType(Integer projectId, Integer projectTypeId) {// 项目ID、项目类型ID
+		SysDictionary sysDictionary = sysDictionaryServce.selectByPrimaryKey(projectTypeId);
 		Project project = projectService.selectByPrimaryKey(projectId);
 		project.setSysDictionary(sysDictionary);
 		return project;
@@ -266,7 +268,18 @@ public class ProjectController {
 			//项目ID自增长，取出
 			project = projectService.selectByProjectName(project.getProjectName());
 			//项目状态为int关联字典表，取出
-			project.setProjectStatusString(sysDictionaryMapper.selectProjectStatusByDicId(project.getProjectStatus()));
+			project.setProjectStatusString(sysDictionaryServce.selectProjectStatusByDicId(project.getProjectStatus()));
+			//创建完项目在警戒值表中按项目类型添加记录
+				//获取项目类型ID
+			    List<SysDictionary> sysDictionaryList = sysDictionaryServce.selectSysDictionaryByProjectTypeId(project.getProjectTypeId());
+			    for(SysDictionary sysDictionary:sysDictionaryList){
+			    	Threshold threshold = new Threshold();
+			    	threshold.setUserId(project.getUserId());
+			    	threshold.setProjectId(project.getProjectId());
+			    	threshold.setProjectTypeId(project.getProjectTypeId());
+			    	threshold.setDetectionTypeId(sysDictionary.getDicId());
+			    	thresholdService.insertSelective(threshold);
+			    }
 		}else{
 			//非管理员不能填写项目
 			project.setUserId(2);
@@ -282,22 +295,24 @@ public class ProjectController {
 	public DetectionPoint addDescription(@RequestBody DetectionPoint detectionPoint){
 		//根据项目名查项目ID加到测点
 		detectionPoint.setProjectId((projectService.selectByProjectName(detectionPoint.getProjectName())).getProjectId());
-		detectionPointMapper.insertSelective(detectionPoint);
+		System.out.println("9+**++-+--++-7+7+768678项目类型ID为："+detectionPoint.getDetectionTypeId());
+		detectionPointService.insertSelective(detectionPoint);
 		return detectionPoint;
 	}
 	
 	/**
 	 * 新建Threshold
 	 */
-	@RequestMapping(value = "/addThreshold", method = RequestMethod.POST)
+	@RequestMapping(value = "/updetaThreshold", method = RequestMethod.POST)
 	@ResponseBody
-	public Threshold addThreshold(@RequestBody Threshold threshold){
+	public Threshold updetaThreshold(@RequestBody Threshold threshold){
 		//use projectName to select userid,projectid,projecttypeid and insert into threshold
 		Project project = projectService.selectByProjectName(threshold.getProjectName());
 		threshold.setUserId(project.getUserId());
 		threshold.setProjectId(project.getProjectId());
 		threshold.setProjectTypeId(project.getProjectTypeId());
-		thresholdService.insertSelective(threshold);
+		threshold.setThresholdId(thresholdService.selectByProjectIdAndDetectionTypeId(project.getProjectId(), threshold.getDetectionTypeId()).getThresholdId());
+		thresholdService.updateByPrimaryKeySelective(threshold);
 		return threshold;
 	}
 	
@@ -312,7 +327,7 @@ public class ProjectController {
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			projectService.updateByPrimaryKeySelective(project);
 			//项目状态为int关联字典表，取出
-			project.setProjectStatusString(sysDictionaryMapper.selectProjectStatusByDicId(project.getProjectStatus()));
+			project.setProjectStatusString(sysDictionaryServce.selectProjectStatusByDicId(project.getProjectStatus()));
 			return project;
 		}else{
 			return null;
@@ -329,7 +344,14 @@ public class ProjectController {
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			// 管理员用户，可删除项目
+			//项目ID删除项目
 			projectService.deleteByPrimaryKey(projectId);
+			//项目ID删除测点
+			detectionPointService.deleteByProjectId(projectId);
+			//项目ID关联测点表和传感器表删除传感器
+			sensorInfoService.deleteByProjectId(projectId);
+			//项目ID删除告警信息
+			thresholdService.deleteByProjectId(projectId);
 			return 1;
 		} else {
 			// 非管理员不能删除项目

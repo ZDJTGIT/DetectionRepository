@@ -1,22 +1,56 @@
 package com.zhongda.detection.web.dao;
 
+import java.util.List;
+
 import com.zhongda.detection.web.model.Threshold;
 
 public interface ThresholdMapper {
+	/**
+	 * 根据告警信息ID删除告警信息
+	 * @param thresholdId
+	 * @return
+	 */
     int deleteByPrimaryKey(Integer thresholdId);
+    
+    /**
+     * 根据项目ID删除告警信息（删除项目下所有告警信息）
+     * @param projectId
+     * @return
+     */
+    int deleteByProjectId(Integer projectId);
 
     int insert(Threshold record);
 
     /**
-     * insert a Threshold
+     * 插入一条预值
      * @param record
      * @return
      */
     int insertSelective(Threshold record);
-
+    
     Threshold selectByPrimaryKey(Integer thresholdId);
+    
+    /**
+     * 根据项目ID查所有Threshold表记录(包括虚拟字段-测点类型名)
+     * @param projectId
+     * @return
+     */
+    List<Threshold> selectByProjectId(Integer projectId);
 
+    /**
+     * 根据预值ID修改记录
+     * @param record
+     * @return
+     */
     int updateByPrimaryKeySelective(Threshold record);
 
     int updateByPrimaryKey(Threshold record);
+    
+    /**
+     * 根据项目ID和测点类型ID精确查找到预警表中的一条记录
+     * @param projectId
+     * @param detectionTypeId
+     * @return
+     */
+    Threshold selectByProjectIdAndDetectionTypeId(Integer projectId, Integer detectionTypeId);
 }

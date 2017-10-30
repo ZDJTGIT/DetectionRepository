@@ -17,6 +17,11 @@ public interface SysDictionaryService {
 
     int insertSelective(SysDictionary record);
 
+    /**
+     * 通过项目类型ID查字典表
+     * @param dicId
+     * @return
+     */
     SysDictionary selectByPrimaryKey(Integer dicId);
 
     int updateByPrimaryKeySelective(SysDictionary record);

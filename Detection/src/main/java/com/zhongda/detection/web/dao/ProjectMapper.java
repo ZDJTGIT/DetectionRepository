@@ -6,11 +6,25 @@ import com.zhongda.detection.web.model.Project;
 public interface ProjectMapper {
 	
 	/**
+	 * 根据用户ID删除项目（删除用户下所有项目）
+	 * @param userId
+	 * @return
+	 */
+	int deleteByUserId(Integer userId);
+	
+	/**
 	 * 根据项目ID删除项目
 	 * @param projectId
 	 * @return
 	 */
 	int deleteByPrimaryKey(Integer projectId);
+	
+	/**
+	 * 根据项目ID删除项目以及项目下测点以及测点下传感器以及告警信息表（sql未实现）---
+	 * @param projectId
+	 * @return
+	 */
+	int deleteAllAboutProjectByProjectId(Integer projectId);
 
 	/**
 	 * 插入一条项目信息

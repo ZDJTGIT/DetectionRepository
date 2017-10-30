@@ -5,10 +5,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.zhongda.detection.web.dao.SysDictionaryMapper;
 import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.service.SysDictionaryService;
 
+@Service
 public class SysDictionaryServiceImpl implements SysDictionaryService {
 
 	@Resource
@@ -34,8 +37,7 @@ public class SysDictionaryServiceImpl implements SysDictionaryService {
 
 	@Override
 	public SysDictionary selectByPrimaryKey(Integer dicId) {
-		// TODO Auto-generated method stub
-		return null;
+		return sysDictionaryMapper.selectByPrimaryKey(dicId);
 	}
 
 	@Override
