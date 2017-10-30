@@ -29,6 +29,7 @@ import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.service.AlarmService;
 import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.ProjectService;
+import com.zhongda.detection.web.service.UserService;
 
 /**
  * <p>
@@ -57,6 +58,9 @@ public class CommonController {
 	private CacheManager cacheManager;
 	private Cache<String, String> vcodeCache;
 
+	@Resource
+	private UserService userService;
+
 	/**
 	 * 首页
 	 */
@@ -75,12 +79,20 @@ public class CommonController {
 			throws JsonProcessingException {
 		User user = (User) request.getSession().getAttribute("userInfo");
 		ObjectMapper mapper = new ObjectMapper();
-		List<Project> projects = projectService
-				.selectProjectByUserIdWithMessageCount(user.getUserId());
+		int userId = user.getUserId();
+		List<Project> projects = null;
+		int roleId = userService.selectUserRoleByUserId(userId);
+		if (roleId == 2 || roleId == 1) {
+			projects = projectService.selectAllProjectWithMessageCount();
+		} else {
+			projects = projectService
+					.selectProjectByUserIdWithMessageCount(user.getUserId());
+		}
 		String projectList = null;
 		projectList = mapper.writeValueAsString(projects);
 		System.out.println(projectList);
-		model.addAttribute("projectList", projectList);
+		model.addAttribute("projectList", projects);
+		model.addAttribute("projectLists", projectList);
 		return "home";
 	}
 
@@ -95,14 +107,15 @@ public class CommonController {
 		return projectList;
 	}
 
-	/*@RequestMapping("sensor/{projectId}")
-	@ResponseBody
-	public List<SensorInfo> sensorType(
-			@PathVariable("projectId") Integer projectId) {
-		List<SensorInfo> sensorList = sensorInfoService
-				.selectSensorTypeByProjectId(projectId);
-		return sensorList;
-	}*/
+	/*
+	 * @RequestMapping("sensor/{projectId}")
+	 * 
+	 * @ResponseBody public List<SensorInfo> sensorType(
+	 * 
+	 * @PathVariable("projectId") Integer projectId) { List<SensorInfo>
+	 * sensorList = sensorInfoService .selectSensorTypeByProjectId(projectId);
+	 * return sensorList; }
+	 */
 
 	@RequestMapping("index_v2")
 	public String index_v2(HttpServletRequest request) {

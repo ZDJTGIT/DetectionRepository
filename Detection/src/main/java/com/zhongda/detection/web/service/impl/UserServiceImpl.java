@@ -17,18 +17,19 @@ import com.zhongda.detection.web.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Resource
-    private UserMapper userMapper;
+	@Resource
+	private UserMapper userMapper;
 
 	@Override
 	public boolean insertUser(User user) {
-		String cryptedPwd = new Md5Hash(user.getPassword(),user.getUserName(),1024).toString();
-		System.out.println("register cryptedPwd:"+cryptedPwd);
+		String cryptedPwd = new Md5Hash(user.getPassword(), user.getUserName(),
+				1024).toString();
+		System.out.println("register cryptedPwd:" + cryptedPwd);
 		user.setPassword(cryptedPwd);
 		int index = userMapper.insert(user);
-		if(index>0){
+		if (index > 0) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -78,7 +79,6 @@ public class UserServiceImpl implements UserService {
 		return userMapper.deleteUser(name);
 	}
 
-
 	@Override
 	public int updateByPrimaryKeySelective(User record) {
 		return userMapper.updateByPrimaryKeySelective(record);
@@ -100,8 +100,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> selectUserByKeyword(String keyword,Integer userId) {
-		return userMapper.selectUserByKeyword(keyword,userId);
+	public List<User> selectUserByKeyword(String keyword, Integer userId) {
+		return userMapper.selectUserByKeyword(keyword, userId);
 	}
 
 	@Override
@@ -122,6 +122,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> selectUserWithoutAdmin() {
 		return userMapper.selectUserWithoutAdmin();
+	}
+
+	@Override
+	public int selectUserRoleByUserId(Integer userId) {
+		return userMapper.selectUserRoleByUserId(userId);
 	}
 
 }

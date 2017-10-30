@@ -56,7 +56,6 @@
 								src="assets/img/zdLogo.png" /></span> <a data-toggle="dropdown"
 								class="dropdown-toggle" href="#"> <span class="clear">
 									<span class="block m-t-xs"><strong class="font-bold">ZDJC</strong></span>
-
 							</span>
 							</a>
 						</div>
@@ -829,7 +828,7 @@
 					$(value).each(function(index,val){
 						var projectName = val.projectName;
 						index++;
-						var label = "<li><a class='thirdbind' data-toggle='collapse' data-target='#"+projectName+"' name='"+val.projectId+"'><i>"+index+":"+"</i><span class='nav-label'>"+projectName+"</span><span class='fa arrow'></span></a><ul class='collapse nav nav-second-level' id='"+projectName+"' ></ul></li>";
+						var label = "<li><a class='thirdbind' data-toggle='collapse' data-target='#"+projectName+"' name='"+val.projectId+","+val.projectTypeId+"'><i>"+index+":"+"</i><span class='nav-label'>"+projectName+"</span><span class='fa arrow'></span></a><ul class='collapse nav nav-second-level' id='"+projectName+"' ></ul></li>";
 						$("#"+dataKey).append(label);
 					});
 				}
@@ -837,7 +836,8 @@
 
 
 			 $(document).on('click','.thirdbind',function(){
-					var projectId = $(this).attr("name");
+				 	var projectLists = $(this).attr("name").split(",");
+					var projectId = projectLists[0];
 					var projectName = $(this).attr("data-target");
 					if(map[projectName]==null){
 						map[projectName] = 1;
@@ -851,14 +851,14 @@
 							dataType: 'json',
 							data : 'projectId='+projectId,
 							success: function(data){
-								$.each(data,function(key,value){
-									var label = "<li><a class='J_menuItem' name='"+key+"' href='rest/project/"+value[0].sysDictionary.itemValue+"?projectId="+projectId+"&detectionTypeId="+value[0].detectionTypeId+"'><i>—</i><span class='nav-label'>"+key+"</span><span class='fa arrow'></span></a></li>";
+								$(data).each(function(index,val){
+									var label = "<li><a class='J_menuItem' name='"+val.itemName+"' href='rest/project/"+val.itemValue+"?projectId="+val.projectId+"&detectionTypeId="+val.detectionTypeId+"&userId="+userId+"&projectTypeId="+projectLists[1]+"'><i>—</i><span class='nav-label'>"+val.itemName+"</span><span class='fa arrow'></span></a></li>";
 									$(projectName).append(label);
 								});
 							}
 						});
 					}
-				});w3
+				});
 		})
 		
 	</script>

@@ -8,10 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.zhongda.detection.web.dao.DetectionPointMapper;
 import com.zhongda.detection.web.model.DetectionPoint;
+import com.zhongda.detection.web.model.LaserData;
 import com.zhongda.detection.web.service.DetectionPointService;
 
 /**
- * <p> 测点业务实现类 </p>
+ * <p>
+ * 测点业务实现类
+ * </p>
+ * 
  * @author mike
  * @data 2017/10/25
  */
@@ -20,7 +24,7 @@ public class DetectionPointServiceImpl implements DetectionPointService {
 
 	@Resource
 	private DetectionPointMapper detectionPointMapper;
-	
+
 	@Override
 	public int insertSelective(DetectionPoint record) {
 		return detectionPointMapper.insertSelective(record);
@@ -49,13 +53,25 @@ public class DetectionPointServiceImpl implements DetectionPointService {
 	@Override
 	public DetectionPoint selectByProjectIDAndDetectionName(Integer projectId,
 			String detectionName) {
-		return detectionPointMapper.selectByProjectIDAndDetectionName(projectId, detectionName);
+		return detectionPointMapper.selectByProjectIDAndDetectionName(
+				projectId, detectionName);
 	}
 
 	@Override
 	public List<DetectionPoint> selectByProjectNameAndKeyWord(
 			String projectName, String keyWord) {
-		return detectionPointMapper.selectByProjectNameAndKeyWord(projectName, keyWord);
+		return detectionPointMapper.selectByProjectNameAndKeyWord(projectName,
+				keyWord);
 	}
 
+	public List<DetectionPoint> selectItemNameByProjectgId(Integer projectId) {
+		return detectionPointMapper.selectItemNameByProjectgId(projectId);
+	}
+
+	@Override
+	public List<LaserData> selectLaserDataByCurrentTimes(Integer projectId,
+			Integer detectionTypeId, String currentTime) {
+		return detectionPointMapper.selectLaserDataByCurrentTimes(projectId,
+				detectionTypeId, currentTime);
+	}
 }

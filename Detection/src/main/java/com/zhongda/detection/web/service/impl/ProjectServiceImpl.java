@@ -51,7 +51,7 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 		return projectMap;
 	}
-	
+
 	@Override
 	public List<Project> selectProjectAndSysDicByUserIds(Integer userId) {
 		return projectMapper.selectProjectAndSysDicByUserId(userId);
@@ -116,7 +116,8 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public Project selectProjectByProjectNameAndUserId(String projectName,
 			Integer userId) {
-		return projectMapper.selectProjectByProjectNameAndUserId(projectName, userId);
+		return projectMapper.selectProjectByProjectNameAndUserId(projectName,
+				userId);
 	}
 
 	@Override

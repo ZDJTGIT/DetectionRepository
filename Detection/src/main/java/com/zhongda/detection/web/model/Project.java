@@ -20,19 +20,19 @@ public class Project {
 	private String projectLatitude;
 
 	private Date projectBeginTime;
-	
+
 	private Date projectEndTime;
 
 	private Integer projectStatus;
 
 	private String projectDescription;
 
-	//数据库无
+	// 数据库无
 	private SysDictionary sysDictionary;
 
 	// 缓存告警信息的数量
 	private Integer messageCount;
-	
+
 	// 缓存字典表查到的状态字符串
 	private String projectStatusString;
 
@@ -119,19 +119,19 @@ public class Project {
 		return projectStatus;
 	}
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    public Date getProjectBeginTime() {
-        return projectBeginTime;
-    }
-    
-    public void setProjectEndTime(Date projectEndTime) {
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	public Date getProjectBeginTime() {
+		return projectBeginTime;
+	}
+
+	public void setProjectEndTime(Date projectEndTime) {
 		this.projectEndTime = projectEndTime;
 	}
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    public Date getProjectEndTime() {
-        return projectEndTime;
-    }
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+	public Date getProjectEndTime() {
+		return projectEndTime;
+	}
 
 	public void setProjectStatus(Integer projectStatus) {
 		this.projectStatus = projectStatus;
@@ -153,4 +153,5 @@ public class Project {
 	public void setSysDictionary(SysDictionary sysDictionary) {
 		this.sysDictionary = sysDictionary;
 	}
+
 }

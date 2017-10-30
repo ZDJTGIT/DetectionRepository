@@ -22,9 +22,18 @@
 <title>用户&告警联系人信息表</title>
 <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
 <meta name="description" content="中大检测平台">
-<link rel="shortcut icon" href="favicon.ico">
+
+<link rel="shortcut icon" href="favicon.ico"> <link href="assets/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
 <link href="assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+ <!-- Sweet Alert -->
+    <link href="assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+<link href="assets/css/style.min.css" rel="stylesheet">
 <link href="assets/css/plugins/table/basic.css" rel="stylesheet">
+
 </head>
 
 <body class="gray-bg">
@@ -167,148 +176,168 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>告警联系人列表</h5>
-						<div class="ibox-tools">
-							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
-							</a> <a class="dropdown-toggle" data-toggle="dropdown"
-								href="table_basic.html#"> <i class="fa fa-wrench"></i>
-							</a>
-							<ul class="dropdown-menu dropdown-user">
-								<li><a href="table_basic.html#">添加联系人</a></li>
-								<li><a href="table_basic.html#">删除联系人</a></li>
-							</ul>
-							<a class="close-link"> <i class="fa fa-times"></i>
-							</a>
-						</div>
-					</div>
-					<div class="ibox-content">
-						<div class="row">
-							<div class="col-sm-5 m-b-xs">
-								<p>系统数据告警时系统自动与相关联系人建立联系。</p>
-								<button class="btn btn-sm btn-white">添加联系人</button>
-							</div>
-							<div class="col-sm-4 m-b-xs">
-								<div data-toggle="buttons" class="btn-group">
-									<label class="btn btn-sm btn-white"> <input
-										type="radio" id="option1" name="options">隧道
-									</label> <label class="btn btn-sm btn-white active"> <input
-										type="radio" id="option2" name="options">农田
-									</label> <label class="btn btn-sm btn-white"> <input
-										type="radio" id="option3" name="options">桥梁
-									</label><label class="btn btn-sm btn-white"> <input
-										type="radio" id="option4" name="options">公路
-									</label>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="input-group">
-									<input type="text" placeholder="请输入关键词"
-										class="input-sm form-control"> <span
-										class="input-group-btn">
-										<button type="button" class="btn btn-sm btn-primary">
-											搜索</button>
-									</span>
-								</div>
+		</div>
+		<div class="row">
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+						<div class="ibox-title">
+							<h5>告警联系人</h5>
+							<div class="ibox-tools">
+								<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+								</a> <a class="dropdown-toggle" data-toggle="dropdown"
+									href="table_data_tables.html#"> <i class="fa fa-wrench"></i>
+								</a>
+								<ul class="dropdown-menu dropdown-user">
+									<li><a href="table_data_tables.html#">选项1</a></li>
+									<li><a href="table_data_tables.html#">选项2</a></li>
+								</ul>
+								<a class="close-link"> <i class="fa fa-times"></i>
+								</a>
 							</div>
 						</div>
-						<div class="table-responsive">
-							<table class="table table-striped">
-								<thead>
-									<tr>
-										<th></th>
-										<th>接收人</th>
-										<th>接收告警类型</th>
-										<th>接收方式</th>
-										<th>手机号</th>
-										<th>邮箱</th>
-										<th>短信接收告警级别</th>
-										<th>邮件接收告警级别</th>
-										<th>操作</th>
+						 <div class="ibox-content">
+	                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal_table_basic" id="table_basic_addalarm">
+							  添加联系人
+							</button>
+	                        <table class="table table-striped table-bordered table-hover display" id="addAlarmBasic"  cellspacing="0" width="100%"> 
+	                            <thead>
+	                                <tr>
+	                                	<td>用户名</td>
+										<td>项目名</td>
+										<td>手机号</td>
+										<td>邮箱</td>
+										<td>启用状态</td>
+										<td >操作</td>
 									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><input type="checkbox" checked class="i-checks"
-											name="input[]"></td>
-										<th>罗杰</th>
-										<th>农田水位告警</th>
-										<th>短信接收</th>
-										<th>15456547878</th>
-										<th>888888@qq.com</th>
-										<th>3</th>
-										<th>2</th>
-										<td><a href="table_basic.html#"><i
-												class="fa fa-check text-navy"></i></a></td>
-									</tr>
-									<tr>
-										<td><input type="checkbox" checked class="i-checks"
-											name="input[]"></td>
-										<th>张无忌</th>
-										<th>农田水位告警</th>
-										<th>短信接收</th>
-										<th>15456547878</th>
-										<th>888888@qq.com</th>
-										<th>2</th>
-										<th>1</th>
-										<td><a href="table_basic.html#"><i
-												class="fa fa-check text-navy"></i></a></td>
-									</tr>
-									<tr>
-										<td><input type="checkbox" checked class="i-checks"
-											name="input[]"></td>
-										<th>猪八戒</th>
-										<th>农田PH/铬含量异常告警</th>
-										<th>短信接收</th>
-										<th>15456547878</th>
-										<th>8877788@qq.com</th>
-										<th>3</th>
-										<th>2</th>
-										<td><a href="table_basic.html#"><i
-												class="fa fa-check text-navy"></i></a></td>
-									</tr>
-									<tr>
-										<td><input type="checkbox" checked class="i-checks"
-											name="input[]"></td>
-										<th>蜘蛛侠</th>
-										<th>农田PH/铬含量异常告警</th>
-										<th>邮件接收</th>
-										<th>15456547878</th>
-										<th>8666788@qq.com</th>
-										<th>1</th>
-										<th>1</th>
-										<td><a href="table_basic.html#"><i
-												class="fa fa-check text-navy"></i></a></td>
-									</tr>
-									<tr id="soss">
-										<td><input type="checkbox" checked class="i-checks"
-											name="input[]"></td>
-										<th>d</th>
-										<th>农</th>
-										<th>邮</th>
-										<th>1</th>
-										<th>8</th>
-										<th>1</th>
-										<th>1</th>
-										<td><a href="table_basic.html#"><i
-												class="fa fa-check text-navy"></i></a></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+	                            </thead>
+	                            <tbody>
+	                            	<c:forEach items="${aLinkmanList }" var="aLinkman">
+	                            		<tr>
+	                            			<td>${aLinkman.userName }</td> 
+	                            			<td>${aLinkman.projectName }</td>   
+	                            			<td>${aLinkman.phone }</td> 
+	                            			<td>${aLinkman.email }</td> 
+	                            			<td >
+	                            				<div id="status${aLinkman.alarmLinkmanId }">
+	                            					<c:choose>
+					                            		<c:when test="${aLinkman.status eq 27}">
+					                            			启用
+					                            		</c:when>
+					                            		<c:otherwise>
+					                            			禁用
+					                            		</c:otherwise>
+					                            	</c:choose>
+	                            				</div>
+	                            				
+	                            			</td> 
+	                            			<td >
+					                            <div class="onoffswitch" >
+					                            	<c:choose>
+					                            		<c:when test="${aLinkman.status eq 27}">
+					                            			<input type="checkbox" checked class="onoffswitch-checkbox" id="example${aLinkman.alarmLinkmanId}">
+					                            		</c:when>
+					                            		<c:otherwise>
+					                            			 <input type="checkbox" class="onoffswitch-checkbox" id="example${aLinkman.alarmLinkmanId}">
+					                            		</c:otherwise>
+					                            	</c:choose>
+					                                <label class="onoffswitch-label" for="example${aLinkman.alarmLinkmanId}" >
+					                                    <span class="onoffswitch-inner"></span>
+					                                    <span class="onoffswitch-switch"></span>
+					                                </label>
+					                            </div>
+	                            			</td>
+	                            		</tr> 
+	                            	</c:forEach>
+                           		</tbody>
+	                        </table>
+	                    </div>
 					</div>
 				</div>
 			</div>
-		</div>
+			<!-- Modal -->
+			<div class="modal fade" id="myModal_table_basic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">添加联系人</h4>
+				      </div>
+				      <div class="modal-body">
+				      	<!-- 表单 -->
+				      	 <form class="form-horizontal m-t" id="signupForm">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">联系人：</label>
+                                <div class="col-sm-8">
+                                    <input id="table_basic_userName" class="form-control" type="text" aria-required="true">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">手机号码：</label>
+                                <div class="col-sm-8">
+                                    <input  id="table_basic_phone" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">E-mail：</label>
+                                <div class="col-sm-8">
+                                    <input id="table_basic_email" class="form-control" type="email">
+                                </div>
+                            </div>
+                            <div class="form-group" id="allckekout_tablebasic">
+                             	<label class="col-sm-3 control-label"><input type="checkbox" class="i-checks" id="nidaoshika">项目名称：</label>
+                                <div class="col-sm-8" id="checkout_basic_all">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">启用状态：</label>
+                                <div class="col-sm-8">
+                                     <div class="radio radio-info radio-inline">
+                                        <input type="radio" id="inlineRadio1" value="27" name="table_basic_radioInline" checked="">
+                                        <label for="inlineRadio1"> 启用 </label>
+                                    </div>
+                                    <div class="radio radio-inline">
+                                        <input type="radio" id="inlineRadio2" value="28" name="table_basic_radioInline">
+                                        <label for="inlineRadio2"> 禁用 </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
+			        	 
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal" id="table_basic_close">关闭</button>
+				        <button type="button" class="btn btn-primary" id="table_basic_commitadd">提交</button>
+				      </div>
+				    </div>
+				  </div>
+			</div>		
 	</div>
 
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/content.js"></script>
-	<script src="assets/js/plugins/iCheck/icheck.min.js"></script>
-	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
+	<!-- <script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script> -->
+	<!-- <script src="assets/js/content.js"></script> -->
+	 <!-- jQuery Validation plugin javascript-->
+    <script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="assets/js/plugins/validate/messages_zh.min.js"></script>
+
+    <script src="assets/js/demo/form-validate-demo.min.js"></script>
+	
 	<script src="assets/js/customerValidate.js"></script>
+	<!-- Switchery -->
+    <script src="assets/js/plugins/switchery/switchery.js"></script>
+	<!-- iCheck -->
+    <script src="assets/js/plugins/iCheck/icheck.min.js"></script>
+	
+	<!-- Data Tables -->
+    <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+   
+    <!-- Sweet alert -->
+    <script src="assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+    
+    <script type="text/javascript" src="assets/js/tabel_basic_addAla.js"></script>
+	
 	<script type="text/javascript">
 	
 	 $(document).ready(function(){
@@ -573,6 +602,7 @@
 						});
 				});
 	</script>
+	
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
 </body>

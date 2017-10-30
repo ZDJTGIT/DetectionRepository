@@ -82,7 +82,7 @@
 							displacementData.push(slopdata[val].currentData);
 							oTabel.fnAddData([
 	                  						detections,
-	                                       val,
+	                  						val,
 								            slopdata[val].firstTime,
 								            slopdata[val].firstData,
 								            slopdata[val].previousTime,

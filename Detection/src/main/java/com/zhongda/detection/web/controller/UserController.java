@@ -48,11 +48,13 @@ import org.springframework.web.util.WebUtils;
 
 import com.zhongda.detection.core.utils.GetVerificationCode;
 import com.zhongda.detection.core.utils.SimpleMailSender;
+import com.zhongda.detection.web.model.AlarmLinkman;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.Role;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.PermissionSign;
 import com.zhongda.detection.web.security.RoleSign;
+import com.zhongda.detection.web.service.AlarmLinkmanService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
 import com.zhongda.detection.web.service.UserService;
@@ -61,7 +63,7 @@ import com.zhongda.detection.web.task.PushAlarm;
 /**
  * 用户控制器
  **/
-@Api(value = "用户模块", description="与用户相关的功能模块操作接口定义类")
+@Api(value = "用户模块", description = "与用户相关的功能模块操作接口定义类")
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
@@ -84,6 +86,9 @@ public class UserController {
 	private CacheManager cacheManager;
 	private Cache<String, String> changePasswordCache;
 
+	@Resource
+	private AlarmLinkmanService alarmLinkmanService;
+
 	public static final Logger logger = LoggerFactory
 			.getLogger(UserController.class);
 
@@ -91,14 +96,16 @@ public class UserController {
 
 	/**
 	 * 用户登录
+	 * 
 	 * @param user
 	 * @param result
 	 * @return
 	 */
 	@ApiOperation(value = "登陆", httpMethod = "POST", response = String.class, notes = "根据用户名和密码登陆程序")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@ApiParam(required = true, name = "user", value = "用户") @Valid User user, BindingResult result, Model model,
-			HttpServletRequest request) {
+	public String login(
+			@ApiParam(required = true, name = "user", value = "用户") @Valid User user,
+			BindingResult result, Model model, HttpServletRequest request) {
 		// //验证码校验
 		// String vcode = request.getParameter("vcode");
 		// String vcode_flag = request.getParameter("vcode_flag");
@@ -126,25 +133,28 @@ public class UserController {
 			// 身份验证
 			subject.login(shiroToken);
 
-			System.out.println("currentUser:"+subject.getSession().getId());
-			//获取所有在线的用户session
+			System.out.println("currentUser:" + subject.getSession().getId());
+			// 获取所有在线的用户session
 
-//			Collection<Session> sessions = sessionDAO.getActiveSessions();
-//			System.out.println("sessions的大小"+sessions.size());
-//			for(Session session:sessions){
-//				Object userObj = session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
-//				System.out.println("session:"+session.getId());
-//				if(null == userObj){
-//					session.stop();
-//				}else if(userObj.toString().equals(user.getUserName()) && !session.getId().equals(subject.getSession().getId())){
-//					//如果当前用户上一个session有效 ,踢出上一个登录用户
-//					System.out.println(user.getUserName()+":"+session.getId());
-//					Message message = new Message();
-//					message.setMessageContext("你的账户已在其他地方登录，如不是本人操作，请尽快修改密码！");
-//					messageTemplate.convertAndSendToUser(user.getUserName(), "/message", message);
-//					session.stop();
-//				}
-//			}
+			// Collection<Session> sessions = sessionDAO.getActiveSessions();
+			// System.out.println("sessions的大小"+sessions.size());
+			// for(Session session:sessions){
+			// Object userObj =
+			// session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+			// System.out.println("session:"+session.getId());
+			// if(null == userObj){
+			// session.stop();
+			// }else if(userObj.toString().equals(user.getUserName()) &&
+			// !session.getId().equals(subject.getSession().getId())){
+			// //如果当前用户上一个session有效 ,踢出上一个登录用户
+			// System.out.println(user.getUserName()+":"+session.getId());
+			// Message message = new Message();
+			// message.setMessageContext("你的账户已在其他地方登录，如不是本人操作，请尽快修改密码！");
+			// messageTemplate.convertAndSendToUser(user.getUserName(),
+			// "/message", message);
+			// session.stop();
+			// }
+			// }
 
 			// 验证成功在Session中保存用户信息
 			final User authUserInfo = userService.selectByUsername(user
@@ -299,9 +309,13 @@ public class UserController {
 	@ApiOperation(value = "显示所有用户", httpMethod = "POST", notes = "显示所有用户")
 	@RequestMapping(value = "/userList")
 	public String userList(HttpServletRequest request, Model model) {
-		User currentUser = (User) WebUtils.getSessionAttribute(request, "userInfo");
+		User currentUser = (User) WebUtils.getSessionAttribute(request,
+				"userInfo");
 		List<User> userList = userService.selectList(currentUser.getUserId());
+		List<AlarmLinkman> aLinkmanList = alarmLinkmanService.selectAll();
 		model.addAttribute("userList", userList);
+		model.addAttribute("aLinkmanList", aLinkmanList);
+		System.out.println(aLinkmanList);
 		logger.info("进入userList");
 		logger.info("userList的大小" + userList.size());
 		return "table_basic";
@@ -334,7 +348,8 @@ public class UserController {
 		user.setCreateTime(date);
 		// 将user存入数据库
 		userService.insertUser(user);
-		user.setUserId(userService.selectByUsername(user.getUserName()).getUserId());
+		user.setUserId(userService.selectByUsername(user.getUserName())
+				.getUserId());
 		userService.insertUser_Role(user.getUserId(), user.getRoleId());
 		return user;
 	}
@@ -346,27 +361,31 @@ public class UserController {
 	@ResponseBody
 	public Map<String, String> delete(@RequestBody User user) {
 		Map<String, String> model = new HashMap<String, String>();
-		int roleid=0;
-		List<Role> roleInfos = roleService.selectRolesByUserId(userService.selectByUsername(user.getUserName()).getUserId());
+		int roleid = 0;
+		List<Role> roleInfos = roleService.selectRolesByUserId(userService
+				.selectByUsername(user.getUserName()).getUserId());
 		roleid = roleInfos.get(0).getRoleId();
-		if(roleid==1){
-			//超级管理员，不可删除
+		if (roleid == 1) {
+			// 超级管理员，不可删除
 			model.put("isDelete", "2");
 			return model;
-		}else if(roleid==2){
-			//超级管理员才可以删除管理员
-			if(roleService.selectRolesByUserId(user.getUserId()).get(0).getRoleId()==2){
+		} else if (roleid == 2) {
+			// 超级管理员才可以删除管理员
+			if (roleService.selectRolesByUserId(user.getUserId()).get(0)
+					.getRoleId() == 2) {
 				model.put("isDelete", "3");
 				return model;
-			}else{
-				userService.deleteUser_role(userService.selectByUsername(user.getUserName()).getUserId());
+			} else {
+				userService.deleteUser_role(userService.selectByUsername(
+						user.getUserName()).getUserId());
 				userService.deleteUser(user.getUserName());
 				model.put("isDelete", "1");
 				return model;
 			}
-		}else{
-			//普通用户，直接删除
-			userService.deleteUser_role(userService.selectByUsername(user.getUserName()).getUserId());
+		} else {
+			// 普通用户，直接删除
+			userService.deleteUser_role(userService.selectByUsername(
+					user.getUserName()).getUserId());
 			userService.deleteUser(user.getUserName());
 			model.put("isDelete", "1");
 			return model;
@@ -383,72 +402,72 @@ public class UserController {
 		return roleInfos;
 	}
 
-	//showSelectUserRole
+	// showSelectUserRole
 	/**
 	 * 查找展示添加用户时的用户权限
 	 */
 	@RequestMapping(value = "/showSelectUserRole", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> showSelectUserRole(Integer userId,String userName) {//当前登陆账号ID,要修改的用户的用户名
+	public Map<String, String> showSelectUserRole(Integer userId,
+			String userName) {// 当前登陆账号ID,要修改的用户的用户名
 		Subject subject = SecurityUtils.getSubject();
 		Map<String, String> model = new HashMap<String, String>();
-		List<Role> selectedrole = roleService.selectRolesByUserId((userService.selectByUsername(userName)).getUserId());
+		List<Role> selectedrole = roleService.selectRolesByUserId((userService
+				.selectByUsername(userName)).getUserId());
 		Integer roleId = selectedrole.get(0).getRoleId();
-		if(subject.hasRole(RoleSign.SUPER_ADMIN)){
-		//用户权限为超级管理员
-			switch (roleId)
-			{
+		if (subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			// 用户权限为超级管理员
+			switch (roleId) {
 			case 2:
 				model.put("roleid", "0");
-			  break;
+				break;
 			case 3:
 				model.put("roleid", "1");
-			  break;
+				break;
 			case 4:
 				model.put("roleid", "2");
-			  break;
+				break;
 			case 5:
 				model.put("roleid", "3");
-			  break;
+				break;
 			case 6:
 				model.put("roleid", "4");
-			  break;
+				break;
 			case 7:
 				model.put("roleid", "5");
-		      break;
+				break;
 			case 8:
 				model.put("roleid", "6");
-			  break;
+				break;
 			case 9:
 				model.put("roleid", "7");
-			  break;
+				break;
 			}
 			return model;
-		}else{
-		//用户权限为管理员
-			switch (roleId)
-			{
+		} else {
+			// 用户权限为管理员
+			switch (roleId) {
 			case 3:
 				model.put("roleid", "0");
-			  break;
+				break;
 			case 4:
 				model.put("roleid", "1");
-			  break;
+				break;
 			case 5:
 				model.put("roleid", "2");
-			  break;
+				break;
 			case 6:
 				model.put("roleid", "3");
-			  break;
+				break;
 			case 7:
 				model.put("roleid", "4");
-		      break;
+				break;
 			case 8:
 				model.put("roleid", "5");
-			  break;
+				break;
 			case 9:
 				model.put("roleid", "6");
-			  break;
+				break;
 			}
 			return model;
 		}
@@ -461,7 +480,8 @@ public class UserController {
 	@ResponseBody
 	public User modify(@RequestBody User user, HttpServletRequest request) {
 		userService.updateByPrimaryKeySelective(user);
-		if(((User)WebUtils.getSessionAttribute(request, "userInfo")).getUserName().equals(user.getUserName())){
+		if (((User) WebUtils.getSessionAttribute(request, "userInfo"))
+				.getUserName().equals(user.getUserName())) {
 			WebUtils.setSessionAttribute(request, "userInfo", user);
 		}
 		userService.updateUsersRole(user);
@@ -552,8 +572,7 @@ public class UserController {
 	@RequestMapping(value = "/mdOnlyPhone", method = RequestMethod.POST)
 	public void mdOnlyPhone(String mdphone, Integer userId,
 			HttpServletResponse response) {
-		if (mdphone.equals(userService.selectByPrimaryKey(userId)
-				.getPhone())) {
+		if (mdphone.equals(userService.selectByPrimaryKey(userId).getPhone())) {
 			try {
 				response.getWriter().print(true);
 			} catch (IOException e) {
@@ -572,14 +591,14 @@ public class UserController {
 			}
 		}
 	}
+
 	/**
 	 * 验证电子邮箱是否唯一(修改验证)
 	 */
 	@RequestMapping(value = "/mdOnlyEmail", method = RequestMethod.POST)
 	public void mdOnlyEmail(String mdemail, Integer userId,
 			HttpServletResponse response) {
-		if (mdemail.equals(userService.selectByPrimaryKey(userId)
-				.getEmail())) {
+		if (mdemail.equals(userService.selectByPrimaryKey(userId).getEmail())) {
 			try {
 				response.getWriter().print(true);
 			} catch (IOException e) {
@@ -630,16 +649,22 @@ public class UserController {
 	@RequestMapping(value = "/updataUser", method = RequestMethod.POST)
 	@ResponseBody
 	public User updataUser(@RequestBody User user, HttpServletRequest request) {
-		String name = userService.selectByPrimaryKey(user.getUserId()).getUserName();
+		String name = userService.selectByPrimaryKey(user.getUserId())
+				.getUserName();
 		SimpleMailSender Sender = new SimpleMailSender();
 		String congtent = name
 				+ ": 你好，您正在进行修改个人信息操作，请确认是你本人操作！    ---中大检测数据监测平台";
-		Sender.send(userService.selectByPrimaryKey(user.getUserId()).getEmail(), "修改个人信息提醒", congtent);
-		if(!userService.selectByPrimaryKey(user.getUserId()).getPassword().equals(user.getPassword())){
-			if(user.getPassword()==""|user.getPassword()==null){
-				user.setPassword(userService.selectByPrimaryKey(user.getUserId()).getPassword());
-			}else{
-				String cryptedPwd = new Md5Hash(user.getPassword(), name, 1024).toString();
+		Sender.send(
+				userService.selectByPrimaryKey(user.getUserId()).getEmail(),
+				"修改个人信息提醒", congtent);
+		if (!userService.selectByPrimaryKey(user.getUserId()).getPassword()
+				.equals(user.getPassword())) {
+			if (user.getPassword() == "" | user.getPassword() == null) {
+				user.setPassword(userService.selectByPrimaryKey(
+						user.getUserId()).getPassword());
+			} else {
+				String cryptedPwd = new Md5Hash(user.getPassword(), name, 1024)
+						.toString();
 				user.setPassword(cryptedPwd);
 			}
 		}
@@ -651,29 +676,30 @@ public class UserController {
 	/**
 	 * 查找用户权限
 	 */
-	@RequestMapping(value = "/selectUserRole", method=RequestMethod.POST)
+	@RequestMapping(value = "/selectUserRole", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> selectUserRole(Integer userId){
+	public Map<String, String> selectUserRole(Integer userId) {
 		Map<String, String> model = new HashMap<String, String>();
 		List<Role> roleInfos = roleService.selectRolesByUserId(userId);
-		 for (Role role : roleInfos) {
-			 model.put("role", role.getRoleName());
-		 }
-		 return model;
+		for (Role role : roleInfos) {
+			model.put("role", role.getRoleName());
+		}
+		return model;
 	}
 
 	/**
 	 * 查找用户所属项目
 	 */
-	@RequestMapping(value = "/selectUserproject", method=RequestMethod.POST)
+	@RequestMapping(value = "/selectUserproject", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Project> selectUserproject(Integer userId){
+	public List<Project> selectUserproject(Integer userId) {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			return null;
-		}else{
-			List<Project> projectList = projectService.selectProjectAndSysDicByUserIds(userId);
+		} else {
+			List<Project> projectList = projectService
+					.selectProjectAndSysDicByUserIds(userId);
 			return projectList;
 		}
 	}
@@ -681,76 +707,80 @@ public class UserController {
 	/**
 	 * 关键词查找用户（用户名，电话，邮箱，公司，联系人，用户表按时间排序）
 	 */
-	@RequestMapping(value = "/keywordSearch", method=RequestMethod.POST)
+	@RequestMapping(value = "/keywordSearch", method = RequestMethod.POST)
 	@ResponseBody
-	public List<User> keywordSearch(String keyword,Integer userId){
-		List<User> userss =  userService.selectUserByKeyword(keyword,userId);
+	public List<User> keywordSearch(String keyword, Integer userId) {
+		List<User> userss = userService.selectUserByKeyword(keyword, userId);
 		return userss;
 	}
-
 
 	/**
 	 * 找回密码retpassword
 	 */
-	@RequestMapping(value = "/retunpassword", method=RequestMethod.POST)
+	@RequestMapping(value = "/retunpassword", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> retpassword(String contect){
+	public Map<String, String> retpassword(String contect) {
 		Map<String, String> model = new HashMap<String, String>();
-		//判定传来的phone的格式，为phone或email
-		//邮箱格式验证
+		// 判定传来的phone的格式，为phone或email
+		// 邮箱格式验证
 		String expr = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$";
-		//手机号码格式验证
-		Pattern pattern = Pattern.compile("^(13[0-9]|15[0-9]|153|15[6-9]|180|18[23]|18[5-9])\\d{8}$");
-		//获取六位数随机验证码
+		// 手机号码格式验证
+		Pattern pattern = Pattern
+				.compile("^(13[0-9]|15[0-9]|153|15[6-9]|180|18[23]|18[5-9])\\d{8}$");
+		// 获取六位数随机验证码
 		String code = GetVerificationCode.getRandom();
 		Matcher matcher = pattern.matcher(contect);
-		 if (matcher.matches()) {
-			if(userService.selectByPhone(contect)!=null){
-				//手机号码格式验证通过，发送手机验证码
-				System.out.println("手机号码验证通过！"+code);
+		if (matcher.matches()) {
+			if (userService.selectByPhone(contect) != null) {
+				// 手机号码格式验证通过，发送手机验证码
+				System.out.println("手机号码验证通过！" + code);
 				model.put("code", code);
 				return model;
-			}else{
-			model.put("code", null);
-			return model;
-			}
-	     }else{
-	        //手机号码格式验证失败，进行邮箱验证
-	        System.out.println("手机号码验证失败，正在进行邮箱验证...");
-	        if (contect.matches(expr)) {
-	        	if(userService.selectByEmail(contect)!=null){
-	        		//邮箱格式验证通过，发送邮箱验证码
-	        		SimpleMailSender Sender = new SimpleMailSender();
-	        		String congtent = userService.selectByEmail(contect).getUserName()
-	        					    +": 您好，您的验证码是:"+code+"5分钟内有效。如非本人操作，请忽略本短信。---中大检测数据监测平台";
-	        		Sender.send(contect, "找回密码", congtent);
-		        	System.out.println("邮箱验证通过！"+code);
-		        	model.put("code", code);
-					return model;
-	        	}else{
-	        	model.put("code", null);
-	            return model;
-	        	}
-	        }else{
-	            //邮箱格式验证失败
-	            System.out.println("邮箱验证失败");
-	            model.put("code", null);
+			} else {
+				model.put("code", null);
 				return model;
-	        }
-	    }
+			}
+		} else {
+			// 手机号码格式验证失败，进行邮箱验证
+			System.out.println("手机号码验证失败，正在进行邮箱验证...");
+			if (contect.matches(expr)) {
+				if (userService.selectByEmail(contect) != null) {
+					// 邮箱格式验证通过，发送邮箱验证码
+					SimpleMailSender Sender = new SimpleMailSender();
+					String congtent = userService.selectByEmail(contect)
+							.getUserName()
+							+ ": 您好，您的验证码是:"
+							+ code
+							+ "5分钟内有效。如非本人操作，请忽略本短信。---中大检测数据监测平台";
+					Sender.send(contect, "找回密码", congtent);
+					System.out.println("邮箱验证通过！" + code);
+					model.put("code", code);
+					return model;
+				} else {
+					model.put("code", null);
+					return model;
+				}
+			} else {
+				// 邮箱格式验证失败
+				System.out.println("邮箱验证失败");
+				model.put("code", null);
+				return model;
+			}
+		}
 	}
 
 	/**
 	 * 用户输入验证码是否正确
 	 */
-	@RequestMapping(value = "/verIsQqual" ,method=RequestMethod.POST)
+	@RequestMapping(value = "/verIsQqual", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> verIsQqual(String inputVerification,String temporaryVerification){
+	public Map<String, String> verIsQqual(String inputVerification,
+			String temporaryVerification) {
 		Map<String, String> model = new HashMap<String, String>();
-		if(inputVerification.equals(temporaryVerification)){
+		if (inputVerification.equals(temporaryVerification)) {
 			model.put("bool", "1");
 			return model;
-		}else{
+		} else {
 			model.put("bool", "0");
 			return model;
 		}
@@ -759,31 +789,32 @@ public class UserController {
 	/**
 	 * 用户通过验证找回密码-修改密码
 	 */
-	@RequestMapping(value = "/selfChangPassword" ,method=RequestMethod.POST)
-	public void changPassword(String newpassword, String contect){
-		//手机号码格式验证
-		Pattern pattern = Pattern.compile("^(13[0-9]|15[0-9]|153|15[6-9]|180|18[23]|18[5-9])\\d{8}$");
+	@RequestMapping(value = "/selfChangPassword", method = RequestMethod.POST)
+	public void changPassword(String newpassword, String contect) {
+		// 手机号码格式验证
+		Pattern pattern = Pattern
+				.compile("^(13[0-9]|15[0-9]|153|15[6-9]|180|18[23]|18[5-9])\\d{8}$");
 		Matcher matcher = pattern.matcher(contect);
 		User user;
 		if (matcher.matches()) {
-			//手机号找回密码
+			// 手机号找回密码
 			user = userService.selectByPhone(contect);
-		}else{
-			//邮箱找回密码
+		} else {
+			// 邮箱找回密码
 			user = userService.selectByEmail(contect);
 		}
-			String name = user.getUserName();
-			String cryptedPwd = new Md5Hash(newpassword, name, 1024).toString();
-			user.setPassword(cryptedPwd);
-			userService.updateByPrimaryKeySelective(user);
-			System.out.println("修改成功");
+		String name = user.getUserName();
+		String cryptedPwd = new Md5Hash(newpassword, name, 1024).toString();
+		user.setPassword(cryptedPwd);
+		userService.updateByPrimaryKeySelective(user);
+		System.out.println("修改成功");
 	}
 
 	/**
 	 * 跳转到找回密码页面
 	 */
 	@RequestMapping(value = "/retpassword")
-	public String turnpassword(){
+	public String turnpassword() {
 		return "retpassword";
 	}
 

@@ -1,9 +1,14 @@
 package com.zhongda.detection.web.controller;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -16,13 +21,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zhongda.detection.web.dao.ThresholdMapper;
+import com.zhongda.detection.web.model.AlarmLinkman;
 import com.zhongda.detection.web.model.DetectionPoint;
+import com.zhongda.detection.web.model.LaserData;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.model.Threshold;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.DetectionPointService;
+import com.zhongda.detection.web.service.AlarmLinkmanService;
 import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
@@ -39,16 +47,16 @@ public class ProjectController {
 
 	@Resource
 	private SysDictionaryService sysDictionaryServce;
-	
+
 	@Resource
 	private DetectionPointService detectionPointService;
 
 	@Autowired
 	private ThresholdMapper thresholdService;
-	
+
 	@Autowired
 	private SensorInfoService sensorInfoService;
-	
+
 	@Autowired
 	private ProjectService projectService;
 
@@ -58,16 +66,107 @@ public class ProjectController {
 	@Autowired
 	private RoleService roleService;
 
+	@Resource
+	private AlarmLinkmanService alarmLinkmanService;
+
 	@RequestMapping(value = "/myproject")
 	public @ResponseBody Map<String, List<Project>> queryProject(Integer userId) {
 		return projectService.selectProjectAndSysDicByUserId(userId);
 	}
 
-	/*
-	 * @RequestMapping(value = "/queryItem") public @ResponseBody Map<String,
-	 * List<SensorInfo>> queryItem( Integer projectId) { return
-	 * sensorInfoService.selectsenInfoAndSysdicByProjectId(projectId); }
+	/**
+	 * 左侧栏具体项目类型
 	 * 
+	 * @param projectId
+	 * @return
+	 */
+	@RequestMapping(value = "/queryItem")
+	public @ResponseBody List<DetectionPoint> queryItem(Integer projectId) {
+		List<DetectionPoint> itemNameList = detectionPointService
+				.selectItemNameByProjectgId(projectId);
+		System.out.println("itemNameList:" + itemNameList);
+		return itemNameList;
+	}
+
+	/**
+	 * 激光测距
+	 * 
+	 * @param model
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	@RequestMapping(value = "/laserRanging")
+	public String laserRanging(Model model, Integer projectId,
+			Integer detectionTypeId, Integer userId, Integer projectTypeId) {
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String format = simpleDateFormat.format(date);
+
+		model.addAttribute("projectId", projectId);
+		model.addAttribute("detectionTypeId", detectionTypeId);
+		return "graph_echarts_laserRanging";
+	}
+
+	/**
+	 * 激光测距
+	 * 
+	 * @param currentTime
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	@RequestMapping(value = "/selectlaserRanging")
+	public @ResponseBody List<LaserData> selectlaserRanging(String currentTime,
+			Integer projectId, Integer detectionTypeId) {
+		return detectionPointService.selectLaserDataByCurrentTimes(projectId,
+				detectionTypeId, currentTime);
+	}
+
+	/**
+	 * 查询所有项目
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/selectAllProject")
+	public @ResponseBody List<Project> queryAllProjec() {
+		return projectService.selectAllProject();
+	}
+
+	/**
+	 * 批量插入告警联系人
+	 * 
+	 * @param alarList
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/insertAlarmLinkmanList", method = RequestMethod.POST)
+	public @ResponseBody List<AlarmLinkman> insertAlarmLinkmanList(
+			@RequestBody List<AlarmLinkman> alarList,
+			HttpServletResponse response) {
+		int isTrue = alarmLinkmanService.insertAlarmLinkmanList(alarList);
+		if (isTrue > 0) {
+			return alarList;
+		} else {
+			return new ArrayList<AlarmLinkman>();
+		}
+
+		// response.getWriter().print(1);
+	}
+
+	@RequestMapping(value = "/updateAlarmLinmanStatus")
+	public void updateAlarmLinmanStatus(Integer status, Integer alarmLinkmanId,
+			HttpServletResponse response) throws IOException {
+		int isOk = alarmLinkmanService.updateStatusByalarmLinkmanId(status,
+				alarmLinkmanId);
+		if (isOk > 0) {
+			response.getWriter().print(true);
+		} else {
+			response.getWriter().print(false);
+		}
+	}
+
+	/*
 	 * @RequestMapping(value = "/displacement") public String displacement(Model
 	 * model, Integer projectId, Integer detectionTypeId) {
 	 * System.out.println(projectId + "_--" + detectionTypeId); int count =
@@ -109,27 +208,6 @@ public class ProjectController {
 	 * sensorInfoService.selectInfoAndSlopeRainfall(detectionTime, projectId,
 	 * detectionTypeId); }
 	 */
-	/**
-	 * 通用跳转逻辑
-	 * 
-	 * @param model
-	 * @param url
-	 * @param count
-	 * @param projectId
-	 * @param detectionTypeId
-	 * @return
-	 */
-	public String generalJump(Model model, String url, int count,
-			Integer projectId, Integer detectionTypeId) {
-		// 如果没有查询到数据则返回404
-		if (count == 0) {
-			return "nodata";
-		} else {
-			model.addAttribute("projectId", projectId);
-			model.addAttribute("detectionTypeId", detectionTypeId);
-			return url;
-		}
-	}
 
 	/**
 	 * 查找用户所属项目
@@ -139,21 +217,25 @@ public class ProjectController {
 	public List<Project> showUsersProject(Integer userId) {
 		Subject subject = SecurityUtils.getSubject();
 		List<Project> projectList = null;
-		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
-			 //管理员用户，可查看所有项目信息
-			 projectList = projectService.selectAllProjectWithMessageCount();
-			 //将数据库查到的项目状态添加到项目
-			 for(Project project:projectList){
-				 project.setProjectStatusString(sysDictionaryServce.selectProjectStatusByDicId(project.getProjectStatus()));
-			 }
-		 }else{
-			 //非管理员用户，可查看自己的项目信息
-			 projectList = projectService.selectProjectByUserIdWithMessageCount(userId);
-			 //将数据库查到的项目状态添加到项目
-			 for(Project project:projectList){
-				 project.setProjectStatusString(sysDictionaryServce.selectProjectStatusByDicId(project.getProjectStatus()));
-			 }
-		 }
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			// 管理员用户，可查看所有项目信息
+			projectList = projectService.selectAllProjectWithMessageCount();
+			// 将数据库查到的项目状态添加到项目
+			for (Project project : projectList) {
+				project.setProjectStatusString(sysDictionaryServce
+						.selectProjectStatusByDicId(project.getProjectStatus()));
+			}
+		} else {
+			// 非管理员用户，可查看自己的项目信息
+			projectList = projectService
+					.selectProjectByUserIdWithMessageCount(userId);
+			// 将数据库查到的项目状态添加到项目
+			for (Project project : projectList) {
+				project.setProjectStatusString(sysDictionaryServce
+						.selectProjectStatusByDicId(project.getProjectStatus()));
+			}
+		}
 		return projectList;
 	}
 
@@ -165,15 +247,20 @@ public class ProjectController {
 	public List<Project> keywordSearchProject(String keyWord, Integer userId) {
 		Subject subject = SecurityUtils.getSubject();
 		List<Project> projectList = null;
-		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
-			projectList = projectService.selectAllProjectByKeyWord_mana(keyWord);
-			for(Project project:projectList){
-				 project.setProjectStatusString(sysDictionaryServce.selectProjectStatusByDicId(project.getProjectStatus()));
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			projectList = projectService
+					.selectAllProjectByKeyWord_mana(keyWord);
+			for (Project project : projectList) {
+				project.setProjectStatusString(sysDictionaryServce
+						.selectProjectStatusByDicId(project.getProjectStatus()));
 			}
-		}else{
-			projectList = projectService.selectAllProjectByKeyWord_nomana(keyWord, userId);
-			for(Project project:projectList){
-				 project.setProjectStatusString(sysDictionaryServce.selectProjectStatusByDicId(project.getProjectStatus()));
+		} else {
+			projectList = projectService.selectAllProjectByKeyWord_nomana(
+					keyWord, userId);
+			for (Project project : projectList) {
+				project.setProjectStatusString(sysDictionaryServce
+						.selectProjectStatusByDicId(project.getProjectStatus()));
 			}
 		}
 		return projectList;
@@ -200,20 +287,22 @@ public class ProjectController {
 	/**
 	 * 查找项目状态
 	 */
-	@RequestMapping(value = "/showProjectStatus", method=RequestMethod.POST)
+	@RequestMapping(value = "/showProjectStatus", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SysDictionary> showProjectStatus(Integer userId){
+	public List<SysDictionary> showProjectStatus(Integer userId) {
 		return sysDictionaryServce.selectSysDictionaryType_Status();
 	}
+
 	/**
 	 * 查找测点类型
 	 */
-	@RequestMapping(value = "/showDetectionStatus", method=RequestMethod.POST)
+	@RequestMapping(value = "/showDetectionStatus", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SysDictionary> showDetectionStatus(Integer projectTypeId){
-		return sysDictionaryServce.selectSysDictionaryByProjectTypeId(projectTypeId);
+	public List<SysDictionary> showDetectionStatus(Integer projectTypeId) {
+		return sysDictionaryServce
+				.selectSysDictionaryByProjectTypeId(projectTypeId);
 	}
-	
+
 	/**
 	 * 查找数据库用户(编辑项目时)
 	 */
@@ -231,25 +320,28 @@ public class ProjectController {
 	public List<SysDictionary> showProjectType_selected(Integer userId) {
 		return sysDictionaryServce.selectSysDictionaryType();
 	}
-	
+
 	/**
 	 * 查找数据库项目状态（编辑项目时）
+	 * 
 	 * @param userId
 	 * @return
 	 */
-	@RequestMapping(value = "/showProjectStatus_selected", method=RequestMethod.POST)
+	@RequestMapping(value = "/showProjectStatus_selected", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SysDictionary> showProjectStatus_selected(Integer userId){
-		return sysDictionaryServce.selectSysDictionaryType_Status(); 
+	public List<SysDictionary> showProjectStatus_selected(Integer userId) {
+		return sysDictionaryServce.selectSysDictionaryType_Status();
 	}
-	
+
 	/**
 	 * 打开编辑项目时默认选中当前项目信息对应用户和项目类型
 	 */
 	@RequestMapping(value = "/showSelectUserAndProjectType", method = RequestMethod.POST)
 	@ResponseBody
-	public Project showSelectUserAndProjectType(Integer projectId, Integer projectTypeId) {// 项目ID、项目类型ID
-		SysDictionary sysDictionary = sysDictionaryServce.selectByPrimaryKey(projectTypeId);
+	public Project showSelectUserAndProjectType(Integer projectId,
+			Integer projectTypeId) {// 项目ID、项目类型ID
+		SysDictionary sysDictionary = sysDictionaryServce
+				.selectByPrimaryKey(projectTypeId);
 		Project project = projectService.selectByPrimaryKey(projectId);
 		project.setSysDictionary(sysDictionary);
 		return project;
@@ -262,26 +354,31 @@ public class ProjectController {
 	@ResponseBody
 	public Project addProject(@RequestBody Project project) {
 		Subject subject = SecurityUtils.getSubject();
-		if(subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)){
-			//管理员用户，可添加项目
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			// 管理员用户，可添加项目
 			projectService.insertSelective(project);
-			//项目ID自增长，取出
-			project = projectService.selectByProjectName(project.getProjectName());
-			//项目状态为int关联字典表，取出
-			project.setProjectStatusString(sysDictionaryServce.selectProjectStatusByDicId(project.getProjectStatus()));
-			//创建完项目在警戒值表中按项目类型添加记录
-				//获取项目类型ID
-			    List<SysDictionary> sysDictionaryList = sysDictionaryServce.selectSysDictionaryByProjectTypeId(project.getProjectTypeId());
-			    for(SysDictionary sysDictionary:sysDictionaryList){
-			    	Threshold threshold = new Threshold();
-			    	threshold.setUserId(project.getUserId());
-			    	threshold.setProjectId(project.getProjectId());
-			    	threshold.setProjectTypeId(project.getProjectTypeId());
-			    	threshold.setDetectionTypeId(sysDictionary.getDicId());
-			    	thresholdService.insertSelective(threshold);
-			    }
-		}else{
-			//非管理员不能填写项目
+			// 项目ID自增长，取出
+			project = projectService.selectByProjectName(project
+					.getProjectName());
+			// 项目状态为int关联字典表，取出
+			project.setProjectStatusString(sysDictionaryServce
+					.selectProjectStatusByDicId(project.getProjectStatus()));
+			// 创建完项目在警戒值表中按项目类型添加记录
+			// 获取项目类型ID
+			List<SysDictionary> sysDictionaryList = sysDictionaryServce
+					.selectSysDictionaryByProjectTypeId(project
+							.getProjectTypeId());
+			for (SysDictionary sysDictionary : sysDictionaryList) {
+				Threshold threshold = new Threshold();
+				threshold.setUserId(project.getUserId());
+				threshold.setProjectId(project.getProjectId());
+				threshold.setProjectTypeId(project.getProjectTypeId());
+				threshold.setDetectionTypeId(sysDictionary.getDicId());
+				thresholdService.insertSelective(threshold);
+			}
+		} else {
+			// 非管理员不能填写项目
 			project.setUserId(2);
 		}
 		return project;
@@ -292,33 +389,45 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/addDescription", method = RequestMethod.POST)
 	@ResponseBody
-	public DetectionPoint addDescription(@RequestBody DetectionPoint detectionPoint){
-		//根据项目名查项目ID加到测点
-		detectionPoint.setProjectId((projectService.selectByProjectName(detectionPoint.getProjectName())).getProjectId());
+	public DetectionPoint addDescription(
+			@RequestBody DetectionPoint detectionPoint) {
+		// 根据项目名查项目ID加到测点
+		detectionPoint.setProjectId((projectService
+				.selectByProjectName(detectionPoint.getProjectName()))
+				.getProjectId());
 		detectionPointService.insertSelective(detectionPoint);
-		//根据项目ID+测点名称查出插入的测点得到测点ID
-		detectionPoint = detectionPointService.selectByProjectIDAndDetectionName(detectionPoint.getProjectId(), detectionPoint.getDetectionName());
-		//得到测点类型名称（itemName）
-		detectionPoint.setItemName(sysDictionaryServce.selectProjectStatusByDicId((detectionPoint.getDetectionTypeId())));
+		// 根据项目ID+测点名称查出插入的测点得到测点ID
+		detectionPoint = detectionPointService
+				.selectByProjectIDAndDetectionName(
+						detectionPoint.getProjectId(),
+						detectionPoint.getDetectionName());
+		// 得到测点类型名称（itemName）
+		detectionPoint.setItemName(sysDictionaryServce
+				.selectProjectStatusByDicId((detectionPoint
+						.getDetectionTypeId())));
 		return detectionPoint;
 	}
-	
+
 	/**
 	 * 新建Threshold
 	 */
 	@RequestMapping(value = "/updetaThreshold", method = RequestMethod.POST)
 	@ResponseBody
-	public Threshold updetaThreshold(@RequestBody Threshold threshold){
-		//use projectName to select userid,projectid,projecttypeid and insert into threshold
-		Project project = projectService.selectByProjectName(threshold.getProjectName());
+	public Threshold updetaThreshold(@RequestBody Threshold threshold) {
+		// use projectName to select userid,projectid,projecttypeid and insert
+		// into threshold
+		Project project = projectService.selectByProjectName(threshold
+				.getProjectName());
 		threshold.setUserId(project.getUserId());
 		threshold.setProjectId(project.getProjectId());
 		threshold.setProjectTypeId(project.getProjectTypeId());
-		threshold.setThresholdId(thresholdService.selectByProjectIdAndDetectionTypeId(project.getProjectId(), threshold.getDetectionTypeId()).getThresholdId());
+		threshold.setThresholdId(thresholdService
+				.selectByProjectIdAndDetectionTypeId(project.getProjectId(),
+						threshold.getDetectionTypeId()).getThresholdId());
 		thresholdService.updateByPrimaryKeySelective(threshold);
 		return threshold;
 	}
-	
+
 	/**
 	 * 修改项目
 	 */
@@ -329,10 +438,11 @@ public class ProjectController {
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			projectService.updateByPrimaryKeySelective(project);
-			//项目状态为int关联字典表，取出
-			project.setProjectStatusString(sysDictionaryServce.selectProjectStatusByDicId(project.getProjectStatus()));
+			// 项目状态为int关联字典表，取出
+			project.setProjectStatusString(sysDictionaryServce
+					.selectProjectStatusByDicId(project.getProjectStatus()));
 			return project;
-		}else{
+		} else {
 			return null;
 		}
 	}
@@ -347,13 +457,13 @@ public class ProjectController {
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			// 管理员用户，可删除项目
-			//项目ID删除项目
+			// 项目ID删除项目
 			projectService.deleteByPrimaryKey(projectId);
-			//项目ID删除测点
+			// 项目ID删除测点
 			detectionPointService.deleteByProjectId(projectId);
-			//项目ID关联测点表和传感器表删除传感器
+			// 项目ID关联测点表和传感器表删除传感器
 			sensorInfoService.deleteByProjectId(projectId);
-			//项目ID删除告警信息
+			// 项目ID删除告警信息
 			thresholdService.deleteByProjectId(projectId);
 			return 1;
 		} else {

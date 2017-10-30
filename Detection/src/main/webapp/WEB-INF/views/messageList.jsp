@@ -127,7 +127,7 @@
 			</div>
 		</div>
 	</div>
-	<div style="background: rgba(255,255,255, 0.5);">
+	<!-- <div style="background: rgba(255,255,255, 0.5);">
         <div class="sk-spinner sk-fading-circle">
         <div class="sk-circle1 sk-circle"></div>
         <div class="sk-circle2 sk-circle"></div>
@@ -141,7 +141,7 @@
         <div class="sk-circle10 sk-circle"></div>
         <div class="sk-circle11 sk-circle"></div>
         <div class="sk-circle12 sk-circle"></div>
-    </div>
+    </div> -->
 </div>
 
 

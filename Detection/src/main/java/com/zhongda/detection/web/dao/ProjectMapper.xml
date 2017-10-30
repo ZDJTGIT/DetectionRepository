@@ -34,7 +34,7 @@
     <result column="project_end_time" jdbcType="TIMESTAMP" property="projectEndTime" />
     <result column="project_status" jdbcType="VARCHAR" property="projectStatus" />
     <result column="project_description" jdbcType="VARCHAR" property="projectDescription" />
-     <result column="message_count" jdbcType="VARCHAR" property="messageCount" />
+    <result column="message_count" jdbcType="VARCHAR" property="messageCount" />
   </resultMap>
   
   <sql id="Base_Column_List">

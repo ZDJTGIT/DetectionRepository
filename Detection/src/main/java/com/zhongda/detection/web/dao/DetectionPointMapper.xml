@@ -9,6 +9,29 @@
     <result column="detection_longitude" jdbcType="VARCHAR" property="detectionLongitude" />
     <result column="detection_name" jdbcType="VARCHAR" property="detectionName" />
     <result column="detection_description" jdbcType="VARCHAR" property="detectionDescription" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="item_value" jdbcType="VARCHAR" property="itemValue" />
+  </resultMap>
+  <resultMap id="DetectionPointMap" type="com.zhongda.detection.web.model.DetectionPoint">
+    <result column="detection_name" jdbcType="VARCHAR" property="detectionName" />
+    <collection property="laserDataList" javaType="java.util.List" ofType="com.zhongda.detection.web.model.LaserData">
+    	<id column="id" jdbcType="INTEGER" property="id" />
+	    <result column="sensor_id" jdbcType="VARCHAR" property="sensorId" />
+	    <result column="first_time" jdbcType="TIMESTAMP" property="firstTime" />
+	    <result column="first_data" jdbcType="DOUBLE" property="firstData" />
+	    <result column="previous_time" jdbcType="TIMESTAMP" property="previousTime" />
+	    <result column="previous_data" jdbcType="DOUBLE" property="previousData" />
+	    <result column="current_times" jdbcType="TIMESTAMP" property="currentTimes" />
+	    <result column="current_data" jdbcType="DOUBLE" property="currentData" />
+	    <result column="current_laser_change" jdbcType="DOUBLE" property="currentLaserChange" />
+	    <result column="total_laser_change" jdbcType="DOUBLE" property="totalLaserChange" />
+	    <result column="speed_change" jdbcType="DOUBLE" property="speedChange" />
+	    <result column="sensor_status" jdbcType="INTEGER" property="sensorStatus" />
+	    <result column="create_type" jdbcType="VARCHAR" property="createType" />
+	    <result column="smu_cms_id" jdbcType="VARCHAR" property="smuCmsId" />
+	    <result column="smu_cms_channel" jdbcType="VARCHAR" property="smuCmsChannel" />
+	    <result column="smu_status" jdbcType="INTEGER" property="smuStatus" />
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     detection_point_id, project_id, detection_type_id, detection_latitude, detection_longitude, 
@@ -39,6 +62,35 @@
     from detection_point
     where project_id = #{0}
     and detection_name = #{1}
+  <select id="selectItemNameByProjectgId" resultMap="BaseResultMap">
+  	SELECT
+	sd.item_name 'item_name',
+	sd.item_value 'item_value',
+	dp.project_id,
+	dp.detection_type_id
+	FROM
+	detection_point dp,
+	sys_dictionary sd
+	WHERE
+	dp.detection_type_id = sd.dic_id
+	AND dp.project_id = #{projectId,jdbcType=INTEGER}
+	GROUP BY
+	detection_type_id
+  </select>
+  <select id="selectLaserDataByCurrentTimes" resultMap="DetectionPointMap">
+  	SELECT
+	dp.detection_name, ld.*
+	FROM
+	(
+		detection_point dp
+		RIGHT JOIN sensor_info si ON dp.detection_point_id = si.detection_point_id
+	)
+	RIGHT JOIN laser_data ld ON ld.sensor_id = si.sensor_id
+	WHERE
+	dp.project_id = #{projectId,jdbcType=INTEGER}
+	AND dp.detection_type_id = #{detectionTypeId,jdbcType=INTEGER} and ld.current_times like concat(#{currentTime,jdbcType=VARCHAR},'%')
+	ORDER BY
+	ld.current_times;
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from detection_point

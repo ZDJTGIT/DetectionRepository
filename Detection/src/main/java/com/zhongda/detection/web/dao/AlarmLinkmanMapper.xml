@@ -19,10 +19,25 @@
     from alarm_linkman
     where alarm_linkman_id = #{alarmLinkmanId,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select 
+  	*
+  	from alarm_linkman
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from alarm_linkman
     where alarm_linkman_id = #{alarmLinkmanId,jdbcType=INTEGER}
   </delete>
+  <insert id="insertAlarmLinkmanList" useGeneratedKeys="true" keyProperty="alarmLinkmanId" >
+  	insert into alarm_linkman (user_name, project_id, 
+     	project_name, phone, email, status)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+    	(#{item.userName,jdbcType=VARCHAR}, #{item.projectId,jdbcType=INTEGER}, 
+      #{item.projectName,jdbcType=VARCHAR}, #{item.phone,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, 
+      #{item.status,jdbcType=INTEGER})
+    </foreach>
+  </insert>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.AlarmLinkman">
     insert into alarm_linkman (alarm_linkman_id, user_name, project_id, 
       project_name, phone, email, 
@@ -113,5 +128,11 @@
       email = #{email,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER}
     where alarm_linkman_id = #{alarmLinkmanId,jdbcType=INTEGER}
+  </update>
+  <update id="updateStatusByalarmLinkmanId" parameterType="com.zhongda.detection.web.model.AlarmLinkman">
+  	UPDATE alarm_linkman al
+	SET al.status = #{status,jdbcType=INTEGER}
+	WHERE
+	al.alarm_linkman_id = #{alarmLinkmanId,jdbcType=INTEGER}
   </update>
 </mapper>
