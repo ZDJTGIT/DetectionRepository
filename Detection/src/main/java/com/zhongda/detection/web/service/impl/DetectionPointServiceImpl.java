@@ -46,4 +46,16 @@ public class DetectionPointServiceImpl implements DetectionPointService {
 		return detectionPointMapper.updateByPrimaryKeySelective(record);
 	}
 
+	@Override
+	public DetectionPoint selectByProjectIDAndDetectionName(Integer projectId,
+			String detectionName) {
+		return detectionPointMapper.selectByProjectIDAndDetectionName(projectId, detectionName);
+	}
+
+	@Override
+	public List<DetectionPoint> selectByProjectNameAndKeyWord(
+			String projectName, String keyWord) {
+		return detectionPointMapper.selectByProjectNameAndKeyWord(projectName, keyWord);
+	}
+
 }

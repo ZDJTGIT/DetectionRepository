@@ -46,19 +46,12 @@
 							</div>
 							<div class="col-md-11">
 								<div class="input-group">
-									<input type="text" id="searchProject" name="searchProject" placeholder="请输入传感器名称" class="input-sm form-control"> 
-									<span class="input-group-btn">
-										<button type="button" id="searchSensoInfo" name="searchSensoInfo" class="btn btn-sm btn-primary">
-											搜索
-										</button>
-									</span>
 								</div>
 							</div>
 						</div>
 						<div class="project-list">
 							<table class="table table-hover" id="sensorInfo_table">
 								<tbody id="sensorInfo_tbody">
-								
 								 <tr>
 										<td class="project-title" style="width:60px">
 										</td>
@@ -201,11 +194,53 @@
 			   success: function(data){
 			   		if(data){
 			   			//添加成功后清空输入层以便重复使用
-			   			//添加成功之后刷新页面---
+			   			//添加成功之后刷新页面
 						$('#sensorId_addSensorInfo').val("");
 						$('#sensorType_addSensorInfo').val("");
 						$('#sensorModel_addSensorInfo').val("");
 						$('#sensorDepth_addSensorInfo').val("");
+						
+		 var viewData = '<tr id='+data.sensorInfoId+'>'+
+						'<td class="project-title" style="width:60px">'+
+						'</td>'+
+					    	'<td class="project-status" style="width:120px">'+
+						'<a href="project_detail.html">'+data.sensorType+'</a><br />'+
+					    '</td>'+
+					    '<td class="project-title" style="width:50px">'+
+						'</td>'+
+						'<td class="project-status" style="width:200px">'+
+							'<span class="label label-primary">'+data.sensorId+'</span>'+
+						'</td>'+
+						'<td class="project-title" style="width:260px">'+
+							'<a href="project_detail.html">'+data.sensorDepth+'</a><br />'+
+							'<small></small>'+
+						'</td>'+
+						'<td class="project-title" style="width:260px">'+
+							'<a href="project_detail.html">'+data.sensorModel+'</a><br />'+
+							'<small></small>'+
+						'</td>'+
+						//传感器ID（隐藏6）
+						'<td class="project-status" style="display:none">'+
+							'<span class="label label-primary">' + data.sensorInfoId+ '</span>'+
+						'</td>'+
+						//测点ID（隐藏7）
+						'<td class="project-status" style="display:none">'+
+							'<span class="label label-primary">' + data.detectionPointId+ '</span>'+
+						'</td>'+
+						'<td class="project-title" style="width:340px">'+
+						'</td>'+
+						'<td class="project-status style="width:120px">'+
+						    '<a href="javascript:;" class="J_menuItem" onclick="updetaSensorInfo(this)" data-toggle="modal" data-target="#myModal_updetaSensorInfo">'+
+								'<i class="fa fa-pencil"></i>修改&nbsp&nbsp&nbsp&nbsp'+
+							'</a>'+
+							'<a href="javascript:;" class="J_menuItem" onclick="deleteSensorInfo('+data.sensorInfoId+')">'+
+								'<i class="fa fa-times-circle"></i>删除'+
+						    '</a>'+
+					   '</td>'+
+					   '<td class="project-actions">'+
+					   '</td>'+
+					   '</tr>';
+						$('#sensorInfo_tbody').append(viewData);
 						alert("传感器添加成功！");
 			   		   	   }else {
 			  			   alert("数据异常");
@@ -213,11 +248,11 @@
 			   		}
 			   }); 	
 	});
-	
+	    var b;
 	//点击修改传感器信息，加载传感器信息到弹出层
 	function updetaSensorInfo(asd){
 		//在输入框加载当前测点的相关信息
-		var b = asd.parentNode.parentNode.rowIndex;
+		b = asd.parentNode.parentNode.rowIndex;
 		var sensorType = $("table tr:eq(" + b + ") td:eq(1)").text();//传感器类型
 		var sensorId = $("table tr:eq(" + b + ") td:eq(3)").text();//传感器编号
 		var sensorDepth = $("table tr:eq(" + b + ") td:eq(4)").text();//传感器深度
@@ -234,6 +269,7 @@
 	
 	//点击提交，确定修改，修改的数据库存入数据库
 	$('.sureUpdetaSensorInfo_updetaSensorInfo').click(function(){
+		var t = b;
 		var sensorType = $('#sensorType_updetaSensorInfo').val();
 		var sensorId =$('#sensorId_updetaSensorInfo').val();
 		var sensorDepth = $('#sensorDepth_updetaSensorInfo').val();
@@ -261,7 +297,13 @@
 				data: jsonData,
 				success: function(data){
 						if(data){
-							//修改传感器信息成功后，实时刷新页面---
+							//修改传感器信息成功后，实时刷新页面
+							$("table tr:eq(" + b + ") td:eq(1) a").text(sensorType);//传感器类型
+							$("table tr:eq(" + b + ") td:eq(3) span").text(sensorId);//传感器编号
+							$("table tr:eq(" + b + ") td:eq(4) a").text(sensorDepth);//传感器深度
+							$("table tr:eq(" + b + ") td:eq(5) a").text(sensorModel);//传感器模型
+							$("table tr:eq(" + b + ") td:eq(6)").text(sensorInfoId);//传感器ID
+							$("table tr:eq(" + b + ") td:eq(7)").text(detectionPointId);//测点ID
 							alert("修改传感器信息成功！");
 								}else 
 								{
@@ -288,8 +330,8 @@
 				data : {sensorInfoId:sensorInfoId},
 				success : function(data) {
 					if(data=="1"){
-						//删除成功后动态清除页面对应的记录---
-						//$("#project_"+projectId).remove();
+						//删除成功后动态清除页面对应的记录
+						$("#"+sensorInfoId).remove();
 						layer.msg('删除成功（该提示3s后自动关闭）', {
 							time : 3000, //3s后自动关闭
 							btn : [ '知道了' ]
@@ -321,7 +363,7 @@
 		    	  		  if(data){
 		    	  			var string = "";
 		    	  			$.each(data,function(idx,item){
-		    	  			 string +=  '<tr>'+
+		    	  			 string +=  '<tr id='+item.sensorInfoId+'>'+
 										'<td class="project-title" style="width:60px">'+
 										'</td>'+
 				    	  		    	'<td class="project-status" style="width:120px">'+

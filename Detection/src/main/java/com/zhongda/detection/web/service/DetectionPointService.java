@@ -45,4 +45,20 @@ public interface DetectionPointService {
      * @return
      */
     int updateByPrimaryKeySelective(DetectionPoint record);
+    
+    /**
+     * 根据项目ID和测点名称查出唯一的的测点
+     * @param projectID
+     * @param DetectionPointName
+     * @return
+     */
+    DetectionPoint selectByProjectIDAndDetectionName(Integer projectId,String detectionName);
+    
+    /**
+     * 模糊查询测点
+     * @param projectName
+     * @param keyWord
+     * @return
+     */
+    List<DetectionPoint> selectByProjectNameAndKeyWord(String projectName,String keyWord);
 }

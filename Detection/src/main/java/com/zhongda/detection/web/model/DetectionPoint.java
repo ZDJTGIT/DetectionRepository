@@ -19,7 +19,7 @@ public class DetectionPoint {
     private String projectName;
     
     //缓存测点类型名称，数据库无该字段
-    private String itemName;
+    private String itemName;//
 
 	public String getItemName() {
 		return itemName;

@@ -102,8 +102,12 @@ public class DetectionPointController {
 	 */
 	@RequestMapping(value = "/keywordSearchDetectionPoint", method = RequestMethod.POST)
 	@ResponseBody
-	public SysDictionary keywordSearchDetectionPoint(Integer detectionTypeId){
-		return sysDictionaryServce.selectByPrimaryKey(detectionTypeId);
+	public List<DetectionPoint> keywordSearchDetectionPoint(String keyWord,String projectName){
+		List<DetectionPoint> detectionPointList = detectionPointService.selectByProjectNameAndKeyWord(projectName, keyWord);
+		for(DetectionPoint detectionPoint:detectionPointList){
+			detectionPoint.setItemName(sysDictionaryServce.selectProjectStatusByDicId((detectionPoint.getDetectionTypeId())));
+		}		
+		return detectionPointList;
 	}
 
 }

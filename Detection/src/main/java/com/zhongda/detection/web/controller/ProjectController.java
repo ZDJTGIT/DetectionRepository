@@ -295,8 +295,11 @@ public class ProjectController {
 	public DetectionPoint addDescription(@RequestBody DetectionPoint detectionPoint){
 		//根据项目名查项目ID加到测点
 		detectionPoint.setProjectId((projectService.selectByProjectName(detectionPoint.getProjectName())).getProjectId());
-		System.out.println("9+**++-+--++-7+7+768678项目类型ID为："+detectionPoint.getDetectionTypeId());
 		detectionPointService.insertSelective(detectionPoint);
+		//根据项目ID+测点名称查出插入的测点得到测点ID
+		detectionPoint = detectionPointService.selectByProjectIDAndDetectionName(detectionPoint.getProjectId(), detectionPoint.getDetectionName());
+		//得到测点类型名称（itemName）
+		detectionPoint.setItemName(sysDictionaryServce.selectProjectStatusByDicId((detectionPoint.getDetectionTypeId())));
 		return detectionPoint;
 	}
 	

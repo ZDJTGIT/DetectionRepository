@@ -26,6 +26,20 @@
     from detection_point
     where project_id = #{projectId,jdbcType=INTEGER}
   </select>
+  <select id="selectByProjectNameAndKeyWord" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from detection_point 
+    where project_id = (select project_id from project where project_name = '${_parameter.param1}') 
+    and detection_name like '%${_parameter.param2}%'
+  </select>
+  <select id="selectByProjectIDAndDetectionName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from detection_point
+    where project_id = #{0}
+    and detection_name = #{1}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from detection_point
     where detection_point_id = #{detectionPointId,jdbcType=INTEGER}

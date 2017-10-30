@@ -179,7 +179,6 @@
 	<script src="assets/js/plugins/laydate/laydate.js" charset="utf-8"></script>
 	<script src="assets/js/layui.all.js" charset="utf-8"></script>
 	<script>
-	//---为6一个BUG，四个界面刷新，一个模糊查询语句
 	//确定添加响应事件-将测点信息存入数据库
 	$(".sureAddDetection_addDetection").click(function(){
 		var projectName = '${projectName}';
@@ -209,24 +208,73 @@
 		   success: function(data){
 		   		if(data){
 		   			//添加成功后清空输入层以便重复使用
-		   			//添加成功之后刷新页面---
+		   			//添加成功之后刷新页面
 					$('#DetectionLongitude_addDetection').val("");
 					$('#DetectionLatitude_addDetection').val("");
 					$('#DetectionName_addDetection').val("");
 					$('#DetectionDescription_addDetection').val("");
 					alert("测点添加成功！");
-		   		   	   }else {
-		  			   alert("数据异常");
-		   			   }
+	 var viewData = '<tr id='+data.detectionPointId+'>'+
+					'<td class="project-title" style="width:60px">'+
+					'</td>'+
+	  		    	'<td class="project-status" style="width:120px">'+
+						''+data.itemName+''+
+				    '</td>'+
+				    '<td class="project-title" style="width:50px">'+
+					'</td>'+
+					'<td class="project-title" style="width:200px">'+
+						''+data.detectionName+''+
+					'</td>'+
+					'<td class="project-title" style="width:140px">'+
+						''+data.detectionDescription+''+
+					'</td>'+
+					'<td class="project-title" style="width:140px">'+
+						''+data.detectionLongitude+''+
+					'</td>'+
+					'<td class="project-title" style="width:140px">'+
+						''+data.detectionLatitude+''+
+					'</td>'+
+					//测点ID（隐藏7）
+					'<td class="project-status" style="display:none">'+
+						'<span class="label label-primary">' + data.detectionPointId+ '</span>'+
+					'</td>'+
+					//测点类型ID（隐藏8）
+					'<td class="project-status" style="display:none">'+
+						'<span class="label label-primary">' + data.detectionTypeId+ '</span>'+
+					'</td>'+
+					'<td class="project-title" style="width:400px">'+
+					'</td>'+
+					'<td class="project-status" style="width:150px">'+
+					//打开传感器页面，传测点ID和测点名称
+						'<a href="rest/sensor_info/'+data.detectionPointId+':'+data.detectionName+'" class="J_menuItem" name="传感器信息">'+
+							'&nbsp&nbsp&nbsp&nbsp'+'进入'+
+						'</a>'+
+					'</td>'+
+					'<td class="project-status"  style="width:150px">'+
+					    '<a href="javascript:;" class="J_menuItem" onclick="updetaDetectionPoint(this)" data-toggle="modal" data-target="#myModal_updetaDetection">'+
+							'<i class="fa fa-pencil"></i>修改'+
+						'</a>'+
+						'<a href="javascript:;" class="J_menuItem" onclick="deleteDetectionPoint('+data.detectionPointId+')">'+
+							'<i class="fa fa-times-circle"></i> 删除'+
+					    '</a>'+
+				    '</td>'+
+				    '<td class="project-actions">'+
+				    '</td>'+
+				   '</tr>';
+					$('#detection_tbody').append(viewData);
+		   		   	}else {
+		  			alert("数据异常");
+		   			}
 		   		}
 		   }); 	
 	});
 	
 	//修改测点信息，点击加载选中的测点的信息
+	    var b;
 	function updetaDetectionPoint(asd){
 		
 		//在输入框加载当前测点的相关信息
-		var b = asd.parentNode.parentNode.rowIndex;
+		b = asd.parentNode.parentNode.rowIndex;
 		var detectionPointType = $("table tr:eq(" + b + ") td:eq(1)").text();//测点类型名称
 		var detectionTypeId = $("table tr:eq(" + b + ") td:eq(8)").text();//测点类型ID.
 		var detectionName = $("table tr:eq(" + b + ") td:eq(3)").text();//测点名称.
@@ -254,7 +302,7 @@
 	
 	//确定修改，将修改的测点信息存入数据库
 	$('.sureAddDetection_updetaDetection').click(function(){
-		    alert("确定修改测点响应事件");
+		    var t = b;
 		    var detectionTypeId =  $('#selectDetectionStatus option:selected').val();//测点类型ID
 		    var projectName = '${projectName}';
 		    var detectionLatitude = $('#DetectionLatitude_updetaDetection').val();
@@ -286,7 +334,13 @@
 				data: jsonData,
 				success: function(data){
 						if(data){
-							//修改测点信息成功后，实时刷新页面---
+							//修改测点信息成功后，实时刷新页面
+							//$("table tr:eq(" + t + ") td:eq(1)").text();//测点类型名称---
+							$("table tr:eq(" + t + ") td:eq(8)").text(detectionTypeId);//测点类型ID.
+							$("table tr:eq(" + t + ") td:eq(3)").text(detectionName);//测点名称.
+							$("table tr:eq(" + t + ") td:eq(4)").text(detectionDescription);//测点描述.
+							$("table tr:eq(" + t + ") td:eq(5)").text(detectionLongitude);//测点经度.
+							$("table tr:eq(" + t + ") td:eq(6)").text(detectionLatitude);//测点纬度.
 							alert("修改测点信息成功！");
 								}else {
 									  alert("数据异常");
@@ -309,8 +363,8 @@
 				data : {detectionPointId:detectionPointId},
 				success : function(data) {
 					if(data=="1"){
-						//删除成功后动态清除页面对应的记录---
-						//$("#project_"+projectId).remove();
+						//删除成功后动态清除页面对应的记录
+						$("#"+detectionPointId).remove();
 						layer.msg('删除成功（该提示3s后自动关闭）', {
 							time : 3000, //3s后自动关闭
 							btn : [ '知道了' ]
@@ -323,28 +377,73 @@
 		});
 	}
 	
-	//点击搜索响应事件，模糊查询项目ID下所有测点名称并展示在页面---
+	//点击搜索响应事件，模糊查询项目ID下所有测点名称并展示在页面
 	$('#searchDetectionPoint').click(function(){
 		var keyWord = $('#searchDetectionPoint_input').val();
 		var projectName = '${projectName}';
-		alert(projectName);
-		alert(keyWord);
 		$.ajax({
 			type:'post',
 			url: 'rest/detectionPoint/keywordSearchDetectionPoint',
-			contentType:"application/json",
 			dataType : 'json',
 			data: {keyWord:keyWord,projectName:projectName},
 			success: function(data){
 					if(data){
-							//搜索成功，返回集合展示---
-							alert("搜索成功");
+						    $("#detection_table tbody").html("");
+						   $.each(data,function(idx,item){
+								 var viewData = '<tr id='+item.detectionPointId+'>'+
+												'<td class="project-title" style="width:60px">'+
+												'</td>'+
+								  		    	'<td class="project-status" style="width:120px">'+
+													''+item.itemName+''+
+											    '</td>'+
+											    '<td class="project-title" style="width:50px">'+
+												'</td>'+
+												'<td class="project-title" style="width:200px">'+
+													''+item.detectionName+''+
+												'</td>'+
+												'<td class="project-title" style="width:140px">'+
+													''+item.detectionDescription+''+
+												'</td>'+
+												'<td class="project-title" style="width:140px">'+
+													''+item.detectionLongitude+''+
+												'</td>'+
+												'<td class="project-title" style="width:140px">'+
+													''+item.detectionLatitude+''+
+												'</td>'+
+												//测点ID（隐藏7）
+												'<td class="project-status" style="display:none">'+
+													'<span class="label label-primary">' + item.detectionPointId+ '</span>'+
+												'</td>'+
+												//测点类型ID（隐藏8）
+												'<td class="project-status" style="display:none">'+
+													'<span class="label label-primary">' + item.detectionTypeId+ '</span>'+
+												'</td>'+
+												'<td class="project-title" style="width:400px">'+
+												'</td>'+
+												'<td class="project-status" style="width:150px">'+
+												//打开传感器页面，传测点ID和测点名称
+													'<a href="rest/sensor_info/'+item.detectionPointId+':'+item.detectionName+'" class="J_menuItem" name="传感器信息">'+
+														'&nbsp&nbsp&nbsp&nbsp'+'进入'+
+													'</a>'+
+												'</td>'+
+												'<td class="project-status"  style="width:150px">'+
+												    '<a href="javascript:;" class="J_menuItem" onclick="updetaDetectionPoint(this)" data-toggle="modal" data-target="#myModal_updetaDetection">'+
+														'<i class="fa fa-pencil"></i>修改'+
+													'</a>'+
+													'<a href="javascript:;" class="J_menuItem" onclick="deleteDetectionPoint('+item.detectionPointId+')">'+
+														'<i class="fa fa-times-circle"></i> 删除'+
+												    '</a>'+
+											    '</td>'+
+											    '<td class="project-actions">'+
+											    '</td>'+
+											   '</tr>';   
+						          $('#detection_tbody').append(viewData);
+							});
 							}else {
 								  alert("数据异常");
 							      }
 							}
 			}); 	
-		alert("搜索测点事件响应");
 	});
 	
 		$(document).ready(function() {
@@ -389,7 +488,7 @@
 		    	  		  if(data){
 		    	  			var string = "";
 		    	  			$.each(data,function(idx,item){
-		    	  			  string += '<tr>'+
+		    	  			  string += '<tr id='+item.detectionPointId+'>'+
 										'<td class="project-title" style="width:60px">'+
 										'</td>'+
 				    	  		    	'<td class="project-status" style="width:120px">'+
