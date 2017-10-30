@@ -208,7 +208,7 @@
 						<li class="dropdown">
 							<a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:;">
 								<i class="fa fa-envelope"></i>
-								<span class="label label-warning">${fn:length(messageList)}</span>
+								<span class="label label-warning" id="alarmCountSpan">${fn:length(messageList)}</span>
 							</a>
 							<ul class="dropdown-menu dropdown-messages">
 								<c:forEach items="${messageList}" var="message" varStatus="status">
@@ -238,32 +238,30 @@
 						<li class="dropdown">
 							<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
 								<i class="fa fa-bell"></i>
-								<span class="label label-primary">8</span>
+								<span class="label label-primary">${alarmTotal}</span>
 							</a>
 							<ul class="dropdown-menu dropdown-alerts">
+								<c:forEach items="${alarmList}" var="alarm">
+									<li>
+										<a class="J_menuItem" href="rest/table_jqgrid">
+											<div>
+												<i class="fa fa-envelope fa-fw"></i>${alarm.alarmContext}
+												<span class="pull-right text-muted small"><fmt:formatDate value="${alarm.createTime}" type="both"/></span>
+											</div>
+										</a>
+									</li>
+									<li class="divider"></li>
+								</c:forEach>
 								<li>
-									<a class="J_menuItem" href="rest/table_jqgrid">
-										<div>
-											<i class="fa fa-envelope fa-fw"></i> 您有16条未读消息 <span
-											class="pull-right text-muted small">4分钟前</span>
-										</div>
-									</a></li>
-							<li class="divider"></li>
-							<li><a href="rest/profile">
-									<div>
-										<i class="fa fa-qq fa-fw"></i> 3条新回复 <span
-											class="pull-right text-muted small">12分钟钱</span>
+									<div class="text-center link-block">
+										<a class="J_menuItem" href="rest/alarm/alarmList">
+											<strong>查看所有</strong>
+											<i class="fa fa-angle-right"></i>
+										</a>
 									</div>
-							</a></li>
-							<li class="divider"></li>
-							<li>
-								<div class="text-center link-block">
-									<a class="J_menuItem" href="rest/notifications"> <strong>查看所有
-									</strong> <i class="fa fa-angle-right"></i>
-									</a>
-								</div>
-							</li>
-						</ul></li>
+								</li>
+							</ul>
+						</li>
 					<li class="hidden-xs"><a class="J_menuItem dropdown-toggle"
 						data-toggle="dropdown" href="javascript:;"> <i
 							class="fa fa-user"></i>${userInfo.userName}<span class="caret"></span>
@@ -740,7 +738,7 @@
 	        stompClient.connect({}, function(frame) {
 	        	console.log("connected-------:"+frame);
 	            stompClient.subscribe('/user/${userInfo.userName}/message',  function(data) { //订阅消息
-	            	layer.msg('<a class="J_menuItem" name="消息管理" href="rest/message/messageList">'+JSON.parse(data.body).messageContext+'</a>', {
+	            	layer.msg('<a class="J_menuItem" name="消息管理" href="rest/message/messageList">'+JSON.parse(data.body).alarmContext+'</a>', {
 	            		title: '告警消息',
 	            		closeBtn: 1,
 	            		time:30000,
@@ -749,8 +747,11 @@
 					    icon: 0
 					  });
 	            	
-	            	$('#newMessageAudio').html('<audio autoplay="autoplay">' 
-		            		+ '<source src="assets/audio/notify.wav" type="audio/wav"/></audio>'); 
+	            	var alarmCount = parseInt($('#alarmCountSpan').text());
+	            	$('#alarmCountSpan').text(alarmCount);
+	            
+	            	/* $('#newMessageAudio').html('<audio autoplay="autoplay">' 
+		            		+ '<source src="assets/audio/notify.wav" type="audio/wav"/></audio>');  */
 	            
 	            	/* if($.browser.msie && $.browser.version=='8.0'){ 
 	            		//本来这里用的是<bgsound src="system.wav"/>,结果IE8不播放声音,于是换成了embed 
@@ -761,7 +762,7 @@
 	            		$('#newMessageAudio').html('<audio autoplay="autoplay">' 
 	            		+ '<source src="assets/audio/notify.wav" type="audio/wav"/></audio>'); 
 	            		alert('<audio autoplay="autoplay">');
-	            	}  */
+	            	}*/
 	            
 	            });
 

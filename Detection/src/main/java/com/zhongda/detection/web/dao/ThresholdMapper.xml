@@ -7,15 +7,14 @@
     <result column="project_id" jdbcType="INTEGER" property="projectId" />
     <result column="project_type_id" jdbcType="INTEGER" property="projectTypeId" />
     <result column="detection_type_id" jdbcType="INTEGER" property="detectionTypeId" />
-    <result column="min_threshold_value" jdbcType="REAL" property="minThresholdValue" />
-    <result column="max_threshold_value" jdbcType="REAL" property="maxThresholdValue" />
-    <result column="heat_image_url" jdbcType="VARCHAR" property="heatImageUrl" />
-    <result column="physical_image_url" jdbcType="VARCHAR" property="physicalImageUrl" />
+    <result column="threshold_type_id" jdbcType="INTEGER" property="thresholdTypeId" />
+    <result column="min_threshold_value" jdbcType="DOUBLE" property="minThresholdValue" />
+    <result column="max_threshold_value" jdbcType="DOUBLE" property="maxThresholdValue" />
     <result column="detection_type_name" jdbcType="VARCHAR" property="detectionTypeName" />
   </resultMap>
   <sql id="Base_Column_List">
-    threshold_id, user_id, project_id, project_type_id, detection_type_id, min_threshold_value, 
-    max_threshold_value, heat_image_url, physical_image_url
+    threshold_id, user_id, project_id, project_type_id, detection_type_id, threshold_type_id, 
+    min_threshold_value, max_threshold_value
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -46,13 +45,11 @@
   </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.Threshold">
     insert into threshold (threshold_id, user_id, project_id, 
-      project_type_id, detection_type_id, min_threshold_value, 
-      max_threshold_value, heat_image_url, physical_image_url
-      )
+      project_type_id, detection_type_id, threshold_type_id, 
+      min_threshold_value, max_threshold_value)
     values (#{thresholdId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, 
-      #{projectTypeId,jdbcType=INTEGER}, #{detectionTypeId,jdbcType=INTEGER}, #{minThresholdValue,jdbcType=REAL}, 
-      #{maxThresholdValue,jdbcType=REAL}, #{heatImageUrl,jdbcType=VARCHAR}, #{physicalImageUrl,jdbcType=VARCHAR}
-      )
+      #{projectTypeId,jdbcType=INTEGER}, #{detectionTypeId,jdbcType=INTEGER}, #{thresholdTypeId,jdbcType=INTEGER}, 
+      #{minThresholdValue,jdbcType=DOUBLE}, #{maxThresholdValue,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.Threshold">
     insert into threshold
@@ -72,17 +69,14 @@
       <if test="detectionTypeId != null">
         detection_type_id,
       </if>
+      <if test="thresholdTypeId != null">
+        threshold_type_id,
+      </if>
       <if test="minThresholdValue != null">
         min_threshold_value,
       </if>
       <if test="maxThresholdValue != null">
         max_threshold_value,
-      </if>
-      <if test="heatImageUrl != null">
-        heat_image_url,
-      </if>
-      <if test="physicalImageUrl != null">
-        physical_image_url,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -101,17 +95,14 @@
       <if test="detectionTypeId != null">
         #{detectionTypeId,jdbcType=INTEGER},
       </if>
+      <if test="thresholdTypeId != null">
+        #{thresholdTypeId,jdbcType=INTEGER},
+      </if>
       <if test="minThresholdValue != null">
-        #{minThresholdValue,jdbcType=REAL},
+        #{minThresholdValue,jdbcType=DOUBLE},
       </if>
       <if test="maxThresholdValue != null">
-        #{maxThresholdValue,jdbcType=REAL},
-      </if>
-      <if test="heatImageUrl != null">
-        #{heatImageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="physicalImageUrl != null">
-        #{physicalImageUrl,jdbcType=VARCHAR},
+        #{maxThresholdValue,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -130,17 +121,14 @@
       <if test="detectionTypeId != null">
         detection_type_id = #{detectionTypeId,jdbcType=INTEGER},
       </if>
+      <if test="thresholdTypeId != null">
+        threshold_type_id = #{thresholdTypeId,jdbcType=INTEGER},
+      </if>
       <if test="minThresholdValue != null">
-        min_threshold_value = #{minThresholdValue,jdbcType=REAL},
+        min_threshold_value = #{minThresholdValue,jdbcType=DOUBLE},
       </if>
       <if test="maxThresholdValue != null">
-        max_threshold_value = #{maxThresholdValue,jdbcType=REAL},
-      </if>
-      <if test="heatImageUrl != null">
-        heat_image_url = #{heatImageUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="physicalImageUrl != null">
-        physical_image_url = #{physicalImageUrl,jdbcType=VARCHAR},
+        max_threshold_value = #{maxThresholdValue,jdbcType=DOUBLE},
       </if>
     </set>
     where threshold_id = #{thresholdId,jdbcType=INTEGER}
@@ -151,10 +139,9 @@
       project_id = #{projectId,jdbcType=INTEGER},
       project_type_id = #{projectTypeId,jdbcType=INTEGER},
       detection_type_id = #{detectionTypeId,jdbcType=INTEGER},
-      min_threshold_value = #{minThresholdValue,jdbcType=REAL},
-      max_threshold_value = #{maxThresholdValue,jdbcType=REAL},
-      heat_image_url = #{heatImageUrl,jdbcType=VARCHAR},
-      physical_image_url = #{physicalImageUrl,jdbcType=VARCHAR}
+      threshold_type_id = #{thresholdTypeId,jdbcType=INTEGER},
+      min_threshold_value = #{minThresholdValue,jdbcType=DOUBLE},
+      max_threshold_value = #{maxThresholdValue,jdbcType=DOUBLE}
     where threshold_id = #{thresholdId,jdbcType=INTEGER}
   </update>
 </mapper>

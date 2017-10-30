@@ -56,7 +56,7 @@ import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
 import com.zhongda.detection.web.service.UserService;
-import com.zhongda.detection.web.task.PushMessage;
+import com.zhongda.detection.web.task.PushAlarm;
 
 /**
  * 用户控制器
@@ -151,7 +151,7 @@ public class UserController {
 					.getUserName());
 			WebUtils.setSessionAttribute(request, "userInfo", authUserInfo);
 
-			PushMessage.userSet.add(authUserInfo.getUserName());
+			PushAlarm.userSet.add(authUserInfo.getUserName());
 
 		} catch (LockedAccountException e) {
 			error = "登录失败3次，账户已被锁定 ，请3分钟后再试！";

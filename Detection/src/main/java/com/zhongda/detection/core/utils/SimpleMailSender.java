@@ -19,16 +19,47 @@ import javax.mail.internet.MimeMessage.RecipientType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 邮件发送器
+ * @author zmdeng
+ */
 public class SimpleMailSender {
 
 	public static final Logger logger = LoggerFactory.getLogger(SimpleMailSender.class);
-	//注册模板标识
+	/**
+	 * 注册模板标识: _register
+	 * 注册模板主题 : 注册验证
+	 * 注册模板内容 : ${toUserName}:你好! <a href="http://www.baidu.com?email=${toEmailAddress}">注册链接</a>
+	 */
 	public static final String REGISTER="_register";
-	//改密模板标识
+	/**
+	 * 改密模板标识: _changesPwd
+	 * 改密模板主题 : 改密验证
+	 * 改密模板内容 : ${toUserName},你好！请点击右边超链接改密<a href="http://localhost/Detection/rest/user/cp?zemin=${toEmailAddress}">改密链接</a>,次链接半小时后失效,谢谢！
+	 */
 	public static final String CHANGES_PWD="_changesPwd";
+	/**
+	 * 数据类告警
+	 * 告警模板标识: _alarmDataMessage
+	 * 告警模板主题 : 告警消息
+	 * 告警模板内容 : 尊敬的{0}用户：<br>您好！您的{1}项目，编号为：{2}的传感器监测到{3}超过阈值，当前值{4}，阈值范围{5}~{6}。<br>详情请点击<a href="http://localhost/Detection">中大检测在线检测服务平台</a>查看，谢谢！
+	 * {0}账户名  {1}项目名 {2}传感器编号 {3}监测的类型 {4}监测到的超过阈值的当前值 {5}最小阈值 {6}最大阈值
+	 */
+	public static final String ALARM_DATA_MESSAGE="_alarmDataMessage";
+	/**
+	 * 设备类告警
+	 * 告警模板标识: _alarmDeviceMessage
+	 * 告警模板主题 : 告警消息
+	 * 告警模板内容 : 尊敬的{0}用户：<br>您好！您的{1}项目，编号为：{2}的传感器出现故障，请及时处理。<br>详情请点击<a href="http://localhost/Detection">中大检测在线检测服务平台</a>查看，谢谢！
+	 * {0}账户名  {1}项目名 {2}传感器编号
+	 */
+	public static final String ALARM_DEVICE_MESSAGE="_alarmDeviceMessage";
 
     //邮箱的配置文件
     private Properties properties ;
+    
+    //邮箱的配置文件路径
+    private String mailConfigPath="/mail.properties";
 
     //邮件服务器登录验证
     private MailAuthenticator authenticator;
@@ -36,23 +67,33 @@ public class SimpleMailSender {
     //邮箱session
     private Session session;
 
-    //邮箱的配置文件路径
-    private String mailConfigPath="/mail.properties";
-
     /**
      * 初始化邮件发送器
      * 获取发送邮件的props文件，以及加载邮箱的配置文件
      */
     public SimpleMailSender() {
+    	
+    	logger.info("开始加载properties文件内容.......");
+        properties = new Properties();
+        InputStream inputStream = PropertiesTool.class.getResourceAsStream(mailConfigPath);
+        try {
+        	properties.load(inputStream);
+        } catch (IOException e) {
+			logger.error("无法加载"+mailConfigPath+"目录下的properties文件");
+		}finally {
+            try {
+                if(null != inputStream) {
+                	inputStream.close();
+                }
+            } catch (IOException e) {
+                logger.error(mailConfigPath+"文件流关闭出现异常");
+            }
+        }
+        logger.info("加载properties文件内容完成...........");
+    	
     	//发送邮件的props文件
         Properties props = System.getProperties();
-    	InputStream inputStream = PropertiesTool.class.getResourceAsStream(this.mailConfigPath);
-    	this.properties = new Properties();
-    	try {
-			properties.load(inputStream);
-		} catch (IOException e) {
-			logger.error("无法加载"+this.mailConfigPath+"目录下的properties文件");
-		}
+        //初始化发送邮件的props文件
     	init(props);
     }
 
@@ -61,9 +102,9 @@ public class SimpleMailSender {
      * @param props 发送邮件的props文件
      */
 	private void init(Properties props) {
-    	String smtpHostName = this.properties.getProperty("smtpHostName");
+    	String smtpHostName = properties.getProperty("smtpHostName");
     	if(null == smtpHostName || smtpHostName.equals("")){
-    		smtpHostName = "smtp." + this.properties.getProperty("username").split("@")[1];
+    		smtpHostName = "smtp." + properties.getProperty("username").split("@")[1];
     	}
     	// 初始化props
     	props.put("mail.smtp.auth", "true"); // 使用验证
@@ -75,7 +116,7 @@ public class SimpleMailSender {
     	// props.put("mail.debug", "true");
 
     	// 验证邮箱地址和密码
-		this.authenticator = new MailAuthenticator(this.properties.getProperty("username"), properties.getProperty("password"));
+		this.authenticator = new MailAuthenticator(properties.getProperty("username"), properties.getProperty("password"));
     	// 创建session
     	this.session = Session.getInstance(props, this.authenticator);
     }
@@ -152,7 +193,6 @@ public class SimpleMailSender {
      * @param template 邮件配置文件中的模板
      */
     public void send(String recipient , String template){
-    	properties.setProperty("toEmailAddress", recipient);
     	send(recipient, PropertiesTool.get(properties, "mailSubject"+template) , PropertiesTool.get(properties, "mailContent"+template));
     }
 
@@ -163,6 +203,26 @@ public class SimpleMailSender {
      */
     public void send(List<String> recipients , String template){
     	send(recipients, PropertiesTool.get(properties, "mailSubject"+template) , PropertiesTool.get(properties, "mailContent"+template));
+    }
+    
+    /**
+     * 发送邮件
+     * @param recipient 收件人邮箱地址
+     * @param template 邮件配置文件中的模板标识
+     * @param params 对应模板占位符的参数集合
+     */
+    public void send(String recipient , String template, List<String> params){
+    	send(recipient, PropertiesTool.get(properties, "mailSubject"+template) , PropertiesTool.get(properties, "mailContent"+template, params.toArray()));
+    }
+
+    /**
+     * 群发邮件
+     * @param recipients 收件人们的邮箱地址
+     * @param template 邮件配置文件中的模板标识
+     * @param params 对应模板占位符的参数集合
+     */
+    public void send(List<String> recipients , String template, List<String> params){
+    	send(recipients, PropertiesTool.get(properties, "mailSubject"+template) , PropertiesTool.get(properties, "mailContent"+template, params.toArray()));
     }
 
     //邮箱密码验证类

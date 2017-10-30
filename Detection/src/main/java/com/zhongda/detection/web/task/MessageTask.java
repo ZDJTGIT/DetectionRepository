@@ -13,7 +13,7 @@ import com.zhongda.detection.web.model.Message;
 import com.zhongda.detection.web.service.FarmlandPHService;
 import com.zhongda.detection.web.service.MessageService;
 
-@Component
+//@Component
 public class MessageTask {
 
 	@Resource

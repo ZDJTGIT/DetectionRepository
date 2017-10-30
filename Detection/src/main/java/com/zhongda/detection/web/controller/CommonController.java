@@ -20,11 +20,13 @@ import org.springframework.web.util.WebUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageInfo;
 import com.zhongda.detection.core.utils.vcode.Captcha;
 import com.zhongda.detection.core.utils.vcode.GifCaptcha;
-import com.zhongda.detection.web.model.Message;
+import com.zhongda.detection.web.model.Alarm;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.User;
+import com.zhongda.detection.web.service.AlarmService;
 import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.ProjectService;
 
@@ -44,6 +46,9 @@ public class CommonController {
 
 	@Resource
 	private MessageService messageService;
+	
+	@Resource
+	private AlarmService alarmService;
 
 	@Resource
 	private ProjectService projectService;
@@ -57,11 +62,11 @@ public class CommonController {
 	 */
 	@RequestMapping("index")
 	public String index(HttpServletRequest request, Model model) {
-		// 查出当前用户下所有未读的消息
 		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
-		List<Message> messageList = messageService
-				.selectPartMessagesByUserIdAndNotRead(user.getUserId());
-		model.addAttribute("messageList", messageList);
+		List<Alarm> alarmList = alarmService.selectPageAlarmByUserIdAndNotConfirm(user.getUserId(), 1, 2);
+		PageInfo<Alarm> alarmPageInfo=new PageInfo<Alarm>(alarmList);
+		model.addAttribute("alarmList", alarmList);
+		model.addAttribute("alarmTotal", alarmPageInfo.getTotal());
 		return "index";
 	}
 

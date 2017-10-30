@@ -11,14 +11,12 @@ public class Threshold {
 
     private Integer detectionTypeId;
 
-    private Float minThresholdValue;
+    private Integer thresholdTypeId;
 
-    private Float maxThresholdValue;
+    private Double minThresholdValue;
 
-    private String heatImageUrl;
-
-    private String physicalImageUrl;
-    
+    private Double maxThresholdValue;
+  
     //用户新建时传项目名查找用户ID项目ID项目类型ID
     private String projectName;
     
@@ -81,35 +79,27 @@ public class Threshold {
         this.detectionTypeId = detectionTypeId;
     }
 
-    public Float getMinThresholdValue() {
+    public Integer getThresholdTypeId() {
+        return thresholdTypeId;
+    }
+
+    public void setThresholdTypeId(Integer thresholdTypeId) {
+        this.thresholdTypeId = thresholdTypeId;
+    }
+
+    public Double getMinThresholdValue() {
         return minThresholdValue;
     }
 
-    public void setMinThresholdValue(Float minThresholdValue) {
+    public void setMinThresholdValue(Double minThresholdValue) {
         this.minThresholdValue = minThresholdValue;
     }
 
-    public Float getMaxThresholdValue() {
+    public Double getMaxThresholdValue() {
         return maxThresholdValue;
     }
 
-    public void setMaxThresholdValue(Float maxThresholdValue) {
+    public void setMaxThresholdValue(Double maxThresholdValue) {
         this.maxThresholdValue = maxThresholdValue;
-    }
-
-    public String getHeatImageUrl() {
-        return heatImageUrl;
-    }
-
-    public void setHeatImageUrl(String heatImageUrl) {
-        this.heatImageUrl = heatImageUrl == null ? null : heatImageUrl.trim();
-    }
-
-    public String getPhysicalImageUrl() {
-        return physicalImageUrl;
-    }
-
-    public void setPhysicalImageUrl(String physicalImageUrl) {
-        this.physicalImageUrl = physicalImageUrl == null ? null : physicalImageUrl.trim();
     }
 }
