@@ -50,7 +50,7 @@ public class CommonController {
 
 	@Resource
 	private MessageService messageService;
-	
+
 	@Resource
 	private AlarmService alarmService;
 
@@ -70,8 +70,9 @@ public class CommonController {
 	@RequestMapping("index")
 	public String index(HttpServletRequest request, Model model) {
 		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
-		List<Alarm> alarmList = alarmService.selectPageAlarmByUserIdAndNotConfirm(user.getUserId(), 1, 2);
-		PageInfo<Alarm> alarmPageInfo=new PageInfo<Alarm>(alarmList);
+		List<Alarm> alarmList = alarmService
+				.selectPageAlarmByUserIdAndNotConfirm(user.getUserId(), 1, 2);
+		PageInfo<Alarm> alarmPageInfo = new PageInfo<Alarm>(alarmList);
 		model.addAttribute("alarmList", alarmList);
 		model.addAttribute("alarmTotal", alarmPageInfo.getTotal());
 		return "index";
@@ -83,12 +84,15 @@ public class CommonController {
 		Subject subject = SecurityUtils.getSubject();
 		ObjectMapper mapper = new ObjectMapper();
 		Project project = new Project();
-		if(!subject.hasRole(RoleSign.ADMIN) && !subject.hasRole(RoleSign.SUPER_ADMIN)){
-			//非管理员用户，只可查看自己的项目信息，查询条件增加userId
-			User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
+		if (!subject.hasRole(RoleSign.ADMIN)
+				&& !subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			// 非管理员用户，只可查看自己的项目信息，查询条件增加userId
+			User user = (User) WebUtils
+					.getSessionAttribute(request, "userInfo");
 			project.setUserId(user.getUserId());
 		}
-		List<Project> projects = projectService.selectProjectWithAlarmCount(project);
+		List<Project> projects = projectService
+				.selectProjectWithAlarmCount(project);
 		String projectList = mapper.writeValueAsString(projects);
 		model.addAttribute("projectLists", projectList);
 		return "home";
@@ -186,19 +190,19 @@ public class CommonController {
 	}
 
 	@RequestMapping("detectionPoint/{project}")
-	public String detectionPoint(Model model, @PathVariable("project") String project) {
+	public String detectionPoint(Model model,
+			@PathVariable("project") String project) {
 		String[] strings = project.split(":");
 		model.addAttribute("projectTypeId", strings[0]);
 		model.addAttribute("projectName", strings[1]);
 		return "detectionPoint";
 	}
-	
-	
+
 	@RequestMapping("project_detail")
 	public String project_detail(HttpServletRequest request) {
 		return "project_detail";
 	}
-	
+
 	@RequestMapping("thresHold/{project}")
 	public String thresHold(Model model, @PathVariable("project") String project) {
 		String[] strings = project.split(":");
@@ -208,13 +212,14 @@ public class CommonController {
 	}
 
 	@RequestMapping("sensor_info/{detectionPoint}")
-	public String sensor_info(Model model, @PathVariable("detectionPoint") String detectionPoint) {
+	public String sensor_info(Model model,
+			@PathVariable("detectionPoint") String detectionPoint) {
 		String[] strings = detectionPoint.split(":");
 		model.addAttribute("detectionPointId", strings[0]);
 		model.addAttribute("detectionName", strings[1]);
 		return "sensor_info";
 	}
-	
+
 	@RequestMapping("projects")
 	public String projects(HttpServletRequest request) {
 		return "projects";

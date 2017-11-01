@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import com.zhongda.detection.web.model.Message;
 
