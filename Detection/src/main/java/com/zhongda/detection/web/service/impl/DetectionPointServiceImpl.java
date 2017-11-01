@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.zhongda.detection.web.dao.DetectionPointMapper;
 import com.zhongda.detection.web.model.DetectionPoint;
-import com.zhongda.detection.web.model.LaserData;
 import com.zhongda.detection.web.service.DetectionPointService;
 
 /**
@@ -64,13 +63,14 @@ public class DetectionPointServiceImpl implements DetectionPointService {
 				keyWord);
 	}
 
+	@Override
 	public List<DetectionPoint> selectItemNameByProjectgId(Integer projectId) {
 		return detectionPointMapper.selectItemNameByProjectgId(projectId);
 	}
 
 	@Override
-	public List<LaserData> selectLaserDataByCurrentTimes(Integer projectId,
-			Integer detectionTypeId, String currentTime) {
+	public List<DetectionPoint> selectLaserDataByCurrentTimes(
+			Integer projectId, Integer detectionTypeId, String currentTime) {
 		return detectionPointMapper.selectLaserDataByCurrentTimes(projectId,
 				detectionTypeId, currentTime);
 	}

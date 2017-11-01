@@ -13,7 +13,15 @@
     <result column="item_value" jdbcType="VARCHAR" property="itemValue" />
   </resultMap>
   <resultMap id="DetectionPointMap" type="com.zhongda.detection.web.model.DetectionPoint">
+    <id column="detection_point_id" jdbcType="INTEGER" property="detectionPointId" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="detection_type_id" jdbcType="INTEGER" property="detectionTypeId" />
+    <result column="detection_latitude" jdbcType="VARCHAR" property="detectionLatitude" />
+    <result column="detection_longitude" jdbcType="VARCHAR" property="detectionLongitude" />
     <result column="detection_name" jdbcType="VARCHAR" property="detectionName" />
+    <result column="detection_description" jdbcType="VARCHAR" property="detectionDescription" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="item_value" jdbcType="VARCHAR" property="itemValue" />
     <collection property="laserDataList" javaType="java.util.List" ofType="com.zhongda.detection.web.model.LaserData">
     	<id column="id" jdbcType="INTEGER" property="id" />
 	    <result column="sensor_id" jdbcType="VARCHAR" property="sensorId" />
@@ -62,6 +70,7 @@
     from detection_point
     where project_id = #{0}
     and detection_name = #{1}
+   </select>
   <select id="selectItemNameByProjectgId" resultMap="BaseResultMap">
   	SELECT
 	sd.item_name 'item_name',
@@ -79,7 +88,7 @@
   </select>
   <select id="selectLaserDataByCurrentTimes" resultMap="DetectionPointMap">
   	SELECT
-	dp.detection_name, ld.*
+	dp.*, ld.*
 	FROM
 	(
 		detection_point dp
@@ -89,8 +98,7 @@
 	WHERE
 	dp.project_id = #{projectId,jdbcType=INTEGER}
 	AND dp.detection_type_id = #{detectionTypeId,jdbcType=INTEGER} and ld.current_times like concat(#{currentTime,jdbcType=VARCHAR},'%')
-	ORDER BY
-	ld.current_times;
+	GROUP BY  dp.detection_name ASC, ld.current_times 
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from detection_point

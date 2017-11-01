@@ -828,7 +828,7 @@
 					$(value).each(function(index,val){
 						var projectName = val.projectName;
 						index++;
-						var label = "<li><a class='thirdbind' data-toggle='collapse' data-target='#"+projectName+"' name='"+val.projectId+","+val.projectTypeId+"'><i>"+index+":"+"</i><span class='nav-label'>"+projectName+"</span><span class='fa arrow'></span></a><ul class='collapse nav nav-second-level' id='"+projectName+"' ></ul></li>";
+						var label = "<li><a class='thirdbind' data-toggle='collapse' data-target='#"+projectName+"' name='"+val.projectId+"'><i>"+index+":"+"</i><span class='nav-label'>"+projectName+"</span><span class='fa arrow'></span></a><ul class='collapse nav nav-second-level' id='"+projectName+"' ></ul></li>";
 						$("#"+dataKey).append(label);
 					});
 				}
@@ -836,8 +836,7 @@
 
 
 			 $(document).on('click','.thirdbind',function(){
-				 	var projectLists = $(this).attr("name").split(",");
-					var projectId = projectLists[0];
+					var projectId = $(this).attr("name");
 					var projectName = $(this).attr("data-target");
 					if(map[projectName]==null){
 						map[projectName] = 1;
@@ -852,7 +851,7 @@
 							data : 'projectId='+projectId,
 							success: function(data){
 								$(data).each(function(index,val){
-									var label = "<li><a class='J_menuItem' name='"+val.itemName+"' href='rest/project/"+val.itemValue+"?projectId="+val.projectId+"&detectionTypeId="+val.detectionTypeId+"&userId="+userId+"&projectTypeId="+projectLists[1]+"'><i>—</i><span class='nav-label'>"+val.itemName+"</span><span class='fa arrow'></span></a></li>";
+									var label = "<li><a class='J_menuItem' name='"+val.itemName+"' href='rest/project/"+val.itemValue+"?projectId="+val.projectId+"&detectionTypeId="+val.detectionTypeId+"'><i>—</i><span class='nav-label'>"+val.itemName+"</span></a></li>";
 									$(projectName).append(label);
 								});
 							}

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%
 	String path = request.getContextPath();
@@ -45,7 +46,7 @@
                         <form class="form-inline" role="form" id="formSearch">
                             <div class="form-group">
                                 <label for="startCreateTime">选择日期:</label>
-							   	<input type="datetime" class="form-control" id="diapladata" >
+							   	<input type="datetime" class="form-control" id="diapladata" style="ime-mode: disabled">
                             </div>
                             <button class="btn btn-primary " id="selectdispladata" type="button" style="margin-top: 5px;">&nbsp;查询</button>
                             <!-- <div class="form-group" style="margin-left: 20px;">
@@ -69,9 +70,9 @@
                 
                 </div>
             </div>
-    	
+    	<c:set value="${fn:split(image.physicalImageUrl,',') }" var="names" />
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>热点图片</h5>
@@ -94,61 +95,94 @@
                         </div>
                     </div>
                     <div class="ibox-content" style="text-align: center;">
-                        <img class="pimg" alt="图片未加载" src="assets/img/subway1.png" style="width: 100%;height: 360px" >
+                    	<c:choose>
+                    		<c:when test="${not empty  image.heatImageUrl}">
+                    			<img class="pimg" alt="图片未加载" src="${image.heatImageUrl }" style="width: 100%;height: 360px" >
+                    		</c:when>
+                    		<c:otherwise>
+                    			<h2 class="logo-name" style="height: 360px;">没有图片</h2>
+                    		</c:otherwise>
+                    	</c:choose>
+                        
                     </div>
                 </div>
             </div>
-            <div class="col-sm-7" >
-                <div class="ibox float-e-margins" >
+            <div class="col-sm-6">
+                <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>现场图片</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
+                    </div>
+                    <div class="ibox-content " >
+                        <div class="carousel slide" id="carousel2" >
+                            <ol class="carousel-indicators">
+                            	<c:forEach var="num" items="${names}" varStatus="status"> 
+                            		<c:choose>
+                            			<c:when test="${status.index eq 0}">
+                            				<li data-slide-to="${status.index }" data-target="#carousel2" class="active"></li>
+                            			</c:when>
+                            			<c:otherwise>
+                            				<li data-slide-to="${status.index }" data-target="#carousel2"></li>
+                            			</c:otherwise>
+                            		</c:choose>
+					       		</c:forEach>
+                            </ol>
+                            <div class="carousel-inner" >
+                            	<c:forEach var="num" items="${names}" varStatus="status">
+                            		<c:choose>
+                            			<c:when test="${status.index eq 0}">
+                            				<div class="item active">
+			                                    <img alt="image" class="img-responsive" src="${num }" style="margin: 0 auto;"> 
+			                                    <!-- <div class="carousel-caption">
+			                                        <p>This is simple caption 1</p>
+			                                    </div> -->
+			                                </div>
+                            			</c:when>
+                            			<c:otherwise>
+                            				<div class="item ">
+			                                    <img alt="image" class="img-responsive" src="${num }" style="margin: 0 auto;">
+			                                    <!-- <div class="carousel-caption">
+			                                        <p>This is simple caption 2</p>
+			                                    </div> -->
+			                                </div>
+                            			</c:otherwise>
+                            		</c:choose>
+                            	</c:forEach>
+                            </div>
+                            <a data-slide="prev" href="carousel.html#carousel2" class="left carousel-control">
+                                <span class="icon-prev"></span>
                             </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
+                            <a data-slide="next" href="carousel.html#carousel2" class="right carousel-control">
+                                <span class="icon-next"></span>
                             </a>
                         </div>
-                    </div>
-                    <div class="ibox-content" style="height: 360px;text-align: center;">
-                    	<h2 class="logo-name">假装有图片</h2>
                     </div>
                 </div>
             </div>
 
         </div>
         <div class="row">
+	        <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="text-align: center;">
+                        <h5>实时数据</h5>
+                        <div class="btn-group" name="laserRanging_detectionButtion">
+                         </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="echarts" id="echarts-displacement-chart" style="height: 360px"></div>
+                    </div>
+                </div>
+            </div>
         	<div class="col-sm-12" >
                 <div class="ibox float-e-margins" >
-                    <div class="ibox-title">
+                    <div class="ibox-title" style="text-align: center;">
                         <h5>累计变化量</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
+                         <div class="btn-group" name="laserRanging_detectionButtion">
+                              <!-- <button class="btn btn-white" id="zoomIn" type="button">放大</button>
+                              <button class="btn btn-white" id="zoomOut" type="button">缩小</button>
+                              <button class="btn btn-white" id="rotateLeft" type="button">左旋转</button>
+                              <button class="btn btn-white" id="rotateRight" type="button">右旋转</button> -->
+                         </div>
                     </div>
                     <div class="ibox-content" >
                         <div class="echarts" id="echarts-rate-chart" style="height: 360px"></div>
@@ -157,52 +191,10 @@
             </div>
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>单次变化量</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="echarts" id="echarts-grandtotal-chart" style="height: 360px"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
+                    <div class="ibox-title" style="text-align: center;">
                         <h5>变化速率</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
+                        <div class="btn-group" name="laserRanging_detectionButtion">
+                         </div>
                     </div>
                     <div class="ibox-content">
                         <div class="echarts" id="echarts-single-chart" style="height: 360px"></div>
@@ -211,50 +203,24 @@
             </div>
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>实时数据</h5>
-                        <div class="ibox-tools">
-                            <a class="collapse-link">
-                                <i class="fa fa-chevron-up"></i>
-                            </a>
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
-                                <i class="fa fa-wrench"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user">
-                                <li><a href="graph_flot.html#">选项1</a>
-                                </li>
-                                <li><a href="graph_flot.html#">选项2</a>
-                                </li>
-                            </ul>
-                            <a class="close-link">
-                                <i class="fa fa-times"></i>
-                            </a>
-                        </div>
+                    <div class="ibox-title" style="text-align: center;">
+                        <h5>单次变化量</h5>
+                        <div class="btn-group" name="laserRanging_detectionButtion">
+                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="echarts-displacement-chart" style="height: 360px"></div>
+                        <div class="echarts" id="echarts-grandtotal-chart" style="height: 360px"></div>
                     </div>
                 </div>
             </div>
-
         </div>
          <div class="row">
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
-					<div class="ibox-title">
+					<div class="ibox-title" style="text-align: center;">
 						<h5>告警处理表</h5>
-						<div class="ibox-tools">
-							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
-							</a> <a class="dropdown-toggle" data-toggle="dropdown"
-								href="table_data_tables.html#"> <i class="fa fa-wrench"></i>
-							</a>
-							<ul class="dropdown-menu dropdown-user">
-								<li><a href="table_data_tables.html#">选项1</a></li>
-								<li><a href="table_data_tables.html#">选项2</a></li>
-							</ul>
-							<a class="close-link"> <i class="fa fa-times"></i>
-							</a>
-						</div>
+						<div class="btn-group" name="laserRanging_detectionButtion">
+                         </div>
 					</div>
 					 <div class="ibox-content">
                         <table class="table table-striped table-bordered table-hover display" id="editable"  cellspacing="0" width="100%"> 
@@ -270,6 +236,8 @@
 									<td>单次变化量(MM)</td>
 									<td>总变化量(MM)</td>
 									<td>变化速率(MM/DAY)</td>
+									<td>终端编号(DTU)</td>
+									<td>采集器通道</td>
 								</tr>
                             </thead>
                         </table>
@@ -279,6 +247,9 @@
 			</div>
 		</div> 
     </div>
+    <script type="text/javascript">
+    	var laserRangMap = '${map}';
+    </script>
     <script src="assets/js/jquery.min.js"></script>	
     <script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/datepicker/bootstrap-datetimepicker.min.js" charset="utf-8"></script>
@@ -290,8 +261,19 @@
 	            showTodayButton:true,
 	            format: "YYYY-MM-DD"
 	        })
-	       
+			   
 	</script>
+	 <!-- Data Tables -->
+    <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    
+    <!-- <script>
+	    var oTabel;
+	    $(document).ready(function() {
+	    	
+	    });
+	</script> -->
+	
     <!-- ECharts -->
     <script src="assets/js/plugins/echarts/echarts-all.js"></script>
     <!-- 自定义js -->
@@ -300,16 +282,7 @@
     <!-- ECharts demo data -->
      <script src="assets/js/laserRanging.js"></script>
      <script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
-    <!-- Data Tables -->
-    <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-    
-    <script>
-	    var oTabel;
-	    $(document).ready(function() {
-	    	oTabel= $('#editable').dataTable();
-	    });
-	</script>
+   
 </body>
 
 </html>

@@ -87,7 +87,7 @@ public class LaserData {
 		this.previousData = previousData;
 	}
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = "GMT+8")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	public Date getCurrentTimes() {
 		return currentTimes;
 	}

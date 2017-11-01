@@ -315,7 +315,6 @@ public class UserController {
 		List<AlarmLinkman> aLinkmanList = alarmLinkmanService.selectAll();
 		model.addAttribute("userList", userList);
 		model.addAttribute("aLinkmanList", aLinkmanList);
-		System.out.println(aLinkmanList);
 		logger.info("进入userList");
 		logger.info("userList的大小" + userList.size());
 		return "table_basic";

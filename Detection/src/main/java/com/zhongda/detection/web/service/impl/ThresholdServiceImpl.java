@@ -11,13 +11,16 @@ import com.zhongda.detection.web.model.Threshold;
 import com.zhongda.detection.web.service.ThresholdService;
 
 /**
- *<p>Threshold 业务 实现类</p>
+ * <p>
+ * Threshold 业务 实现类
+ * </p>
+ * 
  * @author mike
  * @date 2017年9月27日
  */
 @Service
 public class ThresholdServiceImpl implements ThresholdService {
-	
+
 	@Resource
 	private ThresholdMapper thresholdMapper;
 
@@ -49,7 +52,15 @@ public class ThresholdServiceImpl implements ThresholdService {
 	@Override
 	public Threshold selectByProjectIdAndDetectionTypeId(Integer projectId,
 			Integer detectionTypeId) {
-		return thresholdMapper.selectByProjectIdAndDetectionTypeId(projectId, detectionTypeId);
+		return thresholdMapper.selectByProjectIdAndDetectionTypeId(projectId,
+				detectionTypeId);
+	}
+
+	@Override
+	public List<Threshold> selectThresholdByTwoId(Integer projectId,
+			Integer detectionTypeId) {
+		return thresholdMapper.selectThresholdByTwoId(projectId,
+				detectionTypeId);
 	}
 
 }

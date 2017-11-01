@@ -23,11 +23,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import com.zhongda.detection.web.dao.ThresholdMapper;
 import com.zhongda.detection.web.model.AlarmLinkman;
 import com.zhongda.detection.web.model.DetectionPoint;
-import com.zhongda.detection.web.model.LaserData;
+import com.zhongda.detection.web.model.Image;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.model.Threshold;
@@ -35,6 +37,7 @@ import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.AlarmLinkmanService;
 import com.zhongda.detection.web.service.DetectionPointService;
+import com.zhongda.detection.web.service.ImageService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
 import com.zhongda.detection.web.service.SensorInfoService;
@@ -69,6 +72,9 @@ public class ProjectController {
 	@Resource
 	private AlarmLinkmanService alarmLinkmanService;
 
+	@Resource
+	private ImageService imageService;
+
 	@RequestMapping(value = "/myproject")
 	public @ResponseBody Map<String, List<Project>> queryProject(Integer userId) {
 		return projectService.selectProjectAndSysDicByUserId(userId);
@@ -95,14 +101,32 @@ public class ProjectController {
 	 * @param projectId
 	 * @param detectionTypeId
 	 * @return
+	 * @throws JsonProcessingException
 	 */
 	@RequestMapping(value = "/laserRanging")
 	public String laserRanging(Model model, Integer projectId,
-			Integer detectionTypeId, Integer userId, Integer projectTypeId) {
+			Integer detectionTypeId) throws JsonProcessingException {
 		Date date = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String format = simpleDateFormat.format(date);
-
+		String currentTime = simpleDateFormat.format(date);
+		List<DetectionPoint> laserList = detectionPointService
+				.selectLaserDataByCurrentTimes(projectId, detectionTypeId,
+						currentTime);
+		List<Threshold> thresholdList = thresholdService
+				.selectThresholdByTwoId(projectId, detectionTypeId);
+		HashMap<Integer, Threshold> hashMap2 = new HashMap<Integer, Threshold>();
+		for (Threshold threshold : thresholdList) {
+			hashMap2.put(threshold.getThresholdTypeId(), threshold);
+		}
+		Map<String, Object> hashMap = new HashMap<String, Object>();
+		Image image = imageService.selectImageByTwoId(projectId,
+				detectionTypeId);
+		hashMap.put("laser", laserList);
+		hashMap.put("threshold", hashMap2);
+		ObjectMapper mapper = new ObjectMapper();
+		String map = mapper.writeValueAsString(hashMap);
+		model.addAttribute("image", image);
+		model.addAttribute("map", map);
 		model.addAttribute("projectId", projectId);
 		model.addAttribute("detectionTypeId", detectionTypeId);
 		return "graph_echarts_laserRanging";
@@ -117,10 +141,21 @@ public class ProjectController {
 	 * @return
 	 */
 	@RequestMapping(value = "/selectlaserRanging")
-	public @ResponseBody List<LaserData> selectlaserRanging(String currentTime,
-			Integer projectId, Integer detectionTypeId) {
-		return detectionPointService.selectLaserDataByCurrentTimes(projectId,
-				detectionTypeId, currentTime);
+	public @ResponseBody Map<String, Object> selectlaserRanging(
+			String currentTime, Integer projectId, Integer detectionTypeId) {
+		List<DetectionPoint> laserList = detectionPointService
+				.selectLaserDataByCurrentTimes(projectId, detectionTypeId,
+						currentTime);
+		List<Threshold> thresholdList = thresholdService
+				.selectThresholdByTwoId(projectId, detectionTypeId);
+		HashMap<Integer, Threshold> hashMap2 = new HashMap<Integer, Threshold>();
+		for (Threshold threshold : thresholdList) {
+			hashMap2.put(threshold.getThresholdTypeId(), threshold);
+		}
+		Map<String, Object> hashMap = new HashMap<String, Object>();
+		hashMap.put("laser", laserList);
+		hashMap.put("threshold", hashMap2);
+		return hashMap;
 	}
 
 	/**
@@ -211,21 +246,28 @@ public class ProjectController {
 
 	/**
 	 * 分页查找用户所有项目
-	 * @param project 封装查询条件
-	 * @param request 获取当前登录用户信息
+	 * 
+	 * @param project
+	 *            封装查询条件
+	 * @param request
+	 *            获取当前登录用户信息
 	 * @return
 	 */
 	@RequestMapping(value = "/projectPageList", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> projectPageList(@RequestBody Project project, HttpServletRequest request) {
+	public Map<String, Object> projectPageList(@RequestBody Project project,
+			HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
-		if(!subject.hasRole(RoleSign.ADMIN) && !subject.hasRole(RoleSign.SUPER_ADMIN)){
-			//非管理员用户，只可查看自己的项目信息，查询条件增加userId
-			User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
+		if (!subject.hasRole(RoleSign.ADMIN)
+				&& !subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			// 非管理员用户，只可查看自己的项目信息，查询条件增加userId
+			User user = (User) WebUtils
+					.getSessionAttribute(request, "userInfo");
 			project.setUserId(user.getUserId());
 		}
-		List<Project> projectList = projectService.selectProjectWithAlarmCount(project);
-		PageInfo<Project> projectPageInfo=new PageInfo<Project>(projectList);
+		List<Project> projectList = projectService
+				.selectProjectWithAlarmCount(project);
+		PageInfo<Project> projectPageInfo = new PageInfo<Project>(projectList);
 		Map<String, Object> projectMap = new HashMap<String, Object>();
 		projectMap.put("total", projectPageInfo.getTotal());
 		projectMap.put("projectList", projectList);

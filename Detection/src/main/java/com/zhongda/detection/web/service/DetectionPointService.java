@@ -3,7 +3,6 @@ package com.zhongda.detection.web.service;
 import java.util.List;
 
 import com.zhongda.detection.web.model.DetectionPoint;
-import com.zhongda.detection.web.model.LaserData;
 
 /**
  * <p>
@@ -63,7 +62,7 @@ public interface DetectionPointService {
 	 * @param currentTime
 	 * @return
 	 */
-	List<LaserData> selectLaserDataByCurrentTimes(Integer projectId,
+	List<DetectionPoint> selectLaserDataByCurrentTimes(Integer projectId,
 			Integer detectionTypeId, String currentTime);
 
 	/**

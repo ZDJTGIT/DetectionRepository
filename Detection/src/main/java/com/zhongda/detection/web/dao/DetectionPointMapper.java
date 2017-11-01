@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.zhongda.detection.web.model.DetectionPoint;
-import com.zhongda.detection.web.model.LaserData;
 
 public interface DetectionPointMapper {
 
@@ -91,7 +90,7 @@ public interface DetectionPointMapper {
 	 * @param currentTime
 	 * @return
 	 */
-	List<LaserData> selectLaserDataByCurrentTimes(
+	List<DetectionPoint> selectLaserDataByCurrentTimes(
 			@Param(value = "projectId") Integer projectId,
 			@Param(value = "detectionTypeId") Integer detectionTypeId,
 			@Param(value = "currentTime") String currentTime);
