@@ -22,7 +22,7 @@
 <link rel="shortcut icon" href="favicon.ico">
 <link href="assets/css/plugins/table/basic.css" rel="stylesheet">
 <link href="assets/css/plugins/table/user.css" rel="stylesheet">
-<!--link href="assets/css/plugins/layuis/layui.css" rel="stylesheet" media="all"-->
+<link rel="stylesheet" href="assets/js/plugins/layui/css/layui.css" media="all"></link>
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInUp">
@@ -60,6 +60,7 @@
 								<tbody id="hover_table">
 								</tbody>
 							</table>
+							<div style="margin-top:15px; text-align:center;" id="pageComponent"></div>
 						</div>
 						
 						<!-- Modal添加 -->
@@ -341,117 +342,6 @@
 				simpleLoad(btn, false)
 			})
 			
-			//根据当前登陆用户加载项目（管理员加载所有项目，其他用户加载用户下对应项目）
-	    	  $.ajax({
-	    		  type:'post',
-	    	  	  url: 'rest/project/showUsersProject',
-	    	  	  data: {userId:dlId},
-	    	  	  contextType:"application/json",
-	    	  	  success: function(data){
-	    	  		         if(data){
-	    	  		       // var start = new Date();
-	    	  		    	 var  asthtml="";
-	    	  		    	 var reStr = '<td class="project-status" style="display:none"><span class="label label-primary">';
-	    	  		    	 $.each(data,function(idx,item){
-	    	  		    		var nowTime = new Date().getTime();
-	    	  		    		var beginTime = stringToData(item.projectBeginTime);
-	    	  		    		var endTime = stringToData(item.projectEndTime);
-	    	  		    		var percentage=0;;
-	    	  		    		if(nowTime > endTime){
-	    	  		    			percentage=100;
-	    	  		    		}else if(nowTime < beginTime){
-	    	  		    			percentage=0;
-	    	  		    		}else{
-	    	  		    			percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
-	    	  		    		}
-	    	  		    		
-	    	  		    	  asthtml += '<tr id="project_'+ item.projectId +'">'+
-				    	  		    	//'<td class="project-status" style="width:120px">'+
-										//'<a href="project_detail.html">' + item.sysDictionary.itemName+'</a><br />'+
-									    //'</td>'+
-										'<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.projectId + '</span>'+
-										'</td>'+
-										'<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.projectTypeId + '</span>'+
-										'</td>'+
-										'<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.projectLongitude + '</span>'+
-										'</td>'+
-										'<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.projectLatitude + '</span>'+
-										'</td>'+
-										'<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.projectAddress + '</span>'+
-										'</td>'+
-										'<td class="project-status" style="width:80px">'+
-											'<span class="label label-primary">' + item.projectStatusString + '</span>'+
-										'</td>'+
-										'<td class="project-title" style="width:150px">'+
-											'<a href="javascript:;">' + item.projectName + '</a><br />'+
-										'</td>'+
-										'<td class="project-title" style="width:200px">'+
-											'<a href="javascript:;">创建时间</a><br />'+
-											'<small>' + item.projectBeginTime + '</small>'+
-									    '</td>'+
-										'<td class="project-completion" style="width:320px">'+
-											'<small>当前进度： '+percentage+'%</small>'+
-											'<div class="progress progress-mini">'+
-												'<div style="width: '+percentage+'%;" class="progress-bar"></div>'+
-											'</div>'+
-										'</td>'+
-										'<td class="project-title" style="width:260px">'+
-											'<a href="javascript:;">项目描述</a><br />'+
-											'<small>' + item.projectDescription + '</small>'+
-									    '</td>'+
-									    '<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.projectStatus + '</span>'+
-									    '</td>'+
-									    '<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.projectBeginTime + '</span>'+
-									    '</td>'+
-									    '<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.projectEndTime + '</span>'+
-								    	'</td>'+
-										'<td class="project-title" style="width:140px">'+
-											'<a href="javascript:;">项目告警信息('+ item.messageCount +')</a><br />'+
-										'</td>'+
-										'<td class="project-title" style="width:20px">'+
-										'</td>'+
-										'<td class="project-status" style="width:140px">'+
-										//打开页面即传item.projectName过去
-											'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="测点信息">'+
-												'测点信息 '+
-											'</a>'+
-										'</td>'+
-										'<td class="project-status" style="width:150px">'+
-										//打开页面即传item.pojectId过去
-											'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+'" class="J_menuItem" name="预值和图片">'+
-												'阀值和图片 '+
-											'</a>'+
-										'</td>'+
-										'<td class="project-actions">'+
-										    '<a href="javascript:;" class="J_menuItem" onclick="updetaProject(this)" data-toggle="modal" data-target="#myModal_updetaProject">'+
-												'<i class="fa fa-times-circle"></i> 修改 '+
-											'</a>'+
-										    '<a href="javascript:;" class="J_menuItem" onclick="deleteProject('+ item.projectId +')">'+
-												'<i class="fa fa-times-circle"></i> 删除 '+
-										    '</a>'+
-										'</td>'+
-									'</tr>';
-	    	  		    	 });
-	        	  		    	
-	    	  		    	$('#hover_table').append(asthtml); 		
-	    	  		    	
-	    	  		       }else{
-	    	  		    	alert("数据异常");
-	    	  		       }
-	    	  	  },
-	    	  	  error: function(){
-	  			    alert("数据加载失败");
-	  		      }
-	    	  });
-	    	 
 	    	//新建项目时加载用户信息
 	    	//用户信息暂且使用全部加载-之后改成按用户类型查找
 	    	//超级管理员和管理员不加载，不能创建自己的项目
@@ -912,117 +802,7 @@
 					}
 				});
 		});
-		//搜索项目响应事件
-		$('#searchButton').click(function(){
-			var keyword = $('#searchProject').val();
-			var userid = '${userInfo.userId}';
-			$('#myModal').hide();
-			$.ajax({
-				  type:'post',
-	    	  	  url: 'rest/project/keywordSearchProject',
-	    	  	  data: {keyWord:keyword,userId:userid},
-	    	  	  contextType:"application/json",
-				  success : function(data) {
-					if (data) {
-						$("#project_table tbody").html("");
-						$.each(data,function(idx,item){
-							var nowTime = new Date().getTime();
-		  		    		var beginTime = stringToData(item.projectBeginTime);
-		  		    		var endTime = stringToData(item.projectEndTime);
-		  		    		var percentage=0;;
-		  		    		if(nowTime > endTime){
-		  		    			percentage=100;
-		  		    		}else if(nowTime < beginTime){
-		  		    			percentage=0;
-		  		    		}else{
-		  		    			percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
-		  		    		}
-							   var viewData = '<tr id="project_'+ item.projectId +'">'+
-					    	  		    	//'<td class="project-status" style="width:120px">'+
-											//'<a href="project_detail.html">' + item.sysDictionary.itemName+'</a><br />'+
-										    //'</td>'+
-										    '<td class="project-status" style="display:none">'+
-												'<span class="label label-primary">' + item.projectId + '</span>'+
-											'</td>'+
-											'<td class="project-status" style="display:none">'+
-												'<span class="label label-primary">' + item.projectTypeId + '</span>'+
-											'</td>'+
-											'<td class="project-status" style="display:none">'+
-												'<span class="label label-primary">' + item.projectLongitude + '</span>'+
-											'</td>'+
-											'<td class="project-status" style="display:none">'+
-												'<span class="label label-primary">' + item.projectLatitude + '</span>'+
-											'</td>'+
-											'<td class="project-status" style="display:none">'+
-												'<span class="label label-primary">' + item.projectAddress + '</span>'+
-										    '</td>'+
-											'<td class="project-status" style="width:80px">'+
-												'<span class="label label-primary">' + item.projectStatusString + '</span>'+
-											'</td>'+
-											'<td class="project-title" style="width:150px">'+
-												'<a href="javascript:;">' + item.projectName + '</a><br />'+
-											'</td>'+
-											'<td class="project-title" style="width:200px">'+
-												'<a href="javascript:;">创建时间</a><br />'+
-												'<small>' + item.projectBeginTime + '</small>'+
-								    		'</td>'+
-											'<td class="project-completion" style="width:320px">'+
-												'<small>当前进度： '+percentage+'%</small>'+
-												'<div class="progress progress-mini">'+
-													'<div style="width: '+percentage+'%;" class="progress-bar"></div>'+
-												'</div>'+
-											'</td>'+
-											'<td class="project-title" style="width:260px">'+
-												'<a href="javascript:;">项目描述</a><br />'+
-												'<small>' + item.projectDescription + '</small>'+
-											'</td>'+
-											'<td class="project-status" style="display:none">'+
-												'<span class="label label-primary">' + item.projectStatus + '</span>'+
-									    	'</td>'+
-									    	'<td class="project-status" style="display:none">'+
-												'<span class="label label-primary">' + item.projectBeginTime + '</span>'+
-										    '</td>'+
-										    '<td class="project-status" style="display:none">'+
-												'<span class="label label-primary">' + item.projectEndTime + '</span>'+
-									    	'</td>'+
-											'<td class="project-title" style="width:140px">'+
-												'<a href="javascript:;">项目告警信息('+ item.messageCount +')</a><br />'+
-											'</td>'+
-											'<td class="project-title" style="width:20px">'+
-											'</td>'+
-											
-											'<td class="project-status" style="width:140px">'+
-											//打开页面即传item.pojectId过去
-												'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="测点信息">'+
-													'测点信息 '+
-												'</a>'+
-											'</td>'+
-											'<td class="project-status" style="width:150px">'+
-											//打开页面即传item.pojectId过去
-												'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+'" class="J_menuItem" name="预值和图片">'+
-													'阀值和图片 '+
-												'</a>'+
-											'</td>'+
-											'<td class="project-actions">'+
-											    '<a href="javascript:;" class="J_menuItem" onclick="updetaProject(this)" data-toggle="modal" data-target="#myModal_updetaProject">'+
-													'<i class="fa fa-pencil"></i> 修改 '+
-												'</a>'+
-												'<a href="javascript:;" class="J_menuItem" onclick="deleteProject('+ item.projectId +')">'+
-													'<i class="fa fa-times-circle"></i> 删除 '+
-											    '</a>'+
-											'</td>'+
-										'</tr>';
-					                   $('#hover_table').append(viewData);
-						});
-					} else {
-						alert("数据异常");
-					}
-				},
-				error : function() {
-					alert("查找失败");
-				}
-			});
-		});
+		
 		//删除项目
 		function deleteProject(projectId){
 			layer.msg('玩命提示中');
@@ -1049,6 +829,138 @@
 				});
 			});
 		}
+		
+		$(function(){
+			(function(){
+				//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
+				function projectPageAjax(jsonData, loadLaypage){
+					 //显示loading提示
+	                 var loading = layer.load(2, {
+	                	  shade: [0.1,'#fff'] //0.1透明度的白色背景
+	                 });
+					 $.ajax({
+							type : 'post',
+							url : 'rest/project/projectPageList',
+							dataType : 'json',
+							contentType : 'application/json',
+							data : JSON.stringify(jsonData),
+							success : function(data) {
+								 if(data){
+					  	  		    var  asthtml = '';
+					  	  		    var reStr = '<td class="project-status" style="display:none"><span class="label label-primary">';
+					  	  		   	$.each(data.projectList,function(idx,item){
+					  	  		    	var nowTime = new Date().getTime();
+					  	  		    	var beginTime = stringToData(item.projectBeginTime);
+					  	  		    	var endTime = stringToData(item.projectEndTime);
+					  	  		    	var percentage=0;;
+					  	  		    	if(nowTime > endTime){
+					  	  		    		percentage=100;
+					  	  		    	}else if(nowTime < beginTime){
+					  	  		    		percentage=0;
+					  	  		    	}else{
+					  	  		    		percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
+					  	  		    	}
+					  	  		    		
+					  	  		    	asthtml += '<tr id="project_'+ item.projectId +'">'+
+					  	  		    				reStr + item.projectId + '</span></td>'+
+					  	  		    				reStr + item.projectTypeId + '</span></td>'+
+					  	  		    				reStr + item.projectLongitude + '</span></td>'+
+					  	  		    				reStr + item.projectLatitude + '</span></td>'+
+					  	  		    				reStr + item.projectAddress + '</span></td>'+
+													'<td class="project-status" style="width:80px">'+
+														'<span class="label label-primary">' + item.projectStatusString + '</span>'+
+													'</td>'+
+													'<td class="project-title" style="width:150px">'+
+														'<a href="javascript:;">' + item.projectName + '</a><br />'+
+													'</td>'+
+													'<td class="project-title" style="width:200px">'+
+														'<a href="javascript:;">创建时间</a><br />'+
+														'<small>' + item.projectBeginTime + '</small>'+
+													'</td>'+
+													'<td class="project-completion" style="width:320px">'+
+														'<small>当前进度： '+percentage+'%</small>'+
+														'<div class="progress progress-mini">'+
+															'<div style="width: '+percentage+'%;" class="progress-bar"></div>'+
+														'</div>'+
+													'</td>'+
+													'<td class="project-title" style="width:260px">'+
+														'<a href="javascript:;">项目描述</a><br />'+
+														'<small>' + item.projectDescription + '</small>'+
+													'</td>'+
+													reStr + item.projectStatus + '</span></td>'+
+													reStr + item.projectBeginTime + '</span></td>'+
+													reStr + item.projectEndTime + '</span></td>'+
+													'<td class="project-title" style="width:140px">'+
+														'<a href="javascript:;">告警次数(<i class="fa fa-bell"></i>'+ item.alarmCount +')</a><br />'+
+													'</td>'+
+													'<td class="project-title" style="width:20px"></td>'+
+													'<td class="project-status" style="width:140px">'+
+														//打开页面即传item.projectName过去
+														'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="测点信息">测点信息</a>'+
+													'</td>'+
+													'<td class="project-status" style="width:150px">'+
+														//打开页面即传item.pojectId过去
+														'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+'" class="J_menuItem" name="预值和图片">阀值和图片 </a>'+
+													'</td>'+
+													'<td class="project-actions">'+
+														'<a href="javascript:;" class="J_menuItem" onclick="updetaProject(this)" data-toggle="modal" data-target="#myModal_updetaProject">'+
+															'<i class="fa fa-times-circle"></i> 修改 '+
+														'</a>'+
+														'<a href="javascript:;" class="J_menuItem" onclick="deleteProject('+ item.projectId +')">'+
+															'<i class="fa fa-times-circle"></i> 删除 '+
+														'</a>'+
+													'</td>'+
+												'</tr>';
+					  	  		    });
+					  	  		    $('#hover_table').html(asthtml); 		
+					  	  		    if(loadLaypage){ //如果该参数有值
+										loadLaypage(data.total, jsonData); //有查询条件时请求数据，需重新初始化分页组件
+									}
+									//加载完成后隐藏loading提示
+				                   	layer.close(loading);
+					  	  		}else{
+					  	  		    alert("数据异常");
+					  	  		}
+							},
+							error : function() {
+								alert("数据加载失败");
+							}
+						});
+				 }
+
+				 //初始化分页组件函数
+				 function loadLaypage(dataTotal, jsonData){
+					 var laypage = layui.laypage;
+					 laypage.render({
+						 elem: 'pageComponent', //分页组件div的id
+						 count: dataTotal, //记录总条数
+						 limit: jsonData.pageSize, //每页显示的条数
+						 limits:[jsonData.pageSize, 10, 20, 30, 40, 50], //每页条数的选择项
+					     groups: 5, //连续显示分页数
+					     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+					     jump: function(obj, first){  //触发分页后的回调
+					         if(!first){ //一定要加此判断，否则初始时会无限刷新
+					        	 jsonData.pageNum = obj.curr;
+					 			 jsonData.pageSize = obj.limit;
+					 			 projectPageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数
+					         }
+					     }
+					 });
+				 }
+				
+				 $('#searchButton').click(function(){
+						var jsonData = {};
+						if($('#searchProject').val()){
+							jsonData.projectName = $('#searchProject').val();
+						}
+						jsonData.pageNum = 1;
+						jsonData.pageSize = 6;
+						projectPageAjax(jsonData, loadLaypage);
+					});
+				 //首次加载页面触发查询按钮初始化列表（无查询参数）
+				 $('#searchButton').trigger("click");
+			})();
+		});
 	</script>
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>

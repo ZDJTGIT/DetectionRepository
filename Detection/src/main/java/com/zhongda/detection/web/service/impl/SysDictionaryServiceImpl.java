@@ -16,40 +16,10 @@ public class SysDictionaryServiceImpl implements SysDictionaryService {
 
 	@Resource
 	private SysDictionaryMapper sysDictionaryMapper;
-	 
-	@Override
-	public int deleteByPrimaryKey(Integer dicId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int insert(SysDictionary record) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int insertSelective(SysDictionary record) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public SysDictionary selectByPrimaryKey(Integer dicId) {
 		return sysDictionaryMapper.selectByPrimaryKey(dicId);
-	}
-
-	@Override
-	public int updateByPrimaryKeySelective(SysDictionary record) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateByPrimaryKey(SysDictionary record) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
@@ -71,6 +41,12 @@ public class SysDictionaryServiceImpl implements SysDictionaryService {
 	public List<SysDictionary> selectSysDictionaryByProjectTypeId(
 			Integer projectTypeId) {
 		return sysDictionaryMapper.selectSysDictionaryByProjectTypeId(projectTypeId);
+	}
+
+	@Override
+	public List<SysDictionary> selectSysDictionaryByAlarmTypeAndStatus(
+			String alarmType, String alarmStatus) {
+		return sysDictionaryMapper.selectSysDictionaryByAlarmTypeAndStatus(alarmType, alarmStatus);
 	}
 
 }

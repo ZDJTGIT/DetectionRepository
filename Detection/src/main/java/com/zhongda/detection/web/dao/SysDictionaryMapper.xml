@@ -43,6 +43,12 @@
     from sys_dictionary 
     where dic_id = #{dicId,jdbcType=INTEGER} 
   </select>
+  <select id="selectSysDictionaryByAlarmTypeAndStatus" resultMap="BaseResultMap">
+    select
+    dic_id, type_value, item_name  
+    from sys_dictionary 
+    where type_value = #{alarmType,jdbcType=VARCHAR} or type_value = #{alarmStatus,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sys_dictionary
     where dic_id = #{dicId,jdbcType=INTEGER}

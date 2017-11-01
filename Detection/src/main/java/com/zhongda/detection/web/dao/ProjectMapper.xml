@@ -34,7 +34,8 @@
     <result column="project_end_time" jdbcType="TIMESTAMP" property="projectEndTime" />
     <result column="project_status" jdbcType="VARCHAR" property="projectStatus" />
     <result column="project_description" jdbcType="VARCHAR" property="projectDescription" />
-    <result column="message_count" jdbcType="VARCHAR" property="messageCount" />
+    <result column="alarm_count" jdbcType="INTEGER" property="alarmCount" />
+    <result column="project_status_string" jdbcType="VARCHAR" property="projectStatusString" />
   </resultMap>
   
   <sql id="Base_Column_List">
@@ -64,20 +65,25 @@
     <include refid="Base_Column_List" />
     from project
   </select>
-  <select id="selectProjectByUserIdWithMessageCount" parameterType="java.lang.Integer" resultMap="ProjectResultMap">
-  	 select
-     p.*,count(pm.message_id) 'message_count'
-     from project p LEFT OUTER JOIN project_message pm
-     on p.project_id = pm.project_id
-     where p.user_id = #{userId,jdbcType=INTEGER}
-     GROUP BY p.project_id;
-  </select>
-  <select id="selectAllProjectWithMessageCount" resultMap="ProjectResultMap">
-  	 select
-     p.*,count(pm.message_id) 'message_count'
-     from project p left outer join project_message pm
-	 on p.project_id = pm.project_id
-     GROUP BY p.project_id;
+  <select id="selectProjectWithAlarmCount" parameterType="com.zhongda.detection.web.model.Project" resultMap="ProjectResultMap">  
+     select
+     x.*,sd.item_name 'project_status_string'
+     from 
+  	 (select
+     	p.*,count(a.alarm_id) 'alarm_count'
+     	from project p LEFT OUTER JOIN alarm a
+     	on p.project_id = a.project_id
+     	<where> 
+     	  <if test="userId != null">
+        	p.user_id = #{userId,jdbcType=INTEGER}
+      	  </if>
+	      <if test="projectName != null">
+	        and p.project_name like '%${_parameter.projectName}%'
+	      </if> 
+	    </where>    
+    	GROUP BY p.project_id) x, sys_dictionary sd
+     where x.project_status = sd.dic_id
+     order by x.project_begin_time desc
   </select>
   <select id="selectProjectAndSysDicByUserId" resultMap="BaseResultMap">
   	select
@@ -101,23 +107,6 @@
     <foreach item="item" index="index" collection="array" open="(" separator="," close=")">  
 	 #{item}  
 	</foreach>
-  </select>
-  <select id="selectAllProjectByKeyWord_mana" parameterType="java.lang.String" resultMap="ProjectResultMap">
-     select
-     p.*,count(pm.message_id) 'message_count'
-     from project p left outer join project_message pm
-	 on p.project_id = pm.project_id 
-     where project_name like '%${_parameter}%'
-     GROUP BY p.project_id;
-  </select>
-  <select id="selectAllProjectByKeyWord_nomana" parameterType="java.lang.String" resultMap="ProjectResultMap">
-  	 select
-     p.*,count(pm.message_id) 'message_count'
-     from project p LEFT OUTER JOIN project_message pm
-     on p.project_id = pm.project_id
-     where project_name like '%${_parameter.param1}%'
-     and p.user_id = ${_parameter.param2}
-     GROUP BY p.project_id;
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from project

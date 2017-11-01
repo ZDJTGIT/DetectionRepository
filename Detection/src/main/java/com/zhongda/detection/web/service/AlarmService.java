@@ -17,13 +17,6 @@ public interface AlarmService {
 	List<Alarm> selectAlarmAndLinkmanPeriod();
 	
 	/**
-	 * 查询出当前用户下所有未确认的告警信息
-	 * @param userId
-	 * @return
-	 */
-	List<Alarm> selectAlarmByUserIdAndNotConfirm(Integer userId);
-	
-	/**
 	 * 分页查询出当前用户下未确认的告警信息
 	 * @param userId 用户id
 	 * @param pageNum 当前页

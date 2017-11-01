@@ -31,25 +31,31 @@ public class Project {
 	private SysDictionary sysDictionary;
 
 	// 缓存告警信息的数量
-	private Integer messageCount;
+	private Integer alarmCount;
 
 	// 缓存字典表查到的状态字符串
 	private String projectStatusString;
+	
+	//数据库不存在该字段，只作为分页时存储当前页数据时使用
+    private Integer pageNum;
+    
+    //数据库不存在该字段，只作为分页时存储每页记录条数数据时使用
+    private Integer pageSize;
 
 	public String getProjectStatusString() {
 		return projectStatusString;
 	}
 
 	public void setProjectStatusString(String projectStatusString) {
-		this.projectStatusString = projectStatusString;
+		this.projectStatusString = projectStatusString == null ? null : projectStatusString.trim();
 	}
 
-	public Integer getMessageCount() {
-		return messageCount;
+	public Integer getAlarmCount() {
+		return alarmCount;
 	}
 
-	public void setMessageCount(Integer messageCount) {
-		this.messageCount = messageCount;
+	public void setAlarmCount(Integer alarmCount) {
+		this.alarmCount = alarmCount;
 	}
 
 	public Integer getProjectId() {
@@ -153,5 +159,20 @@ public class Project {
 	public void setSysDictionary(SysDictionary sysDictionary) {
 		this.sysDictionary = sysDictionary;
 	}
+	
+	public Integer getPageNum() {
+		return pageNum;
+	}
 
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
 }

@@ -11,12 +11,6 @@ import com.zhongda.detection.web.model.SysDictionary;
  */
 public interface SysDictionaryService {
 	
-	int deleteByPrimaryKey(Integer dicId);
-
-    int insert(SysDictionary record);
-
-    int insertSelective(SysDictionary record);
-
     /**
      * 通过项目类型ID查字典表
      * @param dicId
@@ -24,10 +18,6 @@ public interface SysDictionaryService {
      */
     SysDictionary selectByPrimaryKey(Integer dicId);
 
-    int updateByPrimaryKeySelective(SysDictionary record);
-
-    int updateByPrimaryKey(SysDictionary record);
-    
     /**
 	 * 查所有项目类型
 	 * 
@@ -52,4 +42,13 @@ public interface SysDictionaryService {
 	 * @return
 	 */
 	List<SysDictionary> selectSysDictionaryByProjectTypeId(Integer projectTypeId);
+	
+	/**
+	 * 通过type_value的值来获取系统字典对象
+	 * @param alarmType type_value对应的值
+	 * @param alarmStatus type_value对应的值
+	 * @return
+	 */
+	List<SysDictionary> selectSysDictionaryByAlarmTypeAndStatus(
+			String alarmType, String alarmStatus);
 }

@@ -253,7 +253,7 @@
 								</c:forEach>
 								<li>
 									<div class="text-center link-block">
-										<a class="J_menuItem" href="rest/alarm/alarmList">
+										<a class="J_menuItem" name="告警管理" href="rest/alarm/alarmList">
 											<strong>查看所有</strong>
 											<i class="fa fa-angle-right"></i>
 										</a>

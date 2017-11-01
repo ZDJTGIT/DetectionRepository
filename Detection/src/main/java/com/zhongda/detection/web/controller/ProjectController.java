@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
@@ -19,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
 
+import com.github.pagehelper.PageInfo;
 import com.zhongda.detection.web.dao.ThresholdMapper;
 import com.zhongda.detection.web.model.AlarmLinkman;
 import com.zhongda.detection.web.model.DetectionPoint;
@@ -29,9 +33,8 @@ import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.model.Threshold;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.RoleSign;
-import com.zhongda.detection.web.service.DetectionPointService;
 import com.zhongda.detection.web.service.AlarmLinkmanService;
-import com.zhongda.detection.web.service.MessageService;
+import com.zhongda.detection.web.service.DetectionPointService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
 import com.zhongda.detection.web.service.SensorInfoService;
@@ -59,9 +62,6 @@ public class ProjectController {
 
 	@Autowired
 	private ProjectService projectService;
-
-	@Autowired
-	private MessageService messageService;
 
 	@Autowired
 	private RoleService roleService;
@@ -210,60 +210,26 @@ public class ProjectController {
 	 */
 
 	/**
-	 * 查找用户所属项目
+	 * 分页查找用户所有项目
+	 * @param project 封装查询条件
+	 * @param request 获取当前登录用户信息
+	 * @return
 	 */
-	@RequestMapping(value = "/showUsersProject", method = RequestMethod.POST)
+	@RequestMapping(value = "/projectPageList", method = RequestMethod.POST)
 	@ResponseBody
-	public List<Project> showUsersProject(Integer userId) {
+	public Map<String, Object> projectPageList(@RequestBody Project project, HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
-		List<Project> projectList = null;
-		if (subject.hasRole(RoleSign.ADMIN)
-				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
-			// 管理员用户，可查看所有项目信息
-			projectList = projectService.selectAllProjectWithMessageCount();
-			// 将数据库查到的项目状态添加到项目
-			for (Project project : projectList) {
-				project.setProjectStatusString(sysDictionaryServce
-						.selectProjectStatusByDicId(project.getProjectStatus()));
-			}
-		} else {
-			// 非管理员用户，可查看自己的项目信息
-			projectList = projectService
-					.selectProjectByUserIdWithMessageCount(userId);
-			// 将数据库查到的项目状态添加到项目
-			for (Project project : projectList) {
-				project.setProjectStatusString(sysDictionaryServce
-						.selectProjectStatusByDicId(project.getProjectStatus()));
-			}
+		if(!subject.hasRole(RoleSign.ADMIN) && !subject.hasRole(RoleSign.SUPER_ADMIN)){
+			//非管理员用户，只可查看自己的项目信息，查询条件增加userId
+			User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
+			project.setUserId(user.getUserId());
 		}
-		return projectList;
-	}
-
-	/**
-	 * 项目名查找项目
-	 */
-	@RequestMapping(value = "/keywordSearchProject", method = RequestMethod.POST)
-	@ResponseBody
-	public List<Project> keywordSearchProject(String keyWord, Integer userId) {
-		Subject subject = SecurityUtils.getSubject();
-		List<Project> projectList = null;
-		if (subject.hasRole(RoleSign.ADMIN)
-				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
-			projectList = projectService
-					.selectAllProjectByKeyWord_mana(keyWord);
-			for (Project project : projectList) {
-				project.setProjectStatusString(sysDictionaryServce
-						.selectProjectStatusByDicId(project.getProjectStatus()));
-			}
-		} else {
-			projectList = projectService.selectAllProjectByKeyWord_nomana(
-					keyWord, userId);
-			for (Project project : projectList) {
-				project.setProjectStatusString(sysDictionaryServce
-						.selectProjectStatusByDicId(project.getProjectStatus()));
-			}
-		}
-		return projectList;
+		List<Project> projectList = projectService.selectProjectWithAlarmCount(project);
+		PageInfo<Project> projectPageInfo=new PageInfo<Project>(projectList);
+		Map<String, Object> projectMap = new HashMap<String, Object>();
+		projectMap.put("total", projectPageInfo.getTotal());
+		projectMap.put("projectList", projectList);
+		return projectMap;
 	}
 
 	/**

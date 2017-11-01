@@ -43,7 +43,7 @@ public class AlarmController {
 	
 	@RequestMapping("/alarmPageList")
 	@ResponseBody
-	public Map<String, Object> messagePageList(@RequestBody Alarm alarm, HttpServletRequest request) {
+	public Map<String, Object> alarmPageList(@RequestBody Alarm alarm, HttpServletRequest request) {
 		//查出当前用户下所有未读的消息
 		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
 		alarm.setUserId(user.getUserId());

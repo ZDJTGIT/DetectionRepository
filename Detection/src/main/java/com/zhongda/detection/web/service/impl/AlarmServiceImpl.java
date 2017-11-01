@@ -24,11 +24,6 @@ public class AlarmServiceImpl implements AlarmService{
 	public List<Alarm> selectAlarmAndLinkmanPeriod() {
 		return alarmMapper.selectAlarmAndLinkmanPeriod();
 	}
-	
-	@Override
-	public List<Alarm> selectAlarmByUserIdAndNotConfirm(Integer userId) {
-		return alarmMapper.selectAlarmByUserIdAndNotConfirm(userId);
-	}
 
 	@Override
 	public List<Alarm> selectPageAlarmByUserIdAndNotConfirm(Integer userId, Integer pageNum, Integer pageSize) {

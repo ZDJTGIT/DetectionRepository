@@ -31,7 +31,7 @@ public interface AlarmMapper {
 	List<Alarm> selectAlarmByUserIdAndNotConfirm(Integer userId);
 	
 	/**
-	 * 根据查询条件分页查询出当前用户下的告警信息
+	 * 根据查询条件查询出当前用户下的告警信息
 	 * @param alarm 封装了查询条件的alarm对象
 	 * @return
 	 */

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.SensorInfo;
 import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.SensorInfoService;

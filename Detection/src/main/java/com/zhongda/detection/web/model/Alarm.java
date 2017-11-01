@@ -18,7 +18,7 @@ public class Alarm {
 
     private Integer detectionId;
 
-    private Integer smuCmsId;
+    private String smuCmsId;
 
     private Integer sensorId;
 
@@ -102,12 +102,12 @@ public class Alarm {
         this.detectionId = detectionId;
     }
 
-    public Integer getSmuCmsId() {
+    public String getSmuCmsId() {
         return smuCmsId;
     }
 
-    public void setSmuCmsId(Integer smuCmsId) {
-        this.smuCmsId = smuCmsId;
+    public void setSmuCmsId(String smuCmsId) {
+        this.smuCmsId = smuCmsId == null ? null : smuCmsId.trim();
     }
 
     public Integer getSensorId() {

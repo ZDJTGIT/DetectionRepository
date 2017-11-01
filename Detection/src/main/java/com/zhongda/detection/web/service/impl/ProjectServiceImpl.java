@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
 import com.zhongda.detection.web.dao.ProjectMapper;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.service.ProjectService;
@@ -63,24 +64,11 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
-	public List<Project> selectProjectByUserIdWithMessageCount(Integer userId) {
-		return projectMapper.selectProjectByUserIdWithMessageCount(userId);
-	}
-
-	@Override
-	public List<Project> selectAllProjectWithMessageCount() {
-		return projectMapper.selectAllProjectWithMessageCount();
-	}
-
-	@Override
-	public List<Project> selectAllProjectByKeyWord_mana(String keyWord) {
-		return projectMapper.selectAllProjectByKeyWord_mana(keyWord);
-	}
-
-	@Override
-	public List<Project> selectAllProjectByKeyWord_nomana(String keyWord,
-			Integer userId) {
-		return projectMapper.selectAllProjectByKeyWord_nomana(keyWord, userId);
+	public List<Project> selectProjectWithAlarmCount(Project project) {
+		if(null != project.getPageNum() && null != project.getPageSize()){
+			PageHelper.startPage(project.getPageNum(), project.getPageSize());
+		}
+		return projectMapper.selectProjectWithAlarmCount(project);
 	}
 
 	@Override

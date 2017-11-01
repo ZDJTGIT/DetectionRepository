@@ -6,8 +6,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,7 @@ import com.zhongda.detection.core.utils.vcode.GifCaptcha;
 import com.zhongda.detection.web.model.Alarm;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.User;
+import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.AlarmService;
 import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.ProjectService;
@@ -77,21 +80,16 @@ public class CommonController {
 	@RequestMapping("home")
 	public String home(HttpServletRequest request, Model model)
 			throws JsonProcessingException {
-		User user = (User) request.getSession().getAttribute("userInfo");
+		Subject subject = SecurityUtils.getSubject();
 		ObjectMapper mapper = new ObjectMapper();
-		int userId = user.getUserId();
-		List<Project> projects = null;
-		int roleId = userService.selectUserRoleByUserId(userId);
-		if (roleId == 2 || roleId == 1) {
-			projects = projectService.selectAllProjectWithMessageCount();
-		} else {
-			projects = projectService
-					.selectProjectByUserIdWithMessageCount(user.getUserId());
+		Project project = new Project();
+		if(!subject.hasRole(RoleSign.ADMIN) && !subject.hasRole(RoleSign.SUPER_ADMIN)){
+			//非管理员用户，只可查看自己的项目信息，查询条件增加userId
+			User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
+			project.setUserId(user.getUserId());
 		}
-		String projectList = null;
-		projectList = mapper.writeValueAsString(projects);
-		System.out.println(projectList);
-		model.addAttribute("projectList", projects);
+		List<Project> projects = projectService.selectProjectWithAlarmCount(project);
+		String projectList = mapper.writeValueAsString(projects);
 		model.addAttribute("projectLists", projectList);
 		return "home";
 	}

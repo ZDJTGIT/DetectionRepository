@@ -8,7 +8,7 @@
     <result column="project_id" jdbcType="INTEGER" property="projectId" />
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="detection_id" jdbcType="INTEGER" property="detectionId" />
-    <result column="smu_cms_id" jdbcType="INTEGER" property="smuCmsId" />
+    <result column="smu_cms_id" jdbcType="VARCHAR" property="smuCmsId" />
     <result column="sensor_id" jdbcType="INTEGER" property="sensorId" />
     <result column="alarm_type_id" jdbcType="INTEGER" property="alarmTypeId" />
     <result column="alarm_context" jdbcType="VARCHAR" property="alarmContext" />
@@ -16,6 +16,8 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="alarm_level" jdbcType="INTEGER" property="alarmLevel" />
     <result column="frequency" jdbcType="INTEGER" property="frequency" />
+    <result column="alarm_type" jdbcType="INTEGER" property="alarmType" />
+    <result column="alarm_status" jdbcType="INTEGER" property="alarmStatus" />
   </resultMap>
   <resultMap id="WithLinkmanResultMap" type="com.zhongda.detection.web.model.Alarm">
     <id column="alarm_id" jdbcType="INTEGER" property="alarmId" />
@@ -24,7 +26,7 @@
     <result column="project_id" jdbcType="INTEGER" property="projectId" />
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="detection_id" jdbcType="INTEGER" property="detectionId" />
-    <result column="smu_cms_id" jdbcType="INTEGER" property="smuCmsId" />
+    <result column="smu_cms_id" jdbcType="VARCHAR" property="smuCmsId" />
     <result column="sensor_id" jdbcType="INTEGER" property="sensorId" />
     <result column="alarm_type_id" jdbcType="INTEGER" property="alarmTypeId" />
     <result column="alarm_context" jdbcType="VARCHAR" property="alarmContext" />
@@ -68,19 +70,31 @@
 	where user_id = #{userId,jdbcType=INTEGER}
 	and status = 20 order by create_time desc
   </select>
-  <select id="selectPageAlarmByUserIdAndOtherInfo" parameterType="com.zhongda.detection.web.model.Alarm" resultMap="WithLinkmanResultMap">
+  <select id="selectPageAlarmByUserIdAndOtherInfo" parameterType="com.zhongda.detection.web.model.Alarm" resultMap="BaseResultMap">
 	select
-    <include refid="Base_Column_List" />
-    from alarm
+    a.*, sd_type.item_name 'alarm_type', sd_status.item_name 'alarm_status'
+    from alarm a, sys_dictionary sd_type, sys_dictionary sd_status
     where user_id = #{userId,jdbcType=INTEGER}
-    <if test="messageId != null">
-        and message_id = #{messageId,jdbcType=INTEGER}
+      <if test="alarmId != null">
+        and alarm_id = #{alarmId,jdbcType=INTEGER}
       </if>
-      <if test="messageType != null">
-        and message_type = #{messageType,jdbcType=VARCHAR}
+      <if test="projectName != null">
+        and project_name = #{projectName,jdbcType=VARCHAR}
       </if>
-      <if test="messageContext != null">
-        and message_context like '%${_parameter.messageContext}%'
+      <if test="detectionId != null">
+        and detection_id = #{detectionId,jdbcType=INTEGER}
+      </if>
+      <if test="smuCmsId != null">
+        and smu_cms_id = #{smuCmsId,jdbcType=INTEGER}
+      </if>
+      <if test="sensorId != null">
+        and sensor_id = #{sensorId,jdbcType=INTEGER}
+      </if>
+      <if test="alarmTypeId != null">
+        and alarm_type_id = #{alarmTypeId,jdbcType=INTEGER}
+      </if>
+      <if test="alarmContext != null">
+        and alarm_context like '%${_parameter.messageContext}%'
       </if>
       <if test="startCreateTime != null">
         and (create_time &gt;= #{startCreateTime,jdbcType=TIMESTAMP})
@@ -91,6 +105,8 @@
       <if test="status != null">
         and status = #{status,jdbcType=VARCHAR}
       </if>
+      and a.alarm_type_id = sd_type.dic_id
+      and a.status = sd_status.dic_id
       order by create_time desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -105,7 +121,7 @@
       alarm_level, frequency)
     values (#{alarmId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
       #{projectId,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{detectionId,jdbcType=INTEGER}, 
-      #{smuCmsId,jdbcType=INTEGER}, #{sensorId,jdbcType=INTEGER}, #{alarmTypeId,jdbcType=INTEGER}, 
+      #{smuCmsId,jdbcType=VARCHAR}, #{sensorId,jdbcType=INTEGER}, #{alarmTypeId,jdbcType=INTEGER}, 
       #{alarmContext,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
       #{alarmLevel,jdbcType=INTEGER}, #{frequency,jdbcType=INTEGER})
   </insert>
@@ -175,7 +191,7 @@
         #{detectionId,jdbcType=INTEGER},
       </if>
       <if test="smuCmsId != null">
-        #{smuCmsId,jdbcType=INTEGER},
+        #{smuCmsId,jdbcType=VARCHAR},
       </if>
       <if test="sensorId != null">
         #{sensorId,jdbcType=INTEGER},
@@ -219,7 +235,7 @@
         detection_id = #{detectionId,jdbcType=INTEGER},
       </if>
       <if test="smuCmsId != null">
-        smu_cms_id = #{smuCmsId,jdbcType=INTEGER},
+        smu_cms_id = #{smuCmsId,jdbcType=VARCHAR},
       </if>
       <if test="sensorId != null">
         sensor_id = #{sensorId,jdbcType=INTEGER},
@@ -252,7 +268,7 @@
       project_id = #{projectId,jdbcType=INTEGER},
       project_name = #{projectName,jdbcType=VARCHAR},
       detection_id = #{detectionId,jdbcType=INTEGER},
-      smu_cms_id = #{smuCmsId,jdbcType=INTEGER},
+      smu_cms_id = #{smuCmsId,jdbcType=VARCHAR},
       sensor_id = #{sensorId,jdbcType=INTEGER},
       alarm_type_id = #{alarmTypeId,jdbcType=INTEGER},
       alarm_context = #{alarmContext,jdbcType=VARCHAR},
