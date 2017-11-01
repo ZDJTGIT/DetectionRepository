@@ -221,6 +221,8 @@
 						<h5>告警处理表</h5>
 						<div class="btn-group" name="laserRanging_detectionButtion">
                          </div>
+                         <button class="btn btn-info  dim" type="button"><i class="fa fa-upload"></i>
+                    </button>
 					</div>
 					 <div class="ibox-content">
                         <table class="table table-striped table-bordered table-hover display" id="editable"  cellspacing="0" width="100%"> 

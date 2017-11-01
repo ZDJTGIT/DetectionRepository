@@ -69,14 +69,14 @@
 									<td>告警</td>
 								</tr>
                             </thead>
-                            <%-- <tbody id="homecaveatproject">
+                           <tbody id="homecaveatproject">
                             	<c:forEach items="${projectList }" var="projectsList">
                             		<tr>
                             			<td>${projectsList.projectName }</td>
-                            			<td><i class="fa fa-bell"></i> <span class="label label-primary">${projectsList.messageCount }</span></td>
+                            			<td><i class="fa fa-bell"></i> <span class="label label-primary">${projectsList.alarmCount }</span></td>
                             		</tr> 
                             	</c:forEach>
-                            </tbody> --%>
+                            </tbody> 
                         </table>
                     </div>
 				</div>
@@ -104,13 +104,9 @@
 			} 
 		});
 		
-		$(document).ready(function() {
-			var homeMaptabel = $('#maphometabel').dataTable();
-			$(homeMapjsonObjss).each(function(index,value){
-				var label = "<i class='fa fa-bell'></i> <span class='label label-primary'>"+homeMapjsonObjss[index].alarmCount+"</span>"
-				homeMaptabel.fnAddData([homeMapjsonObjss[index].projectName,label]);//填充数据到表
-			});
-		}); 
+		 $(document).ready(function() {
+			$('#maphometabel').dataTable();
+		});  
 
 		$(document).ready(function() {
 			demo.initAMap();

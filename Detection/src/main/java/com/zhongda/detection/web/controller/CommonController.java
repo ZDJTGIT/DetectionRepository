@@ -95,6 +95,7 @@ public class CommonController {
 				.selectProjectWithAlarmCount(project);
 		String projectList = mapper.writeValueAsString(projects);
 		model.addAttribute("projectLists", projectList);
+		model.addAttribute("projectList", projects);
 		return "home";
 	}
 
