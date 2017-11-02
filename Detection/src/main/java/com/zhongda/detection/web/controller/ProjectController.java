@@ -137,6 +137,7 @@ public class ProjectController {
 		model.addAttribute("projectId", projectId);
 		model.addAttribute("detectionTypeId", detectionTypeId);
 		return "graph_echarts_laserRanging";
+
 	}
 
 	/**

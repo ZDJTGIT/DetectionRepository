@@ -70,6 +70,7 @@
                 
                 </div>
             </div>
+            
     	<c:set value="${fn:split(image.physicalImageUrl,',') }" var="names" />
         <div class="row">
             <div class="col-sm-6">
@@ -178,10 +179,6 @@
                     <div class="ibox-title" style="text-align: center;">
                         <h5>累计变化量</h5>
                          <div class="btn-group" name="laserRanging_detectionButtion">
-                              <!-- <button class="btn btn-white" id="zoomIn" type="button">放大</button>
-                              <button class="btn btn-white" id="zoomOut" type="button">缩小</button>
-                              <button class="btn btn-white" id="rotateLeft" type="button">左旋转</button>
-                              <button class="btn btn-white" id="rotateRight" type="button">右旋转</button> -->
                          </div>
                     </div>
                     <div class="ibox-content" >
@@ -218,11 +215,17 @@
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title" style="text-align: center;">
-						<h5>告警处理表</h5>
-						<div class="btn-group" name="laserRanging_detectionButtion">
-                         </div>
-                         <button class="btn btn-info  dim" type="button"><i class="fa fa-upload"></i>
-                    </button>
+						<div class="row">
+							<div class="col-sm-11">
+								<h5>告警处理表</h5>
+								<div class="btn-group" name="laserRanging_detectionButtion">
+                        		 </div>
+							</div>
+							<div class="col-sm-1">
+								<button class="btn btn-info  dim" type="button" title="导成Excel"><i class="fa fa-upload"></i>
+                    			</button>
+							</div>
+						</div>
 					</div>
 					 <div class="ibox-content">
                         <table class="table table-striped table-bordered table-hover display" id="editable"  cellspacing="0" width="100%"> 

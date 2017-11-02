@@ -166,6 +166,9 @@
 								<li><a class="J_menuItem" href="rest/user/userList" name="用户&告警联系人">用户&告警联系人
 										<span class="label label-danger pull-right">管理员可见</span>
 								</a></li>
+								<li><a class="J_menuItem" href="rest/alarm/selectalarm_linkman" name="告警联系人">告警联系人
+										<span class="label label-danger pull-right">管理员可见</span>
+								</a></li>
 								<li><a class="J_menuItem" href="rest/table_data_tables" name="详细检验数据展示分析">详细检验数据展示分析</a>
 								</li>
 								<li><a class="J_menuItem" href="rest/table_foo_table" name="操作日志">操作日志</a>

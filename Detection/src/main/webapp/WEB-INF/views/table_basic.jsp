@@ -19,7 +19,7 @@
 <base href="<%=basePath%>">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>用户&告警联系人信息表</title>
+<title>用户</title>
 <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
 <meta name="description" content="中大检测平台">
 
@@ -177,141 +177,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-				<div class="col-sm-12">
-					<div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5>告警联系人</h5>
-							<div class="ibox-tools">
-								<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
-								</a> <a class="dropdown-toggle" data-toggle="dropdown"
-									href="table_data_tables.html#"> <i class="fa fa-wrench"></i>
-								</a>
-								<ul class="dropdown-menu dropdown-user">
-									<li><a href="table_data_tables.html#">选项1</a></li>
-									<li><a href="table_data_tables.html#">选项2</a></li>
-								</ul>
-								<a class="close-link"> <i class="fa fa-times"></i>
-								</a>
-							</div>
-						</div>
-						 <div class="ibox-content">
-	                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal_table_basic" id="table_basic_addalarm">
-							  添加联系人
-							</button>
-	                        <table class="table table-striped table-bordered table-hover display" id="addAlarmBasic"  cellspacing="0" width="100%"> 
-	                            <thead>
-	                                <tr>
-	                                	<td>用户名</td>
-										<td>项目名</td>
-										<td>手机号</td>
-										<td>邮箱</td>
-										<td>启用状态</td>
-										<td >操作</td>
-									</tr>
-	                            </thead>
-	                            <tbody>
-	                            	<c:forEach items="${aLinkmanList }" var="aLinkman">
-	                            		<tr>
-	                            			<td>${aLinkman.userName }</td> 
-	                            			<td>${aLinkman.projectName }</td>   
-	                            			<td>${aLinkman.phone }</td> 
-	                            			<td>${aLinkman.email }</td> 
-	                            			<td >
-	                            				<div id="status${aLinkman.alarmLinkmanId }">
-	                            					<c:choose>
-					                            		<c:when test="${aLinkman.status eq 27}">
-					                            			启用
-					                            		</c:when>
-					                            		<c:otherwise>
-					                            			禁用
-					                            		</c:otherwise>
-					                            	</c:choose>
-	                            				</div>
-	                            				
-	                            			</td> 
-	                            			<td >
-					                            <div class="onoffswitch" >
-					                            	<c:choose>
-					                            		<c:when test="${aLinkman.status eq 27}">
-					                            			<input type="checkbox" checked class="onoffswitch-checkbox" id="example${aLinkman.alarmLinkmanId}">
-					                            		</c:when>
-					                            		<c:otherwise>
-					                            			 <input type="checkbox" class="onoffswitch-checkbox" id="example${aLinkman.alarmLinkmanId}">
-					                            		</c:otherwise>
-					                            	</c:choose>
-					                                <label class="onoffswitch-label" for="example${aLinkman.alarmLinkmanId}" >
-					                                    <span class="onoffswitch-inner"></span>
-					                                    <span class="onoffswitch-switch"></span>
-					                                </label>
-					                            </div>
-	                            			</td>
-	                            		</tr> 
-	                            	</c:forEach>
-                           		</tbody>
-	                        </table>
-	                    </div>
-					</div>
-				</div>
-			</div>
-			<!-- Modal -->
-			<div class="modal fade" id="myModal_table_basic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">添加联系人</h4>
-				      </div>
-				      <div class="modal-body">
-				      	<!-- 表单 -->
-				      	 <form class="form-horizontal m-t" id="signupForm">
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">联系人：</label>
-                                <div class="col-sm-8">
-                                    <input id="table_basic_userName" class="form-control" type="text" aria-required="true">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">手机号码：</label>
-                                <div class="col-sm-8">
-                                    <input  id="table_basic_phone" class="form-control" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">E-mail：</label>
-                                <div class="col-sm-8">
-                                    <input id="table_basic_email" class="form-control" type="email">
-                                </div>
-                            </div>
-                            <div class="form-group" id="allckekout_tablebasic">
-                             	<label class="col-sm-3 control-label"><input type="checkbox" class="i-checks" id="nidaoshika">项目名称：</label>
-                                <div class="col-sm-8" id="checkout_basic_all">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">启用状态：</label>
-                                <div class="col-sm-8">
-                                     <div class="radio radio-info radio-inline">
-                                        <input type="radio" id="inlineRadio1" value="27" name="table_basic_radioInline" checked="">
-                                        <label for="inlineRadio1"> 启用 </label>
-                                    </div>
-                                    <div class="radio radio-inline">
-                                        <input type="radio" id="inlineRadio2" value="28" name="table_basic_radioInline">
-                                        <label for="inlineRadio2"> 禁用 </label>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </form>
-			        	 
-				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal" id="table_basic_close">关闭</button>
-				        <button type="button" class="btn btn-primary" id="table_basic_commitadd">提交</button>
-				      </div>
-				    </div>
-				  </div>
-			</div>		
 	</div>
 
 	<!-- <script src="assets/js/jquery.min.js"></script>
@@ -335,6 +200,31 @@
     <script src="assets/js/plugins/sweetalert/sweetalert.min.js"></script>
     
     <script type="text/javascript" src="assets/js/tabel_basic_addAla.js"></script>
+    
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		
+    		jQuery.validator.addMethod("isTel", function (value, element) {  
+    		    var length = value.length;  
+    		    var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;  
+    		    var tel = /^(\d{3,4}-?)?\d{7,9}$/g;  
+    		    return this.optional(element) || tel.test(value) || (length == 11 && mobile.test(value));  
+    		}, "请正确填写您的联系方式");  
+    		
+    		$("#signupForm").validate({
+  			  debug:true,
+  			  rules: {
+                     username: { required: true, minlength: 2 },  
+                 },  
+                 messages: {  
+                     username: {  
+                         required: "用户名不能为空",  
+                         minlength: "用户名的最小长度为2"  
+                     },  
+                 }
+  		  });
+    	});
+    </script>
 	
 	<script type="text/javascript">
 	
