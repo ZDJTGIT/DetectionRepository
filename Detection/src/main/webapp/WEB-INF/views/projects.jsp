@@ -110,7 +110,7 @@
 								<textarea id="projectDescription_addProject" class="data_project_tar data_content_input_5" rows="4"></textarea>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        <button type="button" id="offAddProject" class="btn btn-default" data-dismiss="modal">关闭</button>
 						        <button type="button" class="btn btn-primary sureAddProject_addProject">提交</button>
 						      </div>
 						    </div>
@@ -154,7 +154,7 @@
 								<textarea id="projectDescription_updetaProject" class="data_project_tar data_content_input_5" rows="4"></textarea>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        <button type="button" id="offUpdetaProject"  class="btn btn-default" data-dismiss="modal">关闭</button>
 						        <button type="button" class="btn btn-primary sureAddProject_updetaProject">提交</button>
 						      </div>
 						    </div>
@@ -596,7 +596,7 @@
 	  		    	   }	  		    
 			    	   $("table tr:eq(" + t + ") td:eq(8) small").text("当前进度： "+percentage+"%");//当前进度
 			    	   $("table tr:eq(" + t + ") td:eq(8) .progress-bar").css("width",percentage+"%");//当前进度
-			    	   
+			    	   $('#offUpdetaProject').trigger("click"); 
 			    	   alert("修改成功！");
    		   	  		  }else {
   						alert("抱歉！您为非管理员用户，修改项目信息请联系对应管理员！");
@@ -757,31 +757,7 @@
 									$('#projectLatitude_addProject').val("");
 									$('#projectBeginTime_addProject').val("");
 									$('#projectEndTime_addProject').val("");
-									//新建测点时加载测点类型-不同项目不同测点类型(通过项目value判定)
-									
-						    	    $.ajax({
-						    	    	type:'post',
-							    	  	  url: 'rest/project/showDetectionStatus',
-							    	  	  data: {projectTypeId:data.projectTypeId},
-							    	  	  contextType:"application/json",
-							    	  	  success: function(data){
-							    	  		       if(data){
-							    	  		    	var string = '<select class="md_input" id="selectDetectionStatus" name="selectDetectionStatus">';
-							    	  		    	$.each(data,function(idx,SysDictionary){
-							    	  		    	    string += '<option value="'+SysDictionary.dicId+'">'+ SysDictionary.itemName +'</option>';
-							    	  		    	});
-							    	  		       string += '</select>';
-							    	  		       $('#selectDetection_div_addDetection').append(string);
-							    	  		       $('#selectDetection_div_addDetections').append(string);
-							    	  		       }else{
-							    	  		    	alert("数据异常");
-							    	  		       }
-							    	  	  },
-							    	  	  error: function(){
-							  			    alert("数据加载失败");
-							  		      }
-						    	     });
-									
+									$('#offAddProject').trigger("click"); 
                            }else{
                             	alert("抱歉！您为非管理员用户，添加项目请联系对应管理员！");
                             	$('#projectAddress_addProject').val("");

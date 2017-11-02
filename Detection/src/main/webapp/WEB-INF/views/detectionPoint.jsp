@@ -126,7 +126,7 @@
 								<textarea id="DetectionDescription_addDetection" class="data_project_tar data_content_input_5" rows="4"></textarea>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        <button type="button" id="offAddDetection" class="btn btn-default" data-dismiss="modal">关闭</button>
 						        <button type="button" class="btn btn-primary sureAddDetection_addDetection">提交</button>
 						      </div>
 						    </div>
@@ -169,7 +169,7 @@
 								<textarea id="DetectionDescription_updetaDetection" class="data_project_tar data_content_input_5" rows="4"></textarea>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        <button type="button" id="offUpdetaDetection" class="btn btn-default" data-dismiss="modal">关闭</button>
 						        <button type="button" class="btn btn-primary sureAddDetection_updetaDetection">提交</button>
 						      </div>
 						    </div>
@@ -222,7 +222,6 @@
 		   		if(data){
 		   			//添加成功后清空输入层以便重复使用
 		   			//添加成功之后刷新页面
-		   			alert("测点添加成功！");
 					$('#DetectionLongitude_addDetection').val("");
 					$('#DetectionLatitude_addDetection').val("");
 					$('#DetectionName_addDetection').val("");
@@ -275,6 +274,8 @@
 				    '</td>'+
 				   '</tr>';
 					$('#detection_tbody').append(viewData);
+					$('#offAddDetection').trigger("click"); 
+					alert("测点添加成功！");
 		   		   	}else {
 		  			alert("数据异常");
 		   			}
@@ -360,6 +361,7 @@
 							$("table tr:eq(" + t + ") td:eq(4)").text(detectionDescription);//测点描述.
 							$("table tr:eq(" + t + ") td:eq(5)").text(detectionLongitude);//测点经度.
 							$("table tr:eq(" + t + ") td:eq(6)").text(detectionLatitude);//测点纬度.
+							$('#offUpdetaDetection').trigger("click"); 
 							alert("修改测点信息成功！");
 								}else {
 									  alert("数据异常");

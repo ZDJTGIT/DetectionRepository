@@ -88,20 +88,20 @@
 						      </div>
 						      <div class="modal-body">
 							    
-							    <label class="md_lable" for="sensorType_addSensorInfo">传感器类型:</label>&nbsp
+							    <label class="md_lable" for="sensorType_addSensorInfo">传感器类型:&nbsp&nbsp</label>
 								<input class="md_input" type="text" id="sensorType_addSensorInfo" name="sensorType_addSensorInfo"><br><br>
 								
-							    <label class="md_lable" for="sensorId_addSensorInfo">传感器&nbspI&nbsp&nbspD:</label>&nbsp
+							    <label class="md_lable" for="sensorId_addSensorInfo">传感器&nbspI&nbsp&nbspD:&nbsp&nbsp</label>
 								<input class="md_input" type="text" id="sensorId_addSensorInfo" name="sensorId_addSensorInfo"><br><br>
 								
-								<label class="md_lable" for="sensorModel_addSensorInfo">传感器模型:</label>&nbsp
+								<label class="md_lable" for="sensorModel_addSensorInfo">传感器模型:&nbsp&nbsp</label>
 								<input class="md_input" type="text" id="sensorModel_addSensorInfo" name="sensorModel_addSensorInfo"><br><br>
 								
-								<label class="md_lable" for="sensorDepth_addSensorInfo">传感器深度:</label>&nbsp
+								<label class="md_lable" for="sensorDepth_addSensorInfo">传感器深度:&nbsp&nbsp</label>
 								<input class="md_input" type="text" id="sensorDepth_addSensorInfo" name="sensorDepth_addSensorInfo"><br>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        <button type="button" id="offAddSensorInfo" class="btn btn-default" data-dismiss="modal">关闭</button>
 						        <button type="button" class="btn btn-primary sureAddSensorInfo_addSensorInfo">提交</button>
 						      </div>
 						    </div>
@@ -123,20 +123,20 @@
 						      
 							    <input class="md_input" type="text" style="display:none" id="detectionPointId_updetaSensorInfo" name="detectionPointId_updetaSensorInfo">
 							    
-							    <label class="md_lable" for="sensorType_updetaSensorInfo">传感器类型:</label>&nbsp
+							    <label class="md_lable" for="sensorType_updetaSensorInfo">传感器类型:&nbsp&nbsp</label>
 								<input class="md_input" type="text" id="sensorType_updetaSensorInfo" name="sensorType_updetaSensorInfo"><br><br>
 							    
-							    <label class="md_lable" for="sensorId_updetaSensorInfo">传感器&nbspI&nbsp&nbspD:</label>&nbsp
+							    <label class="md_lable" for="sensorId_updetaSensorInfo">传感器&nbspI&nbsp&nbspD:&nbsp&nbsp</label>
 								<input class="md_input" type="text" id="sensorId_updetaSensorInfo" name="sensorId_updetaSensorInfo"><br><br>
 							    
-								<label class="md_lable" for="sensorModel_updetaSensorInfo">传感器模型:</label>&nbsp
+								<label class="md_lable" for="sensorModel_updetaSensorInfo">传感器模型:&nbsp&nbsp</label>
 								<input class="md_input" type="text" id="sensorModel_updetaSensorInfo" name="sensorModel_updetaSensorInfo"><br><br>
 								
-								<label class="md_lable" for="sensorDepth_updetaSensorInfo">传感器深度:</label>&nbsp
+								<label class="md_lable" for="sensorDepth_updetaSensorInfo">传感器深度:&nbsp&nbsp</label>
 								<input class="md_input" type="text" id="sensorDepth_updetaSensorInfo" name="sensorDepth_updetaSensorInfo"><br>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        <button type="button" id="offUpdetaSensorInfo" class="btn btn-default" data-dismiss="modal">关闭</button>
 						        <button type="button" class="btn btn-primary sureUpdetaSensorInfo_updetaSensorInfo">提交</button>
 						      </div>
 						    </div>
@@ -233,6 +233,7 @@
 					   '</td>'+
 					   '</tr>';
 						$('#sensorInfo_tbody').append(viewData);
+						$('#offAddSensorInfo').trigger("click"); 
 						alert("传感器添加成功！");
 			   		   	   }else {
 			  			   alert("数据异常");
@@ -302,6 +303,7 @@
 							$("table tr:eq(" + b + ") td:eq(5) a").text(sensorModel);//传感器模型
 							$("table tr:eq(" + b + ") td:eq(6)").text(sensorInfoId);//传感器ID
 							$("table tr:eq(" + b + ") td:eq(7)").text(detectionPointId);//测点ID
+							$('#offUpdetaSensorInfo').trigger("click"); 
 							alert("修改传感器信息成功！");
 								}else 
 								{

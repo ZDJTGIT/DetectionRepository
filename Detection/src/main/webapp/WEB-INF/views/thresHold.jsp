@@ -98,23 +98,23 @@
 						      
 						        <label class="md_lable" for="">测点类型:</label>
 								<div id="selectDetectionType_div_addThresHold">
-									<select class="md_input" id="selectDetectionType_addThresHold" name="selectDetectionStatus_addThresHold">
+									<select class="md_input" style="margin-left: 85px;" id="selectDetectionType_addThresHold" name="selectDetectionStatus_addThresHold">
 									</select>
 							    </div><br><br>
 							    
 							    <label class="md_lable" for="">阀值类型:</label>
 								<div id="selectThresHoldType_div_addThresHold">
-									<select class="md_input" id="selectThresHoldType_addThresHold" name="selectThresHoldType_addThresHold">
+									<select class="md_input" style="margin-left: 85px;" id="selectThresHoldType_addThresHold" name="selectThresHoldType_addThresHold">
 									</select>
 							    </div><br><br>
 						      	
 						        <label class="md_lable" for="maxThresholdValue_add">最大警戒值:</label>
-								<input class="md_input" type="text" id="maxThresholdValue_add" name="maxThresholdValue_add"><br><br>
+								<input class="md_input" style="margin-left: 85px;" type="text" id="maxThresholdValue_add" name="maxThresholdValue_add"><br><br>
 								<label class="md_lable" for="minThresholdValue_add">最小警戒值:</label>
-								<input class="md_input" type="text" id="minThresholdValue_add" name="minThresholdValue_add"><br><br>
+								<input class="md_input" style="margin-left: 85px;" type="text" id="minThresholdValue_add" name="minThresholdValue_add"><br><br>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        <button type="button" id="offAddThresHold" class="btn btn-default" data-dismiss="modal">关闭</button>
 						        <button type="button" class="btn btn-primary sureAddThresHold_addThresHold">提交</button>
 						      </div>
 						    </div>
@@ -135,13 +135,13 @@
 						      
 						        <label class="md_lable" for="">测点类型:</label>
 								<div id="selectDetectionType_div_updetaThresHold">
-									<select class="md_input" id="selectDetectionType_updetaThresHold" name="selectDetectionStatus_updetaThresHold">
+									<select class="md_input" style="margin-left: 85px;" id="selectDetectionType_updetaThresHold" name="selectDetectionStatus_updetaThresHold">
 									</select>
 							    </div><br><br>
 							    
 							    <label class="md_lable" for="">阀值类型:</label>
 								<div id="selectThresHoldType_div_addThresHold">
-									<select class="md_input" id="selectThresHoldType_updetaThresHold" name="selectThresHoldType_updetaThresHold">
+									<select class="md_input" style="margin-left: 85px;" id="selectThresHoldType_updetaThresHold" name="selectThresHoldType_updetaThresHold">
 									</select>
 							    </div><br><br>
 							     
@@ -150,12 +150,12 @@
 							    <input class="md_input" type="text" style="display:none" id="thresholdTypeId_updetaThresHold" name="thresholdTypeId_updetaThresHold">
 						       
 						        <label class="md_lable" for="maxThresholdValue_updeta">最大警戒值:</label>
-								<input class="md_input" type="text" id="maxThresholdValue_updeta" name="maxThresholdValue_updeta"><br><br>
+								<input class="md_input" style="margin-left: 85px;" type="text" id="maxThresholdValue_updeta" name="maxThresholdValue_updeta"><br><br>
 								<label class="md_lable" for="minThresholdValue_updeta">最小警戒值:</label>
-								<input class="md_input" type="text" id="minThresholdValue_updeta" name="minThresholdValue_updeta"><br><br>
+								<input class="md_input" style="margin-left: 85px;" type="text" id="minThresholdValue_updeta" name="minThresholdValue_updeta"><br><br>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        <button type="button" id="offUpdetaThresHold" class="btn btn-default" data-dismiss="modal">关闭</button>
 						        <button type="button" class="btn btn-primary sureUpdetaThresHold_UpdetaThresHold">提交</button>
 						      </div>
 						    </div>
@@ -237,7 +237,8 @@
 						    '<td class="project-actions">'+
 						    '</td>'+
 							'</tr>';
-							$('#thresHold_tbody').append(viewData);				
+							$('#thresHold_tbody').append(viewData);
+							$('#offAddThresHold').trigger("click"); 
 						    alert("插入成功");
 							}
 							},
@@ -302,13 +303,14 @@
 			data: jsonData,
 			success: function(data){
 					if(data.thresholdId==0){
-							alert("重复添加阀值，请认真核对测点类型和阀值类型后再添加!");
+							alert("阀值重复，请认真核对测点类型和阀值类型后再添加!");
 						}else{
 						//修改成功后吧页面及时刷新
 						$("table tr:eq(" + t + ") td:eq(0)").text($('#selectDetectionType_updetaThresHold option:selected').text());//测点类型名称
 						$("table tr:eq(" + t + ") td:eq(1)").text($('#selectThresHoldType_updetaThresHold option:selected').text());//阀值类型名称
 						$("table tr:eq(" + t + ") td:eq(2)").text(data.minThresholdValue);//最小警戒值
 						$("table tr:eq(" + t + ") td:eq(3)").text(data.maxThresholdValue);//最大警戒值
+						$('#offUpdetaThresHold').trigger("click"); 
 						alert("修改阀值成功！");
 						}
 						},

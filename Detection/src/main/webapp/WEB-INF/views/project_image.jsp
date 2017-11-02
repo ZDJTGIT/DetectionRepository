@@ -92,7 +92,7 @@
 								<input class="md_input" style="display:none" type="text" id="detectionTypeId" name="detectionTypeId"><br><br>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        <button type="button" id="offUpdetaImage" class="btn btn-default" data-dismiss="modal">关闭</button>
 						        <button type="button" class="btn btn-primary sureAddDetection_updetaThresHold">提交</button>
 						      </div>
 						    </div>
@@ -205,6 +205,7 @@
 							//修改成功后吧页面及时刷新
 							$('#h'+data.imageId).attr("src",data.heatImageUrl); 
 							$('#p'+data.imageId).attr("src",data.physicalImageUrl); 
+							$('#offUpdetaImage').trigger("click"); 
 							alert("项目图片设置成功！");
 								}else {
 									  alert("数据异常");
