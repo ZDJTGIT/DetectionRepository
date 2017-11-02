@@ -204,7 +204,9 @@
 			dataType : 'json',
 			data: jsonData,
 			success: function(data){
-					if(data){
+					if(data.thresholdId==0){
+							alert("重复添加阀值，请认真核对测点类型和阀值类型后再添加!");
+					}else{
 							$('#minThresholdValue_add').val("");
 							$('#maxThresholdValue_add').val("");
 			  var viewData ='<tr>'+
@@ -237,13 +239,11 @@
 							'</tr>';
 							$('#thresHold_tbody').append(viewData);				
 						    alert("插入成功");
-							}else {
-								  alert("数据异常");
-							      }
+							}
 							},
 							error: function(){
-								  alert("重复添加阀值，请认真核对测点类型和阀值类型后再添加！");
-							      }
+								  alert("抱歉！您为非管理员用户，添加阀值请联系对应管理员");
+							}
 			}); 	
 	});
 		var b;
@@ -301,20 +301,20 @@
 			dataType : 'json',
 			data: jsonData,
 			success: function(data){
-					if(data){
+					if(data.thresholdId==0){
+							alert("重复添加阀值，请认真核对测点类型和阀值类型后再添加!");
+						}else{
 						//修改成功后吧页面及时刷新
 						$("table tr:eq(" + t + ") td:eq(0)").text($('#selectDetectionType_updetaThresHold option:selected').text());//测点类型名称
 						$("table tr:eq(" + t + ") td:eq(1)").text($('#selectThresHoldType_updetaThresHold option:selected').text());//阀值类型名称
 						$("table tr:eq(" + t + ") td:eq(2)").text(data.minThresholdValue);//最小警戒值
 						$("table tr:eq(" + t + ") td:eq(3)").text(data.maxThresholdValue);//最大警戒值
 						alert("修改阀值成功！");
-						}else {
-							  alert("数据异常");
-							  }
+						}
 						},
 						error: function(){
-							  alert("重复添加阀值，请认真核对测点类型和阀值类型后再添加！");
-						      }
+							  alert("抱歉！您为非管理员用户，修改阀值请联系对应管理员");
+						}
 			}); 	
 	});
 	

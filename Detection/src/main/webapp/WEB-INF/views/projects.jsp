@@ -666,7 +666,6 @@
 	  		    		}else{
 	  		    			percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
 	  		    		}
-	  		    		
 					    var viewData = '<tr id="project_'+ data.projectId +'" style="height:100px">'+
 				    	  		    	//'<td class="project-status" style="width:120px">'+
 										//'<a href="project_detail.html">' + item.sysDictionary.itemName+'</a><br />'+
@@ -704,7 +703,7 @@
 										'</td>'+
 										'<td class="project-title" style="width:300px">'+
 											'<a href="javascript:;">项目描述</a><br />'+
-											'<p id="trhight">' + item.projectDescription + '</p>'+
+											'<p id="trhight">' + data.projectDescription + '</p>'+
 										'</td>'+
 										'<td class="project-status" style="display:none">'+
 											'<span class="label label-primary">' + data.projectStatus + '</span>'+

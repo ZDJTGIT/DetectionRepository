@@ -42,8 +42,14 @@ public class SensorInfoController {
 	@RequestMapping(value = "/addSensorInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public SensorInfo addSensorInfo(@RequestBody SensorInfo sensorInfo) {
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 		sensorInfoService.insertSelective(sensorInfo);
 		return sensorInfo;
+		}else{
+			return null;
+		}
 	}
 
 	/**

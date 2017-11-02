@@ -222,11 +222,11 @@
 		   		if(data){
 		   			//添加成功后清空输入层以便重复使用
 		   			//添加成功之后刷新页面
+		   			alert("测点添加成功！");
 					$('#DetectionLongitude_addDetection').val("");
 					$('#DetectionLatitude_addDetection').val("");
 					$('#DetectionName_addDetection').val("");
 					$('#DetectionDescription_addDetection').val("");
-					alert("测点添加成功！");
 	 var viewData = '<tr id='+data.detectionPointId+'>'+
 					'<td class="project-title" style="width:60px">'+
 					'</td>'+
@@ -278,7 +278,10 @@
 		   		   	}else {
 		  			alert("数据异常");
 		   			}
-		   		}
+		   		},
+		   	  	error: function(){
+				    alert("抱歉！您为非管理员用户，删除测点请联系对应管理员！");
+			    }
 		   }); 	
 	});
 	
@@ -361,7 +364,10 @@
 								}else {
 									  alert("数据异常");
 								      }
-								}
+								},
+							error: function(){
+							    alert("抱歉！您为非管理员用户，删除测点请联系对应管理员！");
+						    }
 				}); 	
 	});
 	

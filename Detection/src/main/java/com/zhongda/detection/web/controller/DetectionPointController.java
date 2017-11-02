@@ -58,9 +58,15 @@ public class DetectionPointController {
 	@RequestMapping(value = "/updetaDetectionPoint", method = RequestMethod.POST)
 	@ResponseBody
 	public DetectionPoint updetaDetectionPoint(@RequestBody DetectionPoint detectionPoint){
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 		detectionPoint.setProjectId(projectService.selectByProjectName(detectionPoint.getProjectName()).getProjectId());
 		detectionPointService.updateByPrimaryKeySelective(detectionPoint);
 		return detectionPoint;
+		}else{
+			return null;
+		}
 	}
 	
 	/**

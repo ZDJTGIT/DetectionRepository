@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.zhongda.detection.web.model.Image;
+import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.ImageService;
 
 @RestController
@@ -68,8 +71,14 @@ public class ImgaeController {
 	@RequestMapping(value = "/updetaImage", method = RequestMethod.POST)
 	@ResponseBody
 	public Image updetaImage(@RequestBody Image image){
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 		imageService.updateByPrimaryKeySelective(image);
 		return image;
+		}else{
+			return null;
+		}
 	}
 	
 }

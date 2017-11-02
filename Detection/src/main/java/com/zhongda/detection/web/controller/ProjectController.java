@@ -403,8 +403,10 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/addDescription", method = RequestMethod.POST)
 	@ResponseBody
-	public DetectionPoint addDescription(
-			@RequestBody DetectionPoint detectionPoint) {
+	public DetectionPoint addDescription(@RequestBody DetectionPoint detectionPoint) {
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 		// 根据项目名查项目ID加到测点
 		detectionPoint.setProjectId((projectService
 				.selectByProjectName(detectionPoint.getProjectName()))
@@ -420,6 +422,9 @@ public class ProjectController {
 				.selectProjectStatusByDicId((detectionPoint
 						.getDetectionTypeId())));
 		return detectionPoint;
+		}else{
+			return null;
+		}
 	}
 
 	/**
@@ -428,6 +433,9 @@ public class ProjectController {
 	@RequestMapping(value = "/updetaThreshold", method = RequestMethod.POST)
 	@ResponseBody
 	public Threshold updetaThreshold(@RequestBody Threshold threshold) {
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 		//查询修改后的的阀值记录是否已存在
 		Threshold selectedThreshold = thresholdService
 				.selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
@@ -440,6 +448,10 @@ public class ProjectController {
 			threshold.setProjectTypeId(project.getProjectTypeId());
 			thresholdService.updateByPrimaryKeySelective(threshold);
 			return threshold;
+		}else{
+			threshold.setThresholdId(0);
+			return threshold;
+		}
 		}else{
 			return null;
 		}

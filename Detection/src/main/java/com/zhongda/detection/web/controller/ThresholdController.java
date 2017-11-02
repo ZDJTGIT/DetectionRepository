@@ -3,15 +3,20 @@ package com.zhongda.detection.web.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.model.Threshold;
+import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.SysDictionaryService;
 import com.zhongda.detection.web.service.ThresholdService;
@@ -64,6 +69,9 @@ public class ThresholdController {
 	@RequestMapping(value = "/addThresHold", method = RequestMethod.POST)
 	@ResponseBody
 	public Threshold addThresHold(@RequestBody Threshold threshold) {
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 		//查询新添加的阀值记录是否已存在
 		Threshold selectedThreshold = thresholdService
 				.selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
@@ -77,6 +85,10 @@ public class ThresholdController {
 			threshold.setProjectTypeId(project.getProjectTypeId());
 			thresholdService.insertSelective(threshold);
 			return threshold;
+		}else{
+			threshold.setThresholdId(0);
+			return threshold;
+		}
 		}else{
 			return null;
 		}
