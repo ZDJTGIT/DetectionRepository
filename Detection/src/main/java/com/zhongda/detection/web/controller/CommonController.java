@@ -99,17 +99,6 @@ public class CommonController {
 		return "home";
 	}
 
-	@RequestMapping("project/{projectTypeId}")
-	@ResponseBody
-	public List<Project> projectType(HttpServletRequest request,
-			@PathVariable("projectTypeId") Integer projectTypeId) {
-		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
-		List<Project> projectList = projectService
-				.selectProjectsByUserIdAndProjectType(user.getUserId(),
-						projectTypeId);
-		return projectList;
-	}
-
 	/*
 	 * @RequestMapping("sensor/{projectId}")
 	 * 
@@ -199,9 +188,20 @@ public class CommonController {
 		return "detectionPoint";
 	}
 
+
 	@RequestMapping("project_detail")
 	public String project_detail(HttpServletRequest request) {
 		return "project_detail";
+	}
+
+	
+	@RequestMapping("project_image/{project}")
+	public String image(Model model, @PathVariable("project") String project) {
+		System.out.println("-------------------------+++"+project);//曾经传了两次
+		String[] strings = project.split(":");
+		model.addAttribute("projectId", strings[0]);
+		model.addAttribute("projectName", strings[1]);
+		return "project_image";
 	}
 
 	@RequestMapping("thresHold/{project}")
@@ -209,6 +209,7 @@ public class CommonController {
 		String[] strings = project.split(":");
 		model.addAttribute("projectId", strings[0]);
 		model.addAttribute("projectName", strings[1]);
+		model.addAttribute("projectTypeId", strings[2]);
 		return "thresHold";
 	}
 
@@ -220,7 +221,7 @@ public class CommonController {
 		model.addAttribute("detectionName", strings[1]);
 		return "sensor_info";
 	}
-
+	
 	@RequestMapping("projects")
 	public String projects(HttpServletRequest request) {
 		return "projects";

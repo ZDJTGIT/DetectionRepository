@@ -46,4 +46,10 @@ public class SensorInfoServiceImpl implements SensorInfoService {
 		return sensorInfoMapper.updateByPrimaryKeySelective(record);
 	}
 
+	@Override
+	public SensorInfo selectBySensorIdAndSensorType(Integer sensorId,
+			String sensorType) {
+		return sensorInfoMapper.selectBySensorIdAndSensorType(sensorId, sensorType);
+	}
+
 }

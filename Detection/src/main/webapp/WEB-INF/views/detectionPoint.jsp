@@ -94,7 +94,7 @@
 						</div>
 						
 						<!-- Modal添加测点 -->
-						<div class="modal fade" id="myModal_addDetection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal fade" id="myModal_addDetection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 140px">
 						 <form id="form_addDetection">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
@@ -106,16 +106,21 @@
 						      
 								<label class="md_lable" for="">测点类型:</label>
 								<div id="selectDetectionType_div_addDetection">
-							    </div><br><br>
+									<select class="md_input" id="selectDetectionStatusAdd" name="selectDetectionStatusAdd">
+									</select>
+							    </div>
+							    
+							    <label class="md_lable" style="display:none" for="ProjectName_addDetection">项目名称:</label>
+								<input class="md_input" style="display:none" type="text" id="ProjectName_addDetection" name="ProjectName_addDetection"><br><br>
 							    
 								<label class="md_lable" for="DetectionName_addDetection">测点名称:</label>
 								<input class="md_input" type="text" id="DetectionName_addDetection" name="DetectionName_addDetection"><br><br>
 								
-								<label class="md_lable" for="DetectionLongitude_addDetection">测点经度:</label>
-								<input class="md_input" type="text" id="DetectionLongitude_addDetection" name="DetectionLongitude_addDetection"><br><br>
-								
-								<label class="md_lable" for="DetectionLatitude_addDetection">测点纬度:</label>
+								<label class="md_lable" for="DetectionLatitude_addDetection">测点经度:</label>
 								<input class="md_input" type="text" id="DetectionLatitude_addDetection" name="DetectionLatitude_addDetection"><br><br>
+								
+								<label class="md_lable" for="DetectionLongitude_addDetection">测点纬度:</label>
+								<input class="md_input" type="text" id="DetectionLongitude_addDetection" name="DetectionLongitude_addDetection"><br><br>
 								
 								<label class="md_lable" for="DetectionDescription_addDetection">测点描述:</label>
 								<textarea id="DetectionDescription_addDetection" class="data_project_tar data_content_input_5" rows="4"></textarea>
@@ -130,8 +135,8 @@
 						</div>
 						
 						<!-- Modal编辑测点信息 -->
-						<div class="modal fade" id="myModal_updetaDetection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						 <form id="form_UpdetaDetection">
+						<div class="modal fade" id="myModal_updetaDetection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 140px">
+						 <form id="form_updetaDetection">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
 						      <div class="modal-header">
@@ -142,9 +147,14 @@
 						      
 								<label class="md_lable" for="">测点类型:</label>
 								<div id="selectDetectionType_div_updetaDetection">
-							    </div><br><br>
+									<select class="md_input" id="selectDetectionStatusUpdeta" name="selectDetectionStatusUpdeta">
+									</select>
+							    </div>
 							    
 							    <input class="md_input" type="text" style="display:none" id="DetectionPointId_updetaDetection" name="DetectionPointId_updetaDetection">
+							    
+							    <label class="md_lable" style="display:none" for="ProjectName_updetaDetection">项目名称:</label>
+								<input class="md_input" style="display:none" type="text" id="ProjectName_uppdetaDetection" name="ProjectName_uppdetaDetection"><br><br>
 							    
 								<label class="md_lable" for="DetectionName_updetaDetection">测点名称:</label>
 								<input class="md_input" type="text" id="DetectionName_updetaDetection" name="DetectionName_updetaDetection"><br><br>
@@ -181,24 +191,27 @@
 	<script>
 	//确定添加响应事件-将测点信息存入数据库
 	$(".sureAddDetection_addDetection").click(function(){
+		if(!$('#form_addDetection').valid()){
+			return false;
+		}
 		var projectName = '${projectName}';
-		var detectionTypeId = $('#selectDetectionStatuss option:selected').val();//测点类型ID-
+		var detectionTypeId = $('#selectDetectionStatusAdd option:selected').val();//测点类型ID-
 		var detectionLatitude = $('#DetectionLongitude_addDetection').val();//测点经度.
 		var detectionLongitude = $('#DetectionLatitude_addDetection').val();//测点纬度.
 		var detectionName = $('#DetectionName_addDetection').val();//测点名.
 		var detectionDescription = $('#DetectionDescription_addDetection').val();//测点描述.
 		var jsonData = '{"projectName":"'
-					+ projectName
-					+ '","detectionTypeId":"'
-					+ detectionTypeId
-					+ '","detectionLatitude":"'
-					+ detectionLatitude
-					+ '","detectionLongitude":"'
-					+ detectionLongitude 
-					+ '","detectionName":"'
-					+ detectionName
-					+ '","detectionDescription":"'
-					+ detectionDescription + '"}';
+						+ projectName
+						+ '","detectionTypeId":"'
+						+ detectionTypeId
+						+ '","detectionLatitude":"'
+						+ detectionLatitude
+						+ '","detectionLongitude":"'
+						+ detectionLongitude 
+						+ '","detectionName":"'
+						+ detectionName
+						+ '","detectionDescription":"'
+						+ detectionDescription + '"}';
 	$.ajax({
 		   type:'post',
 		   url: 'rest/project/addDescription',
@@ -272,7 +285,6 @@
 	//修改测点信息，点击加载选中的测点的信息
 	    var b;
 	function updetaDetectionPoint(asd){
-		
 		//在输入框加载当前测点的相关信息
 		b = asd.parentNode.parentNode.rowIndex;
 		var detectionPointType = $("table tr:eq(" + b + ") td:eq(1)").text();//测点类型名称
@@ -288,22 +300,26 @@
 		$('#DetectionLatitude_updetaDetection').val(detectionLatitude);
 		$('#DetectionPointId_updetaDetection').val(detectionPointId);
 		
-		//默认选中当前测点的测点类型---(有BUG)
+		//默认选中当前测点的测点类型
 		$.ajax({
 	   		  type:'post',
 	   	  	  url: 'rest/detectionPoint/showSelectDetectionType',
 	   	  	  data: {detectionTypeId:detectionTypeId},
 	   	  	  contextType:"application/json",
 	   	  	  success: function(data){
-	   	  	    $("#selectDetectionStatus option[value='"+data.dicId+"']").attr("selected","selected");
+	   	  		$('#selectDetectionStatusUpdeta option').removeProp("selected");
+	   	  	    $("#selectDetectionStatusUpdeta option[value='"+data.dicId+"']").prop("selected",true);
 	   	  	  }
 		   });
 	}
 	
 	//确定修改，将修改的测点信息存入数据库
 	$('.sureAddDetection_updetaDetection').click(function(){
+		    if(!$('#form_updetaDetection').valid()){
+				return false;
+			} 
 		    var t = b;
-		    var detectionTypeId =  $('#selectDetectionStatus option:selected').val();//测点类型ID
+		    var detectionTypeId =  $('#selectDetectionStatusUpdeta option:selected').val();//测点类型ID
 		    var projectName = '${projectName}';
 		    var detectionLatitude = $('#DetectionLatitude_updetaDetection').val();
 		    var detectionLongitude = $('#DetectionLongitude_updetaDetection').val();
@@ -335,7 +351,7 @@
 				success: function(data){
 						if(data){
 							//修改测点信息成功后，实时刷新页面
-							//$("table tr:eq(" + t + ") td:eq(1)").text();//测点类型名称---
+							$("table tr:eq(" + t + ") td:eq(1)").text($('#selectDetectionStatusUpdeta option:selected').text());//测点类型名称
 							$("table tr:eq(" + t + ") td:eq(8)").text(detectionTypeId);//测点类型ID.
 							$("table tr:eq(" + t + ") td:eq(3)").text(detectionName);//测点名称.
 							$("table tr:eq(" + t + ") td:eq(4)").text(detectionDescription);//测点描述.
@@ -450,6 +466,9 @@
 			//项目类型ID,项目名称
 			var projectName = '${projectName}';
 			var projectTypeId = '${projectTypeId}';
+			
+			$('#ProjectName_addDetection').val(projectName);
+			
 			//加载添加弹出层的测点类型选项(公用新建当前项目下所有类型测点)
 			$.ajax({
 		    	type:'post',
@@ -458,16 +477,14 @@
 			  	  contextType:"application/json",
 			  	  success: function(data){
 			  		       if(data){
-			  		    	var string = '<select class="md_input" id="selectDetectionStatus" name="selectDetectionStatus">';
-			  		    	var strings = '<select class="md_input" id="selectDetectionStatuss" name="selectDetectionStatuss">';
+			  		    	var stringUpdeta = '';
+			  		    	var stringAdd = '';
 			  		    	$.each(data,function(idx,SysDictionary){
-			  		    	    string += '<option value="'+SysDictionary.dicId+'">'+ SysDictionary.itemName +'</option>';
-			  		    	    strings += '<option value="'+SysDictionary.dicId+'">'+ SysDictionary.itemName +'</option>';
+			  		    		stringUpdeta += '<option value="'+SysDictionary.dicId+'">'+ SysDictionary.itemName +'</option>';
+			  		    		stringAdd += '<option value="'+SysDictionary.dicId+'">'+ SysDictionary.itemName +'</option>';
 			  		    	});
-			  		       string += '</select>';
-			  		       strings += '</select>';
-			  		       $('#selectDetectionType_div_addDetection').append(strings);
-			  		       $('#selectDetectionType_div_updetaDetection').append(string);
+			  		       $('#selectDetectionStatusAdd').append(stringAdd);
+			  		       $('#selectDetectionStatusUpdeta').append(stringUpdeta);
 			  		       }else{
 			  		    	alert("数据异常");
 			  		       }

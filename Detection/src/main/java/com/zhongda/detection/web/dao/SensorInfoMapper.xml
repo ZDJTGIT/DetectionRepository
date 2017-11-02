@@ -18,6 +18,13 @@
     from sensor_info
     where sensor_info_id = #{sensorInfoId,jdbcType=INTEGER}
   </select>
+  <select id="selectBySensorIdAndSensorType" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+    from sensor_info
+    where sensor_id = #{0}
+    and sensor_type = #{1}
+  </select>
   <select id="selectByDetectionPointId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

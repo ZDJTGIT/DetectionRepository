@@ -57,4 +57,11 @@ public interface SysDictionaryMapper {
 	List<SysDictionary> selectSysDictionaryByAlarmTypeAndStatus(
 			@Param("alarmType") String alarmType,
 			@Param("alarmStatus") String alarmStatus);
+	
+	/**
+	 * 根据typecode查字典表所有字段
+	 * @param typeCode
+	 * @return
+	 */
+	List<SysDictionary> selectSysDictionaryByTypeCode(Integer typeCode);
 }

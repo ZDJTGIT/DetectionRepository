@@ -11,6 +11,7 @@
     <result column="min_threshold_value" jdbcType="DOUBLE" property="minThresholdValue" />
     <result column="max_threshold_value" jdbcType="DOUBLE" property="maxThresholdValue" />
     <result column="detection_type_name" jdbcType="VARCHAR" property="detectionTypeName" />
+    <result column="thresHold_type_name" jdbcType="VARCHAR" property="thresHoldTypeName" />
   </resultMap>
   <sql id="Base_Column_List">
     threshold_id, user_id, project_id, project_type_id, detection_type_id, threshold_type_id, 
@@ -22,10 +23,19 @@
     from threshold
     where threshold_id = #{thresholdId,jdbcType=INTEGER}
   </select>
+  <select id="selectThresholdByProjectIdDetectionTypeIdThresholdTypeId" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from threshold 
+  	where project_id = #{0}
+  	and detection_type_id = #{1} 
+  	and threshold_type_id = #{2}
+  </select>
   <select id="selectByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select t.*,sd.item_name 'detection_type_name' 
-    from threshold t, sys_dictionary sd 
+    select t.*,sd.item_name 'detection_type_name',sds.item_name 'thresHold_type_name' 
+    from threshold t, sys_dictionary sd ,sys_dictionary sds
     where t.detection_type_id=sd.dic_id  
+	and t.threshold_type_id=sds.dic_id
     and t.project_id = #{projectId,jdbcType=INTEGER}
   </select>
   <select id="selectByProjectIdAndDetectionTypeId" resultMap="BaseResultMap">

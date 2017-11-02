@@ -9,6 +9,7 @@
     <result column="detection_type_id" jdbcType="INTEGER" property="detectionTypeId" />
     <result column="heat_image_url" jdbcType="VARCHAR" property="heatImageUrl" />
     <result column="physical_image_url" jdbcType="VARCHAR" property="physicalImageUrl" />
+    <result column="detection_Type_Name" jdbcType="VARCHAR" property="detectionTypeName" />
   </resultMap>
   <sql id="Base_Column_List">
     image_id, user_id, project_id, project_type_id, detection_type_id, heat_image_url, 
@@ -28,6 +29,12 @@
 	WHERE
 		project_id = #{projectId,jdbcType=INTEGER}
 	AND detection_type_id = #{detectionTypeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select i.*,sd.item_name 'detectionTypeName' 
+  	from image i,sys_dictionary sd 
+	where i.detection_type_id=sd.dic_id
+	and project_id = #{projectId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from image

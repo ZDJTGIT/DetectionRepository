@@ -73,4 +73,15 @@ public interface ThresholdMapper {
 	List<Threshold> selectThresholdByTwoId(
 			@Param(value = "projectId") Integer projectId,
 			@Param(value = "detectionTypeId") Integer detectionTypeId);
+
+	/**
+	 * 做校验用-通过项目ID，测点类型ID，阀值类型ID查询唯一的阀值记录
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param thresholdTypeId
+	 * @return
+	 */
+	Threshold selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
+			Integer projectId, Integer detectionTypeId, Integer thresholdTypeId);
 }

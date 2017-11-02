@@ -318,12 +318,10 @@
 	<script src="assets/js/bootstrap.min.js"></script> -->
 	<!-- <script src="assets/js/content.js"></script> -->
 	 <!-- jQuery Validation plugin javascript-->
-    <script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="assets/js/plugins/validate/messages_zh.min.js"></script>
-
-    <script src="assets/js/demo/form-validate-demo.min.js"></script>
-	
 	<script src="assets/js/customerValidate.js"></script>
+	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="assets/js/plugins/validate/messages_zh.min.js"></script>
+    <script src="assets/js/demo/form-validate-demo.min.js"></script>
 	<!-- Switchery -->
     <script src="assets/js/plugins/switchery/switchery.js"></script>
 	<!-- iCheck -->

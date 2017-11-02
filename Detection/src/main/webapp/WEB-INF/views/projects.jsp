@@ -22,7 +22,17 @@
 <link rel="shortcut icon" href="favicon.ico">
 <link href="assets/css/plugins/table/basic.css" rel="stylesheet">
 <link href="assets/css/plugins/table/user.css" rel="stylesheet">
-<link rel="stylesheet" href="assets/js/plugins/layui/css/layui.css" media="all"></link>
+<link href="assets/css/plugins/layuis/layui.css" rel="stylesheet" media="all">
+<style>
+#trhight{
+	height:39px;
+	overflow:hidden;
+}
+
+#trhight:hover{
+	height: 100%;
+}
+</style>
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInUp">
@@ -146,37 +156,6 @@
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 						        <button type="button" class="btn btn-primary sureAddProject_updetaProject">提交</button>
-						      </div>
-						    </div>
-						  </div>
-						 </form>
-						</div>
-						
-						<!-- Modal修改-下一步-编辑修改测点 -->
-						<div class="modal fade" id="myModal_updetaDetection" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						 <form id="form_updetaDetection">
-						  <div class="modal-dialog" role="document">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="myModalLabel">修改项目测点</h4>
-						      </div>
-						      <div class="modal-body">
-								<label class="md_lable" for="">测点类型:</label>
-								<div id="selectDetection_div_updetaDetection">
-							    </div><br><br>
-								<label class="md_lable" for="detectionName_updeta">测点名称:</label>
-								<input class="md_input" type="text" id="detectionName_updeta" name="detectionName_updeta"><br><br>
-								<label class="md_lable" for="detectionLongitude_updeta">测点经度:</label>
-								<input class="md_input" type="text" id="detectionLongitude_updeta" name="detectionLongitude_updeta"><br><br>
-								<label class="md_lable" for="detectionLatitude_updeta">测点纬度:</label>
-								<input class="md_input" type="text" id="detectionLatitude_updeta" name="detectionLatitude_updeta"><br>
-								<label class="md_lable" for="">测点描述:</label>
-								<textarea id="detectionDescription_updeta" class="data_project_tar data_content_input_5" rows="4"></textarea>
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						        <button type="button" id="sureUpdetaDetection" name="sureUpdetaDetection" class="btn btn-primary">提交</button>
 						      </div>
 						    </div>
 						  </div>
@@ -341,7 +320,7 @@
 				simpleLoad(btn, true);
 				simpleLoad(btn, false)
 			})
-			
+ 
 	    	//新建项目时加载用户信息
 	    	//用户信息暂且使用全部加载-之后改成按用户类型查找
 	    	//超级管理员和管理员不加载，不能创建自己的项目
@@ -483,17 +462,27 @@
 		 function updetaProject(s){
 			   b = s.parentNode.parentNode.rowIndex;
 	    	   //获取选中的项目信息加载到编辑框
-	    	   var projectId = $("table tr:eq(" + b + ") td:eq(0)").text();//项目ID
-	    	   var projectTypeId = $("table tr:eq(" + b + ") td:eq(1)").text();//项目类型ID
-	    	   var projectLongitude = $("table tr:eq(" + b + ") td:eq(2)").text();//经度
-	    	   var projectLatitude = $("table tr:eq(" + b + ") td:eq(3)").text();//纬度
-	    	   var projectAddress = $("table tr:eq(" + b + ") td:eq(4)").text();//项目地址_String
+	    	   var projectId = $("table tr:eq(" + b + ") td:eq(0)").text();//项目ID--6
+	    	   var projectTypeId = $("table tr:eq(" + b + ") td:eq(1)").text();//项目类型ID--10
+	    	   var projectLongitude = $("table tr:eq(" + b + ") td:eq(2)").text();//经度--4
+	    	   var projectLatitude = $("table tr:eq(" + b + ") td:eq(3)").text();//纬度--5
+	    	   var projectAddress = $("table tr:eq(" + b + ") td:eq(4)").text();//项目地址_String--1
 	    	   var projectStatusString =  $("table tr:eq(" + b + ") td:eq(5)").text();//项目状态
-	    	   var projectName = $("table tr:eq(" + b + ") td:eq(6)").text();//项目名
-	    	   var projectDescription = $("table tr:eq(" + b + ") td:eq(9)").text();//项目描述
-	    	   var projectStatus =  $("table tr:eq(" + b + ") td:eq(10)").text();//项目状态_int
-	    	   var projectBeginTime =  $("table tr:eq(" + b + ") td:eq(11)").text();//开始时间
-	    	   var projectEndTime =  $("table tr:eq(" + b + ") td:eq(12)").text();//结束时间
+	    	   var projectName = $("table tr:eq(" + b + ") td:eq(6)").text();//项目名--2
+	    	   var projectDescription = $("table tr:eq(" + b + ") td:eq(9)").text();//项目描述--3
+	    	   var projectStatus =  $("table tr:eq(" + b + ") td:eq(10)").text();//项目状态_int--9
+	    	   var projectBeginTime =  $("table tr:eq(" + b + ") td:eq(11)").text();//开始时间--7
+	    	   var projectEndTime =  $("table tr:eq(" + b + ") td:eq(12)").text();//结束时间--8
+	    /* 	   alert(projectAddress);
+	    	   alert(projectName);
+	    	   alert(projectDescription);
+	    	   alert(projectLongitude);
+	    	   alert(projectLatitude);
+	    	   alert(projectId);
+	    	   alert(projectBeginTime);
+	    	   alert(projectEndTime);
+	    	   alert(projectStatus);
+	    	   alert(projectTypeId); */
 			   $('#projectAddress_updetaProject').val(projectAddress);
 	       	   $('#projectName_updetaProject').val(projectName);
 	       	   $('#projectDescription_updetaProject').val(projectDescription);
@@ -510,8 +499,8 @@
 		   	  	  data: {projectId:projectId,projectTypeId:projectTypeId},
 		   	  	  contextType:"application/json",
 		   	  	  success: function(data){
-		   	  	    $("#selectProjectType_selected option[value='"+data.sysDictionary.dicId+"']").attr("selected","selected");
-		   	    	$("#selectUserType_selected option[value='"+data.userId+"']").attr("selected","selected");
+		   	  	    $("#selectProjectType_selected option[value='"+data.sysDictionary.dicId+"']").prop("selected",true);
+		   	    	$("#selectUserType_selected option[value='"+data.userId+"']").prop("selected",true);
 		   	  	  }
 			   });
 	       	   /*$.ajax({
@@ -678,7 +667,7 @@
 	  		    			percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
 	  		    		}
 	  		    		
-					    var viewData = '<tr id="project_'+ data.projectId +'">'+
+					    var viewData = '<tr id="project_'+ data.projectId +'" style="height:100px">'+
 				    	  		    	//'<td class="project-status" style="width:120px">'+
 										//'<a href="project_detail.html">' + item.sysDictionary.itemName+'</a><br />'+
 									    //'</td>'+
@@ -713,9 +702,9 @@
 												'<div style="width: '+percentage+'%;" class="progress-bar"></div>'+
 											'</div>'+
 										'</td>'+
-										'<td class="project-title" style="width:260px">'+
+										'<td class="project-title" style="width:300px">'+
 											'<a href="javascript:;">项目描述</a><br />'+
-											'<small>' + data.projectDescription + '</small>'+
+											'<p id="trhight">' + item.projectDescription + '</p>'+
 										'</td>'+
 										'<td class="project-status" style="display:none">'+
 											'<span class="label label-primary">' + data.projectStatus + '</span>'+
@@ -726,22 +715,30 @@
 									    '<td class="project-status" style="display:none">'+
 											'<span class="label label-primary">' + data.projectEndTime + '</span>'+
 								    	'</td>'+
+								    	'<td class="project-title" style="width:20px">'+
+										'</td>'+
 										'<td class="project-title" style="width:140px">'+
-										'<a href="javascript:;">项目告警信息(0)</a><br />'+
+											'<a href="javascript:;">项目告警信息(0)</a><br />'+
 										'</td>'+
 										'<td class="project-title" style="width:20px">'+
 										'</td>'+
 										
-										'<td class="project-status" style="width:140px">'+
+										'<td class="project-status" style="width:80px">'+
 										//打开页面即传item.pojectId过去
-										'<a href="rest/detectionPoint/'+data.projectTypeId+':'+data.projectName+'" class="J_menuItem" name="测点信息">'+
-											 '测点信息 '+
+										'<a href="rest/detectionPoint/'+data.projectTypeId+':'+data.projectName+'" class="J_menuItem" name="测点">'+
+											 '测点'+
 										'</a>'+
 										'</td>'+
-										'<td class="project-status" style="width:150px">'+
-										//打开页面即传item.pojectId过去
-											'<a href="rest/thresHold/'+data.projectId+':'+data.projectName+'" class="J_menuItem" name="预值和图片">'+
-												'阀值和图片 '+
+										'<td class="project-status" style="width:80px">'+
+										//打开页面即传data.pojectId过去
+											'<a href="rest/thresHold/'+data.projectId+':'+data.projectName+'" class="J_menuItem" name="阀值">'+
+												'阀值 '+
+											'</a>'+
+										'</td>'+
+										'<td class="project-status" style="width:80px">'+
+										//打开页面即传data.pojectId过去
+											'<a href="rest/image/'+data.projectId+':'+data.projectName+'" class="J_menuItem" name="图片">'+
+												'图片 '+
 											'</a>'+
 										'</td>'+
 										'<td class="project-actions">'+
@@ -846,7 +843,7 @@
 							data : JSON.stringify(jsonData),
 							success : function(data) {
 								 if(data){
-					  	  		    var  asthtml = '';
+					  	  		    var asthtml = '';
 					  	  		    var reStr = '<td class="project-status" style="display:none"><span class="label label-primary">';
 					  	  		   	$.each(data.projectList,function(idx,item){
 					  	  		    	var nowTime = new Date().getTime();
@@ -860,8 +857,7 @@
 					  	  		    	}else{
 					  	  		    		percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
 					  	  		    	}
-					  	  		    		
-					  	  		    	asthtml += '<tr id="project_'+ item.projectId +'">'+
+					  	  		    	/*  asthtml += '<tr id="project_'+ item.projectId +'" style="height:200px>'+
 					  	  		    				reStr + item.projectId + '</span></td>'+
 					  	  		    				reStr + item.projectTypeId + '</span></td>'+
 					  	  		    				reStr + item.projectLongitude + '</span></td>'+
@@ -894,13 +890,17 @@
 														'<a href="javascript:;">告警次数(<i class="fa fa-bell"></i>'+ item.alarmCount +')</a><br />'+
 													'</td>'+
 													'<td class="project-title" style="width:20px"></td>'+
-													'<td class="project-status" style="width:140px">'+
+													'<td class="project-status" style="width:80px">'+
 														//打开页面即传item.projectName过去
-														'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="测点信息">测点信息</a>'+
+														'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="测点">测点</a>'+
 													'</td>'+
-													'<td class="project-status" style="width:150px">'+
+													'<td class="project-status" style="width:80px">'+
 														//打开页面即传item.pojectId过去
-														'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+'" class="J_menuItem" name="预值和图片">阀值和图片 </a>'+
+														'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+':'+item.projectTypeId+'" class="J_menuItem" name="阀值">阀值 </a>'+
+													'</td>'+
+													'<td class="project-status" style="width:80px">'+
+														//打开页面即传item.pojectId过去
+														'<a href="rest/project_image/'+item.projectId+':'+item.projectName+'" class="J_menuItem" name="图片">图片 </a>'+
 													'</td>'+
 													'<td class="project-actions">'+
 														'<a href="javascript:;" class="J_menuItem" onclick="updetaProject(this)" data-toggle="modal" data-target="#myModal_updetaProject">'+
@@ -910,8 +910,85 @@
 															'<i class="fa fa-times-circle"></i> 删除 '+
 														'</a>'+
 													'</td>'+
-												'</tr>';
-					  	  		    });
+												'</tr>';  */
+												
+												 asthtml += '<tr id="project_'+ item.projectId +'" style="height:100px">'+
+									    	  		    	//'<td class="project-status" style="width:120px">'+
+															//'<a href="project_detail.html">' + item.sysDictionary.itemName+'</a><br />'+
+														    //'</td>'+
+														    '<td class="project-status" style="display:none">'+
+																'<span class="label label-primary">' + item.projectId + '</span>'+
+															'</td>'+
+															'<td class="project-status" style="display:none">'+
+																'<span class="label label-primary">' + item.projectTypeId + '</span>'+
+															'</td>'+
+															'<td class="project-status" style="display:none">'+
+																'<span class="label label-primary">' + item.projectLongitude + '</span>'+
+															'</td>'+
+															'<td class="project-status" style="display:none">'+
+																'<span class="label label-primary">' + item.projectLatitude + '</span>'+
+															'</td>'+
+															'<td class="project-status" style="display:none">'+
+																'<span class="label label-primary">' + item.projectAddress + '</span>'+
+															'</td>'+
+															'<td class="project-status" style="width:80px">'+
+																'<span class="label label-primary">' + item.projectStatusString + '</span>'+
+															'</td>'+
+															'<td class="project-title" style="width:150px">'+
+																'<a href="javascript:;">' + item.projectName + '</a><br />'+
+															'</td>'+
+															'<td class="project-title" style="width:200px">'+
+																'<a href="javascript:;">创建时间</a><br />'+
+																'<small>' + item.projectBeginTime + '</small>'+
+													    	'</td>'+
+															'<td class="project-completion" style="width:320px">'+
+																'<small>当前进度： '+percentage+'%</small>'+
+																'<div class="progress progress-mini">'+
+																	'<div style="width: '+percentage+'%;" class="progress-bar"></div>'+
+																'</div>'+
+															'</td>'+
+															'<td class="project-title" style="width:300px">'+
+																'<a href="javascript:;">项目描述</a><br />'+
+																'<p id="trhight">' + item.projectDescription + '</p>'+
+															'</td>'+
+															'<td class="project-status" style="display:none">'+
+																'<span class="label label-primary">' + item.projectStatus + '</span>'+
+													    	'</td>'+
+													    	'<td class="project-status" style="display:none">'+
+																'<span class="label label-primary">' + item.projectBeginTime + '</span>'+
+														    '</td>'+
+														    '<td class="project-status" style="display:none">'+
+																'<span class="label label-primary">' + item.projectEndTime + '</span>'+
+													    	'</td>'+
+													    	'<td class="project-title" style="width:20px">'+
+															'</td>'+
+															'<td class="project-title" style="width:140px">'+
+																'<a href="javascript:;">项目告警信息(0)</a><br />'+
+															'</td>'+
+															'<td class="project-title" style="width:20px">'+
+															'</td>'+
+															'<td class="project-status" style="width:80px">'+
+															//打开页面即传item.projectName过去
+																'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="测点">测点</a>'+
+															'</td>'+
+															'<td class="project-status" style="width:80px">'+
+																//打开页面即传item.pojectId过去
+																'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+':'+item.projectTypeId+'" class="J_menuItem" name="阀值">阀值 </a>'+
+															'</td>'+
+															'<td class="project-status" style="width:80px">'+
+																//打开页面即传item.pojectId过去
+																'<a href="rest/project_image/'+item.projectId+':'+item.projectName+'" class="J_menuItem" name="图片">图片 </a>'+
+															'</td>'+
+																'<td class="project-actions">'+
+															    '<a href="javascript:;" class="J_menuItem" onclick="updetaProject(this)" data-toggle="modal" data-target="#myModal_updetaProject">'+
+																	'<i class="fa fa-pencil"></i> 修改 '+
+																'</a>'+
+																'<a href="javascript:;" class="J_menuItem" onclick="deleteProject('+ item.projectId +')">'+
+																	'<i class="fa fa-times-circle"></i> 删除 '+
+															    '</a>'+
+															'</td>'+
+														'</tr>'; 
+					  	  		    					});
 					  	  		    $('#hover_table').html(asthtml); 		
 					  	  		    if(loadLaypage){ //如果该参数有值
 										loadLaypage(data.total, jsonData); //有查询条件时请求数据，需重新初始化分页组件
@@ -927,7 +1004,8 @@
 							}
 						});
 				 }
-
+				 
+			
 				 //初始化分页组件函数
 				 function loadLaypage(dataTotal, jsonData){
 					 var laypage = layui.laypage;

@@ -38,17 +38,6 @@
 						</div>
 					</div>
 					<div class="ibox-content">
-						<div class="row m-b-sm m-t-sm">
-							<div class="col-md-1">
-								<button type="button" id="loading-example-btn" class="btn btn-white btn-sm">
-									<i class="fa fa-refresh"></i> 刷新
-								</button>
-							</div>
-							<div class="col-md-11">
-								<div class="input-group">
-								</div>
-							</div>
-						</div>
 						<div class="project-list">
 							<table class="table table-hover" id="sensorInfo_table">
 								<tbody id="sensorInfo_tbody">
@@ -89,7 +78,7 @@
 						</div>
 						
 						<!-- Modal添加传感器 -->
-						<div class="modal fade" id="myModal_addSensorInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal fade" id="myModal_addSensorInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 160px">
 						 <form id="form_addSensorInfo">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
@@ -99,16 +88,16 @@
 						      </div>
 						      <div class="modal-body">
 							    
-							    <label class="md_lable" for="sensorId_addSensorInfo">传感器ID:</label>
-								<input class="md_input" type="text" id="sensorId_addSensorInfo" name="sensorId_addSensorInfo"><br><br>
-							    
-								<label class="md_lable" for="sensorType_addSensorInfo">传感器类型:</label>
+							    <label class="md_lable" for="sensorType_addSensorInfo">传感器类型:</label>&nbsp
 								<input class="md_input" type="text" id="sensorType_addSensorInfo" name="sensorType_addSensorInfo"><br><br>
 								
-								<label class="md_lable" for="sensorModel_addSensorInfo">传感器模型:</label>
+							    <label class="md_lable" for="sensorId_addSensorInfo">传感器&nbspI&nbsp&nbspD:</label>&nbsp
+								<input class="md_input" type="text" id="sensorId_addSensorInfo" name="sensorId_addSensorInfo"><br><br>
+								
+								<label class="md_lable" for="sensorModel_addSensorInfo">传感器模型:</label>&nbsp
 								<input class="md_input" type="text" id="sensorModel_addSensorInfo" name="sensorModel_addSensorInfo"><br><br>
 								
-								<label class="md_lable" for="sensorDepth_addSensorInfo">传感器深度:</label>
+								<label class="md_lable" for="sensorDepth_addSensorInfo">传感器深度:</label>&nbsp
 								<input class="md_input" type="text" id="sensorDepth_addSensorInfo" name="sensorDepth_addSensorInfo"><br>
 						      </div>
 						      <div class="modal-footer">
@@ -121,7 +110,7 @@
 						</div>
 						
 						<!-- Modal编辑传感器信息 -->
-						<div class="modal fade" id="myModal_updetaSensorInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal fade" id="myModal_updetaSensorInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 160px">
 						 <form id="form_updetaSensorInfo">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
@@ -134,12 +123,12 @@
 						      
 							    <input class="md_input" type="text" style="display:none" id="detectionPointId_updetaSensorInfo" name="detectionPointId_updetaSensorInfo">
 							    
+							    <label class="md_lable" for="sensorType_updetaSensorInfo">传感器类型:</label>&nbsp
+								<input class="md_input" type="text" id="sensorType_updetaSensorInfo" name="sensorType_updetaSensorInfo"><br><br>
+							    
 							    <label class="md_lable" for="sensorId_updetaSensorInfo">传感器&nbspI&nbsp&nbspD:</label>&nbsp
 								<input class="md_input" type="text" id="sensorId_updetaSensorInfo" name="sensorId_updetaSensorInfo"><br><br>
 							    
-								<label class="md_lable" for="sensorType_updetaSensorInfo">传感器类型:</label>&nbsp
-								<input class="md_input" type="text" id="sensorType_updetaSensorInfo" name="sensorType_updetaSensorInfo"><br><br>
-								
 								<label class="md_lable" for="sensorModel_updetaSensorInfo">传感器模型:</label>&nbsp
 								<input class="md_input" type="text" id="sensorModel_updetaSensorInfo" name="sensorModel_updetaSensorInfo"><br><br>
 								
@@ -170,6 +159,9 @@
 	
 	//确定添加传感器，将新添加传感器数据存入数据库
 	$('.sureAddSensorInfo_addSensorInfo').click(function(){
+		if(!$('#form_addSensorInfo').valid()){
+			return false;
+		}
 		var detectionPointId = '${detectionPointId}';
 		var sensorId = $('#sensorId_addSensorInfo').val();
 		var sensorType = $('#sensorType_addSensorInfo').val();
@@ -269,6 +261,9 @@
 	
 	//点击提交，确定修改，修改的数据库存入数据库
 	$('.sureUpdetaSensorInfo_updetaSensorInfo').click(function(){
+		if(!$('#form_updetaSensorInfo').valid()){
+			return false;
+		}
 		var t = b;
 		var sensorType = $('#sensorType_updetaSensorInfo').val();
 		var sensorId =$('#sensorId_updetaSensorInfo').val();

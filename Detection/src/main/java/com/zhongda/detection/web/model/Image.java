@@ -14,8 +14,19 @@ public class Image {
     private String heatImageUrl;
 
     private String physicalImageUrl;
+    
+    //测点类型名称，缓存数据库数据
+    private String detectionTypeName;
 
-    public Integer getImageId() {
+    public String getDetectionTypeName() {
+		return detectionTypeName;
+	}
+
+	public void setDetectionTypeName(String detectionTypeName) {
+		this.detectionTypeName = detectionTypeName;
+	}
+
+	public Integer getImageId() {
         return imageId;
     }
 

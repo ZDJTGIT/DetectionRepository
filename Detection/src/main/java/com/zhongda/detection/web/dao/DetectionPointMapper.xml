@@ -53,9 +53,10 @@
   </select>
   <select id="selectByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
-    from detection_point
-    where project_id = #{projectId,jdbcType=INTEGER}
+    dp.*, sd.item_name 'item_name'
+    from detection_point dp, sys_dictionary sd
+    where project_id = #{projectId,jdbcType=INTEGER} 
+    and detection_type_id = dic_id
   </select>
   <select id="selectByProjectNameAndKeyWord" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 

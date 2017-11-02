@@ -51,4 +51,12 @@ public interface SysDictionaryService {
 	 */
 	List<SysDictionary> selectSysDictionaryByAlarmTypeAndStatus(
 			String alarmType, String alarmStatus);
+
+	/**
+	 * 根据typecode查字典表所有字段
+	 * @param typeCode
+	 * @return
+	 */
+	List<SysDictionary> selectSysDictionaryByTypeCode(Integer typeCode);
+
 }

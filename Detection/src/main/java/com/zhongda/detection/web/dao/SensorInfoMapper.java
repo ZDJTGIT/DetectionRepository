@@ -42,8 +42,16 @@ public interface SensorInfoMapper {
      */
     List<SensorInfo> selectByDetectionPointId(Integer detectionPointId);
     
+    
     SensorInfo selectByPrimaryKey(Integer sensorInfoId);
 
+    /**
+     * 根据传感器编号查询传感器
+     * @param sensorId
+     * @return
+     */
+    SensorInfo selectBySensorIdAndSensorType(Integer sensorId, String sensorType);
+    
     /**
      * 根据传感器ID修改传感器信息
      * @param record

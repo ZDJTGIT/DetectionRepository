@@ -73,5 +73,16 @@ public interface ThresholdService {
 	 */
 	List<Threshold> selectThresholdByTwoId(Integer projectId,
 			Integer detectionTypeId);
+	
+	/**
+	 * 做校验用-通过项目ID，测点类型ID，阀值类型ID查询唯一的阀值记录
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param thresholdTypeId
+	 * @return
+	 */
+	Threshold selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
+			Integer projectId, Integer detectionTypeId, Integer thresholdTypeId);
 
 }

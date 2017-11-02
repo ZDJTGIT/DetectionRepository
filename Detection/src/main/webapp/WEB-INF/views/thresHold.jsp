@@ -33,20 +33,15 @@
 					<div class="ibox-title">
 					<!-- 接受项目页面传过来的projectId查找数据展示 -->
 						<h5>${projectName}</h5>
-						<!--div class="ibox-tools">
-							<button type="button" class="btn btn-primary btn-xs btn-lg" data-toggle="modal" data-target="#myModal_addDetection">
-						 		添加测点
+						<div class="ibox-tools">
+							<button type="button" class="btn btn-primary btn-xs btn-lg" data-toggle="modal" data-target="#myModal_addThresHold">
+						 		添加阀值
 							</button>
-						</div-->
+						</div>
 					</div>
 					<div class="ibox-content">
-						<div class="row m-b-sm m-t-sm">
-							<div class="col-md-1">
-								<button type="button" id="loading-example-btn" class="btn btn-white btn-sm">
-									<i class="fa fa-refresh"></i> 刷新
-								</button>
-							</div>
-							<!--div class="col-md-11">
+						<!--div class="row m-b-sm m-t-sm">
+							<div class="col-md-11">
 								<div class="input-group">
 									<input type="text" id="searchProject" name="searchProject" placeholder="请输入测点名称" class="input-sm form-control"> 
 									<span class="input-group-btn">
@@ -55,30 +50,33 @@
 										</button>
 									</span>
 								</div>
-							</div-->
-						</div>
+							</div>
+						</div-->
 						<div class="project-list">
-							<table class="table table-hover" id="detection_table">
-								<tbody id="detection_tbody">
+							<table class="table table-hover" id="thresHold_table">
+								<tbody id="thresHold_tbody">
 								<!-- 表头 -->
 									<tr>
 										<td class="project-title" style="width:160px">
-											测点类型
+											<a href="javascript:;">测点类型</a>
 										</td>
 										<td class="project-title" style="width:160px">
-											最小警戒值
+											<a href="javascript:;">阀值类型</a>
 										</td>
 										<td class="project-title" style="width:160px">
-											最大警戒值
+											<a href="javascript:;">最小警戒值</a>
 										</td>
-										<td class="project-title" style="width:500px">
+										<td class="project-title" style="width:160px">
+											<a href="javascript:;">最大警戒值</a>
+										</td>
+										<!--td class="project-title" style="width:500px">
 											热点图
 										</td>
 										<td class="project-title" style="width:500px">
 											物理图
-										</td>
+										</td-->
 										<td class="project-title" style="width:160px">
-											操作栏
+											<a href="javascript:;">操作栏</a>
 										</td>
 										<td class="project-actions">
 									    </td>
@@ -87,41 +85,78 @@
 							</table>
 						</div>
 						
-						<!-- Modal修改预值和图片 -->
-						<div class="modal fade" id="myModal_updetaThresHold" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-						 <form id="form_updetaThresHold">
+						<!-- Modal添加阀值 -->
+						<div class="modal fade" id="myModal_addThresHold" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 160px">
+						 <form id="form_addThresHold">
 						  <div class="modal-dialog" role="document">
-						    <div class="modal-content">
+						    <div class="modal-content" style="">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="myModalLabel_updetaDetection">修改阀值和图片</h4>
+						        <h4 class="modal-title" id="myModalLabel_addThresHold">添加阀值</h4>
 						      </div>
 						      <div class="modal-body">
-						        <label class="md_lable" for="detectionTypeName">测点类型:</label>
-						        <input class="md_input" type="text" readonly id="detectionTypeName" name="detectionTypeName"><br><br>
-						        <label class="md_lable" for="maxThresholdValue">最大警戒值:</label>
-								<input class="md_input" type="text" id="maxThresholdValue" name="maxThresholdValue"><br><br>
-								<label class="md_lable" for="minThresholdValue">最小警戒值:</label>
-								<input class="md_input" type="text" id="minThresholdValue" name="minThresholdValue"><br><br>
-								
-								<label class="md_lable" for="">添加热点图:</label>
-							    <div class="layui-upload-list">
-									<img class="layui-upload-img" id="demo1" src="assets/img/test2.png">
-									<p id="demoText1"></p>
-							    </div>
-								<button type="button" class="layui-btn" id="test1">上传</button><br><br>  
-								
-							    <label class="md_lable" for="">添加物理图:</label>
-							    <div class="layui-upload-list">
-									<img class="layui-upload-img" id="demo2" src="assets/img/test2.png">
-									<p id="demoText2"></p>
-							    </div>
-								<button type="button" class="layui-btn" id="test2">上传</button>  
-								<input class="md_input" style="display:none" type="text" id="detectionTypeId" name="detectionTypeId"><br><br>
+						      
+						        <label class="md_lable" for="">测点类型:</label>
+								<div id="selectDetectionType_div_addThresHold">
+									<select class="md_input" id="selectDetectionType_addThresHold" name="selectDetectionStatus_addThresHold">
+									</select>
+							    </div><br><br>
+							    
+							    <label class="md_lable" for="">阀值类型:</label>
+								<div id="selectThresHoldType_div_addThresHold">
+									<select class="md_input" id="selectThresHoldType_addThresHold" name="selectThresHoldType_addThresHold">
+									</select>
+							    </div><br><br>
+						      	
+						        <label class="md_lable" for="maxThresholdValue_add">最大警戒值:</label>
+								<input class="md_input" type="text" id="maxThresholdValue_add" name="maxThresholdValue_add"><br><br>
+								<label class="md_lable" for="minThresholdValue_add">最小警戒值:</label>
+								<input class="md_input" type="text" id="minThresholdValue_add" name="minThresholdValue_add"><br><br>
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						        <button type="button" class="btn btn-primary sureAddDetection_updetaThresHold">提交</button>
+						        <button type="button" class="btn btn-primary sureAddThresHold_addThresHold">提交</button>
+						      </div>
+						    </div>
+						  </div>
+						 </form>
+						</div>
+						
+						<!-- Modal修改阀值 -->
+						<div class="modal fade" id="myModal_updetaThresHold" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 160px">
+						 <form id="form_updetaThresHold">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content" style="">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title" id="myModalLabel_updetaThresHold">修改阀值</h4>
+						      </div>
+						      <div class="modal-body">
+						      
+						        <label class="md_lable" for="">测点类型:</label>
+								<div id="selectDetectionType_div_updetaThresHold">
+									<select class="md_input" id="selectDetectionType_updetaThresHold" name="selectDetectionStatus_updetaThresHold">
+									</select>
+							    </div><br><br>
+							    
+							    <label class="md_lable" for="">阀值类型:</label>
+								<div id="selectThresHoldType_div_addThresHold">
+									<select class="md_input" id="selectThresHoldType_updetaThresHold" name="selectThresHoldType_updetaThresHold">
+									</select>
+							    </div><br><br>
+							     
+							    <input class="md_input" type="text" style="display:none" id="thresHoldId_updetaThresHold" name="thresHoldId_updetaThresHold">
+							    <input class="md_input" type="text" style="display:none" id="detectionTypeId_updetaThresHold" name="detectionTypeId_updetaThresHold">
+							    <input class="md_input" type="text" style="display:none" id="thresholdTypeId_updetaThresHold" name="thresholdTypeId_updetaThresHold">
+						       
+						        <label class="md_lable" for="maxThresholdValue_updeta">最大警戒值:</label>
+								<input class="md_input" type="text" id="maxThresholdValue_updeta" name="maxThresholdValue_updeta"><br><br>
+								<label class="md_lable" for="minThresholdValue_updeta">最小警戒值:</label>
+								<input class="md_input" type="text" id="minThresholdValue_updeta" name="minThresholdValue_updeta"><br><br>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        <button type="button" class="btn btn-primary sureUpdetaThresHold_UpdetaThresHold">提交</button>
 						      </div>
 						    </div>
 						  </div>
@@ -140,111 +175,125 @@
 	<script src="assets/js/plugins/laydate/laydate.js" charset="utf-8"></script>
 	<script src="assets/js/layui.all.js" charset="utf-8"></script>
 	<script>
-	// ---五个，一个cssBUG，一个页面刷新，三个是图片问题
-	//上传图片响应事件
-	 $(function(){
-			var upload = layui.upload;
-			
-			//heatImageUr上传
-			var uploadInst1 = upload.render({
-					elem: '#test1',
-					url: 'rest/threshold/uploadImg',
-					before: function(obj){
-					//预读本地文件示例，不支持ie8
-					obj.preview(function(index, file, result){
-						//alert(result);
-						$('#demo1').attr('src', result); //图片链接（base64）
-					});
-				},
-				//上传成功回调函数
-				done: function(res){
-					//如果上传失败
-					if(res.code > 0){
-						return layer.msg('上传失败');
-					}else{
-						$('#demo1').attr('src', res.path);
-					}
-					//上传成功
-				},
-				//上传失败回调函数
-				error: function(){
-					//演示失败状态，并实现重传
-					var demoText = $('#demoText1');
-					demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-					demoText.find('.demo-reload').on('click', function(){
-						uploadInst1.upload();
-					});
-				}
-			});
-			
-			//physicalImageUrl上传
-			var uploadInst2 = upload.render({
-				elem: '#test2',
-				url: 'rest/threshold/uploadImg',
-				before: function(obj){
-				//预读本地文件示例，不支持ie8
-				obj.preview(function(index, file, result){
-					$('#demo2').attr('src', result); //图片链接（base64）
-				});
-			}
-			,done: function(res){
-				//如果上传失败
-				if(res.code > 0){
-				return layer.msg('上传失败');
-				}else{
-					$('#demo2').attr('src', res.path);
-				}
-				//上传成功
-			}
-			,error: function(){
-				//演示失败状态，并实现重传
-				var demoText = $('#demoText2');
-				demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-				demoText.find('.demo-reload').on('click', function(){
-					uploadInst2.upload();
-				});
-			}
-		});
-
-		 });
-	
-	//点击修改图片和预值，加载数据到弹出层----图片打开即显示
-	function updetaThresHold(asd){
-		var b = asd.parentNode.parentNode.rowIndex;
-		var detectionPointType = $("table tr:eq(" + b + ") td:eq(0)").text();
-		var maxThresholdValue = $("table tr:eq(" + b + ") td:eq(1)").text();
-		var minThresholdValue = $("table tr:eq(" + b + ") td:eq(2)").text();
-		var detectionTypeId = $("table tr:eq(" + b + ") td:eq(5)").text();
-		//---取出数据库的路径地址
-		var heatImageUrl  ;
-		var physicalImageUrl ;
-		$('#detectionTypeName').val(detectionPointType);
-		$('#maxThresholdValue').val(maxThresholdValue);
-		$('#minThresholdValue').val(minThresholdValue);
-		$('#detectionTypeId').val(detectionTypeId);
-		//---展示到弹出层
-	}
-	
-	//点击提交修改图片和预值到数据库
-	$('.sureAddDetection_updetaThresHold').click(function(){
-		var projectName = '${projectName}';
-		var detectionTypeId = $('#detectionTypeId').val();
-		var maxThresholdValue = $('#maxThresholdValue').val();
-		var minThresholdValue = $('#minThresholdValue').val();
-		var heatImageUrl = $('#demo1').attr('src');//热点图
-		var physicalImageUrl = $('#demo2').attr('src');//物理图
-		var jsonData = '{"detectionTypeId":"'
+	 
+	//点击提交添加阀值到数据库
+	$('.sureAddThresHold_addThresHold').click(function(){
+		if(!$('#form_addThresHold').valid()){
+			return false;
+		}
+		var projectId = '${projectId}';//传项目ID可以查其他所有未传ID
+		var detectionTypeId = $('#selectDetectionType_addThresHold option:selected').val();//测点类型ID
+		var thresholdTypeId = $('#selectThresHoldType_addThresHold option:selected').val();//阀值类型ID
+		var maxThresholdValue = $('#maxThresholdValue_add').val();//
+		var minThresholdValue = $('#minThresholdValue_add').val();//
+		var jsonData = '{"projectId":"'
+						+ projectId
+						+ '","detectionTypeId":"'
 						+ detectionTypeId
-						+ '","projectName":"'
-						+ projectName
+						+ '","thresholdTypeId":"'
+						+ thresholdTypeId
 						+ '","maxThresholdValue":"'
 						+ maxThresholdValue
 						+ '","minThresholdValue":"'
 						+ minThresholdValue 
-						+ '","heatImageUrl":"'
-						+ heatImageUrl
-						+ '","physicalImageUrl":"'
-						+ physicalImageUrl + '"}';
+						+'"}';
+			$.ajax({
+			type:'post',
+			url: 'rest/threshold/addThresHold',
+			contentType:"application/json",
+			dataType : 'json',
+			data: jsonData,
+			success: function(data){
+					if(data){
+							$('#minThresholdValue_add').val("");
+							$('#maxThresholdValue_add').val("");
+			  var viewData ='<tr>'+
+					    	'<td class="project-title" style="width:160px">'+
+					    		''+$('#selectDetectionType_addThresHold option:selected').text()+''+
+						    '</td>'+
+						    '<td class="project-title" style="width:160px">'+
+						    	''+$('#selectThresHoldType_addThresHold option:selected').text()+''+
+							'</td>'+
+						    	'<td class="project-title" style="width:160px">'+
+						    		+data.minThresholdValue+
+						    '</td>'+
+						    '<td class="project-title" style="width:160px">'+
+					    			+data.maxThresholdValue+
+					    	'</td>'+
+							'<td class="project-title" style="display:none">'+
+									+data.thresholdId+
+							'</td>'+
+							'<td class="project-title" style="display:none">'+
+				  				+data.detectionTypeId+
+					    	'</td>'+
+					    	'<td class="project-title" style="display:none">'+
+				  				+data.thresholdTypeId+
+				    		'</td>'+
+							'<td class="project-status" style="width:160px">'+
+								'<a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updetaThresHold(this)"  data-toggle="modal" data-target="#myModal_updetaThresHold">编辑修改</a><br />'+
+						    '</td>'+
+						    '<td class="project-actions">'+
+						    '</td>'+
+							'</tr>';
+							$('#thresHold_tbody').append(viewData);				
+						    alert("插入成功");
+							}else {
+								  alert("数据异常");
+							      }
+							},
+							error: function(){
+								  alert("重复添加阀值，请认真核对测点类型和阀值类型后再添加！");
+							      }
+			}); 	
+	});
+		var b;
+	//点击修改阀值，加载数据到弹出层
+	function updetaThresHold(asd){
+		b = asd.parentNode.parentNode.rowIndex;
+		var minThresholdValue = $("table tr:eq(" + b + ") td:eq(2)").text();
+		var maxThresholdValue = $("table tr:eq(" + b + ") td:eq(3)").text();
+		var thresholdId = $("table tr:eq(" + b + ") td:eq(4)").text();
+		var detectionTypeId = $("table tr:eq(" + b + ") td:eq(5)").text();
+		var thresholdTypeId = $("table tr:eq(" + b + ") td:eq(6)").text();
+		//输入框加载
+		$('#minThresholdValue_updeta').val(minThresholdValue);
+		$('#maxThresholdValue_updeta').val(maxThresholdValue);
+		$('#thresHoldId_updetaThresHold').val(thresholdId);
+		$('#detectionTypeId_updetaThresHold').val(detectionTypeId);
+		$('#thresholdTypeId_updetaThresHold').val(thresholdTypeId);
+		//下拉框加载
+		$('#selectDetectionType_updetaThresHold option').removeProp("selected");
+		$('#selectThresHoldType_updetaThresHold option').removeProp("selected");
+	  	$("#selectDetectionType_updetaThresHold option[value='"+detectionTypeId+"']").prop("selected",true);
+	  	$("#selectThresHoldType_updetaThresHold option[value='"+thresholdTypeId+"']").prop("selected",true);
+	  	 
+	}
+	
+	//点击提交修改阀值到数据库
+	$('.sureUpdetaThresHold_UpdetaThresHold').click(function(){
+		if(!$('#form_updetaThresHold').valid()){
+			return false;
+		}
+		var t = b;
+		var projectId = '${projectId}';
+		var detectionTypeId =  $('#selectDetectionType_updetaThresHold option:selected').val();//测点类型ID
+		var thresholdTypeId =  $('#selectThresHoldType_updetaThresHold option:selected').val();//阀值类型ID
+		var thresholdId = $('#thresHoldId_updetaThresHold').val();
+		var maxThresholdValue = $('#maxThresholdValue_updeta').val();
+		var minThresholdValue = $('#minThresholdValue_updeta').val();
+		var jsonData = '{"thresholdId":"'
+						+ thresholdId
+						+ '","projectId":"'
+						+ projectId
+						+ '","detectionTypeId":"'
+						+ detectionTypeId
+						+ '","thresholdTypeId":"'
+						+ thresholdTypeId
+						+ '","maxThresholdValue":"'
+						+ maxThresholdValue
+						+ '","minThresholdValue":"'
+						+ minThresholdValue 
+						+'"}';
 			$.ajax({
 			type:'post',
 			url: 'rest/project/updetaThreshold',
@@ -253,21 +302,77 @@
 			data: jsonData,
 			success: function(data){
 					if(data){
-						//为了可以重复修改，所有修改成功之后把缓存的ID清除
-						//---修改成功后吧页面及时刷新，展示的图片刷新
-						$('#detectionTypeId').val("");
-						alert("警戒值和项目图片设置成功！");
-							}else {
-								  alert("数据异常");
-							      }
-							}
+						//修改成功后吧页面及时刷新
+						$("table tr:eq(" + t + ") td:eq(0)").text($('#selectDetectionType_updetaThresHold option:selected').text());//测点类型名称
+						$("table tr:eq(" + t + ") td:eq(1)").text($('#selectThresHoldType_updetaThresHold option:selected').text());//阀值类型名称
+						$("table tr:eq(" + t + ") td:eq(2)").text(data.minThresholdValue);//最小警戒值
+						$("table tr:eq(" + t + ") td:eq(3)").text(data.maxThresholdValue);//最大警戒值
+						alert("修改阀值成功！");
+						}else {
+							  alert("数据异常");
+							  }
+						},
+						error: function(){
+							  alert("重复添加阀值，请认真核对测点类型和阀值类型后再添加！");
+						      }
 			}); 	
 	});
 	
 		$(document).ready(function() {
 			//项目ID
 			var projectId = '${projectId}';
-			//打开测点页面加载所属项目下的所有测点
+			var projectTypeId = '${projectTypeId}';
+			//加载添加弹出层的测点类型选项
+			$.ajax({
+		    	type:'post',
+			  	  url: 'rest/threshold/showDetectionType',
+			  	  data: {projectTypeId:projectTypeId},
+			  	  contextType:"application/json",
+			  	  success: function(data){
+			  		       if(data){
+			  		    	var stringAdd = '';
+			  		    	var stringUpdeta = '';
+			  		    	$.each(data,function(idx,SysDictionary){
+			  		    		stringAdd += '<option value="'+SysDictionary.dicId+'">'+ SysDictionary.itemName +'</option>';
+			  		    		stringUpdeta += '<option value="'+SysDictionary.dicId+'">'+ SysDictionary.itemName +'</option>';
+			  		    	});
+			  		    	$('#selectDetectionType_addThresHold').append(stringAdd);
+				  		    $('#selectDetectionType_updetaThresHold').append(stringUpdeta);
+			  		       }else{
+			  		    	alert("数据异常");
+			  		       }
+			  	  },
+			  	  error: function(){
+					    alert("数据加载失败");
+				      }
+		     });
+			
+			//加载添加弹出层的阀值类型选项
+			$.ajax({
+		    	type:'post',
+			  	  url: 'rest/threshold/showThresHoldType',
+			  	  data: {projectId:projectId},
+			  	  contextType:"application/json",
+			  	  success: function(data){
+			  		 if(data){
+			  		    	var stringAdd = '';
+			  		    	var stringUpdeta = '';
+			  		    	$.each(data,function(idx,SysDictionary){
+			  		    		stringAdd += '<option value="'+SysDictionary.dicId+'">'+ SysDictionary.itemName +'</option>';
+			  		    		stringUpdeta += '<option value="'+SysDictionary.dicId+'">'+ SysDictionary.itemName +'</option>';
+			  		    	}); 
+			  		       $('#selectThresHoldType_addThresHold').append(stringAdd);
+			  		       $('#selectThresHoldType_updetaThresHold').append(stringUpdeta);
+			  		       }else{
+			  		    	alert("数据异常");
+			  		       }
+			  	  },
+			  	  error: function(){
+					    alert("数据加载失败");
+				      }
+		     });
+			
+			//打开测点页面加载所属项目下的所有阀值
 			  $.ajax({
 		    		  type:'post',
 		    	  	  url: 'rest/threshold/showProjectThreshold',
@@ -283,28 +388,31 @@
 				    	  		    		''+item.detectionTypeName+''+
 									    '</td>'+
 									    '<td class="project-title" style="width:160px">'+
-									    	+item.minThresholdValue+
+									    	''+item.thresHoldTypeName+''+
 										'</td>'+
 				    	  		    	'<td class="project-title" style="width:160px">'+
-				    	  		    		+item.maxThresholdValue+
+				    	  		    		+item.minThresholdValue+
 									    '</td>'+
-									    '<td class="project-title" style="width:500px">'+
-									    	'<img alt="未上传图片" src="'+item.heatImageUrl+'" style="height:110px; width:300px">'+
-										'</td>'+
-				    	  		    	'<td class="project-title" style="width:500px">'+
-				    	  		    		'<img alt="未上传图片" src="'+item.physicalImageUrl+'" style="height:110px; width:300px">'+
-									    '</td>'+
-									    '<td class="project-status" style="display:none">'+
-											'<span class="label label-primary">' + item.detectionTypeId + '</span>'+
-										'</td>'+
+									    '<td class="project-title" style="width:160px">'+
+			    	  		    			+item.maxThresholdValue+
+								    	'</td>'+
+										'<td class="project-title" style="display:none">'+
+	    	  		    					+item.thresholdId+
+						    			'</td>'+
+										'<td class="project-title" style="display:none">'+
+		    	  		    				+item.detectionTypeId+
+								    	'</td>'+
+								    	'<td class="project-title" style="display:none">'+
+		    	  		    				+item.thresholdTypeId+
+							    		'</td>'+
 										'<td class="project-status" style="width:160px">'+
-											'<a href="javascript:;" class="J_menuItem" onclick="updetaThresHold(this)"  data-toggle="modal" data-target="#myModal_updetaThresHold">编辑修改</a><br />'+
+											'<a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updetaThresHold(this)"  data-toggle="modal" data-target="#myModal_updetaThresHold">编辑修改</a><br />'+
 									    '</td>'+
 									    '<td class="project-actions">'+
 									    '</td>'+
 										'</tr>';
 				    	  		  });
-		    	  			$('#detection_tbody').append(string); 		
+		    	  			$('#thresHold_tbody').append(string); 		
 		    	  		  }
 		    	  		  },
 		    	  	  });

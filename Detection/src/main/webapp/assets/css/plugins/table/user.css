@@ -235,3 +235,11 @@
 input:focus {
     border: 1px solid green;
 }
+
+#trhight{
+	height:30px;
+}
+
+#trhight:hover{
+	height: 100%;
+}

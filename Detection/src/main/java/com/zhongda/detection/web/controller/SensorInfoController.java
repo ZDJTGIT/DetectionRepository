@@ -1,8 +1,10 @@
 package com.zhongda.detection.web.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SensorInfo;
 import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.SensorInfoService;
@@ -78,6 +81,41 @@ public class SensorInfoController {
 		} else {
 			// 非管理员不能修改传感器信息
 			return null;
+		}
+	}
+	
+//校验
+	/**
+	 * 验证传感器ID是否唯一(添加验证)
+	 */
+	@RequestMapping(value = "/OnlysensorInfoId", method = RequestMethod.POST)
+	public void OnlyProjectName(Integer sensorId_addSensorInfo,String sensorType_addSensorInfo, HttpServletResponse response) {
+		SensorInfo sensorInfo = sensorInfoService.selectBySensorIdAndSensorType(sensorId_addSensorInfo, sensorType_addSensorInfo);
+		try {
+			if (sensorInfo == null) {
+				response.getWriter().print(true);
+			} else {
+				response.getWriter().print(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 验证传感器ID是否唯一(添加验证)
+	 */
+	@RequestMapping(value = "/upOnlysensorInfoId", method = RequestMethod.POST)
+	public void upOnlyProjectName(Integer sensorId_updetaSensorInfo, String sensorType_updetaSensorInfo, HttpServletResponse response) {
+		SensorInfo sensorInfo = sensorInfoService.selectBySensorIdAndSensorType(sensorId_updetaSensorInfo, sensorType_updetaSensorInfo);
+		try {
+			if (sensorInfo == null) {
+				response.getWriter().print(true);
+			} else {
+				response.getWriter().print(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

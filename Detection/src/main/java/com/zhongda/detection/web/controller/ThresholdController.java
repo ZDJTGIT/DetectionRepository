@@ -1,72 +1,84 @@
 package com.zhongda.detection.web.controller;
 
-import java.io.File;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.zhongda.detection.web.dao.ThresholdMapper;
+import com.zhongda.detection.web.model.Project;
+import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.model.Threshold;
+import com.zhongda.detection.web.service.ProjectService;
+import com.zhongda.detection.web.service.SysDictionaryService;
+import com.zhongda.detection.web.service.ThresholdService;
 
 @RestController
 @RequestMapping(value = "/threshold")
 public class ThresholdController {
 
 	@Autowired
-	private ThresholdMapper thresholdService;
+	private ThresholdService thresholdService;
+
+	@Resource
+	private SysDictionaryService sysDictionaryServce;
+
+	@Autowired
+	private ProjectService projectService;
 
 	/**
-	 * 上传图片
-	 */
-	@RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
-	public String uploadImg(
-			@RequestParam(value = "file", required = false) MultipartFile file,
-			HttpServletRequest request) {
-
-		System.out.println("开始");
-		String path = request.getSession().getServletContext()
-				.getRealPath("assets/upload");
-		System.out.println(path);
-		String fileName = file.getOriginalFilename();
-		// System.out.println(fileName);
-		// String[] fileNameArray = fileName.split(".");
-		// System.out.println(fileNameArray.length);
-		// fileName = new
-		// Date().getTime()+fileNameArray[fileNameArray.length-1];
-		System.out.println(fileName);
-		File targetFile = new File(path, fileName);
-		if (!targetFile.exists()) {
-			targetFile.mkdirs();
-		}
-		// 保存
-		try {
-			file.transferTo(targetFile);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "{\"code\":\"0\",\"path\":\"assets/upload/" + fileName + "\"}";
-	}
-
-	/**
-	 * 新建测点
+	 * 查项目ID下所有阀值
 	 */
 	@RequestMapping(value = "/showProjectThreshold", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Threshold> showProjectThreshold(Integer projectId) {
-		// 根据项目名查所有Threshold记录
-		// List<Threshold> s = thresholdService.selectByProjectId(projectId);
-		// for(Threshold threshold:s){
-		// System.out.println("7979779797979797979979"+threshold.getDetectionTypeName());
-		// }
 		return thresholdService.selectByProjectId(projectId);
 	}
 
+	/**
+	 * 显示当前项目下所有测点类型
+	 */
+	@RequestMapping(value = "/showDetectionType", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SysDictionary> showDetectionType(Integer projectTypeId) {
+		return sysDictionaryServce
+				.selectSysDictionaryByProjectTypeId(projectTypeId);
+	}
+
+	/**
+	 * 显示所有阀值类型（所有的测点类型都是公用同样的阀值类型）
+	 */
+	@RequestMapping(value = "/showThresHoldType", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SysDictionary> showThresHoldType(Integer projectId) {
+		// 所有阀值类型一致，通用
+		return sysDictionaryServce.selectSysDictionaryByTypeCode(10);
+	}
+
+	/**
+	 * 插入一条阀值(校验唯一性)
+	 */
+	@RequestMapping(value = "/addThresHold", method = RequestMethod.POST)
+	@ResponseBody
+	public Threshold addThresHold(@RequestBody Threshold threshold) {
+		//查询新添加的阀值记录是否已存在
+		Threshold selectedThreshold = thresholdService
+				.selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
+						threshold.getProjectId(),
+						threshold.getDetectionTypeId(),
+						threshold.getThresholdTypeId());
+		if(selectedThreshold==null){
+			Project project = projectService.selectByPrimaryKey(threshold
+					.getProjectId());
+			threshold.setUserId(project.getUserId());
+			threshold.setProjectTypeId(project.getProjectTypeId());
+			thresholdService.insertSelective(threshold);
+			return threshold;
+		}else{
+			return null;
+		}
+	}
 }

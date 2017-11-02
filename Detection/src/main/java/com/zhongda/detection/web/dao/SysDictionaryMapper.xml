@@ -37,6 +37,12 @@
     where a.type_value = b.item_value 
     and b.dic_id = #{projectTypeId,jdbcType=INTEGER} 
   </select>
+  <select id="selectSysDictionaryByTypeCode" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_dictionary
+    where type_code = #{typeCode,jdbcType=INTEGER} 
+  </select>
   <select id="selectProjectStatusByDicId" parameterType="java.lang.Integer" resultType="java.lang.String">
     select
     item_name 

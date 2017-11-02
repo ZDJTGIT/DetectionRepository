@@ -48,5 +48,11 @@ public class SysDictionaryServiceImpl implements SysDictionaryService {
 			String alarmType, String alarmStatus) {
 		return sysDictionaryMapper.selectSysDictionaryByAlarmTypeAndStatus(alarmType, alarmStatus);
 	}
+	
+	@Override
+	public List<SysDictionary> selectSysDictionaryByTypeCode(Integer typeCode) {
+		return sysDictionaryMapper.selectSysDictionaryByTypeCode(typeCode);
+
+	}
 
 }

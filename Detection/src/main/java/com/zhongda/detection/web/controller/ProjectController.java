@@ -30,6 +30,7 @@ import com.zhongda.detection.web.dao.ThresholdMapper;
 import com.zhongda.detection.web.model.AlarmLinkman;
 import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Image;
+import com.zhongda.detection.web.model.LaserData;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.model.Threshold;
@@ -38,6 +39,7 @@ import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.AlarmLinkmanService;
 import com.zhongda.detection.web.service.DetectionPointService;
 import com.zhongda.detection.web.service.ImageService;
+import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
 import com.zhongda.detection.web.service.SensorInfoService;
@@ -67,13 +69,17 @@ public class ProjectController {
 	private ProjectService projectService;
 
 	@Autowired
+	private MessageService messageService;
+	
+	@Autowired
+	private ImageService imageService;
+
+	@Autowired
 	private RoleService roleService;
 
 	@Resource
 	private AlarmLinkmanService alarmLinkmanService;
 
-	@Resource
-	private ImageService imageService;
 
 	@RequestMapping(value = "/myproject")
 	public @ResponseBody Map<String, List<Project>> queryProject(Integer userId) {
@@ -127,6 +133,7 @@ public class ProjectController {
 		String map = mapper.writeValueAsString(hashMap);
 		model.addAttribute("image", image);
 		model.addAttribute("map", map);
+		String format = simpleDateFormat.format(date);
 		model.addAttribute("projectId", projectId);
 		model.addAttribute("detectionTypeId", detectionTypeId);
 		return "graph_echarts_laserRanging";
@@ -307,8 +314,7 @@ public class ProjectController {
 	@RequestMapping(value = "/showDetectionStatus", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SysDictionary> showDetectionStatus(Integer projectTypeId) {
-		return sysDictionaryServce
-				.selectSysDictionaryByProjectTypeId(projectTypeId);
+		return sysDictionaryServce.selectSysDictionaryByProjectTypeId(projectTypeId);
 	}
 
 	/**
@@ -378,12 +384,12 @@ public class ProjectController {
 					.selectSysDictionaryByProjectTypeId(project
 							.getProjectTypeId());
 			for (SysDictionary sysDictionary : sysDictionaryList) {
-				Threshold threshold = new Threshold();
-				threshold.setUserId(project.getUserId());
-				threshold.setProjectId(project.getProjectId());
-				threshold.setProjectTypeId(project.getProjectTypeId());
-				threshold.setDetectionTypeId(sysDictionary.getDicId());
-				thresholdService.insertSelective(threshold);
+				Image image = new Image();
+				image.setUserId(project.getUserId());
+				image.setProjectId(project.getProjectId());
+				image.setProjectTypeId(project.getProjectTypeId());
+				image.setDetectionTypeId(sysDictionary.getDicId());
+				imageService.insertSelective(image);
 			}
 		} else {
 			// 非管理员不能填写项目
@@ -417,23 +423,26 @@ public class ProjectController {
 	}
 
 	/**
-	 * 新建Threshold
+	 * 修改阀值
 	 */
 	@RequestMapping(value = "/updetaThreshold", method = RequestMethod.POST)
 	@ResponseBody
 	public Threshold updetaThreshold(@RequestBody Threshold threshold) {
-		// use projectName to select userid,projectid,projecttypeid and insert
-		// into threshold
-		Project project = projectService.selectByProjectName(threshold
-				.getProjectName());
-		threshold.setUserId(project.getUserId());
-		threshold.setProjectId(project.getProjectId());
-		threshold.setProjectTypeId(project.getProjectTypeId());
-		threshold.setThresholdId(thresholdService
-				.selectByProjectIdAndDetectionTypeId(project.getProjectId(),
-						threshold.getDetectionTypeId()).getThresholdId());
-		thresholdService.updateByPrimaryKeySelective(threshold);
-		return threshold;
+		//查询修改后的的阀值记录是否已存在
+		Threshold selectedThreshold = thresholdService
+				.selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
+						threshold.getProjectId(),
+						threshold.getDetectionTypeId(),
+						threshold.getThresholdTypeId());
+		if(selectedThreshold==null||selectedThreshold.getThresholdId()==threshold.getThresholdId()){
+			Project project = projectService.selectByPrimaryKey(threshold.getProjectId());
+			threshold.setUserId(project.getUserId());
+			threshold.setProjectTypeId(project.getProjectTypeId());
+			thresholdService.updateByPrimaryKeySelective(threshold);
+			return threshold;
+		}else{
+			return null;
+		}
 	}
 
 	/**
@@ -477,6 +486,42 @@ public class ProjectController {
 		} else {
 			// 非管理员不能删除项目
 			return 2;
+		}
+	}
+	
+//校验
+	
+	/**
+	 * 验证用户名是否唯一(添加验证)
+	 */
+	@RequestMapping(value = "/OnlyProjectName", method = RequestMethod.POST)
+	public void OnlyProjectName(String projectName_addProject, HttpServletResponse response) {
+		Project project = projectService.selectByProjectName(projectName_addProject);
+		try {
+			if (project == null) {
+				response.getWriter().print(true);
+			} else {
+				response.getWriter().print(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 验证用户名是否唯一(修改验证)
+	 */
+	@RequestMapping(value = "/upOnlyProjectName", method = RequestMethod.POST)
+	public void upOnlyProjectName(String projectName_updetaProject, HttpServletResponse response) {
+		Project project = projectService.selectByProjectName(projectName_updetaProject);
+		try {
+			if (project == null) {
+				response.getWriter().print(true);
+			} else {
+				response.getWriter().print(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

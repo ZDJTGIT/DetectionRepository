@@ -16,18 +16,34 @@ $('#form_addProject').validate({
 			projectName_addProject : {
 				required : true,
 				minlength : 2,
+				//验证项目名称是否已存在
+				remote: {
+				    url: "rest/project/OnlyProjectName",    //后台处理程序
+				    type: "post",               //数据发送方式  
+				    data: {                     //要传递的数据
+				    	projectName_addProject: function() {
+				            return $("#projectName_addProject").val();
+				        }
+				    }
+				}
 			},
 			projectAddress_addProject : {
 				required : true,
-				minlength : 2,
+				minlength : 2
 			},
 			projectLongitude_addProject : {
 				required : true,
-				minlength : 2,
+				minlength : 2
 			},
 			projectLatitude_addProject : {
 				required : true,
-				minlength : 2,
+				minlength : 2
+			},
+			projectBeginTime_addProject : {
+				required : true
+			},
+			projectEndTime_addProject : {
+				required : true
 			}
 		},
 		
@@ -36,6 +52,7 @@ $('#form_addProject').validate({
 			projectName_addProject : {
 				required : "请输入项目名",
 				minlength:"项目名为2-15个字符",
+				remote: "项目已存在"
 			},
 			projectAddress_addProject : {
 				required : "请输入项目地址",
@@ -43,11 +60,17 @@ $('#form_addProject').validate({
 			},
 			projectLongitude_addProject : {
 				required : "请输入项目经度",
-				minlength:"项目经度为2-15个字符",
+				minlength:"项目经度为2-15个字符"
 			},
 			projectLatitude_addProject : {
 				required : "请输入项目纬度",
-				minlength:"项目纬度为2-15个字符",
+				minlength:"项目纬度为2-15个字符"
+			},
+			projectBeginTime_addProject : {
+				required : "请选择项目开始时间"
+			},
+			projectEndTime_addProject : {
+				required : "请选择项目结束时间"
 			}
 		}
 	});
@@ -58,18 +81,34 @@ $('#form_updetaProject').validate({
 		projectName_updetaProject : {
 			required : true,
 			minlength : 2,
+			//验证项目名称是否已存在
+			remote: {
+			    url: "rest/project/upOnlyProjectName",    //后台处理程序
+			    type: "post",               //数据发送方式  
+			    data: {                     //要传递的数据
+			    	projectName_updetaProject: function() {
+			            return $("#projectName_updetaProject").val();
+			        }
+			    }
+			}
 		},
 		projectAddress_updetaProject : {
 			required : true,
-			minlength : 2,
+			minlength : 2
 		},
 		projectLongitude_updetaProject : {
 			required : true,
-			minlength : 2,
+			minlength : 2
 		},
 		projectLatitude_updetaProject : {
 			required : true,
-			minlength : 2,
+			minlength : 2
+		},
+		projectBeginTime_updetaProject : {
+			required : true
+		},
+		projectEndTime_updetaProject : {
+			required : true
 		}
 	},
 	
@@ -78,18 +117,25 @@ $('#form_updetaProject').validate({
 		projectName_updetaProject : {
 			required : "项目名不能为空",
 			minlength:"项目名为2-15个字符",
+			remote: "项目已存在"
 		},
 		projectAddress_updetaProject : {
 			required : "项目地址不能为空",
-			minlength:"项目地址为2-15个字符",
+			minlength:"项目地址为2-15个字符"
 		},
 		projectLongitude_updetaProject : {
 			required : "项目经度不能为空",
-			minlength:"项目经度为2-15个字符",
+			minlength:"项目经度为2-15个字符"
 		},
 		projectLatitude_updetaProject : {
 			required : "项目纬度不能为空",
-			minlength:"项目纬度为2-15个字符",
+			minlength:"项目纬度为2-15个字符"
+		},
+		projectBeginTime_updetaProject : {
+			required : "请选择项目开始时间"
+		},
+		projectEndTime_updetaProject : {
+			required : "请选择项目结束时间"
 		}
 	}
 });
@@ -98,86 +144,270 @@ $('#form_updetaProject').validate({
 $('#form_addDetection').validate({
 	
 	rules : {
-		detectionName_add : {
+		DetectionName_addDetection : {
 			required : true,
 			minlength : 2,
+			//验证，同一个项目下的测点名称不能相同
+			remote: {
+			    url: "rest/detectionPoint/OnlyDetectionPointName",    //后台处理程序
+			    type: "post",               //数据发送方式  
+			    data: {                     //要传递的数据
+			    	DetectionName_addDetection: function() {
+			            return $("#DetectionName_addDetection").val();
+			        },
+			        ProjectName_addDetection: function() {
+				        return $("#ProjectName_addDetection").val();
+			        }
+			    }
+			}
 		},
-		detectionNum_add : {
+		DetectionLongitude_addDetection : {
 			required : true,
-			minlength : 2,
+			minlength : 2
 		},
-		detectionLongitude_add : {
+		DetectionLatitude_addDetection : {
 			required : true,
-			minlength : 2,
-		},
-		detectionLatitude_add : {
-			required : true,
-			minlength : 2,
+			minlength : 2
 		}
 	},
 	
 	messages : {
 	
-		detectionName_add : {
+		DetectionName_addDetection : {
 			required : "测点名称不能为空",
 			minlength:"测点名称为2-15个字符",
+			remote: "测点已存在"
 		},
-		detectionNum_add : {
-			required : "测点编号不能为空",
-			minlength:"测点编号为2-15个字符",
-		},
-		detectionLongitude_add : {
+		DetectionLongitude_addDetection : {
 			required : "测点经度不能为空",
-			minlength:"测点经度为2-15个字符",
+			minlength:"测点编号为2-15个字符"
 		},
-		detectionLatitude_add : {
+		DetectionLatitude_addDetection : {
 			required : "测点纬度不能为空",
-			minlength:"测点纬度为2-15个字符",
+			minlength:"测点纬度为2-15个字符"
 		}
 	}
 });
-
+   
 //修改测点信息验证
 $('#form_updetaDetection').validate({
 	
 	rules : {
-		detectionName_updeta : {
+		DetectionName_updetaDetection : {
 			required : true,
 			minlength : 2,
+			//验证，同一个项目下的测点名称不能相同
+			remote: {
+			    url: "rest/detectionPoint/upOnlyDetectionPointName",  //后台处理程序
+			    type: "post",               //数据发送方式  
+			    data: {                     //要传递的数据
+			    	DetectionName_updetaDetection: function() {
+			            return $("#DetectionName_updetaDetection").val();
+			        },
+			        ProjectName_uppdetaDetection: function() {
+				        return $("#ProjectName_uppdetaDetection").val();
+			        }
+			    }
+			}
 		},
-		detectionNum_updeta : {
+		
+		DetectionLongitude_updetaDetection : {
 			required : true,
-			minlength : 2,
+			minlength : 2
 		},
-		detectionLongitude_updeta : {
+		
+		DetectionLatitude_updetaDetection : {
 			required : true,
-			minlength : 2,
-		},
-		detectionLatitude_updeta : {
-			required : true,
-			minlength : 2,
+			minlength : 2
 		}
 	},
 	
 	messages : {
 	
-		detectionName_updeta : {
+		DetectionName_updetaDetection : {
 			required : "测点名称不能为空",
 			minlength:"测点名称为2-15个字符",
+			remote: "测点已存在"
 		},
-		detectionNum_updeta : {
-			required : "测点编号不能为空",
-			minlength:"测点编号为2-15个字符",
-		},
-		detectionLongitude_updeta : {
+		DetectionLongitude_updetaDetection : {
 			required : "测点经度不能为空",
-			minlength:"测点经度为2-15个字符",
+			minlength:"测点经度为2-15个字符"
 		},
-		detectionLatitude_updeta : {
+		DetectionLatitude_updetaDetection : {
 			required : "测点纬度不能为空",
-			minlength:"测点纬度为2-15个字符",
+			minlength:"测点纬度为2-15个字符"
 		}
 	}
+	
+});
+
+//添加阀值校验（同测点类型和阀值类型不能重复校验在java代码内部）
+$('#form_addThresHold').validate({
+		
+		rules : {
+			 
+			 maxThresholdValue_add : {
+				required : true,
+				minlength : 1
+			},
+			minThresholdValue_add : {
+				required : true,
+				minlength : 1
+			}
+		},
+		
+		messages : {
+		
+			maxThresholdValue_add : {
+				required : "最大告警值不能为空",
+				minlength:"最大告警值为1-15个字符"
+			},
+			minThresholdValue_add : {
+				required : "最小告警值不能为空",
+				minlength:"最小告警值为2-15个字符"
+			}
+		}
+});
+
+//修改阀值校验（同测点类型和阀值类型不能重复校验在java代码内部）
+$('#form_updetaThresHold').validate({
+		
+	rules : {
+		 
+		 maxThresholdValue_updeta : {
+			required : true,
+			minlength : 1
+		},
+		minThresholdValue_updeta : {
+			required : true,
+			minlength : 1
+		}
+	},
+	
+	messages : {
+	
+		maxThresholdValue_updeta : {
+			required : "最大告警值不能为空",
+			minlength:"最大告警值为1-15个字符"
+		},
+		minThresholdValue_updeta : {
+			required : "最小告警值不能为空",
+			minlength:"最小告警值为2-15个字符"
+		}
+	}
+});
+
+//添加传感器校验（传感器编号全字段不能重复）
+$('#form_addSensorInfo').validate({
+		rules : {
+			sensorId_addSensorInfo : {
+				required : true,
+				minlength : 1,
+				//验证，同一个项目下的测点名称不能相同
+				remote: {
+				    url: "rest/sensorInfo/OnlysensorInfoId",  //后台处理程序
+				    type: "post",               //数据发送方式  
+				    data: {                     //要传递的数据
+				    	sensorId_addSensorInfo: function() {
+					        return $("#sensorId_addSensorInfo").val();
+				        },
+				        sensorType_addSensorInfo: function() {
+						    return $("#sensorType_addSensorInfo").val();
+						}
+				    }
+				}
+			},
+			sensorType_addSensorInfo : {
+				required : true,
+				minlength : 2
+			},
+			sensorModel_addSensorInfo : {
+				required : true,
+				minlength : 2
+			},
+			sensorDepth_addSensorInfo : {
+				required : true,
+				minlength : 1
+			}
+		},
+		
+		messages : {
+		
+			sensorId_addSensorInfo : {
+				required : "传感器编号不能为空",
+				minlength:"传感器编号为1-15个字符",
+				remote: "编号已存在"
+			},
+			sensorType_addSensorInfo : {
+				required : "传感器类型不能为空",
+				minlength:"传感器类型为2-15个字符"
+			},
+			sensorModel_addSensorInfo : {
+				required : "传感器模型不能为空",
+				minlength:"传感器模型为2-15个字符"
+			},
+			sensorDepth_addSensorInfo : {
+				required : "传感器深度不能为空",
+				minlength:"传感器深度为1-15个字符"
+			}
+		}
+});
+   
+//修改传感器校验（传感器编号全字段不能重复）
+$('#form_updetaSensorInfo').validate({
+		
+		rules : {
+			sensorId_updetaSensorInfo : {
+				required : true,
+				minlength : 1,
+				//验证，同一个项目下的测点名称不能相同
+				remote: {
+				    url: "rest/sensorInfo/upOnlysensorInfoId",  //后台处理程序
+				    type: "post",               //数据发送方式  
+				    data: {                     //要传递的数据
+				    	sensorId_updetaSensorInfo: function() {
+				            return $("#sensorId_updetaSensorInfo").val();
+				        },
+				        sensorType_updetaSensorInfo: function() {
+						    return $("#sensorType_updetaSensorInfo").val();
+						}
+				    }
+				}
+			},
+			sensorType_updetaSensorInfo : {
+				required : true,
+				minlength : 2
+			},
+			sensorModel_updetaSensorInfo : {
+				required : true,
+				minlength : 2
+			},
+			sensorDepth_updetaSensorInfo : {
+				required : true,
+				minlength : 1
+			}
+		},
+		
+		messages : {
+		
+			sensorId_updetaSensorInfo : {
+				required : "传感器编号不能为空",
+				minlength:"传感器编号为1-15个字符",
+				remote: "传感器编号已存在"
+			},
+			sensorType_updetaSensorInfo : {
+				required : "传感器类型不能为空",
+				minlength:"传感器编号为2-15个字符"
+			},
+			sensorModel_updetaSensorInfo : {
+				required : "传感器模型不能为空",
+				minlength:"传感器模型为2-15个字符"
+			},
+			sensorDepth_updetaSensorInfo : {
+				required : "传感器深度不能为空",
+				minlength:"传感器深度为1-15个字符"
+			}
+		}
 });
 
 //添加用户验证	
@@ -379,6 +609,7 @@ $('#form_modifyuser').validate({
 		
 	});
 
+//修改密码是的密码检验
 $('#from_modifyuserpassword').validate({
 	
 	onkeyup:false,

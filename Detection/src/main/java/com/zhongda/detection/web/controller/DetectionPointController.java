@@ -1,8 +1,10 @@
 package com.zhongda.detection.web.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -47,11 +49,7 @@ public class DetectionPointController {
 		//通过projectName查询项目ID，
 		Project project = projectService.selectByProjectName(projectName);
 		//通过项目ID查询到所有测点
-		List<DetectionPoint> detectionPointList = detectionPointService.selectByProjectId(project.getProjectId());
-		for(DetectionPoint detectionPoint:detectionPointList){
-			detectionPoint.setItemName(sysDictionaryServce.selectProjectStatusByDicId((detectionPoint.getDetectionTypeId())));
-		}
-		return detectionPointList;
+		return detectionPointService.selectByProjectId(project.getProjectId());
 	}
 	
 	/**
@@ -109,5 +107,41 @@ public class DetectionPointController {
 		}		
 		return detectionPointList;
 	}
-
+	
+//校验	
+	/**
+	 * 验证同一个项目下测点名是否唯一(添加验证)
+	 */
+	@RequestMapping(value = "/OnlyDetectionPointName", method = RequestMethod.POST)
+	public void OnlyDetectionPointName(String DetectionName_addDetection, String ProjectName_addDetection, HttpServletResponse response) {
+		Project project = projectService.selectByProjectName(ProjectName_addDetection);
+		DetectionPoint detection = detectionPointService.selectByProjectIDAndDetectionName(project.getProjectId(), DetectionName_addDetection);
+		try {
+			if (detection == null) {
+				response.getWriter().print(true);
+			} else {
+				response.getWriter().print(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 验证同一个项目下测点名是否唯一(修改验证)
+	 */
+	@RequestMapping(value = "/upOnlyDetectionPointName", method = RequestMethod.POST)
+	public void upOnlyDetectionPointName(String DetectionName_updetaDetection, String ProjectName_uppdetaDetection, HttpServletResponse response) {
+		Project project = projectService.selectByProjectName(ProjectName_uppdetaDetection);
+		DetectionPoint detection = detectionPointService.selectByProjectIDAndDetectionName(project.getProjectId(), DetectionName_updetaDetection);
+		try {
+			if (detection == null) {
+				response.getWriter().print(true);
+			} else {
+				response.getWriter().print(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

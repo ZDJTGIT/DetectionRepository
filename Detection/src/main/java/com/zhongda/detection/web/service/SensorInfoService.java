@@ -53,5 +53,12 @@ public interface SensorInfoService {
      * @return
      */
     int updateByPrimaryKeySelective(SensorInfo record);
+    
+    /**
+     * 根据传感器编号查询传感器
+     * @param sensorId
+     * @return
+     */
+    SensorInfo selectBySensorIdAndSensorType(Integer sensorId, String sensorType);
 
 }

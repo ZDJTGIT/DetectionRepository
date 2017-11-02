@@ -63,4 +63,12 @@ public class ThresholdServiceImpl implements ThresholdService {
 				detectionTypeId);
 	}
 
+	@Override
+	public Threshold selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
+			Integer projectId, Integer detectionTypeId, Integer thresholdTypeId) {
+		return thresholdMapper
+				.selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
+						projectId, detectionTypeId, thresholdTypeId);
+	}
+
 }
