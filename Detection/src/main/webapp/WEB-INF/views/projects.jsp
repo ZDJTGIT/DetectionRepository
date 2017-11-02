@@ -879,10 +879,10 @@
 													'</td>'+
 													'<td class="project-actions">'+
 														'<a href="javascript:;" class="J_menuItem" onclick="updetaProject(this)" data-toggle="modal" data-target="#myModal_updetaProject">'+
-															'<i class="fa fa-times-circle"></i> 修改 '+
+															'<i class="fa fa-pencil"></i> 修改 '+
 														'</a>'+
 														'<a href="javascript:;" class="J_menuItem" onclick="deleteProject('+ item.projectId +')">'+
-															'<i class="fa fa-times-circle"></i> 删除 '+
+															'<i class="fa fa-trash"></i> 删除 '+
 														'</a>'+
 													'</td>'+
 												'</tr>';  */

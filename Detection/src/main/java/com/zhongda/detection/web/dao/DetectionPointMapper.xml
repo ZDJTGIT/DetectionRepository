@@ -71,7 +71,7 @@
     from detection_point
     where project_id = #{0}
     and detection_name = #{1}
-   </select>
+  </select>
   <select id="selectItemNameByProjectgId" resultMap="BaseResultMap">
   	SELECT
 	sd.item_name 'item_name',

@@ -46,13 +46,14 @@
 										<td class="project-title" style="width:500px">
 											<a href="javascript:;">热点图</a>
 										</td>
+										<td class="project-title" style="width:110px">
+											<a href="javascript:;">操作</a>
+										</td>
 										<td class="project-title" style="width:500px">
 											<a href="javascript:;">现场图</a>
 										</td>
-										<td class="project-title" style="width:60px">
-										</td>
-										<td class="project-title" style="width:160px">
-											<a href="javascript:;">操作栏</a>
+										<td class="project-title" style="width:110px">
+											<a href="javascript:;">操作</a>
 										</td>
 										<td class="project-actions">
 									    </td>
@@ -60,45 +61,70 @@
 								</tbody>
 							</table>
 						</div>
-						<!-- Modal修改图片-->
-						<div class="modal fade" id="myModal_updetaimage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 160px">
-						 <form id="form_updetaThresHold">
+						<!-- Modal修改热点图-->
+						<div class="modal fade" id="myModal_updetaHeatImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 160px">
+						 <form id="form_updetaHeat">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content" style="">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="myModalLabel_updetaimage">修改阀值</h4>
+						        <h4 class="modal-title" id="myModalLabel_updetaimage">修改图片</h4>
 						      </div>
 						      <div class="modal-body">
-						        <label class="md_lable" for="detectionTypeName_updetaimage">测点类型:</label>
-						        <input class="md_input" type="text" readonly id="detectionTypeName_updetaimage" name="detectionTypeName_updetaimage"><br><br>
+						        <label class="md_lable" for="detectionTypeName_updetaHeat">测点类型:</label>
+						        <input class="md_input" type="text" readonly id="detectionTypeName_updetaHeat" name="detectionTypeName_updetaHeat"><br><br>
 						        
-						        <input class="md_input" type="text" style="display:none" id="imageId_updetaimage" name="imageId_updetaimage">
+						        <input class="md_input" type="text" style="display:none" id="imageId_updetaHeat" name="imageId_updetaHeat">
 								
 								<label class="md_lable" for="">添加热点图:</label>
 							    <div class="layui-upload-list">
-									<img class="layui-upload-img" id="demo1" src="assets/img/test2.png">
+									<img class="layui-upload-img" id="showHeat" src="assets/img/test2.png">
 									<p id="demoText1"></p>
 							    </div>
-								<button type="button" class="layui-btn" id="test1">上传</button><br><br>  
-								
-							    <label class="md_lable" for="">添加现场图:</label>
-							    <div class="layui-upload-list">
-									<img class="layui-upload-img" id="demo2" src="assets/img/test2.png">
-									<p id="demoText2"></p>
-							    </div>
-								<button type="button" class="layui-btn" id="test2">上传</button>  
-								
-								<input class="md_input" style="display:none" type="text" id="detectionTypeId" name="detectionTypeId"><br><br>
+								<button type="button" class="layui-btn" id="uploadHeat">上传</button><br><br>  
+								<input class="md_input" style="display:none" type="text" id="detectionTypeId_Heat" name="detectionTypeId_Heat"><br><br>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" id="offUpdetaImage" class="btn btn-default" data-dismiss="modal">关闭</button>
-						        <button type="button" class="btn btn-primary sureAddDetection_updetaThresHold">提交</button>
+						        <button type="button" class="btn btn-default offUpdetaImage" data-dismiss="modal">关闭</button>
+						        <button type="button" class="btn btn-primary sureAddDetection_updetaImage" name="heatBtn">提交</button>
 						      </div>
 						    </div>
 						  </div>
 						 </form>
 						</div>
+						<!-- Modal修改现场图-->
+						<div class="modal fade" id="myModal_updetaPhysicalImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 160px">
+						 <form id="form_updetaPhysical">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content" style="">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title" id="myModalLabel_updetaimage">修改图片</h4>
+						      </div>
+						      <div class="modal-body">
+						        <label class="md_lable" for="detectionTypeName_updetaPhysical">测点类型:</label>
+						        <input class="md_input" type="text" readonly id="detectionTypeName_updetaPhysical" name="detectionTypeName_updetaPhysical"><br><br>
+						        
+						        <input class="md_input" type="text" style="display:none" id="imageId_updetaPhysical" name="imageId_updetaPhysical">
+						        
+							    <label class="md_lable" for="">添加现场图:</label>
+							    <div class="layui-upload-list">
+									<img class="layui-upload-img" id="showPhysical" src="assets/img/test2.png">
+									<p id="demoText2"></p>
+							    </div>
+								<button type="button" class="layui-btn" id="uploadPhysical">上传</button>  
+								
+								<input class="md_input" style="display:none" type="text" id="detectionTypeId_Physical" name="detectionTypeId_Physical"><br><br>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default offUpdetaImage" data-dismiss="modal">关闭</button>
+						        <button type="button" class="btn btn-primary sureAddDetection_updetaImage" name="physicalBtn">提交</button>
+						      </div>
+						    </div>
+						  </div>
+						 </form>
+						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -117,14 +143,13 @@
 			var upload = layui.upload;
 			
 			//heatImageUr上传
-			var uploadInst1 = upload.render({
-					elem: '#test1',
+			var uploadHeat = upload.render({
+					elem: '#uploadHeat',
 					url: 'rest/image/uploadImg',
 					before: function(obj){
 					//预读本地文件示例，不支持ie8
 					obj.preview(function(index, file, result){
-						//alert(result);
-						$('#demo1').attr('src', result); //图片链接（base64）
+						$('#showHeat').attr('src', result); //图片链接（base64）
 					});
 				},
 				//上传成功回调函数
@@ -133,7 +158,7 @@
 					if(res.code > 0){
 						return layer.msg('上传失败');
 					}else{
-						$('#demo1').attr('src', res.path);
+						$('#showHeat').attr('src', res.path);
 					}
 					//上传成功
 				},
@@ -149,13 +174,13 @@
 			});
 			
 			//physicalImageUrl上传
-			var uploadInst2 = upload.render({
-				elem: '#test2',
+			var uploadPhysical = upload.render({
+				elem: '#uploadPhysical',
 				url: 'rest/image/uploadImg',
 				before: function(obj){
 				//预读本地文件示例，不支持ie8
 				obj.preview(function(index, file, result){
-					$('#demo2').attr('src', result); //图片链接（base64）
+					$('#showPhysical').attr('src', result); //图片链接（base64）
 				});
 			}
 			,done: function(res){
@@ -163,7 +188,7 @@
 				if(res.code > 0){
 				return layer.msg('上传失败');
 				}else{
-					$('#demo2').attr('src', res.path);
+					$('#showPhysical').attr('src', res.path);
 				}
 				//上传成功
 			}
@@ -182,18 +207,14 @@
 	//点击添加图片加载当前测点类型图片
 	
 	//确定添加图片(修改编辑)
-	 $('.sureAddDetection_updetaThresHold').click(function(){
-		    
-		 	var heatImageUrl = $('#demo1').attr('src');//热点图
-			var physicalImageUrl = $('#demo2').attr('src');//现场图
-			var imageId = $('#imageId_updetaimage').val();//ID
-			var jsonData = '{"imageId":"'
-							+ imageId
-							+ '","heatImageUrl":"'
-							+ heatImageUrl 
-							+ '","physicalImageUrl":"'
-							+ physicalImageUrl 
-							+ '"}';
+	 $('.sureAddDetection_updetaImage').click(function(){
+		 var jsonData;
+		 	if($(this).attr('name') == 'heatBtn'){
+		 		jsonData = '{"imageId":"'+ $('#imageId_updetaHeat').val() + '","heatImageUrl":"'+ $('#showHeat').attr('src') + '"}';
+		 	}else{
+		 		jsonData = '{"imageId":"'+ $('#imageId_updetaPhysical').val() + '","physicalImageUrl":"'+ $('#showPhysical').attr('src') + '"}';
+		 	}
+			
 			$.ajax({
 				type:'post',
 				url: 'rest/image/updetaImage',
@@ -203,9 +224,13 @@
 				success: function(data){
 						if(data){
 							//修改成功后吧页面及时刷新
-							$('#h'+data.imageId).attr("src",data.heatImageUrl); 
-							$('#p'+data.imageId).attr("src",data.physicalImageUrl); 
-							$('#offUpdetaImage').trigger("click"); 
+							if(data.heatImageUrl){
+								$('#h'+data.imageId).attr("src",data.heatImageUrl); 
+							}
+							if(data.physicalImageUrl){
+								$('#p'+data.imageId).attr("src",data.physicalImageUrl); 
+							}
+							$('.offUpdetaImage').trigger("click"); 
 							alert("项目图片设置成功！");
 								}else {
 									  alert("数据异常");
@@ -218,12 +243,19 @@
 			
 	 });
 	
-	 function  updetaThresHold(asd){
+	 function  updetaThresHold(asd, isHeat){
 		 var b = asd.parentNode.parentNode.rowIndex;
 		 var detectionTypeId = $("table tr:eq(" + b + ") td:eq(1)").text();
-		 var imageId = $("table tr:eq(" + b + ") td:eq(4)").text();
-		 $('#detectionTypeName_updetaimage').val(detectionTypeId);
-		 $('#imageId_updetaimage').val(imageId);
+		 var imageId = $("table tr:eq(" + b + ") td:eq(5)").text();
+		 if(isHeat){
+			 $('#detectionTypeName_updetaHeat').val(detectionTypeId);
+			 $('#imageId_updetaHeat').val(imageId);
+			 $('#showHeat').attr("src",$("table tr:eq(" + b + ") td:eq(2)").find('img').attr('src')); 
+		 }else{
+			 $('#detectionTypeName_updetaPhysical').val(detectionTypeId);
+			 $('#imageId_updetaPhysical').val(imageId);
+			 $('#showPhysical').attr("src",$("table tr:eq(" + b + ") td:eq(4)").find('img').attr('src'));
+		 }
 	 }
 	
 		$(document).ready(function() {
@@ -239,6 +271,7 @@
 		    	  		  if(data){
 		    	  			var string = "";
 		    	  			$.each(data,function(idx,item){
+		    	  				
 		    	  			  string += '<tr>'+
 				    	  			 	'<td class="project-title" style="width:60px">'+
 										'</td>'+
@@ -248,16 +281,17 @@
 									    '<td class="project-title" style="width:500px">'+
 									    	'<img alt="未上传图片" id="h'+item.imageId+'" src="'+item.heatImageUrl+'" style="height:110px; width:300px">'+
 										'</td>'+
+										'<td class="project-title" style="width:110px">'+
+											'<a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updetaThresHold(this, true)"  data-toggle="modal" data-target="#myModal_updetaHeatImage">修改</a><br />'+
+										'</td>'+
 				    	  		    	'<td class="project-title" style="width:500px">'+
 				    	  		    		'<img alt="未上传图片" id="p'+item.imageId+'" src="'+item.physicalImageUrl+'" style="height:110px; width:300px">'+
 									    '</td>'+
 									    '<td class="project-title" style="display:none">'+
     	  		    						+item.imageId+
 					    				'</td>'+
-									    '<td class="project-title" style="width:60px">'+
-										'</td>'+
-										'<td class="project-status" style="width:160px">'+
-											'<a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updetaThresHold(this)"  data-toggle="modal" data-target="#myModal_updetaimage">修改</a><br />'+
+										'<td class="project-status" style="width:110px">'+
+											'<a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updetaThresHold(this, false)"  data-toggle="modal" data-target="#myModal_updetaPhysicalImage">修改</a><br />'+
 									    '</td>'+
 									    '<td class="project-actions">'+
 									    '</td>'+
