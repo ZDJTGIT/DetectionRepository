@@ -173,7 +173,6 @@
 	<script src="assets/js/plugins/laydate/laydate.js" charset="utf-8"></script>
 	<script src="assets/js/layui.all.js" charset="utf-8"></script>
 	<script>
-	
 		//传字符串型时间转化为时间
 		 function stringToData(strin){
 			var beginArray = strin.split(" ");

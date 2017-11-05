@@ -271,7 +271,7 @@
 												'</div>'+
 												'<div>'+
 													'<div style="width:80%;float: left">'+
-														'<input type="text" id="projectTime" name="projectTime" class="input_noborder" value="'+item.projectTime+'">'+
+														'<input type="text" id="projectTime" name="projectTime" class="input_noborder" value="'+item.projectBeginTime+'">'+
 													'</div>'+
 												'</div>'+	
 											'</div>'+

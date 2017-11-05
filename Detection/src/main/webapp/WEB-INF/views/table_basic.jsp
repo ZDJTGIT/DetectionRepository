@@ -60,12 +60,58 @@
 						<div class="row">
 							<div class="col-sm-5 m-b-xs">
 								<p>详细记录用户各项基本信息(用户初始密码：123456)</p>
-								<a href="javascript:;" id="popupAddUser">添加用户</a>
-								
-								<div id="modifyuser" class="white_content">
-									<form id="form_modifyuser">
-									<div>
-										<p><h3><strong>修改用户信息</strong></h3>（请确保修改之后用户名唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
+								<a href="javascript:;" id="popupAddUser" data-toggle="modal" data-target="#myModal_addUser">添加用户</a>
+							<!-- Modal添加用户 -->
+							<div class="modal fade" id="myModal_addUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							 <form id="form_adduser">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							        <h4 class="modal-title" id="myModalLabel_addProject">新建项目</h4>
+							      </div>
+							      <div class="modal-body">
+							      		<p><h3><strong>添加新用户</strong></h3>(请确保用户名的唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
+											<br>
+											<label class="md_lable" for="userName">用户名:</label>
+											<input class="md_input" type="text" id="userName" name="userName"><br><br>
+	
+											<label class="md_lable" for="linkman">联系人:</label>
+											<input class="md_input" type="text" id="linkman" name="linkman"><br><br>
+	
+											<label class="md_lable" for="company">所属公司:</label>
+											<input class="md_input" type="text" id="company" name="company"><br><br>
+	
+											<label class="md_lable" for="phone">手机号码:</label>
+											<input class="md_input" type="text"id="phone" name="phone"><br><br>
+	
+											<label class="md_lable" for="email">邮箱地址:</label>
+											<input class="md_input" type="text" id="email" name="email"><br><br>
+											
+								            <label class="md_lable" for="">用户权限:</label>
+								            <div id="userRole_div_s">
+								            </div>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" id="offAddUser" class="btn btn-default" data-dismiss="modal">关闭</button>
+							        <button type="button" id="sureAdd" class="btn btn-primary">提交</button>
+							      </div>
+							    </div>
+							  </div>
+							 </form>
+							</div>
+						
+							<!-- Modal修改用户 -->
+							<div class="modal fade" id="myModal_modifyuser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+							 <form id="form_modifyuser">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header">
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							        <h4 class="modal-title" id="myModalLabel_addProject">新建项目</h4>
+							      </div>
+							      <div class="modal-body">
+							      		<p><h3><strong>修改用户信息</strong></h3>（请确保修改之后用户名唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
 										<label for="mdid" style="display:none"></label>
 										<input type="text" id="mdid" name="mdid" style="display:none"><br>
 
@@ -87,42 +133,16 @@
 										<label class="md_lable" for="">用户权限:</label>
 										<div id="userRole_div">
 							            </div>
-									</div>
-									<br>
-									<input class="md_input_sure" type="button" id="sureMdy" value="确定修改">
-									<input class="md_input_cancel" type="button" id="closeModfiyUser" value="关闭窗口">
-								    </form>
-								</div>
-
-								<div id="adduser" class="white_content" >
-								  <form id="form_adduser">
-								    <div>
-										<p><h3><strong>添加新用户</strong></h3>(请确保用户名的唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
-										<br>
-										<label class="md_lable" for="userName">用户名:</label>
-										<input class="md_input" type="text" id="userName" name="userName"><br><br>
-
-										<label class="md_lable" for="linkman">联系人:</label>
-										<input class="md_input" type="text" id="linkman" name="linkman"><br><br>
-
-										<label class="md_lable" for="company">所属公司:</label>
-										<input class="md_input" type="text" id="company" name="company"><br><br>
-
-										<label class="md_lable" for="phone">手机号码:</label>
-										<input class="md_input" type="text"id="phone" name="phone"><br><br>
-
-										<label class="md_lable" for="email">邮箱地址:</label>
-										<input class="md_input" type="text" id="email" name="email"><br><br>
-										
-							            <label class="md_lable" for="">用户权限:</label>
-							            <div id="userRole_div_s">
-							            </div>
-									</div>
-									<br>
-									<input class="md_input_sure" type="button" id="sureAdd" value="确定添加">
-									<input class="md_input_cancel" type="button" id="closeAddUser" value="关闭窗口">
-								  </form>
-								</div>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" id="offModifyUser" class="btn btn-default" data-dismiss="modal">关闭</button>
+							        <button type="button" id="sureMdy" class="btn btn-primary">提交</button>
+							      </div>
+							    </div>
+							  </div>
+							 </form>
+							</div>
+								
 							</div>
 							<div class="col-sm-4 m-b-xs">
 								<div data-toggle="buttons" class="btn-group"></div>
@@ -154,7 +174,7 @@
 								</thead>
 								<tbody id="userTableDeatil">
 									<c:forEach items="${userList}" var="singleUser">
-										<tr>
+										<tr class="project-status">
 											<td>${singleUser.userId}</td>
 											<td>${singleUser.userName}</td>
 											<td>${singleUser.email}</td>
@@ -164,7 +184,7 @@
 											<td><fmt:formatDate value="${singleUser.createTime}" type="both" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 											<td>
 												<a href="javascript:;" class="selectRow"
-												onclick="selectRow(this)"><b>修改用户</b></a>
+												onclick="selectRow(this)" data-toggle="modal" data-target="#myModal_modifyuser"><b>修改用户</b></a>
 												<a href="javascript:;" class="deteteRow"
 												onclick="deleteRow(this)"><b>删除用户</b></a>
 											</td>
@@ -184,9 +204,9 @@
 	<!-- <script src="assets/js/content.js"></script> -->
 	 <!-- jQuery Validation plugin javascript-->
 	<script src="assets/js/customerValidate.js"></script>
-	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
+	<!-- <script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
     <script src="assets/js/plugins/validate/messages_zh.min.js"></script>
-    <script src="assets/js/demo/form-validate-demo.min.js"></script>
+    <script src="assets/js/demo/form-validate-demo.min.js"></script> -->
 	<!-- Switchery -->
     <script src="assets/js/plugins/switchery/switchery.js"></script>
 	<!-- iCheck -->
@@ -203,6 +223,16 @@
     
     <script type="text/javascript">
     	$(document).ready(function(){
+    		
+
+    		$("tr").click(function(){
+    		    var me = $(this);
+    		    me.closest("table").find("tr,td").css("backgroundColor","");
+    		    var tr = me.closest("tr").css("backgroundColor","#1ab394");
+    		    var table = tr.closest("table");
+    		    table.find("tr").find("td")
+    		    //.eq(me.index("tr>td")).css("backgroundColor","#1ab394");
+    		});
     		
     		jQuery.validator.addMethod("isTel", function (value, element) {  
     		    var length = value.length;  
@@ -269,18 +299,19 @@
 					if (data) {
 						$("#mytable tbody").html("");
 						$.each(data,function(idx,user){
-							var viewData = "<tr><td>"+ user.userId
-							+ "</td><td>"+ user.userName
-							+ "</td><td>"+ user.email
-							+ "</td><td>"+ user.phone
-							+ "</td><td>"+ user.company
-							+ "</td><td>"+ user.linkman
-							+ "</td><td>"+ user.createTime
-							+ "</td><td>"
-							+ "<a href='javascript:;' class='selectRow' onclick='selectRow(this)'><b>修改用户</b></a> "
-							+ "<a href='javascript:;' class='deteteRow' onclick='deleteRow(this)'><b>删除用户</b></a>"
-							+ "</td></tr>";
+						   var viewData = '<tr><td>'+ user.userId
+										+ '</td><td>'+ user.userName
+										+ '</td><td>'+ user.email
+										+ '</td><td>'+ user.phone
+										+ '</td><td>'+ user.company
+										+ '</td><td>'+ user.linkman
+										+ '</td><td>'+ user.createTime
+										+ '</td><td>'
+										+ '<a href="javascript:;" class="selectRow" onclick="selectRow(this)" data-toggle="modal" data-target="#myModal_modifyuser"><b>修改用户</b></a>'
+										+ '<a href="javascript:;" class="deteteRow" onclick="deleteRow(this)"><b>删除用户</b></a>'
+										+ '</td></tr>';
 					$('#userTableDeatil').append(viewData);
+					$('#offAddUser').trigger("click"); 
 						});
 					} else {
 						alert("数据异常");
@@ -351,6 +382,7 @@
 								$("table tr:eq(" + t + ") td:eq(3)").text(data.phone);
 								$("table tr:eq(" + t + ") td:eq(4)").text(data.company);
 								$("table tr:eq(" + t + ") td:eq(5)").text(data.linkman);
+								$('#offModifyUser').trigger("click"); 
 								alert("修改成功");
 							} else {
 								alert("数据异常");
@@ -479,7 +511,7 @@
 										+ "</td><td>"+ data.linkman
 										+ "</td><td>"+ data.createTime
 										+ "</td><td>"
-										+ "<a href='javascript:;' class='selectRow' onclick='selectRow(this)'><b>修改用户</b></a> "
+										+ "<a href='javascript:;' class='selectRow' onclick='selectRow(this)' data-toggle='modal' data-target='#myModal_modifyuser'><b>修改用户</b></a> "
 										+ "<a href='javascript:;' class='deteteRow' onclick='deleteRow(this)'><b>删除用户</b></a>"
 										+ "</td></tr>";
 								$('#userTableDeatil').append(viewData);

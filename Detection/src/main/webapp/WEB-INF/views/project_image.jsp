@@ -78,7 +78,7 @@
 								
 								<label class="md_lable" for="">添加热点图:</label>
 							    <div class="layui-upload-list">
-									<img class="layui-upload-img" id="showHeat" src="assets/img/test2.png">
+									<img class="layui-upload-img" id="showHeat" src="assets/img/test2.png" style="height:110px; width:300px">
 									<p id="demoText1"></p>
 							    </div>
 								<button type="button" class="layui-btn" id="uploadHeat">上传</button><br><br>  
@@ -109,7 +109,7 @@
 						        
 							    <label class="md_lable" for="">添加现场图:</label>
 							    <div class="layui-upload-list">
-									<img class="layui-upload-img" id="showPhysical" src="assets/img/test2.png">
+									<img class="layui-upload-img" id="showPhysical" src="assets/img/test2.png" style="height:110px; width:300px">
 									<p id="demoText2"></p>
 							    </div>
 								<button type="button" class="layui-btn" id="uploadPhysical">上传</button>  
@@ -256,6 +256,22 @@
 			 $('#imageId_updetaPhysical').val(imageId);
 			 $('#showPhysical').attr("src",$("table tr:eq(" + b + ") td:eq(4)").find('img').attr('src'));
 		 }
+		 var imageId = $("table tr:eq(" + b + ") td:eq(4)").text();
+		 $('#detectionTypeName_updetaimage').val(detectionTypeId);
+		 $('#imageId_updetaimage').val(imageId);
+		 //打开页面获取当前页面图片
+	    $.ajax({
+    		  type:'post',
+    	  	  url: 'rest/image/showThisProjectImaged',
+    	  	  data: {imageId:imageId},
+    	  	  contextType:"application/json",
+    	  	  success: function(data){
+    	  		  //循环加载返回的测点集合
+    	  		  if(data){
+    	  			
+    	  		  }
+    	  		  },
+    	  	  });
 	 }
 	
 		$(document).ready(function() {
