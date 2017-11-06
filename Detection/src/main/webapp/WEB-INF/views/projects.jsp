@@ -472,16 +472,6 @@
 	    	   var projectStatus =  $("table tr:eq(" + b + ") td:eq(10)").text();//项目状态_int--9
 	    	   var projectBeginTime =  $("table tr:eq(" + b + ") td:eq(11)").text();//开始时间--7
 	    	   var projectEndTime =  $("table tr:eq(" + b + ") td:eq(12)").text();//结束时间--8
-	    /* 	   alert(projectAddress);
-	    	   alert(projectName);
-	    	   alert(projectDescription);
-	    	   alert(projectLongitude);
-	    	   alert(projectLatitude);
-	    	   alert(projectId);
-	    	   alert(projectBeginTime);
-	    	   alert(projectEndTime);
-	    	   alert(projectStatus);
-	    	   alert(projectTypeId); */
 			   $('#projectAddress_updetaProject').val(projectAddress);
 	       	   $('#projectName_updetaProject').val(projectName);
 	       	   $('#projectDescription_updetaProject').val(projectDescription);
@@ -490,7 +480,7 @@
 	       	   $('#projectId_updetaProject').val(projectId);
 		       $('#projectBeginTime_updetaProject').val(projectBeginTime);
 			   $('#projectEndTime_updetaProject').val(projectEndTime);
-	       	   $("#selectProjectStatus_selected option[value='"+projectStatus+"']").attr("selected","selected");
+	       	   $("#selectProjectStatus_selected option[value='"+projectStatus+"']").prop("selected",true);
 	       	   //修改项目时显示当前选中项目的所属用户和项目类型
 	       	   $.ajax({
 		   		  type:'post',
@@ -578,6 +568,7 @@
    		   	  		  if(data){
    		   	  		    //修改成功后当前页面的当前项目修改
 			    	   $("table tr:eq(" + t + ") td:eq(5) span").text(data.projectStatusString);//项目状态_String
+			    	   $("table tr:eq(" + t + ") td:eq(5) span").attr('class','label label-primary statusColor'+data.projectStatus);
 			    	   $("table tr:eq(" + t + ") td:eq(6) a").text(data.projectName);//项目名
 			    	   $("table tr:eq(" + t + ") td:eq(9) small").text(data.projectDescription);//项目描述
 			    	   $("table tr:eq(" + t + ") td:eq(7) small").text(data.projectBeginTime);//创建时间
@@ -596,7 +587,10 @@
 			    	   $("table tr:eq(" + t + ") td:eq(8) small").text("当前进度： "+percentage+"%");//当前进度
 			    	   $("table tr:eq(" + t + ") td:eq(8) .progress-bar").css("width",percentage+"%");//当前进度
 			    	   $('#offUpdetaProject').trigger("click"); 
-			    	   alert("修改成功！");
+			    	   $('.statusColor22').css("background-color","#1ab394"); 
+	  	  	 		   $('.statusColor21').css("background-color","#FF8547"); 
+	  	  	 		   $('.statusColor23').css("background-color","#F54545"); 
+	  	  			   $('.statusColor24').css("background-color","#696969");
    		   	  		  }else {
   						alert("抱歉！您为非管理员用户，修改项目信息请联系对应管理员！");
    					  }
@@ -685,7 +679,7 @@
 											'<span class="label label-primary">' + data.projectAddress + '</span>'+
 										'</td>'+
 										'<td class="project-status" style="width:80px">'+
-											'<span class="label label-primary">' + data.projectStatusString + '</span>'+
+											'<span class="label label-primary statusColor'+data.projectStatus+'">' + data.projectStatusString + '</span>'+
 										'</td>'+
 										'<td class="project-title" style="width:150px">'+
 											'<a href="javascript:;">' + data.projectName + '</a><br />'+
@@ -748,7 +742,11 @@
 										    '</a>'+
 										'</td>'+
 									'</tr>';
-								    $('#hover_table').append(viewData);
+								    $('#hover_table').prepend(viewData);
+								    $('.statusColor22').css("background-color","#1ab394"); 
+				  	  	 			$('.statusColor21').css("background-color","#FF8547"); 
+				  	  	 			$('.statusColor23').css("background-color","#F54545"); 
+				  	  				$('.statusColor24').css("background-color","#696969");
 								    $('#projectAddress_addProject').val("");
 									$('#projectName_addProject').val("");
 									$('#projectDescription_addProject').val("");
@@ -756,7 +754,8 @@
 									$('#projectLatitude_addProject').val("");
 									$('#projectBeginTime_addProject').val("");
 									$('#projectEndTime_addProject').val("");
-									$('#offAddProject').trigger("click"); 
+									$('#offAddProject').trigger("click");
+								  
                            }else{
                             	alert("抱歉！您为非管理员用户，添加项目请联系对应管理员！");
                             	$('#projectAddress_addProject').val("");
@@ -906,7 +905,7 @@
 																'<span class="label label-primary">' + item.projectAddress + '</span>'+
 															'</td>'+
 															'<td class="project-status" style="width:80px">'+
-																'<span class="label label-primary">' + item.projectStatusString + '</span>'+
+																'<span class="label label-primary statusColor'+item.projectStatus+'">' + item.projectStatusString + '</span>'+
 															'</td>'+
 															'<td class="project-title" style="width:150px">'+
 																'<a href="javascript:;">' + item.projectName + '</a><br />'+
@@ -963,7 +962,14 @@
 															'</td>'+
 														'</tr>'; 
 					  	  		    					});
-					  	  		    $('#hover_table').html(asthtml); 		
+					  	  		    $('#hover_table').html(asthtml);
+					  	  		    
+					  	  	 		$.each(data.projectList,function(idx,item){
+					  	  	 			$('.statusColor22').css("background-color","#1ab394"); 
+					  	  	 			$('.statusColor21').css("background-color","#FF8547"); 
+					  	  	 			$('.statusColor23').css("background-color","#F54545"); 
+					  	  				$('.statusColor24').css("background-color","#696969"); 
+					  	  	 		});
 					  	  		    if(loadLaypage){ //如果该参数有值
 										loadLaypage(data.total, jsonData); //有查询条件时请求数据，需重新初始化分页组件
 									}

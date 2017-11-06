@@ -46,11 +46,9 @@
    or u.phone like '%${_parameter.param1}%' 
    or u.company like '%${_parameter.param1}%' 
    or u.linkman like '%${_parameter.param1}%')
-   and ur.role_id >(select
-    				role_id
-    				from user_role
-    				where user_id = ${_parameter.param2})
-	and u.user_id = ur.user_id
+   and ur.role_id >(select role_id from user_role
+   where user_id = ${_parameter.param2})
+   and u.user_id = ur.user_id
   </select>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
     select

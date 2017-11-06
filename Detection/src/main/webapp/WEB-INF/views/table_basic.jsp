@@ -28,12 +28,12 @@
 
 <link href="assets/css/plugins/iCheck/custom.css" rel="stylesheet">
 <link href="assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
- <!-- Sweet Alert -->
-    <link href="assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<!-- Sweet Alert -->
+<link href="assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
 <link href="assets/css/style.min.css" rel="stylesheet">
 <link href="assets/css/plugins/table/basic.css" rel="stylesheet">
-
+<link href="css/titatoggle-dist.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
@@ -169,7 +169,9 @@
 										<th>所属公司</th>
 										<th>联系人</th>
 										<th>创建时间</th>
-										<th>操作</th>
+										<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作</th>
+										<th>状态</th>
+										<th>修改状态</th>
 									</tr>
 								</thead>
 								<tbody id="userTableDeatil">
@@ -184,10 +186,16 @@
 											<td><fmt:formatDate value="${singleUser.createTime}" type="both" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 											<td>
 												<a href="javascript:;" class="selectRow"
-												onclick="selectRow(this)" data-toggle="modal" data-target="#myModal_modifyuser"><b>修改用户</b></a>
+												onclick="selectRow(this)" data-toggle="modal" data-target="#myModal_modifyuser"><b>修改</b></a>
+												&nbsp;&nbsp;&nbsp;
 												<a href="javascript:;" class="deteteRow"
-												onclick="deleteRow(this)"><b>删除用户</b></a>
+												onclick="deleteRow(this)"><b>删除</b></a>
 											</td>
+											<td>${singleUser.status}</td> 
+	                            			<td >
+	                            			    <a href="javascript:;" class="changStatus" 
+	                            			    onclick="changStatus(this)"><b>&nbsp;&nbsp;切换</b></a>
+	                            			</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -203,9 +211,9 @@
 	<script src="assets/js/bootstrap.min.js"></script> -->
 	<!-- <script src="assets/js/content.js"></script> -->
 	 <!-- jQuery Validation plugin javascript-->
+	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
 	<script src="assets/js/customerValidate.js"></script>
-	<!-- <script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="assets/js/plugins/validate/messages_zh.min.js"></script>
+    <!-- <script src="assets/js/plugins/validate/messages_zh.min.js"></script>
     <script src="assets/js/demo/form-validate-demo.min.js"></script> -->
 	<!-- Switchery -->
     <script src="assets/js/plugins/switchery/switchery.js"></script>
@@ -215,51 +223,103 @@
 	<!-- Data Tables -->
     <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
-   
+    <script src="assets/js/plugins/layer/layer.js"></script>
     <!-- Sweet alert -->
     <script src="assets/js/plugins/sweetalert/sweetalert.min.js"></script>
     
-    <script type="text/javascript" src="assets/js/tabel_basic_addAla.js"></script>
-    
     <script type="text/javascript">
-    	$(document).ready(function(){
-    		
-
-    		$("tr").click(function(){
-    		    var me = $(this);
-    		    me.closest("table").find("tr,td").css("backgroundColor","");
-    		    var tr = me.closest("tr").css("backgroundColor","#1ab394");
-    		    var table = tr.closest("table");
-    		    table.find("tr").find("td")
-    		    //.eq(me.index("tr>td")).css("backgroundColor","#1ab394");
-    		});
-    		
-    		jQuery.validator.addMethod("isTel", function (value, element) {  
-    		    var length = value.length;  
-    		    var mobile = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;  
-    		    var tel = /^(\d{3,4}-?)?\d{7,9}$/g;  
-    		    return this.optional(element) || tel.test(value) || (length == 11 && mobile.test(value));  
-    		}, "请正确填写您的联系方式");  
-    		
-    		$("#signupForm").validate({
-  			  debug:true,
-  			  rules: {
-                     username: { required: true, minlength: 2 },  
-                 },  
-                 messages: {  
-                     username: {  
-                         required: "用户名不能为空",  
-                         minlength: "用户名的最小长度为2"  
-                     },  
-                 }
-  		  });
-    	});
+    	function xx(e){
+    		var s = e.parentNode.parentNode.rowIndex;
+    		alert(s);
+    		alert(e);
+    	}
     </script>
-	
+    
 	<script type="text/javascript">
+	var dlId = '${userInfo.userId}';
+	var b;
+    //修改用户信息
+	function selectRow(s){
+		b = s.parentNode.parentNode.rowIndex;
+		var dlId = '${userInfo.userId}';
+		var name = $("table tr:eq(" + b + ") td:eq(1)").text();
+		var email= $("table tr:eq(" + b + ") td:eq(2)").text();
+		var phone = $("table tr:eq(" + b + ") td:eq(3)").text();
+		var company= $("table tr:eq(" + b + ") td:eq(4)").text();
+		var linkman = $("table tr:eq(" + b + ") td:eq(5)").text();
+		var id = $("table tr:eq(" + b + ") td:eq(0)").text();
+		$('#modifyuser').show();
+		$('#mdlinkman').val(linkman);
+		$('#mdname').val(name);
+		$('#mdcompany').val(company);
+		$('#mdphone').val(phone);
+		$('#mdemail').val(email);
+		$('#mdid').val(id);
+		$.ajax({
+	   		  type:'post',
+	   	  	  url: 'rest/user/showSelectUserRole',
+	   	  	  data: {userId:dlId,userName:name},
+	   	  	  contextType:"application/json",
+	   	  	  success: function(data){
+	   	  		document.getElementById("userRole")[data.roleid].selected=true;
+	   	  	  }
+		});
+		return;
+	}
+    
+	//切换用户状态
+	function changStatus(s){
+	    b = s.parentNode.parentNode.rowIndex;
+		var userId = $("table tr:eq(" + b + ") td:eq(0)").text();
+		var status = $("table tr:eq(" + b + ") td:eq(8)").text();
+		$.ajax({
+    		   type:'post',
+	    	  	  url: 'rest/user/changUserStatus',
+	    	  	  data: {userId:userId,status:status},
+	    	  	  contextType:"application/json",
+	    	  	  success: function(data){
+	    	  		       if(data){
+	    	  		    	 $("table tr:eq(" + b + ") td:eq(8)").text(data.status);
+	    	  		       }else{
+	    	  		    	alert("数据异常");
+	    	  		       }
+	    	  	  },
+	    	  	  error: function(){
+	  			    alert("数据加载失败");
+	  		      }
+    	   });
+	} 
+	
+	//删除用户
+	function deleteRow(s) {
+		b = s.parentNode.parentNode.rowIndex;
+		var t = $("table tr:eq(" + b + ") td:eq(1)").text();
+		var dlId = '${userInfo.userId}';
+		var jsonData = '{"userName":"' + t +'","userId":"' + dlId + '"}';
+		
+		layer.confirm('确定要删除该用户么？', {
+			btn : [ '取消删除', '确定删除' ] //按钮
+		}, function() {
+			layer.msg('已取消', {icon : 1});
+		}, function() {
+			$.ajax({
+				type : 'post',
+				url : 'rest/user/delete',
+				contentType : 'application/json',
+				data : jsonData,
+				success : function(data) {
+					document.getElementById('mytable').deleteRow(b);
+					layer.msg('删除成功（该提示3s后自动关闭）', {
+						time : 3000, //3s后自动关闭
+						btn : [ '知道了' ]
+					});
+				}
+			});
+		});
+	}
 	
 	 $(document).ready(function(){
-		 var dlId = '${userInfo.userId}';
+		  
 		 $.ajax({
    		  type:'post',
    	  	  url: 'rest/user/showUserRole',
@@ -285,7 +345,7 @@
  			    alert("数据加载失败");
  		      }
    	     });
-	 });
+	 
 	
 		$('#sureSearch').click(function(){
 			var keyword = $('#keyword').val();
@@ -309,9 +369,11 @@
 										+ '</td><td>'
 										+ '<a href="javascript:;" class="selectRow" onclick="selectRow(this)" data-toggle="modal" data-target="#myModal_modifyuser"><b>修改用户</b></a>'
 										+ '<a href="javascript:;" class="deteteRow" onclick="deleteRow(this)"><b>删除用户</b></a>'
+										+ "</td><td>"+ user.status
+                            			+ "</td><td>"
+                            			+ "<a href='javascript:;' class='changStatus' onclick='changStatus(this)'><b>切换状态</b></a>"
 										+ '</td></tr>';
-					$('#userTableDeatil').append(viewData);
-					$('#offAddUser').trigger("click"); 
+						   $('#userTableDeatil').append(viewData);
 						});
 					} else {
 						alert("数据异常");
@@ -322,36 +384,6 @@
 				}
 			});
 		});
-	    
-	        var b;
-	    //修改用户信息
-		function selectRow(s){
-			b = s.parentNode.parentNode.rowIndex;
-			var dlId = '${userInfo.userId}';
-			var name = $("table tr:eq(" + b + ") td:eq(1)").text();
-			var email= $("table tr:eq(" + b + ") td:eq(2)").text();
-			var phone = $("table tr:eq(" + b + ") td:eq(3)").text();
-			var company= $("table tr:eq(" + b + ") td:eq(4)").text();
-			var linkman = $("table tr:eq(" + b + ") td:eq(5)").text();
-			var id = $("table tr:eq(" + b + ") td:eq(0)").text();
-			$('#modifyuser').show();
-			$('#mdlinkman').val(linkman);
-			$('#mdname').val(name);
-			$('#mdcompany').val(company);
-			$('#mdphone').val(phone);
-			$('#mdemail').val(email);
-			$('#mdid').val(id);
-			$.ajax({
-		   		  type:'post',
-		   	  	  url: 'rest/user/showSelectUserRole',
-		   	  	  data: {userId:dlId,userName:name},
-		   	  	  contextType:"application/json",
-		   	  	  success: function(data){
-		   	  		document.getElementById("userRole")[data.roleid].selected=true;
-		   	  	  }
-			});
-			return;
-		}
 	    
 		//确定修改（修改操作稍后改成看信息修改）
 		$("#sureMdy").click(function() {
@@ -394,82 +426,13 @@
 					});
 		});
 	    
-		//关闭修改用户div
-		$('#closeModfiyUser').click(function(e) {
-			$('#modifyuser').hide();
-		});
-	    
-		//删除用户
-		function deleteRow(s) {
-			var b = s.parentNode.parentNode.rowIndex;
-			var t = $("table tr:eq(" + b + ") td:eq(1)").text();
-			var dlId = '${userInfo.userId}';
-			var jsonData = '{"userName":"' + t +'","userId":"' + dlId + '"}';
-			
-			/*&$.ajax({
-				type : 'post',
-				url : 'rest/user/delete',
-				contentType : 'application/json',
-				data : jsonData,
-				success : function(data) {
-					if(data.isDelete=="2"){
-						alert("超级管理员-不可删除");
-					}else if(data.isDelete=="3"){
-						alert("管理员不可操作管理员");
-					}else{
-						document.getElementById('mytable').deleteRow(b);
-						alert("删除成功");
-					}
-					layer.msg('删除成功（该提示3s后自动关闭）', {
-						time : 3000, //3s后自动关闭
-						btn : [ '知道了' ]
-					});
-				}
-			});*/
-			
-			layer.confirm('确定要删除该用户么？', {
-				btn : [ '取消删除', '确定删除' ] //按钮
-			}, function() {
-				layer.msg('已取消', {icon : 1});
-			}, function() {
-				$.ajax({
-					type : 'post',
-					url : 'rest/user/delete',
-					contentType : 'application/json',
-					data : jsonData,
-					success : function(data) {
-						document.getElementById('mytable').deleteRow(b);
-						layer.msg('删除成功（该提示3s后自动关闭）', {
-							time : 3000, //3s后自动关闭
-							btn : [ '知道了' ]
-						});
-					}
-				});
-			});
-		}
-		
-			//打开表格发送请求到控制器查数据库获取表格信息返回加载，
+	 		//打开表格发送请求到控制器查数据库获取表格信息返回加载，
 			//增删改都是通过发送请求到控制器查数据库获取表格信息返回加载
 			$(".i-checks").iCheck({
 				checkboxClass : "icheckbox_square-green",
 				radioClass : "iradio_square-green",
 			});
-			//打开添加用户div
-			$('#popupAddUser').click(function(e) {
-				e.preventDefault();
-				$('#adduser').show();
-				$('#userName').val("");
-				$('#linkman').val("");
-				$('#company').val("");
-				$('#phone').val("");
-				$('#email').val("");
-				
-			});
-			//关闭添加用户div
-			$('#closeAddUser').click(function(e) {
-				e.preventDefault();
-				$('#adduser').hide();
-			});
+	 		
 			//确定添加用户
 			$('#sureAdd').click(function(){
 				if(!$('#form_adduser').valid()){
@@ -513,14 +476,19 @@
 										+ "</td><td>"
 										+ "<a href='javascript:;' class='selectRow' onclick='selectRow(this)' data-toggle='modal' data-target='#myModal_modifyuser'><b>修改用户</b></a> "
 										+ "<a href='javascript:;' class='deteteRow' onclick='deleteRow(this)'><b>删除用户</b></a>"
+										+ "</td><td>"+ data.status
+                            			+ "</td><td>"
+                            			+ "<a href='javascript:;' class='changStatus' onclick='changStatus(this)'><b>切换状态</b></a>"
 										+ "</td></tr>";
+								$('#offAddUser').trigger("click"); 	
 								$('#userTableDeatil').append(viewData);
 								} else {
 									alert("数据异常");
 								}
 							}
 						});
-				});
+				}); 
+	 });
 	</script>
 	
 	<script type="text/javascript"

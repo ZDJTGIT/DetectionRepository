@@ -493,7 +493,7 @@ public class ProjectController {
 			detectionPointService.deleteByProjectId(projectId);
 			// 项目ID关联测点表和传感器表删除传感器
 			sensorInfoService.deleteByProjectId(projectId);
-			// 项目ID删除告警信息
+			// 项目ID删除阀值
 			thresholdService.deleteByProjectId(projectId);
 			return 1;
 		} else {
@@ -505,7 +505,7 @@ public class ProjectController {
 //校验
 	
 	/**
-	 * 验证用户名是否唯一(添加验证)
+	 * 验证项目名是否唯一(添加验证)
 	 */
 	@RequestMapping(value = "/OnlyProjectName", method = RequestMethod.POST)
 	public void OnlyProjectName(String projectName_addProject, HttpServletResponse response) {
@@ -522,13 +522,13 @@ public class ProjectController {
 	}
 	
 	/**
-	 * 验证用户名是否唯一(修改验证)
+	 * 验证项目名是否唯一(修改验证)
 	 */
 	@RequestMapping(value = "/upOnlyProjectName", method = RequestMethod.POST)
-	public void upOnlyProjectName(String projectName_updetaProject, HttpServletResponse response) {
+	public void upOnlyProjectName(String projectName_updetaProject,Integer projectId_updetaProject, HttpServletResponse response) {
 		Project project = projectService.selectByProjectName(projectName_updetaProject);
 		try {
-			if (project == null) {
+			if (project == null||projectName_updetaProject.equals((projectService.selectByPrimaryKey(projectId_updetaProject)).getProjectName())) {
 				response.getWriter().print(true);
 			} else {
 				response.getWriter().print(false);

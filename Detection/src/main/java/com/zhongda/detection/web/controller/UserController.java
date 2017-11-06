@@ -129,13 +129,10 @@ public class UserController {
 			// 设置rememberMe
 			UsernamePasswordToken shiroToken = new UsernamePasswordToken(
 					user.getUserName(), user.getPassword());
-
 			// 身份验证
 			subject.login(shiroToken);
-
 			System.out.println("currentUser:" + subject.getSession().getId());
 			// 获取所有在线的用户session
-
 			// Collection<Session> sessions = sessionDAO.getActiveSessions();
 			// System.out.println("sessions的大小"+sessions.size());
 			// for(Session session:sessions){
@@ -360,35 +357,10 @@ public class UserController {
 	@ResponseBody
 	public Map<String, String> delete(@RequestBody User user) {
 		Map<String, String> model = new HashMap<String, String>();
-		int roleid = 0;
-		List<Role> roleInfos = roleService.selectRolesByUserId(userService
-				.selectByUsername(user.getUserName()).getUserId());
-		roleid = roleInfos.get(0).getRoleId();
-		if (roleid == 1) {
-			// 超级管理员，不可删除
-			model.put("isDelete", "2");
-			return model;
-		} else if (roleid == 2) {
-			// 超级管理员才可以删除管理员
-			if (roleService.selectRolesByUserId(user.getUserId()).get(0)
-					.getRoleId() == 2) {
-				model.put("isDelete", "3");
-				return model;
-			} else {
-				userService.deleteUser_role(userService.selectByUsername(
-						user.getUserName()).getUserId());
-				userService.deleteUser(user.getUserName());
-				model.put("isDelete", "1");
-				return model;
-			}
-		} else {
-			// 普通用户，直接删除
-			userService.deleteUser_role(userService.selectByUsername(
-					user.getUserName()).getUserId());
+			userService.deleteUser_role(userService.selectByUsername(user.getUserName()).getUserId());
 			userService.deleteUser(user.getUserName());
 			model.put("isDelete", "1");
 			return model;
-		}
 	}
 
 	/**
@@ -709,8 +681,24 @@ public class UserController {
 	@RequestMapping(value = "/keywordSearch", method = RequestMethod.POST)
 	@ResponseBody
 	public List<User> keywordSearch(String keyword, Integer userId) {
-		List<User> userss = userService.selectUserByKeyword(keyword, userId);
-		return userss;
+		List<User> usersList = userService.selectUserByKeyword(keyword, userId);
+		return usersList;
+	}
+	
+	/**
+	 * 更改用户状态
+	 */
+	@RequestMapping(value = "/changUserStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public User changUserStatus(Integer userId,String status) {
+		User user = userService.selectByPrimaryKey(userId);
+		if(status.equals("正常")){
+			user.setStatus("禁用");
+		}else{
+			user.setStatus("正常");
+		}
+		userService.updateByPrimaryKeySelective(user);
+		return user;
 	}
 
 	/**

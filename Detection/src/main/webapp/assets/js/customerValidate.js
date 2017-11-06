@@ -88,7 +88,10 @@ $('#form_updetaProject').validate({
 			    data: {                     //要传递的数据
 			    	projectName_updetaProject: function() {
 			            return $("#projectName_updetaProject").val();
-			        }
+			        },
+			        projectId_updetaProject: function() {
+			            return $("#projectId_updetaProject").val();
+			        },
 			    }
 			}
 		},
