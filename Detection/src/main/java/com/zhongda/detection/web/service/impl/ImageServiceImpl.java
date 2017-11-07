@@ -1,7 +1,10 @@
 package com.zhongda.detection.web.service.impl;
 import java.util.List;
+
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+
 import com.zhongda.detection.web.dao.ImageMapper;
 import com.zhongda.detection.web.model.Image;
 import com.zhongda.detection.web.service.ImageService;
@@ -31,6 +34,5 @@ public class ImageServiceImpl implements ImageService {
 	public int updateByPrimaryKeySelective(Image record) {
 		return imageMapper.updateByPrimaryKeySelective(record);
 	}
-
 
 }

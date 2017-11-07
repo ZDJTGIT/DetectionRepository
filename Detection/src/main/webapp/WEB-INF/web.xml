@@ -67,6 +67,18 @@
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>/v2/api-docs</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/swagger-resources</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/swagger-resources/configuration/ui</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/swagger-resources/configuration/security</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>DruidStatView</servlet-name>
     <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>

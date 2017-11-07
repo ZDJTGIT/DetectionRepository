@@ -2,6 +2,7 @@ package com.zhongda.detection.web.controller;
 
 import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -33,26 +34,27 @@ public class ImgaeController {
 	@RequestMapping(value="/uploadImg", method = RequestMethod.POST)
 	public String uploadImg(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request){
 		
-		System.out.println("开始");  
-        String path = request.getSession().getServletContext().getRealPath("assets/upload");
-        System.out.println(path);
+		//基础路径     
+		String path = "/usr/local/nginx1.12.2/html/Detection/mnt/upload";		
         String fileName = file.getOriginalFilename();
-//        System.out.println(fileName);
-//        String[] fileNameArray = fileName.split(".");
-//        System.out.println(fileNameArray.length);
-//        fileName = new Date().getTime()+fileNameArray[fileNameArray.length-1]; 
-        System.out.println(fileName);
-        File targetFile = new File(path, fileName);  
+        // 新的图片名称
+        String newFileName = UUID.randomUUID() + fileName.substring(fileName.lastIndexOf("."));     
+        int hashCode=fileName.hashCode();
+        String dir1=Integer.toHexString(hashCode&0XF);//计算第一级目录
+        String dir2=Integer.toHexString((hashCode>>4)&0XF);//计算第二级目录
+        //基础路径+一级目录+二级目录
+		File dirFile = new File(path, dir1 + "/" + dir2);
+        File targetFile = new File(dirFile, newFileName);  
         if(!targetFile.exists()){  
             targetFile.mkdirs();  
         }  
-        //保存  
-        try {  
+        try {
+        	// 将内存中的数据写入磁盘
             file.transferTo(targetFile);  
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
-		return "{\"code\":\"0\",\"path\":\"assets/upload/"+fileName+"\"}";
+		return "{\"code\":\"0\",\"path\":\"mnt/upload/"+dir1 + "/" + dir2+"/"+newFileName+"\"}";
 	}
 	
 	

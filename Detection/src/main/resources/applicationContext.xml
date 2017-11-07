@@ -33,7 +33,7 @@
             </list>
         </property>
     </bean>
-
+    
 	<!-- druid 拦截配置 -->
 	<bean id="wall-filter-config" class="com.alibaba.druid.wall.WallConfig"
 		init-method="init">

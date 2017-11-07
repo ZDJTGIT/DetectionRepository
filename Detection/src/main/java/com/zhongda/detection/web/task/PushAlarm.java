@@ -10,12 +10,15 @@ import javax.annotation.Resource;
 
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
+import com.zhongda.detection.core.utils.SimpleMailSender;
+import com.zhongda.detection.core.utils.sms.SmsSender;
 import com.zhongda.detection.web.model.Alarm;
 import com.zhongda.detection.web.model.AlarmLinkman;
 import com.zhongda.detection.web.service.AlarmService;
 
-//@Component
+@Component
 public class PushAlarm {
 
 	// 存放所有登录用户信息
@@ -27,7 +30,7 @@ public class PushAlarm {
 	@Resource
 	private SimpMessagingTemplate template;
 
-	@Scheduled(cron = "0/30 * * * * ?")
+	@Scheduled(cron = "* 0/10 * * * ?")
 	public void push() {
 
 		List<Alarm> alarmList = alarmService.selectAlarmAndLinkmanPeriod();
@@ -42,9 +45,9 @@ public class PushAlarm {
 				params.add(alarm.getSensorId().toString());
 				params.add(alarm.getAlarmType());
 				String[] contextArray = alarm.getAlarmContext().split("，");
-				params.add(contextArray[0].substring(3));
+				params.add(contextArray[0].split("：")[1]);
 				String[] thresholdArray = contextArray[2].split("~");
-				params.add(thresholdArray[0].substring(4));
+				params.add(thresholdArray[0].substring(5));
 				params.add(thresholdArray[1]);
 			} else if (alarm.getAlarmTypeId() == 18) { // 如果是设备类告警
 				params.add(alarm.getUserName());
@@ -62,16 +65,17 @@ public class PushAlarm {
 					emails.add(alarmLinkman.getEmail());
 				}
 			} else { // 如果当前项目没有对应的告警联系人
-				System.out.println(params.get(1) + "没有对应的告警联系人");
+				SimpleMailSender mailSender1 = new SimpleMailSender();
+				 mailSender1.send("731583657@qq.com", "告警", alarm.getProjectName()+"没有对应的告警联系人");
 			}
 			// 群发邮件
-			// SimpleMailSender mailSender = new SimpleMailSender();
-			// mailSender.send(emails, SimpleMailSender.ALARM_DATA_MESSAGE,
-			// params);
+			 SimpleMailSender mailSender = new SimpleMailSender();
+			 mailSender.send(emails, SimpleMailSender.ALARM_DATA_MESSAGE,
+			 params);
 			// 群发短信
-			// SmsSender smsSender = new SmsSender();
-			// smsSender.send(51869, phoneNumbers, params);
-			// 如果该消息对应项目的账户在线，则向其登录的客户端推送消息
+			 SmsSender smsSender = new SmsSender();
+			 smsSender.send(51869, phoneNumbers, params);
+			//如果该消息对应项目的账户在线，则向其登录的客户端推送消息
 			if (userSet.contains(alarm.getUserName())) {
 				String message = MessageFormat
 						.format("尊敬的{0}用户：您好！您的{1}项目，编号为：{2}的传感器监测到{3}超过阈值，当前值{4}，阈值范围{5}~{6}。",

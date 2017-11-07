@@ -89,7 +89,6 @@
         <redis.clients.version>2.6.2</redis.clients.version>
         <javax.mail.version>1.4.7</javax.mail.version>
         <pagehelper.version>5.0.0</pagehelper.version>
-        <swagger.version>1.5.8</swagger.version>
 		<io.springfox.version>2.7.0</io.springfox.version>
     </properties>
 
@@ -356,6 +355,12 @@
 		<dependency>
 		    <groupId>io.springfox</groupId>
 		    <artifactId>springfox-swagger2</artifactId>
+		    <version>${io.springfox.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
 		    <version>${io.springfox.version}</version>
 		</dependency>
 		<!-- swagger end -->
