@@ -168,4 +168,19 @@ public class LaserData {
 	public void setSmuStatus(Integer smuStatus) {
 		this.smuStatus = smuStatus;
 	}
+
+	@Override
+	public String toString() {
+		return "LaserData [id=" + id + ", sensorId=" + sensorId
+				+ ", firstTime=" + firstTime + ", firstData=" + firstData
+				+ ", previousTime=" + previousTime + ", previousData="
+				+ previousData + ", currentTimes=" + currentTimes
+				+ ", currentData=" + currentData + ", currentLaserChange="
+				+ currentLaserChange + ", totalLaserChange=" + totalLaserChange
+				+ ", speedChange=" + speedChange + ", sensorStatus="
+				+ sensorStatus + ", createType=" + createType + ", smuCmsId="
+				+ smuCmsId + ", smuCmsChannel=" + smuCmsChannel
+				+ ", smuStatus=" + smuStatus + "]";
+	}
+
 }

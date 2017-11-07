@@ -123,11 +123,12 @@
 
 							</ul>
 						</li>
+						
 					</shiro:hasPermission>
 
 
 
-					<shiro:hasPermission name="project:manager:*">
+					<%-- <shiro:hasPermission name="project:manager:*">
 						<li><a href="javascript:;"> <i
 								class="fa fa fa-bar-chart-o"></i><span class="nav-label">统计图表</span>
 								<span class="fa arrow"></span>
@@ -149,8 +150,12 @@
 									<li><a class="J_menuItem" href="rest/graph_echarts_slope" name="边坡数据分析图">边坡数据分析图</a>
 									</li>
 								</shiro:hasPermission>
+								<shiro:hasPermission name="subwayRail:query:*">
+									<li><a class="J_menuItem" href="rest/graph_echarts_slope" name="地铁轨道分析图">地铁轨道分析图</a>
+									</li>
+								</shiro:hasPermission>
 							</ul></li>
-					</shiro:hasPermission>
+					</shiro:hasPermission> --%>
 					<li><a href="javascript:;"> <i class="fa fa fa-user"></i>
 							<span class="nav-label">个人资料</span> <span class="fa arrow"></span>
 					</a>

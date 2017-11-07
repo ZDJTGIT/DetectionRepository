@@ -108,6 +108,16 @@
 	 #{item}  
 	</foreach>
   </select>
+  <select id="selectProjectAndSysdicByTwoId" resultMap="BaseResultMap">
+  	SELECT
+	p.*, s.*
+	FROM
+		project p,
+		sys_dictionary s
+	WHERE
+		p.project_id = #{projectId,jdbcType=INTEGER}
+	AND s.dic_id = #{detectionTypeId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from project
     where project_id = #{projectId,jdbcType=INTEGER}

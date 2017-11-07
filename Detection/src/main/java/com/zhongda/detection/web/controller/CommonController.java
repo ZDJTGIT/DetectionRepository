@@ -17,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -188,16 +187,14 @@ public class CommonController {
 		return "detectionPoint";
 	}
 
-
 	@RequestMapping("project_detail")
 	public String project_detail(HttpServletRequest request) {
 		return "project_detail";
 	}
 
-	
 	@RequestMapping("project_image/{project}")
 	public String image(Model model, @PathVariable("project") String project) {
-		System.out.println("-------------------------+++"+project);//曾经传了两次
+		System.out.println("-------------------------+++" + project);// 曾经传了两次
 		String[] strings = project.split(":");
 		model.addAttribute("projectId", strings[0]);
 		model.addAttribute("projectName", strings[1]);
@@ -221,7 +218,7 @@ public class CommonController {
 		model.addAttribute("detectionName", strings[1]);
 		return "sensor_info";
 	}
-	
+
 	@RequestMapping("projects")
 	public String projects(HttpServletRequest request) {
 		return "projects";

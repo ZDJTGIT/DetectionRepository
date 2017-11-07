@@ -65,7 +65,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public List<Project> selectProjectWithAlarmCount(Project project) {
-		if(null != project.getPageNum() && null != project.getPageSize()){
+		if (null != project.getPageNum() && null != project.getPageSize()) {
 			PageHelper.startPage(project.getPageNum(), project.getPageSize());
 		}
 		return projectMapper.selectProjectWithAlarmCount(project);
@@ -111,6 +111,13 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public int deleteByUserId(Integer userId) {
 		return projectMapper.deleteByUserId(userId);
+	}
+
+	@Override
+	public Project selectProjectAndSysdicByTwoId(Integer projectId,
+			Integer detectionTypeId) {
+		return projectMapper.selectProjectAndSysdicByTwoId(projectId,
+				detectionTypeId);
 	}
 
 }

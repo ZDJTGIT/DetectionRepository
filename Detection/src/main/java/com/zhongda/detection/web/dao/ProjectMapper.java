@@ -2,17 +2,20 @@ package com.zhongda.detection.web.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.zhongda.detection.web.model.Project;
 
 public interface ProjectMapper {
 
 	/**
 	 * 根据用户ID删除项目（删除用户下所有项目）
+	 * 
 	 * @param userId
 	 * @return
 	 */
 	int deleteByUserId(Integer userId);
-	
+
 	/**
 	 * 根据项目ID删除项目
 	 * 
@@ -20,9 +23,10 @@ public interface ProjectMapper {
 	 * @return
 	 */
 	int deleteByPrimaryKey(Integer projectId);
-	
+
 	/**
 	 * 根据项目ID删除项目以及项目下测点以及测点下传感器以及告警信息表（sql未实现）---
+	 * 
 	 * @param projectId
 	 * @return
 	 */
@@ -105,16 +109,29 @@ public interface ProjectMapper {
 
 	/**
 	 * 根据查询条件查询出对应项目包括告警消息条数
-	 * @param project 封装了查询条件的对象
+	 * 
+	 * @param project
+	 *            封装了查询条件的对象
 	 * @return
 	 */
 	List<Project> selectProjectWithAlarmCount(Project project);
-	
+
 	/**
 	 * 根据项目名称和用户ID查询项目
 	 * 
 	 */
 	Project selectProjectByProjectNameAndUserId(String projectName,
 			Integer userId);
+
+	/**
+	 * 查询字典和项目根据项目ID和字典ID
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	Project selectProjectAndSysdicByTwoId(
+			@Param(value = "projectId") Integer projectId,
+			@Param(value = "detectionTypeId") Integer detectionTypeId);
 
 }

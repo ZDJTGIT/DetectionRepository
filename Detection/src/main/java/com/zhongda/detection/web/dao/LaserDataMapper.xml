@@ -30,6 +30,15 @@
     from laser_data
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAllDataBySensorIdAndTime" resultMap="BaseResultMap">
+  	SELECT
+	*
+	FROM
+		laser_data
+	WHERE
+		sensor_id = #{sensorId,jdbcType=VARCHAR}
+	AND current_times LIKE concat(#{currentTime,jdbcType=VARCHAR},'%')
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from laser_data
     where id = #{id,jdbcType=INTEGER}

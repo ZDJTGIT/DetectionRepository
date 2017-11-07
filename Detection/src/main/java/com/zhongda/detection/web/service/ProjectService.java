@@ -14,9 +14,10 @@ import com.zhongda.detection.web.model.Project;
  * @date 2017年9月25日
  */
 public interface ProjectService {
-	
+
 	/**
 	 * 根据用户ID删除项目（删除用户下所有项目）
+	 * 
 	 * @param userId
 	 * @return
 	 */
@@ -51,11 +52,12 @@ public interface ProjectService {
 
 	/**
 	 * 分页查询出项目包括告警消息条数
-	 * @param project 封装查询条件
+	 * 
+	 * @param project
+	 *            封装查询条件
 	 * @return
 	 */
 	List<Project> selectProjectWithAlarmCount(Project project);
-	
 
 	/**
 	 * 插入一条项目信息
@@ -111,5 +113,15 @@ public interface ProjectService {
 	 */
 	Project selectProjectByProjectNameAndUserId(String projectName,
 			Integer userId);
+
+	/**
+	 * 查询字典和项目根据项目ID和字典ID
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	Project selectProjectAndSysdicByTwoId(Integer projectId,
+			Integer detectionTypeId);
 
 }

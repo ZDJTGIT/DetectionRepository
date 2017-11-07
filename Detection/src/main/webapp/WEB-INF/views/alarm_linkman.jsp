@@ -43,18 +43,6 @@
 					<div class="ibox float-e-margins">
 						<div class="ibox-title">
 							<h5>告警联系人</h5>
-							<div class="ibox-tools">
-								<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
-								</a> <a class="dropdown-toggle" data-toggle="dropdown"
-									href="table_data_tables.html#"> <i class="fa fa-wrench"></i>
-								</a>
-								<ul class="dropdown-menu dropdown-user">
-									<li><a href="table_data_tables.html#">选项1</a></li>
-									<li><a href="table_data_tables.html#">选项2</a></li>
-								</ul>
-								<a class="close-link"> <i class="fa fa-times"></i>
-								</a>
-							</div>
 						</div>
 						 <div class="ibox-content">
 	                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal_table_basic" id="table_basic_addalarm">
@@ -174,7 +162,7 @@
 				      </form>
 				    </div>
 				  </div>
-			</div>		
+			</div>
 	</div>
 
 	<script src="assets/js/jquery.min.js"></script>

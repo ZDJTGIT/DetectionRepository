@@ -35,6 +35,7 @@ demo = {
 				icon : icon
 			});
 			marker.addEventListener("click", function(){
+				alert("sd");
 				var url = "rest/graph_echarts_slope";
 				var indexAarry = $(".J_menuTabs").find('a');
 				var isTrue = true;

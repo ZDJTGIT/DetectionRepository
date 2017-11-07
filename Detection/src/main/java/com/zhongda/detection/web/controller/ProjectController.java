@@ -26,6 +26,7 @@ import org.springframework.web.util.WebUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
+import com.zhongda.detection.core.utils.JXLExcel;
 import com.zhongda.detection.web.dao.ThresholdMapper;
 import com.zhongda.detection.web.model.AlarmLinkman;
 import com.zhongda.detection.web.model.DetectionPoint;
@@ -39,6 +40,7 @@ import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.AlarmLinkmanService;
 import com.zhongda.detection.web.service.DetectionPointService;
 import com.zhongda.detection.web.service.ImageService;
+import com.zhongda.detection.web.service.LaserDataService;
 import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
@@ -70,7 +72,7 @@ public class ProjectController {
 
 	@Autowired
 	private MessageService messageService;
-	
+
 	@Autowired
 	private ImageService imageService;
 
@@ -80,6 +82,11 @@ public class ProjectController {
 	@Resource
 	private AlarmLinkmanService alarmLinkmanService;
 
+	@Resource
+	private LaserDataService laserDataService;
+
+	@Resource
+	private JXLExcel jxlExcel;
 
 	@RequestMapping(value = "/myproject")
 	public @ResponseBody Map<String, List<Project>> queryProject(Integer userId) {
@@ -96,7 +103,6 @@ public class ProjectController {
 	public @ResponseBody List<DetectionPoint> queryItem(Integer projectId) {
 		List<DetectionPoint> itemNameList = detectionPointService
 				.selectItemNameByProjectgId(projectId);
-		System.out.println("itemNameList:" + itemNameList);
 		return itemNameList;
 	}
 
@@ -133,7 +139,6 @@ public class ProjectController {
 		String map = mapper.writeValueAsString(hashMap);
 		model.addAttribute("image", image);
 		model.addAttribute("map", map);
-		String format = simpleDateFormat.format(date);
 		model.addAttribute("projectId", projectId);
 		model.addAttribute("detectionTypeId", detectionTypeId);
 		return "graph_echarts_laserRanging";
@@ -197,6 +202,14 @@ public class ProjectController {
 		// response.getWriter().print(1);
 	}
 
+	/**
+	 * 修改告警联系人状态
+	 * 
+	 * @param status
+	 * @param alarmLinkmanId
+	 * @param response
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/updateAlarmLinmanStatus")
 	public void updateAlarmLinmanStatus(Integer status, Integer alarmLinkmanId,
 			HttpServletResponse response) throws IOException {
@@ -209,48 +222,26 @@ public class ProjectController {
 		}
 	}
 
-	/*
-	 * @RequestMapping(value = "/displacement") public String displacement(Model
-	 * model, Integer projectId, Integer detectionTypeId) {
-	 * System.out.println(projectId + "_--" + detectionTypeId); int count =
-	 * sensorInfoService.selectCountByProjectAndDetectionId( projectId,
-	 * detectionTypeId); return generalJump(model, "graph_echarts_displacement",
-	 * count, projectId, detectionTypeId); }
-	 * 
-	 * @RequestMapping(value = "/osmotic") public String osmotic(Model model,
-	 * Integer projectId, Integer detectionTypeId) {
-	 * System.out.println(projectId + "_--" + detectionTypeId); int count =
-	 * sensorInfoService.selectCountByProjectAndDetectionId( projectId, 11);
-	 * return generalJump(model, "graph_echarts_osmotic", count, projectId, 11);
-	 * }
-	 * 
-	 * @RequestMapping(value = "/selectdisplament") public @ResponseBody
-	 * Map<String, Object> selectdisplament( Integer projectId, Integer
-	 * detectionTypeId, String currentTimes) {
-	 * System.out.println("currentTimes:" + currentTimes + "--projectId:" +
-	 * projectId + "--detectionTypeId:" + detectionTypeId); return
-	 * sensorInfoService.selectInfoAndDisplacementData(currentTimes, projectId,
-	 * detectionTypeId);
-	 * 
-	 * }
-	 * 
-	 * @RequestMapping(value = "/rainfall") public String rainfall(Model model,
-	 * Integer projectId, Integer detectionTypeId) {
-	 * System.out.println(projectId + "_--" + detectionTypeId); int count =
-	 * sensorInfoService.selectCountAndRainfall(projectId, detectionTypeId);
-	 * System.out.println(count); return generalJump(model,
-	 * "graph_echarts_rainfall", count, projectId, detectionTypeId);
-	 * 
-	 * }
-	 * 
-	 * @RequestMapping(value = "/selectrainfall") public @ResponseBody
-	 * Map<String, Object> selectrainfall(Integer projectId, Integer
-	 * detectionTypeId, String detectionTime) {
-	 * System.out.println("currentTimes:" + detectionTime + "--projectId:" +
-	 * projectId + "--detectionTypeId:" + detectionTypeId); return
-	 * sensorInfoService.selectInfoAndSlopeRainfall(detectionTime, projectId,
-	 * detectionTypeId); }
-	 */
+	@RequestMapping(value = "/exportExcel")
+	public void excel(String sensorId, String currentTime, Integer projectId,
+			Integer detectionTypeId, String detectionName,
+			HttpServletResponse response) throws IOException {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		List<LaserData> list = laserDataService.selectAllDataBySensorIdAndTime(
+				sensorId, currentTime);
+		Project project = projectService.selectProjectAndSysdicByTwoId(
+				projectId, detectionTypeId);
+		String datesnew = format.format(list.get(0).getCurrentTimes());
+		response.setContentType("application/octet-stream");
+		response.setContentType("application/OCTET-STREAM;charset=UTF-8");
+		response.setHeader("Content-Disposition", "attachment;filename="
+				+ datesnew + ".xls");
+		String[] head = { "初次测试值(MM)", "前次测试时间", "前次测试值(MM)", "本次检测时间",
+				"本次测试值(MM)", "单次变化量(MM)", "总变化量(MM)", "变化速率(MM/MIN)" };
+
+		jxlExcel.export(response, list, head, project, detectionName);
+
+	}
 
 	/**
 	 * 分页查找用户所有项目
@@ -315,7 +306,8 @@ public class ProjectController {
 	@RequestMapping(value = "/showDetectionStatus", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SysDictionary> showDetectionStatus(Integer projectTypeId) {
-		return sysDictionaryServce.selectSysDictionaryByProjectTypeId(projectTypeId);
+		return sysDictionaryServce
+				.selectSysDictionaryByProjectTypeId(projectTypeId);
 	}
 
 	/**
@@ -404,26 +396,27 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/addDescription", method = RequestMethod.POST)
 	@ResponseBody
-	public DetectionPoint addDescription(@RequestBody DetectionPoint detectionPoint) {
+	public DetectionPoint addDescription(
+			@RequestBody DetectionPoint detectionPoint) {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
-		// 根据项目名查项目ID加到测点
-		detectionPoint.setProjectId((projectService
-				.selectByProjectName(detectionPoint.getProjectName()))
-				.getProjectId());
-		detectionPointService.insertSelective(detectionPoint);
-		// 根据项目ID+测点名称查出插入的测点得到测点ID
-		detectionPoint = detectionPointService
-				.selectByProjectIDAndDetectionName(
-						detectionPoint.getProjectId(),
-						detectionPoint.getDetectionName());
-		// 得到测点类型名称（itemName）
-		detectionPoint.setItemName(sysDictionaryServce
-				.selectProjectStatusByDicId((detectionPoint
-						.getDetectionTypeId())));
-		return detectionPoint;
-		}else{
+			// 根据项目名查项目ID加到测点
+			detectionPoint.setProjectId((projectService
+					.selectByProjectName(detectionPoint.getProjectName()))
+					.getProjectId());
+			detectionPointService.insertSelective(detectionPoint);
+			// 根据项目ID+测点名称查出插入的测点得到测点ID
+			detectionPoint = detectionPointService
+					.selectByProjectIDAndDetectionName(
+							detectionPoint.getProjectId(),
+							detectionPoint.getDetectionName());
+			// 得到测点类型名称（itemName）
+			detectionPoint.setItemName(sysDictionaryServce
+					.selectProjectStatusByDicId((detectionPoint
+							.getDetectionTypeId())));
+			return detectionPoint;
+		} else {
 			return null;
 		}
 	}
@@ -437,23 +430,26 @@ public class ProjectController {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
-		//查询修改后的的阀值记录是否已存在
-		Threshold selectedThreshold = thresholdService
-				.selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
-						threshold.getProjectId(),
-						threshold.getDetectionTypeId(),
-						threshold.getThresholdTypeId());
-		if(selectedThreshold==null||selectedThreshold.getThresholdId()==threshold.getThresholdId()){
-			Project project = projectService.selectByPrimaryKey(threshold.getProjectId());
-			threshold.setUserId(project.getUserId());
-			threshold.setProjectTypeId(project.getProjectTypeId());
-			thresholdService.updateByPrimaryKeySelective(threshold);
-			return threshold;
-		}else{
-			threshold.setThresholdId(0);
-			return threshold;
-		}
-		}else{
+			// 查询修改后的的阀值记录是否已存在
+			Threshold selectedThreshold = thresholdService
+					.selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
+							threshold.getProjectId(),
+							threshold.getDetectionTypeId(),
+							threshold.getThresholdTypeId());
+			if (selectedThreshold == null
+					|| selectedThreshold.getThresholdId() == threshold
+							.getThresholdId()) {
+				Project project = projectService.selectByPrimaryKey(threshold
+						.getProjectId());
+				threshold.setUserId(project.getUserId());
+				threshold.setProjectTypeId(project.getProjectTypeId());
+				thresholdService.updateByPrimaryKeySelective(threshold);
+				return threshold;
+			} else {
+				threshold.setThresholdId(0);
+				return threshold;
+			}
+		} else {
 			return null;
 		}
 	}
@@ -501,15 +497,17 @@ public class ProjectController {
 			return 2;
 		}
 	}
-	
-//校验
-	
+
+	// 校验
+
 	/**
 	 * 验证项目名是否唯一(添加验证)
 	 */
 	@RequestMapping(value = "/OnlyProjectName", method = RequestMethod.POST)
-	public void OnlyProjectName(String projectName_addProject, HttpServletResponse response) {
-		Project project = projectService.selectByProjectName(projectName_addProject);
+	public void OnlyProjectName(String projectName_addProject,
+			HttpServletResponse response) {
+		Project project = projectService
+				.selectByProjectName(projectName_addProject);
 		try {
 			if (project == null) {
 				response.getWriter().print(true);
@@ -520,15 +518,21 @@ public class ProjectController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 验证项目名是否唯一(修改验证)
 	 */
 	@RequestMapping(value = "/upOnlyProjectName", method = RequestMethod.POST)
-	public void upOnlyProjectName(String projectName_updetaProject,Integer projectId_updetaProject, HttpServletResponse response) {
-		Project project = projectService.selectByProjectName(projectName_updetaProject);
+	public void upOnlyProjectName(String projectName_updetaProject,
+			Integer projectId_updetaProject, HttpServletResponse response) {
+		Project project = projectService
+				.selectByProjectName(projectName_updetaProject);
+
 		try {
-			if (project == null||projectName_updetaProject.equals((projectService.selectByPrimaryKey(projectId_updetaProject)).getProjectName())) {
+			if (project == null
+					|| projectName_updetaProject.equals((projectService
+							.selectByPrimaryKey(projectId_updetaProject))
+							.getProjectName())) {
 				response.getWriter().print(true);
 			} else {
 				response.getWriter().print(false);
