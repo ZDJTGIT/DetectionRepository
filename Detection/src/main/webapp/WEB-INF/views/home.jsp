@@ -105,10 +105,7 @@
 		});
 		
 		$(document).ready(function() {
-			var homeMaptabel = $('#maphometabel').dataTable();
-			$(homeMapjsonObjss).each(function(index,value){
-				homeMaptabel.fnAddData([homeMapjsonObjss[index].projectName,homeMapjsonObjss[index].alarmCount]);//填充数据到表
-			});
+			$('#maphometabel').dataTable();
 		}); 
 
 		$(document).ready(function() {
