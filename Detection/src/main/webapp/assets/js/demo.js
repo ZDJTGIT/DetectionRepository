@@ -35,8 +35,7 @@ demo = {
 				icon : icon
 			});
 			marker.addEventListener("click", function(){
-				alert("sd");
-				var url = "rest/graph_echarts_slope";
+				var url = "rest/project/laserRanging?projectId=176&detectionTypeId=26";
 				var indexAarry = $(".J_menuTabs").find('a');
 				var isTrue = true;
 				$(indexAarry).each(function(index,val){
@@ -76,7 +75,7 @@ demo = {
 					height : 90, // 信息窗口高度
 					title : homeMapjsonObjss[index].projectName // 信息窗口标题
 				}
-				var datainfo = "经度:" + lng + ", 纬度" + lat + "边坡信息......";
+				var datainfo = "经度:" + lng + ", 纬度" + lat;
 				infoWindow = new BMap.InfoWindow(datainfo, opts); // 创建信息窗口对象
 				this.openInfoWindow(infoWindow); // 打开信息窗口
 			});

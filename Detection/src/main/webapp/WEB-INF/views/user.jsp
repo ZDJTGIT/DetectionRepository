@@ -38,12 +38,8 @@
 					<div>
 					     <div class="ibox-content no-padding border-left-right">
 					        <div class="img_head">
-					        <!--label class="btn-file" data-role="add">  
-                                 <img id = "#avatarImg" src="assets/img/rojoy.jpg" width="130" height="100" alt=""/>  
-                                 <input id="avatarFile" accept="image/png,image/gif" name="avatarFile" type="file" style="display:none;" />  
-                            </label-->
                             <div class="ge_pic_icon_Infor">  
-                                    <img src="assets/img/rojoy.jpg" width="130" height="100">  
+                                    <img src="assets/img/rojay.png" width="130" height="100">  
 							</div>  
 							<div class="Infor_file">  
     								<input type="file" name="uploadPicture" id="file" value="上传照片" title="上传照片" onchange="getPhoto(this)"/>  
@@ -62,9 +58,6 @@
 						</div>
 						<div class="ibox-content profile-content">
 						    <br><hr>
-							<div>
-								<h6>预留DIV</h6>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -276,7 +269,7 @@
 												'</div>'+	
 											'</div>'+
 											'<div class="poj_layer">'+
-												'<a class="J_menuItem" style="font-size: 15px" onclick="" href="rest/project_detail">查看项目</a>'+
+												'<a class="J_menuItem" style="font-size: 15px" onclick="" href="rest/project/laserRanging?projectId=176&detectionTypeId=26">查看项目</a>'+
 											'</div>'+
 									'</div><hr>';
     	  		    	 });

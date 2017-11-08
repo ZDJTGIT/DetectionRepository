@@ -35,7 +35,7 @@ public class ImgaeController {
 	public String uploadImg(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request){
 		
 		//基础路径     
-		String path = "/usr/local/nginx1.12.2/html/Detection/mnt/upload";		
+		String path = "/usr/local/nginx/html/Detection/mnt/upload";		
         String fileName = file.getOriginalFilename();
         // 新的图片名称
         String newFileName = UUID.randomUUID() + fileName.substring(fileName.lastIndexOf("."));     
