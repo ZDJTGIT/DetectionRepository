@@ -269,7 +269,7 @@
 												'</div>'+	
 											'</div>'+
 											'<div class="poj_layer">'+
-												'<a class="J_menuItem" style="font-size: 15px" onclick="" href="rest/project/laserRanging?projectId=176&detectionTypeId=26">查看项目</a>'+
+												'<a class="J_menuItem" style="font-size: 15px" onclick="" href="rest/project_detail/'+item.projectId+":"+item.projectName+'" name="项目详情">查看项目</a>'+
 											'</div>'+
 									'</div><hr>';
     	  		    	 });

@@ -52,4 +52,9 @@ public class SensorInfoServiceImpl implements SensorInfoService {
 		return sensorInfoMapper.selectBySensorIdAndSensorType(sensorId, sensorType);
 	}
 
+	@Override
+	public List<SensorInfo> selectByProjectId(Integer projectId) {
+		return sensorInfoMapper.selectByProjectId(projectId);
+	}
+
 }

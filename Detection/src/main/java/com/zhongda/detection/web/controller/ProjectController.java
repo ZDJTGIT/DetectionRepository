@@ -497,6 +497,31 @@ public class ProjectController {
 			return 2;
 		}
 	}
+	
+	/**
+	 * 传projectId获取用户信息
+	 */
+	@RequestMapping(value = "/obtainProject", method = RequestMethod.POST)
+	@ResponseBody
+	public Project obtainProject(Integer projectId) {
+		return projectService.selectByPrimaryKey(projectId);
+	}
+	
+	/**
+	 * 获取测点数量，传感器数量，阀值数量，图片数量。
+	 * @param projectId
+	 * @return
+	 */
+	@RequestMapping(value = "/obtainCount", method = RequestMethod.POST)
+	@ResponseBody
+	public Project obtainCount(Integer projectId) {
+		Project project = new Project();
+		project.setDetectionPointCount(projectService.selectDetectionCount(projectId).getDetectionPointCount());
+		project.setSensorInfoCount(projectService.selectSensorInfoCount(projectId).getSensorInfoCount());
+		project.setThresholdCount(projectService.selectThresholdCount(projectId).getThresholdCount());
+		project.setImageCount(projectService.selectImageCount(projectId).getImageCount());
+		return project;
+	}
 
 	// 校验
 

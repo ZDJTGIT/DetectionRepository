@@ -120,4 +120,24 @@ public class ProjectServiceImpl implements ProjectService {
 				detectionTypeId);
 	}
 
+	@Override
+	public Project selectDetectionCount(Integer projectId) {
+		return projectMapper.selectDetectionCount(projectId);
+	}
+
+	@Override
+	public Project selectSensorInfoCount(Integer projectId) {
+		return projectMapper.selectSensorInfoCount(projectId);
+	}
+
+	@Override
+	public Project selectThresholdCount(Integer projectId) {
+		return projectMapper.selectThresholdCount(projectId);
+	}
+
+	@Override
+	public Project selectImageCount(Integer projectId) {
+		return projectMapper.selectImageCount(projectId);
+	}
+
 }

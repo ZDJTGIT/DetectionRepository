@@ -36,6 +36,10 @@
     <result column="project_description" jdbcType="VARCHAR" property="projectDescription" />
     <result column="alarm_count" jdbcType="INTEGER" property="alarmCount" />
     <result column="project_status_string" jdbcType="VARCHAR" property="projectStatusString" />
+    <result column="detection_point_count" jdbcType="INTEGER" property="detectionPointCount" />
+    <result column="sensor_info_count" jdbcType="INTEGER" property="sensorInfoCount" />
+    <result column="threshold_count" jdbcType="INTEGER" property="thresholdCount" />
+    <result column="image_count" jdbcType="INTEGER" property="imageCount" />
   </resultMap>
   
   <sql id="Base_Column_List">
@@ -117,6 +121,29 @@
 	WHERE
 		p.project_id = #{projectId,jdbcType=INTEGER}
 	AND s.dic_id = #{detectionTypeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectDetectionCount" parameterType="java.lang.Integer" resultMap="ProjectResultMap">
+  	select count(*) 'detection_point_count'
+  	from detection_point 
+  	where project_id=#{projectId,jdbcType=INTEGER}
+  </select>
+  <select id="selectSensorInfoCount" parameterType="java.lang.Integer" resultMap="ProjectResultMap">
+    select count(*) 'sensor_info_count'
+    from sensor_info 
+    where detection_point_id 
+    in (select detection_point_id 
+    from detection_point 
+    where project_id = #{projectId,jdbcType=INTEGER})
+  </select>
+  <select id="selectThresholdCount" parameterType="java.lang.Integer" resultMap="ProjectResultMap">
+  	select count(*) 'threshold_count'
+  	from threshold 
+  	where project_id = #{projectId,jdbcType=INTEGER}
+  </select>
+  <select id="selectImageCount" parameterType="java.lang.Integer" resultMap="ProjectResultMap">
+  	select count(*) 'image_count'
+  	from image 
+  	where project_id = #{projectId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from project

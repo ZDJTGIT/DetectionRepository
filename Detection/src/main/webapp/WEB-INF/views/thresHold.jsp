@@ -16,7 +16,7 @@
 <base href="<%=basePath%>">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>预值和图片</title>
+<title>阀值</title>
 <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
 <meta name="description" content="中大检测平台">
 <link rel="shortcut icon" href="favicon.ico">

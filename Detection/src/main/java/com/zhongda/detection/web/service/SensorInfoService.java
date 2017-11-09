@@ -60,5 +60,11 @@ public interface SensorInfoService {
      * @return
      */
     SensorInfo selectBySensorIdAndSensorType(Integer sensorId, String sensorType);
-
+    
+    /**
+     * 根据项目ID查项目下所有传感器
+     * @param ProjectId
+     * @return
+     */
+    List<SensorInfo> selectByProjectId(Integer projectId);
 }

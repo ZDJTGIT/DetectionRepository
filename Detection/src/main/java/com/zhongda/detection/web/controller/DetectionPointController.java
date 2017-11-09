@@ -48,8 +48,9 @@ public class DetectionPointController {
 	public List<DetectionPoint> showProjectDetectionPoint(String projectName){
 		//通过projectName查询项目ID，
 		Project project = projectService.selectByProjectName(projectName);
+		List<DetectionPoint> detectionPointList = detectionPointService.selectByProjectId(project.getProjectId());
 		//通过项目ID查询到所有测点
-		return detectionPointService.selectByProjectId(project.getProjectId());
+		return detectionPointList;
 	}
 	
 	/**

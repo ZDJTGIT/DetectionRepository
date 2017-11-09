@@ -187,14 +187,16 @@ public class CommonController {
 		return "detectionPoint";
 	}
 
-	@RequestMapping("project_detail")
-	public String project_detail(HttpServletRequest request) {
+	@RequestMapping("project_detail/{project}")
+	public String project_detail(Model model, @PathVariable("project") String project) {
+		String[] strings = project.split(":");
+		model.addAttribute("projectId", strings[0]);
+		model.addAttribute("projectName", strings[1]);
 		return "project_detail";
 	}
 
 	@RequestMapping("project_image/{project}")
 	public String image(Model model, @PathVariable("project") String project) {
-		System.out.println("-------------------------+++" + project);// 曾经传了两次
 		String[] strings = project.split(":");
 		model.addAttribute("projectId", strings[0]);
 		model.addAttribute("projectName", strings[1]);

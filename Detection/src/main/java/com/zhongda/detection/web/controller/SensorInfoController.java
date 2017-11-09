@@ -27,6 +27,16 @@ public class SensorInfoController {
 	private SensorInfoService sensorInfoService;
 
 	/**
+	 * 展示项目下所有传感器
+	 */
+	@RequestMapping(value = "/showProjectSensorInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SensorInfo> showProjectSensorInfo(
+			Integer projectId) {
+		return sensorInfoService.selectByProjectId(projectId);
+	}
+	
+	/**
 	 * 展示测点下所有传感器
 	 */
 	@RequestMapping(value = "/showDetectionPointSensorInfo", method = RequestMethod.POST)

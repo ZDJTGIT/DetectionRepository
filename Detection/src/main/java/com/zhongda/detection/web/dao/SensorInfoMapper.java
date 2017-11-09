@@ -42,6 +42,12 @@ public interface SensorInfoMapper {
      */
     List<SensorInfo> selectByDetectionPointId(Integer detectionPointId);
     
+    /**
+     * 根据项目ID查项目下所有传感器
+     * @param ProjectId
+     * @return
+     */
+    List<SensorInfo> selectByProjectId(Integer projectId);
     
     SensorInfo selectByPrimaryKey(Integer sensorInfoId);
 

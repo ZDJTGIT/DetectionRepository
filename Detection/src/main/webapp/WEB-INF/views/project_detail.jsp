@@ -24,64 +24,50 @@
 </head>
 <body class="gray-bg">
 	<div class="row">
-		<div class="col-sm-9">
+		<div class="col-sm-12">
 			<div class="wrapper wrapper-content animated fadeInUp">
 				<div class="ibox">
 					<div class="ibox-content">
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="m-b-md">
-									<a href="project_detail.html#"
-										class="btn btn-white btn-xs pull-right">编辑项目</a>
-
-									<h2>中大检测集团公司</h2>
-
+									<h2>${projectName}</h2>
 								</div>
 								<dl class="dl-horizontal">
-									<dt>状态：</dt>
+								<dt>项目状态：&nbsp;&nbsp;&nbsp;</dt>
 									<dd>
-										<span class="label label-primary">进行中</span>
-									</dd>
+										<span class="label label-primary">已启动</span>
+								    </dd>
 								</dl>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-sm-5">
+							<div class="col-sm-1">
+							</div>
+							<div class="col-sm-2">
 								<dl class="dl-horizontal">
-
-									<dt>项目经理：</dt>
-									<dd>Beaut-zihan</dd>
-									<dt>消息：</dt>
-									<dd>162</dd>
-									<dt>客户：</dt>
-									<dd>
-										<a href="project_detail.html#" class="text-navy"> 百度</a>
-									</dd>
-									<dt>版本：</dt>
-									<dd>v1.4.2</dd>
+									<dt>测点记录：&nbsp;&nbsp;&nbsp;</dt>
+									<dd id="dd_detectionPointCont">0</dd>
+									<dt>阀值记录：&nbsp;&nbsp;&nbsp;</dt>
+									<dd id="dd_thresHoldCont">0</dd>
+									<dt>图片记录：&nbsp;&nbsp;&nbsp;</dt>
+									<dd id="dd_imageCont">0</dd>
+									<dt>传感器记录：</dt>
+									<dd id="dd_sensorInfoCont">0</dd>
 								</dl>
 							</div>
 							<div class="col-sm-7" id="cluster_info">
 								<dl class="dl-horizontal">
-
-									<dt>最后更新：</dt>
-									<dd>2014年 11月7日 22:03</dd>
-									<dt>创建于：</dt>
-									<dd>2014年 2月16日 03:01</dd>
-									<dt>团队成员：</dt>
-									<dd class="project-people">
-										<a href="project_detail.html"> <img alt="image"
-											class="img-circle" src="img/a3.jpg">
-										</a> <a href="project_detail.html"> <img alt="image"
-											class="img-circle" src="img/a1.jpg">
-										</a> <a href="project_detail.html"> <img alt="image"
-											class="img-circle" src="img/a2.jpg">
-										</a> <a href="project_detail.html"> <img alt="image"
-											class="img-circle" src="img/a4.jpg">
-										</a> <a href="project_detail.html"> <img alt="image"
-											class="img-circle" src="img/a5.jpg">
-										</a>
-									</dd>
+									<dt>创建时间：</dt>
+									<dd id="dd_beginTime">2017-05-10 00:00:00</dd>
+									<dt>结束时间：</dt>
+									<dd id="dd_endTime">2018-02-25 19:14:24</dd>
+									<dt>项目地点：</dt>
+									<dd id="dd_address">湖南长沙</dd>
+									<dt>项目经度：</dt>
+									<dd id="dd_Longitude">12''45'</dd>
+									<dt>项目纬度：</dt>
+									<dd id="dd_Latitude">13''14</dd>
 								</dl>
 							</div>
 						</div>
@@ -89,11 +75,11 @@
 							<div class="col-sm-12">
 								<dl class="dl-horizontal">
 									<dt>当前进度</dt>
-									<dd>
+									<dd id="dd_schedule">
 										<div class="progress progress-striped active m-b-sm">
-											<div style="width: 60%;" class="progress-bar"></div>
+											<div id="schedule_div" style="width: 62.63%;" class="progress-bar"></div>
 										</div>
-										<small>当前已完成项目总进度的 <strong>60%</strong></small>
+										<small>当前已完成项目总进度的 <strong id="schedule_strong">62.63%</strong></small>
 									</dd>
 								</dl>
 							</div>
@@ -105,160 +91,80 @@
 										<div class="panel-options">
 											<ul class="nav nav-tabs">
 												<li><a href="project_detail.html#tab-1"
-													data-toggle="tab">团队消息</a></li>
+													data-toggle="tab">测点</a></li>
 												<li class=""><a href="project_detail.html#tab-2"
-													data-toggle="tab">最后更新</a></li>
+													data-toggle="tab">传感器</a></li>
+												<li><a href="project_detail.html#tab-3"
+													data-toggle="tab">图片</a></li>
+												<li class=""><a href="project_detail.html#tab-4"
+													data-toggle="tab">阀值</a></li>
 											</ul>
 										</div>
 									</div>
 
 									<div class="panel-body">
-
 										<div class="tab-content">
 											<div class="tab-pane active" id="tab-1">
 												<div class="feed-activity-list">
-													<div class="feed-element">
-														<a href="profile.html#" class="pull-left"> <img
-															alt="image" class="img-circle" src="img/a1.jpg">
-														</a>
-														<div class="media-body ">
-															<small class="pull-right text-navy">1天前</small> <strong>奔波儿灞</strong>
-															关注了 <strong>灞波儿奔</strong>. <br> <small
-																class="text-muted">54分钟前 来自 皮皮时光机</small>
-															<div class="actions">
-																<a class="btn btn-xs btn-white"><i
-																	class="fa fa-thumbs-up"></i> 赞 </a> <a
-																	class="btn btn-xs btn-danger"><i
-																	class="fa fa-heart"></i> 收藏</a>
-															</div>
-														</div>
-													</div>
-
-													<div class="feed-element">
-														<a href="profile.html#" class="pull-left"> <img
-															alt="image" class="img-circle" src="img/profile.jpg">
-														</a>
-														<div class="media-body ">
-															<small class="pull-right">5分钟前</small> <strong>作家崔成浩</strong>
-															发布了一篇文章 <br> <small class="text-muted">今天
-																10:20 来自 iPhone 6 Plus</small>
-
-														</div>
-													</div>
-
-													<div class="feed-element">
-														<a href="profile.html#" class="pull-left"> <img
-															alt="image" class="img-circle" src="img/a2.jpg">
-														</a>
-														<div class="media-body ">
-															<small class="pull-right">2小时前</small> <strong>作家崔成浩</strong>
-															抽奖中了20万 <br> <small class="text-muted">今天
-																09:27 来自 Koryolink iPhone</small>
-															<div class="well">
-																抽奖，人民币2000元，从转发这个微博的粉丝中抽取一人。11月16日平台开奖。随手一转，万一中了呢？</div>
-															<div class="pull-right">
-																<a class="btn btn-xs btn-white"><i
-																	class="fa fa-thumbs-up"></i> 赞 </a> <a
-																	class="btn btn-xs btn-white"><i class="fa fa-heart"></i>
-																	收藏</a> <a class="btn btn-xs btn-primary"><i
-																	class="fa fa-pencil"></i> 评论</a>
-															</div>
-														</div>
-													</div>
-													<div class="feed-element">
-														<a href="profile.html#" class="pull-left"> <img
-															alt="image" class="img-circle" src="img/a3.jpg">
-														</a>
-														<div class="media-body ">
-															<small class="pull-right">2天前</small> <strong>天猫</strong>
-															上传了2张图片 <br> <small class="text-muted">11月7日
-																11:56 来自 微博 weibo.com</small>
-															<div class="photos">
-																<a target="_blank"
-																	href="../../../24.media.tumblr.com/20a9c501846f50c1271210639987000f/tumblr_n4vje69pJm1st5lhmo1_1280.jpg">
-																	<img alt="image" class="feed-photo" src="img/p1.jpg">
-																</a> <a target="_blank"
-																	href="../../../37.media.tumblr.com/9afe602b3e624aff6681b0b51f5a062b/tumblr_n4ef69szs71st5lhmo1_1280.jpg">
-																	<img alt="image" class="feed-photo" src="img/p3.jpg">
-																</a>
-															</div>
-														</div>
-													</div>
-													<div class="feed-element">
-														<a href="profile.html#" class="pull-left"> <img
-															alt="image" class="img-circle" src="img/a4.jpg">
-														</a>
-														<div class="media-body ">
-															<small class="pull-right text-navy">5小时前</small> <strong>在水一方Y</strong>
-															关注了 <strong>那二十年的单身</strong>. <br> <small
-																class="text-muted">今天 10:39 来自 iPhone客户端</small>
-															<div class="actions">
-																<a class="btn btn-xs btn-white"><i
-																	class="fa fa-thumbs-up"></i> 赞 </a> <a
-																	class="btn btn-xs btn-white"><i class="fa fa-heart"></i>
-																	收藏</a>
-															</div>
-														</div>
-													</div>
-												</div>
-
+													<table class="table table-striped">
+													<thead>
+														<tr>
+															<th>名称</th>
+															<th>类型</th>
+															<th>经度</th>
+															<th>纬度</th>
+															<th>描述</th>
+														</tr>
+													</thead>
+													<tbody id="tbody_detectionPoint">
+													</tbody>
+												</table>
+											</div>
 											</div>
 											<div class="tab-pane" id="tab-2">
-
 												<table class="table table-striped">
 													<thead>
 														<tr>
-															<th>状态</th>
-															<th>标题</th>
-															<th>开始时间</th>
-															<th>结束时间</th>
-															<th>说明</th>
+															<th>所属测点</th>
+															<th>编号</th>
+															<th>类型</th>
+															<th>模型</th>
+															<th>深度</th>
 														</tr>
 													</thead>
-													<tbody>
-														<tr>
-															<td><span class="label label-primary"><i
-																	class="fa fa-check"></i> 已完成</span></td>
-															<td>文档在线预览功能</td>
-															<td>11月7日 22:03</td>
-															<td>11月7日 20:11</td>
-															<td>
-																<p class="small">已经测试通过</p>
-															</td>
-
-														</tr>
-														<tr>
-															<td><span class="label label-primary"><i
-																	class="fa fa-check"></i> 解决中</span></td>
-															<td>会员登录</td>
-															<td>11月7日 22:03</td>
-															<td>11月7日 20:11</td>
-															<td>
-																<p class="small">测试中</p>
-															</td>
-
-														</tr>
-														<tr>
-															<td><span class="label label-primary"><i
-																	class="fa fa-check"></i> 解决中</span></td>
-															<td>会员积分</td>
-															<td>11月7日 22:03</td>
-															<td>11月7日 20:11</td>
-															<td>
-																<p class="small">未测试</p>
-															</td>
-
-														</tr>
-
-
+													<tbody id="tbody_sensorInfo">
 													</tbody>
 												</table>
-
+											</div>
+											<div class="tab-pane" id="tab-3">
+												<table class="table table-striped">
+													<thead>
+														<tr>
+															<th>测点类型</th>
+															<th>热点图</th>
+															<th>现场图</th>
+														</tr>
+													</thead>
+													<tbody id="tbody_image">
+													</tbody>
+												</table>
+											</div>
+											<div class="tab-pane" id="tab-4">
+												<table class="table table-striped">
+													<thead>
+														<tr>
+															<th>测点类型</th>
+															<th>阀值类型</th>
+															<th>最小警戒值</th>
+															<th>最大警戒值</th>
+														</tr>
+													</thead>
+													<tbody id="tbody_thresHold">
+													</tbody>
+												</table>
 											</div>
 										</div>
-
 									</div>
-
 								</div>
 							</div>
 						</div>
@@ -266,45 +172,187 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-3">
-			<div class="wrapper wrapper-content project-manager">
-				<h4>项目描述</h4>
-				<img src="img/wenku_logo.png" class="img-responsive">
-				<p class="small">
-					<br>在线互动式文档分享平台，在这里，您可以和千万网友分享自己手中的文档，全文阅读其他用户的文档，同时，也可以利用分享文档获取的积分下载文档
-				</p>
-				<p class="small font-bold">
-					<span><i class="fa fa-circle text-warning"></i> 高优先级</span>
-				</p>
-				<h5>项目标签</h5>
-				<ul class="tag-list" style="padding: 0">
-					<li><a href="project_detail.html"><i class="fa fa-tag"></i>
-							文档</a></li>
-					<li><a href="project_detail.html"><i class="fa fa-tag"></i>
-							分享</a></li>
-					<li><a href="project_detail.html"><i class="fa fa-tag"></i>
-							下载</a></li>
-				</ul>
-				<h5>项目文档</h5>
-				<ul class="list-unstyled project-files">
-					<li><a href="project_detail.html"><i class="fa fa-file"></i>
-							Project_document.docx</a></li>
-					<li><a href="project_detail.html"><i
-							class="fa fa-file-picture-o"></i> Logo_zender_company.jpg</a></li>
-					<li><a href="project_detail.html"><i
-							class="fa fa-stack-exchange"></i> Email_from_Alex.mln</a></li>
-					<li><a href="project_detail.html"><i class="fa fa-file"></i>
-							Contract_20_11_2014.docx</a></li>
-				</ul>
-				<div class="m-t-md">
-					<a href="project_detail.html#" class="btn btn-xs btn-primary">添加文档</a>
-
-				</div>
-			</div>
-		</div>
 	</div>
 	<script src="assets/js/content.js"></script>
 	<script>
+	     var projectId = '${projectId}';
+	     var projectName = '${projectName}';
+	     //var username = $("#dd_user").text();
+	     //$("#dd_user").text("456");
+	     $.ajax({
+		        type:'post',
+			    url: 'rest/project/obtainProject',
+			    data: {projectId:projectId},
+			    contextType:"application/json",
+			    success: function(data){
+			    	var nowTime = new Date().getTime();
+			    	var beginTime = stringToData(data.projectBeginTime);
+			    	var endTime = stringToData(data.projectEndTime);
+			    	var percentage=0;;
+			    	if(nowTime > endTime){
+			    	 	percentage=100;
+			    	}else if(nowTime < beginTime){
+			    	 	percentage=0;
+			    	}else{
+			    	 	percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
+			    	}
+			    	if(data){
+			    	  	/* $("#dd_detectionPointCont").text(data.userId);
+			    	  	$("#dd_thresHoldCont").text(data.userId);
+			    	  	$("#dd_imageCont").text(data.userId);
+			    	  	$("#dd_sensorInfoCont").text(data.userId); */
+			    	  	$("#dd_beginTime").text(data.projectBeginTime);
+			    	  	$("#dd_endTime").text(data.projectEndTime);
+			    	  	$("#dd_address").text(data.projectAddress);
+			    	  	$("#dd_Longitude").text(data.projectLongitude);
+			    	  	$("#dd_Latitude").text(data.projectLatitude);
+			    	  	$("#schedule_div").css("width",percentage+"%");//当前进度
+			    	  	$("#dd_schedule small").text("当前进度： "+percentage+"%");//当前进度
+			    	  		 }else{
+			    	  		  alert("数据异常");
+			    	  		 }
+			    	  	     },
+			    	 error: function(){
+			  			      alert("数据加载失败");
+			  		         }
+		    	   });
+	    //获取项目下所有测点
+	     $.ajax({
+		        type:'post',
+			    url: 'rest/detectionPoint/showProjectDetectionPoint',
+			    data: {projectName:projectName},
+			    contextType:"application/json",
+			    success: function(data){
+			    	if(data){
+			    	  		 var string = "";
+			    	  		 $.each(data,function(idx,item){
+			    	  		 string += '<tr>'+
+											'<td><span class="label label-primary">'+
+											'<i class="fa fa-check"></i>'+item.detectionName+'</span></td>'+
+											'<td>'+item.itemName+'</td>'+
+											'<td>'+item.detectionLatitude+'</td>'+
+											'<td>'+item.detectionLongitude+'</td>'+
+											'<td>'+
+												'<p class="small">第一个测点</p>'+
+											'</td>'+
+										'</tr>';
+					    	 });
+			    	  		 $('#tbody_detectionPoint').append(string); 		
+			    	  		 }else{
+			    	  		  alert("数据异常");
+			    	  		 }
+			    	  	     },
+			    	 error: function(){
+			  			      alert("数据加载失败");
+			  		         }
+		    	 });
+	    //获取项目下所有传感器
+	     $.ajax({
+		        type:'post',
+			    url: 'rest/sensorInfo/showProjectSensorInfo',
+			    data: {projectId:projectId},
+			    contextType:"application/json",
+			    success: function(data){
+			    	if(data){
+			    	  		 var string = "";
+			    	  		 $.each(data,function(idx,item){
+			    	  		 string += '<tr>'+
+											'<td><span class="label label-primary">'+
+											'<i class="fa fa-check"></i>'+item.detectionName+'</span></td>'+
+											'<td>'+item.sensorId+'</td>'+
+											'<td>'+item.sensorType+'</td>'+
+											'<td>'+item.sensorModel+'</td>'+
+											'<td>'+
+												'<p class="small">'+item.sensorDepth+'</p>'+
+											'</td>'+
+										'</tr>';
+					    	 });
+			    	  		 $('#tbody_sensorInfo').append(string); 		
+			    	  		 }else{
+			    	  		  alert("数据异常");
+			    	  		 }
+			    	  	     },
+			    	 error: function(){
+			  			      alert("数据加载失败");
+			  		         }
+		    	 });
+	    //获取项目下所有阀值
+	     $.ajax({
+		        type:'post',
+			    url: 'rest/threshold/showProjectThreshold',
+			    data: {projectId:projectId},
+			    contextType:"application/json",
+			    success: function(data){
+			    	if(data){
+			    	  		 var string = "";
+			    	  		 $.each(data,function(idx,item){
+			    	  		 string += '<tr>'+
+											'<td><span class="label label-primary">'+
+											'<i class="fa fa-check"></i>'+item.detectionTypeName+'</span></td>'+
+											'<td>'+item.thresHoldTypeName+'</td>'+
+											'<td>'+item.minThresholdValue+'</td>'+
+											'<td>'+item.maxThresholdValue+'</td>'+
+										'</tr>';
+					    	 });
+			    	  		 $('#tbody_thresHold').append(string); 		
+			    	  		 }else{
+			    	  		  alert("数据异常");
+			    	  		 }
+			    	  	     },
+			    	 error: function(){
+			  			      alert("数据加载失败");
+			  		         }
+		    	 });
+	    //获取项目下所有图片
+        $.ajax({
+		        type:'post',
+			    url: 'rest/image/showProjectImaged',
+			    data: {projectId:projectId},
+			    contextType:"application/json",
+			    success: function(data){
+			    	if(data){
+			    	  		 var string = "";
+			    	  		 $.each(data,function(idx,item){
+			    	  		 string += '<tr>'+
+											'<td><span class="label label-primary">'+
+											'<i class="fa fa-check"></i>'+item.detectionTypeName+'</span></td>'+
+											'<td>'+
+												'<img alt="未上传图片" src="'+item.heatImageUrl+'" style="height:110px; width:300px">'+
+											'</td>'+
+											'<td>'+
+												'<img alt="未上传图片" src="'+item.physicalImageUrl+'" style="height:110px; width:300px">'+
+											'</td>'+
+										'</tr>';
+					    	 });
+			    	  		 $('#tbody_image').append(string); 		
+			    	  		 }else{
+			    	  		  alert("数据异常");
+			    	  		 }
+			    	  	     },
+			    	 error: function(){
+			  			      alert("数据加载失败");
+			  		         }
+		    	 });
+	    //获取测点数量，传感器数量，阀值数量，图片数量。
+	    $.ajax({
+		        type:'post',
+			    url: 'rest/project/obtainCount',
+			    data: {projectId:projectId},
+			    contextType:"application/json",
+			    success: function(data){
+			    	 if(data){   
+				    		 $("#dd_detectionPointCont").text(data.detectionPointCount);
+				    	  	 $("#dd_thresHoldCont").text(data.thresholdCount);
+				    	  	 $("#dd_imageCont").text(data.imageCount);
+				    	  	 $("#dd_sensorInfoCont").text(data.sensorInfoCount);
+			    	  		 }else{
+			    	  		  alert("数据异常");
+			    	  		 }
+			    	  	     },
+			    	 error: function(){
+			  			      alert("数据加载失败");
+			  		         }
+		    	 });
 		$(document).ready(function() {
 			$("#loading-example-btn").click(function() {
 				btn = $(this);

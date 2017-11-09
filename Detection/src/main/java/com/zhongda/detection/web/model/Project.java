@@ -41,6 +41,44 @@ public class Project {
     
     //数据库不存在该字段，只作为分页时存储每页记录条数数据时使用
     private Integer pageSize;
+    
+    //缓存测点数量，传感器数量，阀值数量，图片数量。
+    private Integer detectionPointCount;
+    private Integer sensorInfoCount;
+    private Integer thresholdCount;
+    private Integer imageCount;
+    
+    public Integer getDetectionPointCount() {
+		return detectionPointCount;
+	}
+
+	public void setDetectionPointCount(Integer detectionPointCount) {
+		this.detectionPointCount = detectionPointCount;
+	}
+
+	public Integer getSensorInfoCount() {
+		return sensorInfoCount;
+	}
+
+	public void setSensorInfoCount(Integer sensorInfoCount) {
+		this.sensorInfoCount = sensorInfoCount;
+	}
+
+	public Integer getThresholdCount() {
+		return thresholdCount;
+	}
+
+	public void setThresholdCount(Integer thresholdCount) {
+		this.thresholdCount = thresholdCount;
+	}
+
+	public Integer getImageCount() {
+		return imageCount;
+	}
+
+	public void setImageCount(Integer imageCount) {
+		this.imageCount = imageCount;
+	}
 
 	public String getProjectStatusString() {
 		return projectStatusString;

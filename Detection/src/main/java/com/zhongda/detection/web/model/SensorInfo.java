@@ -12,8 +12,19 @@ public class SensorInfo {
     private String sensorModel;
 
     private Float sensorDepth;
+    
+    //缓存测点名称，数据库无
+    private String detectionName;
 
-    public Integer getSensorInfoId() {
+    public String getDetectionName() {
+		return detectionName;
+	}
+
+	public void setDetectionName(String detectionName) {
+		this.detectionName = detectionName;
+	}
+
+	public Integer getSensorInfoId() {
         return sensorInfoId;
     }
 

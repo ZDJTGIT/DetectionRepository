@@ -8,6 +8,7 @@
     <result column="sensor_type" jdbcType="VARCHAR" property="sensorType" />
     <result column="sensor_model" jdbcType="VARCHAR" property="sensorModel" />
     <result column="sensor_depth" jdbcType="REAL" property="sensorDepth" />
+    <result column="detection_name" jdbcType="VARCHAR" property="detectionName" />
   </resultMap>
   <sql id="Base_Column_List">
     sensor_info_id, detection_point_id, sensor_id, sensor_type, sensor_model, sensor_depth
@@ -30,6 +31,14 @@
     <include refid="Base_Column_List" />
     from sensor_info
     where detection_point_id = #{detectionPointId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select si.*,dp.detection_name 'detection_name' 
+  from sensor_info si,detection_point dp 
+  where si.detection_point_id in (select detection_point_id 
+  from detection_point where project_id = #{projectId,jdbcType=INTEGER})
+  and si.detection_point_id=dp.detection_point_id
+
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sensor_info
