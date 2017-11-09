@@ -43,7 +43,19 @@ $('#form_addProject').validate({
 				required : true
 			},
 			projectEndTime_addProject : {
-				required : true
+				required : true,
+				remote: {
+				    url: "rest/project/CorrectEndTime",    //后台处理程序
+				    type: "post",               //数据发送方式  
+				    data: {                     //要传递的数据
+				    	projectBeginTime_addProject: function() {
+				            return $("#projectBeginTime_addProject").val();
+				        },
+				        projectEndTime_addProject: function() {
+				            return $("#projectEndTime_addProject").val();
+				        }
+				    }
+				}
 			}
 		},
 		
@@ -70,7 +82,8 @@ $('#form_addProject').validate({
 				required : "请选择项目开始时间"
 			},
 			projectEndTime_addProject : {
-				required : "请选择项目结束时间"
+				required : "请选择项目结束时间",
+				remote: "结束时间不能在开始时间之前"
 			}
 		}
 	});
@@ -91,7 +104,7 @@ $('#form_updetaProject').validate({
 			        },
 			        projectId_updetaProject: function() {
 			            return $("#projectId_updetaProject").val();
-			        },
+			        }
 			    }
 			}
 		},
@@ -111,7 +124,19 @@ $('#form_updetaProject').validate({
 			required : true
 		},
 		projectEndTime_updetaProject : {
-			required : true
+			required : true,
+			remote: {
+			    url: "rest/project/upCorrectEndTime",    //后台处理程序
+			    type: "post",               //数据发送方式  
+			    data: {                     //要传递的数据
+			    	projectBeginTime_updetaProject: function() {
+			            return $("#projectBeginTime_updetaProject").val();
+			        },
+			        projectEndTime_updetaProject: function() {
+			            return $("#projectEndTime_updetaProject").val();
+			        }
+			    }
+			}
 		}
 	},
 	
@@ -138,7 +163,8 @@ $('#form_updetaProject').validate({
 			required : "请选择项目开始时间"
 		},
 		projectEndTime_updetaProject : {
-			required : "请选择项目结束时间"
+			required : "请选择项目结束时间",
+			remote: "结束时间不能在开始时间之前"
 		}
 	}
 });

@@ -89,9 +89,9 @@
 								<label class="md_lable" for="">项目类型:</label>
 								<div id="selectProjectType_div_addProject">
 							    </div><br><br>
-							    <label class="md_lable" for="">项目状态:</label>
+							    <!--  <label class="md_lable" for="">项目状态:</label>
 								<div id="selectProjectStatus_div_addProject">
-							    </div><br><br>
+							    </div><br><br> -->
 								<label class="md_lable" for="projectName_addProject">项目名称:</label>
 								<input class="md_input" type="text" id="projectName_addProject" name="projectName_addProject"><br><br>
 								<!-- 项目名 -->
@@ -134,9 +134,9 @@
 								<label class="md_lable" for="">项目类型:</label>
 								<div id="selectProjectType_div_updetaProject">
 							    </div><br><br>
-							     <label class="md_lable" for="">项目状态:</label>
+							    <!--  <label class="md_lable" for="">项目状态:</label>
 								<div id="selectProjectStatus_div_updetaProject">
-							    </div><br><br>
+							    </div><br><br> -->
 							    <input class="md_input" type="text" style="display:none" id="projectId_updetaProject" name="projectId_updetaProject">
 								<label class="md_lable" for="projectName_updetaProject">项目名称:</label>
 								<input class="md_input" type="text" id="projectName_updetaProject" name="projectName_updetaProject"><br><br>
@@ -173,6 +173,16 @@
 	<script src="assets/js/plugins/laydate/laydate.js" charset="utf-8"></script>
 	<script src="assets/js/layui.all.js" charset="utf-8"></script>
 	<script>
+	
+	 $.ajax({
+		  type:'post',
+	  	  url: 'rest/project/updetaProjectStatus',
+	  	  success: function(data){
+	  	  },
+	  	  error: function(){
+			 alert("项目状态失败");
+		     }
+	     });
 		//传字符串型时间转化为时间
 		 function stringToData(strin){
 			var beginArray = strin.split(" ");
@@ -367,7 +377,7 @@
 		  		      }
 		    	     });
 	    	   //新建项目时加载项目状态
-	    	    $.ajax({
+	    	   /*  $.ajax({
 	    	    	type:'post',
 		    	  	  url: 'rest/project/showProjectStatus',
 		    	  	  data: {userId:dlId},
@@ -387,7 +397,7 @@
 		    	  	  error: function(){
 		  			    alert("数据加载失败");
 		  		      }
-	    	     });
+	    	     }); */
 	    	   
 		 		//编辑项目加载用户，默认显示选中用户
 		    	   $.ajax({
@@ -434,7 +444,7 @@
 			  		      }
 		    	   });
 		    	//编辑项目加载项目状态，默认显示选中项目状态
-		    	   $.ajax({
+		    	  /*  $.ajax({
 		    		   type:'post',
 			    	  	  url: 'rest/project/showProjectStatus_selected',
 			    	  	  data: {userId:dlId},
@@ -454,7 +464,7 @@
 			    	  	  error: function(){
 			  			    alert("数据加载失败");
 			  		      }
-		    	   });
+		    	   }); */
 		});
 		       var b;
 		 //修改编辑项目时加载编辑框内所有元素
@@ -534,7 +544,7 @@
    			   var projectIds = $("#projectId_updetaProject").val();
    			   var projectBeginTimes = $('#projectBeginTime_updetaProject').val();
    			   var projectEndTimes = $('#projectEndTime_updetaProject').val();
-   			   var projectStatuss = $("#selectProjectStatus_div_updetaProject option:selected").val();
+   			   //var projectStatuss = $("#selectProjectStatus_div_updetaProject option:selected").val();
    	       	   var jsonData = '{"userId":"'
    					       		+ userIds
    					       		+ '","projectId":"'
@@ -553,8 +563,8 @@
    								+ projectLongitudes
    								+ '","projectLatitude":"'
    								+ projectLatitudes
-   								+ '","projectStatus":"'
-   								+ projectStatuss
+   								//+ '","projectStatus":"'
+   								//+ projectStatuss
    								+ '","projectDescription":"'
    								+ projectDescriptions + '"}';
    	       	 //确定修改，将数据插入数据库 
@@ -606,10 +616,10 @@
 			//添加项目验证
 			if(!$('#form_addProject').valid()){
 				return false;
-			}
+			} 
 			var userId = $("#selectUser_div_addProject option:selected").val();
 			var projectTypeId = $("#selectProjectType_div_addProject option:selected").val();
-			var projectStatus = $("#selectProjectStatus_div_addProject option:selected").val();
+			//var projectStatus = $("#selectProjectStatus_div_addProject option:selected").val();
 			var projectName = $("#projectName_addProject").val();
 			var projectAddress = $("#projectAddress_addProject").val();
 			var projectDescription = $("#projectDescription_addProject").val();
@@ -624,8 +634,8 @@
 							+ projectTypeId
 							+ '","projectName":"'
 							+ projectName
-							+ '","projectStatus":"'
-							+ projectStatus
+							//+ '","projectStatus":"'
+							//+ projectStatus
 							+ '","projectAddress":"'
 							+ projectAddress
 							+ '","projectBeginTime":"'
@@ -800,8 +810,7 @@
 			});
 		}
 		
-		$(function(){
-			(function(){
+		$(function(){(function(){
 				//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
 				function projectPageAjax(jsonData, loadLaypage){
 					 //显示loading提示

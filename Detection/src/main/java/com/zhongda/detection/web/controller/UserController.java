@@ -669,8 +669,7 @@ public class UserController {
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			return null;
 		} else {
-			List<Project> projectList = projectService
-					.selectProjectAndSysDicByUserIds(userId);
+			List<Project> projectList = projectService.selectProjectAndSysDicByUserIds(userId);
 			return projectList;
 		}
 	}

@@ -1,6 +1,7 @@
 package com.zhongda.detection.web.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -254,23 +255,57 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/projectPageList", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> projectPageList(@RequestBody Project project,
-			HttpServletRequest request) {
+	public Map<String, Object> projectPageList(@RequestBody Project project,HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
-		if (!subject.hasRole(RoleSign.ADMIN)
-				&& !subject.hasRole(RoleSign.SUPER_ADMIN)) {
+		if (!subject.hasRole(RoleSign.ADMIN)&& !subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			// 非管理员用户，只可查看自己的项目信息，查询条件增加userId
-			User user = (User) WebUtils
-					.getSessionAttribute(request, "userInfo");
+			User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
 			project.setUserId(user.getUserId());
 		}
-		List<Project> projectList = projectService
-				.selectProjectWithAlarmCount(project);
+		List<Project> projectList = projectService.selectProjectWithAlarmCount(project);
 		PageInfo<Project> projectPageInfo = new PageInfo<Project>(projectList);
 		Map<String, Object> projectMap = new HashMap<String, Object>();
 		projectMap.put("total", projectPageInfo.getTotal());
 		projectMap.put("projectList", projectList);
 		return projectMap;
+	}
+	
+	/**
+	 * 自动更新项目状态
+	 * 每次打开项目界面，获取所有项目的创建时间和结束时间并比对当前时间，修改项目状态
+	 */
+	@RequestMapping(value = "/updetaProjectStatus", method = RequestMethod.POST)
+	@ResponseBody
+	public void updetaProjectStatus(){
+		List<Project> projectList = projectService.selectAllProject();
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");//设置日期格式
+		String beginTime;
+		String emdTime;
+		String nowTime = df.format(new Date());//获取当前系统时间
+		for(Project project :projectList){
+			beginTime = df.format(project.getProjectBeginTime());//获取项目开始时间
+			emdTime = df.format(project.getProjectEndTime());//获取项目结束时间
+			long nowTimeMillionSeconds=0;
+			long beginTimeMillionSeconds = 0;
+			long endTimeMillionSeconds =0;
+			try {
+				nowTimeMillionSeconds = df.parse(nowTime).getTime();//把当前系统时间转化成毫秒数
+				beginTimeMillionSeconds = df.parse(beginTime).getTime();//把项目开始时间转化成毫秒数
+				endTimeMillionSeconds = df.parse(emdTime).getTime();//把项目结束时间转化成毫秒数
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			if(nowTimeMillionSeconds<beginTimeMillionSeconds){
+				//开始时间在当前时间之后-未启动
+				project.setProjectStatus(21);
+			}else if((nowTimeMillionSeconds>beginTimeMillionSeconds)&(nowTimeMillionSeconds<endTimeMillionSeconds)){
+				//开始时间在当前时间之前，结束时间在当前时间之后-已启动
+				project.setProjectStatus(22);
+			}else{
+				//开始时间在当前时间之前，结束时间在当前时间之前-已结束
+				project.setProjectStatus(24);
+			}
+		}
 	}
 
 	/**
@@ -364,6 +399,31 @@ public class ProjectController {
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			// 管理员用户，可添加项目
+			// 通过开始时间和结束时间获取项目状态(未启动，已启动，已结束)
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");//设置日期格式
+			String nowTime = df.format(new Date());//获取当前系统时间
+			String beginTime = df.format(project.getProjectBeginTime());//获取项目开始时间
+			String emdTime = df.format(project.getProjectEndTime());//获取项目结束时间
+			long nowTimeMillionSeconds=0;
+			long beginTimeMillionSeconds = 0;
+			long endTimeMillionSeconds =0;
+			try {
+				nowTimeMillionSeconds = df.parse(nowTime).getTime();//把当前系统时间转化成毫秒数
+				beginTimeMillionSeconds = df.parse(beginTime).getTime();//把项目开始时间转化成毫秒数
+				endTimeMillionSeconds = df.parse(emdTime).getTime();//把项目结束时间转化成毫秒数
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			if(nowTimeMillionSeconds<beginTimeMillionSeconds){
+				//开始时间在当前时间之后-未启动
+				project.setProjectStatus(21);
+			}else if((nowTimeMillionSeconds>beginTimeMillionSeconds)&(nowTimeMillionSeconds<endTimeMillionSeconds)){
+				//开始时间在当前时间之前，结束时间在当前时间之后-已启动
+				project.setProjectStatus(22);
+			}else{
+				//开始时间在当前时间之前，结束时间在当前时间之前-已结束
+				project.setProjectStatus(24);
+			}
 			projectService.insertSelective(project);
 			// 项目ID自增长，取出
 			project = projectService.selectByProjectName(project
@@ -385,7 +445,7 @@ public class ProjectController {
 				imageService.insertSelective(image);
 			}
 		} else {
-			// 非管理员不能填写项目
+			// 非管理员不能添加项目
 			project.setUserId(2);
 		}
 		return project;
@@ -461,12 +521,35 @@ public class ProjectController {
 	@ResponseBody
 	public Project selectProject(@RequestBody Project project) {
 		Subject subject = SecurityUtils.getSubject();
-		if (subject.hasRole(RoleSign.ADMIN)
-				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+		if (subject.hasRole(RoleSign.ADMIN) || subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			// 通过开始时间和结束时间获取项目状态(未启动，已启动，已结束)
+			SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");//设置日期格式
+			String nowTime = df.format(new Date());//获取当前系统时间
+			String beginTime = df.format(project.getProjectBeginTime());//获取项目开始时间
+			String emdTime = df.format(project.getProjectEndTime());//获取项目结束时间
+			long nowTimeMillionSeconds=0;
+			long beginTimeMillionSeconds = 0;
+			long endTimeMillionSeconds =0;
+			try {
+				nowTimeMillionSeconds = df.parse(nowTime).getTime();//把当前系统时间转化成毫秒数
+				beginTimeMillionSeconds = df.parse(beginTime).getTime();//把项目开始时间转化成毫秒数
+				endTimeMillionSeconds = df.parse(emdTime).getTime();//把项目结束时间转化成毫秒数
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			if(nowTimeMillionSeconds<beginTimeMillionSeconds){
+				//开始时间在当前时间之后-未启动
+				project.setProjectStatus(21);
+			}else if((nowTimeMillionSeconds>beginTimeMillionSeconds)&(nowTimeMillionSeconds<endTimeMillionSeconds)){
+				//开始时间在当前时间之前，结束时间在当前时间之后-已启动
+				project.setProjectStatus(22);
+			}else{
+				//开始时间在当前时间之前，结束时间在当前时间之前-已结束
+				project.setProjectStatus(24);
+			}
 			projectService.updateByPrimaryKeySelective(project);
 			// 项目状态为int关联字典表，取出
-			project.setProjectStatusString(sysDictionaryServce
-					.selectProjectStatusByDicId(project.getProjectStatus()));
+			project.setProjectStatusString(sysDictionaryServce.selectProjectStatusByDicId(project.getProjectStatus()));
 			return project;
 		} else {
 			return null;
@@ -500,6 +583,8 @@ public class ProjectController {
 	
 	/**
 	 * 传projectId获取用户信息
+	 * @param projectId
+	 * @return
 	 */
 	@RequestMapping(value = "/obtainProject", method = RequestMethod.POST)
 	@ResponseBody
@@ -558,6 +643,88 @@ public class ProjectController {
 					|| projectName_updetaProject.equals((projectService
 							.selectByPrimaryKey(projectId_updetaProject))
 							.getProjectName())) {
+				response.getWriter().print(true);
+			} else {
+				response.getWriter().print(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 验证结束时间是否在开始时间之前(添加验证)
+	 * @param projectName_addProject
+	 * @param response
+	 */
+	@RequestMapping(value = "/CorrectEndTime", method = RequestMethod.POST)
+	public void CorrectEndTime(String projectBeginTime_addProject,String projectEndTime_addProject,HttpServletResponse response) {
+		Date dateBegin = null;
+		Date dateend = null;
+		try
+		{
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			dateBegin = sdf.parse(projectBeginTime_addProject);
+			dateend = sdf.parse(projectEndTime_addProject);
+		}
+		catch (ParseException e)
+		{
+			System.out.println(e.getMessage());
+		}
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");//设置日期格式
+		String beginTime = df.format(dateBegin);//获取项目开始时间
+		String emdTime = df.format(dateend);//获取项目结束时间
+		long beginTimeMillionSeconds = 0;
+		long endTimeMillionSeconds = 0;
+		try {
+			beginTimeMillionSeconds = df.parse(beginTime).getTime();//把项目开始时间转化成毫秒数
+			endTimeMillionSeconds = df.parse(emdTime).getTime();//把项目结束时间转化成毫秒数
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		try {
+			if (endTimeMillionSeconds>beginTimeMillionSeconds) {
+				response.getWriter().print(true);
+			} else {
+				response.getWriter().print(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 验证结束时间是否在开始时间之前(修改验证)
+	 * @param projectName_addProject
+	 * @param response
+	 */
+	@RequestMapping(value = "/upCorrectEndTime", method = RequestMethod.POST)
+	public void upCorrectEndTime(String projectBeginTime_updetaProject,String projectEndTime_updetaProject,HttpServletResponse response) {
+		Date dateBegin = null;
+		Date dateend = null;
+		try
+		{
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			dateBegin = sdf.parse(projectBeginTime_updetaProject);
+			dateend = sdf.parse(projectEndTime_updetaProject);
+		}
+		catch (ParseException e)
+		{
+			System.out.println(e.getMessage());
+		}
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");//设置日期格式
+		String beginTime = df.format(dateBegin);//获取项目开始时间
+		String emdTime = df.format(dateend);//获取项目结束时间
+		long beginTimeMillionSeconds = 0;
+		long endTimeMillionSeconds = 0;
+		try {
+			beginTimeMillionSeconds = df.parse(beginTime).getTime();//把项目开始时间转化成毫秒数
+			endTimeMillionSeconds = df.parse(emdTime).getTime();//把项目结束时间转化成毫秒数
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		try {
+			if (endTimeMillionSeconds>beginTimeMillionSeconds) {
 				response.getWriter().print(true);
 			} else {
 				response.getWriter().print(false);

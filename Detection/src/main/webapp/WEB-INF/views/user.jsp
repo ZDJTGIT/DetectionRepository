@@ -250,7 +250,7 @@
 					    						'<input type="text" id="projectItem_name" name="projectItem_name" class="input_noborder" value="'+item.sysDictionary.itemName+'">'+
 											'</div>'+
 											'<div class="poj_layer">'+
-												'<input type="text" id="projectStatus" name="projectStatus" class="input_noborder_2" value="'+item.projectStatus+'">'+
+												'<input type="text" id="projectStatus" name="projectStatus" class="input_noborder_2" value="'+item.projectStatusString+'">'+
 											'</div>'+
 											'<div class="poj_description_div">'+
 												'<div>'+

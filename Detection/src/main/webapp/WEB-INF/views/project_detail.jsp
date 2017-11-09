@@ -35,8 +35,7 @@
 								</div>
 								<dl class="dl-horizontal">
 								<dt>项目状态：&nbsp;&nbsp;&nbsp;</dt>
-									<dd>
-										<span class="label label-primary">已启动</span>
+									<dd id="dd_projectStatus">
 								    </dd>
 								</dl>
 							</div>
@@ -173,8 +172,19 @@
 			</div>
 		</div>
 	</div>
+	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/content.js"></script>
 	<script>
+	
+		//传字符串型时间转化为时间
+		 function stringToData(strin){
+			var beginArray = strin.split(" ");
+	   	var dateArray = beginArray[0].split("-");
+	   	var timeArray = beginArray[1].split(":");
+	   	var date = new Date(dateArray[0], dateArray[1]-1, dateArray[2], timeArray[0], timeArray[1], timeArray[2]);
+	   	return date.getTime();
+		}
+	
 	     var projectId = '${projectId}';
 	     var projectName = '${projectName}';
 	     //var username = $("#dd_user").text();
@@ -185,29 +195,30 @@
 			    data: {projectId:projectId},
 			    contextType:"application/json",
 			    success: function(data){
-			    	var nowTime = new Date().getTime();
-			    	var beginTime = stringToData(data.projectBeginTime);
-			    	var endTime = stringToData(data.projectEndTime);
-			    	var percentage=0;;
-			    	if(nowTime > endTime){
-			    	 	percentage=100;
-			    	}else if(nowTime < beginTime){
-			    	 	percentage=0;
-			    	}else{
-			    	 	percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
-			    	}
 			    	if(data){
-			    	  	/* $("#dd_detectionPointCont").text(data.userId);
-			    	  	$("#dd_thresHoldCont").text(data.userId);
-			    	  	$("#dd_imageCont").text(data.userId);
-			    	  	$("#dd_sensorInfoCont").text(data.userId); */
-			    	  	$("#dd_beginTime").text(data.projectBeginTime);
-			    	  	$("#dd_endTime").text(data.projectEndTime);
-			    	  	$("#dd_address").text(data.projectAddress);
-			    	  	$("#dd_Longitude").text(data.projectLongitude);
-			    	  	$("#dd_Latitude").text(data.projectLatitude);
-			    	  	$("#schedule_div").css("width",percentage+"%");//当前进度
-			    	  	$("#dd_schedule small").text("当前进度： "+percentage+"%");//当前进度
+				    		var nowDate = new Date().getTime();
+					    	var beginDate = stringToData(data.projectBeginTime);
+					    	var endDate = stringToData(data.projectEndTime);
+					    	var percentage=0;
+					    	if(nowDate > endDate){
+					    	 	percentage=100;
+					    	}else if(nowDate < beginDate){
+					    	 	percentage=0;
+					    	}else{
+					    	 	percentage = ((nowDate-beginDate)/(endDate-beginDate)*100).toFixed(2);
+					    	} 
+				    	  	$("#dd_projectStatus").append('<span class="label label-primary statusColor'+data.projectStatus+'">'+data.projectStatusString+'</span>');
+				    	  	$("#dd_beginTime").text(data.projectBeginTime);
+				    	  	$("#dd_endTime").text(data.projectEndTime);
+				    	  	$("#dd_address").text(data.projectAddress);
+				    	  	$("#dd_Longitude").text(data.projectLongitude);
+				    	  	$("#dd_Latitude").text(data.projectLatitude);
+				    	  	$("#schedule_div").css("width",percentage+"%");//当前进度
+				    	  	$("#dd_schedule small").text("当前进度： "+percentage+"%");//当前进度
+				    	  	$('.statusColor22').css("background-color","#1ab394"); 
+		  	  	 			$('.statusColor21').css("background-color","#FF8547"); 
+		  	  	 			$('.statusColor23').css("background-color","#F54545"); 
+		  	  				$('.statusColor24').css("background-color","#696969");
 			    	  		 }else{
 			    	  		  alert("数据异常");
 			    	  		 }

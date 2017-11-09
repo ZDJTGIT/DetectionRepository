@@ -13,6 +13,7 @@
     <result column="project_end_time" jdbcType="TIMESTAMP" property="projectEndTime" />
     <result column="project_status" jdbcType="VARCHAR" property="projectStatus" />
     <result column="project_description" jdbcType="VARCHAR" property="projectDescription" />
+    <result column="project_status_string" jdbcType="VARCHAR" property="projectStatusString" />
     <association property="sysDictionary" javaType="SysDictionary">
       	<id column="dic_id" jdbcType="INTEGER" property="dicId" />
 	    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
@@ -46,11 +47,13 @@
     project_id, user_id, project_name, project_type_id, project_address, project_longitude,
 	project_latitude, project_begin_time, project_end_time, project_status, project_description
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <!-- bug -->
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ProjectResultMap">
     select
-    <include refid="Base_Column_List" />
-    from project
-    where project_id = #{projectId,jdbcType=INTEGER}
+    p.*,sd.item_name 'project_status_string'
+    from project p,sys_dictionary sd
+    where p.project_id = #{projectId,jdbcType=INTEGER}
+    and p.project_status = sd.dic_id
   </select>
   <select id="selectByProjectName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
@@ -89,11 +92,12 @@
      where x.project_status = sd.dic_id
      order by x.project_begin_time desc
   </select>
-  <select id="selectProjectAndSysDicByUserId" resultMap="BaseResultMap">
+  <select id="selectProjectAndSysDicByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
   	select
-    p.*,sd.*
-    from project p,sys_dictionary sd
-    where p.project_type_id = sd.dic_id and user_id = #{userId,jdbcType=INTEGER}
+    p.*,sd.*,sds.item_name 'project_status_string'
+    from project p,sys_dictionary sd,sys_dictionary sds
+    where p.project_type_id = sd.dic_id and p.user_id = #{userId,jdbcType=INTEGER}
+    and p.project_status = sds.dic_id
   </select>
   <select id="selectProjectByProjectNameAndUserId" resultMap="BaseResultMap">
     select 
