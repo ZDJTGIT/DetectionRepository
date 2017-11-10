@@ -10,12 +10,14 @@
     <result column="threshold_type_id" jdbcType="INTEGER" property="thresholdTypeId" />
     <result column="min_threshold_value" jdbcType="DOUBLE" property="minThresholdValue" />
     <result column="max_threshold_value" jdbcType="DOUBLE" property="maxThresholdValue" />
+    <result column="min_drastic_threshold_value" jdbcType="DOUBLE" property="minDrasticThresholdValue" />
+    <result column="max_drastic_threshold_value" jdbcType="DOUBLE" property="maxDrasticThresholdValue" />
     <result column="detection_type_name" jdbcType="VARCHAR" property="detectionTypeName" />
-    <result column="thresHold_type_name" jdbcType="VARCHAR" property="thresHoldTypeName" />
+    <result column="threshold_type_name" jdbcType="VARCHAR" property="thresholdTypeName" />
   </resultMap>
   <sql id="Base_Column_List">
     threshold_id, user_id, project_id, project_type_id, detection_type_id, threshold_type_id, 
-    min_threshold_value, max_threshold_value
+    min_threshold_value, max_threshold_value, min_drastic_threshold_value, max_drastic_threshold_value
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -32,7 +34,7 @@
   	and threshold_type_id = #{2}
   </select>
   <select id="selectByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select t.*,sd.item_name 'detection_type_name',sds.item_name 'thresHold_type_name' 
+    select t.*,sd.item_name 'detection_type_name',sds.item_name 'threshold_type_name' 
     from threshold t, sys_dictionary sd ,sys_dictionary sds
     where t.detection_type_id=sd.dic_id  
 	and t.threshold_type_id=sds.dic_id
@@ -41,19 +43,10 @@
   <select id="selectByProjectIdAndDetectionTypeId" resultMap="BaseResultMap">
      select
      <include refid="Base_Column_List" />
-     FROM threshold 
-     where project_id = #{0} 
-     and detection_type_id = #{1} 
-  </select>
-  <select id="selectThresholdByTwoId" resultMap="BaseResultMap">
-  	SELECT
-	*
-	FROM
-		threshold
-	WHERE
-	project_id = #{projectId,jdbcType=INTEGER}
-	AND detection_type_id = #{detectionTypeId,jdbcType=INTEGER}
-  </select>
+     from threshold 
+     where project_id = #{projectId,jdbcType=INTEGER} 
+     and detection_type_id = #{detectionTypeId,jdbcType=INTEGER} 
+  </select>  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from threshold
     where threshold_id = #{thresholdId,jdbcType=INTEGER}
@@ -65,10 +58,12 @@
   <insert id="insert" parameterType="com.zhongda.detection.web.model.Threshold">
     insert into threshold (threshold_id, user_id, project_id, 
       project_type_id, detection_type_id, threshold_type_id, 
-      min_threshold_value, max_threshold_value)
+      min_threshold_value, max_threshold_value, min_drastic_threshold_value, 
+      max_drastic_threshold_value)
     values (#{thresholdId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, 
       #{projectTypeId,jdbcType=INTEGER}, #{detectionTypeId,jdbcType=INTEGER}, #{thresholdTypeId,jdbcType=INTEGER}, 
-      #{minThresholdValue,jdbcType=DOUBLE}, #{maxThresholdValue,jdbcType=DOUBLE})
+      #{minThresholdValue,jdbcType=DOUBLE}, #{maxThresholdValue,jdbcType=DOUBLE}, #{minDrasticThresholdValue,jdbcType=DOUBLE}, 
+      #{maxDrasticThresholdValue,jdbcType=DOUBLE})
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.Threshold">
     insert into threshold
@@ -97,6 +92,12 @@
       <if test="maxThresholdValue != null">
         max_threshold_value,
       </if>
+      <if test="minDrasticThresholdValue != null">
+        min_drastic_threshold_value,
+      </if>
+      <if test="maxDrasticThresholdValue != null">
+        max_drastic_threshold_value,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="thresholdId != null">
@@ -122,6 +123,12 @@
       </if>
       <if test="maxThresholdValue != null">
         #{maxThresholdValue,jdbcType=DOUBLE},
+      </if>
+      <if test="minDrasticThresholdValue != null">
+        #{minDrasticThresholdValue,jdbcType=DOUBLE},
+      </if>
+      <if test="maxDrasticThresholdValue != null">
+        #{maxDrasticThresholdValue,jdbcType=DOUBLE},
       </if>
     </trim>
   </insert>
@@ -149,6 +156,12 @@
       <if test="maxThresholdValue != null">
         max_threshold_value = #{maxThresholdValue,jdbcType=DOUBLE},
       </if>
+      <if test="minDrasticThresholdValue != null">
+        min_drastic_threshold_value = #{minDrasticThresholdValue,jdbcType=DOUBLE},
+      </if>
+      <if test="maxDrasticThresholdValue != null">
+        max_drastic_threshold_value = #{maxDrasticThresholdValue,jdbcType=DOUBLE},
+      </if>
     </set>
     where threshold_id = #{thresholdId,jdbcType=INTEGER}
   </update>
@@ -160,7 +173,9 @@
       detection_type_id = #{detectionTypeId,jdbcType=INTEGER},
       threshold_type_id = #{thresholdTypeId,jdbcType=INTEGER},
       min_threshold_value = #{minThresholdValue,jdbcType=DOUBLE},
-      max_threshold_value = #{maxThresholdValue,jdbcType=DOUBLE}
+      max_threshold_value = #{maxThresholdValue,jdbcType=DOUBLE},
+      min_drastic_threshold_value = #{minDrasticThresholdValue,jdbcType=DOUBLE},
+      max_drastic_threshold_value = #{maxDrasticThresholdValue,jdbcType=DOUBLE}
     where threshold_id = #{thresholdId,jdbcType=INTEGER}
   </update>
 </mapper>

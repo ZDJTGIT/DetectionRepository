@@ -2,6 +2,7 @@ package com.zhongda.detection.web.dao;
 
 
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 import com.zhongda.detection.web.model.Image;
@@ -27,7 +28,7 @@ public interface ImageMapper {
      * @param projectId
      * @return
      */
-    List<Image> selectByProjectId(Integer projectId);
+    List<Image> selectImageByProjectId(Integer projectId);
 
     /**
      * 根据ID修改图片信息
@@ -45,4 +46,5 @@ public interface ImageMapper {
 	 */
 	Image selectImageByTwoId(@Param(value = "projectId") Integer projectId,
 			@Param(value = "detectionTypeId") Integer detectionTypeId);
+
 }

@@ -1,7 +1,11 @@
 package com.zhongda.detection.web.service;
 
 import com.zhongda.detection.web.model.Image;
+import com.zhongda.detection.web.model.Result;
+
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public interface ImageService {
 
@@ -10,7 +14,7 @@ public interface ImageService {
      * @param projectId
      * @return
      */
-    List<Image> selectByProjectId(Integer projectId);
+    List<Image> selectImageByProjectId(Integer projectId);
 	
     /**
      * 插入一条图片地址数据
@@ -34,5 +38,18 @@ public interface ImageService {
 	 * @return
 	 */
 	Image selectImageByTwoId(Integer projectId, Integer detectionTypeId);
+	
+	/**
+	 * 删除具体的图片
+	 * @param imageUrl 图片在服务器上的路径(需和基本路径一起组装成完整目录)
+	 */
+	void removeImage(String imageUrl);
+	
+	/**
+	 * 上传图片至服务器
+	 * @param file 图片文件
+	 * @return 返回上传结果
+	 */
+	Result uploadImage(MultipartFile file);
 
 }

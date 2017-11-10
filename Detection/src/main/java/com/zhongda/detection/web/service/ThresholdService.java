@@ -61,17 +61,7 @@ public interface ThresholdService {
 	 * @param detectionTypeId
 	 * @return
 	 */
-	Threshold selectByProjectIdAndDetectionTypeId(Integer projectId,
-			Integer detectionTypeId);
-
-	/**
-	 * 查询指定项目阈值
-	 * 
-	 * @param projectId
-	 * @param detectionTypeId
-	 * @return
-	 */
-	List<Threshold> selectThresholdByTwoId(Integer projectId,
+	List<Threshold> selectByProjectIdAndDetectionTypeId(Integer projectId,
 			Integer detectionTypeId);
 	
 	/**

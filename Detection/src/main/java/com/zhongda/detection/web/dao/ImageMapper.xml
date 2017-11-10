@@ -30,7 +30,7 @@
 		project_id = #{projectId,jdbcType=INTEGER}
 	AND detection_type_id = #{detectionTypeId,jdbcType=INTEGER}
   </select>
-  <select id="selectByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectImageByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
   	select i.*,sd.item_name 'detectionTypeName' 
   	from image i,sys_dictionary sd 
 	where i.detection_type_id=sd.dic_id

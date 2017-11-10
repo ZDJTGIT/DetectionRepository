@@ -16,7 +16,11 @@ public class Threshold {
     private Double minThresholdValue;
 
     private Double maxThresholdValue;
-  
+
+    private Double minDrasticThresholdValue;
+
+    private Double maxDrasticThresholdValue;
+    
     //用户新建时传项目名查找用户ID项目ID项目类型ID
     private String projectName;
     
@@ -24,34 +28,9 @@ public class Threshold {
     private String detectionTypeName;
     
     //打开threshold表时缓存阀值类型名
-    private String thresHoldTypeName;
+    private String thresholdTypeName;
 
-
-	public String getThresHoldTypeName() {
-		return thresHoldTypeName;
-	}
-
-	public void setThresHoldTypeName(String thresHoldTypeName) {
-		this.thresHoldTypeName = thresHoldTypeName;
-	}
-
-	public String getDetectionTypeName() {
-		return detectionTypeName;
-	}
-
-	public void setDetectionTypeName(String detectionTypeName) {
-		this.detectionTypeName = detectionTypeName;
-	}
-
-    public String getProjectName() {
-		return projectName;
-	}
-
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
-
-	public Integer getThresholdId() {
+    public Integer getThresholdId() {
         return thresholdId;
     }
 
@@ -114,4 +93,45 @@ public class Threshold {
     public void setMaxThresholdValue(Double maxThresholdValue) {
         this.maxThresholdValue = maxThresholdValue;
     }
+
+    public Double getMinDrasticThresholdValue() {
+        return minDrasticThresholdValue;
+    }
+
+    public void setMinDrasticThresholdValue(Double minDrasticThresholdValue) {
+        this.minDrasticThresholdValue = minDrasticThresholdValue;
+    }
+
+    public Double getMaxDrasticThresholdValue() {
+        return maxDrasticThresholdValue;
+    }
+
+    public void setMaxDrasticThresholdValue(Double maxDrasticThresholdValue) {
+        this.maxDrasticThresholdValue = maxDrasticThresholdValue;
+    }
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName == null ? null : projectName.trim();
+	}
+
+	public String getDetectionTypeName() {
+		return detectionTypeName;
+	}
+
+	public void setDetectionTypeName(String detectionTypeName) {
+		this.detectionTypeName = detectionTypeName == null ? null : detectionTypeName.trim();
+	}
+
+	public String getThresholdTypeName() {
+		return thresholdTypeName;
+	}
+
+	public void setThresholdTypeName(String thresholdTypeName) {
+		this.thresholdTypeName = thresholdTypeName == null ? null : thresholdTypeName.trim();
+	}
+    
 }

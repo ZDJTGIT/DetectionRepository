@@ -22,6 +22,7 @@
 <link rel="shortcut icon" href="favicon.ico">
 <link href="assets/css/plugins/table/basic.css" rel="stylesheet">
 <link href="assets/css/plugins/table/user.css" rel="stylesheet">
+<link href="assets/css/plugins/layuis/layui.css" rel="stylesheet" media="all">
 </head>
 </head>
 <body class="gray-bg">
@@ -34,31 +35,27 @@
 					</div>
 					<div class="ibox-content">
 						<div class="project-list">
-							<table class="table table-hover" id="image_table">
-								<tbody id="image_tbody">
-								 <!-- 表头 -->
+							<table class="table table-striped table-hover" id="image_table">
+								<thead>
 									<tr>
-									    <td class="project-title" style="width:60px">
-										</td>
-										<td class="project-title" style="width:160px">
+										<th class="project-title" style="width:160px">
 											<a href="javascript:;">测点类型</a>
-										</td>
-										<td class="project-title" style="width:500px">
+										</th>
+										<th class="project-title" style="width:500px">
 											<a href="javascript:;">热点图</a>
-										</td>
-										<td class="project-title" style="width:110px">
+										</th>
+										<th class="project-title" style="width:110px">
 											<a href="javascript:;">操作</a>
-										</td>
-										<td class="project-title" style="width:500px">
+										</th>
+										<th class="project-title" style="width:500px">
 											<a href="javascript:;">现场图</a>
-										</td>
-										<td class="project-title" style="width:110px">
+										</th>
+										<th class="project-title" style="width:110px">
 											<a href="javascript:;">操作</a>
-										</td>
-										<td class="project-actions">
-									    </td>
+										</th>
 									</tr>	
-								</tbody>
+								</thead>
+								<tbody id="image_tbody"></tbody>
 							</table>
 						</div>
 						<!-- Modal修改热点图-->
@@ -76,16 +73,19 @@
 						        
 						        <input class="md_input" type="text" style="display:none" id="imageId_updetaHeat" name="imageId_updetaHeat">
 								
-								<label class="md_lable" for="">添加热点图:</label>
-							    <div class="layui-upload-list">
-									<img class="layui-upload-img" id="showHeat" src="assets/img/test2.png" style="height:110px; width:300px">
-									<p id="demoText1"></p>
-							    </div>
-								<button type="button" class="layui-btn" id="uploadHeat">上传</button><br><br>  
+								<label class="md_lable" for="">添加热点图:</label>								
+								<div class="layui-upload">
+									<div class="layui-upload-list">
+										<img class="layui-upload-img" id="showHeat" src="assets/img/test2.png" style="height:110px; width:300px">
+										<p id="demoText"></p>
+								    </div>
+									<button type="button" class="layui-btn" id="uploadHeat">上传</button><br><br>  
+								</div>
 								<input class="md_input" style="display:none" type="text" id="detectionTypeId_Heat" name="detectionTypeId_Heat"><br><br>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default offUpdetaImage" data-dismiss="modal">关闭</button>
+						      	<button type="button" class="btn btn-default offDeleteImage" style="display:none" data-dismiss="modal">关闭</button>
+						        <button type="button" class="btn btn-default imageCloseBtn">关闭</button>
 						        <button type="button" class="btn btn-primary sureAddDetection_updetaImage" name="heatBtn">提交</button>
 						      </div>
 						    </div>
@@ -117,7 +117,8 @@
 								<input class="md_input" style="display:none" type="text" id="detectionTypeId_Physical" name="detectionTypeId_Physical"><br><br>
 						      </div>
 						      <div class="modal-footer">
-						        <button type="button" class="btn btn-default offUpdetaImage" data-dismiss="modal">关闭</button>
+						        <button type="button" class="btn btn-default offDeleteImage" style="display:none" data-dismiss="modal">关闭</button>
+						        <button type="button" class="btn btn-default imageCloseBtn">关闭</button>
 						        <button type="button" class="btn btn-primary sureAddDetection_updetaImage" name="physicalBtn">提交</button>
 						      </div>
 						    </div>
@@ -156,9 +157,9 @@
 				done: function(res){
 					//如果上传失败
 					if(res.code > 0){
-						return layer.msg('上传失败');
+						return layer.msg(res.msg);
 					}else{
-						$('#showHeat').attr('src', res.path);
+						$('#showHeat').attr('src', res.data);
 					}
 					//上传成功
 				},
@@ -168,7 +169,7 @@
 					var demoText = $('#demoText1');
 					demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
 					demoText.find('.demo-reload').on('click', function(){
-						uploadInst1.upload();
+						uploadHeat.upload();
 					});
 				}
 			});
@@ -186,9 +187,9 @@
 			,done: function(res){
 				//如果上传失败
 				if(res.code > 0){
-				return layer.msg('上传失败');
+				return layer.msg(res.msg);
 				}else{
-					$('#showPhysical').attr('src', res.path);
+					$('#showPhysical').attr('src', res.data);
 				}
 				//上传成功
 			}
@@ -197,11 +198,21 @@
 				var demoText = $('#demoText2');
 				demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
 				demoText.find('.demo-reload').on('click', function(){
-					uploadInst2.upload();
+					uploadPhysical.upload();
 				});
 			}
 		});
 
+	});
+	
+	//点击模态框关闭按钮触发事件
+	$('.imageCloseBtn').click(function(){
+		$('.offDeleteImage').trigger("click");
+		$.ajax({
+			type:'get',
+			url: 'rest/image/removeImage',		
+			data: {imageUrl:$(this).parent().prev().find('img').attr('src')}			
+		});
 	});
 	
 	//点击添加图片加载当前测点类型图片
@@ -230,7 +241,7 @@
 							if(data.physicalImageUrl){
 								$('#p'+data.imageId).attr("src",data.physicalImageUrl); 
 							}
-							$('.offUpdetaImage').trigger("click"); 
+							$('.offDeleteImage').trigger("click"); 
 							alert("项目图片设置成功！");
 								}else {
 									  alert("数据异常");
@@ -256,9 +267,6 @@
 			 $('#imageId_updetaPhysical').val(imageId);
 			 $('#showPhysical').attr("src",$("table tr:eq(" + b + ") td:eq(4)").find('img').attr('src'));
 		 }
-		 var imageId = $("table tr:eq(" + b + ") td:eq(4)").text();
-		 $('#detectionTypeName_updetaimage').val(detectionTypeId);
-		 $('#imageId_updetaimage').val(imageId);
 		 //打开页面获取当前页面图片
 	    $.ajax({
     		  type:'post',
@@ -275,68 +283,40 @@
 	 }
 	
 		$(document).ready(function() {
-			var projectId = '${projectId}';
 			//打开测点页面加载所属项目下的所有图片
-			  $.ajax({
-		    		  type:'post',
-		    	  	  url: 'rest/image/showProjectImaged',
-		    	  	  data: {projectId:projectId},
-		    	  	  contextType:"application/json",
-		    	  	  success: function(data){
-		    	  		  //循环加载返回的测点集合
-		    	  		  if(data){
-		    	  			var string = "";
-		    	  			$.each(data,function(idx,item){
+			$.ajax({
+		    	type:'post',
+		    	url: 'rest/image/showProjectImage',
+		    	data: {projectId:'${projectId}'},
+		    	contextType:"application/json",
+		    	success: function(data){
+		    	  	//循环加载返回的监测类型集合
+		    	  	if(data){
+		    	  		var string = "";
+		    	  		$.each(data,function(idx,item){
 		    	  				
-		    	  			  string += '<tr>'+
-				    	  			 	'<td class="project-title" style="width:60px">'+
-										'</td>'+
-				    	  		    	'<td class="project-title" style="width:160px">'+
-				    	  		    		''+item.detectionTypeName+''+
-									    '</td>'+
-									    '<td class="project-title" style="width:500px">'+
-									    	'<img alt="未上传图片" id="h'+item.imageId+'" src="'+item.heatImageUrl+'" style="height:110px; width:300px">'+
-										'</td>'+
-										'<td class="project-title" style="width:110px">'+
-											'<a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updetaThresHold(this, true)"  data-toggle="modal" data-target="#myModal_updetaHeatImage">修改</a><br />'+
-										'</td>'+
-				    	  		    	'<td class="project-title" style="width:500px">'+
-				    	  		    		'<img alt="未上传图片" id="p'+item.imageId+'" src="'+item.physicalImageUrl+'" style="height:110px; width:300px">'+
-									    '</td>'+
-									    '<td class="project-title" style="display:none">'+
-    	  		    						+item.imageId+
-					    				'</td>'+
-										'<td class="project-status" style="width:110px">'+
-											'<a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updetaThresHold(this, false)"  data-toggle="modal" data-target="#myModal_updetaPhysicalImage">修改</a><br />'+
-									    '</td>'+
-									    '<td class="project-actions">'+
-									    '</td>'+
-										'</tr>';
-				    	  		  });
+		    	  			 string += '<tr><td class="project-title" style="width:160px" id="'+item.imageId+'">'+item.detectionTypeName+'</td>'+				    	  		    	
+									'<td class="project-title" style="width:500px">'+
+									    '<img alt="未上传图片" id="h'+item.imageId+'" src="'+item.heatImageUrl+'" style="height:110px; width:300px">'+
+									'</td>'+
+									'<td class="project-title" style="width:110px">'+
+										'<a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updateImage(this, true)"  data-toggle="modal" data-target="#myModal_updetaHeatImage">修改</a><br />'+
+									'</td>'+
+				    	  		    '<td class="project-title" style="width:500px">'+
+				    	  		    	'<img alt="未上传图片" id="p'+item.imageId+'" src="'+item.physicalImageUrl+'" style="height:110px; width:300px">'+
+									'</td>'+									   
+									'<td class="project-status" style="width:110px">'+
+										'<a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updateImage(this, false)"  data-toggle="modal" data-target="#myModal_updetaPhysicalImage">修改</a><br />'+
+									'</td></tr>';
+									   									    
+				    	  	});
 		    	  			$('#image_tbody').append(string); 		
-		    	  		  }
-		    	  		  },
-		    	  	  });
-			//系统自带
-			$("#loading-example-btn").click(function() {
-				btn = $(this);
-				simpleLoad(btn, true);
-				simpleLoad(btn, false)
-			})
+		    	  	}
+		    	}
+		    });
+			
 		});			
-		
-		//系统自带
-		function simpleLoad(btn, state) {
-			if (state) {
-				btn.children().addClass("fa-spin");
-				btn.contents().last().replaceWith(" Loading")
-			} else {
-				setTimeout(function() {
-					btn.children().removeClass("fa-spin");
-					btn.contents().last().replaceWith(" Refresh")
-				}, 2000)
-			}
-		};
+	
 	</script>
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>

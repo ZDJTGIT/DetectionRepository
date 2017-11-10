@@ -50,16 +50,9 @@ public class ThresholdServiceImpl implements ThresholdService {
 	}
 
 	@Override
-	public Threshold selectByProjectIdAndDetectionTypeId(Integer projectId,
+	public List<Threshold> selectByProjectIdAndDetectionTypeId(Integer projectId,
 			Integer detectionTypeId) {
 		return thresholdMapper.selectByProjectIdAndDetectionTypeId(projectId,
-				detectionTypeId);
-	}
-
-	@Override
-	public List<Threshold> selectThresholdByTwoId(Integer projectId,
-			Integer detectionTypeId) {
-		return thresholdMapper.selectThresholdByTwoId(projectId,
 				detectionTypeId);
 	}
 

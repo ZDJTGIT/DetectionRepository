@@ -30,7 +30,7 @@ public class PushAlarm {
 	@Resource
 	private SimpMessagingTemplate template;
 
-	@Scheduled(cron = "* 0/10 * * * ?")
+	@Scheduled(cron = "0 0/10 * * * ?")
 	public void push() {
 
 		List<Alarm> alarmList = alarmService.selectAlarmAndLinkmanPeriod();

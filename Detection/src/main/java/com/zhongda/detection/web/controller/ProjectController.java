@@ -126,7 +126,7 @@ public class ProjectController {
 				.selectLaserDataByCurrentTimes(projectId, detectionTypeId,
 						currentTime);
 		List<Threshold> thresholdList = thresholdService
-				.selectThresholdByTwoId(projectId, detectionTypeId);
+				.selectByProjectIdAndDetectionTypeId(projectId, detectionTypeId);
 		HashMap<Integer, Threshold> hashMap2 = new HashMap<Integer, Threshold>();
 		for (Threshold threshold : thresholdList) {
 			hashMap2.put(threshold.getThresholdTypeId(), threshold);
@@ -161,7 +161,7 @@ public class ProjectController {
 				.selectLaserDataByCurrentTimes(projectId, detectionTypeId,
 						currentTime);
 		List<Threshold> thresholdList = thresholdService
-				.selectThresholdByTwoId(projectId, detectionTypeId);
+				.selectByProjectIdAndDetectionTypeId(projectId, detectionTypeId);
 		HashMap<Integer, Threshold> hashMap2 = new HashMap<Integer, Threshold>();
 		for (Threshold threshold : thresholdList) {
 			hashMap2.put(threshold.getThresholdTypeId(), threshold);
