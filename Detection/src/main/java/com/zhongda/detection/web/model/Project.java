@@ -30,9 +30,6 @@ public class Project {
 	// 数据库无
 	private SysDictionary sysDictionary;
 
-	// 缓存告警信息的数量
-	private Integer alarmCount;
-
 	// 缓存字典表查到的状态字符串
 	private String projectStatusString;
 	
@@ -48,7 +45,21 @@ public class Project {
     private Integer thresholdCount;
     private Integer imageCount;
     
-    public Integer getDetectionPointCount() {
+    //缓存采集器的数量。
+    private Integer terminalsCount;
+    
+    // 缓存告警信息的数量
+  	private Integer alarmCount;
+     
+    public Integer getTerminalsCount() {
+		return terminalsCount;
+	}
+
+	public void setTerminalsCount(Integer terminalsCount) {
+		this.terminalsCount = terminalsCount;
+	}
+
+	public Integer getDetectionPointCount() {
 		return detectionPointCount;
 	}
 

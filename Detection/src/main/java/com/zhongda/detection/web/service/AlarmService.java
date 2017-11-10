@@ -32,4 +32,10 @@ public interface AlarmService {
 	 */
 	List<Alarm> selectPageAlarmByUserIdAndOtherInfo(Alarm alarm);
 	
+	/**
+	 * 查当前用户下所有告警信息
+	 * @param projectId
+	 * @return
+	 */
+	List<Alarm> selectAlarmByProjectId(Integer projectId);
 }

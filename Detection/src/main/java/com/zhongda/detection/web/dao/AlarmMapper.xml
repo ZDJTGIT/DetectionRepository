@@ -35,6 +35,7 @@
     <result column="alarm_level" jdbcType="INTEGER" property="alarmLevel" />
     <result column="frequency" jdbcType="INTEGER" property="frequency" />
     <result column="alarm_type" jdbcType="INTEGER" property="alarmType" />
+    <result column="detection_name" jdbcType="VARCHAR" property="detectionName" />
     <collection property="alarmLinkmans" ofType="com.zhongda.detection.web.model.AlarmLinkman">
 	    <id column="alarm_linkman_id" jdbcType="INTEGER" property="alarmLinkmanId" />
 	    <result column="user_name" jdbcType="VARCHAR" property="userName" />
@@ -69,6 +70,14 @@
     from alarm
 	where user_id = #{userId,jdbcType=INTEGER}
 	and status = 20 order by create_time desc
+  </select>
+  <select id="selectAlarmByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+   select 
+   a.*, sd.item_name 'alarm_type', dp.detection_name 'detection_name'
+   from alarm a, sys_dictionary sd, detection_point dp
+   where a.project_Id = #{projectId,jdbcType=INTEGER}
+   and a.alarm_type_id = sd.dic_id
+   and a.detection_id = dp.detection_point_id
   </select>
   <select id="selectPageAlarmByUserIdAndOtherInfo" parameterType="com.zhongda.detection.web.model.Alarm" resultMap="BaseResultMap">
 	select

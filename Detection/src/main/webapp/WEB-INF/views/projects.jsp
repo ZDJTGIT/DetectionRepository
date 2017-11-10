@@ -98,10 +98,10 @@
 								<input class="md_input" type="text" style="display:none" id="projectName_addProjects" name="projectName_addProjects">
 								<label class="md_lable" for="projectAddress_addProject">项目地址:</label>
 								<input class="md_input" type="text" id="projectAddress_addProject" name="projectAddress_addProject"><br><br>
-								<label class="md_lable" for="projectLongitude_addProject">项目经度:</label>
-								<input class="md_input" type="text" id="projectLongitude_addProject" name="projectLongitude_addProject"><br><br>
+								<label class="md_lable" for="projectLongitude_addProject">项目经度: </label>
+								<input class="md_input" type="text" id="projectLongitude_addProject" placeholder="如：12.3456789" name="projectLongitude_addProject"><br><br>
 								<label class="md_lable" for="projectLatitude_addProject">项目纬度:</label>
-								<input class="md_input" type="text" id="projectLatitude_addProject" name="projectLatitude_addProject"><br><br>
+								<input class="md_input" type="text" id="projectLatitude_addProject" placeholder="如：12.3456789" name="projectLatitude_addProject"><br><br>
 								<label class="md_lable" for="projectBeginTime_addProject">开始时间:</label>
 								<input class="md_input" type="text" id="projectBeginTime_addProject" name="projectBeginTime_addProject"><br><br>
 								<label class="md_lable" for="projectEndTime_addProject">结束时间:</label>
@@ -143,9 +143,9 @@
 								<label class="md_lable" for="projectAddress_updetaProject">项目地址:</label>
 								<input class="md_input" type="text" id="projectAddress_updetaProject" name="projectAddress_updetaProject"><br><br>
 								<label class="md_lable" for="projectLongitude_updetaProject">项目经度:</label>
-								<input class="md_input" type="text" id="projectLongitude_updetaProject" name="projectLongitude_updetaProject"><br><br>
+								<input class="md_input" type="text" id="projectLongitude_updetaProject" placeholder="如：12.3456789" name="projectLongitude_updetaProject"><br><br>
 								<label class="md_lable" for="projectLatitude_updetaProject">项目纬度:</label>
-								<input class="md_input" type="text" id="projectLatitude_updetaProject" name="projectLatitude_updetaProject"><br><br>
+								<input class="md_input" type="text" id="projectLatitude_updetaProject" placeholder="如：12.3456789" name="projectLatitude_updetaProject"><br><br>
 								<label class="md_lable" for="projectBeginTime_updetaProject">开始时间:</label>
 								<input class="md_input" type="text" id="projectBeginTime_updetaProject" name="projectBeginTime_updetaProject"><br><br>
 								<label class="md_lable" for="projectEndTime_updetaProject">结束时间:</label>

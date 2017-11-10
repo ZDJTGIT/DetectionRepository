@@ -140,4 +140,9 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectMapper.selectImageCount(projectId);
 	}
 
+	@Override
+	public Project selectAlarmCount(Integer projectId) {
+		return projectMapper.selectAlarmCount(projectId);
+	}
+
 }

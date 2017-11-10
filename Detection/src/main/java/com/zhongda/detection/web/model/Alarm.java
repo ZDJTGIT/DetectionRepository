@@ -34,7 +34,10 @@ public class Alarm {
 
     private Integer frequency;
     
-    //临时存放告警类型名称
+    //存放测点名称
+    private String detectionName;
+    
+	//临时存放告警类型名称
     private String alarmType;
     
     //临时存放告警状态
@@ -53,6 +56,15 @@ public class Alarm {
     private Date endCreateTime;
     
     private List<AlarmLinkman> alarmLinkmans;
+    
+    public String getDetectionName() {
+		return detectionName;
+	}
+
+	public void setDetectionName(String detectionName) {
+		this.detectionName = detectionName;
+	}
+
     
     public Integer getAlarmId() {
         return alarmId;

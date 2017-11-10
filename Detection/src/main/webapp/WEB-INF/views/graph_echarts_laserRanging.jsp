@@ -284,7 +284,7 @@
 	        })
 			   
 	</script>
-	 <!-- Data Tables -->
+	<!-- Data Tables -->
     <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     

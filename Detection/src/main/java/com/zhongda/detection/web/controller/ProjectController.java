@@ -593,7 +593,7 @@ public class ProjectController {
 	}
 	
 	/**
-	 * 获取测点数量，传感器数量，阀值数量，图片数量。
+	 * 获取测点数量，传感器数量，阀值数量，图片数量，告警信息数量，采集器数量（---数据库未添加）。
 	 * @param projectId
 	 * @return
 	 */
@@ -601,6 +601,7 @@ public class ProjectController {
 	@ResponseBody
 	public Project obtainCount(Integer projectId) {
 		Project project = new Project();
+		project.setAlarmCount(projectService.selectAlarmCount(projectId).getAlarmCount());
 		project.setDetectionPointCount(projectService.selectDetectionCount(projectId).getDetectionPointCount());
 		project.setSensorInfoCount(projectService.selectSensorInfoCount(projectId).getSensorInfoCount());
 		project.setThresholdCount(projectService.selectThresholdCount(projectId).getThresholdCount());

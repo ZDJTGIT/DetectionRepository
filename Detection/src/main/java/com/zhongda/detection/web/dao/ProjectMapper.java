@@ -158,4 +158,10 @@ public interface ProjectMapper {
 	 * @return
 	 */
 	Project selectImageCount(Integer projectId);
+	/**
+	 * 查项目下报警信息数量
+	 * @param projectId
+	 * @return
+	 */
+	Project selectAlarmCount(Integer projectId);
 }

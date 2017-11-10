@@ -7,6 +7,7 @@ jQuery.validator.addMethod("isMobile", function(value, element) {
 }, "请正确填写您的手机号码");
 
 
+
 //添加用户校验用户信息唯一性
 $(document).ready(function() {
 //添加项目信息验证	
@@ -33,10 +34,12 @@ $('#form_addProject').validate({
 			},
 			projectLongitude_addProject : {
 				required : true,
+				number:  true,
 				minlength : 2
 			},
 			projectLatitude_addProject : {
 				required : true,
+				number:  true,
 				minlength : 2
 			},
 			projectBeginTime_addProject : {
@@ -72,10 +75,12 @@ $('#form_addProject').validate({
 			},
 			projectLongitude_addProject : {
 				required : "请输入项目经度",
+				number:  "项目经度格式不正确",
 				minlength:"项目经度为2-15个字符"
 			},
 			projectLatitude_addProject : {
 				required : "请输入项目纬度",
+				number:  "项目纬度格式不正确",
 				minlength:"项目纬度为2-15个字符"
 			},
 			projectBeginTime_addProject : {
@@ -114,10 +119,12 @@ $('#form_updetaProject').validate({
 		},
 		projectLongitude_updetaProject : {
 			required : true,
+			number:  true,
 			minlength : 2
 		},
 		projectLatitude_updetaProject : {
 			required : true,
+			number:  true,
 			minlength : 2
 		},
 		projectBeginTime_updetaProject : {
@@ -153,10 +160,12 @@ $('#form_updetaProject').validate({
 		},
 		projectLongitude_updetaProject : {
 			required : "项目经度不能为空",
+			number:  "项目经度格式不正确",
 			minlength:"项目经度为2-15个字符"
 		},
 		projectLatitude_updetaProject : {
 			required : "项目纬度不能为空",
+			number:  "项目纬度格式不正确",
 			minlength:"项目纬度为2-15个字符"
 		},
 		projectBeginTime_updetaProject : {
@@ -192,10 +201,12 @@ $('#form_addDetection').validate({
 		},
 		DetectionLongitude_addDetection : {
 			required : true,
+			number:  true,
 			minlength : 2
 		},
 		DetectionLatitude_addDetection : {
 			required : true,
+			number:  true,
 			minlength : 2
 		}
 	},
@@ -209,10 +220,12 @@ $('#form_addDetection').validate({
 		},
 		DetectionLongitude_addDetection : {
 			required : "测点经度不能为空",
+			number:  "测点经度格式不正确",
 			minlength:"测点编号为2-15个字符"
 		},
 		DetectionLatitude_addDetection : {
 			required : "测点纬度不能为空",
+			number:  "测点纬度格式不正确",
 			minlength:"测点纬度为2-15个字符"
 		}
 	}
@@ -242,11 +255,13 @@ $('#form_updetaDetection').validate({
 		
 		DetectionLongitude_updetaDetection : {
 			required : true,
+			number:  true,
 			minlength : 2
 		},
 		
 		DetectionLatitude_updetaDetection : {
 			required : true,
+			number:  true,
 			minlength : 2
 		}
 	},
@@ -260,10 +275,12 @@ $('#form_updetaDetection').validate({
 		},
 		DetectionLongitude_updetaDetection : {
 			required : "测点经度不能为空",
+			number:  "测点经度格式不正确",
 			minlength:"测点经度为2-15个字符"
 		},
 		DetectionLatitude_updetaDetection : {
 			required : "测点纬度不能为空",
+			number:  "测点纬度格式不正确",
 			minlength:"测点纬度为2-15个字符"
 		}
 	}
@@ -277,10 +294,12 @@ $('#form_addThresHold').validate({
 			 
 			 maxThresholdValue_add : {
 				required : true,
+				number:  true,
 				minlength : 1
 			},
 			minThresholdValue_add : {
 				required : true,
+				number:  true,
 				minlength : 1
 			}
 		},
@@ -289,10 +308,12 @@ $('#form_addThresHold').validate({
 		
 			maxThresholdValue_add : {
 				required : "最大告警值不能为空",
+				number:  "请正确填写阀值",
 				minlength:"最大告警值为1-15个字符"
 			},
 			minThresholdValue_add : {
 				required : "最小告警值不能为空",
+				number:  "请正确填写阀值",
 				minlength:"最小告警值为2-15个字符"
 			}
 		}
@@ -305,10 +326,12 @@ $('#form_updetaThresHold').validate({
 		 
 		 maxThresholdValue_updeta : {
 			required : true,
+			number:  true,
 			minlength : 1
 		},
 		minThresholdValue_updeta : {
 			required : true,
+			number:  true,
 			minlength : 1
 		}
 	},
@@ -317,10 +340,12 @@ $('#form_updetaThresHold').validate({
 	
 		maxThresholdValue_updeta : {
 			required : "最大告警值不能为空",
+			number:  "请正确填写阀值",
 			minlength:"最大告警值为1-15个字符"
 		},
 		minThresholdValue_updeta : {
 			required : "最小告警值不能为空",
+			number:  "请正确填写阀值",
 			minlength:"最小告警值为2-15个字符"
 		}
 	}
@@ -331,6 +356,7 @@ $('#form_addSensorInfo').validate({
 		rules : {
 			sensorId_addSensorInfo : {
 				required : true,
+				number:  true,
 				minlength : 1,
 				//验证，同一个项目下的测点名称不能相同
 				remote: {
@@ -356,6 +382,7 @@ $('#form_addSensorInfo').validate({
 			},
 			sensorDepth_addSensorInfo : {
 				required : true,
+				number:  true,
 				minlength : 1
 			}
 		},
@@ -365,6 +392,7 @@ $('#form_addSensorInfo').validate({
 			sensorId_addSensorInfo : {
 				required : "传感器编号不能为空",
 				minlength:"传感器编号为1-15个字符",
+				number:  "传感器编号为数字",
 				remote: "编号已存在"
 			},
 			sensorType_addSensorInfo : {
@@ -377,6 +405,7 @@ $('#form_addSensorInfo').validate({
 			},
 			sensorDepth_addSensorInfo : {
 				required : "传感器深度不能为空",
+				number: "传感器深度为数字",
 				minlength:"传感器深度为1-15个字符"
 			}
 		}
@@ -388,6 +417,7 @@ $('#form_updetaSensorInfo').validate({
 		rules : {
 			sensorId_updetaSensorInfo : {
 				required : true,
+				number:  true,
 				minlength : 1,
 				//验证，同一个项目下的测点名称不能相同
 				remote: {
@@ -413,6 +443,7 @@ $('#form_updetaSensorInfo').validate({
 			},
 			sensorDepth_updetaSensorInfo : {
 				required : true,
+				number:  true,
 				minlength : 1
 			}
 		},
@@ -422,6 +453,7 @@ $('#form_updetaSensorInfo').validate({
 			sensorId_updetaSensorInfo : {
 				required : "传感器编号不能为空",
 				minlength:"传感器编号为1-15个字符",
+				number: "传感器深度为数字",
 				remote: "传感器编号已存在"
 			},
 			sensorType_updetaSensorInfo : {
@@ -434,6 +466,7 @@ $('#form_updetaSensorInfo').validate({
 			},
 			sensorDepth_updetaSensorInfo : {
 				required : "传感器深度不能为空",
+				number: "传感器深度为数字",
 				minlength:"传感器深度为1-15个字符"
 			}
 		}

@@ -36,4 +36,9 @@ public class AlarmServiceImpl implements AlarmService{
 		PageHelper.startPage(alarm.getPageNum(), alarm.getPageSize());
 		return alarmMapper.selectPageAlarmByUserIdAndOtherInfo(alarm);
 	}
+
+	@Override
+	public List<Alarm> selectAlarmByProjectId(Integer projectId) {
+		return alarmMapper.selectAlarmByProjectId(projectId);
+	}
 }

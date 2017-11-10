@@ -13,12 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
 import com.github.pagehelper.PageInfo;
 import com.zhongda.detection.web.model.Alarm;
 import com.zhongda.detection.web.model.AlarmLinkman;
+import com.zhongda.detection.web.model.DetectionPoint;
+import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.service.AlarmLinkmanService;
 import com.zhongda.detection.web.service.AlarmService;
@@ -71,5 +74,13 @@ public class AlarmController {
 		List<AlarmLinkman> aLinkmanList = alarmLinkmanService.selectAll();
 		model.addAttribute("aLinkmanList", aLinkmanList);
 		return "alarm_linkman";
+	}
+	/**
+	 * 展示项目下所有测点
+	 */
+	@RequestMapping(value = "/showProjectAlarm", method = RequestMethod.POST)
+	@ResponseBody
+	public List<Alarm> showProjectAlarm(Integer projectId){
+		return alarmService.selectAlarmByProjectId(projectId);
 	}
 }
