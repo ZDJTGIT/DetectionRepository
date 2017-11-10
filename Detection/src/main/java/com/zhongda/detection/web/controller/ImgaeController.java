@@ -44,7 +44,8 @@ public class ImgaeController {
 	@RequestMapping(value = "/showProjectImage", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Image> showProjectImage(Integer projectId){
-		return imageService.selectImageByProjectId(projectId);
+		List<Image> imageList = imageService.selectImageByProjectId(projectId);
+		return imageList;
 	}
 	
 	/**

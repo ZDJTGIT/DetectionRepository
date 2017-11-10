@@ -69,12 +69,12 @@
 										<td class="project-title" style="width:160px">
 											<a href="javascript:;">最大警戒值</a>
 										</td>
-										<!--td class="project-title" style="width:500px">
-											热点图
+										<td class="project-title" style="width:160px">
+											<a href="javascript:;">最小意外值</a>
 										</td>
-										<td class="project-title" style="width:500px">
-											物理图
-										</td-->
+										<td class="project-title" style="width:160px">
+											<a href="javascript:;">最大意外值</a>
+										</td>
 										<td class="project-title" style="width:160px">
 											<a href="javascript:;">操作栏</a>
 										</td>
@@ -112,6 +112,10 @@
 								<input class="md_input" style="margin-left: 85px;" type="text" id="maxThresholdValue_add" name="maxThresholdValue_add"><br><br>
 								<label class="md_lable" for="minThresholdValue_add">最小警戒值:</label>
 								<input class="md_input" style="margin-left: 85px;" type="text" id="minThresholdValue_add" name="minThresholdValue_add"><br><br>
+								<label class="md_lable" for="maxDrasticThresholdValue_add">最大意外值:</label>
+								<input class="md_input" style="margin-left: 85px;" type="text" id="maxDrasticThresholdValue_add" name="maxDrasticThresholdValue_add"><br><br>
+								<label class="md_lable" for="minDrasticThresholdValue_add">最小意外值:</label>
+								<input class="md_input" style="margin-left: 85px;" type="text" id="minDrasticThresholdValue_add" name="minDrasticThresholdValue_add">
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" id="offAddThresHold" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -153,6 +157,10 @@
 								<input class="md_input" style="margin-left: 85px;" type="text" id="maxThresholdValue_updeta" name="maxThresholdValue_updeta"><br><br>
 								<label class="md_lable" for="minThresholdValue_updeta">最小警戒值:</label>
 								<input class="md_input" style="margin-left: 85px;" type="text" id="minThresholdValue_updeta" name="minThresholdValue_updeta"><br><br>
+								<label class="md_lable" for="maxDrasticThresholdValue_updeta">最大意外值:</label>
+								<input class="md_input" style="margin-left: 85px;" type="text" id="maxDrasticThresholdValue_updeta" name="maxDrasticThresholdValue_updeta"><br><br>
+								<label class="md_lable" for="minDrasticThresholdValue_updeta">最小意外值:</label>
+								<input class="md_input" style="margin-left: 85px;" type="text" id="minDrasticThresholdValue_updeta" name="minDrasticThresholdValue_updeta">
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" id="offUpdetaThresHold" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -185,13 +193,19 @@
 		var detectionTypeId = $('#selectDetectionType_addThresHold option:selected').val();//测点类型ID
 		var thresholdTypeId = $('#selectThresHoldType_addThresHold option:selected').val();//阀值类型ID
 		var maxThresholdValue = $('#maxThresholdValue_add').val();//
-		var minThresholdValue = $('#minThresholdValue_add').val();//
+		var minThresholdValue = $('#minThresholdValue_add').val();// 
+		var maxDrasticThresholdValue = $('#maxDrasticThresholdValue_add').val();
+		var minDrasticThresholdValue = $('#minDrasticThresholdValue_add').val();
 		var jsonData = '{"projectId":"'
 						+ projectId
 						+ '","detectionTypeId":"'
 						+ detectionTypeId
 						+ '","thresholdTypeId":"'
 						+ thresholdTypeId
+						+ '","minDrasticThresholdValue":"'
+						+ minDrasticThresholdValue
+						+ '","maxDrasticThresholdValue":"'
+						+ maxDrasticThresholdValue
 						+ '","maxThresholdValue":"'
 						+ maxThresholdValue
 						+ '","minThresholdValue":"'
@@ -209,6 +223,8 @@
 					}else{
 							$('#minThresholdValue_add').val("");
 							$('#maxThresholdValue_add').val("");
+							$('#maxDrasticThresholdValue_add').val("");
+							$('#minDrasticThresholdValue_add').val("");
 			  var viewData ='<tr>'+
 					    	'<td class="project-title" style="width:160px">'+
 					    		''+$('#selectDetectionType_addThresHold option:selected').text()+''+
@@ -231,6 +247,13 @@
 					    	'<td class="project-title" style="display:none">'+
 				  				+data.thresholdTypeId+
 				    		'</td>'+
+				    		'</td>'+
+						    '<td class="project-title" style="width:160px">'+
+						    		+data.minDrasticThresholdValue+
+						    '</td>'+
+						    '<td class="project-title" style="width:160px">'+
+					    			+data.maxDrasticThresholdValue+
+					    	'</td>'+
 							'<td class="project-status" style="width:160px">'+
 								'<a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updetaThresHold(this)"  data-toggle="modal" data-target="#myModal_updetaThresHold">编辑修改</a><br />'+
 						    '</td>'+
@@ -256,7 +279,11 @@
 		var thresholdId = $("table tr:eq(" + b + ") td:eq(4)").text();
 		var detectionTypeId = $("table tr:eq(" + b + ") td:eq(5)").text();
 		var thresholdTypeId = $("table tr:eq(" + b + ") td:eq(6)").text();
-		//输入框加载
+		var minDrasticThresholdValue = $("table tr:eq(" + b + ") td:eq(7)").text();
+		var maxDrasticThresholdValue = $("table tr:eq(" + b + ") td:eq(8)").text();
+		//输入框加载 
+		$('#minDrasticThresholdValue_updeta').val(minDrasticThresholdValue);
+		$('#maxDrasticThresholdValue_updeta').val(maxDrasticThresholdValue);
 		$('#minThresholdValue_updeta').val(minThresholdValue);
 		$('#maxThresholdValue_updeta').val(maxThresholdValue);
 		$('#thresHoldId_updetaThresHold').val(thresholdId);
@@ -282,6 +309,8 @@
 		var thresholdId = $('#thresHoldId_updetaThresHold').val();
 		var maxThresholdValue = $('#maxThresholdValue_updeta').val();
 		var minThresholdValue = $('#minThresholdValue_updeta').val();
+		var minDrasticThresholdValue = $('#minDrasticThresholdValue_updeta').val();
+		var maxDrasticThresholdValue = $('#maxDrasticThresholdValue_updeta').val();
 		var jsonData = '{"thresholdId":"'
 						+ thresholdId
 						+ '","projectId":"'
@@ -290,6 +319,10 @@
 						+ detectionTypeId
 						+ '","thresholdTypeId":"'
 						+ thresholdTypeId
+						+ '","minDrasticThresholdValue":"'
+						+ minDrasticThresholdValue
+						+ '","maxDrasticThresholdValue":"'
+						+ maxDrasticThresholdValue
 						+ '","maxThresholdValue":"'
 						+ maxThresholdValue
 						+ '","minThresholdValue":"'
@@ -310,6 +343,8 @@
 						$("table tr:eq(" + t + ") td:eq(1)").text($('#selectThresHoldType_updetaThresHold option:selected').text());//阀值类型名称
 						$("table tr:eq(" + t + ") td:eq(2)").text(data.minThresholdValue);//最小警戒值
 						$("table tr:eq(" + t + ") td:eq(3)").text(data.maxThresholdValue);//最大警戒值
+						$("table tr:eq(" + t + ") td:eq(7)").text(data.minDrasticThresholdValue);//最小警戒值
+						$("table tr:eq(" + t + ") td:eq(8)").text(data.maxDrasticThresholdValue);//最大警戒值
 						$('#offUpdetaThresHold').trigger("click"); 
 						alert("修改阀值成功！");
 						}
@@ -390,7 +425,7 @@
 				    	  		    		''+item.detectionTypeName+''+
 									    '</td>'+
 									    '<td class="project-title" style="width:160px">'+
-									    	''+item.thresHoldTypeName+''+
+									    	''+item.thresholdTypeName+''+
 										'</td>'+
 				    	  		    	'<td class="project-title" style="width:160px">'+
 				    	  		    		+item.minThresholdValue+
@@ -407,6 +442,12 @@
 								    	'<td class="project-title" style="display:none">'+
 		    	  		    				+item.thresholdTypeId+
 							    		'</td>'+
+							    		'<td class="project-title" style="width:160px">'+
+									    	+item.minDrasticThresholdValue+
+									    '</td>'+
+									    '<td class="project-title" style="width:160px">'+
+								    		+item.maxDrasticThresholdValue+
+								    	'</td>'+
 										'<td class="project-status" style="width:160px">'+
 											'<a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updetaThresHold(this)"  data-toggle="modal" data-target="#myModal_updetaThresHold">编辑修改</a><br />'+
 									    '</td>'+

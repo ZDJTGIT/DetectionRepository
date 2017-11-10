@@ -213,6 +213,8 @@
 															<th>阀值类型</th>
 															<th>最小警戒值</th>
 															<th>最大警戒值</th>
+															<th>最小意外剧烈变化幅度大的值</th>
+															<th>最大意外剧烈变化幅度大的值</th>
 														</tr>
 													</thead>
 													<tbody id="tbody_thresHold">
@@ -531,9 +533,11 @@
 			    	  		 string += '<tr>'+
 											'<td><span class="label label-primary">'+
 											'<i class=""></i>'+item.detectionTypeName+'</span></td>'+
-											'<td>'+item.thresHoldTypeName+'</td>'+
+											'<td>'+item.thresholdTypeName+'</td>'+
 											'<td>'+item.minThresholdValue+'</td>'+
 											'<td>'+item.maxThresholdValue+'</td>'+
+											'<td>'+item.minDrasticThresholdValue+'</td>'+
+											'<td>'+item.maxDrasticThresholdValue+'</td>'+
 										'</tr>';
 					    	 });
 			    	  		 $('#tbody_thresHold').append(string); 		
@@ -548,7 +552,7 @@
 	    //获取项目下所有图片
         $.ajax({
 		        type:'post',
-			    url: 'rest/image/showProjectImaged',
+			    url: 'rest/image/showProjectImage',
 			    data: {projectId:projectId},
 			    contextType:"application/json",
 			    success: function(data){

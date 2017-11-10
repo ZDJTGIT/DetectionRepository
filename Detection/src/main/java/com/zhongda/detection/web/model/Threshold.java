@@ -13,9 +13,9 @@ public class Threshold {
 
     private Integer thresholdTypeId;
 
-    private Double minThresholdValue;
-
     private Double maxThresholdValue;
+
+    private Double minThresholdValue;
 
     private Double minDrasticThresholdValue;
 
