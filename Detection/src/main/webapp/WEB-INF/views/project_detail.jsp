@@ -23,10 +23,9 @@
 <link rel="shortcut icon" href="favicon.ico">
 </head>
 <body class="gray-bg">
-	<div class="row">
 		<div class="col-sm-12">
 			<div class="wrapper wrapper-content animated fadeInUp">
-				<div class="ibox">
+				<div class="col-sm-12">
 					<div class="ibox-content">
 						<div class="row">
 							<div class="col-sm-12">
@@ -242,7 +241,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 	</div>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/content.js"></script>

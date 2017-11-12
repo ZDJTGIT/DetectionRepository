@@ -174,6 +174,7 @@
 										<th>修改状态</th>
 									</tr>
 								</thead>
+								<!-- --- -->
 								<tbody id="userTableDeatil">
 									<c:forEach items="${userList}" var="singleUser">
 										<tr class="project-status">
@@ -488,6 +489,27 @@
 							}
 						});
 				}); 
+			
+			
+			 //初始化分页组件函数
+			 function loadLaypage(dataTotal, jsonData){
+				 var laypage = layui.laypage;
+				 laypage.render({
+					 elem: 'pageComponent', //分页组件div的id
+					 count: dataTotal, //记录总条数
+					 limit: jsonData.pageSize, //每页显示的条数
+					 limits:[jsonData.pageSize, 10, 20, 30, 40, 50], //每页条数的选择项
+				     groups: 5, //连续显示分页数
+				     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+				     jump: function(obj, first){  //触发分页后的回调
+				         if(!first){ //一定要加此判断，否则初始时会无限刷新
+				        	 jsonData.pageNum = obj.curr;
+				 			 jsonData.pageSize = obj.limit;
+				 			 projectPageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数
+				         }
+				     }
+				 });
+			 }
 	 });
 	</script>
 	

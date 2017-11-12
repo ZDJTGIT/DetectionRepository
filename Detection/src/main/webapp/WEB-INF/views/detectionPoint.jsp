@@ -117,10 +117,10 @@
 								<input class="md_input" type="text" id="DetectionName_addDetection" name="DetectionName_addDetection"><br><br>
 								
 								<label class="md_lable" for="DetectionLatitude_addDetection">测点经度:</label>
-								<input class="md_input" type="text" id="DetectionLatitude_addDetection" placeholder="如：12.3456789" name="DetectionLatitude_addDetection"><br><br>
+								<input class="md_input" type="text" id="DetectionLatitude_addDetection" placeholder="格式：(-180)-180，小数位1-5位" name="DetectionLatitude_addDetection"><br><br>
 								
 								<label class="md_lable" for="DetectionLongitude_addDetection">测点纬度:</label>
-								<input class="md_input" type="text" id="DetectionLongitude_addDetection" placeholder="如：12.3456789" name="DetectionLongitude_addDetection"><br><br>
+								<input class="md_input" type="text" id="DetectionLongitude_addDetection" placeholder="格式：(-90)-90，小数位1-5位" name="DetectionLongitude_addDetection"><br><br>
 								
 								<label class="md_lable" for="DetectionDescription_addDetection">测点描述:</label>
 								<textarea id="DetectionDescription_addDetection" class="data_project_tar data_content_input_5" rows="4"></textarea>
@@ -160,10 +160,10 @@
 								<input class="md_input" type="text" id="DetectionName_updetaDetection" name="DetectionName_updetaDetection"><br><br>
 								
 								<label class="md_lable" for="DetectionLongitude_updetaDetection">测点经度:</label>
-								<input class="md_input" type="text" id="DetectionLongitude_updetaDetection" placeholder="如：12.3456789" name="DetectionLongitude_updetaDetection"><br><br>
+								<input class="md_input" type="text" id="DetectionLongitude_updetaDetection" placeholder="格式：(-180)-180，小数位1-5位" name="DetectionLongitude_updetaDetection"><br><br>
 								
 								<label class="md_lable" for="DetectionLatitude_updetaDetection">测点纬度:</label>
-								<input class="md_input" type="text" id="DetectionLatitude_updetaDetection" placeholder="如：12.3456789" name="DetectionLatitude_updetaDetection"><br><br>
+								<input class="md_input" type="text" id="DetectionLatitude_updetaDetection" placeholder="格式：(-90)-90，小数位1-5位" name="DetectionLatitude_updetaDetection"><br><br>
 								
 								<label class="md_lable" for="DetectionDescription_updetaDetection">测点描述:</label>
 								<textarea id="DetectionDescription_updetaDetection" class="data_project_tar data_content_input_5" rows="4"></textarea>
@@ -275,7 +275,10 @@
 				   '</tr>';
 					$('#detection_tbody').append(viewData);
 					$('#offAddDetection').trigger("click"); 
-					alert("测点添加成功！");
+					layer.msg('添加成功（该提示1s后自动关闭）', {
+						time : 1000, //1s后自动关闭
+						btn : [ '知道了' ]
+					});
 		   		   	}else {
 		  			alert("数据异常");
 		   			}
@@ -362,7 +365,10 @@
 							$("table tr:eq(" + t + ") td:eq(5)").text(detectionLongitude);//测点经度.
 							$("table tr:eq(" + t + ") td:eq(6)").text(detectionLatitude);//测点纬度.
 							$('#offUpdetaDetection').trigger("click"); 
-							alert("修改测点信息成功！");
+							layer.msg('修改成功（该提示1s后自动关闭）', {
+								time : 1000, //1s后自动关闭
+								btn : [ '知道了' ]
+							});
 								}else {
 									  alert("数据异常");
 								      }

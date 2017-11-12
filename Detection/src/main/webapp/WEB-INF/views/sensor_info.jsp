@@ -234,7 +234,10 @@
 					   '</tr>';
 						$('#sensorInfo_tbody').append(viewData);
 						$('#offAddSensorInfo').trigger("click"); 
-						alert("传感器添加成功！");
+						layer.msg('添加成功（该提示1s后自动关闭）', {
+							time : 1000, //1s后自动关闭
+							btn : [ '知道了' ]
+						});
 			   		   	   }else {
 			  			   alert("数据异常");
 			   			   }
@@ -304,7 +307,10 @@
 							$("table tr:eq(" + b + ") td:eq(6)").text(sensorInfoId);//传感器ID
 							$("table tr:eq(" + b + ") td:eq(7)").text(detectionPointId);//测点ID
 							$('#offUpdetaSensorInfo').trigger("click"); 
-							alert("修改传感器信息成功！");
+							layer.msg('修改成功（该提示1s后自动关闭）', {
+								time : 1000, //1s后自动关闭
+								btn : [ '知道了' ]
+							});
 								}else 
 								{
 								alert("数据异常");

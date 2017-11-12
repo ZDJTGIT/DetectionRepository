@@ -99,9 +99,9 @@
 								<label class="md_lable" for="projectAddress_addProject">项目地址:</label>
 								<input class="md_input" type="text" id="projectAddress_addProject" name="projectAddress_addProject"><br><br>
 								<label class="md_lable" for="projectLongitude_addProject">项目经度: </label>
-								<input class="md_input" type="text" id="projectLongitude_addProject" placeholder="如：12.3456789" name="projectLongitude_addProject"><br><br>
+								<input class="md_input" type="text" id="projectLongitude_addProject" placeholder="格式：(-180)-180，小数位1-5位" name="projectLongitude_addProject"><br><br>
 								<label class="md_lable" for="projectLatitude_addProject">项目纬度:</label>
-								<input class="md_input" type="text" id="projectLatitude_addProject" placeholder="如：12.3456789" name="projectLatitude_addProject"><br><br>
+								<input class="md_input" type="text" id="projectLatitude_addProject" placeholder="格式：(-90)-90，小数位1-5位" name="projectLatitude_addProject"><br><br>
 								<label class="md_lable" for="projectBeginTime_addProject">开始时间:</label>
 								<input class="md_input" type="text" id="projectBeginTime_addProject" name="projectBeginTime_addProject"><br><br>
 								<label class="md_lable" for="projectEndTime_addProject">结束时间:</label>
@@ -143,9 +143,9 @@
 								<label class="md_lable" for="projectAddress_updetaProject">项目地址:</label>
 								<input class="md_input" type="text" id="projectAddress_updetaProject" name="projectAddress_updetaProject"><br><br>
 								<label class="md_lable" for="projectLongitude_updetaProject">项目经度:</label>
-								<input class="md_input" type="text" id="projectLongitude_updetaProject" placeholder="如：12.3456789" name="projectLongitude_updetaProject"><br><br>
+								<input class="md_input" type="text" id="projectLongitude_updetaProject" placeholder="格式：(-180)-180，小数位1-5位" name="projectLongitude_updetaProject"><br><br>
 								<label class="md_lable" for="projectLatitude_updetaProject">项目纬度:</label>
-								<input class="md_input" type="text" id="projectLatitude_updetaProject" placeholder="如：12.3456789" name="projectLatitude_updetaProject"><br><br>
+								<input class="md_input" type="text" id="projectLatitude_updetaProject" placeholder="格式：(-90)-90，小数位1-5位" name="projectLatitude_updetaProject"><br><br>
 								<label class="md_lable" for="projectBeginTime_updetaProject">开始时间:</label>
 								<input class="md_input" type="text" id="projectBeginTime_updetaProject" name="projectBeginTime_updetaProject"><br><br>
 								<label class="md_lable" for="projectEndTime_updetaProject">结束时间:</label>
@@ -577,6 +577,10 @@
    		   	  	  success: function(data){
    		   	  		  if(data){
    		   	  		    //修改成功后当前页面的当前项目修改
+   		   	  		    layer.msg('修改成功（该提示1s后自动关闭）', {
+								time : 1000, //1s后自动关闭
+								btn : [ '知道了' ]
+							});
 			    	   $("table tr:eq(" + t + ") td:eq(5) span").text(data.projectStatusString);//项目状态_String
 			    	   $("table tr:eq(" + t + ") td:eq(5) span").attr('class','label label-primary statusColor'+data.projectStatus);
 			    	   $("table tr:eq(" + t + ") td:eq(6) a").text(data.projectName);//项目名
@@ -657,7 +661,10 @@
 				success : function(data) {
 					if(data) {
 						if(data.userId!=2){
-						alert("项目添加成功！");
+							layer.msg('项目添加成功（该提示1s后自动关闭）', {
+								time : 1000, //1s后自动关闭
+								btn : [ '知道了' ]
+							});
 						var nowTime = new Date().getTime();
 	  		    		var beginTime = stringToData(data.projectBeginTime);
 	  		    		var endTime = stringToData(data.projectEndTime);
