@@ -149,7 +149,7 @@
 							</div>
 							<div class="col-sm-3">
 								<div class="input-group">
-									<input type="text" id="keyword" name="keyword" placeholder="请输入关键词" class="input-sm form-control"> 
+									<input type="text" id="keyword" name="keyword" placeholder="输入用户名，邮箱，手机号，公司，联系人关键字" class="input-sm form-control"> 
 									<span class="input-group-btn">
 									<button type="button" id="sureSearch" class="btn btn-sm btn-primary">
 									搜索
@@ -158,8 +158,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="table-responsive">
-							<table class="table table-striped" id="mytable">
+							<table class="table table-striped table-bordered table-hover display" id="mytable">
 								<thead>
 									<tr>
 										<th>ID</th>
@@ -174,7 +173,6 @@
 										<th>修改状态</th>
 									</tr>
 								</thead>
-								<!-- --- -->
 								<tbody id="userTableDeatil">
 									<c:forEach items="${userList}" var="singleUser">
 										<tr class="project-status">
@@ -201,7 +199,6 @@
 									</c:forEach>
 								</tbody>
 							</table>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -228,6 +225,7 @@
     <!-- Sweet alert -->
     <script src="assets/js/plugins/sweetalert/sweetalert.min.js"></script>
     
+    
     <script type="text/javascript">
     	function xx(e){
     		var s = e.parentNode.parentNode.rowIndex;
@@ -237,6 +235,13 @@
     </script>
     
 	<script type="text/javascript">
+	
+	 table_basic_datatable = $('#mytable').dataTable({
+			ordering:false
+		});
+	 
+	 $('#mytable_filter').hide();
+	
 	var dlId = '${userInfo.userId}';
 	var b;
     //修改用户信息
@@ -489,8 +494,17 @@
 							}
 						});
 				}); 
-			
-			
+	 });
+	 
+		$(function(){(function(){
+			//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
+			function projectPageAjax(jsonData, loadLaypage){
+				 //显示loading提示
+                 var loading = layer.load(2, {
+                	  shade: [0.1,'#fff'] //0.1透明度的白色背景
+                 });
+				 
+			 }
 			 //初始化分页组件函数
 			 function loadLaypage(dataTotal, jsonData){
 				 var laypage = layui.laypage;
@@ -510,7 +524,19 @@
 				     }
 				 });
 			 }
-	 });
+			/*$('#searchButton').click(function(){
+					var jsonData = {};
+					if($('#searchProject').val()){
+						jsonData.projectName = $('#searchProject').val();
+					}
+					jsonData.pageNum = 1;
+					jsonData.pageSize = 6;
+					projectPageAjax(jsonData, loadLaypage);
+				});
+			 //首次加载页面触发查询按钮初始化列表（无查询参数）
+			 $('#searchButton').trigger("click"); */
+		})();
+	});
 	</script>
 	
 	<script type="text/javascript"

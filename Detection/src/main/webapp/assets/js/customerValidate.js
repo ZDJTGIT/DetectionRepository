@@ -18,6 +18,12 @@ jQuery.validator.addMethod("istrueLatitude", function(value, element) {
     return this.optional(element) || mobile.test(value);
 }, "请正确填写您的手机号码");
 
+//double类型验证
+jQuery.validator.addMethod("isdouble", function(value, element) {
+    var mobile =  /^[-+]?[0-9]+(\.[0-9]+)?$/;
+    return this.optional(element) || mobile.test(value);
+}, "请按要求填入double值");
+
 //添加用户校验用户信息唯一性
 $(document).ready(function() {
 //添加项目信息验证	
@@ -327,6 +333,16 @@ $('#form_addThresHold').validate({
 				required : true,
 				number:  true,
 				minlength : 1
+			},
+			maxDrasticThresholdValue_add : {
+				required : true,
+				isdouble:  true,
+				minlength : 1
+			},
+			minDrasticThresholdValue_add : {
+				required : true,
+				isdouble:  true,
+				minlength : 1
 			}
 		},
 		
@@ -341,6 +357,16 @@ $('#form_addThresHold').validate({
 				required : "最小告警值不能为空",
 				number:  "请正确填写阀值",
 				minlength:"最小告警值为2-15个字符"
+			},
+			maxDrasticThresholdValue_add : {
+				required : "最大意外告警值不能为空",
+				number:  "请按要求填写阀值",
+				minlength:"最大意外告警值为1-15个字符"
+			},
+			minDrasticThresholdValue_add : {
+				required : "最小意外告警值不能为空",
+				number:  "请按要求填写阀值",
+				minlength:"最小意外告警值为2-15个字符"
 			}
 		}
 });
@@ -382,7 +408,6 @@ $('#form_addSensorInfo').validate({
 		rules : {
 			sensorId_addSensorInfo : {
 				required : true,
-				number:  true,
 				minlength : 1,
 				//验证，同一个项目下的测点名称不能相同
 				remote: {
@@ -418,7 +443,6 @@ $('#form_addSensorInfo').validate({
 			sensorId_addSensorInfo : {
 				required : "传感器编号不能为空",
 				minlength:"传感器编号为1-15个字符",
-				number:  "传感器编号为数字",
 				remote: "编号已存在"
 			},
 			sensorType_addSensorInfo : {
@@ -443,7 +467,6 @@ $('#form_updetaSensorInfo').validate({
 		rules : {
 			sensorId_updetaSensorInfo : {
 				required : true,
-				number:  true,
 				minlength : 1,
 				//验证，同一个项目下的测点名称不能相同
 				remote: {
@@ -479,7 +502,6 @@ $('#form_updetaSensorInfo').validate({
 			sensorId_updetaSensorInfo : {
 				required : "传感器编号不能为空",
 				minlength:"传感器编号为1-15个字符",
-				number: "传感器深度为数字",
 				remote: "传感器编号已存在"
 			},
 			sensorType_updetaSensorInfo : {
