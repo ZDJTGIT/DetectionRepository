@@ -8,15 +8,15 @@ jQuery.validator.addMethod("isMobile", function(value, element) {
 
 // 经度验证
 jQuery.validator.addMethod("istrueLongitude", function(value, element) {
-    var mobile = /^[\-\+]?(0?\d{1,2}\.\d{1,5}|1[0-7]?\d{1}\.\d{1,5}|180\.0{1,5})$/;
+    var mobile = /^[\-\+]?(0?\d{0}\.\d{1,8}|1[0-7]?\d{1}\.\d{1,8}|180\.0{1,8})$/;
     return this.optional(element) || mobile.test(value);
-}, "请正确填写您的手机号码");
+}, "请正确填写您的经度");
 
-// 纬度验证
+// 纬度验证(存在bug，首字母输入两个零不报异常，由d{1}控制，可改为d{0})
 jQuery.validator.addMethod("istrueLatitude", function(value, element) {
-    var mobile =  /^[\-\+]?([0-8]?\d{1}\.\d{1,5}|90\.0{1,5})$/;
+    var mobile =  /^[\-\+]?([0-8]?\d{1}\.\d{1,8}|90\.0{1,8})$/;
     return this.optional(element) || mobile.test(value);
-}, "请正确填写您的手机号码");
+}, "请正确填写您的纬度");
 
 //double类型验证
 jQuery.validator.addMethod("isdouble", function(value, element) {

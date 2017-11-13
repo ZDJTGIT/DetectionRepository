@@ -170,6 +170,8 @@
 					<button id="determineDelete" class="btn btn-primary btn-block m" style="width:96%">
 						<i class="fa fa-arrow-down"></i> 确认修改
 					</button>
+					<input class="md_input" style="display:none" id="user_userInfo.userId" name="user_userInfo.userId" value="${userInfo.userId}">
+					<input class="md_input" style="display:none" id="user_userInfo.password" name="user_userInfo.password" value="${userInfo.password}">
 				</div>
 			</div>
 		</div>
@@ -179,160 +181,11 @@
 	<script src="assets/js/content.js"></script>
 	<script src="assets/js/demo/peity-demo.min.js"></script>
 	<script src="assets/js/customerValidate.js"></script>
+	
+	<!-- external jquery -->
+	<script src="assets/js/user.js"></script>
+		
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
-    <script type="text/javascript">
-    
-    //上传图片并及时展示 
-    var imgurl = "";  
-    function getPhoto(node) {  
-        var imgURL = "";  
-        try{  
-            var file = null;  
-            if(node.files && node.files[0] ){  
-                file = node.files[0];  
-            }else if(node.files && node.files.item(0)) {  
-                file = node.files.item(0);  
-            }  
-            try{  
-                imgURL =  file.getAsDataURL();  
-            }catch(e){  
-                imgRUL = window.URL.createObjectURL(file);  
-            }  
-        }catch(e){  
-            if (node.files && node.files[0]) {  
-                var reader = new FileReader();  
-                reader.onload = function (e) {  
-                    imgURL = e.target.result;  
-                };  
-                reader.readAsDataURL(node.files[0]);  
-            }  
-        }  
-        creatImg(imgRUL);  
-        return imgURL;  
-    }  
-    function creatImg(imgRUL){  
-        var textHtml = "<img src='"+imgRUL+"'width='130px' height='100px'/>";  
-        $(".ge_pic_icon_Infor").html(textHtml);  
-    }  
-    
-    
-       $(document).ready(function(){
-    	  var user_idvalue = '${userInfo.userId}';
-    	  $.ajax({
-    		  type:'post',
-    	  	  url: 'rest/user/selectUserRole',
-    	  	  data: {userId:user_idvalue},
-    	  	  contextType:"application/json",
-    	  	  success: function(data){
-    	  		       if(data){
-    	  		    	$('#user_role').val(data.role);
-    	  		       }else{
-    	  		    	alert("数据异常");
-    	  		       }
-    	  	  },
-    	  	  error: function(){
-  			    alert("数据加载失败");
-  		      }
-    	  });
-    	  
-    	  $.ajax({
-    		  type:'post',
-    	  	  url: 'rest/user/selectUserproject',
-    	  	  data: {userId:user_idvalue},
-    	  	  contextType:"application/json",
-    	  	  success: function(data){
-    	  		         if(data){
-    	  		    	 var  asthtml="";
-    	  		    	 $.each(data,function(idx,item){
-    	  		    		asthtml += '<div class="poj_External_div">'+
-							   			 	'<div class="poj_layer">'+
-					    						'<input type="text" id="projectItem_name" name="projectItem_name" class="input_noborder" value="'+item.sysDictionary.itemName+'">'+
-											'</div>'+
-											'<div class="poj_layer">'+
-												'<input type="text" id="projectStatus" name="projectStatus" class="input_noborder_2" value="'+item.projectStatusString+'">'+
-											'</div>'+
-											'<div class="poj_description_div">'+
-												'<div>'+
-						        					'<div style="width:20%;float: left">'+
-														'<input type="text" class="input_noborder" value="名称："><br>'+
-														'<input type="text" class="input_noborder" value="时间：">'+
-													'</div>'+
-													'<div style="width:80%;float: left">'+
-														'<input type="text" id="projectName" name="projectName" class="input_noborder" value="'+item.projectName+'">'+
-													'</div>'+
-												'</div>'+
-												'<div>'+
-													'<div style="width:80%;float: left">'+
-														'<input type="text" id="projectTime" name="projectTime" class="input_noborder" value="'+item.projectBeginTime+'">'+
-													'</div>'+
-												'</div>'+	
-											'</div>'+
-											'<div class="poj_layer">'+
-												'<a class="J_menuItem" style="font-size: 15px" onclick="" href="rest/project_detail/'+item.projectId+":"+item.projectName+'" name="项目详情">查看项目</a>'+
-											'</div>'+
-									'</div><hr>';
-    	  		    	 });
-        	  		    $('#allProject').append(asthtml); 	
-    	  		       }else{
-    	  		    	var  asthtmls='<div class="poj_External_div">'+
-    	  		    					'<p>管理员无项目信息</p>'
-    	  		    				  '</div>';
-    	  		    	$('#allProject').append(asthtmls); 	
-    	  		       }
-    	  	  },
-    	  	  error: function(){
-  			    alert("数据加载失败");
-  		      }
-    	  });
-    	  
-       });
-       
-       //点击确定修改，提交修改的user信息，提交到控制器修改数据库数据
-       $('#determineDelete').click(function(){
-    	   var newpassword = '${userInfo.password}';
-    	   if($('#password').val()!=''|$('#new_password').val()!=''|$('#new_passwords').val()!=''){
-    		   if(!$('#from_modifyuserpassword').valid()){
-      				return false;
-      			}
-    		   newpassword = $('#new_passwords').val();
-    	   }
-	       	   if(!$('#from_modifyusermassage').valid()){
-	   				return false;
-	   			}
-    	   var companyvalue = $('#self_company').val();
-    	   var namevalue = $('#self_name').val();
-		   var linkmanvalue = $('#self_linkman').val();
-		   var emailvalue = $('#self_email').val();
-    	   var phonevalue = $('#self_phone').val();
-           var user_idvalue = '${userInfo.userId}';
-           var jsonData= '{"userId":"'+user_idvalue+'","linkman":"'+linkmanvalue+'","password":"'+newpassword+'","userName":"'+namevalue+'","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue+'"}';
-           $.ajax({
-        	      type: 'post',
-	    		  url: 'rest/user/updataUser',
-	    		  contentType:'application/json',
-		          dataType:'json',
-	    		  data: jsonData,
-	    		  success: function (data){
-	    			       if(data){
-	    			    	      $("#self_company").val(companyvalue);
-		    			  		  $("#self_name").val(namevalue);
-		    			  		  $("#self_linkman").val(linkmanvalue);
-		    			  		  $("#self_email").val(emailvalue);
-		    			  		  $("#self_phone").val(phonevalue);
-		    			  		  $("#password").val("");
-		    			  		  $("#new_password").val("");
-		    			  		  $("#new_passwords").val("");
-		    			  		alert("修改成功！");
-	    			       }else{
-	    				    alert("数据异常");
-	    			       }
-	    		  },
-	    		  error: function(){
-	    			  alert("数据加载失败");
-	    		  }
-	    		  });
-       });
-    </script>
 </body>
 </html>
