@@ -664,14 +664,15 @@ public class UserController {
 	@RequestMapping(value = "/selectUserproject", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Project> selectUserproject(Integer userId) {
+		List<Project> projectList=null;
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
-			return null;
+			projectList=projectService.selectAllProject();
 		} else {
-			List<Project> projectList = projectService.selectProjectAndSysDicByUserIds(userId);
-			return projectList;
+			projectList = projectService.selectProjectAndSysDicByUserIds(userId);
 		}
+		return projectList;
 	}
 
 	/**

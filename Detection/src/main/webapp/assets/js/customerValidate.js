@@ -12,9 +12,9 @@ jQuery.validator.addMethod("istrueLongitude", function(value, element) {
     return this.optional(element) || mobile.test(value);
 }, "请正确填写您的经度");
 
-// 纬度验证(存在bug，首字母输入两个零不报异常，由d{1}控制，可改为d{0})
+// 纬度验证
 jQuery.validator.addMethod("istrueLatitude", function(value, element) {
-    var mobile =  /^[\-\+]?([0-8]?\d{1}\.\d{1,8}|90\.0{1,8})$/;
+    var mobile =  /^[\-\+]?([1-8]?\d{1}\.\d{1,8}|90\.0{1,8})$/;
     return this.optional(element) || mobile.test(value);
 }, "请正确填写您的纬度");
 

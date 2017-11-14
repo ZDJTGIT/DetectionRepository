@@ -102,7 +102,10 @@ var projectId=document.getElementById("project_image_projectId").value;
 								$('#p'+data.imageId).attr("src",data.physicalImageUrl); 
 							}
 							$('.offDeleteImage').trigger("click"); 
-							alert("项目图片设置成功！");
+							layer.msg('项目图片设置成功（该提示1s后自动关闭）', {
+								time : 1000, //1s后自动关闭
+								btn : [ '知道了' ]
+							});
 								}else {
 									  alert("数据异常");
 								      }

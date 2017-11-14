@@ -338,6 +338,23 @@ var dlId=document.getElementById("project_DLID").value;
 		   	  	  }
 			   });*/
   	     }
+		 
+		//页面tr点击跳转到页面详情====
+		 /*function test(tr_projectId){
+			 alert(tr_projectId);
+			
+			 $.ajax({
+		   		  type:'post',
+		   	  	  url: 'rest/project/obtainProject',
+		   	  	  data: {projectId:tr_projectId},
+		   	  	  contextType:"application/json",
+		   	  	  success: function(data){
+		   	  	    var hreftt='rest/project_detail/'+tr_projectId+":"+data.projectName;
+		   	  	  	window.location.href='rest/project_detail/'+tr_projectId+":"+data.projectName;
+			 		window.open( hreftt ,'top'); 
+		   	  	  }
+			      });
+			}*/
 		
 		//系统自带
 		function simpleLoad(btn, state) {
@@ -501,7 +518,7 @@ var dlId=document.getElementById("project_DLID").value;
 	  		    		}else{
 	  		    			percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
 	  		    		}
-					    var viewData = '<tr id="project_'+ data.projectId +'" style="height:100px">'+
+					    var viewData = '<tr id="project_'+ data.projectId +'" onclick="test('+data.projectId+')" style="height:100px">'+
 				    	  		    	//'<td class="project-status" style="width:120px">'+
 										//'<a href="project_detail.html">' + item.sysDictionary.itemName+'</a><br />'+
 									    //'</td>'+
@@ -524,7 +541,9 @@ var dlId=document.getElementById("project_DLID").value;
 											'<span class="label label-primary statusColor'+data.projectStatus+'">' + data.projectStatusString + '</span>'+
 										'</td>'+
 										'<td class="project-title" style="width:150px">'+
-											'<a href="javascript:;">' + data.projectName + '</a><br />'+
+											'<a class="J_menuItem" href="rest/project_detail/'+data.projectId+":"+data.projectName+'" name="项目详情">' + 
+											data.projectName + 
+											'</a><br />'+
 										'</td>'+
 										'<td class="project-title" style="width:200px">'+
 											'<a href="javascript:;">创建时间</a><br />'+
@@ -725,8 +744,8 @@ var dlId=document.getElementById("project_DLID").value;
 														'</a>'+
 													'</td>'+
 												'</tr>';  */
-												
-												 asthtml += '<tr id="project_'+ item.projectId +'" style="height:100px">'+
+					  	  		    				//var onclick="\"test('"+item.projectId+"','"+item.projectName+"')\"";
+					  	  		    				asthtml +='<tr id="project_'+ item.projectId +'" onclick="test('+item.projectId+')" style="height:100px">'+
 									    	  		    	//'<td class="project-status" style="width:120px">'+
 															//'<a href="project_detail.html">' + item.sysDictionary.itemName+'</a><br />'+
 														    //'</td>'+
@@ -749,7 +768,9 @@ var dlId=document.getElementById("project_DLID").value;
 																'<span class="label label-primary statusColor'+item.projectStatus+'">' + item.projectStatusString + '</span>'+
 															'</td>'+
 															'<td class="project-title" style="width:150px">'+
-																'<a href="javascript:;">' + item.projectName + '</a><br />'+
+																'<a class="J_menuItem" href="rest/project_detail/'+item.projectId+":"+item.projectName+'" name="项目详情">' + 
+																 item.projectName + 
+																'</a><br />'+
 															'</td>'+
 															'<td class="project-title" style="width:200px">'+
 																'<a href="javascript:;">创建时间</a><br />'+

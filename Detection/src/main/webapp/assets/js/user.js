@@ -93,12 +93,12 @@ var newpassword=document.getElementById("user_userInfo.password").value;
 									'</div><hr>';
     	  		    	 });
         	  		    $('#allProject').append(asthtml); 	
-    	  		       }else{
+    	  		       }/*else{
     	  		    	var  asthtmls='<div class="poj_External_div">'+
     	  		    					'<p>管理员无项目信息</p>'
     	  		    				  '</div>';
     	  		    	$('#allProject').append(asthtmls); 	
-    	  		       }
+    	  		       }*/
     	  	  },
     	  	  error: function(){
   			    alert("数据加载失败");
@@ -109,6 +109,7 @@ var newpassword=document.getElementById("user_userInfo.password").value;
        
        //点击确定修改，提交修改的user信息，提交到控制器修改数据库数据
        $('#determineDelete').click(function(){
+    	   layer.msg('加载中');
     	   if($('#password').val()!=''|$('#new_password').val()!=''|$('#new_passwords').val()!=''){
     		   if(!$('#from_modifyuserpassword').valid()){
       				return false;

@@ -78,7 +78,10 @@ var projectTypeId=document.getElementById("thres_hold_projectTypeId").value;
 							'</tr>';
 							$('#thresHold_tbody').append(viewData);
 							$('#offAddThresHold').trigger("click"); 
-						    alert("插入成功");
+							layer.msg('添加成功（该提示1s后自动关闭）', {
+								time : 1000, //1s后自动关闭
+								btn : [ '知道了' ]
+							});
 							}
 							},
 							error: function(){
@@ -161,7 +164,10 @@ var projectTypeId=document.getElementById("thres_hold_projectTypeId").value;
 						$("table tr:eq(" + t + ") td:eq(7)").text(data.minDrasticThresholdValue);//最小警戒值
 						$("table tr:eq(" + t + ") td:eq(8)").text(data.maxDrasticThresholdValue);//最大警戒值
 						$('#offUpdetaThresHold').trigger("click"); 
-						alert("修改阀值成功！");
+						layer.msg('修改成功（该提示1s后自动关闭）', {
+							time : 1000, //1s后自动关闭
+							btn : [ '知道了' ]
+						});
 						}
 						},
 						error: function(){
