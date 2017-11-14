@@ -97,26 +97,6 @@
 				radioClass : "iradio_square-green",
 			})
 		});
-		//$('#closeIframe').click(function(){
-		    //if(confirm("您确定要关闭本页吗？")){
-		    	//alert("第一个窗口对象"+window);
-		    	//alert(window.closed);
-		        //window.opener=null;
-		        //window.open('','_self');
-		        //alert("第二个窗口对象"+window);
-		        //window.close;
-		        //alert("第san个窗口对象"+window);
-		        //alert(window.closed);
-		    	//window.open("about:blank","_self").close() //关闭当前窗口数据
-		    	//window.open("","_self").close()
-		    	//window.top.close();//关闭所有父级页
-		    	//window.open("about:blank","_top").close()
-		    	//window.open("","_top").close()
-		    	//window.parent.close();
-		    	//alert(window.closed);
-                //}
-		    //}
-		//});
 		function logout(){
         if(confirm("确定要退出吗？")){
         	window.open("about:blank","_self").close()

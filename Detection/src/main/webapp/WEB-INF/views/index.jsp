@@ -167,7 +167,7 @@
 								class="nav-label">用户管理</span><span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a class="J_menuItem" href="rest/user/userList"
-									name="用户&告警联系人">用户信息 <span
+									name="用户信息">用户信息 <span
 										class="label label-danger pull-right">管理员可见</span>
 								</a></li>
 								<li><a class="J_menuItem"
