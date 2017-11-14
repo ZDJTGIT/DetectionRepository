@@ -38,7 +38,7 @@
 <link href="assets/css/style.min.css" rel="stylesheet">
 </head>
 
-<body class="fixed-sidebar full-height-layout gray-bg"
+<body class="fixed-sidebar full-height-layout gray-bg skin-1"
 	style="overflow-y: hidden margin: 0 padding: 0">
 
 	<div id="wrapper">
@@ -47,7 +47,7 @@
 			<div class="nav-close">
 				<i class="fa fa-times-circle"></i>
 			</div>
-			<div class="sidebar-collapse">
+			<div class="sidebar-collapse" id="sidebar-collapse">
 				<ul class="nav" id="side-menu">
 					<li class="nav-header" style="text-align: center">
 						<div class="dropdown profile-element">
@@ -386,14 +386,14 @@
 								</div>
 							</div>
 							<div class="title">皮肤选择</div>
-							<div class="setings-item default-skin nb">
-								<span class="skin-name "> <a href="javascript:;"
-									class="s-skin-0"> 默认皮肤 </a>
-								</span>
-							</div>
 							<div class="setings-item blue-skin nb">
 								<span class="skin-name "> <a href="javascript:;"
-									class="s-skin-1"> 蓝色主题 </a>
+									class="s-skin-1"> 默认皮肤 </a>
+								</span>
+							</div>
+							<div class="setings-item default-skin nb">
+								<span class="skin-name "> <a href="javascript:;"
+									class="s-skin-0"> 灰黑皮肤 </a>
 								</span>
 							</div>
 							<div class="setings-item yellow-skin nb">

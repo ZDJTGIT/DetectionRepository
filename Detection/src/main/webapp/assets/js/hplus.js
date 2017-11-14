@@ -4,7 +4,7 @@
 
 
 $(document).ready(function () {
-
+	
     // MetsiMenu
     $('#side-menu').metisMenu();
 
@@ -230,6 +230,7 @@ $(function () {
         $("body").addClass("skin-3");
         return false;
     });
+    
 
     if (localStorageSupport) {
         var collapse = localStorage.getItem("collapse_menu");

@@ -185,7 +185,7 @@ body.body-small .navbar-top-links li:last-child {
 
 .nav>li.active {
 	border-left: 4px solid #19aa8d;
-	background: #293846
+	background: #ffff00
 }
 
 .nav.nav-second-level>li.active {
@@ -291,6 +291,10 @@ body.mini-navbar .navbar-default .nav>li>.nav-second-level li a {
 .fixed-nav .slimScrollDiv #side-menu {
 	padding-bottom: 60px;
 	position: relative
+}
+
+.side-menu li{
+	background-color:#f3f3f4 !important;
 }
 
 .slimScrollDiv>* {
@@ -6450,7 +6454,6 @@ body.rtls .top-navigation #page-wrapper, body.rtls .top-navigation .footer.fixed
 }
 
 .skin-1 .nav-header {
-	background: #0e9aef;
 	background: url(patterns/header-profile-skin-1.png)
 }
 
@@ -7068,4 +7071,11 @@ body.skin-3 {
 		width: 12.5%;
 		font-size: 12px
 	}
+}
+
+.skin-1 #sidebar-collapse ul li a{
+	color:#fff !important;
+}
+.skin-1 #sidebar-collapse{
+	background-color:rgb(20,68,106);
 }
