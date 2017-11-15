@@ -29,7 +29,6 @@ var projectName=document.getElementById("project_detail_projectName").value;
 		var option = {
             title:{
                 text: '结构物报表统计分析',
-                subtext: 'From ExcelHome',
                 sublink: 'http://e.weibo.com/1341556070/AiEscco0H'
             },
             tooltip:{
@@ -350,7 +349,7 @@ var projectName=document.getElementById("project_detail_projectName").value;
 							success : function(data) {
 								 if(data){
 					  	  		    var asthtml = '';
-					  	  		   	$.each(data.sensorInfoListList,function(idx,item){
+					  	  		   	$.each(data.sensorInfoList,function(idx,item){
 						  	  		    asthtml += '<tr>'+
 														'<td><span class="label label-primary">'+
 														'<i class=""></i>'+item.detectionName+'</span></td>'+

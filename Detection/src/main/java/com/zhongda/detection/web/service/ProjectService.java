@@ -154,4 +154,13 @@ public interface ProjectService {
 	 * @return
 	 */
 	Project selectAlarmCount(Integer projectId);
+	
+	/**
+	 * 查询属于用户的项目
+	 * 
+	 * @param project
+	 *            封装了查询条件的对象
+	 * @return
+	 */
+	List<Project> selectUsersProjectWithAlarmCount(Project project);
 }

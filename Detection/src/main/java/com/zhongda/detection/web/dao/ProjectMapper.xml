@@ -13,6 +13,7 @@
     <result column="project_end_time" jdbcType="TIMESTAMP" property="projectEndTime" />
     <result column="project_status" jdbcType="VARCHAR" property="projectStatus" />
     <result column="project_description" jdbcType="VARCHAR" property="projectDescription" />
+    <result column="alarm_count" jdbcType="INTEGER" property="alarmCount" />
     <result column="project_status_string" jdbcType="VARCHAR" property="projectStatusString" />
     <association property="sysDictionary" javaType="SysDictionary">
       	<id column="dic_id" jdbcType="INTEGER" property="dicId" />
@@ -73,7 +74,28 @@
     from project p,sys_dictionary sd,sys_dictionary sds
     where p.project_type_id = sd.dic_id
     and p.project_status = sds.dic_id
+  </select>  
+   <select id="selectUsersProjectWithAlarmCount" parameterType="com.zhongda.detection.web.model.Project" resultMap="BaseResultMap">
+    select
+     x.*,sd.item_name 'project_status_string',sds.*
+     from 
+  	 (select
+     	p.*,count(a.alarm_id) 'alarm_count'
+     	from project p LEFT OUTER JOIN alarm a
+     	on p.project_id = a.project_id
+     	<where> 
+     	  <if test="userId != null">
+        	p.user_id = #{userId,jdbcType=INTEGER}
+      	  </if>
+	      <if test="projectName != null">
+	        and p.project_name like '%${_parameter.projectName}%'
+	      </if> 
+	    </where>    
+    	GROUP BY p.project_id) x, sys_dictionary sd, sys_dictionary sds
+     where x.project_status = sd.dic_id and x.project_type_id = sds.dic_id
+     order by x.project_begin_time desc
   </select>
+  
   <select id="selectProjectWithAlarmCount" parameterType="com.zhongda.detection.web.model.Project" resultMap="ProjectResultMap">  
      select
      x.*,sd.item_name 'project_status_string'

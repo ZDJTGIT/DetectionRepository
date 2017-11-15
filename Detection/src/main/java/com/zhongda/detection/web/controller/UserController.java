@@ -46,9 +46,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
+import com.github.pagehelper.PageInfo;
 import com.zhongda.detection.core.utils.GetVerificationCode;
 import com.zhongda.detection.core.utils.SimpleMailSender;
 import com.zhongda.detection.web.model.AlarmLinkman;
+import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.Role;
 import com.zhongda.detection.web.model.User;
@@ -660,7 +662,7 @@ public class UserController {
 
 	/**
 	 * 查找用户所属项目
-	 */
+	 *//*
 	@RequestMapping(value = "/selectUserproject", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Project> selectUserproject(Integer userId) {
@@ -673,6 +675,29 @@ public class UserController {
 			projectList = projectService.selectProjectAndSysDicByUserIds(userId);
 		}
 		return projectList;
+	}*/
+	
+	/**
+	 * 查找用户所属项目
+	 */
+	@RequestMapping(value = "/selectUserproject", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> selectUserproject(@RequestBody Project project,HttpServletRequest request) {
+		Subject subject = SecurityUtils.getSubject();
+		Map<String, Object> UserprojectMap = new HashMap<String, Object>();
+		if (subject.hasRole(RoleSign.ADMIN)|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+
+		} else {
+			// 非管理员用户，只可查看自己的项目信息，查询条件增加userId
+			User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
+			project.setUserId(user.getUserId());
+		}
+		
+		List<Project> projectList = projectService.selectUsersProjectWithAlarmCount(project);
+		PageInfo<Project> projectPageInfo = new PageInfo<Project>(projectList);
+		UserprojectMap.put("total", projectPageInfo.getTotal());
+		UserprojectMap.put("usersProjectList", projectList);
+		return UserprojectMap;
 	}
 
 	/**

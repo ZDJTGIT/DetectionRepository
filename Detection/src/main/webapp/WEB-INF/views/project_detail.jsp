@@ -21,7 +21,7 @@
 <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
 <meta name="description" content="中大检测平台">
 <link rel="shortcut icon" href="favicon.ico">
-<link href="assets/css/plugins/layuis/layui.css" rel="stylesheet" media="all">
+<!-- <link href="assets/css/plugins/layuis/layui.css" rel="stylesheet" media="all"> -->
 </head>
 <body class="gray-bg">
 		<div class="col-sm-12">

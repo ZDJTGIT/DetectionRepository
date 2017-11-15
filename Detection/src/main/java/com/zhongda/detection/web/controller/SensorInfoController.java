@@ -42,7 +42,7 @@ public class SensorInfoController {
 		PageInfo<SensorInfo> sensorInfoListPageInfo = new PageInfo<SensorInfo>(sensorInfoList);
 		Map<String, Object> sensorInfoMap = new HashMap<String, Object>();
 		sensorInfoMap.put("total", sensorInfoListPageInfo.getTotal());
-		sensorInfoMap.put("sensorInfoListList", sensorInfoList);
+		sensorInfoMap.put("sensorInfoList", sensorInfoList);
 		//通过项目ID查询到所有测点
 		return sensorInfoMap;
 	}

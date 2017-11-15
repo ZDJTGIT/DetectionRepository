@@ -23,6 +23,7 @@
 <meta name="description" content="中大检测平台">
 <link rel="shortcut icon" href="favicon.ico">
 <link href="assets/css/plugins/table/user.css" rel="stylesheet">
+<link href="assets/css/plugins/layuis/layui.css" rel="stylesheet" media="all">
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content">
@@ -69,14 +70,19 @@
 							<strong>我的项目信息</strong>
 						</h3>
 					</div>
+					
 					<div style="margin-top: -20px">
+							<!-- <table class="table table-hover" id="project_table">
+								<tbody id="allProject">
+								</tbody>
+							</table>
+							<div style="margin-top:15px; text-align:center;" id="pageComponent"></div> -->
 						<div class="ibox-content profile-content" id="allProject">
 							<hr>
-							<div style="height:20px">
+							<div style="">
 							</div>
 						</div>
-						
-						
+						<div style="margin-top:15px; text-align:center;" id="pageComponent_5"></div>
 					</div>
 				</div>
 			</div>

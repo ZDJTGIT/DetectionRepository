@@ -146,4 +146,12 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectMapper.selectAlarmCount(projectId);
 	}
 
+	@Override
+	public List<Project> selectUsersProjectWithAlarmCount(Project project) {
+		if (null != project.getPageNum() && null != project.getPageSize()) {
+			PageHelper.startPage(project.getPageNum(), project.getPageSize());
+		}
+		return projectMapper.selectUsersProjectWithAlarmCount(project);
+	}
+
 }
