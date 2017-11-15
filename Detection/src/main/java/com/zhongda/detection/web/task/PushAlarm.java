@@ -1,6 +1,7 @@
 package com.zhongda.detection.web.task;
 
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -40,8 +41,8 @@ public class PushAlarm {
 			List<String> emails = null;
 			List<String> params = new ArrayList<String>();
 			params.add(alarm.getUserName());
-			params.add(alarm.getCreateTime().toString());
-			params.add(alarm.getAlarmType());
+			params.add(new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss").format(alarm.getCreateTime()));
+			params.add(alarm.getDetectionType());
 			params.add(alarm.getProjectName());
 			params.add(alarm.getSmuCmsId());
 			params.add(alarm.getSensorId());

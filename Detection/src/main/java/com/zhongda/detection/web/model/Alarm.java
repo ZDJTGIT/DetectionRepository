@@ -40,6 +40,9 @@ public class Alarm {
 	//临时存放告警类型名称
     private String alarmType;
     
+    //临时存放检测类型名称
+    private String detectionType;
+    
     //临时存放告警状态
     private String alarmStatus;
     
@@ -185,6 +188,14 @@ public class Alarm {
 
 	public void setAlarmType(String alarmType) {
 		this.alarmType = alarmType == null ? null : alarmType.trim();
+	}	
+	
+	public String getDetectionType() {
+		return detectionType;
+	}
+
+	public void setDetectionType(String detectionType) {
+		this.detectionType = detectionType == null ? null : detectionType.trim();
 	}
 
 	public String getAlarmStatus() {

@@ -50,7 +50,6 @@ import com.github.pagehelper.PageInfo;
 import com.zhongda.detection.core.utils.GetVerificationCode;
 import com.zhongda.detection.core.utils.SimpleMailSender;
 import com.zhongda.detection.web.model.AlarmLinkman;
-import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.Role;
 import com.zhongda.detection.web.model.User;

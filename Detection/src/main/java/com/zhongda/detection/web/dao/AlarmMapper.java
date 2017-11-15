@@ -3,7 +3,6 @@ package com.zhongda.detection.web.dao;
 import java.util.List;
 
 import com.zhongda.detection.web.model.Alarm;
-import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Project;
 
 public interface AlarmMapper {

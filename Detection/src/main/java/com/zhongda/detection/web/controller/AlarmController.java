@@ -20,7 +20,6 @@ import org.springframework.web.util.WebUtils;
 import com.github.pagehelper.PageInfo;
 import com.zhongda.detection.web.model.Alarm;
 import com.zhongda.detection.web.model.AlarmLinkman;
-import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.service.AlarmLinkmanService;

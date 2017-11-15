@@ -35,6 +35,7 @@
     <result column="alarm_level" jdbcType="INTEGER" property="alarmLevel" />
     <result column="frequency" jdbcType="INTEGER" property="frequency" />
     <result column="alarm_type" jdbcType="INTEGER" property="alarmType" />
+    <result column="detection_type" jdbcType="INTEGER" property="detectionType" />
     <result column="detection_name" jdbcType="VARCHAR" property="detectionName" />
     <collection property="alarmLinkmans" ofType="com.zhongda.detection.web.model.AlarmLinkman">
 	    <id column="alarm_linkman_id" jdbcType="INTEGER" property="alarmLinkmanId" />
@@ -57,12 +58,14 @@
     where alarm_id = #{alarmId,jdbcType=INTEGER}
   </select>
   <select id="selectAlarmAndLinkmanPeriod" resultMap="WithLinkmanResultMap">
-  	select a.*, al.*, sd.item_name 'alarm_type'
-    from alarm a, alarm_linkman al, sys_dictionary sd
-	where a.create_time &gt;= date_sub(now(), INTERVAL 10 MINUTE) and a.create_time &lt; now()
+	select a.*, al.*, sds.item_name 'detection_type', sd.item_name 'alarm_type'
+    from alarm a, alarm_linkman al, detection_point dp, sys_dictionary sd, sys_dictionary sds
+	where a.create_time &gt;= date_sub(now(), INTERVAL 100 MINUTE) and a.create_time &lt; now()
 	and a.project_id = al.project_id
 	and a.alarm_type_id = sd.dic_id
-	and a.status = 20 and al.status = 27
+	and a.detection_id = dp.detection_point_id
+	and dp.detection_type_id = sds.dic_id
+	and a.status = 20 and al.status = 27;
   </select>
   <select id="selectAlarmByUserIdAndNotConfirm" parameterType="java.lang.Integer" resultMap="WithLinkmanResultMap">
   	select
