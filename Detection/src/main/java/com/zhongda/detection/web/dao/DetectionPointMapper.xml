@@ -97,6 +97,17 @@
     where project_id = (select project_id from project where project_name = '${_parameter.param1}') 
     and detection_name like '%${_parameter.param2}%'
   </select>
+  
+   <select id="selectDetectionPointWithAlarmCount" parameterType="com.zhongda.detection.web.model.Project" resultMap="BaseResultMap"> 
+     select
+     dp.*, sd.item_name 'item_name'
+     from detection_point dp, sys_dictionary sd
+     where dp.project_id = (select project_id 
+     from project where project_name = '${_parameter.projectName}')
+     and dp.detection_type_id = sd.dic_id
+     order by dp.detection_point_id desc
+  </select>
+  
   <select id="selectByProjectIDAndDetectionName" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

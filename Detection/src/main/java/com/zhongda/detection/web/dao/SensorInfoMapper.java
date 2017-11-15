@@ -2,6 +2,7 @@ package com.zhongda.detection.web.dao;
 
 import java.util.List;
 
+import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SensorInfo;
 
 public interface SensorInfoMapper {
@@ -66,4 +67,13 @@ public interface SensorInfoMapper {
     int updateByPrimaryKeySelective(SensorInfo record);
 
     int updateByPrimaryKey(SensorInfo record);
+    
+	/**
+	 * 根据查询条件查询出对应项目下传感器
+	 * 
+	 * @param project
+	 *            封装了查询条件的对象
+	 * @return
+	 */
+    List<SensorInfo> selectSensorInfoWithAlarmCount(Project project);
 }

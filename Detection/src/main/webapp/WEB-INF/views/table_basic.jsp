@@ -206,26 +206,18 @@
 		</div>
 	</div>
 
-	<!-- <script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script> -->
-	<!-- <script src="assets/js/content.js"></script> -->
-	 <!-- jQuery Validation plugin javascript-->
 	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
 	<script src="assets/js/customerValidate.js"></script>
-    <!-- <script src="assets/js/plugins/validate/messages_zh.min.js"></script>
-    <script src="assets/js/demo/form-validate-demo.min.js"></script> -->
 	<!-- Switchery -->
     <script src="assets/js/plugins/switchery/switchery.js"></script>
 	<!-- iCheck -->
     <script src="assets/js/plugins/iCheck/icheck.min.js"></script>
-	
 	<!-- Data Tables -->
     <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script src="assets/js/plugins/layer/layer.js"></script>
     <!-- Sweet alert -->
     <script src="assets/js/plugins/sweetalert/sweetalert.min.js"></script>
-    
     <!-- external jquery -->
 	<script src="assets/js/table_basic.js"></script>
 	

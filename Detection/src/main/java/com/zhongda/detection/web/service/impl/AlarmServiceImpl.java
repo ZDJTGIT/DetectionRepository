@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.zhongda.detection.web.dao.AlarmMapper;
 import com.zhongda.detection.web.model.Alarm;
+import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.service.AlarmService;
 
 /**
@@ -40,5 +41,13 @@ public class AlarmServiceImpl implements AlarmService{
 	@Override
 	public List<Alarm> selectAlarmByProjectId(Integer projectId) {
 		return alarmMapper.selectAlarmByProjectId(projectId);
+	}
+
+	@Override
+	public List<Alarm> selectAlarmWithAlarmCount(Project project) {
+		if (null != project.getPageNum() && null != project.getPageSize()) {
+			PageHelper.startPage(project.getPageNum(), project.getPageSize());
+		}
+		return alarmMapper.selectAlarmWithAlarmCount(project);
 	}
 }

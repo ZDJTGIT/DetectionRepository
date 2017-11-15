@@ -1,6 +1,7 @@
  
 var projectId=document.getElementById("project_detail_projectId").value;
 var projectName=document.getElementById("project_detail_projectName").value;
+
 //指定图标的配置和数据
         var placeHoledStyle = {
 		    normal:{
@@ -171,7 +172,7 @@ var projectName=document.getElementById("project_detail_projectName").value;
 			  		         }
 		    	   });
 	    //获取项目下所有测点
-	     $.ajax({
+	     /*$.ajax({
 		        type:'post',
 			    url: 'rest/detectionPoint/showProjectDetectionPoint',
 			    data: {projectName:projectName},
@@ -199,10 +200,83 @@ var projectName=document.getElementById("project_detail_projectName").value;
 			    	 error: function(){
 			  			      alert("数据加载失败");
 			  		         }
-		    	 });
+		    	 });*/
+	     	//分页获取项目下所有测点
+			$(function(){(function(){
+				
+				var jsonData = {};
+				jsonData.projectName = projectName;
+				jsonData.pageNum = 1;
+				jsonData.pageSize = 6;
+				
+				//初始化分页组件函数
+				 function loadLaypage(dataTotal, jsonData){
+					 var laypage = layui.laypage;
+					 laypage.render({
+						 elem: 'pageComponent_1', //分页组件div的id
+						 count: dataTotal, //记录总条数
+						 limit: jsonData.pageSize, //每页显示的条数
+						 limits:[jsonData.pageSize, 10, 20, 30, 40, 50], //每页条数的选择项
+					     groups: 5, //连续显示分页数
+					     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+					     jump: function(obj, first){  //触发分页后的回调
+					         if(!first){ //一定要加此判断，否则初始时会无限刷新
+					        	 jsonData.pageNum = obj.curr;
+					 			 jsonData.pageSize = obj.limit;
+					 			 projectPageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数
+					         }
+					     }
+					 });
+				 }
+				
+				//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
+				function projectPageAjax(jsonData,loadLaypage){
+					 //显示loading提示
+	                 var loading = layer.load(2, {
+	                	  shade: [0.1,'#fff'] //0.1透明度的白色背景
+	                 });
+					 $.ajax({
+							type : 'post',
+							url : 'rest/detectionPoint/showProjectDetectionPoint',
+							dataType : 'json',
+							contentType : 'application/json',
+							data : JSON.stringify(jsonData),
+							success : function(data) {
+								 if(data){
+					  	  		    var asthtml = '';
+					  	  		   	$.each(data.detectionPointList,function(idx,item){
+						  	  		    asthtml += '<tr>'+
+														'<td><span class="label label-primary">'+
+														'<i class=""></i>'+item.detectionName+'</span></td>'+
+														'<td>'+item.itemName+'</td>'+
+														'<td>'+item.detectionLatitude+'</td>'+
+														'<td>'+item.detectionLongitude+'</td>'+
+														'<td>'+
+															'<p class="small">第一个测点</p>'+
+														'</td>'+
+												  '</tr>';		
+					  	  		    	});
+					  	  		    $('#tbody_detectionPoint').html(asthtml);
+									//加载完成后隐藏loading提示
+				                   	layer.close(loading);
+				                   	if(loadLaypage){
+				                   		loadLaypage(data.total,jsonData);
+				                   	}
+					  	  		}else{
+					  	  		    alert("数据异常");
+					  	  		}
+							},
+							error : function() {
+								alert("数据加载失败");
+							}
+						});
+				 }
+				projectPageAjax(jsonData,loadLaypage);
+			})();
+		});
 	    //获取项目下所有采集器
 	    
-	    //获取项目下所有传感器
+	    /*//获取项目下所有传感器
 	     $.ajax({
 		        type:'post',
 			    url: 'rest/sensorInfo/showProjectSensorInfo',
@@ -231,9 +305,84 @@ var projectName=document.getElementById("project_detail_projectName").value;
 			    	 error: function(){
 			  			      alert("数据加载失败");
 			  		         }
-		    	 });
+		    	 });*/
+	     
+	     	//分页获取项目下所有传感器
+			$(function(){(function(){
+				
+				var jsonData = {};
+				jsonData.projectName = projectName;
+				jsonData.pageNum = 1;
+				jsonData.pageSize = 6;
+				
+				//初始化分页组件函数
+				 function loadLaypage(dataTotal, jsonData){
+					 var laypage = layui.laypage;
+					 laypage.render({
+						 elem: 'pageComponent_2', //分页组件div的id
+						 count: dataTotal, //记录总条数
+						 limit: jsonData.pageSize, //每页显示的条数
+						 limits:[jsonData.pageSize, 10, 20, 30, 40, 50], //每页条数的选择项
+					     groups: 5, //连续显示分页数
+					     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+					     jump: function(obj, first){  //触发分页后的回调
+					         if(!first){ //一定要加此判断，否则初始时会无限刷新
+					        	 jsonData.pageNum = obj.curr;
+					 			 jsonData.pageSize = obj.limit;
+					 			 projectPageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数
+					         }
+					     }
+					 });
+				 }
+				
+				//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
+				function projectPageAjax(jsonData,loadLaypage){
+					 //显示loading提示
+	                 var loading = layer.load(2, {
+	                	  shade: [0.1,'#fff'] //0.1透明度的白色背景
+	                 });
+					 $.ajax({
+							type : 'post',
+							url : 'rest/sensorInfo/showProjectSensorInfo',
+							dataType : 'json',
+							contentType : 'application/json',
+							data : JSON.stringify(jsonData),
+							success : function(data) {
+								 if(data){
+					  	  		    var asthtml = '';
+					  	  		   	$.each(data.sensorInfoListList,function(idx,item){
+						  	  		    asthtml += '<tr>'+
+														'<td><span class="label label-primary">'+
+														'<i class=""></i>'+item.detectionName+'</span></td>'+
+														'<td>'+item.sensorId+'</td>'+
+														'<td>'+item.sensorType+'</td>'+
+														'<td>'+item.sensorModel+'</td>'+
+														'<td>'+
+															'<p class="small">'+item.sensorDepth+'</p>'+
+														'</td>'+
+													'</tr>';		
+					  	  		    	});
+					  	  		    $('#tbody_sensorInfo').html(asthtml);
+									//加载完成后隐藏loading提示
+				                   	layer.close(loading);
+				                   	if(loadLaypage){
+				                   		loadLaypage(data.total,jsonData);
+				                   	}
+					  	  		}else{
+					  	  		    alert("数据异常");
+					  	  		}
+							},
+							error : function() {
+								alert("数据加载失败");
+							}
+						});
+				 }
+				projectPageAjax(jsonData,loadLaypage);
+			})();
+		});
+	     
 	    //获取项目下所有告警信息
-	    $.ajax({
+	   /* $.ajax({
 		        type:'post',
 			    url: 'rest/alarm/showProjectAlarm',
 			    data: {projectId:projectId},
@@ -262,7 +411,83 @@ var projectName=document.getElementById("project_detail_projectName").value;
 			    	 error: function(){
 			  			      alert("数据加载失败");
 			  		         }
-		    	 });
+		    	 });*/
+	    
+	  	//分页获取项目下所有告警信息
+		$(function(){(function(){
+			
+			var jsonData = {};
+			jsonData.projectId = projectId;
+			jsonData.pageNum = 1;
+			jsonData.pageSize = 6;
+			
+			//初始化分页组件函数
+			 function loadLaypage(dataTotal, jsonData){
+				 var laypage = layui.laypage;
+				 laypage.render({
+					 elem: 'pageComponent_3', //分页组件div的id
+					 count: dataTotal, //记录总条数
+					 limit: jsonData.pageSize, //每页显示的条数
+					 limits:[jsonData.pageSize, 10, 20, 30, 40, 50], //每页条数的选择项
+				     groups: 5, //连续显示分页数
+				     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+				     jump: function(obj, first){  //触发分页后的回调
+				         if(!first){ //一定要加此判断，否则初始时会无限刷新
+				        	 jsonData.pageNum = obj.curr;
+				 			 jsonData.pageSize = obj.limit;
+				 			 projectPageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数
+				         }
+				     }
+				 });
+			 }
+			
+			//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
+			function projectPageAjax(jsonData,loadLaypage){
+				 //显示loading提示
+                 var loading = layer.load(2, {
+                	  shade: [0.1,'#fff'] //0.1透明度的白色背景
+                 });
+				 $.ajax({
+						type : 'post',
+						url : 'rest/alarm/showProjectAlarm',
+						dataType : 'json',
+						contentType : 'application/json',
+						data : JSON.stringify(jsonData),
+						success : function(data) {
+							 if(data){
+				  	  		    var asthtml = '';
+				  	  		   	$.each(data.AlarmList,function(idx,item){
+					  	  		    asthtml += '<tr>'+
+									    	  		'<td><span class="label label-primary">'+
+													'<i class=""></i>'+item.detectionName+'</span></td>'+
+													'<td>'+item.smuCmsId+'</td>'+
+													'<td>'+item.sensorId+'</td>'+
+													'<td>'+item.alarmType+'</td>'+
+													'<td>'+item.alarmContext+'</td>'+
+													'<td>'+item.createTime+'</td>'+
+													'<td>'+item.alarmLevel+'</td>'+
+													'<td>'+item.frequency+'</td>'+
+												'</tr>';		
+				  	  		    	});
+				  	  		    $('#tbody_alarm').html(asthtml);
+								//加载完成后隐藏loading提示
+			                   	layer.close(loading);
+			                   	if(loadLaypage){
+			                   		loadLaypage(data.total,jsonData);
+			                   	}
+				  	  		}else{
+				  	  		    alert("数据异常");
+				  	  		}
+						},
+						error : function() {
+							alert("数据加载失败");
+						}
+					});
+			 }
+			projectPageAjax(jsonData,loadLaypage);
+		})();
+	});
+	    
 	    //获取项目下所有阀值
 	     $.ajax({
 		        type:'post',

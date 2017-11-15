@@ -2,6 +2,7 @@ package com.zhongda.detection.web.service;
 
 import java.util.List;
 
+import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SensorInfo;
 
 
@@ -67,4 +68,13 @@ public interface SensorInfoService {
      * @return
      */
     List<SensorInfo> selectByProjectId(Integer projectId);
+    
+    /**
+	 * 根据查询条件查询出对应项目下传感器
+	 * 
+	 * @param project
+	 *            封装了查询条件的对象
+	 * @return
+	 */
+    List<SensorInfo> selectSensorInfoWithAlarmCount(Project project);
 }

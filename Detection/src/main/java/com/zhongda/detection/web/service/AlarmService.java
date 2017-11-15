@@ -3,6 +3,7 @@ package com.zhongda.detection.web.service;
 import java.util.List;
 
 import com.zhongda.detection.web.model.Alarm;
+import com.zhongda.detection.web.model.Project;
 
 /**
  * <p>告警 业务 接口</p>
@@ -38,4 +39,13 @@ public interface AlarmService {
 	 * @return
 	 */
 	List<Alarm> selectAlarmByProjectId(Integer projectId);
+	
+	/**
+	 * 根据查询条件查询出对应项目下告警信息
+	 * 
+	 * @param project
+	 *            封装了查询条件的对象
+	 * @return
+	 */
+	List<Alarm> selectAlarmWithAlarmCount(Project project);
 }

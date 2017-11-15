@@ -21,6 +21,7 @@
 <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
 <meta name="description" content="中大检测平台">
 <link rel="shortcut icon" href="favicon.ico">
+<link href="assets/css/plugins/layuis/layui.css" rel="stylesheet" media="all">
 </head>
 <body class="gray-bg">
 		<div class="col-sm-12">
@@ -114,7 +115,7 @@
 										<div class="tab-content">
 											<div class="tab-pane active" id="tab-1">
 												<div class="feed-activity-list">
-													<table class="table table-striped">
+													<table class="table table-striped" id="detail_tab_1">
 													<thead>
 														<tr>
 															<th>名称</th>
@@ -127,6 +128,7 @@
 													<tbody id="tbody_detectionPoint">
 													</tbody>
 													</table>
+													<div style="margin-top:15px; text-align:center;" id="pageComponent_1"></div>
 												</div>
 											</div>
 											<!-- 采集器，未更新，4,5写死展示 -->
@@ -183,6 +185,7 @@
 													<tbody id="tbody_sensorInfo">
 													</tbody>
 												</table>
+												<div style="margin-top:15px; text-align:center;" id="pageComponent_2"></div>
 											</div>
 											<div class="tab-pane" id="tab-6">
 												<div class="feed-activity-list">
@@ -202,6 +205,7 @@
 													<tbody id="tbody_alarm">
 													</tbody>
 													</table>
+													<div style="margin-top:15px; text-align:center;" id="pageComponent_3"></div>
 												</div>
 											</div>
 											<div class="tab-pane" id="tab-4">
@@ -247,6 +251,10 @@
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/content.js"></script>
 	<script src="assets/js/plugins/echarts/echarts-all.js"></script>
+	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
+	<script src="assets/js/customerValidate.js"></script>
+	<script src="assets/js/plugins/laydate/laydate.js" charset="utf-8"></script>
+	<script src="assets/js/layui.all.js" charset="utf-8"></script>
 	
 	<!-- external jquery -->
 	<script src="assets/js/project_detail.js"></script>

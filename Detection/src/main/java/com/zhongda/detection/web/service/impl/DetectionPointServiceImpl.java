@@ -6,8 +6,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
 import com.zhongda.detection.web.dao.DetectionPointMapper;
 import com.zhongda.detection.web.model.DetectionPoint;
+import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.service.DetectionPointService;
 
 /**
@@ -82,4 +84,10 @@ public class DetectionPointServiceImpl implements DetectionPointService {
 				detectionTypeId);
 	}
 
+	public List<DetectionPoint> selectDetectionPointWithAlarmCount(Project project) {
+		if (null != project.getPageNum() && null != project.getPageSize()) {
+			PageHelper.startPage(project.getPageNum(), project.getPageSize());
+		}
+		return detectionPointMapper.selectDetectionPointWithAlarmCount(project);
+	}
 }

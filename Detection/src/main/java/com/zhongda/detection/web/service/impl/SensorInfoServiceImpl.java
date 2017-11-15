@@ -6,7 +6,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
 import com.zhongda.detection.web.dao.SensorInfoMapper;
+import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SensorInfo;
 import com.zhongda.detection.web.service.SensorInfoService;
 
@@ -55,6 +57,14 @@ public class SensorInfoServiceImpl implements SensorInfoService {
 	@Override
 	public List<SensorInfo> selectByProjectId(Integer projectId) {
 		return sensorInfoMapper.selectByProjectId(projectId);
+	}
+
+	@Override
+	public List<SensorInfo> selectSensorInfoWithAlarmCount(Project project) {
+		if (null != project.getPageNum() && null != project.getPageSize()) {
+			PageHelper.startPage(project.getPageNum(), project.getPageSize());
+		}
+		return sensorInfoMapper.selectSensorInfoWithAlarmCount(project);
 	}
 
 }

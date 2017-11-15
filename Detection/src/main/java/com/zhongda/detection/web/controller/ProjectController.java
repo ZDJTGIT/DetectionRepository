@@ -302,6 +302,7 @@ public class ProjectController {
 		}
 		List<Project> projectList = projectService.selectProjectWithAlarmCount(project);
 		PageInfo<Project> projectPageInfo = new PageInfo<Project>(projectList);
+		
 		Map<String, Object> projectMap = new HashMap<String, Object>();
 		projectMap.put("total", projectPageInfo.getTotal());
 		projectMap.put("projectList", projectList);

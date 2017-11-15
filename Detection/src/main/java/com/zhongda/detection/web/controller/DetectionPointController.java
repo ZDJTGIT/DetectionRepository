@@ -1,9 +1,12 @@
 package com.zhongda.detection.web.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageInfo;
 import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SysDictionary;
@@ -45,13 +49,30 @@ public class DetectionPointController {
 	 */
 	@RequestMapping(value = "/showProjectDetectionPoint", method = RequestMethod.POST)
 	@ResponseBody
+	public Map<String, Object> showProjectDetectionPoint(@RequestBody Project project,HttpServletRequest request){
+		
+		//根据查询条件分页查询测点
+		List<DetectionPoint> detectionPointList = detectionPointService.selectDetectionPointWithAlarmCount(project);
+		PageInfo<DetectionPoint> DetectionPointPageInfo = new PageInfo<DetectionPoint>(detectionPointList);
+		Map<String, Object> detectionPointMap = new HashMap<String, Object>();
+		detectionPointMap.put("total", DetectionPointPageInfo.getTotal());
+		detectionPointMap.put("detectionPointList", detectionPointList);
+		//通过项目ID查询到所有测点
+		return detectionPointMap;
+	}
+	
+	/**
+	 * 展示项目下所有测点
+	 *//*
+	@RequestMapping(value = "/showProjectDetectionPoint", method = RequestMethod.POST)
+	@ResponseBody
 	public List<DetectionPoint> showProjectDetectionPoint(String projectName){
 		//通过projectName查询项目ID，
 		Project project = projectService.selectByProjectName(projectName);
 		List<DetectionPoint> detectionPointList = detectionPointService.selectByProjectId(project.getProjectId());
 		//通过项目ID查询到所有测点
 		return detectionPointList;
-	}
+	}*/
 	
 	/**
 	 * 修改测点

@@ -75,12 +75,29 @@ public class AlarmController {
 		model.addAttribute("aLinkmanList", aLinkmanList);
 		return "alarm_linkman";
 	}
+	
 	/**
 	 * 展示项目下所有测点
 	 */
 	@RequestMapping(value = "/showProjectAlarm", method = RequestMethod.POST)
 	@ResponseBody
+	public Map<String, Object> showProjectAlarm(@RequestBody Project project,HttpServletRequest request){
+		//根据查询条件分页查询告警信息
+		List<Alarm> AlarmList = alarmService.selectAlarmWithAlarmCount(project);
+		PageInfo<Alarm> AlarmPageInfo = new PageInfo<Alarm>(AlarmList);
+		Map<String, Object> AlarmMap = new HashMap<String, Object>();
+		AlarmMap.put("total", AlarmPageInfo.getTotal());
+		AlarmMap.put("AlarmList", AlarmList);
+		//通过项目ID查询到所有告警信息
+		return AlarmMap;
+	}
+	
+	/**
+	 * 展示项目下所有测点
+	 *//*
+	@RequestMapping(value = "/showProjectAlarm", method = RequestMethod.POST)
+	@ResponseBody
 	public List<Alarm> showProjectAlarm(Integer projectId){
 		return alarmService.selectAlarmByProjectId(projectId);
-	}
+	}*/
 }

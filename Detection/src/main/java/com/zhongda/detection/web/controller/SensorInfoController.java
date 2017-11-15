@@ -1,9 +1,12 @@
 package com.zhongda.detection.web.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageInfo;
+import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SensorInfo;
 import com.zhongda.detection.web.security.RoleSign;
@@ -31,10 +36,25 @@ public class SensorInfoController {
 	 */
 	@RequestMapping(value = "/showProjectSensorInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SensorInfo> showProjectSensorInfo(
-			Integer projectId) {
-		return sensorInfoService.selectByProjectId(projectId);
+	public Map<String, Object> showProjectSensorInfo(@RequestBody Project project,HttpServletRequest request) {
+		//根据查询条件分页查询测点
+		List<SensorInfo> sensorInfoList = sensorInfoService.selectSensorInfoWithAlarmCount(project);
+		PageInfo<SensorInfo> sensorInfoListPageInfo = new PageInfo<SensorInfo>(sensorInfoList);
+		Map<String, Object> sensorInfoMap = new HashMap<String, Object>();
+		sensorInfoMap.put("total", sensorInfoListPageInfo.getTotal());
+		sensorInfoMap.put("sensorInfoListList", sensorInfoList);
+		//通过项目ID查询到所有测点
+		return sensorInfoMap;
 	}
+	
+	/**
+	 * 展示项目下所有传感器
+	 *//*
+	@RequestMapping(value = "/showProjectSensorInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SensorInfo> showProjectSensorInfo(Integer projectId) {
+		return sensorInfoService.selectByProjectId(projectId);
+	}*/
 	
 	/**
 	 * 展示测点下所有传感器

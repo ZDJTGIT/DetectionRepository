@@ -3,6 +3,8 @@ package com.zhongda.detection.web.dao;
 import java.util.List;
 
 import com.zhongda.detection.web.model.Alarm;
+import com.zhongda.detection.web.model.DetectionPoint;
+import com.zhongda.detection.web.model.Project;
 
 public interface AlarmMapper {
     int deleteByPrimaryKey(Integer alarmId);
@@ -43,4 +45,13 @@ public interface AlarmMapper {
 	 * @return
 	 */
 	List<Alarm> selectAlarmByProjectId(Integer projectId);
+	
+	/**
+	 * 根据查询条件查询出对应项目下告警信息
+	 * 
+	 * @param project
+	 *            封装了查询条件的对象
+	 * @return
+	 */
+	List<Alarm> selectAlarmWithAlarmCount(Project project);
 }

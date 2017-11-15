@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.zhongda.detection.web.model.DetectionPoint;
+import com.zhongda.detection.web.model.Project;
 
 public interface DetectionPointMapper {
 
@@ -95,6 +96,7 @@ public interface DetectionPointMapper {
 			@Param(value = "detectionTypeId") Integer detectionTypeId,
 			@Param(value = "currentTime") String currentTime);
 
+
 	/**
 	 * 查询每天最大值最小值传给K线图
 	 * 
@@ -105,5 +107,15 @@ public interface DetectionPointMapper {
 	List<DetectionPoint> selectKlineGraphData(
 			@Param(value = "projectId") Integer projectId,
 			@Param(value = "detectionTypeId") Integer detectionTypeId);
+
+
+	/**
+	 * 根据查询条件查询出对应项目下测点
+	 * 
+	 * @param project
+	 *            封装了查询条件的对象
+	 * @return
+	 */
+	List<DetectionPoint> selectDetectionPointWithAlarmCount(Project project);
 
 }

@@ -3,6 +3,7 @@ package com.zhongda.detection.web.service;
 import java.util.List;
 
 import com.zhongda.detection.web.model.DetectionPoint;
+import com.zhongda.detection.web.model.Project;
 
 /**
  * <p>
@@ -102,4 +103,13 @@ public interface DetectionPointService {
 	 */
 	List<DetectionPoint> selectKlineGraphData(Integer projectId,
 			Integer detectionTypeId);
+	
+	/**
+	 * 根据查询条件查询出对应项目下测点
+	 * 
+	 * @param project
+	 *            封装了查询条件的对象
+	 * @return
+	 */
+	List<DetectionPoint> selectDetectionPointWithAlarmCount(Project project);
 }
