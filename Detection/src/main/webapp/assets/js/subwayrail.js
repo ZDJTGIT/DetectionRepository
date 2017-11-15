@@ -33,13 +33,15 @@ $(function(){
 		var rateData = [];
 		var grandtotalData = [];
 		var singleData = [];
+		var dt;
 		$(value.laserDataList).each(function(ind,val){
 			var datas = [];
 			var ratedatas = [];
 			var grandtotaldatas = [];
 			var singledatas = [];
 			var temper=val.currentTimes;
-			var dt = new Date(temper.replace(/-/,"/"))
+//			dt = new Date(temper.replace(/-/,"/"))
+			dt = new Date(temper.substring(0,4),temper.substring(5,7),temper.substring(8,10),temper.substring(11,13),temper.substring(14,16),temper.substring(17,19));
 			datas.push(dt);
 			datas.push(val.currentData);
 			ratedatas.push(dt);
@@ -52,7 +54,6 @@ $(function(){
 			rateData.push(ratedatas);
 			grandtotalData.push(grandtotaldatas);
 			singleData.push(singledatas);
-			
 		});
 		var displacementpoint ={name: value.detectionName, type: 'line',symbol:'circle',showAllSymbol: true,data: displacementData,markPoint : {data : [ {type : 'max',name : '最大值'}, {type : 'min',name : '最小值'} ]}, formatter : function (params){return params.name+'<br>'+params } };
 		var ratepoint ={name: value.detectionName, type: 'line',symbol:'circle',showAllSymbol: true,data: rateData,markPoint : {data : [ {type : 'max',name : '最大值'}, {type : 'min',name : '最小值'} ]}, formatter : function (params){return params.name+'<br>'+params } };

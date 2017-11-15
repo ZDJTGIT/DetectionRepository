@@ -104,7 +104,7 @@
                     </div>
                 </div>
             </div> 
-            <!-- <div class="col-sm-12" id="K线图">
+             <!-- <div class="col-sm-12" id="K线图">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title" style="text-align: center;">
                         <h5>K线图</h5>
