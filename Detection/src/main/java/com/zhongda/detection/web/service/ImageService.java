@@ -51,5 +51,28 @@ public interface ImageService {
 	 * @return 返回上传结果
 	 */
 	Result uploadImage(MultipartFile file);
+	
+	/**
+	 * 单个图片上传至服务器，同时更新数据库的url路径
+	 * @param file 需上传的图片文件
+	 * @param imageId 数据库对应的图片id
+	 * @return
+	 */
+	Result uploadSingleImage(MultipartFile file, Integer imageId);
+	
+	/**
+	 * 多个图片上传至服务器，同时更新数据库的url路径
+	 * @param file 需上传的图片文件
+	 * @param imageId 数据库对应的图片id
+	 * @return
+	 */
+	Result uploadMultipleImage(MultipartFile file, Integer imageId);
+	
+	/**
+	 * 更新物理图的Url路径
+	 * @param imageId 对应物理图的Id
+	 * @return 
+	 */
+	Image updatePhysicalUrl(Integer imageId);
 
 }

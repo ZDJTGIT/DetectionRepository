@@ -42,4 +42,11 @@
         timeToIdleSeconds="300" timeToLiveSeconds="0" overflowToDisk="false"
         statistics="true">
     </cache>
+    
+    <!-- 多张图片上传 缓存图片 锁定1小时 -->
+    <cache name="multipleImageCache" eternal="false"
+        timeToIdleSeconds="3600" timeToLiveSeconds="0" overflowToDisk="false"
+        statistics="true">
+    </cache>
+    
 </ehcache>

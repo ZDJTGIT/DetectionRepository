@@ -17,8 +17,14 @@ public class Image {
     
     //测点类型名称，缓存数据库数据
     private String detectionTypeName;
+    
+    public Image() {}
+    
+    public Image(Integer imageId) {
+		this.imageId = imageId;
+	}
 
-    public String getDetectionTypeName() {
+	public String getDetectionTypeName() {
 		return detectionTypeName;
 	}
 

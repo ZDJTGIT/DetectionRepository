@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.cache.Cache;
+import org.apache.shiro.cache.CacheManager;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +24,10 @@ public class ImageServiceImpl implements ImageService {
 	
 	@Resource
 	private ImageMapper imageMapper;
+	
+	@Resource(name = "shiroEhcacheManager")
+	private CacheManager cacheManager;
+	private Cache<Integer, Image> multipleImageCache;
 
 	@Override
 	public Image selectImageByTwoId(Integer projectId, Integer detectionTypeId) {
@@ -46,13 +52,18 @@ public class ImageServiceImpl implements ImageService {
 	public void removeImage(String imageUrl) {
 		try {
 			String[] imageUrlSplit = imageUrl.split("/");
+			if(imageUrlSplit.length != 5){
+				return;
+			}
 			String directory = basePath + "/" + imageUrlSplit[2] + "/" +imageUrlSplit[3];
 			String ip = InetAddress.getLocalHost().getHostAddress();
 			System.out.println(ip);
 			if(!"123.207.39.209".endsWith(ip)){		        
-				JschRemote.connect();
-				JschRemote.delete(directory, imageUrlSplit[4]);
-				JschRemote.close();				
+				synchronized (this) {
+					JschRemote.connect();
+					JschRemote.delete(directory, imageUrlSplit[4]);
+					JschRemote.close();
+				}				
 			}else{						        
 		        //基础路径+一级目录+二级目录
 				File targetFile = new File(directory, imageUrlSplit[4]);
@@ -79,9 +90,11 @@ public class ImageServiceImpl implements ImageService {
 			if(!"123.207.39.209".endsWith(ip)){					        
 		        //一级目录+二级目录
 		        String otherDirectory = dir1 + "/" + dir2;
-				JschRemote.connect();
-				JschRemote.upload(basePath, otherDirectory, file, newFileName);
-				JschRemote.close();				
+				synchronized (this) {
+					JschRemote.connect();
+					JschRemote.upload(basePath, otherDirectory, file, newFileName);
+					JschRemote.close();
+				}				
 			}else{						        
 		        //基础路径+一级目录+二级目录
 				File dirFile = new File(basePath, dir1 + "/" + dir2);
@@ -97,7 +110,7 @@ public class ImageServiceImpl implements ImageService {
 		        }		       				
 			}
 			result.setCode(Result.SUCCESS);
-			result.setMsg("上传成功");
+			result.setMsg("上传成功");			
 			result.setData("mnt/upload/"+dir1 + "/" + dir2+"/"+newFileName);
 		} catch (Exception e) {		
 			e.printStackTrace();
@@ -105,5 +118,69 @@ public class ImageServiceImpl implements ImageService {
 			result.setMsg("上传失败(获取IP地址失败)");
 		}		
 		return result;
+	}
+
+	@Override
+	public Result uploadSingleImage(MultipartFile file, Integer imageId) {
+		//上传图片至服务器
+		Result result = uploadImage(file);
+		//删除服务器上的图片
+		Image image = imageMapper.selectByPrimaryKey(imageId);
+		if(null != image && null != image.getHeatImageUrl()){
+			removeImage(image.getHeatImageUrl());
+		}	
+		//如果上传成功，则更新图片路径Url
+		if(result.getCode() == Result.SUCCESS){
+			image = new Image(imageId);
+			image.setHeatImageUrl(result.getData().toString());
+			imageMapper.updateByPrimaryKeySelective(image);
+		}
+		return result;
+	}
+
+	@Override
+	public Result uploadMultipleImage(MultipartFile file, Integer imageId) {
+		//上传图片至服务器
+		Result result = uploadImage(file);
+		//如果上传成功，则将该图片路径Url添加至缓存
+		if(result.getCode() == Result.SUCCESS){
+			multipleImageCache = cacheManager.getCache("multipleImageCache");
+			Image image = multipleImageCache.get(imageId);
+			if(null == image){
+				image = new Image(imageId);
+				multipleImageCache.put(imageId, image);
+			}
+			String physicalImageUrl = image.getPhysicalImageUrl();
+			if(null == physicalImageUrl || physicalImageUrl.trim().equals("")){
+				physicalImageUrl = result.getData().toString();
+			}else{
+				physicalImageUrl = physicalImageUrl + "," + result.getData().toString();
+			}
+			image.setPhysicalImageUrl(physicalImageUrl);
+		}
+		return result;
+	}
+
+	@Override
+	public Image updatePhysicalUrl(Integer imageId) {
+		//删除服务器上的图片
+		Image image = imageMapper.selectByPrimaryKey(imageId);
+		if(null != image && null != image.getPhysicalImageUrl()){
+			String[] imgUrls = image.getPhysicalImageUrl().split(",");
+			for (String imgUrl : imgUrls) {
+				removeImage(imgUrl);
+			}
+		}	
+		try {
+			//获取缓存中的图片路径
+			multipleImageCache = cacheManager.getCache("multipleImageCache");
+			image = multipleImageCache.get(imageId);
+			imageMapper.updateByPrimaryKeySelective(image);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally{
+			multipleImageCache.remove(imageId);
+		}	
+		return image;
 	}
 }

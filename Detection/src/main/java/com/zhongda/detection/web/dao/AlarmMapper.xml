@@ -9,7 +9,7 @@
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="detection_id" jdbcType="INTEGER" property="detectionId" />
     <result column="smu_cms_id" jdbcType="VARCHAR" property="smuCmsId" />
-    <result column="sensor_id" jdbcType="INTEGER" property="sensorId" />
+    <result column="sensor_id" jdbcType="VARCHAR" property="sensorId" />
     <result column="alarm_type_id" jdbcType="INTEGER" property="alarmTypeId" />
     <result column="alarm_context" jdbcType="VARCHAR" property="alarmContext" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -27,7 +27,7 @@
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="detection_id" jdbcType="INTEGER" property="detectionId" />
     <result column="smu_cms_id" jdbcType="VARCHAR" property="smuCmsId" />
-    <result column="sensor_id" jdbcType="INTEGER" property="sensorId" />
+    <result column="sensor_id" jdbcType="VARCHAR" property="sensorId" />
     <result column="alarm_type_id" jdbcType="INTEGER" property="alarmTypeId" />
     <result column="alarm_context" jdbcType="VARCHAR" property="alarmContext" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -108,7 +108,7 @@
         and smu_cms_id = #{smuCmsId,jdbcType=INTEGER}
       </if>
       <if test="sensorId != null">
-        and sensor_id = #{sensorId,jdbcType=INTEGER}
+        and sensor_id = #{sensorId,jdbcType=VARCHAR}
       </if>
       <if test="alarmTypeId != null">
         and alarm_type_id = #{alarmTypeId,jdbcType=INTEGER}
@@ -141,7 +141,7 @@
       alarm_level, frequency)
     values (#{alarmId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
       #{projectId,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{detectionId,jdbcType=INTEGER}, 
-      #{smuCmsId,jdbcType=VARCHAR}, #{sensorId,jdbcType=INTEGER}, #{alarmTypeId,jdbcType=INTEGER}, 
+      #{smuCmsId,jdbcType=VARCHAR}, #{sensorId,jdbcType=VARCHAR}, #{alarmTypeId,jdbcType=INTEGER}, 
       #{alarmContext,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
       #{alarmLevel,jdbcType=INTEGER}, #{frequency,jdbcType=INTEGER})
   </insert>
@@ -214,7 +214,7 @@
         #{smuCmsId,jdbcType=VARCHAR},
       </if>
       <if test="sensorId != null">
-        #{sensorId,jdbcType=INTEGER},
+        #{sensorId,jdbcType=VARCHAR},
       </if>
       <if test="alarmTypeId != null">
         #{alarmTypeId,jdbcType=INTEGER},
@@ -258,7 +258,7 @@
         smu_cms_id = #{smuCmsId,jdbcType=VARCHAR},
       </if>
       <if test="sensorId != null">
-        sensor_id = #{sensorId,jdbcType=INTEGER},
+        sensor_id = #{sensorId,jdbcType=VARCHAR},
       </if>
       <if test="alarmTypeId != null">
         alarm_type_id = #{alarmTypeId,jdbcType=INTEGER},
@@ -289,7 +289,7 @@
       project_name = #{projectName,jdbcType=VARCHAR},
       detection_id = #{detectionId,jdbcType=INTEGER},
       smu_cms_id = #{smuCmsId,jdbcType=VARCHAR},
-      sensor_id = #{sensorId,jdbcType=INTEGER},
+      sensor_id = #{sensorId,jdbcType=VARCHAR},
       alarm_type_id = #{alarmTypeId,jdbcType=INTEGER},
       alarm_context = #{alarmContext,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},

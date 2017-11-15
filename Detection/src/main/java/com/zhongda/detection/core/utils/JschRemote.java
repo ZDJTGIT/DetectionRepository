@@ -1,9 +1,7 @@
 package com.zhongda.detection.core.utils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -11,8 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
@@ -34,15 +30,16 @@ public class JschRemote {
 	 * @param port 端口号
 	 */
 	public static void connect(String user, String passwd, String host, int port) {
-		jsch = new JSch();// 创建JSch对象
 		try {
-			session = jsch.getSession(user, host, port);// 根据用户名、主机ip、端口号获取一个Session对象
+			jsch = new JSch();// 创建JSch对象
+			session = jsch.getSession(user, host, port);// 根据用户名、主机ip、端口号获取一个Session对象			
 			session.setPassword(passwd);// 设置密码
 			Properties config = new Properties();
 			config.put("StrictHostKeyChecking", "no");
 			session.setConfig(config);// 为Session对象设置properties
 			session.setTimeout(1500);// 设置超时
 			session.connect();// 通过Session建立连接
+			System.out.println("session is connected:"+session);
 		} catch (JSchException e) {
 			logger.error("连接远程服务器失败："+e.getMessage());
 		}
@@ -59,52 +56,12 @@ public class JschRemote {
 	 *  关闭连接
 	 */
 	public static void close() {
-		if(null != session && session.isConnected()){  
+		if(null != session && session.isConnected()){
+			System.out.println("session is closed:"+session);
 			session.disconnect();
         }
 	}
 
-	/**
-	 * 执行相关的命令
-	 * @param command 命令
-	 */
-	public void execCmd(String command){
-		BufferedReader reader = null;
-		Channel channel = null;
-		InputStream in = null;
-		try {
-			if (command != null) {
-				channel = session.openChannel("exec");
-				((ChannelExec) channel).setCommand(command);
-				channel.setInputStream(null);
-				channel.connect();
-				in = channel.getInputStream();
-				reader = new BufferedReader(new InputStreamReader(in));
-				String buf = null;
-				while ((buf = reader.readLine()) != null) {
-					System.out.println(buf);
-				}
-			}
-		} catch (IOException e) {
-			logger.error("IO异常："+e.getMessage());
-		} catch (JSchException e) {
-			logger.error("打开sftp通道失败："+e.getMessage());
-		} finally {
-			try {
-				if(null != channel && channel.isConnected()){
-					channel.disconnect();
-				}
-				if(null != reader){
-					reader.close();
-				}
-				if(null != in){
-					in.close();
-				}
-			} catch (IOException e) {
-				logger.error("IO异常："+e.getMessage());
-			}
-		}
-	}
 
 	/**
 	 * 上传文件
@@ -222,17 +179,5 @@ public class JschRemote {
             }  
 		}
 		return vector;
-	}
-
-	public static void main(String[] args) {
-		
-		// 1.连接到指定的服务器
-		connect();
-
-//		upload("/usr/local/nginx/html/abc", new File("D:\\usr\\local\\nginx\\html\\Detection\\mnt\\upload\\5\\8\\8451b343-cb2a-4c87-9ed4-6993b4169a83.jpg"));
-//		delete("/usr/local/nginx/html", "8451b343-cb2a-4c87-9ed4-6993b4169a83.jpg");
-		
-		// 4.关闭连接
-		close();
 	}
 }

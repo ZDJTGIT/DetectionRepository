@@ -4,9 +4,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.zhongda.detection.web.model.Image;
 import com.zhongda.detection.web.model.Result;
-import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.ImageService;
 
 @RestController
@@ -27,14 +23,32 @@ public class ImgaeController {
 	private ImageService imageService;
 	
 	/**
-	 * 上传图片
+	 * 单个图片上传
 	 */
-	@RequestMapping(value="/uploadImg", method = RequestMethod.POST)
+	@RequestMapping(value="/uploadSingleImage", method = RequestMethod.POST)
 	@ResponseBody
-	public Result uploadImg(@RequestParam(value = "file", required = false) MultipartFile file){
-		Result result = imageService.uploadImage(file);
+	public Result uploadSingleImage(@RequestParam(value = "file") MultipartFile file, Integer imageId){	
+		Result result = imageService.uploadSingleImage(file, imageId);
 		return result;
-	}	
+	}
+	
+	/**
+	 * 多个图片上传
+	 */
+	@RequestMapping(value="/uploadMultipleImage", method = RequestMethod.POST)
+	@ResponseBody
+	public Result uploadMultipleImage(@RequestParam(value = "file") MultipartFile file, Integer imageId){
+		Result result = imageService.uploadMultipleImage(file, imageId);
+		return result;
+	}
+	
+	/**
+	 * 更新物理图的Url路径
+	 */
+	@RequestMapping(value="/updatePhysicalUrl", method = RequestMethod.GET)
+	public Image updatePhysicalUrl(Integer imageId){
+		return imageService.updatePhysicalUrl(imageId);
+	}
 	
 	/**
 	 * 查项目下所有图片
@@ -44,33 +58,7 @@ public class ImgaeController {
 	@RequestMapping(value = "/showProjectImage", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Image> showProjectImage(Integer projectId){
-		List<Image> imageList = imageService.selectImageByProjectId(projectId);
-		return imageList;
+		return imageService.selectImageByProjectId(projectId);
 	}
-	
-	/**
-	 * 修改图片
-	 */
-	@RequestMapping(value = "/updetaImage", method = RequestMethod.POST)
-	@ResponseBody
-	public Image updetaImage(@RequestBody Image image){
-		Subject subject = SecurityUtils.getSubject();
-		if (subject.hasRole(RoleSign.ADMIN)
-				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
-		imageService.updateByPrimaryKeySelective(image);
-		return image;
-		}else{
-			return null;
-		}
-	}
-	
-	/**
-	 * 删除具体的图片
-	 */
-	@RequestMapping(value = "/removeImage", method = RequestMethod.GET)
-	@ResponseBody
-	public void removeImage(String imageUrl){
-		imageService.removeImage(imageUrl);
-	}
-	
+
 }

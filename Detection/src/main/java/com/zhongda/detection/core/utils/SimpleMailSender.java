@@ -42,16 +42,16 @@ public class SimpleMailSender {
 	 * 数据类告警
 	 * 告警模板标识: _alarmDataMessage
 	 * 告警模板主题 : 告警消息
-	 * 告警模板内容 : 尊敬的{0}用户：<br>您好！您的{1}项目，编号为：{2}的传感器监测到{3}超过阈值，当前值{4}，阈值范围{5}~{6}。<br>详情请点击<a href="http://localhost/Detection">中大检测在线检测服务平台</a>查看，谢谢！
-	 * {0}账户名  {1}项目名 {2}传感器编号 {3}监测的类型 {4}监测到的超过阈值的当前值 {5}最小阈值 {6}最大阈值
+	 * 告警模板内容 : 尊敬的{0}用户：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您好！您的项目于{1}监测到数据类告警：{2}超过阈值。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;项目名称：{3}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;采集终端：{4} 传感器编号：{5}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前监测值：{6} 正常值范围:{7}~{8}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;详情请点击<a href="http://123.207.39.209/Detection">中大检测在线检测服务平台</a>查看，谢谢！<br>公司：湖南中大检测建设工程技术有限公司<br>地址：长沙市岳麓区学士路755号<br> 联系电话：18673101894    座机：0731-88137366转8000  4008930909（转分机号）<br><a href="http://www.hnzdjc.com">中大检测官网网址</a>
+	 * {0}账户名  {1}时间  {2}监测的类型  {3}项目名   {4}采集终端    {5}传感器编号  {6}监测到的超过阈值的当前值   {7}最小阈值  {8}最大阈值
 	 */
 	public static final String ALARM_DATA_MESSAGE="_alarmDataMessage";
 	/**
 	 * 设备类告警
 	 * 告警模板标识: _alarmDeviceMessage
 	 * 告警模板主题 : 告警消息
-	 * 告警模板内容 : 尊敬的{0}用户：<br>您好！您的{1}项目，编号为：{2}的传感器出现故障，请及时处理。<br>详情请点击<a href="http://localhost/Detection">中大检测在线检测服务平台</a>查看，谢谢！
-	 * {0}账户名  {1}项目名 {2}传感器编号
+	 * 告警模板内容 : 尊敬的{0}用户：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您好！您的项目于{1}监测到{2}的设备类告警。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;项目名称：{3}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;采集终端：{4} 传感器编号：{5}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{6}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;详情请点击<a href="http://123.207.39.209/Detection">中大检测在线检测服务平台</a>查看，谢谢！<br>公司：湖南中大检测建设工程技术有限公司<br>地址：长沙市岳麓区学士路755号<br> 联系电话：18673101894    座机：0731-88137366转8000  4008930909（转分机号）<br><a href="http://www.hnzdjc.com">中大检测官网网址</a>
+	 * {0}账户名  {1}时间  {2}监测的类型  {3}项目名   {4}采集终端    {5}传感器编号  {6}故障类型
 	 */
 	public static final String ALARM_DEVICE_MESSAGE="_alarmDeviceMessage";
 

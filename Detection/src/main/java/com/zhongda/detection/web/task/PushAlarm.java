@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.zhongda.detection.core.utils.SimpleMailSender;
+import com.zhongda.detection.core.utils.sms.SmsContentTemplate;
 import com.zhongda.detection.core.utils.sms.SmsSender;
 import com.zhongda.detection.web.model.Alarm;
 import com.zhongda.detection.web.model.AlarmLinkman;
@@ -38,21 +39,21 @@ public class PushAlarm {
 			List<String> phoneNumbers = null;
 			List<String> emails = null;
 			List<String> params = new ArrayList<String>();
+			params.add(alarm.getUserName());
+			params.add(alarm.getCreateTime().toString());
+			params.add(alarm.getAlarmType());
+			params.add(alarm.getProjectName());
+			params.add(alarm.getSmuCmsId());
+			params.add(alarm.getSensorId());
 			// 如果是数据类告警
 			if (alarm.getAlarmTypeId() == 17) {
-				params.add(alarm.getUserName());
-				params.add(alarm.getProjectName());
-				params.add(alarm.getSensorId().toString());
-				params.add(alarm.getAlarmType());
 				String[] contextArray = alarm.getAlarmContext().split("，");
 				params.add(contextArray[0].split("：")[1]);
 				String[] thresholdArray = contextArray[2].split("~");
 				params.add(thresholdArray[0].substring(5));
 				params.add(thresholdArray[1]);
 			} else if (alarm.getAlarmTypeId() == 18) { // 如果是设备类告警
-				params.add(alarm.getUserName());
-				params.add(alarm.getProjectName());
-				params.add(alarm.getSensorId().toString());
+				params.add(alarm.getAlarmContext());
 			}
 			// 如果当前项目有对应的告警联系人
 			if (null != alarm.getAlarmLinkmans()
@@ -68,23 +69,32 @@ public class PushAlarm {
 				SimpleMailSender mailSender1 = new SimpleMailSender();
 				 mailSender1.send("731583657@qq.com", "告警", alarm.getProjectName()+"没有对应的告警联系人");
 			}
-			// 群发邮件
-			 SimpleMailSender mailSender = new SimpleMailSender();
-			 mailSender.send(emails, SimpleMailSender.ALARM_DATA_MESSAGE,
-			 params);
-			// 群发短信
-			 SmsSender smsSender = new SmsSender();
-			 smsSender.send(51869, phoneNumbers, params);
+			SimpleMailSender mailSender = new SimpleMailSender();
+			SmsSender smsSender = new SmsSender();
+			// 如果是数据类告警
+			if(alarm.getAlarmTypeId() == 17){
+				// 群发邮件
+				mailSender.send(emails, SimpleMailSender.ALARM_DATA_MESSAGE,params);
+				// 群发短信
+				smsSender.send(SmsContentTemplate.ALARM_DATA_MESSAGE, phoneNumbers, params);
+			} else if (alarm.getAlarmTypeId() == 18) { // 如果是设备类告警
+				// 群发邮件
+				mailSender.send(emails, SimpleMailSender.ALARM_DEVICE_MESSAGE,params);
+				// 群发短信
+				smsSender.send(SmsContentTemplate.ALARM_DEVICE_MESSAGE, phoneNumbers, params);
+			}
 			//如果该消息对应项目的账户在线，则向其登录的客户端推送消息
 			if (userSet.contains(alarm.getUserName())) {
-				String message = MessageFormat
-						.format("尊敬的{0}用户：您好！您的{1}项目，编号为：{2}的传感器监测到{3}超过阈值，当前值{4}，阈值范围{5}~{6}。",
-								params.toArray());
+				String message = null;
+				// 如果是数据类告警
+				if(alarm.getAlarmTypeId() == 17){
+					message = MessageFormat.format("尊敬的{0}用户：您好！您的项目于{1}监测到数据类告警：{2}超过阈值。项目名称：{3}，采集终端：{4}，传感器编号：{5}，当前监测值：{6}，正常值范围:{7}~{8}。",params.toArray());
+				} else if (alarm.getAlarmTypeId() == 18) { // 如果是设备类告警
+					message = MessageFormat.format("尊敬的{0}用户：您好！您的项目于{1}监测到数据类告警：{2}超过阈值。项目名称：{3}，采集终端：{4}，传感器编号：{5}，{6}。",params.toArray());
+				}
 				alarm.setAlarmContext(message);
-				template.convertAndSendToUser(alarm.getUserName(), "/message",
-						alarm);
+				template.convertAndSendToUser(alarm.getUserName(), "/message", alarm);
 			}
-
 		}
 	}
 }
