@@ -56,7 +56,8 @@
 										<td>手机号</td>
 										<td>邮箱</td>
 										<td>启用状态</td>
-										<td >操作</td>
+										<td>操作</td>
+										<td>删除</td>
 									</tr>
 	                            </thead>
 	                            <tbody>
@@ -95,6 +96,10 @@
 					                                </label>
 					                            </div>
 	                            			</td>
+	                            			<td>
+	                            				<button class="btn btn-danger btn-circle deletebutton" name="delete${aLinkman.alarmLinkmanId }" type="button"><i class="fa fa-times"></i>
+                            					</button>
+	                            			</td>
 	                            		</tr> 
 	                            	</c:forEach>
                            		</tbody>
@@ -103,7 +108,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- Modal -->
+			<!-- Model -->
 			<div class="modal fade" id="myModal_table_basic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 				<div class="modal-dialog" role="document">
 				    <div class="modal-content">
@@ -151,9 +156,6 @@
 	                                    </div>
 	                                </div>
 	                            </div>
-	                            
-	                        
-				        	 
 					      </div>
 					      <div class="modal-footer">
 					        <button type="button"  class="btn btn-default" data-dismiss="modal" id="table_basic_close">关闭</button>

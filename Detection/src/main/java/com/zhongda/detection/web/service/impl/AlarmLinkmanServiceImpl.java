@@ -33,4 +33,9 @@ public class AlarmLinkmanServiceImpl implements AlarmLinkmanService {
 				alarmLinkmanId);
 	}
 
+	@Override
+	public int deleteByPrimaryKey(Integer alarmLinkmanId) {
+		return alarmLinkmanMapper.deleteByPrimaryKey(alarmLinkmanId);
+	}
+
 }

@@ -1,4 +1,32 @@
+
+
 var table_basic_datatable;
+
+$('#addAlarmBasic').on('click','.deletebutton',function(){
+	var deleteid =$(this).attr("name").substring(6);
+	var table = $('#addAlarmBasic').DataTable();
+	var parenttr = $(this).closest('tr');
+	if ( parenttr.hasClass('selected') ) {
+		parenttr.removeClass('selected');
+    }
+    else {
+        table.$('tr.selected').removeClass('selected');
+        parenttr.addClass('selected');
+    }
+	$.ajax({
+		url:"rest/project/deletealarm",
+		data:{alarmLinkmanId:deleteid},
+		success:function(data){
+			if(data=="true"){
+				table.row('.selected').remove().draw( false );
+			}else{
+				alert("删除失败");
+			}
+		}
+	});
+	
+});
+
 	$(document).ready(function(){
 		
 		table_basic_datatable = $('#addAlarmBasic').dataTable({
@@ -126,7 +154,8 @@ var table_basic_datatable;
       			      					statu="<div id='status"+val.alarmLinkmanId+"'>启用</div>";
       			      					label = "<div class='onoffswitch' ><input type='checkbox' checked class='onoffswitch-checkbox' id='example"+val.alarmLinkmanId+"'><label class='onoffswitch-label' for='example"+val.alarmLinkmanId+"' ><span class='onoffswitch-inner'></span><span class='onoffswitch-switch'></span></label></div>"
       				      				}
-      				      				table_basic_datatable.fnAddData([val.userName,val.projectName,val.phone,val.email,statu,label]);
+      				      				deletes="<button class='btn btn-danger btn-circle deletebutton' name='delete"+val.alarmLinkmanId+"' type='button'><i class='fa fa-times'></i></button>";
+      				      				table_basic_datatable.fnAddData([val.userName,val.projectName,val.phone,val.email,statu,label,deletes]);
       			      			  	});
       			                	$("#table_basic_close").trigger("click");
       			                });

@@ -35,7 +35,7 @@ demo = {
 				icon : icon
 			});
 			marker.addEventListener("click", function(){
-				var url = "rest/project/laserRanging?projectId=176&detectionTypeId=26";
+				var url = "rest/project/subwayRail?projectId="+homeMapjsonObjss[index].projectId;
 				var indexAarry = $(".J_menuTabs").find('a');
 				var isTrue = true;
 				$(indexAarry).each(function(index,val){

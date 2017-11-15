@@ -29,4 +29,12 @@ public interface AlarmLinkmanService {
 	 * @return
 	 */
 	int updateStatusByalarmLinkmanId(Integer status, Integer alarmLinkmanId);
+
+	/**
+	 * 删除联系人通过ID
+	 * 
+	 * @param alarmLinkmanId
+	 * @return
+	 */
+	int deleteByPrimaryKey(Integer alarmLinkmanId);
 }

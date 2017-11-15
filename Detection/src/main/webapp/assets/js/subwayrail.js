@@ -33,15 +33,13 @@ $(function(){
 		var rateData = [];
 		var grandtotalData = [];
 		var singleData = [];
-		var dt;
 		$(value.laserDataList).each(function(ind,val){
 			var datas = [];
 			var ratedatas = [];
 			var grandtotaldatas = [];
 			var singledatas = [];
 			var temper=val.currentTimes;
-//			dt = new Date(temper.replace(/-/,"/"))
-			dt = new Date(temper.substring(0,4),temper.substring(5,7),temper.substring(8,10),temper.substring(11,13),temper.substring(14,16),temper.substring(17,19));
+			var dt = new Date(temper.substring(0,4),temper.substring(5,7),temper.substring(8,10),temper.substring(11,13),temper.substring(14,16),temper.substring(17,19));
 			datas.push(dt);
 			datas.push(val.currentData);
 			ratedatas.push(dt);
@@ -77,7 +75,7 @@ $(function(){
 				            var seconds = date.getSeconds();
 				            var hours = date.getHours();
 				            var year= date.getFullYear();
-				            var month =date.getMonth() + 1;
+				            var month =date.getMonth() ;
 			                var day = date.getDate(); 
 //				            alert(JSON.stringify(params));
 			                if(month<10){
@@ -112,7 +110,7 @@ $(function(){
 				    },
 				    dataZoom: {
 				        show: true,
-				        start : 70
+				        start : 90
 				    },
 				    legend : {
 				    	selected:selected,
@@ -158,7 +156,7 @@ $(function(){
 			            var seconds = date.getSeconds();
 			            var hours = date.getHours();
 			            var year= date.getFullYear();
-			            var month =date.getMonth() + 1;
+			            var month =date.getMonth() ;
 		                var day = date.getDate(); 
 //			            alert(JSON.stringify(params));
 		                if(month<10){
@@ -193,7 +191,7 @@ $(function(){
 			    },
 			    dataZoom: {
 			        show: true,
-			        start : 70
+			        start : 90
 			    },
 			    legend : {
 			    	selected:selected,
@@ -239,7 +237,7 @@ $(function(){
 		            var seconds = date.getSeconds();
 		            var hours = date.getHours();
 		            var year= date.getFullYear();
-		            var month =date.getMonth() + 1;
+		            var month =date.getMonth();
 	                var day = date.getDate(); 
 //		            alert(JSON.stringify(params));
 	                if(month<10){
@@ -274,7 +272,7 @@ $(function(){
 		    },
 		    dataZoom: {
 		        show: true,
-		        start : 70
+		        start : 90
 		    },
 		    legend : {
 		    	selected:selected,
@@ -320,7 +318,7 @@ $(function(){
 		            var seconds = date.getSeconds();
 		            var hours = date.getHours();
 		            var year= date.getFullYear();
-		            var month =date.getMonth() + 1;
+		            var month =date.getMonth();
 	                var day = date.getDate(); 
 //		            alert(JSON.stringify(params));
 	                if(month<10){
@@ -355,7 +353,7 @@ $(function(){
 		    },
 		    dataZoom: {
 		        show: true,
-		        start : 70
+		        start : 90
 		    },
 		    legend : {
 		    	selected:selected,

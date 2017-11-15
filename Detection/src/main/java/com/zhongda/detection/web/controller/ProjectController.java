@@ -251,6 +251,26 @@ public class ProjectController {
 	}
 
 	/**
+	 * 删除告警联系人
+	 * 
+	 * @param alarmLinkmanId
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/deletealarm")
+	public void deletealarm(Integer alarmLinkmanId, HttpServletResponse response)
+			throws IOException {
+		System.out.println(alarmLinkmanId);
+		int key = alarmLinkmanService.deleteByPrimaryKey(alarmLinkmanId);
+		System.out.println(key);
+		if (key > 0) {
+			response.getWriter().print(true);
+		} else {
+			response.getWriter().print(false);
+		}
+	}
+
+	/**
 	 * 导出表
 	 * 
 	 * @param sensorId
@@ -306,7 +326,7 @@ public class ProjectController {
 		List<Project> projectList = projectService
 				.selectProjectWithAlarmCount(project);
 		PageInfo<Project> projectPageInfo = new PageInfo<Project>(projectList);
-		
+
 		Map<String, Object> projectMap = new HashMap<String, Object>();
 		projectMap.put("total", projectPageInfo.getTotal());
 		projectMap.put("projectList", projectList);

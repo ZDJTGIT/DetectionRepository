@@ -86,7 +86,6 @@
 	<script type="text/javascript">
 		var homeMapProjectList = '${projectLists}';
 		var homeMapjsonObjss = JSON.parse(homeMapProjectList); 
-		
 	</script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/demo.js"></script>
