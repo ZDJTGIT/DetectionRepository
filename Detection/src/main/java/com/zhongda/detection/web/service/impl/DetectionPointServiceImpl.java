@@ -74,4 +74,12 @@ public class DetectionPointServiceImpl implements DetectionPointService {
 		return detectionPointMapper.selectLaserDataByCurrentTimes(projectId,
 				detectionTypeId, currentTime);
 	}
+
+	@Override
+	public List<DetectionPoint> selectKlineGraphData(Integer projectId,
+			Integer detectionTypeId) {
+		return detectionPointMapper.selectKlineGraphData(projectId,
+				detectionTypeId);
+	}
+
 }

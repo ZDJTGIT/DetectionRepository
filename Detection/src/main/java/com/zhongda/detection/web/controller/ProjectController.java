@@ -173,6 +173,33 @@ public class ProjectController {
 	}
 
 	/**
+	 * 地铁总表
+	 * 
+	 * @return
+	 * @throws JsonProcessingException
+	 */
+	@RequestMapping(value = "/subwayRail")
+	public String subwayRail(Integer projectId, Model model)
+			throws JsonProcessingException {
+		System.out.println("projectId:" + projectId);
+		List<DetectionPoint> laserList = detectionPointService
+				.selectLaserDataByCurrentTimes(projectId, 26, "2");
+		// List<DetectionPoint> selectKlineGraphData = detectionPointService
+		// .selectKlineGraphData(projectId, 26);// 每天最大值最小值
+		// HashMap<Integer, DetectionPoint> hashMap = new HashMap<Integer,
+		// DetectionPoint>();
+		// for (DetectionPoint detectionPoint : selectKlineGraphData) {
+		// hashMap.put(detectionPoint.getDetectionPointId(), detectionPoint);
+		// }
+		ObjectMapper mapper = new ObjectMapper();
+		String laser = mapper.writeValueAsString(laserList);
+		// String kline = mapper.writeValueAsString(hashMap);
+		model.addAttribute("laserList", laser);
+		// model.addAttribute("kline", kline);
+		return "graph_echarts_subwayRail";
+	}
+
+	/**
 	 * 查询所有项目
 	 * 
 	 * @return
@@ -223,6 +250,17 @@ public class ProjectController {
 		}
 	}
 
+	/**
+	 * 导出表
+	 * 
+	 * @param sensorId
+	 * @param currentTime
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param detectionName
+	 * @param response
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/exportExcel")
 	public void excel(String sensorId, String currentTime, Integer projectId,
 			Integer detectionTypeId, String detectionName,

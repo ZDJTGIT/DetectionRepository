@@ -92,4 +92,14 @@ public interface DetectionPointService {
 	 */
 	List<DetectionPoint> selectByProjectNameAndKeyWord(String projectName,
 			String keyWord);
+
+	/**
+	 * 查询每天最大值最小值传给K线图
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	List<DetectionPoint> selectKlineGraphData(Integer projectId,
+			Integer detectionTypeId);
 }

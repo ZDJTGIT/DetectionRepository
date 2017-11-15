@@ -127,34 +127,44 @@
 
 
 
-					<%-- <shiro:hasPermission name="project:manager:*">
-						<li><a href="javascript:;"> <i
+					<shiro:hasPermission name="project:manager:*">
+						<li><a href="javascript:;" class="queryproject"> <i
 								class="fa fa fa-bar-chart-o"></i><span class="nav-label">统计图表</span>
 								<span class="fa arrow"></span>
 						</a>
 							<ul class="nav nav-second-level">
 								<shiro:hasPermission name="farmland:query:*">
-									<li><a class="J_menuItem"
-										href="rest/graph_echarts_farmland" name="农田数据分析图">农田数据分析图</a></li>
+									<li><a class="J_menuItem" href="rest/graph_echarts_farmland" name="农田数据分析图">农田数据分析图</a>
+										<ul class="nav nav-third-level" aria-expanded="false" id="farmland">
+										</ul>
+									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="bridge:query:*">
 									<li><a class="J_menuItem" href="rest/graph_echarts_bridge" name="桥梁数据分析图">桥梁数据分析图</a>
+										<ul class="nav nav-third-level" aria-expanded="false" id="bridge">
+										</ul>
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="tunnel:query:*">
 									<li><a class="J_menuItem" href="rest/graph_echarts_tunnel" name="隧道数据分析图">隧道数据分析图</a>
+										<ul class="nav nav-third-level" aria-expanded="false" id="tunnel">
+										</ul>
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="slope:query:*">
 									<li><a class="J_menuItem" href="rest/graph_echarts_slope" name="边坡数据分析图">边坡数据分析图</a>
+										<ul class="nav nav-third-level" aria-expanded="false" id="slope">
+										</ul>
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="subwayRail:query:*">
-									<li><a class="J_menuItem" href="rest/graph_echarts_slope" name="地铁轨道分析图">地铁轨道分析图</a>
+									<li><a > <i class="fa fa fa-bar-chart-o"></i><span class="nav-label">地铁轨道分析图</span><span class="fa arrow"></span></a>
+										<ul class="nav nav-third-level" aria-expanded="false" id="subwayRail">
+										</ul>
 									</li>
 								</shiro:hasPermission>
 							</ul></li>
-					</shiro:hasPermission> --%>
+					</shiro:hasPermission>
 					<li><a href="javascript:;"> <i class="fa fa fa-user"></i>
 							<span class="nav-label">个人资料</span> <span class="fa arrow"></span>
 					</a>
@@ -282,7 +292,70 @@
 				</nav>
 			</div>
 			<!-- header 结束-->
-
+<!-- 所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F -->
 			<div class="row content-tabs">
 				<a class="navbar-minimalize minimalize-styl-3 btn btn-primary "
 					href="#"><i class="fa fa-bars"></i> </a>
@@ -588,137 +661,148 @@
 
 		});
 	</script>
-
+	<!-- 所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F
+	所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F所有页面不要按Ctrl+shift+F -->
 	<!-- 动态加载左导航栏我的项目 -->
 	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
+		$(document).ready(function() {
 							var btainUserId = "${sessionScope.userInfo.userId}";
 							var userId = btainUserId;
 							var key = true;
 							var projectData = null;
-							$(".queryproject")
-									.click(
-											function() {
-												if (key) {
-													key = false;
-													var itemName = "";
-													$
-															.ajax({
-																url : 'rest/project/myproject',
-																dataType : 'json',
-																data : 'userId='
-																		+ userId,
-																success : function(
-																		data) {
-																	$
-																			.each(
-																					data,
-																					function(
-																							key,
-																							value) {
-																						projectData = data;
-																						var label = "<li><a class='secondbind' data-toggle='collapse' data-parent='#accordion'  href='#"+key+"' name='"+key+"'><i class='fa fa-columns'></i><span class='nav-label'>"
-																								+ key
-																								+ "</span><span class='fa arrow'></span></a><ul class='collapse nav nav-second-level' id='"+key+"' ></ul></li>";
-																						$(
-																								".filling")
-																								.append(
-																										label);
-																					});
-																}
-															});
-												}
+							$(".queryproject").click(function() {
+								if (key) {
+									key = false;
+									var itemName = "";
+									$.ajax({
+										url : 'rest/project/myproject',
+										dataType : 'json',
+										data : 'userId='+ userId,
+										success : function(data) {
+											$.each(data,function(key,value) {
+												projectData = data;
+												var name = key.split(",");
+												var label = "<li><a class='secondbind' data-toggle='collapse' data-parent='#accordion'  href='#"+name[0]+"' name='"+key+"'><i class='fa fa-columns'></i><span class='nav-label'>"+ name[0]+ "</span><span class='fa arrow'></span></a><ul class='collapse nav nav-second-level' id='"+name[0]+"' ></ul></li>";
+												$(".filling").append(label);
+												$(data[key]).each(function(index,val){
+													label = "<li><a class='J_menuItem' name='"+val.projectName+"' href='rest/project/"+name[1]+"?projectId="+val.projectId+"'>"+val.projectName+"</a></li>"
+													$("#"+name[1]).append(label);
+												});
 											});
+										}
+									});
+								}
+							});
 							var key2 = true;
 							var map = {};
-							$(document)
-									.on(
-											'click',
-											'.secondbind',
-											function() {
-												var dataKey = $(this).attr(
-														"name");
-												var value = projectData[dataKey];
-												if (map[dataKey] == null) {
-													map[dataKey] = 1;
-													key2 = true;
-												} else {
-													key2 = false;
-												}
-												if (key2) {
-													$(value)
-															.each(
-																	function(
-																			index,
-																			val) {
-																		var projectName = val.projectName;
-																		index++;
-																		var label = "<li><a class='thirdbind' data-toggle='collapse' data-target='#"+projectName+"' name='"+val.projectId+"'><i>"
-																				+ index
-																				+ ":"
-																				+ "</i><span class='nav-label'>"
-																				+ projectName
-																				+ "</span><span class='fa arrow'></span></a><ul class='collapse nav nav-second-level' id='"+projectName+"' ></ul></li>";
-																		$(
-																				"#"
-																						+ dataKey)
-																				.append(
-																						label);
-																	});
-												}
-											});
+							$(document).on('click','.secondbind',function() {
+								var dataKey = $(this).attr(
+										"name");
+								var value = projectData[dataKey];
+								if (map[dataKey] == null) {
+									map[dataKey] = 1;
+									key2 = true;
+								} else {
+									key2 = false;
+								}
+								if (key2) {
+									$(value).each(function(index,val) {
+										var projectName = val.projectName;
+										index++;
+										var label = "<li><a class='thirdbind' data-toggle='collapse' data-target='#"+projectName+"' name='"+val.projectId+"'><i>"+ index+ ":"+ "</i><span class='nav-label'>"+ projectName+ "</span><span class='fa arrow'></span></a><ul class='collapse nav nav-second-level' id='"+projectName+"' ></ul></li>";
+										$("#"+ dataKey).append(label);
+									});
+								}
+							});
 
-							$(document)
-									.on(
-											'click',
-											'.thirdbind',
-											function() {
-												var projectId = $(this).attr(
-														"name");
-												var projectName = $(this).attr(
-														"data-target");
-												if (map[projectName] == null) {
-													map[projectName] = 1;
-													key2 = true;
-												} else {
-													key2 = false;
-												}
-												if (key2) {
-													$
-															.ajax({
-																url : 'rest/project/queryItem',
-																dataType : 'json',
-																data : 'projectId='
-																		+ projectId,
-																success : function(
-																		data) {
-																	$(data)
-																			.each(
-																					function(
-																							index,
-																							val) {
-																						var label = "<li><a class='J_menuItem' name='"
-																								+ val.itemName
-																								+ "' href='rest/project/"
-																								+ val.itemValue
-																								+ "?projectId="
-																								+ val.projectId
-																								+ "&detectionTypeId="
-																								+ val.detectionTypeId
-																								+ "'><i>—</i><span class='nav-label'>"
-																								+ val.itemName
-																								+ "</span></a></li>";
-																						$(
-																								projectName)
-																								.append(
-																										label);
-																					});
-																}
-															});
-												}
+							$(document).on('click','.thirdbind',function() {
+								var projectId = $(this).attr(
+										"name");
+								var projectName = $(this).attr(
+										"data-target");
+								if (map[projectName] == null) {
+									map[projectName] = 1;
+									key2 = true;
+								} else {
+									key2 = false;
+								}
+								if (key2) {
+									$.ajax({
+										url : 'rest/project/queryItem',
+										dataType : 'json',
+										data : 'projectId='
+												+ projectId,
+										success : function(data) {
+											$(data).each(function(index,val) {
+												var label = "<li><a class='J_menuItem' name='"+ val.itemName+ "' href='rest/project/"+ val.itemValue+ "?projectId="+ val.projectId+ "&detectionTypeId="+ val.detectionTypeId+ "'><i>—</i><span class='nav-label'>"+ val.itemName+ "</span></a></li>";
+												$(projectName).append(label);
 											});
+										}
+									});
+								}
+							});
 						})
 	</script>
 

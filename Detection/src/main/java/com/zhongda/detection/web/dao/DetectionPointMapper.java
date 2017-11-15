@@ -94,4 +94,16 @@ public interface DetectionPointMapper {
 			@Param(value = "projectId") Integer projectId,
 			@Param(value = "detectionTypeId") Integer detectionTypeId,
 			@Param(value = "currentTime") String currentTime);
+
+	/**
+	 * 查询每天最大值最小值传给K线图
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	List<DetectionPoint> selectKlineGraphData(
+			@Param(value = "projectId") Integer projectId,
+			@Param(value = "detectionTypeId") Integer detectionTypeId);
+
 }

@@ -41,6 +41,38 @@
 	    <result column="smu_status" jdbcType="INTEGER" property="smuStatus" />
     </collection>
   </resultMap>
+  <resultMap id="KDataMap" type="com.zhongda.detection.web.model.DetectionPoint">
+  	<id column="detection_point_id" jdbcType="INTEGER" property="detectionPointId" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="detection_type_id" jdbcType="INTEGER" property="detectionTypeId" />
+    <result column="detection_latitude" jdbcType="VARCHAR" property="detectionLatitude" />
+    <result column="detection_longitude" jdbcType="VARCHAR" property="detectionLongitude" />
+    <result column="detection_name" jdbcType="VARCHAR" property="detectionName" />
+    <result column="detection_description" jdbcType="VARCHAR" property="detectionDescription" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="item_value" jdbcType="VARCHAR" property="itemValue" />
+    <collection property="kGraphLaserDataList" javaType="java.util.List" ofType="com.zhongda.detection.web.model.KLineGraphLaserData">
+    	<result column="detection_ids" jdbcType="INTEGER" property="detectionids" />
+    	<result column="max_current_data" jdbcType="DOUBLE" property="maxCurrentdata" />
+    	<result column="max_total_laser_change" jdbcType="DOUBLE" property="maxTotalLaserChange" />
+    	<result column="max_current_laser_change" jdbcType="DOUBLE" property="maxCurrentLaserChange" />
+    	<result column="max_speed_change" jdbcType="DOUBLE" property="maxSpeedChange" />
+    	<result column="min_current_data" jdbcType="DOUBLE" property="minCurrentData" />
+    	<result column="min_total_laser_change" jdbcType="DOUBLE" property="minTotalLaserChangen" />
+    	<result column="min_current_laser_change" jdbcType="DOUBLE" property="minCurrentLaserChange" />
+    	<result column="min_speed_change" jdbcType="DOUBLE" property="minSpeedChange" />
+    	<result column="sensor_id" jdbcType="VARCHAR" property="sensorId" />
+    	<result column="current_times" jdbcType="TIMESTAMP" property="currentTimes" />
+    	<result column="begin_current_datas" jdbcType="DOUBLE" property="beginCurrentDatas" />
+    	<result column="begin_current_laser_changes" jdbcType="DOUBLE" property="beginCurrentLaserChange" />
+    	<result column="begin_total_laser_changes" jdbcType="DOUBLE" property="beginTotalLaerChanges" />
+    	<result column="begin_speed_changes" jdbcType="DOUBLE" property="beginSpeedChanges" />
+    	<result column="end_current_data" jdbcType="DOUBLE" property="endCurrentData" />
+    	<result column="end_current_laser_change" jdbcType="DOUBLE" property="endCurentLaerChangens" />
+    	<result column="end_total_laser_change" jdbcType="DOUBLE" property="endTotalLaserChangens" />
+    	<result column="end_speed_change" jdbcType="DOUBLE" property="endSpeedChange" />
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List">
     detection_point_id, project_id, detection_type_id, detection_latitude, detection_longitude, 
     detection_name, detection_description
@@ -100,6 +132,149 @@
 	dp.project_id = #{projectId,jdbcType=INTEGER}
 	AND dp.detection_type_id = #{detectionTypeId,jdbcType=INTEGER} and ld.current_times like concat(#{currentTime,jdbcType=VARCHAR},'%')
 	GROUP BY  dp.detection_name ASC, ld.current_times 
+  </select>
+  <select id="selectKlineGraphData" resultMap="KDataMap">
+  	SELECT
+	dpt.*,
+	data_total.*
+	FROM
+		detection_point dpt,
+		(
+			SELECT
+				max_and_min.*, begin_and_end.*
+			FROM
+				(
+					SELECT
+						begin_data.begin_id AS bl_id,
+						begin_data.begin_time AS bl_time,
+						begin_data.begin_current_data AS begin_current_datas,
+						begin_data.begin_current_laser_change AS begin_current_laser_changes,
+						begin_data.begin_total_laser_change AS begin_total_laser_changes,
+						begin_data.begin_speed_change AS begin_speed_changes,
+						last_data.last_current_data AS end_current_data,
+						last_data.last_current_laser_change AS end_current_laser_change,
+						last_data.last_total_laser_change AS end_total_laser_change,
+						last_data.last_speed_change AS end_speed_change
+					FROM
+						(
+							SELECT
+								ldd.sensor_id AS begin_id,
+								ldd.current_times AS begin_time,
+								ldd.current_data AS begin_current_data,
+								ldd.current_laser_change AS begin_current_laser_change,
+								ldd.total_laser_change AS begin_total_laser_change,
+								ldd.speed_change AS begin_speed_change
+							FROM
+								laser_data ldd,
+								(
+									SELECT
+										min(ld.id) AS begin_data_time
+									FROM
+										(
+											detection_point dp
+											LEFT JOIN sensor_info si ON dp.detection_point_id = si.detection_point_id
+										)
+									LEFT JOIN laser_data ld ON ld.sensor_id = si.sensor_id
+									WHERE
+										dp.project_id = #{projectId,jdbcType=INTEGER}
+									AND dp.detection_type_id = #{detectionTypeId,jdbcType=INTEGER}
+									GROUP BY
+										DATE_FORMAT(
+											ld.current_times,
+											'%y-%b-%d'
+										),
+										ld.sensor_id
+								) AS lsdt
+							WHERE
+								lsdt.begin_data_time = ldd.id
+							ORDER BY
+								ldd.sensor_id
+						) AS begin_data,
+						(
+							SELECT
+								ldd.sensor_id AS last_id,
+								ldd.current_times AS last_time,
+								ldd.current_data AS last_current_data,
+								ldd.current_laser_change AS last_current_laser_change,
+								ldd.total_laser_change AS last_total_laser_change,
+								ldd.speed_change AS last_speed_change
+							FROM
+								laser_data ldd,
+								(
+									SELECT
+										max(ld.id) AS last_data_time
+									FROM
+										(
+											detection_point dp
+											LEFT JOIN sensor_info si ON dp.detection_point_id = si.detection_point_id
+										)
+									LEFT JOIN laser_data ld ON ld.sensor_id = si.sensor_id
+									WHERE
+										dp.project_id = #{projectId,jdbcType=INTEGER}
+									AND dp.detection_type_id = #{detectionTypeId,jdbcType=INTEGER}
+									GROUP BY
+										DATE_FORMAT(
+											ld.current_times,
+											'%y-%b-%d'
+										),
+										ld.sensor_id
+								) AS lsdt
+							WHERE
+								lsdt.last_data_time = ldd.id
+							ORDER BY
+								ldd.sensor_id
+						) AS last_data
+					WHERE
+						begin_data.begin_id = last_data.last_id
+					AND DATE_FORMAT(
+						begin_data.begin_time,
+						'%y-%b-%d'
+					) = DATE_FORMAT(
+						last_data.last_time,
+						'%y-%b-%d'
+					)
+				) AS begin_and_end,
+				(
+					SELECT
+						dpp.detection_point_id AS detection_ids,
+						max(lddd.current_data) AS max_current_data,
+						max(lddd.total_laser_change) AS max_total_laser_change,
+						max(lddd.current_laser_change) AS max_current_laser_change,
+						max(lddd.speed_change) AS max_speed_change,
+						min(lddd.current_data) AS min_current_data,
+						min(lddd.total_laser_change) AS min_total_laser_change,
+						min(lddd.current_laser_change) AS min_current_laser_change,
+						min(lddd.speed_change) AS min_speed_change,
+						lddd.sensor_id,
+						lddd.current_times
+					FROM
+						(
+							detection_point dpp
+							LEFT JOIN sensor_info sii ON sii.detection_point_id = dpp.detection_point_id
+						)
+					LEFT JOIN laser_data lddd ON lddd.sensor_id = sii.sensor_id
+					WHERE
+						dpp.project_id = #{projectId,jdbcType=INTEGER}
+					AND dpp.detection_type_id = #{detectionTypeId,jdbcType=INTEGER}
+					GROUP BY
+						DATE_FORMAT(
+							lddd.current_times,
+							'%y-%b-%d'
+						),
+						lddd.sensor_id
+				) AS max_and_min
+			WHERE
+				max_and_min.sensor_id = begin_and_end.bl_id
+			AND DATE_FORMAT(
+				max_and_min.current_times,
+				'%y-%b-%d'
+			) = DATE_FORMAT(
+				begin_and_end.bl_time,
+				'%y-%b-%d'
+			)
+		) AS data_total
+	WHERE
+	data_total.detection_ids = dpt.detection_point_id ORDER BY data_total.current_times 
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from detection_point

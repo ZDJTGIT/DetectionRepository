@@ -42,7 +42,8 @@ public class ProjectServiceImpl implements ProjectService {
 				.selectProjectAndSysDicByUserId(userId);
 		Map<String, List<Project>> projectMap = new HashMap<String, List<Project>>();
 		for (Project project : projectList) {
-			String key = project.getSysDictionary().getItemName();
+			String key = project.getSysDictionary().getItemName() + ","
+					+ project.getSysDictionary().getItemValue();
 			List<Project> value = projectMap.get(key);
 			if (null == value) {
 				value = new ArrayList<Project>();

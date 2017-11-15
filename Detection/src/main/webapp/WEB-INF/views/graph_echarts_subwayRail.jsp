@@ -24,23 +24,15 @@
     <meta name="description" content="中大检测平台">
 
     <link rel="shortcut icon" href="favicon.ico">
-    <!-- Data Tables -->
-    <link href="assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-	<link href="assets/css/plugins/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
-	<link href="assets/css/plugins/datepicker/datepicker3.css" rel="stylesheet">
     <link href="assets/css/style.min.css" rel="stylesheet">
 	
 </head>
 
 <body class="gray-bg">
-	<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:999;width:100%;height:100%;display:none;">
-		<div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="assets/img/farmmap.jpg" />
-		</div>
-	</div>
-	<label style="display: none;" id="projectId">${projectId }</label>
-	<label style="display: none;" id="detectionTypeId">${detectionTypeId }</label>
+		<label style="display: none;" id="projectId">${projectId }</label>
+	<%-- <label style="display: none;" id="detectionTypeId">${detectionTypeId }</label> --%>
     <div class="wrapper wrapper-content animated fadeInRight">
-    	<div class="row">
+    	<!-- <div class="row">
     		<div class="col-sm-12">
                 <div class="ibox float-e-margins" id="small-chat1" style="width: 100%" >
                     <div class="ibox-content" style="background: rgba(255,255,255, 0.5);height: 65px;">
@@ -51,32 +43,17 @@
 								   	<input type="datetime" class="form-control" id="diapladata" style="ime-mode: disabled">
 	                            <button class="btn btn-primary " id="selectdispladata" type="button" style="margin-top: 5px;">&nbsp;查询</button>
 	                        	</div>
-	                            <div class="col-sm-1" style="margin-top: 12px;">
-	                            	<label for="startCreateTime"><a href="#实时数据">实时数据</a></label>
-	                            </div>
-	                            <div class="col-sm-1" style="margin-top: 12px;">
-	                            	<label for="startCreateTime"><a href="#累计变化量">累计变化量</a></label>
-	                            </div>
-	                            <div class="col-sm-1" style="margin-top: 12px;">
-	                            	<label for="startCreateTime"><a href="#变化速率">变化速率</a></label>
-	                            </div>
-	                            <div class="col-sm-1" style="margin-top: 12px;">
-	                            	<label for="startCreateTime"><a href="#单次变化量">单次变化量</a></label>
-	                            </div>
-	                            <div class="col-sm-1" style="margin-top: 12px;">
-	                            	<label for="startCreateTime"><a href="#数据信息">数据信息</a></label>
-	                            </div>
 	                        </div>
                         </form>
                     </div>
                 </div>
             </div>
-    	</div>
-   		 <div class="row">
+    	</div> -->
+   		<!--  <div class="row">
     		<div class="col-sm-12" style="height: 65px">
                 
                 </div>
-            </div>
+            </div> -->
             
         <div class="row">
 	        <div class="col-sm-12" id="实时数据">
@@ -126,11 +103,24 @@
                         <div class="echarts" id="echarts-grandtotal-chart" style="height: 360px"></div>
                     </div>
                 </div>
-            </div>
+            </div> 
+            <!-- <div class="col-sm-12" id="K线图">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title" style="text-align: center;">
+                        <h5>K线图</h5>
+                        <div class="btn-group" name="subway_detectionButtion">
+                         </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="echarts" id="echarts-klinedata-chart" style="height: 360px"></div>
+                    </div>
+                </div>
+            </div>  -->
         </div>
     </div>
     <script type="text/javascript">
-    	var laserRangMap = '${map}';
+    	var subwayrail = '${laserList}';
+    	/* var klinesubway='${kline}'; */
     </script>
     <script src="assets/js/jquery.min.js"></script>	
     <script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
@@ -145,9 +135,6 @@
 	        })
 			   
 	</script>
-	 <!-- Data Tables -->
-    <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
     
 	
     <!-- ECharts -->

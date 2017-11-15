@@ -26,6 +26,8 @@ public class DetectionPoint {
 
 	// 激光测距List
 	private List<LaserData> laserDataList;
+	// k线图List
+	private List<KLineGraphLaserData> kGraphLaserDataList;
 
 	public String getProjectName() {
 		return projectName;
@@ -119,10 +121,20 @@ public class DetectionPoint {
 		this.laserDataList = laserDataList;
 	}
 
+	public List<KLineGraphLaserData> getkGraphLaserDataList() {
+		return kGraphLaserDataList;
+	}
+
+	public void setkGraphLaserDataList(
+			List<KLineGraphLaserData> kGraphLaserDataList) {
+		this.kGraphLaserDataList = kGraphLaserDataList;
+	}
+
 	@Override
 	public String toString() {
-		return "DetectionPoint [detectionName=" + detectionName
-				+ ", laserDataList=" + laserDataList + "]";
+		return "DetectionPoint [detectionPointId=" + detectionPointId
+				+ ", detectionName=" + detectionName + ", kGraphLaserDataList="
+				+ kGraphLaserDataList + "]";
 	}
 
 }
