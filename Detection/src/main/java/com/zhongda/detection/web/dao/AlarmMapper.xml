@@ -60,7 +60,7 @@
   <select id="selectAlarmAndLinkmanPeriod" resultMap="WithLinkmanResultMap">
 	select a.*, al.*, sds.item_name 'detection_type', sd.item_name 'alarm_type'
     from alarm a, alarm_linkman al, detection_point dp, sys_dictionary sd, sys_dictionary sds
-	where a.create_time &gt;= date_sub(now(), INTERVAL 100 MINUTE) and a.create_time &lt; now()
+	where a.create_time &gt;= date_sub(now(), INTERVAL 10 MINUTE) and a.create_time &lt; now()
 	and a.project_id = al.project_id
 	and a.alarm_type_id = sd.dic_id
 	and a.detection_id = dp.detection_point_id
