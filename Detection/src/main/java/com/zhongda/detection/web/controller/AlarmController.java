@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,8 +48,14 @@ public class AlarmController {
 	private AlarmLinkmanService alarmLinkmanService;
 
 	@RequestMapping("/alarmList")
-	public String messageList() {
+	public String alarmList() {
 		// 进入告警列表页
+		return "alarmList";
+	}
+	
+	@RequestMapping("/alarmList/{alarmId}")
+	public String alarmSingle(@PathVariable("alarmId") String alarmId, Model model) {
+		model.addAttribute("alarmId", alarmId);
 		return "alarmList";
 	}
 
@@ -76,11 +83,11 @@ public class AlarmController {
 	}
 	
 	/**
-	 * 展示项目下所有测点
+	 * 展示项目下所有告警信息
 	 */
 	@RequestMapping(value = "/showProjectAlarm", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> showProjectAlarm(@RequestBody Project project,HttpServletRequest request){
+	public Map<String, Object> showProjectAlarm(@RequestBody Project project){
 		//根据查询条件分页查询告警信息
 		List<Alarm> AlarmList = alarmService.selectAlarmWithAlarmCount(project);
 		PageInfo<Alarm> AlarmPageInfo = new PageInfo<Alarm>(AlarmList);
@@ -91,12 +98,4 @@ public class AlarmController {
 		return AlarmMap;
 	}
 	
-	/**
-	 * 展示项目下所有测点
-	 *//*
-	@RequestMapping(value = "/showProjectAlarm", method = RequestMethod.POST)
-	@ResponseBody
-	public List<Alarm> showProjectAlarm(Integer projectId){
-		return alarmService.selectAlarmByProjectId(projectId);
-	}*/
 }

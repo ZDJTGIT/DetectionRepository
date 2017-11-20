@@ -165,43 +165,64 @@
 								</shiro:hasPermission>
 							</ul></li>
 					</shiro:hasPermission>
-					<li><a href="javascript:;"> <i class="fa fa fa-user"></i>
-							<span class="nav-label">个人资料</span> <span class="fa arrow"></span>
-					</a>
+					<li>
+						<a href="javascript:;"><i class="fa fa fa-user"></i>
+							<span class="nav-label">个人资料</span><span class="fa arrow"></span>
+						</a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/user" name="个人资料">个人资料</a></li>
-						</ul></li>
-
+							<li>
+								<a class="J_menuItem" href="rest/user" name="个人资料">个人资料</a>
+							</li>
+						</ul>
+					</li>
 					<shiro:hasAnyRoles name="superAdmin, admin">
-						<li><a href="javascript:;"><i class="fa fa-table"></i> <span
-								class="nav-label">用户管理</span><span class="fa arrow"></span></a>
+						<li>
+							<a href="javascript:;"><i class="fa fa-table"></i>
+								<span class="nav-label">用户管理</span><span class="fa arrow"></span>
+							</a>
 							<ul class="nav nav-second-level">
-								<li><a class="J_menuItem" href="rest/user/userList"
-									name="用户信息">用户信息 <span
-										class="label label-danger pull-right">管理员可见</span>
-								</a></li>
-								<li><a class="J_menuItem"
-									href="rest/alarm/selectalarm_linkman" name="告警联系人">告警联系人 <span
-										class="label label-danger pull-right">管理员可见</span>
-								</a></li>
-								<li><a class="J_menuItem" href="rest/table_data_tables"
-									name="详细检验数据展示分析">详细检验数据展示分析</a></li>
-								<li><a class="J_menuItem" href="rest/table_foo_table"
-									name="操作日志">操作日志</a></li>
-								<li><a class="J_menuItem" href="rest/table_bootstrap"
-									name="其他">其他</a></li>
-							</ul></li>
+								<li>
+									<a class="J_menuItem" href="rest/user/userList" name="用户信息">用户信息</a>
+								</li>								
+								<li>
+									<a class="J_menuItem" href="rest/table_data_tables" name="详细检验数据展示分析">详细检验数据展示分析</a>
+								</li>
+								<li>
+									<a class="J_menuItem" href="rest/table_foo_table" name="操作日志">操作日志</a>
+								</li>
+								<li>
+									<a class="J_menuItem" href="rest/table_bootstrap" name="其他">其他</a>
+								</li>
+							</ul>
+						</li>
 					</shiro:hasAnyRoles>
-
-					<li><a href="javascript:;"><i class="fa fa-tasks"></i> <span
-							class="nav-label">项目管理</span><span class="fa arrow"></span></a>
+					<li>
+						<a href="javascript:;">
+							<i class="fa fa-tasks"></i>
+							<span class="nav-label">项目管理</span><span class="fa arrow"></span>
+						</a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/projects" name="项目">项目</a></li>
-							
-						</ul></li>
-					<!-- <li><a class="J_menuItem" href="rest/table_jqgrid" name="告警信息"><i
-							class="fa fa-bell"></i> <span class="nav-label">告警信息</span></a></li>
- -->
+							<li><a class="J_menuItem" href="rest/projects" name="项目">项目</a></li>							
+						</ul>
+					</li>
+					<li>
+						<a href="javascript:;"><i class="fa fa-bell"></i>
+							<span class="nav-label">告警管理</span><span class="fa arrow"></span>
+						</a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a class="J_menuItem" href="rest/alarm/alarmList" name="告警信息列表">告警信息列表</a>
+							</li>
+							<shiro:hasAnyRoles name="superAdmin, admin">
+								<li>
+									<a class="J_menuItem" href="rest/alarm/selectalarm_linkman" name="告警联系人">告警联系人 </a>
+								</li>
+							</shiro:hasAnyRoles>								
+							<li>
+								<a class="J_menuItem" href="rest/table_foo_table" name="操作日志">操作日志</a>
+							</li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</nav>
@@ -258,7 +279,7 @@
 						</a>
 							<ul class="dropdown-menu dropdown-alerts">
 								<c:forEach items="${alarmList}" var="alarm">
-									<li><a class="J_menuItem" href="rest/table_jqgrid">
+									<li><a class="J_menuItem" name="告警管理" href="rest/alarm/alarmList/${alarm.alarmId}">
 											<div>
 												<i class="fa fa-envelope fa-fw"></i>${alarm.alarmContext} <span
 													class="pull-right text-muted small"><fmt:formatDate

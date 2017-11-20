@@ -51,7 +51,7 @@
 								<div class="row">
 							  		<div class="form-group col-md-3">
 							    		<label for="alarmId">&nbsp;&nbsp;&nbsp;告警ID:</label>
-							    		<input type="text" class="form-control" id="alarmId" name="alarmId" placeholder="告警ID">
+							    		<input type="text" class="form-control" id="alarmId" name="alarmId" value="${alarmId}" placeholder="告警ID">
 							  		</div>
 							  		<div class="form-group col-md-3">
 							    		<label for="projectId">所属项目:</label>
