@@ -172,33 +172,56 @@ public class ProjectController {
 		return hashMap;
 	}
 
+//	/**
+//	 * 地铁总表
+//	 * 
+//	 * @return
+//	 * @throws JsonProcessingException
+//	 */
+//	@RequestMapping(value = "/subwayRail")
+//	public String subwayRail(Integer projectId, Model model)
+//			throws JsonProcessingException {
+//		System.out.println("projectId:" + projectId);
+//		List<DetectionPoint> laserList = detectionPointService
+//				.selectLaserDataByCurrentTimes(projectId, 26, "2");
+//		// List<DetectionPoint> selectKlineGraphData = detectionPointService
+//		// .selectKlineGraphData(projectId, 26);// 每天最大值最小值
+//		// HashMap<Integer, DetectionPoint> hashMap = new HashMap<Integer,
+//		// DetectionPoint>();
+//		// for (DetectionPoint detectionPoint : selectKlineGraphData) {
+//		// hashMap.put(detectionPoint.getDetectionPointId(), detectionPoint);
+//		// }
+//		ObjectMapper mapper = new ObjectMapper();
+//		String laser = mapper.writeValueAsString(laserList);
+//		// String kline = mapper.writeValueAsString(hashMap);
+//		model.addAttribute("laserList", laser);
+//		// model.addAttribute("kline", kline);
+//		return "graph_echarts_subwayRail";
+//	}
+		
 	/**
-	 * 地铁总表
-	 * 
+	 * 进入地铁总表数据对比页面
 	 * @return
-	 * @throws JsonProcessingException
 	 */
-	@RequestMapping(value = "/subwayRail")
-	public String subwayRail(Integer projectId, Model model)
-			throws JsonProcessingException {
-		System.out.println("projectId:" + projectId);
-		List<DetectionPoint> laserList = detectionPointService
-				.selectLaserDataByCurrentTimes(projectId, 26, "2");
-		// List<DetectionPoint> selectKlineGraphData = detectionPointService
-		// .selectKlineGraphData(projectId, 26);// 每天最大值最小值
-		// HashMap<Integer, DetectionPoint> hashMap = new HashMap<Integer,
-		// DetectionPoint>();
-		// for (DetectionPoint detectionPoint : selectKlineGraphData) {
-		// hashMap.put(detectionPoint.getDetectionPointId(), detectionPoint);
-		// }
-		ObjectMapper mapper = new ObjectMapper();
-		String laser = mapper.writeValueAsString(laserList);
-		// String kline = mapper.writeValueAsString(hashMap);
-		model.addAttribute("laserList", laser);
-		// model.addAttribute("kline", kline);
+	@RequestMapping(value = "/subwayRail", method = RequestMethod.GET)
+	public String subwayRail(Integer projectId, Model model){
+		model.addAttribute("projectId", projectId);
 		return "graph_echarts_subwayRail";
 	}
-
+	
+	/**
+	 * 获取地铁总表数据
+	 * @return
+	 */
+	@RequestMapping(value = "/subwayRailComparison", method = RequestMethod.POST)
+	@ResponseBody
+	public List<DetectionPoint> subwayRailComparison(Integer projectId){
+		List<DetectionPoint> laserList = detectionPointService
+				.selectLaserDataByCurrentTimes(projectId, 26, "2");		
+		return laserList;
+	}
+	
+	
 	/**
 	 * 查询所有项目
 	 * 

@@ -141,7 +141,7 @@
 	RIGHT JOIN laser_data ld ON ld.sensor_id = si.sensor_id
 	WHERE
 	dp.project_id = #{projectId,jdbcType=INTEGER}
-	AND dp.detection_type_id = #{detectionTypeId,jdbcType=INTEGER} and ld.current_times like concat(#{currentTime,jdbcType=VARCHAR},'%')
+	AND dp.detection_type_id = #{detectionTypeId,jdbcType=INTEGER} and ld.current_times <!-- &gt;= date_sub(now(), INTERVAL 1 DAY) --> like concat(#{currentTime,jdbcType=VARCHAR},'%')
 	GROUP BY  dp.detection_name ASC, ld.current_times 
   </select>
   <select id="selectKlineGraphData" resultMap="KDataMap">

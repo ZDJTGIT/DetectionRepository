@@ -11,7 +11,6 @@ import javax.annotation.Resource;
 
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import com.zhongda.detection.core.utils.SimpleMailSender;
 import com.zhongda.detection.core.utils.sms.SmsContentTemplate;
@@ -20,7 +19,7 @@ import com.zhongda.detection.web.model.Alarm;
 import com.zhongda.detection.web.model.AlarmLinkman;
 import com.zhongda.detection.web.service.AlarmService;
 
-@Component
+//@Component
 public class PushAlarm {
 
 	// 存放所有登录用户信息

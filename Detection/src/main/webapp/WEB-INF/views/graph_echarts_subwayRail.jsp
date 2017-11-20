@@ -29,7 +29,7 @@
 </head>
 
 <body class="gray-bg">
-		<label style="display: none;" id="projectId">${projectId }</label>
+		<label style="display: none;" id="projectId">${projectId}</label>
 	<%-- <label style="display: none;" id="detectionTypeId">${detectionTypeId }</label> --%>
     <div class="wrapper wrapper-content animated fadeInRight">
     	<!-- <div class="row">
@@ -118,10 +118,10 @@
             </div>  -->
         </div>
     </div>
-    <script type="text/javascript">
+   <!--  <script type="text/javascript">
     	var subwayrail = '${laserList}';
     	/* var klinesubway='${kline}'; */
-    </script>
+    </script> -->
     <script src="assets/js/jquery.min.js"></script>	
     <script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/datepicker/bootstrap-datetimepicker.min.js" charset="utf-8"></script>

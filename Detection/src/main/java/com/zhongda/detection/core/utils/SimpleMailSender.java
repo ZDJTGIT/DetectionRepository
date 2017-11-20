@@ -109,10 +109,10 @@ public class SimpleMailSender {
     	// 初始化props
     	props.put("mail.smtp.auth", "true"); // 使用验证
     	props.put("mail.smtp.host", smtpHostName);
-    	props.put("mail.smtp.starttls.enable", "true");// 使用 STARTTLS安全连接
+    	//props.put("mail.smtp.starttls.enable", "true");// 使用 STARTTLS安全连接
     	props.put("mail.transport.protocol", "smtp");
-    	//props.put("mail.smtp.ssl.enable", "true");
-    	// props.put("mail.smtp.port", "465"); //google使用465或587端口
+    	props.put("mail.smtp.ssl.enable", "true");
+    	props.put("mail.smtp.port", "465"); //google使用465或587端口
     	// props.put("mail.debug", "true");
 
     	// 验证邮箱地址和密码
