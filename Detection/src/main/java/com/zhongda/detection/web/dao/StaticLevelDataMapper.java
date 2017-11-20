@@ -2,7 +2,7 @@ package com.zhongda.detection.web.dao;
 
 import com.zhongda.detection.web.model.StaticLevelData;
 
-public interface staticLevelDataMapper {
+public interface StaticLevelDataMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(StaticLevelData record);
