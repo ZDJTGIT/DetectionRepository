@@ -28,6 +28,8 @@ public class DetectionPoint {
 	private List<LaserData> laserDataList;
 	// k线图List
 	private List<KLineGraphLaserData> kGraphLaserDataList;
+	// 沉降
+	private List<StaticLevelData> staticLevelDataList;
 
 	public String getProjectName() {
 		return projectName;
@@ -130,11 +132,19 @@ public class DetectionPoint {
 		this.kGraphLaserDataList = kGraphLaserDataList;
 	}
 
+	public List<StaticLevelData> getStaticLevelDataList() {
+		return staticLevelDataList;
+	}
+
+	public void setStaticLevelDataList(List<StaticLevelData> staticLevelDataList) {
+		this.staticLevelDataList = staticLevelDataList;
+	}
+
 	@Override
 	public String toString() {
-		return "DetectionPoint [detectionPointId=" + detectionPointId
-				+ ", detectionName=" + detectionName + ", kGraphLaserDataList="
-				+ kGraphLaserDataList + "]";
+		return "DetectionPoint [detectionTypeId=" + detectionTypeId
+				+ ", detectionName=" + detectionName + ", staticLevelDataList="
+				+ staticLevelDataList + "]";
 	}
 
 }

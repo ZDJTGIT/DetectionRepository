@@ -96,7 +96,6 @@ public interface DetectionPointMapper {
 			@Param(value = "detectionTypeId") Integer detectionTypeId,
 			@Param(value = "currentTime") String currentTime);
 
-
 	/**
 	 * 查询每天最大值最小值传给K线图
 	 * 
@@ -108,7 +107,6 @@ public interface DetectionPointMapper {
 			@Param(value = "projectId") Integer projectId,
 			@Param(value = "detectionTypeId") Integer detectionTypeId);
 
-
 	/**
 	 * 根据查询条件查询出对应项目下测点
 	 * 
@@ -117,5 +115,18 @@ public interface DetectionPointMapper {
 	 * @return
 	 */
 	List<DetectionPoint> selectDetectionPointWithAlarmCount(Project project);
+
+	/**
+	 * 查询沉降数据
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param currentTime
+	 * @return
+	 */
+	List<DetectionPoint> selectStaticLevelByCurrentTimes(
+			@Param(value = "projectId") Integer projectId,
+			@Param(value = "detectionTypeId") Integer detectionTypeId,
+			@Param(value = "currentTime") String currentTime);
 
 }

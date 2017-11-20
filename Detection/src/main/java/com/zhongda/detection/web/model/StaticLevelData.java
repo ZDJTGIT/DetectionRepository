@@ -2,7 +2,7 @@ package com.zhongda.detection.web.model;
 
 import java.util.Date;
 
-public class staticLevelData {
+public class StaticLevelData {
     private Integer id;
 
     private String sensorId;

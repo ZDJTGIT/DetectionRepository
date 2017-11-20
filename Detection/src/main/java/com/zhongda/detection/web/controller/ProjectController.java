@@ -157,6 +157,7 @@ public class ProjectController {
 	@RequestMapping(value = "/selectlaserRanging")
 	public @ResponseBody Map<String, Object> selectlaserRanging(
 			String currentTime, Integer projectId, Integer detectionTypeId) {
+		System.out.println("------------------" + detectionTypeId);
 		List<DetectionPoint> laserList = detectionPointService
 				.selectLaserDataByCurrentTimes(projectId, detectionTypeId,
 						currentTime);
@@ -222,6 +223,45 @@ public class ProjectController {
 	}
 	
 	
+	/**
+	 * 沉降
+	 * 
+	 * @param model
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 * @throws JsonProcessingException
+	 */
+	@RequestMapping(value = "/staticLevel")
+	public String staticLevel(Model model, Integer projectId,
+			Integer detectionTypeId) throws JsonProcessingException {
+		System.out.println(detectionTypeId);
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String currentTime = simpleDateFormat.format(date);
+		List<DetectionPoint> laserList = detectionPointService
+				.selectStaticLevelByCurrentTimes(projectId, detectionTypeId,
+						currentTime);
+		List<Threshold> thresholdList = thresholdService
+				.selectByProjectIdAndDetectionTypeId(projectId, detectionTypeId);
+		HashMap<Integer, Threshold> hashMap2 = new HashMap<Integer, Threshold>();
+		for (Threshold threshold : thresholdList) {
+			hashMap2.put(threshold.getThresholdTypeId(), threshold);
+		}
+		Map<String, Object> hashMap = new HashMap<String, Object>();
+		Image image = imageService.selectImageByTwoId(projectId,
+				detectionTypeId);
+		hashMap.put("laser", laserList);
+		hashMap.put("threshold", hashMap2);
+		ObjectMapper mapper = new ObjectMapper();
+		String map = mapper.writeValueAsString(hashMap);
+		model.addAttribute("image", image);
+		model.addAttribute("map", map);
+		model.addAttribute("projectId", projectId);
+		model.addAttribute("detectionTypeId", detectionTypeId);
+		return "graph_echarts_staticLevel";
+	}
+
 	/**
 	 * 查询所有项目
 	 * 

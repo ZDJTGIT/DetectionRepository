@@ -84,10 +84,18 @@ public class DetectionPointServiceImpl implements DetectionPointService {
 				detectionTypeId);
 	}
 
-	public List<DetectionPoint> selectDetectionPointWithAlarmCount(Project project) {
+	public List<DetectionPoint> selectDetectionPointWithAlarmCount(
+			Project project) {
 		if (null != project.getPageNum() && null != project.getPageSize()) {
 			PageHelper.startPage(project.getPageNum(), project.getPageSize());
 		}
 		return detectionPointMapper.selectDetectionPointWithAlarmCount(project);
+	}
+
+	@Override
+	public List<DetectionPoint> selectStaticLevelByCurrentTimes(
+			Integer projectId, Integer detectionTypeId, String currentTime) {
+		return detectionPointMapper.selectStaticLevelByCurrentTimes(projectId,
+				detectionTypeId, currentTime);
 	}
 }

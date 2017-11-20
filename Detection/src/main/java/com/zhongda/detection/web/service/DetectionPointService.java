@@ -67,6 +67,17 @@ public interface DetectionPointService {
 			Integer detectionTypeId, String currentTime);
 
 	/**
+	 * 查询沉降数据
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param currentTime
+	 * @return
+	 */
+	List<DetectionPoint> selectStaticLevelByCurrentTimes(Integer projectId,
+			Integer detectionTypeId, String currentTime);
+
+	/**
 	 * 根据测点ID修改测点信息
 	 * 
 	 * @param record
@@ -103,7 +114,7 @@ public interface DetectionPointService {
 	 */
 	List<DetectionPoint> selectKlineGraphData(Integer projectId,
 			Integer detectionTypeId);
-	
+
 	/**
 	 * 根据查询条件查询出对应项目下测点
 	 * 

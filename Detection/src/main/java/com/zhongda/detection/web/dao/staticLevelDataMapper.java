@@ -1,17 +1,17 @@
 package com.zhongda.detection.web.dao;
 
-import com.zhongda.detection.web.model.staticLevelData;
+import com.zhongda.detection.web.model.StaticLevelData;
 
 public interface staticLevelDataMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(staticLevelData record);
+    int insert(StaticLevelData record);
 
-    int insertSelective(staticLevelData record);
+    int insertSelective(StaticLevelData record);
 
-    staticLevelData selectByPrimaryKey(Integer id);
+    StaticLevelData selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(staticLevelData record);
+    int updateByPrimaryKeySelective(StaticLevelData record);
 
-    int updateByPrimaryKey(staticLevelData record);
+    int updateByPrimaryKey(StaticLevelData record);
 }
