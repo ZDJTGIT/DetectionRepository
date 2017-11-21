@@ -85,14 +85,22 @@
     <result column="item_value" jdbcType="VARCHAR" property="itemValue" />
     <collection property="staticLevelDataList" javaType="java.util.List" ofType="com.zhongda.detection.web.model.StaticLevelData">
     	<id column="id" jdbcType="INTEGER" property="id" />
-	    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	    <result column="sensor_id" jdbcType="VARCHAR" property="sensorId" />
+	    <result column="first_time" jdbcType="TIMESTAMP" property="firstTime" />
+	    <result column="first_data" jdbcType="DOUBLE" property="firstData" />
+	    <result column="previous_time" jdbcType="TIMESTAMP" property="previousTime" />
+	    <result column="previous_data" jdbcType="DOUBLE" property="previousData" />
+	    <result column="current_times" jdbcType="TIMESTAMP" property="currentTimes" />
+	    <result column="current_data" jdbcType="DOUBLE" property="currentData" />
+	    <result column="current_temperature" jdbcType="DOUBLE" property="currentTemperature" />
+	    <result column="current_laser_change" jdbcType="DOUBLE" property="currentLaserChange" />
+	    <result column="total_laser_change" jdbcType="DOUBLE" property="totalLaserChange" />
+	    <result column="speed_change" jdbcType="DOUBLE" property="speedChange" />
+	    <result column="sensor_status" jdbcType="INTEGER" property="sensorStatus" />
 	    <result column="create_type" jdbcType="VARCHAR" property="createType" />
 	    <result column="smu_cms_id" jdbcType="VARCHAR" property="smuCmsId" />
 	    <result column="smu_cms_channel" jdbcType="VARCHAR" property="smuCmsChannel" />
-	    <result column="sensor_id" jdbcType="VARCHAR" property="sensorId" />
-	    <result column="sensor_status" jdbcType="INTEGER" property="sensorStatus" />
-	    <result column="sensor_value" jdbcType="DOUBLE" property="sensorValue" />
-	    <result column="sensor_temperature" jdbcType="DOUBLE" property="sensorTemperature" />
+	    <result column="smu_status" jdbcType="INTEGER" property="smuStatus" />
     </collection>
   </resultMap>
   <sql id="Base_Column_List">
@@ -119,8 +127,7 @@
     where project_id = (select project_id from project where project_name = '${_parameter.param1}') 
     and detection_name like '%${_parameter.param2}%'
   </select>
-  
-   <select id="selectDetectionPointWithAlarmCount" parameterType="com.zhongda.detection.web.model.Project" resultMap="BaseResultMap"> 
+  <select id="selectDetectionPointWithAlarmCount" parameterType="com.zhongda.detection.web.model.Project" resultMap="BaseResultMap"> 
      select
      dp.*, sd.item_name 'item_name'
      from detection_point dp, sys_dictionary sd
@@ -129,7 +136,6 @@
      and dp.detection_type_id = sd.dic_id
      order by dp.detection_point_id desc
   </select>
-  
   <select id="selectByProjectIDAndDetectionName" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -163,10 +169,10 @@
 	RIGHT JOIN laser_data ld ON ld.sensor_id = si.sensor_id
 	WHERE
 	dp.project_id = #{projectId,jdbcType=INTEGER}
-	AND dp.detection_type_id = #{detectionTypeId,jdbcType=INTEGER} and ld.current_times <!-- &gt;= date_sub(now(), INTERVAL 1 DAY) --> like concat(#{currentTime,jdbcType=VARCHAR},'%')
+	AND dp.detection_type_id = #{detectionTypeId,jdbcType=INTEGER} and ld.current_times  like concat(#{currentTime,jdbcType=VARCHAR},'%')
 	GROUP BY  dp.detection_name ASC, ld.current_times 
   </select>
-   <select id="selectStaticLevelByCurrentTimes" resultMap="DetectionPointMap">
+   <select id="selectStaticLevelByCurrentTimes" resultMap="StaticLevelMap">
   	SELECT
 	dp.*, sld.*
 	FROM

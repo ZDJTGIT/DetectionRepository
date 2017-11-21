@@ -49,8 +49,8 @@
                         	<div class="row">
                         		<div class="col-sm-3">
 	                                <label for="startCreateTime">选择日期:</label>
-								   	<input type="datetime" class="form-control" id="diapladata" style="ime-mode: disabled">
-	                            <button class="btn btn-primary " id="selectdispladata" type="button" style="margin-top: 5px;">&nbsp;查询</button>
+								   	<input type="datetime" class="form-control" id="diapladata" style="ime-mode: disabled" value="${currentTime }">
+	                            <button class="btn btn-primary " id="selectstaticleveldata" type="button" style="margin-top: 5px;">&nbsp;查询</button>
 	                        	</div>
 	                            <div class="col-sm-1" style="margin-top: 12px;">
 	                            	<label for="startCreateTime"><a href="#热点图片">热点图片</a></label>
@@ -180,7 +180,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title" style="text-align: center;">
                         <h5>实时数据</h5>
-                        <div class="btn-group" name="laserRanging_detectionButtion">
+                        <div class="btn-group" >
                          </div>
                     </div>
                     <div class="ibox-content">
@@ -192,7 +192,7 @@
                 <div class="ibox float-e-margins" >
                     <div class="ibox-title" style="text-align: center;">
                         <h5>累计变化量</h5>
-                         <div class="btn-group" name="laserRanging_detectionButtion">
+                         <div class="btn-group" >
                          </div>
                     </div>
                     <div class="ibox-content" >
@@ -204,7 +204,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title" style="text-align: center;">
                         <h5>变化速率</h5>
-                        <div class="btn-group" name="laserRanging_detectionButtion">
+                        <div class="btn-group">
                          </div>
                     </div>
                     <div class="ibox-content">
@@ -216,7 +216,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title" style="text-align: center;">
                         <h5>单次变化量</h5>
-                        <div class="btn-group" name="laserRanging_detectionButtion">
+                        <div class="btn-group" >
                          </div>
                     </div>
                     <div class="ibox-content">
@@ -232,7 +232,7 @@
 						<div class="row" >
 							<div class="col-sm-11">
 								<h5>数据信息</h5>
-								<div class="btn-group" name="laserRanging_detectionButtion">
+								<div class="btn-group" name="staticlevel_detectionButtion">
                         		 </div>
 							</div>
 							<div class="col-sm-1">
@@ -244,7 +244,7 @@
 						</div>
 					</div>
 					 <div class="ibox-content">
-                        <table class="table table-striped table-bordered table-hover display" id="editable"  cellspacing="0" width="100%"> 
+                        <table class="table table-striped table-bordered table-hover display" id="statictable"  cellspacing="0" width="100%"> 
                             <thead>
                                 <tr>
                                 	<td>测点名称</td>
@@ -259,6 +259,7 @@
 									<td>变化速率(MM/DAY)</td>
 									<td>终端编号(DTU)</td>
 									<td>采集器通道</td>
+									<td>温度(℃)</td>
 								</tr>
                             </thead>
                         </table>
@@ -268,9 +269,6 @@
 			</div>
 		</div> 
     </div>
-    <script type="text/javascript">
-    	var laserRangMap = '${map}';
-    </script>
     <script src="assets/js/jquery.min.js"></script>	
     <script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/datepicker/bootstrap-datetimepicker.min.js" charset="utf-8"></script>
@@ -301,7 +299,7 @@
     <script src="assets/js/content.js"></script>
 
     <!-- ECharts demo data -->
-     <script src="assets/js/laserRanging.js"></script>
+     <script src="assets/js/staticLevel.js"></script>
      <script src="assets/js/plugins/jeditable/jquery.jeditable.js"></script>
    
 </body>

@@ -23,7 +23,7 @@ $("#selectdispladata").click(function(){
 });
 
 		
-$("body").on('click','.btn-primary',function(){
+$("[name='laserRanging_detectionButtion']").on('click','.buttondetection',function(){
 	var parent = $(this).parent().prev().text();
 	var dName = $(this).html();
 	var id = $(this).attr("name");
@@ -246,7 +246,7 @@ function echartloading(map,oTabel){
 		$("[name='laserRanging_detectionButtion']").empty(); 
 		$(data).each(function(index,value){
 			detectionIdMap[value.detectionPointId]=value.laserDataList;
-			var lable = "<button class='btn btn-primary' name='"+value.detectionPointId+"' type='button'>"+value.detectionName+"</button>"
+			var lable = "<button class='btn btn-primary buttondetection' name='"+value.detectionPointId+"' type='button'>"+value.detectionName+"</button>"
 			$("[name='laserRanging_detectionButtion']").append(lable);
 		});
 		

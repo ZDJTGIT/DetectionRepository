@@ -11,14 +11,14 @@ $(function(){
   		singleChart.showLoading();
   		displacementChart.showLoading();
   		
-  		displacementChart.on("dataZoom", function(param){
-  			console.log(param);
-  			console.log(param.zoom.start);
-  			console.log(param.zoom.end);
-  			var lastData = [];
-  			var axisData = new Date('2017-11-18');
-  			lastData.push(axisData);
-  			lastData.push(3333);
+//  		displacementChart.on("dataZoom", function(param){
+//  			console.log(param);
+//  			console.log(param.zoom.start);
+//  			console.log(param.zoom.end);
+//  			var lastData = [];
+//  			var axisData = new Date('2017-11-18');
+//  			lastData.push(axisData);
+//  			lastData.push(3333);
   			// 动态数据接口 addData
 //  			displacementChart.addData([
 //  		        [
@@ -29,7 +29,8 @@ $(function(){
 //  		           // axisData  // 坐标轴标签
 //  		        ]
 //  		    ]);
-	    });	  				
+  			
+//	    });	  				
   		
 		$.ajax({
 			type:'post',

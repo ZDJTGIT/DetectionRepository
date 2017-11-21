@@ -173,56 +173,57 @@ public class ProjectController {
 		return hashMap;
 	}
 
-//	/**
-//	 * 地铁总表
-//	 * 
-//	 * @return
-//	 * @throws JsonProcessingException
-//	 */
-//	@RequestMapping(value = "/subwayRail")
-//	public String subwayRail(Integer projectId, Model model)
-//			throws JsonProcessingException {
-//		System.out.println("projectId:" + projectId);
-//		List<DetectionPoint> laserList = detectionPointService
-//				.selectLaserDataByCurrentTimes(projectId, 26, "2");
-//		// List<DetectionPoint> selectKlineGraphData = detectionPointService
-//		// .selectKlineGraphData(projectId, 26);// 每天最大值最小值
-//		// HashMap<Integer, DetectionPoint> hashMap = new HashMap<Integer,
-//		// DetectionPoint>();
-//		// for (DetectionPoint detectionPoint : selectKlineGraphData) {
-//		// hashMap.put(detectionPoint.getDetectionPointId(), detectionPoint);
-//		// }
-//		ObjectMapper mapper = new ObjectMapper();
-//		String laser = mapper.writeValueAsString(laserList);
-//		// String kline = mapper.writeValueAsString(hashMap);
-//		model.addAttribute("laserList", laser);
-//		// model.addAttribute("kline", kline);
-//		return "graph_echarts_subwayRail";
-//	}
-		
+	// /**
+	// * 地铁总表
+	// *
+	// * @return
+	// * @throws JsonProcessingException
+	// */
+	// @RequestMapping(value = "/subwayRail")
+	// public String subwayRail(Integer projectId, Model model)
+	// throws JsonProcessingException {
+	// System.out.println("projectId:" + projectId);
+	// List<DetectionPoint> laserList = detectionPointService
+	// .selectLaserDataByCurrentTimes(projectId, 26, "2");
+	// // List<DetectionPoint> selectKlineGraphData = detectionPointService
+	// // .selectKlineGraphData(projectId, 26);// 每天最大值最小值
+	// // HashMap<Integer, DetectionPoint> hashMap = new HashMap<Integer,
+	// // DetectionPoint>();
+	// // for (DetectionPoint detectionPoint : selectKlineGraphData) {
+	// // hashMap.put(detectionPoint.getDetectionPointId(), detectionPoint);
+	// // }
+	// ObjectMapper mapper = new ObjectMapper();
+	// String laser = mapper.writeValueAsString(laserList);
+	// // String kline = mapper.writeValueAsString(hashMap);
+	// model.addAttribute("laserList", laser);
+	// // model.addAttribute("kline", kline);
+	// return "graph_echarts_subwayRail";
+	// }
+
 	/**
 	 * 进入地铁总表数据对比页面
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/subwayRail", method = RequestMethod.GET)
-	public String subwayRail(Integer projectId, Model model){
+	public String subwayRail(Integer projectId, Model model) {
 		model.addAttribute("projectId", projectId);
 		return "graph_echarts_subwayRail";
 	}
-	
+
 	/**
 	 * 获取地铁总表数据
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/subwayRailComparison", method = RequestMethod.POST)
 	@ResponseBody
-	public List<DetectionPoint> subwayRailComparison(Integer projectId){
+	public List<DetectionPoint> subwayRailComparison(Integer projectId) {
 		List<DetectionPoint> laserList = detectionPointService
-				.selectLaserDataByCurrentTimes(projectId, 26, "2");		
+				.selectLaserDataByCurrentTimes(projectId, 26, "2");
 		return laserList;
 	}
-	
-	
+
 	/**
 	 * 沉降
 	 * 
@@ -234,32 +235,44 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/staticLevel")
 	public String staticLevel(Model model, Integer projectId,
-			Integer detectionTypeId) throws JsonProcessingException {
+			Integer detectionTypeId) {
 		System.out.println(detectionTypeId);
 		Date date = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String currentTime = simpleDateFormat.format(date);
-		List<DetectionPoint> laserList = detectionPointService
-				.selectStaticLevelByCurrentTimes(projectId, detectionTypeId,
-						currentTime);
-		List<Threshold> thresholdList = thresholdService
-				.selectByProjectIdAndDetectionTypeId(projectId, detectionTypeId);
-		HashMap<Integer, Threshold> hashMap2 = new HashMap<Integer, Threshold>();
-		for (Threshold threshold : thresholdList) {
-			hashMap2.put(threshold.getThresholdTypeId(), threshold);
-		}
-		Map<String, Object> hashMap = new HashMap<String, Object>();
-		Image image = imageService.selectImageByTwoId(projectId,
-				detectionTypeId);
-		hashMap.put("laser", laserList);
-		hashMap.put("threshold", hashMap2);
-		ObjectMapper mapper = new ObjectMapper();
-		String map = mapper.writeValueAsString(hashMap);
-		model.addAttribute("image", image);
-		model.addAttribute("map", map);
+		String format = simpleDateFormat.format(date);
+		model.addAttribute("currentTime", format);
 		model.addAttribute("projectId", projectId);
 		model.addAttribute("detectionTypeId", detectionTypeId);
+		// List<DetectionPoint> laserList = detectionPointService
+		// .selectStaticLevelByCurrentTimes(projectId, detectionTypeId,
+		// currentTime);
+		// List<Threshold> thresholdList = thresholdService
+		// .selectByProjectIdAndDetectionTypeId(projectId, detectionTypeId);
+		// HashMap<Integer, Threshold> hashMap2 = new HashMap<Integer,
+		// Threshold>();
+		// for (Threshold threshold : thresholdList) {
+		// hashMap2.put(threshold.getThresholdTypeId(), threshold);
+		// }
+		// Map<String, Object> hashMap = new HashMap<String, Object>();
+		// Image image = imageService.selectImageByTwoId(projectId,
+		// detectionTypeId);
+		// hashMap.put("laser", laserList);
+		// hashMap.put("threshold", hashMap2);
+		// ObjectMapper mapper = new ObjectMapper();
+		// String map = mapper.writeValueAsString(hashMap);
+		// model.addAttribute("image", image);
 		return "graph_echarts_staticLevel";
+	}
+
+	@RequestMapping(value = "/staticLevelMonitor")
+	public @ResponseBody List<DetectionPoint> staticLevelMonitor(
+			Integer projectId, Integer detectionTypeId, String currentTime) {
+		System.out.println("projectId:" + projectId + "detectionTypeId:"
+				+ detectionTypeId + "currentTime:" + currentTime);
+		List<DetectionPoint> staticList = detectionPointService
+				.selectStaticLevelByCurrentTimes(projectId, detectionTypeId,
+						currentTime);
+		return staticList;
 	}
 
 	/**
