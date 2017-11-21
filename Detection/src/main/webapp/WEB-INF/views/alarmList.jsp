@@ -111,12 +111,13 @@
 							      <th>告警ID</th>
 							      <th>所属项目</th>
 							      <th>所在测点</th>
-							      <th>采集器（终端）编号</th>
+							      <th>采集终端编号</th>
 							      <th>传感器编号</th>
 							      <th>告警类型</th>
 							      <th>告警内容</th>
 							      <th>产生时间</th>
 							      <th>告警状态</th>
+							      <th>操作</th>
 							    </tr>
 							</thead>
 							<tbody></tbody>
@@ -170,6 +171,29 @@
 		        	  content: $(this) //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
 		        	});
 	        });
+	        
+	        //点击修改告警消息状态
+	        $('#alarmTable').on('click','.confirmClick',function(e){
+	        	e.preventDefault();
+	        	var clickObj = $(this);
+	        	$.ajax({
+					type : 'post',
+					url : 'rest/alarm/alarmConfirm',
+					dataType : 'json',
+					data : {alarmId:clickObj.parent().parent().find('td:eq(1)').text()},
+					success : function(res) {
+						console.log(res);
+						if (res.code == 0) {
+							clickObj.parent().prev().text("已确认");						
+						} else {
+							alert(res.msg);
+						}
+					},
+					error : function() {
+						alert("发送请求异常");
+					}
+				});
+	        });
 
 	       (function(){
 				//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
@@ -188,7 +212,7 @@
 								if (data) {
 									var htmlData = '';
 									$.each(data.alarmList,function(idx,item){
-										htmlData +='<tr><td style="text-align:center"><input type="checkbox"></td><td>'+item.alarmId+'</td><td>'+item.projectName+'</td><td>'+item.detectionId+'</td><td>'+item.smuCmsId+'</td><td>'+item.sensorId+'</td><td>'+item.alarmType+'</td><td class="layerOpen">'+item.alarmContext+'</td><td>'+item.createTime+'</td><td>'+item.alarmStatus+'</td></tr>'
+										htmlData +='<tr><td style="text-align:center"><input type="checkbox"></td><td>'+item.alarmId+'</td><td>'+item.projectName+'</td><td>'+item.detectionId+'</td><td>'+item.smuCmsId+'</td><td>'+item.sensorId+'</td><td>'+item.alarmType+'</td><td class="layerOpen">'+item.alarmContext+'</td><td>'+item.createTime+'</td><td>'+item.alarmStatus+'</td><td><a class="confirmClick">点击确认</a></td></tr>'
 									});
 									$("#alarmTable tbody").html(htmlData);
 									if(loadLaypage){ //如果该参数有值
@@ -204,6 +228,8 @@
 				                    layer.close(loading);
 								} else {
 									alert("数据异常");
+									//加载完成后隐藏loading提示
+				                    layer.close(loading);
 								}
 							},
 							error : function() {

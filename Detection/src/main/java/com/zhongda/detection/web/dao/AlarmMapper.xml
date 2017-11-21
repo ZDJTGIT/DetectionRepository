@@ -81,8 +81,7 @@
    where a.project_Id = #{projectId,jdbcType=INTEGER}
    and a.alarm_type_id = sd.dic_id
    and a.detection_id = dp.detection_point_id
-  </select>
-  
+  </select>  
    <select id="selectAlarmWithAlarmCount" parameterType="com.zhongda.detection.web.model.Project" resultMap="BaseResultMap"> 
      select
       a.*, sd.item_name 'alarm_type', dp.detection_name 'detection_name'
@@ -91,8 +90,7 @@
       and a.alarm_type_id = sd.dic_id
       and a.detection_id = dp.detection_point_id
      order by a.create_time desc
-  </select>
-  
+  </select>  
   <select id="selectPageAlarmByUserIdAndOtherInfo" parameterType="com.zhongda.detection.web.model.Alarm" resultMap="BaseResultMap">
 	select
     a.*, sd_type.item_name 'alarm_type', sd_status.item_name 'alarm_status'
@@ -238,7 +236,12 @@
         #{frequency,jdbcType=INTEGER},
       </if>
     </trim>
-  </insert>
+  </insert> 
+   <update id="updateAlarmStatus" parameterType="java.lang.Integer">
+    update alarm
+    set status = 19     
+    where alarm_id = #{alarmId,jdbcType=INTEGER}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.zhongda.detection.web.model.Alarm">
     update alarm
     <set>

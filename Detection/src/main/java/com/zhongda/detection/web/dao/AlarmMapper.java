@@ -53,4 +53,11 @@ public interface AlarmMapper {
 	 * @return
 	 */
 	List<Alarm> selectAlarmWithAlarmCount(Project project);
+	
+	/**
+	 * 修改对应的告警消息状态为确认状态
+	 * @param alarmId 告警消息Id
+	 * @return
+	 */
+	int updateAlarmStatus(Integer alarmId);
 }

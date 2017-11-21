@@ -10,6 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.zhongda.detection.web.dao.AlarmMapper;
 import com.zhongda.detection.web.model.Alarm;
 import com.zhongda.detection.web.model.Project;
+import com.zhongda.detection.web.model.Result;
 import com.zhongda.detection.web.service.AlarmService;
 
 /**
@@ -49,5 +50,19 @@ public class AlarmServiceImpl implements AlarmService{
 			PageHelper.startPage(project.getPageNum(), project.getPageSize());
 		}
 		return alarmMapper.selectAlarmWithAlarmCount(project);
+	}
+
+	@Override
+	public Result updateAlarmStatus(Integer alarmId) {
+		int index = alarmMapper.updateAlarmStatus(alarmId);
+		Result result = new Result();
+		if(index > 0){
+			result.setCode(Result.SUCCESS);
+			result.setMsg("修改状态成功");
+		}else{
+			result.setCode(Result.FAILURE);
+			result.setMsg("修改状态失败");
+		}
+		return result;
 	}
 }

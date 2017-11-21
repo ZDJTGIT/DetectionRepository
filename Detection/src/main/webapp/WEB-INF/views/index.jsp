@@ -345,7 +345,7 @@
 			</div>
 			<div class="footer">
 				<div class="pull-right">
-					&copy; 2017 <a href="http://www.hnzdjc.com" target="_blank">ZDJT</a>
+					&copy; 2017 <a href="http://www.hnzdjc.com" target="_blank">ZDJC</a>
 				</div>
 			</div>
 		</div>

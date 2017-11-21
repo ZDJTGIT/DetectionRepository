@@ -22,6 +22,7 @@ import com.github.pagehelper.PageInfo;
 import com.zhongda.detection.web.model.Alarm;
 import com.zhongda.detection.web.model.AlarmLinkman;
 import com.zhongda.detection.web.model.Project;
+import com.zhongda.detection.web.model.Result;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.service.AlarmLinkmanService;
 import com.zhongda.detection.web.service.AlarmService;
@@ -96,6 +97,18 @@ public class AlarmController {
 		AlarmMap.put("AlarmList", AlarmList);
 		//通过项目ID查询到所有告警信息
 		return AlarmMap;
+	}
+	
+	/**
+	 * 修改告警消息状态为确认状态
+	 * @param alarmId
+	 * @return
+	 */
+	@RequestMapping("/alarmConfirm")
+	@ResponseBody
+	public Result alarmConfirm(Integer alarmId) {
+		Result result = alarmService.updateAlarmStatus(alarmId);
+		return result;
 	}
 	
 }

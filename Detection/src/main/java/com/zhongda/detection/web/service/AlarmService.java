@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.zhongda.detection.web.model.Alarm;
 import com.zhongda.detection.web.model.Project;
+import com.zhongda.detection.web.model.Result;
 
 /**
  * <p>告警 业务 接口</p>
@@ -48,4 +49,11 @@ public interface AlarmService {
 	 * @return
 	 */
 	List<Alarm> selectAlarmWithAlarmCount(Project project);
+	
+	/**
+	 * 修改对应的告警消息状态为确认状态
+	 * @param alarmId 告警消息Id
+	 * @return
+	 */
+	Result updateAlarmStatus(Integer alarmId);
 }
