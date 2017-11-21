@@ -126,35 +126,44 @@ public interface ProjectService {
 
 	/**
 	 * 查项目下测点数量
+	 * 
 	 * @param projectId
 	 * @return
 	 */
 	Project selectDetectionCount(Integer projectId);
+
 	/**
 	 * 查项目下传感器数量
+	 * 
 	 * @param projectId
 	 * @return
 	 */
 	Project selectSensorInfoCount(Integer projectId);
+
 	/**
 	 * 查项目下阀值数量
+	 * 
 	 * @param projectId
 	 * @return
 	 */
 	Project selectThresholdCount(Integer projectId);
+
 	/**
 	 * 查项目下图片记录数量
+	 * 
 	 * @param projectId
 	 * @return
 	 */
 	Project selectImageCount(Integer projectId);
+
 	/**
 	 * 查项目下报警信息数量
+	 * 
 	 * @param projectId
 	 * @return
 	 */
 	Project selectAlarmCount(Integer projectId);
-	
+
 	/**
 	 * 查询属于用户的项目
 	 * 
@@ -163,4 +172,11 @@ public interface ProjectService {
 	 * @return
 	 */
 	List<Project> selectUsersProjectWithAlarmCount(Project project);
+
+	/**
+	 * 查询所有项目
+	 * 
+	 * @return
+	 */
+	Map<String, List<Project>> selectAllProjects();
 }

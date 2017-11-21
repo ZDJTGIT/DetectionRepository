@@ -91,6 +91,11 @@ public class ProjectController {
 
 	@RequestMapping(value = "/myproject")
 	public @ResponseBody Map<String, List<Project>> queryProject(Integer userId) {
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			return projectService.selectAllProjects();
+		}
 		return projectService.selectProjectAndSysDicByUserId(userId);
 	}
 
@@ -240,27 +245,12 @@ public class ProjectController {
 		Date date = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String format = simpleDateFormat.format(date);
+		Image image = imageService.selectImageByTwoId(projectId,
+				detectionTypeId);
+		model.addAttribute("image", image);
 		model.addAttribute("currentTime", format);
 		model.addAttribute("projectId", projectId);
 		model.addAttribute("detectionTypeId", detectionTypeId);
-		// List<DetectionPoint> laserList = detectionPointService
-		// .selectStaticLevelByCurrentTimes(projectId, detectionTypeId,
-		// currentTime);
-		// List<Threshold> thresholdList = thresholdService
-		// .selectByProjectIdAndDetectionTypeId(projectId, detectionTypeId);
-		// HashMap<Integer, Threshold> hashMap2 = new HashMap<Integer,
-		// Threshold>();
-		// for (Threshold threshold : thresholdList) {
-		// hashMap2.put(threshold.getThresholdTypeId(), threshold);
-		// }
-		// Map<String, Object> hashMap = new HashMap<String, Object>();
-		// Image image = imageService.selectImageByTwoId(projectId,
-		// detectionTypeId);
-		// hashMap.put("laser", laserList);
-		// hashMap.put("threshold", hashMap2);
-		// ObjectMapper mapper = new ObjectMapper();
-		// String map = mapper.writeValueAsString(hashMap);
-		// model.addAttribute("image", image);
 		return "graph_echarts_staticLevel";
 	}
 

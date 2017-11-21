@@ -56,6 +56,13 @@
     where p.project_id = #{projectId,jdbcType=INTEGER}
     and p.project_status = sd.dic_id
   </select>
+  <select id="selectAllProjects" resultMap="BaseResultMap">
+  	select
+    p.*,sd.*,sds.item_name 'project_status_string'
+    from project p,sys_dictionary sd,sys_dictionary sds
+    where p.project_type_id = sd.dic_id
+    and p.project_status = sds.dic_id
+  </select>
   <select id="selectByProjectName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

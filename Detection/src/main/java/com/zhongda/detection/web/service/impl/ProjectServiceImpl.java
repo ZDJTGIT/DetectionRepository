@@ -55,6 +55,23 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 
 	@Override
+	public Map<String, List<Project>> selectAllProjects() {
+		List<Project> projectList = projectMapper.selectAllProjects();
+		Map<String, List<Project>> projectMap = new HashMap<String, List<Project>>();
+		for (Project project : projectList) {
+			String key = project.getSysDictionary().getItemName() + ","
+					+ project.getSysDictionary().getItemValue();
+			List<Project> value = projectMap.get(key);
+			if (null == value) {
+				value = new ArrayList<Project>();
+			}
+			value.add(project);
+			projectMap.put(key, value);
+		}
+		return projectMap;
+	}
+
+	@Override
 	public List<Project> selectProjectAndSysDicByUserIds(Integer userId) {
 		return projectMapper.selectProjectAndSysDicByUserId(userId);
 	}
