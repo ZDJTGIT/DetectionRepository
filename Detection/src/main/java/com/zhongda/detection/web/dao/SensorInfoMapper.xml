@@ -19,12 +19,18 @@
     from sensor_info
     where sensor_info_id = #{sensorInfoId,jdbcType=INTEGER}
   </select>
-  <select id="selectBySensorIdAndSensorType" resultMap="BaseResultMap">
+  <!-- <select id="selectBySensorIdAndSensorType" resultMap="BaseResultMap">
   	select
   	<include refid="Base_Column_List" />
     from sensor_info
     where sensor_id = #{0}
     and sensor_type = #{1}
+  </select> -->
+  <select id="selectBySensorIdAndSensorType" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+    from sensor_info
+    where sensor_id = #{0}
   </select>
   <select id="selectByDetectionPointId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
@@ -39,6 +45,13 @@
 	  where si.detection_point_id in (select detection_point_id 
 	  from detection_point where project_id = #{projectId,jdbcType=INTEGER})
 	  and si.detection_point_id=dp.detection_point_id
+  </select>
+  
+  <select id="selectSensorInfoBySensorInfoId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from sensor_info
+  	where sensor_info_id= #{sensorInfoId,jdbcType=INTEGER}
   </select>
   
   <select id="selectSensorInfoWithAlarmCount" parameterType="com.zhongda.detection.web.model.Project" resultMap="BaseResultMap"> 

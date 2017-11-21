@@ -76,4 +76,10 @@ public interface SensorInfoMapper {
 	 * @return
 	 */
     List<SensorInfo> selectSensorInfoWithAlarmCount(Project project);
+    
+    /**
+     * 根据传感器ID查唯一传感器
+     * @return
+     */
+    SensorInfo selectSensorInfoBySensorInfoId(Integer sensorInfoId);
 }

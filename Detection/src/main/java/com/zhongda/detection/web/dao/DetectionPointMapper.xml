@@ -127,7 +127,15 @@
     where project_id = (select project_id from project where project_name = '${_parameter.param1}') 
     and detection_name like '%${_parameter.param2}%'
   </select>
-  <select id="selectDetectionPointWithAlarmCount" parameterType="com.zhongda.detection.web.model.Project" resultMap="BaseResultMap"> 
+  
+  <select id="selectDetectionByDetectionPointId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from detection_point
+  	where detection_point_id = #{detectionPointId,jdbcType=INTEGER} 
+  </select>
+  
+   <select id="selectDetectionPointWithAlarmCount" parameterType="com.zhongda.detection.web.model.Project" resultMap="BaseResultMap"> 
      select
      dp.*, sd.item_name 'item_name'
      from detection_point dp, sys_dictionary sd

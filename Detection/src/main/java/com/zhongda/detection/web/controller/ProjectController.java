@@ -448,7 +448,9 @@ public class ProjectController {
 	}
 
 	/**
-	 * 查找数据库用户
+	 * 新建项目时查找数据库用户
+	 * @param userId
+	 * @return
 	 */
 	@RequestMapping(value = "/showUser", method = RequestMethod.POST)
 	@ResponseBody
@@ -457,7 +459,9 @@ public class ProjectController {
 	}
 
 	/**
-	 * 查找数据库项目类型
+	 * 新建项目时加载项目类型信息
+	 * @param userId
+	 * @return
 	 */
 	@RequestMapping(value = "/showProjectType", method = RequestMethod.POST)
 	@ResponseBody
@@ -466,26 +470,20 @@ public class ProjectController {
 	}
 
 	/**
-	 * 查找项目状态
+	 * 新建项目时加载项目状态
+	 * @param userId
+	 * @return
 	 */
-	@RequestMapping(value = "/showProjectStatus", method = RequestMethod.POST)
-	@ResponseBody
-	public List<SysDictionary> showProjectStatus(Integer userId) {
-		return sysDictionaryServce.selectSysDictionaryType_Status();
-	}
+//	@RequestMapping(value = "/showProjectStatus", method = RequestMethod.POST)
+//	@ResponseBody
+//	public List<SysDictionary> showProjectStatus(Integer userId) {
+//		return sysDictionaryServce.selectSysDictionaryType_Status();
+//	}
 
 	/**
-	 * 查找测点类型
-	 */
-	@RequestMapping(value = "/showDetectionStatus", method = RequestMethod.POST)
-	@ResponseBody
-	public List<SysDictionary> showDetectionStatus(Integer projectTypeId) {
-		return sysDictionaryServce
-				.selectSysDictionaryByProjectTypeId(projectTypeId);
-	}
-
-	/**
-	 * 查找数据库用户(编辑项目时)
+	 * 编辑项目加载用户，默认显示选中用户
+	 * @param userId
+	 * @return
 	 */
 	@RequestMapping(value = "/showUserType_selected", method = RequestMethod.POST)
 	@ResponseBody
@@ -495,6 +493,8 @@ public class ProjectController {
 
 	/**
 	 * 查找数据库项目类型（编辑项目时）
+	 * @param userId
+	 * @return
 	 */
 	@RequestMapping(value = "/showProjectType_selected", method = RequestMethod.POST)
 	@ResponseBody
@@ -516,6 +516,9 @@ public class ProjectController {
 
 	/**
 	 * 打开编辑项目时默认选中当前项目信息对应用户和项目类型
+	 * @param projectId
+	 * @param projectTypeId
+	 * @return
 	 */
 	@RequestMapping(value = "/showSelectUserAndProjectType", method = RequestMethod.POST)
 	@ResponseBody
@@ -530,6 +533,8 @@ public class ProjectController {
 
 	/**
 	 * 新建项目
+	 * @param project
+	 * @return
 	 */
 	@RequestMapping(value = "/addProject", method = RequestMethod.POST)
 	@ResponseBody
@@ -592,70 +597,9 @@ public class ProjectController {
 	}
 
 	/**
-	 * 新建测点
-	 */
-	@RequestMapping(value = "/addDescription", method = RequestMethod.POST)
-	@ResponseBody
-	public DetectionPoint addDescription(
-			@RequestBody DetectionPoint detectionPoint) {
-		Subject subject = SecurityUtils.getSubject();
-		if (subject.hasRole(RoleSign.ADMIN)
-				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
-			// 根据项目名查项目ID加到测点
-			detectionPoint.setProjectId((projectService
-					.selectByProjectName(detectionPoint.getProjectName()))
-					.getProjectId());
-			detectionPointService.insertSelective(detectionPoint);
-			// 根据项目ID+测点名称查出插入的测点得到测点ID
-			detectionPoint = detectionPointService
-					.selectByProjectIDAndDetectionName(
-							detectionPoint.getProjectId(),
-							detectionPoint.getDetectionName());
-			// 得到测点类型名称（itemName）
-			detectionPoint.setItemName(sysDictionaryServce
-					.selectProjectStatusByDicId((detectionPoint
-							.getDetectionTypeId())));
-			return detectionPoint;
-		} else {
-			return null;
-		}
-	}
-
-	/**
-	 * 修改阀值
-	 */
-	@RequestMapping(value = "/updetaThreshold", method = RequestMethod.POST)
-	@ResponseBody
-	public Threshold updetaThreshold(@RequestBody Threshold threshold) {
-		Subject subject = SecurityUtils.getSubject();
-		if (subject.hasRole(RoleSign.ADMIN)
-				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
-			// 查询修改后的的阀值记录是否已存在
-			Threshold selectedThreshold = thresholdService
-					.selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
-							threshold.getProjectId(),
-							threshold.getDetectionTypeId(),
-							threshold.getThresholdTypeId());
-			if (selectedThreshold == null
-					|| selectedThreshold.getThresholdId() == threshold
-							.getThresholdId()) {
-				Project project = projectService.selectByPrimaryKey(threshold
-						.getProjectId());
-				threshold.setUserId(project.getUserId());
-				threshold.setProjectTypeId(project.getProjectTypeId());
-				thresholdService.updateByPrimaryKeySelective(threshold);
-				return threshold;
-			} else {
-				threshold.setThresholdId(0);
-				return threshold;
-			}
-		} else {
-			return null;
-		}
-	}
-
-	/**
 	 * 修改项目
+	 * @param project
+	 * @return
 	 */
 	@RequestMapping(value = "/selectProject", method = RequestMethod.POST)
 	@ResponseBody
@@ -701,6 +645,8 @@ public class ProjectController {
 
 	/**
 	 * 删除用户项目
+	 * @param projectId
+	 * @return
 	 */
 	@RequestMapping(value = "/deleteProject", method = RequestMethod.POST)
 	@ResponseBody
@@ -759,7 +705,8 @@ public class ProjectController {
 		return project;
 	}
 
-	// 校验
+//校验==>
+ 
 
 	/**
 	 * 验证项目名是否唯一(添加验证)

@@ -274,8 +274,11 @@ $('#form_updetaDetection').validate({
 			    	DetectionName_updetaDetection: function() {
 			            return $("#DetectionName_updetaDetection").val();
 			        },
-			        ProjectName_uppdetaDetection: function() {
-				        return $("#ProjectName_uppdetaDetection").val();
+			        ProjectName_updetaDetection: function() {
+				        return $("#ProjectName_updetaDetection").val();
+			        },
+			        DetectionPointId_updetaDetection:function() {
+				        return $("#DetectionPointId_updetaDetection").val();
 			        }
 			    }
 			}
@@ -478,6 +481,9 @@ $('#form_updetaSensorInfo').validate({
 				        },
 				        sensorType_updetaSensorInfo: function() {
 						    return $("#sensorType_updetaSensorInfo").val();
+						},
+						sensorInfoId_updetaSensorInfo: function() {
+						    return $("#sensorInfoId_updetaSensorInfo").val();
 						}
 				    }
 				}

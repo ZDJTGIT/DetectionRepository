@@ -153,8 +153,7 @@
 							    
 							    <input class="md_input" type="text" style="display:none" id="DetectionPointId_updetaDetection" name="DetectionPointId_updetaDetection">
 							    
-							    <label class="md_lable" style="display:none" for="ProjectName_updetaDetection">项目名称:</label>
-								<input class="md_input" style="display:none" type="text" id="ProjectName_uppdetaDetection" name="ProjectName_uppdetaDetection"><br><br>
+								<input class="md_input" style="display:none" type="text" id="ProjectName_updetaDetection" name="ProjectName_updetaDetection"><br><br>
 							    
 								<label class="md_lable" for="DetectionName_updetaDetection">测点名称:</label>
 								<input class="md_input" type="text" id="DetectionName_updetaDetection" name="DetectionName_updetaDetection"><br><br>

@@ -56,7 +56,7 @@ public interface SensorInfoService {
     int updateByPrimaryKeySelective(SensorInfo record);
     
     /**
-     * 根据传感器编号查询传感器
+     * 根据传感器编号查询传感器==>类型无作用暂时
      * @param sensorId
      * @return
      */
@@ -77,4 +77,10 @@ public interface SensorInfoService {
 	 * @return
 	 */
     List<SensorInfo> selectSensorInfoWithAlarmCount(Project project);
+    
+    /**
+     * 根据传感器ID查唯一传感器
+     * @return
+     */
+    SensorInfo selectSensorInfoBySensorInfoId(Integer sensorInfoId);
 }

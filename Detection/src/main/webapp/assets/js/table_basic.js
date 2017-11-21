@@ -242,11 +242,11 @@ table_basic_datatable = $('#mytable').dataTable({
 										+ "</td><td>"+ data.linkman
 										+ "</td><td>"+ data.createTime
 										+ "</td><td>"
-										+ "<a href='javascript:;' class='selectRow' onclick='selectRow(this)' data-toggle='modal' data-target='#myModal_modifyuser'><b>修改用户</b></a> "
-										+ "<a href='javascript:;' class='deteteRow' onclick='deleteRow(this)'><b>删除用户</b></a>"
+										+ "<a href='javascript:;' class='selectRow' onclick='selectRow(this)' data-toggle='modal' data-target='#myModal_modifyuser'><b>修改</b></a> "
+										+ "<a href='javascript:;' class='deteteRow' onclick='deleteRow(this)'><b>删除</b></a>"
 										+ "</td><td>"+ data.status
                             			+ "</td><td>"
-                            			+ "<a href='javascript:;' class='changStatus' onclick='changStatus(this)'><b>切换状态</b></a>"
+                            			+ "<a href='javascript:;' class='changStatus' onclick='changStatus(this)'><b>切换</b></a>"
 										+ "</td></tr>";
 								layer.msg('添加成功（该提示1s后自动关闭）', {
 									time : 1000, //1s后自动关闭

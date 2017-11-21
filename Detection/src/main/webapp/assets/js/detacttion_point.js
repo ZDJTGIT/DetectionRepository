@@ -26,7 +26,7 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 						+ detectionDescription + '"}';
 	$.ajax({
 		   type:'post',
-		   url: 'rest/project/addDescription',
+		   url: 'rest/detectionPoint/addDescription',
 		   contentType:"application/json",
 		   dataType : 'json',
 		   data: jsonData,
@@ -96,7 +96,7 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 		   			}
 		   		},
 		   	  	error: function(){
-				    alert("抱歉！您为非管理员用户，删除测点请联系对应管理员！");
+				    alert("抱歉！您为非管理员用户，添加测点请联系对应管理员！");
 			    }
 		   }); 	
 	});
@@ -118,7 +118,7 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 		$('#DetectionLongitude_updetaDetection').val(detectionLongitude);
 		$('#DetectionLatitude_updetaDetection').val(detectionLatitude);
 		$('#DetectionPointId_updetaDetection').val(detectionPointId);
-		
+		$('#ProjectName_updetaDetection').val(projectName);
 		//默认选中当前测点的测点类型
 		$.ajax({
 	   		  type:'post',
@@ -185,7 +185,7 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 								      }
 								},
 							error: function(){
-							    alert("抱歉！您为非管理员用户，删除测点请联系对应管理员！");
+							    alert("抱歉！您为非管理员用户，修改测点请联系对应管理员！");
 						    }
 				}); 	
 	});
@@ -294,7 +294,7 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 			//加载添加弹出层的测点类型选项(公用新建当前项目下所有类型测点)
 			$.ajax({
 		    	type:'post',
-			  	  url: 'rest/project/showDetectionStatus',
+			  	  url: 'rest/detectionPoint/showDetectionStatus',
 			  	  data: {projectTypeId:projectTypeId},
 			  	  contextType:"application/json",
 			  	  success: function(data){
@@ -315,8 +315,7 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 					    alert("数据加载失败");
 				      }
 		     });
-			
-			//打开测点页面加载所属项目下的所有测点
+			  //打开测点页面加载所属项目下的所有测点
 			  $.ajax({
 		    		  type:'post',
 		    	  	  url: 'rest/detectionPoint/showProjectDetectionPoint',

@@ -32,6 +32,9 @@ public class SensorInfoController {
 
 	/**
 	 * 展示项目下所有传感器
+	 * @param project
+	 * @param request
+	 * @return
 	 */
 	@RequestMapping(value = "/showProjectSensorInfo", method = RequestMethod.POST)
 	@ResponseBody
@@ -46,17 +49,21 @@ public class SensorInfoController {
 		return sensorInfoMap;
 	}
 	
-	/**
-	 * 展示项目下所有传感器
-	 *//*
-	@RequestMapping(value = "/showProjectSensorInfo", method = RequestMethod.POST)
-	@ResponseBody
-	public List<SensorInfo> showProjectSensorInfo(Integer projectId) {
-		return sensorInfoService.selectByProjectId(projectId);
-	}*/
+//	/**
+//	 * 展示项目下所有传感器
+//	 * @param projectId
+//	 * @return
+//	 */
+//	@RequestMapping(value = "/showProjectSensorInfo", method = RequestMethod.POST)
+//	@ResponseBody
+//	public List<SensorInfo> showProjectSensorInfo(Integer projectId) {
+//		return sensorInfoService.selectByProjectId(projectId);
+//	}
 	
 	/**
 	 * 展示测点下所有传感器
+	 * @param detectionPointId
+	 * @return
 	 */
 	@RequestMapping(value = "/showDetectionPointSensorInfo", method = RequestMethod.POST)
 	@ResponseBody
@@ -67,6 +74,8 @@ public class SensorInfoController {
 
 	/**
 	 * 添加一个传感器
+	 * @param sensorInfo
+	 * @return
 	 */
 	@RequestMapping(value = "/addSensorInfo", method = RequestMethod.POST)
 	@ResponseBody
@@ -83,6 +92,8 @@ public class SensorInfoController {
 
 	/**
 	 * 删除一个传感器
+	 * @param sensorInfoId
+	 * @return
 	 */
 	@RequestMapping(value = "/deleteSensorInfo", method = RequestMethod.POST)
 	@ResponseBody
@@ -101,12 +112,12 @@ public class SensorInfoController {
 
 	/**
 	 * 修改传感器信息
+	 * @param sensorInfo
+	 * @return
 	 */
 	@RequestMapping(value = "/updetaSensorInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public SensorInfo updetaSensorInfo(@RequestBody SensorInfo sensorInfo) {
-		System.out.println("adasdasdasdsaddas------------"
-				+ sensorInfo.getSensorId());
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
@@ -119,9 +130,13 @@ public class SensorInfoController {
 		}
 	}
 	
-//校验
+//校验==>
+	
 	/**
 	 * 验证传感器ID是否唯一(添加验证)
+	 * @param sensorId_addSensorInfo
+	 * @param sensorType_addSensorInfo
+	 * @param response
 	 */
 	@RequestMapping(value = "/OnlysensorInfoId", method = RequestMethod.POST)
 	public void OnlyProjectName(Integer sensorId_addSensorInfo,String sensorType_addSensorInfo, HttpServletResponse response) {
@@ -138,10 +153,22 @@ public class SensorInfoController {
 	}
 	
 	/**
-	 * 验证传感器ID是否唯一(添加验证)
+	 * 验证传感器ID是否唯一(修改验证)
+	 * @param sensorId_updetaSensorInfo
+	 * @param sensorType_updetaSensorInfo
+	 * @param response
 	 */
 	@RequestMapping(value = "/upOnlysensorInfoId", method = RequestMethod.POST)
-	public void upOnlyProjectName(Integer sensorId_updetaSensorInfo, String sensorType_updetaSensorInfo, HttpServletResponse response) {
+	public void upOnlyProjectName(Integer sensorId_updetaSensorInfo, String sensorType_updetaSensorInfo,
+			Integer sensorInfoId_updetaSensorInfo, HttpServletResponse response) {
+		SensorInfo sensorInfoLL = sensorInfoService.selectSensorInfoBySensorInfoId(sensorInfoId_updetaSensorInfo);
+		if(sensorInfoLL.getSensorId().equals(sensorId_updetaSensorInfo)){
+			try {
+				response.getWriter().print(true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
 		SensorInfo sensorInfo = sensorInfoService.selectBySensorIdAndSensorType(sensorId_updetaSensorInfo, sensorType_updetaSensorInfo);
 		try {
 			if (sensorInfo == null) {
@@ -151,6 +178,7 @@ public class SensorInfoController {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
 		}
 	}
 

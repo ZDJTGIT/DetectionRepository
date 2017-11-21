@@ -67,4 +67,9 @@ public class SensorInfoServiceImpl implements SensorInfoService {
 		return sensorInfoMapper.selectSensorInfoWithAlarmCount(project);
 	}
 
+	@Override
+	public SensorInfo selectSensorInfoBySensorInfoId(Integer sensorInfoId) {
+		return sensorInfoMapper.selectSensorInfoBySensorInfoId(sensorInfoId);
+	}
+
 }

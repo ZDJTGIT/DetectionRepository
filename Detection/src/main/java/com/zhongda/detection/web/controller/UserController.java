@@ -198,6 +198,7 @@ public class UserController {
 
 	/**
 	 * 基于角色 标识的权限控制案例
+	 * @return
 	 */
 	@RequestMapping(value = "/admin")
 	@ResponseBody
@@ -208,6 +209,7 @@ public class UserController {
 
 	/**
 	 * 基于权限标识的权限控制案例
+	 * @return
 	 */
 	@RequestMapping(value = "/create")
 	@ResponseBody
@@ -218,6 +220,8 @@ public class UserController {
 
 	/**
 	 * 验证账号唯一
+	 * @param username
+	 * @return
 	 */
 	@ApiOperation(value = " 验证账号唯一", httpMethod = "POST", notes = " 验证账号唯一")
 	@RequestMapping(value = "/checkUsername", method = RequestMethod.POST)
@@ -235,6 +239,8 @@ public class UserController {
 
 	/**
 	 * 验证邮箱唯一
+	 * @param email
+	 * @return
 	 */
 	@RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
 	@ResponseBody
@@ -252,6 +258,11 @@ public class UserController {
 
 	/**
 	 * 根据邮箱修改密码
+	 * @param user
+	 * @param result
+	 * @param model
+	 * @param reques
+	 * @return
 	 */
 	@RequestMapping(value = "/forgetPassword", method = RequestMethod.POST)
 	public String forgetPassword(@Valid User user, BindingResult result,
@@ -270,6 +281,11 @@ public class UserController {
 
 	/**
 	 * 跳到changPassword页面
+	 * @param user
+	 * @param result
+	 * @param model
+	 * @param request
+	 * @return
 	 */
 	@RequestMapping(value = "/cp", method = RequestMethod.GET)
 	public String cp(@Valid User user, BindingResult result, Model model,
@@ -287,6 +303,11 @@ public class UserController {
 
 	/**
 	 * 修改密码
+	 * @param user
+	 * @param result
+	 * @param model
+	 * @param reques
+	 * @return
 	 */
 	@RequestMapping(value = "/changPassword", method = RequestMethod.POST)
 	public String changPassword(@Valid User user, BindingResult result,
@@ -303,6 +324,9 @@ public class UserController {
 
 	/**
 	 * 显示所有用户
+	 * @param request
+	 * @param model
+	 * @return
 	 */
 	@ApiOperation(value = "显示所有用户", httpMethod = "POST", notes = "显示所有用户")
 	@RequestMapping(value = "/userList")
@@ -320,6 +344,9 @@ public class UserController {
 
 	/**
 	 * 根据用户名查找用户
+	 * @param user
+	 * @param model
+	 * @return
 	 */
 	@RequestMapping(value = "/findUser")
 	public String findUser(User user, Model model) {
@@ -334,7 +361,9 @@ public class UserController {
 	}
 
 	/**
-	 * 输入用户信息添加用户
+	 * 输入用户信息添加用户(初始密码：123456，初始状态：正常)
+	 * @param user
+	 * @return
 	 */
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	@ResponseBody
@@ -353,6 +382,8 @@ public class UserController {
 
 	/**
 	 * 根据当前选中的用户名删除用户
+	 * @param user
+	 * @return
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
@@ -366,6 +397,8 @@ public class UserController {
 
 	/**
 	 * 查找展示添加用户时的用户权限
+	 * @param userId
+	 * @return
 	 */
 	@RequestMapping(value = "/showUserRole", method = RequestMethod.POST)
 	@ResponseBody
@@ -374,9 +407,11 @@ public class UserController {
 		return roleInfos;
 	}
 
-	// showSelectUserRole
 	/**
 	 * 查找展示添加用户时的用户权限
+	 * @param userId
+	 * @param userName
+	 * @return
 	 */
 	@RequestMapping(value = "/showSelectUserRole", method = RequestMethod.POST)
 	@ResponseBody
@@ -460,163 +495,12 @@ public class UserController {
 		return user;
 	}
 
-	/**
-	 * 验证用户名是否唯一(添加验证)
-	 */
-	@RequestMapping(value = "/OnlyUserName", method = RequestMethod.POST)
-	public void OnlyUserName(String userName, HttpServletResponse response) {
-		User user = userService.selectByUsername(userName);
-		try {
-			if (user == null) {
-				response.getWriter().print(true);
-			} else {
-				response.getWriter().print(false);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 验证手机号码是否唯一(添加验证)
-	 */
-	@RequestMapping(value = "/OnlyPhone", method = RequestMethod.POST)
-	public void Onlyphone(String phone, HttpServletResponse response) {
-		User user = userService.selectByPhone(phone);
-		try {
-			if (user == null) {
-				response.getWriter().print(true);
-			} else {
-				response.getWriter().print(false);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 验证电子邮件是否唯一(添加验证)
-	 */
-	@RequestMapping(value = "/OnlyEmail", method = RequestMethod.POST)
-	public void Onlyemail(String email, HttpServletResponse response) {
-		User user = userService.selectByEmail(email);
-		try {
-			if (user == null) {
-				response.getWriter().print(true);
-			} else {
-				response.getWriter().print(false);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 验证用户名是否唯一(修改验证)
-	 */
-	@RequestMapping(value = "/mdOnlyUserName", method = RequestMethod.POST)
-	public void mdOnlyUserName(String userName, Integer userId,
-			HttpServletResponse response) {
-		if (userName.equals(userService.selectByPrimaryKey(userId)
-				.getUserName())) {
-			try {
-				response.getWriter().print(true);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			User user = userService.selectByUsername(userName);
-			try {
-				if (user == null) {
-					response.getWriter().print(true);
-				} else {
-					response.getWriter().print(false);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	/**
-	 * 验证手机号码是否唯一(修改验证)
-	 */
-	@RequestMapping(value = "/mdOnlyPhone", method = RequestMethod.POST)
-	public void mdOnlyPhone(String mdphone, Integer userId,
-			HttpServletResponse response) {
-		if (mdphone.equals(userService.selectByPrimaryKey(userId).getPhone())) {
-			try {
-				response.getWriter().print(true);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			User user = userService.selectByPhone(mdphone);
-			try {
-				if (user == null) {
-					response.getWriter().print(true);
-				} else {
-					response.getWriter().print(false);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	/**
-	 * 验证电子邮箱是否唯一(修改验证)
-	 */
-	@RequestMapping(value = "/mdOnlyEmail", method = RequestMethod.POST)
-	public void mdOnlyEmail(String mdemail, Integer userId,
-			HttpServletResponse response) {
-		if (mdemail.equals(userService.selectByPrimaryKey(userId).getEmail())) {
-			try {
-				response.getWriter().print(true);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			User user = userService.selectByEmail(mdemail);
-			try {
-				if (user == null) {
-					response.getWriter().print(true);
-				} else {
-					response.getWriter().print(false);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	/**
-	 * 验证原密码输入
-	 */
-	@RequestMapping(value = "/OnlyPassword", method = RequestMethod.POST)
-	public void OnlyPassword(String password, Integer userId,
-			HttpServletResponse response) {
-		String sqlpassword = userService.selectByPrimaryKey(userId)
-				.getPassword();
-		String username = userService.selectByPrimaryKey(userId).getUserName();
-		String cryptedPwd = new Md5Hash(password, username, 1024).toString();
-		if (cryptedPwd.equals(sqlpassword)) {
-			try {
-				response.getWriter().print(true);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			try {
-				response.getWriter().print(false);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
+	
 	/**
 	 * 用户修改用户信息
+	 * @param user
+	 * @param request
+	 * @return
 	 */
 	@RequestMapping(value = "/updataUser", method = RequestMethod.POST)
 	@ResponseBody
@@ -647,6 +531,8 @@ public class UserController {
 
 	/**
 	 * 查找用户权限
+	 * @param userId
+	 * @return
 	 */
 	@RequestMapping(value = "/selectUserRole", method = RequestMethod.POST)
 	@ResponseBody
@@ -661,23 +547,9 @@ public class UserController {
 
 	/**
 	 * 查找用户所属项目
-	 *//*
-	@RequestMapping(value = "/selectUserproject", method = RequestMethod.POST)
-	@ResponseBody
-	public List<Project> selectUserproject(Integer userId) {
-		List<Project> projectList=null;
-		Subject subject = SecurityUtils.getSubject();
-		if (subject.hasRole(RoleSign.ADMIN)
-				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
-			projectList=projectService.selectAllProject();
-		} else {
-			projectList = projectService.selectProjectAndSysDicByUserIds(userId);
-		}
-		return projectList;
-	}*/
-	
-	/**
-	 * 查找用户所属项目
+	 * @param project
+	 * @param request
+	 * @return
 	 */
 	@RequestMapping(value = "/selectUserproject", method = RequestMethod.POST)
 	@ResponseBody
@@ -701,6 +573,9 @@ public class UserController {
 
 	/**
 	 * 关键词查找用户（用户名，电话，邮箱，公司，联系人，用户表按时间排序）
+	 * @param keyword
+	 * @param userId
+	 * @return
 	 */
 	@RequestMapping(value = "/keywordSearch", method = RequestMethod.POST)
 	@ResponseBody
@@ -711,6 +586,9 @@ public class UserController {
 	
 	/**
 	 * 更改用户状态
+	 * @param userId
+	 * @param status
+	 * @return
 	 */
 	@RequestMapping(value = "/changUserStatus", method = RequestMethod.POST)
 	@ResponseBody
@@ -724,9 +602,189 @@ public class UserController {
 		userService.updateByPrimaryKeySelective(user);
 		return user;
 	}
+	
+//校验==>
+	
+	/**
+	 * 验证用户名是否唯一(添加验证)
+	 * @param userName
+	 * @param response
+	 */
+	@RequestMapping(value = "/OnlyUserName", method = RequestMethod.POST)
+	public void OnlyUserName(String userName, HttpServletResponse response) {
+		User user = userService.selectByUsername(userName);
+		try {
+			if (user == null) {
+				response.getWriter().print(true);
+			} else {
+				response.getWriter().print(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
+	 * 验证手机号码是否唯一(添加验证)
+	 * @param phone
+	 * @param response
+	 */
+	@RequestMapping(value = "/OnlyPhone", method = RequestMethod.POST)
+	public void Onlyphone(String phone, HttpServletResponse response) {
+		User user = userService.selectByPhone(phone);
+		try {
+			if (user == null) {
+				response.getWriter().print(true);
+			} else {
+				response.getWriter().print(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 验证电子邮件是否唯一(添加验证)
+	 * @param email
+	 * @param response
+	 */
+	@RequestMapping(value = "/OnlyEmail", method = RequestMethod.POST)
+	public void Onlyemail(String email, HttpServletResponse response) {
+		User user = userService.selectByEmail(email);
+		try {
+			if (user == null) {
+				response.getWriter().print(true);
+			} else {
+				response.getWriter().print(false);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 验证用户名是否唯一(修改验证)
+	 * @param userName
+	 * @param userId
+	 * @param response
+	 */
+	@RequestMapping(value = "/mdOnlyUserName", method = RequestMethod.POST)
+	public void mdOnlyUserName(String userName, Integer userId,
+			HttpServletResponse response) {
+		if (userName.equals(userService.selectByPrimaryKey(userId)
+				.getUserName())) {
+			try {
+				response.getWriter().print(true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			User user = userService.selectByUsername(userName);
+			try {
+				if (user == null) {
+					response.getWriter().print(true);
+				} else {
+					response.getWriter().print(false);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * 验证手机号码是否唯一(修改验证)
+	 * @param mdphone
+	 * @param userId
+	 * @param response
+	 */
+	@RequestMapping(value = "/mdOnlyPhone", method = RequestMethod.POST)
+	public void mdOnlyPhone(String mdphone, Integer userId,
+			HttpServletResponse response) {
+		if (mdphone.equals(userService.selectByPrimaryKey(userId).getPhone())) {
+			try {
+				response.getWriter().print(true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			User user = userService.selectByPhone(mdphone);
+			try {
+				if (user == null) {
+					response.getWriter().print(true);
+				} else {
+					response.getWriter().print(false);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * 验证电子邮箱是否唯一(修改验证)
+	 * @param mdemail
+	 * @param userId
+	 * @param response
+	 */
+	@RequestMapping(value = "/mdOnlyEmail", method = RequestMethod.POST)
+	public void mdOnlyEmail(String mdemail, Integer userId,
+			HttpServletResponse response) {
+		if (mdemail.equals(userService.selectByPrimaryKey(userId).getEmail())) {
+			try {
+				response.getWriter().print(true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			User user = userService.selectByEmail(mdemail);
+			try {
+				if (user == null) {
+					response.getWriter().print(true);
+				} else {
+					response.getWriter().print(false);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * 验证原密码输入
+	 * @param password
+	 * @param userId
+	 * @param response
+	 */
+	@RequestMapping(value = "/OnlyPassword", method = RequestMethod.POST)
+	public void OnlyPassword(String password, Integer userId,
+			HttpServletResponse response) {
+		String sqlpassword = userService.selectByPrimaryKey(userId)
+				.getPassword();
+		String username = userService.selectByPrimaryKey(userId).getUserName();
+		String cryptedPwd = new Md5Hash(password, username, 1024).toString();
+		if (cryptedPwd.equals(sqlpassword)) {
+			try {
+				response.getWriter().print(true);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				response.getWriter().print(false);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	
+//找回密码==>
+	
+	/**
 	 * 找回密码retpassword
+	 * @param contect
+	 * @return
 	 */
 	@RequestMapping(value = "/retunpassword", method = RequestMethod.POST)
 	@ResponseBody
@@ -782,6 +840,9 @@ public class UserController {
 
 	/**
 	 * 用户输入验证码是否正确
+	 * @param inputVerification
+	 * @param temporaryVerification
+	 * @return
 	 */
 	@RequestMapping(value = "/verIsQqual", method = RequestMethod.POST)
 	@ResponseBody
@@ -799,6 +860,8 @@ public class UserController {
 
 	/**
 	 * 用户通过验证找回密码-修改密码
+	 * @param newpassword
+	 * @param contect
 	 */
 	@RequestMapping(value = "/selfChangPassword", method = RequestMethod.POST)
 	public void changPassword(String newpassword, String contect) {
@@ -823,6 +886,7 @@ public class UserController {
 
 	/**
 	 * 跳转到找回密码页面
+	 * @return
 	 */
 	@RequestMapping(value = "/retpassword")
 	public String turnpassword() {

@@ -35,7 +35,45 @@ public class ThresholdController {
 	private ProjectService projectService;
 
 	/**
+	 * 修改阀值
+	 * @param threshold
+	 * @return
+	 */
+	@RequestMapping(value = "/updetaThreshold", method = RequestMethod.POST)
+	@ResponseBody
+	public Threshold updetaThreshold(@RequestBody Threshold threshold) {
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			// 查询修改后的的阀值记录是否已存在
+			Threshold selectedThreshold = thresholdService
+					.selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
+							threshold.getProjectId(),
+							threshold.getDetectionTypeId(),
+							threshold.getThresholdTypeId());
+			if (selectedThreshold == null
+					|| selectedThreshold.getThresholdId() == threshold
+							.getThresholdId()) {
+				Project project = projectService.selectByPrimaryKey(threshold
+						.getProjectId());
+				threshold.setUserId(project.getUserId());
+				threshold.setProjectTypeId(project.getProjectTypeId());
+				thresholdService.updateByPrimaryKeySelective(threshold);
+				return threshold;
+			} else {
+				threshold.setThresholdId(0);
+				return threshold;
+			}
+		} else {
+			return null;
+		}
+	}
+
+	
+	/**
 	 * 查项目ID下所有阀值
+	 * @param projectId
+	 * @return
 	 */
 	@RequestMapping(value = "/showProjectThreshold", method = RequestMethod.POST)
 	@ResponseBody
@@ -45,6 +83,8 @@ public class ThresholdController {
 
 	/**
 	 * 显示当前项目下所有测点类型
+	 * @param projectTypeId
+	 * @return
 	 */
 	@RequestMapping(value = "/showDetectionType", method = RequestMethod.POST)
 	@ResponseBody
@@ -55,6 +95,8 @@ public class ThresholdController {
 
 	/**
 	 * 显示所有阀值类型（所有的测点类型都是公用同样的阀值类型）
+	 * @param projectId
+	 * @return
 	 */
 	@RequestMapping(value = "/showThresHoldType", method = RequestMethod.POST)
 	@ResponseBody
@@ -65,6 +107,8 @@ public class ThresholdController {
 
 	/**
 	 * 插入一条阀值(校验唯一性)
+	 * @param threshold
+	 * @return
 	 */
 	@RequestMapping(value = "/addThresHold", method = RequestMethod.POST)
 	@ResponseBody

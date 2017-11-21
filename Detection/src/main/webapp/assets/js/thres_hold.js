@@ -148,7 +148,7 @@ var projectTypeId=document.getElementById("thres_hold_projectTypeId").value;
 						+'"}';
 			$.ajax({
 			type:'post',
-			url: 'rest/project/updetaThreshold',
+			url: 'rest/threshold/updetaThreshold',
 			contentType:"application/json",
 			dataType : 'json',
 			data: jsonData,

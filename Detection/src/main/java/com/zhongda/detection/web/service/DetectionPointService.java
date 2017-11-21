@@ -123,4 +123,11 @@ public interface DetectionPointService {
 	 * @return
 	 */
 	List<DetectionPoint> selectDetectionPointWithAlarmCount(Project project);
+	
+	/**
+	 * 根据测点ID查唯一的测点
+	 * @param detectionPointId
+	 * @return
+	 */
+	DetectionPoint selectDetectionByDetectionPointId(Integer detectionPointId);
 }

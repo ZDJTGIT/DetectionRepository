@@ -129,4 +129,9 @@ public interface DetectionPointMapper {
 			@Param(value = "detectionTypeId") Integer detectionTypeId,
 			@Param(value = "currentTime") String currentTime);
 
+	/** 根据测点ID查唯一的测点
+	 * @param detectionPointId
+	 * @return
+	 */
+	DetectionPoint selectDetectionByDetectionPointId(Integer detectionPointId);
 }

@@ -24,6 +24,9 @@ public class ImgaeController {
 	
 	/**
 	 * 单个图片上传
+	 * @param file
+	 * @param imageId
+	 * @return
 	 */
 	@RequestMapping(value="/uploadSingleImage", method = RequestMethod.POST)
 	@ResponseBody
@@ -34,6 +37,9 @@ public class ImgaeController {
 	
 	/**
 	 * 多个图片上传
+	 * @param file
+	 * @param imageId
+	 * @return
 	 */
 	@RequestMapping(value="/uploadMultipleImage", method = RequestMethod.POST)
 	@ResponseBody
@@ -44,6 +50,8 @@ public class ImgaeController {
 	
 	/**
 	 * 更新物理图的Url路径
+	 * @param imageId
+	 * @return
 	 */
 	@RequestMapping(value="/updatePhysicalUrl", method = RequestMethod.GET)
 	public Image updatePhysicalUrl(Integer imageId){
