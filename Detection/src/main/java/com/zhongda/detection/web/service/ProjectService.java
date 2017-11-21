@@ -179,4 +179,18 @@ public interface ProjectService {
 	 * @return
 	 */
 	Map<String, List<Project>> selectAllProjects();
+	
+	/**
+	 * 查项目下异常测点数量
+	 * @param projectId
+	 * @return
+	 */
+	Project selectAlarmDetectionPointCount(Integer projectId);
+	
+	/**
+	 * 查项目下异常传感器数量
+	 * @param projectId
+	 * @return
+	 */
+	Project selectAlarmSensorInfoCount(Integer projectId);
 }

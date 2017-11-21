@@ -19,7 +19,7 @@ public class DetectionPoint {
 
 	// 缓存项目名，数据库无该字段
 	private String projectName;
-
+	
 	// 字典表数据，数据库无该字段
 	private String itemName;
 	private String itemValue;

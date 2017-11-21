@@ -6,7 +6,7 @@ var projectName=document.getElementById("project_detail_projectName").value;
         var placeHoledStyle = {
 		    normal:{
 		        barBorderColor:'rgba(0,0,0,0)',
-		        color:'rgba(26,179,148)',
+		        color:'rgba(26,179,148,1)',
 		        label : {
 		            show: true,
 		            position: 'insideLeft',
@@ -103,16 +103,24 @@ var projectName=document.getElementById("project_detail_projectName").value;
 			    data: {projectId:projectId},
 			    contextType:"application/json",
 			    success: function(data){
+			    	 var normalDetectionPointCount = data.detectionPointCount-data.alarmDetectionCount;
+			    	 var normalSensorInfoCount = data.sensorInfoCount-data.alarmSensorInfoCount;
 			    	 if(data){   
 				    		 content.push(data.alarmCount);//告警信息条数（alarm表）
 				    		 content.push(2);//改成采集器数量---
-				    		 content.push(data.sensorInfoCount);
-				    		 content.push(data.detectionPointCount);
+				    		 content.push(normalSensorInfoCount);
+				    		 content.push(normalDetectionPointCount);
+				    		 contenterror.push(0);
+				    		 contenterror.push(0);
+				    		 contenterror.push(data.alarmSensorInfoCount);
+				    		 contenterror.push(data.alarmDetectionCount);
 				    		 myChart.hideLoading();
 				    		 myChart.setOption({        //加载数据图表
 			                        series: [{
 			                            // 根据名字对应到相应的系列
 			                            data: content
+			                        },{
+			                        	data: contenterror
 			                        }]
 			                 });
 			    	  		 }else{

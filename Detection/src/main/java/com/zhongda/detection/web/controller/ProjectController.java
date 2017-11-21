@@ -682,16 +682,13 @@ public class ProjectController {
 	@ResponseBody
 	public Project obtainCount(Integer projectId) {
 		Project project = new Project();
-		project.setAlarmCount(projectService.selectAlarmCount(projectId)
-				.getAlarmCount());
-		project.setDetectionPointCount(projectService.selectDetectionCount(
-				projectId).getDetectionPointCount());
-		project.setSensorInfoCount(projectService.selectSensorInfoCount(
-				projectId).getSensorInfoCount());
-		project.setThresholdCount(projectService
-				.selectThresholdCount(projectId).getThresholdCount());
-		project.setImageCount(projectService.selectImageCount(projectId)
-				.getImageCount());
+		project.setAlarmCount(projectService.selectAlarmCount(projectId).getAlarmCount());
+		project.setDetectionPointCount(projectService.selectDetectionCount(projectId).getDetectionPointCount());
+		project.setSensorInfoCount(projectService.selectSensorInfoCount(projectId).getSensorInfoCount());
+		project.setThresholdCount(projectService.selectThresholdCount(projectId).getThresholdCount());
+		project.setImageCount(projectService.selectImageCount(projectId).getImageCount());
+		project.setAlarmDetectionCount(projectService.selectAlarmDetectionPointCount(projectId).getAlarmDetectionCount());
+		project.setAlarmSensorInfoCount(projectService.selectAlarmSensorInfoCount(projectId).getAlarmSensorInfoCount());
 		return project;
 	}
 

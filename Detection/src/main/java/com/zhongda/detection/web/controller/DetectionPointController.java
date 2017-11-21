@@ -177,6 +177,17 @@ public class DetectionPointController {
 	}
 	
 	/**
+	 * 查项目下有告警信息的测点个数
+	 * @param detectionPointId
+	 * @return
+	 */
+	@RequestMapping(value = "/selectAlarmDetectionPointCount", method = RequestMethod.POST)
+	@ResponseBody
+	public Integer selectAlarmDetectionPointCount(Integer projectId){
+		return projectId;
+	}
+	
+	/**
 	 * 根据输入测点名查询所有符合模糊查询的测点展示
 	 * @param keyWord
 	 * @param projectName
