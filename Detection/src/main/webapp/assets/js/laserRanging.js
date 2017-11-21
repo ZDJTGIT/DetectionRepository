@@ -4,6 +4,41 @@ var laserjson = JSON.parse(map);
 var detectionIdMap={};
 echartloading(laserjson,oTabel);
 
+//自动刷新代码
+var today = new Date();
+var minute = today.getMinutes();
+var time;
+
+	if(minute<10  && minute>2){
+		time=12-minute;
+	}else if(minute==2){
+		time=10;
+	}else if(minute<2){
+		time=2-minute;
+	}else{
+		for(var i=1;i<11;i++){
+			minute++;
+			if(minute.toString().substring(1,2)==2){
+				time=i;
+				break;
+			}
+		}
+	}
+time = time*60*1000;
+
+var refreshbegin =setInterval("refresh()",time);
+
+function refresh(){
+	$("#selectdispladata").trigger("click");
+	clearInterval(refreshbegin);
+	setInterval("fixed()",600000);
+}
+
+function fixed(){
+	$("#selectdispladata").trigger("click");
+}
+//自动刷新代码结束
+
 $("#selectdispladata").click(function(){
 	var diapladataText = $("#diapladata").val();
 	var projectId = $("#projectId").text();
