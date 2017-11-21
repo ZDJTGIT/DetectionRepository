@@ -24,6 +24,11 @@
 <meta name="description" content="中大检测平台">
 <link rel="stylesheet" href="assets/js/plugins/layui/css/layui.css" media="all"></link>
 <link href="assets/css/plugins/iCheck/custom.css" rel="stylesheet">
+<style>
+	#AlarmSearchForm>.row>.form-group{
+		padding:8px 15px;
+	}
+</style>
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content  animated fadeInRight">
@@ -46,7 +51,7 @@
 						</div>
 					</div>
 					<div class="ibox-content">
-						<div class="container">
+						<div class="container" style="width:100%">
 							<form class="form-inline" role="form" id="AlarmSearchForm">
 								<div class="row">
 							  		<div class="form-group col-md-3">
@@ -63,7 +68,7 @@
 							  		</div>
 							  		<div class="form-group col-md-3">
 									    <label for="alarmTypeId">告警类型:</label>
-									    <select  class="form-control" name="alarmTypeId" id="alarmTypeId">
+									    <select style="width:121px" class="form-control" name="alarmTypeId" id="alarmTypeId">
 		                                    <option value="0">请选择</option>
 		                                </select>
 									 </div>
@@ -83,7 +88,7 @@
 							  		</div>
 							  		<div class="form-group col-md-3">
 									    <label for="status">告警状态:</label>
-									    <select  class="form-control" name="status" id="status">
+									    <select  style="width:121px" class="form-control" name="status" id="status">
 		                                    <option value="0">请选择</option>
 		                                </select>
 									 </div>
@@ -100,7 +105,8 @@
 									 <div class="form-group col-md-3 col-md-offset-3" style="margin-top: 10px;text-align: center">
 									  	<button type="button" id="btnSearch" class="btn btn-md btn-primary query" >查询</button>
 									 </div>
-							  	</div>								
+							  	</div>
+							  									
                         	</form>
 						</div>
                         <div id="checkboxTip"></div>
@@ -184,7 +190,9 @@
 					success : function(res) {
 						console.log(res);
 						if (res.code == 0) {
-							clickObj.parent().prev().text("已确认");						
+							clickObj.parent().prev().text("已确认");
+							clickObj.attr("disabled","disabled");
+							clickObj.text("已确认");
 						} else {
 							alert(res.msg);
 						}
@@ -212,7 +220,13 @@
 								if (data) {
 									var htmlData = '';
 									$.each(data.alarmList,function(idx,item){
-										htmlData +='<tr><td style="text-align:center"><input type="checkbox"></td><td>'+item.alarmId+'</td><td>'+item.projectName+'</td><td>'+item.detectionId+'</td><td>'+item.smuCmsId+'</td><td>'+item.sensorId+'</td><td>'+item.alarmType+'</td><td class="layerOpen">'+item.alarmContext+'</td><td>'+item.createTime+'</td><td>'+item.alarmStatus+'</td><td><a class="confirmClick">点击确认</a></td></tr>'
+										htmlData +='<tr><td style="text-align:center"><input type="checkbox"></td><td>'+item.alarmId+'</td><td>'+item.projectName+'</td><td>'+item.detectionId+'</td><td>'+item.smuCmsId+'</td><td>'+item.sensorId+'</td><td>'+item.alarmType+'</td><td class="layerOpen">'+item.alarmContext+'</td><td>'+item.createTime+'</td><td>'+item.alarmStatus+'</td><td><a class="confirmClick btn btn-sm btn-info"'
+										if(item.alarmStatus === "已确认"){
+											htmlData +=' disabled="disabled">已确认</a></td></tr>'
+										}else{
+											htmlData +='>点击确认</a></td></tr>'
+										}
+				
 									});
 									$("#alarmTable tbody").html(htmlData);
 									if(loadLaypage){ //如果该参数有值
@@ -282,7 +296,6 @@
 
 		 //反选checkbox
 		 $('#alarmTable tbody').on('ifClicked', '[type="checkbox"]', function(event){
-			 alert(event.target.checked);
 			 var checkLength = $('#alarmTable tbody').find('[type="checkbox"]:checked').length;
 			 var totalLength = $('#alarmTable tbody').find('[type="checkbox"]').length;
 			 if(event.target.checked){
