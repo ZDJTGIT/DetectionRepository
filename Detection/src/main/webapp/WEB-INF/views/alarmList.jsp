@@ -193,6 +193,7 @@
 							clickObj.parent().prev().text("已确认");
 							clickObj.attr("disabled","disabled");
 							clickObj.text("已确认");
+							$('#alarmTotalSpan').text($('#alarmTotalSpan').text()-1);
 						} else {
 							alert(res.msg);
 						}

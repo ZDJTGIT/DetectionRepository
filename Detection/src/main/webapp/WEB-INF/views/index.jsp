@@ -274,8 +274,8 @@
 								</li>
 							</ul></li>
 						<li class="dropdown"><a class="dropdown-toggle count-info"
-							data-toggle="dropdown" href="#"> <i class="fa fa-bell"></i> <span
-								class="label label-primary">${alarmTotal}</span>
+							data-toggle="dropdown" href="#"> <i class="fa fa-bell"></i>
+							<span id="alarmTotalSpan" class="label label-primary">${alarmTotal}</span>
 						</a>
 							<ul class="dropdown-menu dropdown-alerts">
 								<c:forEach items="${alarmList}" var="alarm">
