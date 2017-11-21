@@ -236,7 +236,7 @@ var projectName=document.getElementById("project_detail_projectName").value;
 	                 });
 					 $.ajax({
 							type : 'post',
-							url : 'rest/detectionPoint/showProjectDetectionPoint',
+							url : 'rest/detectionPoint/showNormalProjectDetectionPoint',
 							dataType : 'json',
 							contentType : 'application/json',
 							data : JSON.stringify(jsonData),

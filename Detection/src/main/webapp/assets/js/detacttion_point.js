@@ -315,7 +315,7 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 					    alert("数据加载失败");
 				      }
 		     });
-			  //打开测点页面加载所属项目下的所有测点
+			  /*//打开测点页面加载所属项目下的所有测点
 			  $.ajax({
 		    		  type:'post',
 		    	  	  url: 'rest/detectionPoint/showProjectDetectionPoint',
@@ -377,5 +377,117 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 		    	  			$('#detection_tbody').append(string); 		
 		    	  		  }
 		    	  		  },
-		    	  	  });
+		    	  	  });*/
+			  
+			//分页获取项目下所有测点
+				$(function(){(function(){
+					
+					var jsonData = {};
+					jsonData.projectName = projectName;
+					jsonData.pageNum = 1;
+					jsonData.pageSize = 6;
+					
+					//初始化分页组件函数
+					 function loadLaypage(dataTotal, jsonData){
+						 var laypage = layui.laypage;
+						 laypage.render({
+							 elem: 'pageComponent_n', //分页组件div的id
+							 count: dataTotal, //记录总条数
+							 limit: jsonData.pageSize, //每页显示的条数
+							 limits:[jsonData.pageSize, 10, 20, 30, 40, 50], //每页条数的选择项
+						     groups: 5, //连续显示分页数
+						     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+						     jump: function(obj, first){  //触发分页后的回调
+						         if(!first){ //一定要加此判断，否则初始时会无限刷新
+						        	 jsonData.pageNum = obj.curr;
+						 			 jsonData.pageSize = obj.limit;
+						 			 projectPageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数
+						         }
+						     }
+						 });
+					 }
+					
+					//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
+					function projectPageAjax(jsonData,loadLaypage){
+						 //显示loading提示
+		                 var loading = layer.load(2, {
+		                	  shade: [0.1,'#fff'] //0.1透明度的白色背景
+		                 });
+						 $.ajax({
+								type : 'post',
+								url : 'rest/detectionPoint/showNormalProjectDetectionPoint',
+								dataType : 'json',
+								contentType : 'application/json',
+								data : JSON.stringify(jsonData),
+								success : function(data) {
+									 if(data){
+						  	  		    var asthtml = '';
+						  	  		   	$.each(data.detectionPointList,function(idx,item){
+							  	  		     asthtml += '<tr id='+item.detectionPointId+'>'+
+														'<td class="project-title" style="width:60px">'+
+														'</td>'+
+								    	  		    	'<td class="project-status" style="width:120px">'+
+															''+item.itemName+''+
+													    '</td>'+
+													    '<td class="project-title" style="width:50px">'+
+														'</td>'+
+														'<td class="project-title" style="width:200px">'+
+															''+item.detectionName+''+
+														'</td>'+
+														'<td class="project-title" style="width:140px">'+
+															''+item.detectionDescription+''+
+														'</td>'+
+														'<td class="project-title" style="width:140px">'+
+															''+item.detectionLongitude+''+
+														'</td>'+
+														'<td class="project-title" style="width:140px">'+
+															''+item.detectionLatitude+''+
+														'</td>'+
+														//测点ID（隐藏7）
+														'<td class="project-status" style="display:none">'+
+															'<span class="label label-primary">' + item.detectionPointId+ '</span>'+
+														'</td>'+
+														//测点类型ID（隐藏8）
+														'<td class="project-status" style="display:none">'+
+															'<span class="label label-primary">' + item.detectionTypeId+ '</span>'+
+														'</td>'+
+														'<td class="project-title" style="width:400px">'+
+														'</td>'+
+														'<td class="project-status" style="width:150px">'+
+														//打开传感器页面，传测点ID和测点名称
+															'<a href="rest/sensor_info/'+item.detectionPointId+':'+item.detectionName+'" class="J_menuItem" name="传感器信息">'+
+																'&nbsp&nbsp&nbsp&nbsp'+'进入'+
+															'</a>'+
+														'</td>'+
+														'<td class="project-status"  style="width:150px">'+
+														    '<a href="javascript:;" class="J_menuItem" onclick="updetaDetectionPoint(this)" data-toggle="modal" data-target="#myModal_updetaDetection">'+
+																'<i class="fa fa-pencil"></i>修改'+
+															'</a>'+
+															'<a href="javascript:;" class="J_menuItem" onclick="deleteDetectionPoint('+item.detectionPointId+')">'+
+																'<i class="fa fa-times-circle"></i> 删除'+
+														    '</a>'+
+													    '</td>'+
+													    '<td class="project-actions">'+
+													    '</td>'+
+													   '</tr>';		
+						  	  		    	});
+						  	  		    $('#detection_tbody').html(asthtml);
+										//加载完成后隐藏loading提示
+					                   	layer.close(loading);
+					                   	if(loadLaypage){
+					                   		loadLaypage(data.total,jsonData);
+					                   	}
+						  	  		}else{
+						  	  		    alert("数据异常");
+						  	  		}
+								},
+								error : function() {
+									alert("数据加载失败");
+								}
+							});
+					 }
+					projectPageAjax(jsonData,loadLaypage);
+				})();
+			});
+				
 			});	

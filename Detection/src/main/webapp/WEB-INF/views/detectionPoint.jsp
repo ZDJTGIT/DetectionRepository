@@ -91,6 +91,7 @@
 									   </tr>
 								</tbody>
 							</table>
+							<div style="margin-top:15px; text-align:center;" id="pageComponent_n"></div>
 						</div>
 						
 						<!-- Modal添加测点 -->
