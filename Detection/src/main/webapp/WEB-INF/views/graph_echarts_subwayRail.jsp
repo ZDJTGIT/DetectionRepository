@@ -32,28 +32,42 @@
 		<label style="display: none;" id="projectId">${projectId}</label>
 	<%-- <label style="display: none;" id="detectionTypeId">${detectionTypeId }</label> --%>
     <div class="wrapper wrapper-content animated fadeInRight">
-    	<!-- <div class="row">
+    	 <div class="row">
     		<div class="col-sm-12">
                 <div class="ibox float-e-margins" id="small-chat1" style="width: 100%" >
                     <div class="ibox-content" style="background: rgba(255,255,255, 0.5);height: 65px;">
                         <form class="form-inline"  >
                         	<div class="row">
-                        		<div class="col-sm-3">
-	                                <label for="startCreateTime">选择日期:</label>
-								   	<input type="datetime" class="form-control" id="diapladata" style="ime-mode: disabled">
-	                            <button class="btn btn-primary " id="selectdispladata" type="button" style="margin-top: 5px;">&nbsp;查询</button>
-	                        	</div>
-	                        </div>
+                        			<div class="form-group col-md-1 date">
+									    <select class="form-control" id="selectsubway">
+										    <option>最近一周</option>
+										    <option>最近一月</option>
+										    <option>最近三个月</option>
+										    <option>最近六个月</option>
+										    <option>最近一年</option>
+										    <option>全部</option>
+										 </select>
+									 </div>
+							  		<div class="form-group col-md-3 date">
+									    <label for="startCreateTime">起始时间:</label>
+									    <input type="datetime" class="form-control" id="startCreateTime" name="startCreateTime" placeholder="起始时间">
+									 </div>
+									 <div class="form-group col-md-3">
+									    <label for="endCreateTime">结束时间:</label>
+									    <input type="datetime" class="form-control" id="endCreateTime" name="endCreateTime" placeholder="结束时间">
+									 </div>
+									 <button type="button" id="btnSearchsubway" class="btn btn-md btn-primary query" >查询</button>
+							  	</div>
                         </form>
                     </div>
                 </div>
             </div>
-    	</div> -->
-   		<!--  <div class="row">
+    	</div> 
+   		 <div class="row">
     		<div class="col-sm-12" style="height: 65px">
                 
                 </div>
-            </div> -->
+            </div> 
             
         <div class="row">
 	        <div class="col-sm-12" id="实时数据">
@@ -125,14 +139,35 @@
     <script src="assets/js/jquery.min.js"></script>	
     <script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/datepicker/bootstrap-datetimepicker.min.js" charset="utf-8"></script>
+	<script src="assets/js/plugins/laydate/laydate.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/layui/layui.all.js" charset="utf-8"></script>
 	<script type="text/javascript">
-			
-			$('#diapladata').datetimepicker({
-	            locale: moment.locale('zh-cn'),
-	            showTodayButton:true,
-	            format: "YYYY-MM-DD"
-	        })
+	//日期范围限制
+    var start = {
+        elem: '#startCreateTime',
+        format: 'YYYY-MM-DD hh:mm:ss',
+        min: '1900-06-16 23:59:59', //设定最小日期为当前日期laydate.now()
+        max: '2099-06-16 23:59:59', //最大日期
+        istime: true,
+        istoday: false,
+        choose: function (datas) {
+            end.min = datas; //开始日选好后，重置结束日的最小日期
+            end.start = datas //将结束日的初始值设定为开始日
+        }
+    };
+    var end = {
+        elem: '#endCreateTime',
+        format: 'YYYY-MM-DD hh:mm:ss',
+        min: '1900-06-16 23:59:59',
+        max: '2099-06-16 23:59:59',
+        istime: true,
+        istoday: false,
+        choose: function (datas) {
+            start.max = datas; //结束日选好后，重置开始日的最大日期
+        }
+    };
+    laydate(start);
+    laydate(end);
 			   
 	</script>
     

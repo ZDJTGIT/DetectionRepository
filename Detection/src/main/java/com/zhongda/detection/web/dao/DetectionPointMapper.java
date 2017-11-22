@@ -97,6 +97,21 @@ public interface DetectionPointMapper {
 			@Param(value = "currentTime") String currentTime);
 
 	/**
+	 * 查询激光测距所有数据
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param begincurrentTime
+	 * @param endcurrentTime
+	 * @return
+	 */
+	List<DetectionPoint> selectAllLaserDataByCurrentTimes(
+			@Param(value = "projectId") Integer projectId,
+			@Param(value = "detectionTypeId") Integer detectionTypeId,
+			@Param(value = "begincurrentTime") String begincurrentTime,
+			@Param(value = "endcurrentTime") String endcurrentTime);
+
+	/**
 	 * 查询每天最大值最小值传给K线图
 	 * 
 	 * @param projectId
@@ -129,7 +144,9 @@ public interface DetectionPointMapper {
 			@Param(value = "detectionTypeId") Integer detectionTypeId,
 			@Param(value = "currentTime") String currentTime);
 
-	/** 根据测点ID查唯一的测点
+	/**
+	 * 根据测点ID查唯一的测点
+	 * 
 	 * @param detectionPointId
 	 * @return
 	 */

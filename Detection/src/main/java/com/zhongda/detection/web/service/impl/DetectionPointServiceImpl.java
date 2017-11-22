@@ -98,9 +98,18 @@ public class DetectionPointServiceImpl implements DetectionPointService {
 		return detectionPointMapper.selectStaticLevelByCurrentTimes(projectId,
 				detectionTypeId, currentTime);
 	}
-		
+
 	public DetectionPoint selectDetectionByDetectionPointId(
 			Integer detectionPointId) {
-		return detectionPointMapper.selectDetectionByDetectionPointId(detectionPointId);
+		return detectionPointMapper
+				.selectDetectionByDetectionPointId(detectionPointId);
+	}
+
+	@Override
+	public List<DetectionPoint> selectAllLaserDataByCurrentTimes(
+			Integer projectId, Integer detectionTypeId,
+			String begincurrentTime, String endcurrentTime) {
+		return detectionPointMapper.selectAllLaserDataByCurrentTimes(projectId,
+				detectionTypeId, begincurrentTime, endcurrentTime);
 	}
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -223,9 +224,44 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/subwayRailComparison", method = RequestMethod.POST)
 	@ResponseBody
-	public List<DetectionPoint> subwayRailComparison(Integer projectId) {
-		List<DetectionPoint> laserList = detectionPointService
-				.selectLaserDataByCurrentTimes(projectId, 26, "2");
+	public List<DetectionPoint> subwayRailComparison(Integer projectId,
+			String begin, String end, String dateRange) {
+		Date date = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd HH:mm:ss");
+		Calendar lastDate = Calendar.getInstance();
+		List<DetectionPoint> laserList = null;
+		System.out.println("begin:" + begin + " end:" + end + " dateRange:"
+				+ dateRange.length());
+		if (dateRange.length() != 0) {
+			end = simpleDateFormat.format(date);
+			lastDate.setTime(date);
+			if ("最近一周".equals(dateRange)) {
+				lastDate.add(Calendar.DATE, -1);
+			} else if ("最近一月".equals(dateRange)) {
+				lastDate.add(Calendar.MONTH, -1);
+			} else if ("最近三个月".equals(dateRange)) {
+				lastDate.add(Calendar.MONTH, -3);
+			} else if ("最近六个月".equals(dateRange)) {
+				lastDate.add(Calendar.MONTH, -6);
+			} else if ("最近一年".equals(dateRange)) {
+				lastDate.add(Calendar.YEAR, -1);
+			} else if ("全部".equals(dateRange)) {
+				return detectionPointService.selectLaserDataByCurrentTimes(
+						projectId, 26, "2");
+			}
+			Date m = lastDate.getTime();
+			begin = simpleDateFormat.format(m);
+		}
+		if (begin.length() == 0 && end.length() == 0) {
+			end = simpleDateFormat.format(date);
+			lastDate.roll(Calendar.DATE, -7);// 日期回滚7天
+			begin = simpleDateFormat.format(lastDate.getTime());
+		}
+		System.out.println("begin:" + begin + " end:" + end);
+		laserList = detectionPointService.selectAllLaserDataByCurrentTimes(
+				projectId, 26, begin, end);
+		System.out.println(laserList);
 		return laserList;
 	}
 
@@ -439,6 +475,7 @@ public class ProjectController {
 
 	/**
 	 * 新建项目时查找数据库用户
+	 * 
 	 * @param userId
 	 * @return
 	 */
@@ -450,6 +487,7 @@ public class ProjectController {
 
 	/**
 	 * 新建项目时加载项目类型信息
+	 * 
 	 * @param userId
 	 * @return
 	 */
@@ -461,17 +499,20 @@ public class ProjectController {
 
 	/**
 	 * 新建项目时加载项目状态
+	 * 
 	 * @param userId
 	 * @return
 	 */
-//	@RequestMapping(value = "/showProjectStatus", method = RequestMethod.POST)
-//	@ResponseBody
-//	public List<SysDictionary> showProjectStatus(Integer userId) {
-//		return sysDictionaryServce.selectSysDictionaryType_Status();
-//	}
+	// @RequestMapping(value = "/showProjectStatus", method =
+	// RequestMethod.POST)
+	// @ResponseBody
+	// public List<SysDictionary> showProjectStatus(Integer userId) {
+	// return sysDictionaryServce.selectSysDictionaryType_Status();
+	// }
 
 	/**
 	 * 编辑项目加载用户，默认显示选中用户
+	 * 
 	 * @param userId
 	 * @return
 	 */
@@ -483,6 +524,7 @@ public class ProjectController {
 
 	/**
 	 * 查找数据库项目类型（编辑项目时）
+	 * 
 	 * @param userId
 	 * @return
 	 */
@@ -506,6 +548,7 @@ public class ProjectController {
 
 	/**
 	 * 打开编辑项目时默认选中当前项目信息对应用户和项目类型
+	 * 
 	 * @param projectId
 	 * @param projectTypeId
 	 * @return
@@ -523,6 +566,7 @@ public class ProjectController {
 
 	/**
 	 * 新建项目
+	 * 
 	 * @param project
 	 * @return
 	 */
@@ -588,6 +632,7 @@ public class ProjectController {
 
 	/**
 	 * 修改项目
+	 * 
 	 * @param project
 	 * @return
 	 */
@@ -635,6 +680,7 @@ public class ProjectController {
 
 	/**
 	 * 删除用户项目
+	 * 
 	 * @param projectId
 	 * @return
 	 */
@@ -682,18 +728,26 @@ public class ProjectController {
 	@ResponseBody
 	public Project obtainCount(Integer projectId) {
 		Project project = new Project();
-		project.setAlarmCount(projectService.selectAlarmCount(projectId).getAlarmCount());
-		project.setDetectionPointCount(projectService.selectDetectionCount(projectId).getDetectionPointCount());
-		project.setSensorInfoCount(projectService.selectSensorInfoCount(projectId).getSensorInfoCount());
-		project.setThresholdCount(projectService.selectThresholdCount(projectId).getThresholdCount());
-		project.setImageCount(projectService.selectImageCount(projectId).getImageCount());
-		project.setAlarmDetectionCount(projectService.selectAlarmDetectionPointCount(projectId).getAlarmDetectionCount());
-		project.setAlarmSensorInfoCount(projectService.selectAlarmSensorInfoCount(projectId).getAlarmSensorInfoCount());
+		project.setAlarmCount(projectService.selectAlarmCount(projectId)
+				.getAlarmCount());
+		project.setDetectionPointCount(projectService.selectDetectionCount(
+				projectId).getDetectionPointCount());
+		project.setSensorInfoCount(projectService.selectSensorInfoCount(
+				projectId).getSensorInfoCount());
+		project.setThresholdCount(projectService
+				.selectThresholdCount(projectId).getThresholdCount());
+		project.setImageCount(projectService.selectImageCount(projectId)
+				.getImageCount());
+		project.setAlarmDetectionCount(projectService
+				.selectAlarmDetectionPointCount(projectId)
+				.getAlarmDetectionCount());
+		project.setAlarmSensorInfoCount(projectService
+				.selectAlarmSensorInfoCount(projectId)
+				.getAlarmSensorInfoCount());
 		return project;
 	}
 
-//校验==>
- 
+	// 校验==>
 
 	/**
 	 * 验证项目名是否唯一(添加验证)

@@ -67,6 +67,19 @@ public interface DetectionPointService {
 			Integer detectionTypeId, String currentTime);
 
 	/**
+	 * 查询激光测距所有数据
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param begincurrentTime
+	 * @param endcurrentTime
+	 * @return
+	 */
+	List<DetectionPoint> selectAllLaserDataByCurrentTimes(Integer projectId,
+			Integer detectionTypeId, String begincurrentTime,
+			String endcurrentTime);
+
+	/**
 	 * 查询沉降数据
 	 * 
 	 * @param projectId
@@ -123,9 +136,10 @@ public interface DetectionPointService {
 	 * @return
 	 */
 	List<DetectionPoint> selectDetectionPointWithAlarmCount(Project project);
-	
+
 	/**
 	 * 根据测点ID查唯一的测点
+	 * 
 	 * @param detectionPointId
 	 * @return
 	 */
