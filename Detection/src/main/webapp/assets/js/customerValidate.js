@@ -8,13 +8,13 @@ jQuery.validator.addMethod("isMobile", function(value, element) {
 
 // 经度验证
 jQuery.validator.addMethod("istrueLongitude", function(value, element) {
-    var mobile = /^[\-\+]?(0?\d{0}\.\d{1,8}|1[0-7]?\d{1}\.\d{1,8}|180\.0{1,8})$/;
+    var mobile =  /^(((\d|[1-9]\d|1[1-7]\d|0)\.\d{0,8})|(\d|[1-9]\d|1[1-7]\d|0{1,3})|180\.0{0,8}|180)$/;
     return this.optional(element) || mobile.test(value);
 }, "请正确填写您的经度");
 
 // 纬度验证
 jQuery.validator.addMethod("istrueLatitude", function(value, element) {
-    var mobile =  /^[\-\+]?([1-8]?\d{1}\.\d{1,8}|90\.0{1,8})$/;
+    var mobile =   /^([1-8]?\d{1}\.\d{0,8}|90\.0{0,8}|[0-8]?\d{1}|90)$/;
     return this.optional(element) || mobile.test(value);
 }, "请正确填写您的纬度");
 
@@ -51,14 +51,12 @@ $('#form_addProject').validate({
 			projectLongitude_addProject : {
 				required : true,
 				number:  true,
-				istrueLongitude: true,
-				minlength : 2
+				istrueLongitude: true
 			},
 			projectLatitude_addProject : {
 				required : true,
 				number:  true,
-				istrueLatitude :true,
-				minlength : 2
+				istrueLatitude :true
 			},
 			projectBeginTime_addProject : {
 				required : true
@@ -94,14 +92,12 @@ $('#form_addProject').validate({
 			projectLongitude_addProject : {
 				required : "请输入项目经度",
 				number:  "项目经度格式不正确",
-				istrueLongitude : "项目经度格式不正确",
-				minlength:"项目经度为2-15个字符"
+				istrueLongitude : "项目经度格式不正确"
 			},
 			projectLatitude_addProject : {
 				required : "请输入项目纬度",
 				number:  "项目纬度格式不正确",
-				istrueLatitude: "项目纬度格式不正确",
-				minlength:"项目纬度为2-15个字符"
+				istrueLatitude: "项目纬度格式不正确"
 			},
 			projectBeginTime_addProject : {
 				required : "请选择项目开始时间"
@@ -140,14 +136,12 @@ $('#form_updetaProject').validate({
 		projectLongitude_updetaProject : {
 			required : true,
 			number:  true,
-			istrueLongitude: true,
-			minlength : 2
+			istrueLongitude: true
 		},
 		projectLatitude_updetaProject : {
 			required : true,
 			number:  true,
-			istrueLatitude :true,
-			minlength : 2
+			istrueLatitude :true
 		},
 		projectBeginTime_updetaProject : {
 			required : true
@@ -183,14 +177,12 @@ $('#form_updetaProject').validate({
 		projectLongitude_updetaProject : {
 			required : "项目经度不能为空",
 			number:  "项目经度格式不正确",
-			istrueLongitude : "项目经度格式不正确",
-			minlength:"项目经度为2-15个字符"
+			istrueLongitude : "项目经度格式不正确"
 		},
 		projectLatitude_updetaProject : {
 			required : "项目纬度不能为空",
 			number:  "项目纬度格式不正确",
-			istrueLatitude: "项目纬度格式不正确",
-			minlength:"项目纬度为2-15个字符"
+			istrueLatitude: "项目纬度格式不正确"
 		},
 		projectBeginTime_updetaProject : {
 			required : "请选择项目开始时间"
@@ -226,14 +218,12 @@ $('#form_addDetection').validate({
 		DetectionLongitude_addDetection : {
 			required : true,
 			number:  true,
-			istrueLongitude: true,
-			minlength : 2
+			istrueLongitude: true
 		},
 		DetectionLatitude_addDetection : {
 			required : true,
 			number:  true,
-			istrueLatitude :true,
-			minlength : 2
+			istrueLatitude :true
 		}
 	},
 	
@@ -247,14 +237,12 @@ $('#form_addDetection').validate({
 		DetectionLongitude_addDetection : {
 			required : "测点经度不能为空",
 			number:  "测点经度格式不正确",
-			istrueLongitude : "项目经度格式不正确",
-			minlength:"测点编号为2-15个字符"
+			istrueLongitude : "项目经度格式不正确"
 		},
 		DetectionLatitude_addDetection : {
 			required : "测点纬度不能为空",
 			number:  "测点纬度格式不正确",
-			istrueLatitude: "项目纬度格式不正确",
-			minlength:"测点纬度为2-15个字符"
+			istrueLatitude: "项目纬度格式不正确"
 		}
 	}
 });
@@ -288,14 +276,12 @@ $('#form_updetaDetection').validate({
 			required : true,
 			number:  true,
 			istrueLongitude: true,
-			minlength : 2
 		},
 		
 		DetectionLatitude_updetaDetection : {
 			required : true,
 			number:  true,
 			istrueLatitude :true,
-			minlength : 2
 		}
 	},
 	
@@ -309,14 +295,12 @@ $('#form_updetaDetection').validate({
 		DetectionLongitude_updetaDetection : {
 			required : "测点经度不能为空",
 			number:  "测点经度格式不正确",
-			istrueLongitude : "项目经度格式不正确",
-			minlength:"测点经度为2-15个字符"
+			istrueLongitude : "项目经度格式不正确"
 		},
 		DetectionLatitude_updetaDetection : {
 			required : "测点纬度不能为空",
 			number:  "测点纬度格式不正确",
-			istrueLatitude: "项目纬度格式不正确",
-			minlength:"测点纬度为2-15个字符"
+			istrueLatitude: "项目纬度格式不正确"
 		}
 	}
 	
