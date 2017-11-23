@@ -58,7 +58,7 @@
 								<!-- 表头 -->
 									<tr>
 										<td class="project-title" style="width:160px">
-											<a href="javascript:;">测点类型</a>
+											<a href="javascript:;">检测指标</a>
 										</td>
 										<td class="project-title" style="width:160px">
 											<a href="javascript:;">阀值类型</a>
@@ -96,7 +96,7 @@
 						      </div>
 						      <div class="modal-body">
 						      
-						        <label class="md_lable" for="">测点类型:</label>
+						        <label class="md_lable" for="">检测指标:</label>
 								<div id="selectDetectionType_div_addThresHold">
 									<select class="md_input" style="margin-left: 85px;" id="selectDetectionType_addThresHold" name="selectDetectionStatus_addThresHold">
 									</select>
@@ -137,7 +137,7 @@
 						      </div>
 						      <div class="modal-body">
 						      
-						        <label class="md_lable" for="">测点类型:</label>
+						        <label class="md_lable" for="">检测指标:</label>
 								<div id="selectDetectionType_div_updetaThresHold">
 									<select class="md_input" style="margin-left: 85px;" id="selectDetectionType_updetaThresHold" name="selectDetectionStatus_updetaThresHold">
 									</select>

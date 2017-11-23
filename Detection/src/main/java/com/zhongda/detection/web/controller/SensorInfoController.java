@@ -1,6 +1,7 @@
 package com.zhongda.detection.web.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,11 +17,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
 
 import com.github.pagehelper.PageInfo;
+import com.zhongda.detection.web.model.OperationLog;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SensorInfo;
+import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.RoleSign;
+import com.zhongda.detection.web.service.OperationLogService;
 import com.zhongda.detection.web.service.SensorInfoService;
 
 @Controller
@@ -29,6 +34,9 @@ public class SensorInfoController {
 
 	@Resource
 	private SensorInfoService sensorInfoService;
+	
+	@Resource
+	private OperationLogService operationLogService;
 
 	/**
 	 * 展示项目下所有传感器
@@ -79,11 +87,15 @@ public class SensorInfoController {
 	 */
 	@RequestMapping(value = "/addSensorInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public SensorInfo addSensorInfo(@RequestBody SensorInfo sensorInfo) {
+	public SensorInfo addSensorInfo(@RequestBody SensorInfo sensorInfo,HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 		sensorInfoService.insertSelective(sensorInfo);
+		//插入一条操作日志
+		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"传感器插入",
+				currentUser.getUserName()+"在测点ID："+sensorInfo.getDetectionPointId()+"插入传感器编号为："+sensorInfo.getSensorId(),new Date()));
 		return sensorInfo;
 		}else{
 			return null;
@@ -97,12 +109,16 @@ public class SensorInfoController {
 	 */
 	@RequestMapping(value = "/deleteSensorInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public Integer deleteSensorInfo(Integer sensorInfoId) {
+	public Integer deleteSensorInfo(Integer sensorInfoId,HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			// 管理员用户，可删除传感器
 			sensorInfoService.deleteByPrimaryKey(sensorInfoId);
+			//插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"传感器删除",
+					currentUser.getUserName()+"删除传感器,ID为："+sensorInfoId,new Date()));
 			return 1;
 		} else {
 			// 非管理员不能删除项目
@@ -117,12 +133,16 @@ public class SensorInfoController {
 	 */
 	@RequestMapping(value = "/updetaSensorInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public SensorInfo updetaSensorInfo(@RequestBody SensorInfo sensorInfo) {
+	public SensorInfo updetaSensorInfo(@RequestBody SensorInfo sensorInfo,HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			// 管理员用户，可以修改传感器信息
 			sensorInfoService.updateByPrimaryKeySelective(sensorInfo);
+			//插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"传感器修改",
+					currentUser.getUserName()+"修改传感器,ID为："+sensorInfo.getSensorInfoId(),new Date()));
 			return sensorInfo;
 		} else {
 			// 非管理员不能修改传感器信息

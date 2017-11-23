@@ -564,17 +564,20 @@ var dlId=document.getElementById("project_DLID").value;
 										'<td class="project-title" style="width:20px">'+
 										'</td>'+
 										
-										'<td class="project-status" style="width:80px">'+
+										'<td class="project-status" style="width:70px">'+
 											'<a href="rest/detectionPoint/'+data.projectTypeId+':'+data.projectName+'" class="J_menuItem" name="测点">'+
 												 '测点'+
 											'</a>'+
 										'</td>'+
-										'<td class="project-status" style="width:80px">'+
+										'<td class="project-status" style="width:70px">'+
+											'<a href="rest/terminals/'+data.projectTypeId+':'+data.projectName+'" class="J_menuItem" name="采集器">采集器</a>'+
+										'</td>'+
+										'<td class="project-status" style="width:70px">'+
 											'<a href="rest/thresHold/'+data.projectId+':'+data.projectName+'" class="J_menuItem" name="阀值">'+
 												'阀值 '+
 											'</a>'+
 										'</td>'+
-										'<td class="project-status" style="width:80px">'+
+										'<td class="project-status" style="width:70px">'+
 											'<a href="rest/image/'+data.projectId+':'+data.projectName+'" class="J_menuItem" name="图片">'+
 												'图片 '+
 											'</a>'+

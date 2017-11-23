@@ -8,13 +8,13 @@ jQuery.validator.addMethod("isMobile", function(value, element) {
 
 // 经度验证
 jQuery.validator.addMethod("istrueLongitude", function(value, element) {
-    var mobile =  /^(((\d|[1-9]\d|1[1-7]\d|0)\.\d{0,8})|(\d|[1-9]\d|1[1-7]\d|0{1,3})|180\.0{0,8}|180)$/;
+    var mobile =  /^(((\d|[1-9]\d|1[1-7]\d|0)\.\d{0,12})|(\d|[1-9]\d|1[1-7]\d|0{1,3})|180\.0{0,12}|180)$/;
     return this.optional(element) || mobile.test(value);
 }, "请正确填写您的经度");
 
 // 纬度验证
 jQuery.validator.addMethod("istrueLatitude", function(value, element) {
-    var mobile =   /^([1-8]?\d{1}\.\d{0,8}|90\.0{0,8}|[0-8]?\d{1}|90)$/;
+    var mobile =   /^([1-8]?\d{1}\.\d{0,12}|90\.0{0,12}|[0-8]?\d{1}|90)$/;
     return this.optional(element) || mobile.test(value);
 }, "请正确填写您的纬度");
 

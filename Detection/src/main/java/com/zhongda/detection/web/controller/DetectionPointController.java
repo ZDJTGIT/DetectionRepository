@@ -1,6 +1,7 @@
 package com.zhongda.detection.web.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,13 +18,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
 
 import com.github.pagehelper.PageInfo;
 import com.zhongda.detection.web.model.DetectionPoint;
+import com.zhongda.detection.web.model.OperationLog;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SysDictionary;
+import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.DetectionPointService;
+import com.zhongda.detection.web.service.OperationLogService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.SensorInfoService;
 import com.zhongda.detection.web.service.SysDictionaryService;
@@ -44,6 +49,9 @@ public class DetectionPointController {
 	@Autowired
 	private SensorInfoService sensorInfoService;
 	
+	@Resource
+	private OperationLogService operationLogService;
+	
 	/**
 	 * 新建测点
 	 * @param detectionPoint
@@ -52,7 +60,7 @@ public class DetectionPointController {
 	@RequestMapping(value = "/addDescription", method = RequestMethod.POST)
 	@ResponseBody
 	public DetectionPoint addDescription(
-			@RequestBody DetectionPoint detectionPoint) {
+			@RequestBody DetectionPoint detectionPoint,HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
@@ -70,6 +78,10 @@ public class DetectionPointController {
 			detectionPoint.setItemName(sysDictionaryServce
 					.selectProjectStatusByDicId((detectionPoint
 							.getDetectionTypeId())));
+			//插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"测点插入",
+					currentUser.getUserName()+"在项目,ID为："+detectionPoint.getProjectId()+"插入测点："+detectionPoint.getDetectionName(),new Date()));
 			return detectionPoint;
 		} else {
 			return null;
@@ -141,12 +153,16 @@ public class DetectionPointController {
 	 */
 	@RequestMapping(value = "/updetaDetectionPoint", method = RequestMethod.POST)
 	@ResponseBody
-	public DetectionPoint updetaDetectionPoint(@RequestBody DetectionPoint detectionPoint){
+	public DetectionPoint updetaDetectionPoint(@RequestBody DetectionPoint detectionPoint ,HttpServletRequest request){
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 		detectionPoint.setProjectId(projectService.selectByProjectName(detectionPoint.getProjectName()).getProjectId());
 		detectionPointService.updateByPrimaryKeySelective(detectionPoint);
+		//插入一条操作日志
+		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"测点修改",
+				currentUser.getUserName()+"在项目"+detectionPoint.getProjectName()+"修改测点ID为："+detectionPoint.getDetectionPointId(),new Date()));
 		return detectionPoint;
 		}else{
 			return null;
@@ -171,7 +187,7 @@ public class DetectionPointController {
 	 */
 	@RequestMapping(value = "/deleteDetectionPoint", method = RequestMethod.POST)
 	@ResponseBody
-	public Integer deleteDetectionPoint(Integer detectionPointId){
+	public Integer deleteDetectionPoint(Integer detectionPointId, HttpServletRequest request){
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
@@ -180,6 +196,10 @@ public class DetectionPointController {
 			detectionPointService.deleteByPrimaryKey(detectionPointId);
 			//测点ID删除传感器
 			sensorInfoService.deleteByDetectionPointId(detectionPointId);
+			//插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"测点删除",
+					currentUser.getUserName()+"删除测点ID为："+detectionPointId,new Date()));
 			return 1;
 		} else {
 			// 非管理员不能删除测点

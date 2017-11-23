@@ -374,7 +374,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	@ResponseBody
-	public User addUser(@RequestBody User user) {
+	public User addUser(@RequestBody User user,HttpServletRequest request) {
 		Date date = new Date();
 		user.setPassword("123456");
 		user.setStatus("正常");
@@ -384,6 +384,10 @@ public class UserController {
 		user.setUserId(userService.selectByUsername(user.getUserName())
 				.getUserId());
 		userService.insertUser_Role(user.getUserId(), user.getRoleId());
+		//插入一条操作日志
+		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"用户插入",
+				currentUser.getUserName()+"插入用户："+user.getUserName(),new Date()));
 		return user;
 	}
 
@@ -394,11 +398,15 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> delete(@RequestBody User user) {
+	public Map<String, String> delete(@RequestBody User user,HttpServletRequest request) {
 		Map<String, String> model = new HashMap<String, String>();
 			userService.deleteUser_role(userService.selectByUsername(user.getUserName()).getUserId());
 			userService.deleteUser(user.getUserName());
 			model.put("isDelete", "1");
+			//插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"用户删除",
+					currentUser.getUserName()+"删除用户，用户名为："+user.getUserName(),new Date()));
 			return model;
 	}
 
@@ -499,6 +507,10 @@ public class UserController {
 			WebUtils.setSessionAttribute(request, "userInfo", user);
 		}
 		userService.updateUsersRole(user);
+		//插入一条操作日志
+		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"用户修改",
+				currentUser.getUserName()+"修改用户信息，用户名为："+user.getUserName(),new Date()));
 		return user;
 	}
 
@@ -533,6 +545,9 @@ public class UserController {
 		}
 		userService.updateByPrimaryKeySelective(user);
 		WebUtils.setSessionAttribute(request, "userInfo", user);
+		//插入一条操作日志
+		operationLogService.insertOperationLog(new OperationLog(user.getUserId(),user.getUserName(),"用户修改",
+				user.getUserName()+"修改用户信息",new Date()));
 		return user;
 	}
 
@@ -599,7 +614,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/changUserStatus", method = RequestMethod.POST)
 	@ResponseBody
-	public User changUserStatus(Integer userId,String status) {
+	public User changUserStatus(Integer userId,String status,HttpServletRequest request) {
 		User user = userService.selectByPrimaryKey(userId);
 		if(status.equals("正常")){
 			user.setStatus("禁用");
@@ -607,6 +622,10 @@ public class UserController {
 			user.setStatus("正常");
 		}
 		userService.updateByPrimaryKeySelective(user);
+		//插入一条操作日志
+		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"更改用户状态",
+				currentUser.getUserName()+"更改用户"+user.getUserName()+"状态为："+user.getStatus(),new Date()));
 		return user;
 	}
 	

@@ -34,6 +34,7 @@ import com.zhongda.detection.web.model.AlarmLinkman;
 import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Image;
 import com.zhongda.detection.web.model.LaserData;
+import com.zhongda.detection.web.model.OperationLog;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.model.Threshold;
@@ -44,6 +45,7 @@ import com.zhongda.detection.web.service.DetectionPointService;
 import com.zhongda.detection.web.service.ImageService;
 import com.zhongda.detection.web.service.LaserDataService;
 import com.zhongda.detection.web.service.MessageService;
+import com.zhongda.detection.web.service.OperationLogService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
 import com.zhongda.detection.web.service.SensorInfoService;
@@ -80,6 +82,9 @@ public class ProjectController {
 
 	@Autowired
 	private RoleService roleService;
+	
+	@Resource
+	private OperationLogService operationLogService;
 
 	@Resource
 	private AlarmLinkmanService alarmLinkmanService;
@@ -573,7 +578,7 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/addProject", method = RequestMethod.POST)
 	@ResponseBody
-	public Project addProject(@RequestBody Project project) {
+	public Project addProject(@RequestBody Project project,HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
@@ -628,6 +633,10 @@ public class ProjectController {
 			// 非管理员不能添加项目
 			project.setUserId(2);
 		}
+		//插入一条操作日志
+		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目插入",
+				currentUser.getUserName()+"插入项目："+project.getProjectName(),new Date()));
 		return project;
 	}
 
@@ -639,7 +648,7 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/selectProject", method = RequestMethod.POST)
 	@ResponseBody
-	public Project selectProject(@RequestBody Project project) {
+	public Project selectProject(@RequestBody Project project,HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
@@ -673,6 +682,10 @@ public class ProjectController {
 			// 项目状态为int关联字典表，取出
 			project.setProjectStatusString(sysDictionaryServce
 					.selectProjectStatusByDicId(project.getProjectStatus()));
+			//插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目修改",
+					currentUser.getUserName()+"修改项目："+project.getProjectName(),new Date()));
 			return project;
 		} else {
 			return null;
@@ -687,19 +700,24 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/deleteProject", method = RequestMethod.POST)
 	@ResponseBody
-	public Integer deleteProject(Integer projectId) {
+	public Integer deleteProject(Integer projectId, HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			// 管理员用户，可删除项目
 			// 项目ID删除项目
 			projectService.deleteByPrimaryKey(projectId);
+			// 项目ID删除采集器---
 			// 项目ID删除测点
 			detectionPointService.deleteByProjectId(projectId);
 			// 项目ID关联测点表和传感器表删除传感器
 			sensorInfoService.deleteByProjectId(projectId);
 			// 项目ID删除阀值
 			thresholdService.deleteByProjectId(projectId);
+			//插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目修改",
+					currentUser.getUserName()+"删除项目ID为："+projectId+"下所有信息",new Date()));
 			return 1;
 		} else {
 			// 非管理员不能删除项目
