@@ -438,8 +438,7 @@ public class ProjectController {
 	/**
 	 * 自动更新项目状态 每次打开项目界面，获取所有项目的创建时间和结束时间并比对当前时间，修改项目状态
 	 */
-	@RequestMapping(value = "/updetaProjectStatus", method = RequestMethod.POST)
-	@ResponseBody
+	@RequestMapping(value = "/updetaProjectStatus", method = RequestMethod.GET)
 	public void updetaProjectStatus() {
 		List<Project> projectList = projectService.selectAllProject();
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");// 设置日期格式

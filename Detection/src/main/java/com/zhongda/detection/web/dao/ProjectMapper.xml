@@ -113,6 +113,7 @@
      	p.*,count(a.alarm_id) 'alarm_count'
      	from project p LEFT OUTER JOIN alarm a
      	on p.project_id = a.project_id
+     	and a.status = 20 
      	<where> 
      	  <if test="userId != null">
         	p.user_id = #{userId,jdbcType=INTEGER}
@@ -120,7 +121,7 @@
 	      <if test="projectName != null">
 	        and p.project_name like '%${_parameter.projectName}%'
 	      </if> 
-	    </where>    
+	    </where>   
     	GROUP BY p.project_id) x, sys_dictionary sd
      where x.project_status = sd.dic_id
      order by x.project_begin_time desc

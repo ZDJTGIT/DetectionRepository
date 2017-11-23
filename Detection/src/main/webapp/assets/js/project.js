@@ -1,15 +1,9 @@
 
 var dlId=document.getElementById("project_DLID").value;
-
-	 $.ajax({
-		  type:'post',
-	  	  url: 'rest/project/updetaProjectStatus',
-	  	  success: function(data){
-	  	  },
-	  	  error: function(){
-			 alert("项目状态失败");
-		     }
-	     });
+	
+	//修改项目状态
+	$.get('rest/project/updetaProjectStatus');
+	 
 		//传字符串型时间转化为时间
 		 function stringToData(strin){
 			var beginArray = strin.split(" ");
@@ -571,7 +565,7 @@ var dlId=document.getElementById("project_DLID").value;
 								    	'<td class="project-title" style="width:20px">'+
 										'</td>'+
 										'<td class="project-title" style="width:140px">'+
-											'<a href="javascript:;">项目告警信息(0)</a><br />'+
+											'<a href="javascript:;">告警次数(<i class="fa fa-bell"></i><span class="label label-primary">0</span>)</a><br />'+
 										'</td>'+
 										'<td class="project-title" style="width:20px">'+
 										'</td>'+
@@ -690,65 +684,13 @@ var dlId=document.getElementById("project_DLID").value;
 					  	  		    	}else{
 					  	  		    		percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
 					  	  		    	}
-					  	  		    	/*  asthtml += '<tr id="project_'+ item.projectId +'" style="height:200px>'+
-					  	  		    				reStr + item.projectId + '</span></td>'+
-					  	  		    				reStr + item.projectTypeId + '</span></td>'+
-					  	  		    				reStr + item.projectLongitude + '</span></td>'+
-					  	  		    				reStr + item.projectLatitude + '</span></td>'+
-					  	  		    				reStr + item.projectAddress + '</span></td>'+
-													'<td class="project-status" style="width:80px">'+
-														'<span class="label label-primary">' + item.projectStatusString + '</span>'+
-													'</td>'+
-													'<td class="project-title" style="width:150px">'+
-														'<a href="javascript:;">' + item.projectName + '</a><br />'+
-													'</td>'+
-													'<td class="project-title" style="width:200px">'+
-														'<a href="javascript:;">创建时间</a><br />'+
-														'<small>' + item.projectBeginTime + '</small>'+
-													'</td>'+
-													'<td class="project-completion" style="width:320px">'+
-														'<small>当前进度： '+percentage+'%</small>'+
-														'<div class="progress progress-mini">'+
-															'<div style="width: '+percentage+'%;" class="progress-bar"></div>'+
-														'</div>'+
-													'</td>'+
-													'<td class="project-title" style="width:260px">'+
-														'<a href="javascript:;">项目描述</a><br />'+
-														'<small>' + item.projectDescription + '</small>'+
-													'</td>'+
-													reStr + item.projectStatus + '</span></td>'+
-													reStr + item.projectBeginTime + '</span></td>'+
-													reStr + item.projectEndTime + '</span></td>'+
-													'<td class="project-title" style="width:140px">'+
-														'<a href="javascript:;">告警次数(<i class="fa fa-bell"></i>'+ item.alarmCount +')</a><br />'+
-													'</td>'+
-													'<td class="project-title" style="width:20px"></td>'+
-													'<td class="project-status" style="width:80px">'+
-														//打开页面即传item.projectName过去
-														'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="测点">测点</a>'+
-													'</td>'+
-													'<td class="project-status" style="width:80px">'+
-														//打开页面即传item.pojectId过去
-														'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+':'+item.projectTypeId+'" class="J_menuItem" name="阀值">阀值 </a>'+
-													'</td>'+
-													'<td class="project-status" style="width:80px">'+
-														//打开页面即传item.pojectId过去
-														'<a href="rest/project_image/'+item.projectId+':'+item.projectName+'" class="J_menuItem" name="图片">图片 </a>'+
-													'</td>'+
-													'<td class="project-actions">'+
-														'<a href="javascript:;" class="J_menuItem" onclick="updetaProject(this)" data-toggle="modal" data-target="#myModal_updetaProject">'+
-															'<i class="fa fa-pencil"></i> 修改 '+
-														'</a>'+
-														'<a href="javascript:;" class="J_menuItem" onclick="deleteProject('+ item.projectId +')">'+
-															'<i class="fa fa-trash"></i> 删除 '+
-														'</a>'+
-													'</td>'+
-												'</tr>';  */
-					  	  		    				//var onclick="\"test('"+item.projectId+"','"+item.projectName+"')\"";
-					  	  		    				asthtml +='<tr id="project_'+ item.projectId +'" onclick="test('+item.projectId+')" style="height:100px">'+
-									    	  		    	//'<td class="project-status" style="width:120px">'+
-															//'<a href="project_detail.html">' + item.sysDictionary.itemName+'</a><br />'+
-														    //'</td>'+
+					  	  		    	var spanClass;
+					  	  		    	if(item.alarmCount == 0){
+					  	  		    		spanClass = "label-primary";
+					  	  		    	}else{
+					  	  		    		spanClass = "label-warning";
+					  	  		    	}
+					  	  		    				asthtml +='<tr id="project_'+ item.projectId +'" onclick="test('+item.projectId+')" style="height:100px">'+								    	  		    	
 														    '<td class="project-status" style="display:none">'+
 																'<span class="label label-primary">' + item.projectId + '</span>'+
 															'</td>'+
@@ -798,7 +740,7 @@ var dlId=document.getElementById("project_DLID").value;
 													    	'<td class="project-title" style="width:20px">'+
 															'</td>'+
 															'<td class="project-title" style="width:140px">'+
-																'<a href="javascript:;">项目告警信息(0)</a><br />'+
+																'<a href="javascript:;">告警次数(<i class="fa fa-bell"></i><span class="label '+spanClass+'">'+item.alarmCount+'</span>)</a><br />'+
 															'</td>'+
 															'<td class="project-title" style="width:20px">'+
 															'</td>'+

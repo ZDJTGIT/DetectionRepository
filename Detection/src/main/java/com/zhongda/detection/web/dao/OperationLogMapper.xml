@@ -3,13 +3,14 @@
 <mapper namespace="com.zhongda.detection.web.dao.OperationLogMapper">
   <resultMap id="BaseResultMap" type="com.zhongda.detection.web.model.OperationLog">
     <id column="log_id" jdbcType="INTEGER" property="logId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="operation_context" jdbcType="VARCHAR" property="operationContext" />
     <result column="operation_description" jdbcType="VARCHAR" property="operationDescription" />
     <result column="operation_time" jdbcType="TIMESTAMP" property="operationTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    log_id, user_name, operation_context, operation_description, operation_time
+    log_id, user_id, user_name, operation_context, operation_description, operation_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -22,16 +23,21 @@
     where log_id = #{logId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.OperationLog">
-    insert into operation_log (log_id, user_name, operation_context, 
-      operation_description, operation_time)
-    values (#{logId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{operationContext,jdbcType=VARCHAR}, 
-      #{operationDescription,jdbcType=VARCHAR}, #{operationTime,jdbcType=TIMESTAMP})
+    insert into operation_log (log_id, user_id, user_name, 
+      operation_context, operation_description, 
+      operation_time)
+    values (#{logId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, 
+      #{operationContext,jdbcType=VARCHAR}, #{operationDescription,jdbcType=VARCHAR}, 
+      #{operationTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.OperationLog">
     insert into operation_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="logId != null">
         log_id,
+      </if>
+      <if test="userId != null">
+        user_id,
       </if>
       <if test="userName != null">
         user_name,
@@ -50,6 +56,9 @@
       <if test="logId != null">
         #{logId,jdbcType=INTEGER},
       </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
       <if test="userName != null">
         #{userName,jdbcType=VARCHAR},
       </if>
@@ -67,6 +76,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zhongda.detection.web.model.OperationLog">
     update operation_log
     <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
@@ -84,7 +96,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zhongda.detection.web.model.OperationLog">
     update operation_log
-    set user_name = #{userName,jdbcType=VARCHAR},
+    set user_id = #{userId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
       operation_context = #{operationContext,jdbcType=VARCHAR},
       operation_description = #{operationDescription,jdbcType=VARCHAR},
       operation_time = #{operationTime,jdbcType=TIMESTAMP}

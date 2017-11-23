@@ -5,6 +5,8 @@ import java.util.Date;
 public class OperationLog {
     private Integer logId;
 
+    private Integer userId;
+
     private String userName;
 
     private String operationContext;
@@ -12,13 +14,32 @@ public class OperationLog {
     private String operationDescription;
 
     private Date operationTime;
+    
+    public OperationLog(){}
+    
+    public OperationLog(Integer userId, String userName, String operationContext,
+			String operationDescription, Date operationTime) {
+		this.userId = userId;
+		this.userName = userName;
+		this.operationContext = operationContext;
+		this.operationDescription = operationDescription;
+		this.operationTime = operationTime;
+	}
 
-    public Integer getLogId() {
+	public Integer getLogId() {
         return logId;
     }
 
     public void setLogId(Integer logId) {
         this.logId = logId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {

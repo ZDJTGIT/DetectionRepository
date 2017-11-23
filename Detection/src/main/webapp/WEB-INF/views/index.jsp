@@ -244,8 +244,8 @@
 					<ul class="nav navbar-top-links navbar-right">
 						<li class="dropdown"><a class="dropdown-toggle count-info"
 							data-toggle="dropdown" href="javascript:;"> <i
-								class="fa fa-envelope"></i> <span class="label label-warning"
-								id="alarmCountSpan">${fn:length(messageList)}</span>
+								class="fa fa-envelope"></i> <span class="label label-primary"
+								id="messageCountSpan">${fn:length(messageList)}</span>
 						</a>
 							<ul class="dropdown-menu dropdown-messages">
 								<c:forEach items="${messageList}" var="message"
@@ -275,7 +275,14 @@
 							</ul></li>
 						<li class="dropdown"><a class="dropdown-toggle count-info"
 							data-toggle="dropdown" href="#"> <i class="fa fa-bell"></i>
-							<span id="alarmTotalSpan" class="label label-primary">${alarmTotal}</span>
+							<c:choose>
+								<c:when test="${alarmTotal eq 0}">
+									<span id="alarmTotalSpan" class="label label-primary">0</span>
+								</c:when>
+								<c:otherwise>
+									<span id="alarmTotalSpan" class="label label-warning">${alarmTotal}</span>
+								</c:otherwise>
+							</c:choose>
 						</a>
 							<ul class="dropdown-menu dropdown-alerts">
 								<c:forEach items="${alarmList}" var="alarm">

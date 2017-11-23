@@ -50,12 +50,14 @@ import com.github.pagehelper.PageInfo;
 import com.zhongda.detection.core.utils.GetVerificationCode;
 import com.zhongda.detection.core.utils.SimpleMailSender;
 import com.zhongda.detection.web.model.AlarmLinkman;
+import com.zhongda.detection.web.model.OperationLog;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.Role;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.PermissionSign;
 import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.AlarmLinkmanService;
+import com.zhongda.detection.web.service.OperationLogService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
 import com.zhongda.detection.web.service.UserService;
@@ -74,8 +76,12 @@ public class UserController {
 
 	@Resource
 	private RoleService roleService;
+	
 	@Resource
 	private ProjectService projectService;
+	
+	@Resource
+	private OperationLogService operationLogService;
 
 	@Resource
 	private SimpMessagingTemplate messageTemplate;
@@ -158,7 +164,8 @@ public class UserController {
 			final User authUserInfo = userService.selectByUsername(user
 					.getUserName());
 			WebUtils.setSessionAttribute(request, "userInfo", authUserInfo);
-
+			//插入一条操作日志
+			operationLogService.insertOperationLog(new OperationLog(authUserInfo.getUserId(),authUserInfo.getUserName(),"用户登录","登录",new Date()));
 			PushAlarm.userSet.add(authUserInfo.getUserName());
 
 		} catch (LockedAccountException e) {

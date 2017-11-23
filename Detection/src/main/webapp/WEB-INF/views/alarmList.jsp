@@ -109,7 +109,8 @@
 							  									
                         	</form>
 						</div>
-                        <div id="checkboxTip"></div>
+                        <div id="checkboxTip" style="display: none;text-align: center;"><span></span><a class="confirmClick btn btn-sm btn-info">点击确认</a></div>
+                        <div style="display: none;"><input type="text" id="alarmTotalInput"/></div>
 						<table id="alarmTable" class="table table-striped table-bordered table-hover topy">
 							<thead>
 							    <tr>
@@ -239,6 +240,7 @@
 									    increaseArea: '20%' // optional
 									});
 									$('#checkbox-all').iCheck('uncheck');
+									$('#checkboxTip').hide();
 									//加载完成后隐藏loading提示
 				                    layer.close(loading);
 								} else {
@@ -255,6 +257,7 @@
 
 				 //初始化分页组件函数
 				 function loadLaypage(dataTotal, jsonData){
+					 $('#alarmTotalInput').val(dataTotal);
 					 var laypage = layui.laypage;
 					 laypage.render({
 						 elem: 'pageComponent', //分页组件div的id
@@ -265,7 +268,7 @@
 					         if(!first){ //一定要加此判断，否则初始时会无限刷新
 					        	 jsonData.pageNum = obj.curr;
 					 			 jsonData.pageSize = obj.limit;
-					 			 alarmPageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数
+					 			 alarmPageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数					 			 
 					         }
 					     }
 					 });
@@ -288,10 +291,14 @@
 
 		 //全选checkbox
 		 $('#alarmTable').on("ifClicked", '#checkbox-all', function(event){
+			var checkboxArray = $('#alarmTable tbody').find('[type="checkbox"]');
 		    if(event.target.checked){
-		      $('#alarmTable tbody').find('[type="checkbox"]').iCheck('uncheck');
+		      checkboxArray.iCheck('uncheck');
+		      $('#checkboxTip').hide();
 		    }else{
-		      $('#alarmTable tbody').find('[type="checkbox"]').iCheck('check');
+		      checkboxArray.iCheck('check');
+		      $('#checkboxTip').find('span').text("已选择当前页共"+checkboxArray.size()+"项，点击选择所有告警消息共"+$('#alarmTotalInput').val()+"项");
+		      $('#checkboxTip').show();
 		    }
 		 });
 
@@ -302,10 +309,13 @@
 			 if(event.target.checked){
 				 if(checkLength == totalLength){
 					  $('#checkbox-all').iCheck('uncheck');
+					  $('#checkboxTip').hide();
 				 }
 			 }else{
 				 if(checkLength == totalLength - 1){
 					  $('#checkbox-all').iCheck('check');
+					  $('#checkboxTip').find('span').text("已选择当前页共"+totalLength+"项，点击选择所有告警消息共"+$('#alarmTotalInput').val()+"项");
+				      $('#checkboxTip').show();
 				 }
 			 }
 		 });

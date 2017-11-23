@@ -18,7 +18,7 @@ import com.zhongda.detection.web.service.UserService;
 public class UserServiceImpl implements UserService {
 
 	@Resource
-	private UserMapper userMapper;
+	private UserMapper userMapper;	
 
 	@Override
 	public boolean insertUser(User user) {
