@@ -64,6 +64,9 @@
 										<td class="project-status" style="display:none">
 											测点ID（隐藏）
 										</td>
+										<td class="project-title" style="width:260px">
+											采集器编号
+										</td>
 										<td class="project-title" style="width:340px">
 										</td>
 										<td class="project-title" style="width:120px">
@@ -98,7 +101,10 @@
 								<input class="md_input" type="text" id="sensorModel_addSensorInfo" name="sensorModel_addSensorInfo"><br><br>
 								
 								<label class="md_lable" for="sensorDepth_addSensorInfo">传感器深度:&nbsp;&nbsp;</label>
-								<input class="md_input" type="text" id="sensorDepth_addSensorInfo" name="sensorDepth_addSensorInfo"><br>
+								<input class="md_input" type="text" id="sensorDepth_addSensorInfo" name="sensorDepth_addSensorInfo"><br><br>
+								
+								<label class="md_lable" for="terminalsInfoNum_addSensorInfo">采集器编号:&nbsp;&nbsp;</label>
+								<input class="md_input" type="text" id="terminalsInfoNum_addSensorInfo" name="terminalsInfoNum_addSensorInfo"><br>
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" id="offAddSensorInfo" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -133,7 +139,10 @@
 								<input class="md_input" type="text" id="sensorModel_updetaSensorInfo" name="sensorModel_updetaSensorInfo"><br><br>
 								
 								<label class="md_lable" for="sensorDepth_updetaSensorInfo">传感器深度:&nbsp;&nbsp;</label>
-								<input class="md_input" type="text" id="sensorDepth_updetaSensorInfo" name="sensorDepth_updetaSensorInfo"><br>
+								<input class="md_input" type="text" id="sensorDepth_updetaSensorInfo" name="sensorDepth_updetaSensorInfo"><br><br>
+								
+								<label class="md_lable" for="terminalsInfoNum_updetaSensorInfo">采集器编号:&nbsp;&nbsp;</label>
+								<input class="md_input" type="text" id="terminalsInfoNum_updetaSensorInfo" name="terminalsInfoNum_updetaSensorInfo"><br>
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" id="offUpdetaSensorInfo" class="btn btn-default" data-dismiss="modal">关闭</button>

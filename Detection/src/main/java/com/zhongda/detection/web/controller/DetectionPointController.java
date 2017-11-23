@@ -64,6 +64,10 @@ public class DetectionPointController {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			//插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"测点插入",
+					currentUser.getUserName()+"在项目："+detectionPoint.getProjectName()+"中插入测点："+detectionPoint.getDetectionName(),new Date()));
 			// 根据项目名查项目ID加到测点
 			detectionPoint.setProjectId((projectService
 					.selectByProjectName(detectionPoint.getProjectName()))
@@ -78,10 +82,6 @@ public class DetectionPointController {
 			detectionPoint.setItemName(sysDictionaryServce
 					.selectProjectStatusByDicId((detectionPoint
 							.getDetectionTypeId())));
-			//插入一条操作日志
-			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
-			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"测点插入",
-					currentUser.getUserName()+"在项目,ID为："+detectionPoint.getProjectId()+"插入测点："+detectionPoint.getDetectionName(),new Date()));
 			return detectionPoint;
 		} else {
 			return null;
