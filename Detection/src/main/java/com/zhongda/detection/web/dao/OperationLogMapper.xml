@@ -18,6 +18,39 @@
     from operation_log
     where log_id = #{logId,jdbcType=INTEGER}
   </select>
+  <select id="selectLogByBlurryquery" resultMap="BaseResultMap">
+  	SELECT
+	ol.*
+	FROM
+		(select * from operation_log 
+       		where user_id = #{userId,jdbcType=INTEGER}
+		) as ol
+	WHERE
+		user_id LIKE concat('%',#{condition,jdbcType=VARCHAR},'%') ||
+        log_id LIKE concat('%',#{condition,jdbcType=VARCHAR},'%') ||
+        user_name LIKE concat('%',#{condition,jdbcType=VARCHAR},'%') ||
+        operation_context LIKE concat('%',#{condition,jdbcType=VARCHAR},'%') ||
+        operation_description LIKE concat('%',#{condition,jdbcType=VARCHAR},'%') ||
+        DATE_FORMAT(operation_time,'%Y-%m-%d %H:%i:%s') LIKE concat('%',#{condition,jdbcType=VARCHAR},'%')
+  </select>
+  <select id="selectAlllogByUserId" resultMap="BaseResultMap">
+  select * from operation_log
+       	where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectLogByBlurryqueryByAdmin" resultMap="BaseResultMap">
+  	SELECT
+	*
+	FROM operation_log 
+	WHERE
+        log_id LIKE concat('%',#{condition,jdbcType=VARCHAR},'%') ||
+        user_name LIKE concat('%',#{condition,jdbcType=VARCHAR},'%') ||
+        operation_context LIKE concat('%',#{condition,jdbcType=VARCHAR},'%') ||
+        operation_description LIKE concat('%',#{condition,jdbcType=VARCHAR},'%') ||
+        DATE_FORMAT(operation_time,'%Y-%m-%d %H:%i:%s') LIKE concat('%',#{condition,jdbcType=VARCHAR},'%')
+  </select>
+  <select id="selectAlllogByUserIdByAdmin" resultMap="BaseResultMap">
+  	select * from operation_log
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from operation_log
     where log_id = #{logId,jdbcType=INTEGER}

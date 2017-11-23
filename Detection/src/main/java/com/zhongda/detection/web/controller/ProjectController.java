@@ -82,7 +82,7 @@ public class ProjectController {
 
 	@Autowired
 	private RoleService roleService;
-	
+
 	@Resource
 	private OperationLogService operationLogService;
 
@@ -168,7 +168,6 @@ public class ProjectController {
 	@RequestMapping(value = "/selectlaserRanging")
 	public @ResponseBody Map<String, Object> selectlaserRanging(
 			String currentTime, Integer projectId, Integer detectionTypeId) {
-		System.out.println("------------------" + detectionTypeId);
 		List<DetectionPoint> laserList = detectionPointService
 				.selectLaserDataByCurrentTimes(projectId, detectionTypeId,
 						currentTime);
@@ -298,8 +297,6 @@ public class ProjectController {
 	@RequestMapping(value = "/staticLevelMonitor")
 	public @ResponseBody List<DetectionPoint> staticLevelMonitor(
 			Integer projectId, Integer detectionTypeId, String currentTime) {
-		System.out.println("projectId:" + projectId + "detectionTypeId:"
-				+ detectionTypeId + "currentTime:" + currentTime);
 		List<DetectionPoint> staticList = detectionPointService
 				.selectStaticLevelByCurrentTimes(projectId, detectionTypeId,
 						currentTime);
@@ -326,15 +323,23 @@ public class ProjectController {
 	@RequestMapping(value = "/insertAlarmLinkmanList", method = RequestMethod.POST)
 	public @ResponseBody List<AlarmLinkman> insertAlarmLinkmanList(
 			@RequestBody List<AlarmLinkman> alarList,
-			HttpServletResponse response) {
+			HttpServletResponse response, HttpServletRequest request) {
 		int isTrue = alarmLinkmanService.insertAlarmLinkmanList(alarList);
 		if (isTrue > 0) {
+			StringBuffer idString = new StringBuffer();
+			for (AlarmLinkman alarmLinkman : alarList) {
+				idString.append(alarmLinkman.getAlarmLinkmanId() + ",");
+			}
+			User user = (User) WebUtils
+					.getSessionAttribute(request, "userInfo");
+			operationLogService.insertOperationLog(new OperationLog(user
+					.getUserId(), user.getUserName(), "用户插入", user
+					.getUserName() + "插入" + isTrue + "条告警联系人，ID是" + idString,
+					new Date()));
 			return alarList;
 		} else {
 			return new ArrayList<AlarmLinkman>();
 		}
-
-		// response.getWriter().print(1);
 	}
 
 	/**
@@ -347,10 +352,23 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/updateAlarmLinmanStatus")
 	public void updateAlarmLinmanStatus(Integer status, Integer alarmLinkmanId,
-			HttpServletResponse response) throws IOException {
+			HttpServletResponse response, HttpServletRequest request)
+			throws IOException {
 		int isOk = alarmLinkmanService.updateStatusByalarmLinkmanId(status,
 				alarmLinkmanId);
 		if (isOk > 0) {
+			String statusString = "启用";
+			if (status == 28) {
+				statusString = "禁用";
+			}
+			User user = (User) WebUtils
+					.getSessionAttribute(request, "userInfo");
+			operationLogService.insertOperationLog(new OperationLog(user
+					.getUserId(), user.getUserName(), "用户修改", user
+					.getUserName()
+					+ "修改告警联系人(alarm_linkman)表，ID："
+					+ alarmLinkmanId + "，告警联系人状态修改为:" + statusString,
+					new Date()));
 			response.getWriter().print(true);
 		} else {
 			response.getWriter().print(false);
@@ -365,12 +383,19 @@ public class ProjectController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/deletealarm")
-	public void deletealarm(Integer alarmLinkmanId, HttpServletResponse response)
+	public void deletealarm(Integer alarmLinkmanId,
+			HttpServletResponse response, HttpServletRequest request)
 			throws IOException {
 		System.out.println(alarmLinkmanId);
 		int key = alarmLinkmanService.deleteByPrimaryKey(alarmLinkmanId);
 		System.out.println(key);
 		if (key > 0) {
+			User user = (User) WebUtils
+					.getSessionAttribute(request, "userInfo");
+			operationLogService.insertOperationLog(new OperationLog(user
+					.getUserId(), user.getUserName(), "用户删除", user
+					.getUserName() + "删除ID:" + alarmLinkmanId + "的告警联系人",
+					new Date()));
 			response.getWriter().print(true);
 		} else {
 			response.getWriter().print(false);
@@ -578,7 +603,8 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/addProject", method = RequestMethod.POST)
 	@ResponseBody
-	public Project addProject(@RequestBody Project project,HttpServletRequest request) {
+	public Project addProject(@RequestBody Project project,
+			HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
@@ -633,10 +659,15 @@ public class ProjectController {
 			// 非管理员不能添加项目
 			project.setUserId(2);
 		}
-		//插入一条操作日志
-		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
-		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目插入",
-				currentUser.getUserName()+"插入项目："+project.getProjectName(),new Date()));
+		// 插入一条操作日志
+		User currentUser = (User) WebUtils.getSessionAttribute(request,
+				"userInfo");
+		operationLogService
+				.insertOperationLog(new OperationLog(currentUser.getUserId(),
+						currentUser.getUserName(), "项目插入", currentUser
+								.getUserName()
+								+ "插入项目："
+								+ project.getProjectName(), new Date()));
 		return project;
 	}
 
@@ -648,7 +679,8 @@ public class ProjectController {
 	 */
 	@RequestMapping(value = "/selectProject", method = RequestMethod.POST)
 	@ResponseBody
-	public Project selectProject(@RequestBody Project project,HttpServletRequest request) {
+	public Project selectProject(@RequestBody Project project,
+			HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
@@ -682,10 +714,13 @@ public class ProjectController {
 			// 项目状态为int关联字典表，取出
 			project.setProjectStatusString(sysDictionaryServce
 					.selectProjectStatusByDicId(project.getProjectStatus()));
-			//插入一条操作日志
-			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
-			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目修改",
-					currentUser.getUserName()+"修改项目："+project.getProjectName(),new Date()));
+			// 插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,
+					"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser
+					.getUserId(), currentUser.getUserName(), "项目修改",
+					currentUser.getUserName() + "修改项目："
+							+ project.getProjectName(), new Date()));
 			return project;
 		} else {
 			return null;
@@ -714,10 +749,13 @@ public class ProjectController {
 			sensorInfoService.deleteByProjectId(projectId);
 			// 项目ID删除阀值
 			thresholdService.deleteByProjectId(projectId);
-			//插入一条操作日志
-			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
-			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目修改",
-					currentUser.getUserName()+"删除项目ID为："+projectId+"下所有信息",new Date()));
+			// 插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,
+					"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser
+					.getUserId(), currentUser.getUserName(), "项目修改",
+					currentUser.getUserName() + "删除项目ID为：" + projectId
+							+ "下所有信息", new Date()));
 			return 1;
 		} else {
 			// 非管理员不能删除项目
@@ -747,14 +785,24 @@ public class ProjectController {
 	@ResponseBody
 	public Project obtainCount(Integer projectId) {
 		Project project = new Project();
-		project.setAlarmCount(projectService.selectAlarmCount(projectId).getAlarmCount());
-		project.setDetectionPointCount(projectService.selectDetectionCount(projectId).getDetectionPointCount());
-		project.setSensorInfoCount(projectService.selectSensorInfoCount(projectId).getSensorInfoCount());
-		project.setThresholdCount(projectService.selectThresholdCount(projectId).getThresholdCount());
-		project.setImageCount(projectService.selectImageCount(projectId).getImageCount());
-		project.setAlarmDetectionCount(projectService.selectAlarmDetectionPointCount(projectId).getAlarmDetectionCount());
-		project.setAlarmSensorInfoCount(projectService.selectAlarmSensorInfoCount(projectId).getAlarmSensorInfoCount());
-		project.setAlarmAlarmCount(projectService.selectAlarmAlarmCount(projectId).getAlarmAlarmCount());
+		project.setAlarmCount(projectService.selectAlarmCount(projectId)
+				.getAlarmCount());
+		project.setDetectionPointCount(projectService.selectDetectionCount(
+				projectId).getDetectionPointCount());
+		project.setSensorInfoCount(projectService.selectSensorInfoCount(
+				projectId).getSensorInfoCount());
+		project.setThresholdCount(projectService
+				.selectThresholdCount(projectId).getThresholdCount());
+		project.setImageCount(projectService.selectImageCount(projectId)
+				.getImageCount());
+		project.setAlarmDetectionCount(projectService
+				.selectAlarmDetectionPointCount(projectId)
+				.getAlarmDetectionCount());
+		project.setAlarmSensorInfoCount(projectService
+				.selectAlarmSensorInfoCount(projectId)
+				.getAlarmSensorInfoCount());
+		project.setAlarmAlarmCount(projectService.selectAlarmAlarmCount(
+				projectId).getAlarmAlarmCount());
 		return project;
 	}
 

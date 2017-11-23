@@ -21,164 +21,80 @@
 <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
 <meta name="description" content="中大检测平台">
 <link rel="shortcut icon" href="favicon.ico">
-<link href="assets/css/plugins/footable/footable.core.css" rel="stylesheet">
+ 	<!-- Data Tables -->
+    <link href="assets/css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+	<link href="assets/css/plugins/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<link href="assets/css/plugins/datepicker/datepicker3.css" rel="stylesheet">
+    <link href="assets/css/style.min.css" rel="stylesheet">
+	<link href="assets/css/plugins/footable/footable.core.css" rel="stylesheet">
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
-		<div class="row">
-			<div class="col-sm-12">
+		<div class="row" >
+			<div class="col-sm-12" id="数据信息">
 				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>操作日志表</h5>
-
-						<div class="ibox-tools">
-							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
-							</a> <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-								<i class="fa fa-wrench"></i>
-							</a>
-							<ul class="dropdown-menu dropdown-user">
-								<li><a href="#">选项 01</a></li>
-								<li><a href="#">选项 02</a></li>
-							</ul>
-							<a class="close-link"> <i class="fa fa-times"></i>
-							</a>
+					<div class="ibox-title" style="text-align: center;">
+						<div class="row" >
+							<div class="col-sm-11">
+								<h5>日志信息</h5>
+							</div>
 						</div>
 					</div>
-					<div class="ibox-content">
+					 <div class="ibox-content">
+                        <table class="table table-striped table-bordered table-hover display" id="logtabel"  cellspacing="0" width="100%"> 
+                            <thead>
+                                <tr>
+                                	<td>日志ID</td>
+									<td>用户名称</td>
+									<td>操作内容</td>
+									<td>操作描述</td>
+									<td>操作时间</td>
+								</tr>
+                            </thead>
+                        </table>
 
-						<table class="footable table table-stripped toggle-arrow-tiny"
-							data-page-size="8">
-							<thead>
-								<tr>
-									<th>公司</th>
-									<th>用户名</th>
-									<th>操作时间</th>
-									<th>设备类型</th>
-									<th>操作内容</th>
-									<th>操作参数</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th>中大检测</th>
-									<th>罗杰</th>
-									<th>2017/7/27 13:16:41</th>
-									<th>Windows系统</th>
-									<th>登陆</th>
-									<th>无</th>
-								</tr>
-								<tr>
-									<th>中大检测</th>
-									<th>罗杰</th>
-									<th>2017/7/27 13:18:41</th>
-									<th>Ios手机</th>
-									<th>登陆</th>
-									<th>无</th>
-								</tr>
-								<tr>
-									<th>中大检测</th>
-									<th>罗杰</th>
-									<th>2017/7/27 13:19:41</th>
-									<th>未知设备</th>
-									<th>退出登陆</th>
-									<th>无</th>
-								</tr>
-								<tr>
-									<th>中大检测</th>
-									<th>令狐冲</th>
-									<th>2017/7/27 13:19:41</th>
-									<th>未知设备</th>
-									<th>退出登陆</th>
-									<th>无</th>
-								</tr>
-								<tr>
-									<th>中大检测</th>
-									<th>杨过</th>
-									<th>2017/7/27 13:19:41</th>
-									<th>未知设备</th>
-									<th>退出登陆</th>
-									<th>无</th>
-								</tr>
-						</table>
-					</div>
+                    </div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<h5>报表管理</h5>
-						<div class="ibox-tools">
-							<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
-							</a> <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-								<i class="fa fa-wrench"></i>
-							</a>
-							<ul class="dropdown-menu dropdown-user">
-								<li><a href="#">选项 01</a></li>
-								<li><a href="#">选项 02</a></li>
-							</ul>
-							<a class="close-link"> <i class="fa fa-times"></i>
-							</a>
-						</div>
-					</div>
-					<div class="ibox-content">
-						<table class="footable table table-stripped toggle-arrow-tiny"
-							data-page-size="8">
-							<thead>
-								<tr>
-									<th>报表名称</th>
-									<th>生成时间</th>
-									<th>操作人</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th>五一广场水位变动报告</th>
-									<th>2017/7/27 13:19:42</th>
-									<th>罗杰</th>
-									<th>导出</th>
-								</tr>
-								<tr>
-									<th>五一广场水位变动报告</th>
-									<th>2017/7/27 13:19:42</th>
-									<th>罗杰</th>
-									<th>导出</th>
-								</tr>
-								<tr>
-									<th>中大检测水位变动报告</th>
-									<th>2017/7/27 13:21:42</th>
-									<th>罗杰</th>
-									<th>导出</th>
-								</tr>
-								<tr>
-									<th>中大检测水位变动报告</th>
-									<th>2017/7/27 13:21:42</th>
-									<th>罗杰</th>
-									<th>导出</th>
-								</tr>
-								<tr>
-									<th>中大检测水位变动报告</th>
-									<th>2017/7/27 13:21:42</th>
-									<th>罗杰</th>
-									<th>导出</th>
-								</tr>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
+		</div> 
 	</div>
+	<!-- Data Tables -->
+    <script src="assets/js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="assets/js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    
 	<script src="assets/js/plugins/footable/footable.all.min.js"></script>
 	<script src="assets/js/content.js"></script>
-	<script>
-		$(document).ready(function() {
-			$(".footable").footable();
-			$(".footable2").footable()
-		});
+	<script type="text/javascript">
+	 $('#logtabel').dataTable({
+         "bProcessing": true, // 是否显示取数据时的那个等待提示
+         "bServerSide": true,//这个用来指明是通过服务端来取数据
+         "bPaginate": true,  //是否显示分页
+         "sAjaxSource": "rest/operationlog/selectlog",//这个是请求的地址
+         "fnServerData": retrieveData, // 获取数据的处理函数
+         "aoColumns": [
+                       { "mData": "logId"},
+                       { "mData": "userName"},
+                       { "mData": "operationContext"},
+                       { "mData": "operationDescription"},
+                       { "mData": "operationTime"},
+                   ] //对应表格中的每一列
+         
+ 	});
+	 function retrieveData( sSource111,aoData111, fnCallback111) {
+	        $.ajax({
+	            url : sSource111,//这个就是请求地址对应sAjaxSource
+	            data : {"aoData":JSON.stringify(aoData111)},//这个是把datatable的一些基本数据传给后台,比如起始位置,每页显示的行数
+	            type : 'post',
+	            dataType : 'json',
+	            async : false,
+	            success : function(result) {
+	                fnCallback111(result);//把返回的数据传给这个方法就可以了,datatable会自动绑定数据的
+	            },
+	            error : function(msg) {
+	            }
+	        });
+	    }
 	</script>
-	<script type="text/javascript"
-		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+	
 </body>
 </html>
