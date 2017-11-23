@@ -291,7 +291,7 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 			
 			$('#ProjectName_addDetection').val(projectName);
 			
-			//加载添加弹出层的测点类型选项(公用新建当前项目下所有类型测点)
+			//加载添加弹出层的检测指标选项(所有项目公用所有检测指标)
 			$.ajax({
 		    	type:'post',
 			  	  url: 'rest/detectionPoint/showDetectionStatus',
@@ -438,10 +438,10 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 															''+item.detectionDescription+''+
 														'</td>'+
 														'<td class="project-title" style="width:140px">'+
-															''+item.detectionLongitude+''+
+															''+item.detectionLatitude+''+
 														'</td>'+
 														'<td class="project-title" style="width:140px">'+
-															''+item.detectionLatitude+''+
+															''+item.detectionLongitude+''+
 														'</td>'+
 														//测点ID（隐藏7）
 														'<td class="project-status" style="display:none">'+

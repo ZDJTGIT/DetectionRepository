@@ -181,4 +181,9 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectMapper.selectAlarmSensorInfoCount(projectId);
 	}
 
+	@Override
+	public Project selectAlarmAlarmCount(Integer projectId) {
+		return projectMapper.selectAlarmAlarmCount(projectId);
+	}
+
 }

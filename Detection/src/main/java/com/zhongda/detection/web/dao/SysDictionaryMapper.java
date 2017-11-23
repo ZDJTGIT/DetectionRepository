@@ -64,4 +64,10 @@ public interface SysDictionaryMapper {
 	 * @return
 	 */
 	List<SysDictionary> selectSysDictionaryByTypeCode(Integer typeCode);
+	
+	/**
+	 * 查所有检测指标
+	 * @return
+	 */
+	List<SysDictionary> selectAllDetectionType();
 }

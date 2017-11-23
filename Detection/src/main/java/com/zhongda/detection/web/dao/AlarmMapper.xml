@@ -84,12 +84,13 @@
   </select>  
    <select id="selectAlarmWithAlarmCount" parameterType="com.zhongda.detection.web.model.Project" resultMap="BaseResultMap"> 
      select
-      a.*, sd.item_name 'alarm_type', dp.detection_name 'detection_name'
-      from alarm a, sys_dictionary sd, detection_point dp
+      a.*, sd.item_name 'alarm_type', dp.detection_name 'detection_name', sds.item_name 'alarm_status'
+      from alarm a, sys_dictionary sd, detection_point dp, sys_dictionary sds
       where a.project_Id = ${_parameter.projectId}
       and a.alarm_type_id = sd.dic_id
       and a.detection_id = dp.detection_point_id
-     order by a.create_time desc
+      and a.status = sds.dic_id
+      order by a.create_time desc
   </select>  
   <select id="selectPageAlarmByUserIdAndOtherInfo" parameterType="com.zhongda.detection.web.model.Alarm" resultMap="BaseResultMap">
 	select

@@ -200,6 +200,7 @@
 															<th>产生时间</th>
 															<th>告警等级</th>
 															<th>同类消息产生次数</th>
+															<th>处理</th>
 														</tr>
 													</thead>
 													<tbody id="tbody_alarm">

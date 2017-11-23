@@ -219,6 +219,12 @@
 	and si.detection_point_id=dp.detection_point_id) b
 	where a.alarm_level=2) o
   </select>
+  <select id="selectAlarmAlarmCount" parameterType="java.lang.Integer" resultMap="ProjectResultMap">
+  	select count(*) 'alarm_alarm_count'
+  	from alarm 
+  	where project_id = #{projectId,jdbcType=INTEGER}
+  	and status=20
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from project
     where project_id = #{projectId,jdbcType=INTEGER}

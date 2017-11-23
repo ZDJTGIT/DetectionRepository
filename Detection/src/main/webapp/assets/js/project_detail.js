@@ -17,7 +17,6 @@ var projectName=document.getElementById("project_detail_projectName").value;
 		        color:'rgba(0,0,0,0)'
 		    }
 		}; 
-        //26,179,148
 		var dataStyle = { 
 		    normal: {
 		        label : {
@@ -45,9 +44,6 @@ var projectName=document.getElementById("project_detail_projectName").value;
             xAxis : [
                      {
                          type : 'value',
-                         //position: 'top',
-                         //splitLine: {show: false},
-                         //axisLabel: {show: false},
                      }
             ],
             //纵坐标
@@ -58,13 +54,6 @@ var projectName=document.getElementById("project_detail_projectName").value;
             },
             
             series : [
-                      /*  {
-                          name:'正常',
-                          type:'bar',
-                          stack: '总量',
-                          itemStyle : dataStyle,
-                          data:[0,0,0,0]
-                      },  */
                         {
                           name:'正常',
                           type:'bar',
@@ -79,13 +68,6 @@ var projectName=document.getElementById("project_detail_projectName").value;
                           itemStyle : dataStyle,
                           data:[0,0,0,0]
                       }  
-                      /* {
-                          name:'非正常',
-                          type:'bar',
-                          stack: '总量',
-                          itemStyle: placeHoledStyle,
-                          data:[1,2,1,2]
-                      }  */
                   ]
         };
 		//初始化echarts实例
@@ -103,14 +85,18 @@ var projectName=document.getElementById("project_detail_projectName").value;
 			    data: {projectId:projectId},
 			    contextType:"application/json",
 			    success: function(data){
+			    	 //非正常测点（出线告警信息的测点）
 			    	 var normalDetectionPointCount = data.detectionPointCount-data.alarmDetectionCount;
+			    	 //非正常传感器（传回设备类告警的传感器）
 			    	 var normalSensorInfoCount = data.sensorInfoCount-data.alarmSensorInfoCount;
+			    	 //未处理告警信息（告警信息状态为未读）
+			    	 var normalAlarmCount = data.alarmCount-data.alarmAlarmCount;
 			    	 if(data){   
-				    		 content.push(data.alarmCount);//告警信息条数（alarm表）
+				    		 content.push(normalAlarmCount);//告警信息条数（alarm表）
 				    		 content.push(2);//改成采集器数量---
 				    		 content.push(normalSensorInfoCount);
 				    		 content.push(normalDetectionPointCount);
-				    		 contenterror.push(0);
+				    		 contenterror.push(data.alarmAlarmCount);
 				    		 contenterror.push(0);
 				    		 contenterror.push(data.alarmSensorInfoCount);
 				    		 contenterror.push(data.alarmDetectionCount);
@@ -474,6 +460,7 @@ var projectName=document.getElementById("project_detail_projectName").value;
 													'<td>'+item.createTime+'</td>'+
 													'<td>'+item.alarmLevel+'</td>'+
 													'<td>'+item.frequency+'</td>'+
+													'<td>'+item.alarmStatus+'</td>'+
 												'</tr>';		
 				  	  		    	});
 				  	  		    $('#tbody_alarm').html(asthtml);

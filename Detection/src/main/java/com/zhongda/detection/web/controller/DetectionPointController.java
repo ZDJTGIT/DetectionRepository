@@ -76,16 +76,27 @@ public class DetectionPointController {
 		}
 	}
 	
+//	/**
+//	 * 加载添加弹出层的测点类型选项(公用新建当前项目下所有类型测点)
+//	 * @param projectTypeId
+//	 * @return
+//	 */
+//	@RequestMapping(value = "/showDetectionStatus", method = RequestMethod.POST)
+//	@ResponseBody
+//	public List<SysDictionary> showDetectionStatus(Integer projectTypeId) {
+//		return sysDictionaryServce
+//				.selectSysDictionaryByProjectTypeId(projectTypeId);
+//	}---原本根据项目类型不同分开的检测指标
+	
 	/**
-	 * 加载添加弹出层的测点类型选项(公用新建当前项目下所有类型测点)
+	 * 加载添加弹出层的检测指标选项(所有项目公用所有检测指标)
 	 * @param projectTypeId
 	 * @return
 	 */
 	@RequestMapping(value = "/showDetectionStatus", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SysDictionary> showDetectionStatus(Integer projectTypeId) {
-		return sysDictionaryServce
-				.selectSysDictionaryByProjectTypeId(projectTypeId);
+		return sysDictionaryServce.selectAllDetectionType();
 	}
 	
 	/**

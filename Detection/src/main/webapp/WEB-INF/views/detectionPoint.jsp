@@ -57,12 +57,11 @@
 						</div>
 						<div class="project-list">
 							<table class="table table-hover" id="detection_table">
-								<tbody id="detection_tbody">
 										<tr>
 										<td class="project-title" style="width:60px">
 										</td>
 				    	  		    	<td class="project-title" style="width:120px">
-				    	  		    		<a href="javascript:;">检测因素</a>
+				    	  		    		<a href="javascript:;">检测指标</a>
 									    </td>
 									    <td class="project-title" style="width:50px">
 										</td>
@@ -89,6 +88,7 @@
 									    <td class="project-actions">
 									    </td>
 									   </tr>
+								<tbody id="detection_tbody">
 								</tbody>
 							</table>
 							<div style="margin-top:15px; text-align:center;" id="pageComponent_n"></div>
@@ -105,7 +105,7 @@
 						      </div>
 						      <div class="modal-body">
 						      
-								<label class="md_lable" for="">测点类型:</label>
+								<label class="md_lable" for="">检测指标:</label>
 								<div id="selectDetectionType_div_addDetection">
 									<select class="md_input" id="selectDetectionStatusAdd" name="selectDetectionStatusAdd">
 									</select>
@@ -146,7 +146,7 @@
 						      </div>
 						      <div class="modal-body">
 						      
-								<label class="md_lable" for="">测点类型:</label>
+								<label class="md_lable" for="">检测指标:</label>
 								<div id="selectDetectionType_div_updetaDetection">
 									<select class="md_input" id="selectDetectionStatusUpdeta" name="selectDetectionStatusUpdeta">
 									</select>

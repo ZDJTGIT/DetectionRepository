@@ -178,6 +178,15 @@ public class CommonController {
 		return "form_avatar";
 	}
 
+	@RequestMapping("terminals/{project}")
+	public String terminals(Model model,
+			@PathVariable("project") String project) {
+		String[] strings = project.split(":");
+		model.addAttribute("projectTypeId", strings[0]);
+		model.addAttribute("projectName", strings[1]);
+		return "terminals";
+	}
+	
 	@RequestMapping("detectionPoint/{project}")
 	public String detectionPoint(Model model,
 			@PathVariable("project") String project) {

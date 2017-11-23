@@ -1,8 +1,8 @@
 
 var dlId=document.getElementById("project_DLID").value;
-	
-	//修改项目状态
-	$.get('rest/project/updetaProjectStatus');
+
+	 //自动更新项目状态
+	 $.get('rest/project/updetaProjectStatus');
 	 
 		//传字符串型时间转化为时间
 		 function stringToData(strin){
@@ -459,7 +459,6 @@ var dlId=document.getElementById("project_DLID").value;
 			} 
 			var userId = $("#selectUser_div_addProject option:selected").val();
 			var projectTypeId = $("#selectProjectType_div_addProject option:selected").val();
-			//var projectStatus = $("#selectProjectStatus_div_addProject option:selected").val();
 			var projectName = $("#projectName_addProject").val();
 			var projectAddress = $("#projectAddress_addProject").val();
 			var projectDescription = $("#projectDescription_addProject").val();
@@ -474,8 +473,6 @@ var dlId=document.getElementById("project_DLID").value;
 							+ projectTypeId
 							+ '","projectName":"'
 							+ projectName
-							//+ '","projectStatus":"'
-							//+ projectStatus
 							+ '","projectAddress":"'
 							+ projectAddress
 							+ '","projectBeginTime":"'
@@ -512,10 +509,7 @@ var dlId=document.getElementById("project_DLID").value;
 	  		    		}else{
 	  		    			percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
 	  		    		}
-					    var viewData = '<tr id="project_'+ data.projectId +'" onclick="test('+data.projectId+')" style="height:100px">'+
-				    	  		    	//'<td class="project-status" style="width:120px">'+
-										//'<a href="project_detail.html">' + item.sysDictionary.itemName+'</a><br />'+
-									    //'</td>'+
+					     var viewData = '<tr id="project_'+ data.projectId +'" onclick="test('+data.projectId+')" style="height:100px">'+
 									    '<td class="project-status" style="display:none">'+
 											'<span class="label label-primary">' + data.projectId + '</span>'+
 										'</td>'+
@@ -571,19 +565,16 @@ var dlId=document.getElementById("project_DLID").value;
 										'</td>'+
 										
 										'<td class="project-status" style="width:80px">'+
-										//打开页面即传item.pojectId过去
-										'<a href="rest/detectionPoint/'+data.projectTypeId+':'+data.projectName+'" class="J_menuItem" name="测点">'+
-											 '测点'+
-										'</a>'+
+											'<a href="rest/detectionPoint/'+data.projectTypeId+':'+data.projectName+'" class="J_menuItem" name="测点">'+
+												 '测点'+
+											'</a>'+
 										'</td>'+
 										'<td class="project-status" style="width:80px">'+
-										//打开页面即传data.pojectId过去
 											'<a href="rest/thresHold/'+data.projectId+':'+data.projectName+'" class="J_menuItem" name="阀值">'+
 												'阀值 '+
 											'</a>'+
 										'</td>'+
 										'<td class="project-status" style="width:80px">'+
-										//打开页面即传data.pojectId过去
 											'<a href="rest/image/'+data.projectId+':'+data.projectName+'" class="J_menuItem" name="图片">'+
 												'图片 '+
 											'</a>'+
@@ -684,87 +675,81 @@ var dlId=document.getElementById("project_DLID").value;
 					  	  		    	}else{
 					  	  		    		percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
 					  	  		    	}
-					  	  		    	var spanClass;
-					  	  		    	if(item.alarmCount == 0){
-					  	  		    		spanClass = "label-primary";
-					  	  		    	}else{
-					  	  		    		spanClass = "label-warning";
-					  	  		    	}
-					  	  		    				asthtml +='<tr id="project_'+ item.projectId +'" onclick="test('+item.projectId+')" style="height:100px">'+								    	  		    	
-														    '<td class="project-status" style="display:none">'+
-																'<span class="label label-primary">' + item.projectId + '</span>'+
-															'</td>'+
-															'<td class="project-status" style="display:none">'+
-																'<span class="label label-primary">' + item.projectTypeId + '</span>'+
-															'</td>'+
-															'<td class="project-status" style="display:none">'+
-																'<span class="label label-primary">' + item.projectLongitude + '</span>'+
-															'</td>'+
-															'<td class="project-status" style="display:none">'+
-																'<span class="label label-primary">' + item.projectLatitude + '</span>'+
-															'</td>'+
-															'<td class="project-status" style="display:none">'+
-																'<span class="label label-primary">' + item.projectAddress + '</span>'+
-															'</td>'+
-															'<td class="project-status" style="width:80px">'+
-																'<span class="label label-primary statusColor'+item.projectStatus+'">' + item.projectStatusString + '</span>'+
-															'</td>'+
-															'<td class="project-title" style="width:150px">'+
-																'<a class="J_menuItem" href="rest/project_detail/'+item.projectId+":"+item.projectName+'" name="项目详情">' + 
-																 item.projectName + 
-																'</a><br />'+
-															'</td>'+
-															'<td class="project-title" style="width:200px">'+
-																'<a href="javascript:;">创建时间</a><br />'+
-																'<small>' + item.projectBeginTime + '</small>'+
-													    	'</td>'+
-															'<td class="project-completion" style="width:320px">'+
-																'<small>当前进度： '+percentage+'%</small>'+
-																'<div class="progress progress-mini">'+
-																	'<div style="width: '+percentage+'%;" class="progress-bar"></div>'+
-																'</div>'+
-															'</td>'+
-															'<td class="project-title" style="width:300px">'+
-																'<a href="javascript:;">项目描述</a><br />'+
-																'<p id="trhight">' + item.projectDescription + '</p>'+
-															'</td>'+
-															'<td class="project-status" style="display:none">'+
-																'<span class="label label-primary">' + item.projectStatus + '</span>'+
-													    	'</td>'+
-													    	'<td class="project-status" style="display:none">'+
-																'<span class="label label-primary">' + item.projectBeginTime + '</span>'+
-														    '</td>'+
-														    '<td class="project-status" style="display:none">'+
-																'<span class="label label-primary">' + item.projectEndTime + '</span>'+
-													    	'</td>'+
-													    	'<td class="project-title" style="width:20px">'+
-															'</td>'+
-															'<td class="project-title" style="width:140px">'+
-																'<a href="javascript:;">告警次数(<i class="fa fa-bell"></i><span class="label '+spanClass+'">'+item.alarmCount+'</span>)</a><br />'+
-															'</td>'+
-															'<td class="project-title" style="width:20px">'+
-															'</td>'+
-															'<td class="project-status" style="width:80px">'+
-															//打开页面即传item.projectName过去
-																'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="测点">测点</a>'+
-															'</td>'+
-															'<td class="project-status" style="width:80px">'+
-																//打开页面即传item.pojectId过去
-																'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+':'+item.projectTypeId+'" class="J_menuItem" name="阀值">阀值 </a>'+
-															'</td>'+
-															'<td class="project-status" style="width:80px">'+
-																//打开页面即传item.pojectId过去
-																'<a href="rest/project_image/'+item.projectId+':'+item.projectName+'" class="J_menuItem" name="图片">图片 </a>'+
-															'</td>'+
-																'<td class="project-actions">'+
-															    '<a href="javascript:;" class="J_menuItem" onclick="updetaProject(this)" data-toggle="modal" data-target="#myModal_updetaProject">'+
-																	'<i class="fa fa-pencil"></i> 修改 '+
-																'</a>'+
-																'<a href="javascript:;" class="J_menuItem" onclick="deleteProject('+ item.projectId +')">'+
-																	'<i class="fa fa-times-circle"></i> 删除 '+
-															    '</a>'+
-															'</td>'+
-														'</tr>'; 
+					  	  		    				 asthtml += '<tr id="project_'+ item.projectId +'" onclick="test('+item.projectId+')" style="height:100px">'+
+															    '<td class="project-status" style="display:none">'+
+																	'<span class="label label-primary">' + item.projectId + '</span>'+
+																'</td>'+
+																'<td class="project-status" style="display:none">'+
+																	'<span class="label label-primary">' + item.projectTypeId + '</span>'+
+																'</td>'+
+																'<td class="project-status" style="display:none">'+
+																	'<span class="label label-primary">' + item.projectLongitude + '</span>'+
+																'</td>'+
+																'<td class="project-status" style="display:none">'+
+																	'<span class="label label-primary">' + item.projectLatitude + '</span>'+
+																'</td>'+
+																'<td class="project-status" style="display:none">'+
+																	'<span class="label label-primary">' + item.projectAddress + '</span>'+
+																'</td>'+
+																'<td class="project-status" style="width:80px">'+
+																	'<span class="label label-primary statusColor'+item.projectStatus+'">' + item.projectStatusString + '</span>'+
+																'</td>'+
+																'<td class="project-title" style="width:150px">'+
+																	'<a class="J_menuItem" href="rest/project_detail/'+item.projectId+":"+item.projectName+'" name="项目详情">' + 
+																	 item.projectName + 
+																	'</a><br />'+
+																'</td>'+
+																'<td class="project-title" style="width:200px">'+
+																	'<a href="javascript:;">创建时间</a><br />'+
+																	'<small>' + item.projectBeginTime + '</small>'+
+														    	'</td>'+
+																'<td class="project-completion" style="width:320px">'+
+																	'<small>当前进度： '+percentage+'%</small>'+
+																	'<div class="progress progress-mini">'+
+																		'<div style="width: '+percentage+'%;" class="progress-bar"></div>'+
+																	'</div>'+
+																'</td>'+
+																'<td class="project-title" style="width:300px">'+
+																	'<a href="javascript:;">项目描述</a><br />'+
+																	'<p id="trhight">' + item.projectDescription + '</p>'+
+																'</td>'+
+																'<td class="project-status" style="display:none">'+
+																	'<span class="label label-primary">' + item.projectStatus + '</span>'+
+														    	'</td>'+
+														    	'<td class="project-status" style="display:none">'+
+																	'<span class="label label-primary">' + item.projectBeginTime + '</span>'+
+															    '</td>'+
+															    '<td class="project-status" style="display:none">'+
+																	'<span class="label label-primary">' + item.projectEndTime + '</span>'+
+														    	'</td>'+
+														    	'<td class="project-title" style="width:20px">'+
+																'</td>'+
+																'<td class="project-title" style="width:140px">'+
+																	'<a href="javascript:;">项目告警信息(0)</a><br />'+
+																'</td>'+
+																'<td class="project-title" style="width:20px">'+
+																'</td>'+
+																'<td class="project-status" style="width:70px">'+
+																	'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="测点">测点</a>'+
+																'</td>'+
+																'<td class="project-status" style="width:70px">'+
+																	'<a href="rest/terminals/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="采集器">采集器</a>'+
+																'</td>'+
+																'<td class="project-status" style="width:70px">'+
+																	'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+':'+item.projectTypeId+'" class="J_menuItem" name="阀值">阀值 </a>'+
+																'</td>'+
+																'<td class="project-status" style="width:70px">'+
+																	'<a href="rest/project_image/'+item.projectId+':'+item.projectName+'" class="J_menuItem" name="图片">图片 </a>'+
+																'</td>'+
+																	'<td class="project-actions">'+
+																    '<a href="javascript:;" class="J_menuItem" onclick="updetaProject(this)" data-toggle="modal" data-target="#myModal_updetaProject">'+
+																		'<i class="fa fa-pencil"></i> 修改 '+
+																	'</a>'+
+																	'<a href="javascript:;" class="J_menuItem" onclick="deleteProject('+ item.projectId +')">'+
+																		'<i class="fa fa-times-circle"></i> 删除 '+
+																    '</a>'+
+																'</td>'+
+															'</tr>'; 
 					  	  		    					});
 					  	  		    $('#hover_table').html(asthtml);
 					  	  		    

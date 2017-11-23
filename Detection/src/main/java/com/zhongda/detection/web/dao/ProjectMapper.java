@@ -201,4 +201,10 @@ public interface ProjectMapper {
 	 * @return
 	 */
 	Project selectAlarmSensorInfoCount(Integer projectId);
+	/**
+	 * 查项目下未处理告警信息条数
+	 * @param projectId
+	 * @return
+	 */
+	Project selectAlarmAlarmCount(Integer projectId);
 }

@@ -40,8 +40,9 @@ public class Project {
     private Integer pageSize;
     
     //缓存测点数量，传感器数量，阀值数量，图片数量。
-    //异常测点数，异常传感器数量
-    private Integer alarmSensorInfoCount;
+    //异常测点数，异常传感器数量，未处理告警信息数量
+    private Integer alarmAlarmCount;
+	private Integer alarmSensorInfoCount;
 	private Integer alarmDetectionCount;
     private Integer detectionPointCount;
     private Integer sensorInfoCount;
@@ -53,6 +54,14 @@ public class Project {
     
     // 缓存告警信息的数量
   	private Integer alarmCount;
+  	
+  	public Integer getAlarmAlarmCount() {
+		return alarmAlarmCount;
+	}
+
+	public void setAlarmAlarmCount(Integer alarmAlarmCount) {
+		this.alarmAlarmCount = alarmAlarmCount;
+	}
   	
   	public Integer getAlarmSensorInfoCount() {
 		return alarmSensorInfoCount;
