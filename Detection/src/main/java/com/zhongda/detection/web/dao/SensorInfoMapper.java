@@ -6,7 +6,8 @@ import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SensorInfo;
 
 public interface SensorInfoMapper {
-	/**
+	
+    /**
 	 * 根据传感器ID删除传感器--
 	 * @param sensorInfoId
 	 * @return
@@ -50,6 +51,11 @@ public interface SensorInfoMapper {
      */
     List<SensorInfo> selectByProjectId(Integer projectId);
     
+    /**
+     *  根据传感器ID查唯一传感器
+     * @param sensorInfoId
+     * @return
+     */
     SensorInfo selectByPrimaryKey(Integer sensorInfoId);
 
     /**
@@ -77,9 +83,4 @@ public interface SensorInfoMapper {
 	 */
     List<SensorInfo> selectSensorInfoWithAlarmCount(Project project);
     
-    /**
-     * 根据传感器ID查唯一传感器
-     * @return
-     */
-    SensorInfo selectSensorInfoBySensorInfoId(Integer sensorInfoId);
 }

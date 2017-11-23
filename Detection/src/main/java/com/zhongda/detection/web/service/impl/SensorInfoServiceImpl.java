@@ -69,7 +69,7 @@ public class SensorInfoServiceImpl implements SensorInfoService {
 
 	@Override
 	public SensorInfo selectSensorInfoBySensorInfoId(Integer sensorInfoId) {
-		return sensorInfoMapper.selectSensorInfoBySensorInfoId(sensorInfoId);
+		return sensorInfoMapper.selectByPrimaryKey(sensorInfoId);
 	}
 
 }

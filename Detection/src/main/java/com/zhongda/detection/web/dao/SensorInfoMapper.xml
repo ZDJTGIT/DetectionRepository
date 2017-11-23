@@ -3,15 +3,16 @@
 <mapper namespace="com.zhongda.detection.web.dao.SensorInfoMapper">
   <resultMap id="BaseResultMap" type="com.zhongda.detection.web.model.SensorInfo">
     <id column="sensor_info_id" jdbcType="INTEGER" property="sensorInfoId" />
+    <result column="smu_id" jdbcType="VARCHAR" property="smuId" />
     <result column="detection_point_id" jdbcType="INTEGER" property="detectionPointId" />
     <result column="sensor_id" jdbcType="VARCHAR" property="sensorId" />
     <result column="sensor_type" jdbcType="VARCHAR" property="sensorType" />
     <result column="sensor_model" jdbcType="VARCHAR" property="sensorModel" />
     <result column="sensor_depth" jdbcType="REAL" property="sensorDepth" />
-    <result column="detection_name" jdbcType="VARCHAR" property="detectionName" />
   </resultMap>
   <sql id="Base_Column_List">
-    sensor_info_id, detection_point_id, sensor_id, sensor_type, sensor_model, sensor_depth
+    sensor_info_id, smu_id, detection_point_id, sensor_id, sensor_type, sensor_model, 
+    sensor_depth
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -19,13 +20,6 @@
     from sensor_info
     where sensor_info_id = #{sensorInfoId,jdbcType=INTEGER}
   </select>
-  <!-- <select id="selectBySensorIdAndSensorType" resultMap="BaseResultMap">
-  	select
-  	<include refid="Base_Column_List" />
-    from sensor_info
-    where sensor_id = #{0}
-    and sensor_type = #{1}
-  </select> -->
   <select id="selectBySensorIdAndSensorType" resultMap="BaseResultMap">
   	select
   	<include refid="Base_Column_List" />
@@ -45,15 +39,7 @@
 	  where si.detection_point_id in (select detection_point_id 
 	  from detection_point where project_id = #{projectId,jdbcType=INTEGER})
 	  and si.detection_point_id=dp.detection_point_id
-  </select>
-  
-  <select id="selectSensorInfoBySensorInfoId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-  	select 
-  	<include refid="Base_Column_List" />
-  	from sensor_info
-  	where sensor_info_id= #{sensorInfoId,jdbcType=INTEGER}
-  </select>
-  
+  </select>  
   <select id="selectSensorInfoWithAlarmCount" parameterType="com.zhongda.detection.web.model.Project" resultMap="BaseResultMap"> 
      select 
 	 si.*,dp.detection_name 'detection_name' 
@@ -64,7 +50,6 @@
 	 and si.detection_point_id=dp.detection_point_id
      order by si.sensor_info_id desc
   </select>
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sensor_info
     where sensor_info_id = #{sensorInfoId,jdbcType=INTEGER}
@@ -80,18 +65,21 @@
     where detection_point_id = #{detectionPointId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.SensorInfo">
-    insert into sensor_info (sensor_info_id, detection_point_id, sensor_id, 
-      sensor_type, sensor_model, sensor_depth
-      )
-    values (#{sensorInfoId,jdbcType=INTEGER}, #{detectionPointId,jdbcType=INTEGER}, #{sensorId,jdbcType=VARCHAR}, 
-      #{sensorType,jdbcType=VARCHAR}, #{sensorModel,jdbcType=VARCHAR}, #{sensorDepth,jdbcType=REAL}
-      )
+    insert into sensor_info (sensor_info_id, smu_id, detection_point_id, 
+      sensor_id, sensor_type, sensor_model, 
+      sensor_depth)
+    values (#{sensorInfoId,jdbcType=INTEGER}, #{smuId,jdbcType=VARCHAR}, #{detectionPointId,jdbcType=INTEGER}, 
+      #{sensorId,jdbcType=VARCHAR}, #{sensorType,jdbcType=VARCHAR}, #{sensorModel,jdbcType=VARCHAR}, 
+      #{sensorDepth,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.SensorInfo">
     insert into sensor_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="sensorInfoId != null">
         sensor_info_id,
+      </if>
+      <if test="smuId != null">
+        smu_id,
       </if>
       <if test="detectionPointId != null">
         detection_point_id,
@@ -113,6 +101,9 @@
       <if test="sensorInfoId != null">
         #{sensorInfoId,jdbcType=INTEGER},
       </if>
+      <if test="smuId != null">
+        #{smuId,jdbcType=VARCHAR},
+      </if>
       <if test="detectionPointId != null">
         #{detectionPointId,jdbcType=INTEGER},
       </if>
@@ -133,6 +124,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.zhongda.detection.web.model.SensorInfo">
     update sensor_info
     <set>
+      <if test="smuId != null">
+        smu_id = #{smuId,jdbcType=VARCHAR},
+      </if>
       <if test="detectionPointId != null">
         detection_point_id = #{detectionPointId,jdbcType=INTEGER},
       </if>
@@ -153,7 +147,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zhongda.detection.web.model.SensorInfo">
     update sensor_info
-    set detection_point_id = #{detectionPointId,jdbcType=INTEGER},
+    set smu_id = #{smuId,jdbcType=VARCHAR},
+      detection_point_id = #{detectionPointId,jdbcType=INTEGER},
       sensor_id = #{sensorId,jdbcType=VARCHAR},
       sensor_type = #{sensorType,jdbcType=VARCHAR},
       sensor_model = #{sensorModel,jdbcType=VARCHAR},

@@ -3,6 +3,8 @@ package com.zhongda.detection.web.model;
 public class SensorInfo {
     private Integer sensorInfoId;
 
+    private String smuId;
+
     private Integer detectionPointId;
 
     private String sensorId;
@@ -12,16 +14,16 @@ public class SensorInfo {
     private String sensorModel;
 
     private Float sensorDepth;
-    
+
     //缓存测点名称，数据库无
     private String detectionName;
-
+     
     public String getDetectionName() {
 		return detectionName;
 	}
 
 	public void setDetectionName(String detectionName) {
-		this.detectionName = detectionName;
+		this.detectionName = detectionName == null ? null : detectionName.trim();
 	}
 
 	public Integer getSensorInfoId() {
@@ -30,6 +32,14 @@ public class SensorInfo {
 
     public void setSensorInfoId(Integer sensorInfoId) {
         this.sensorInfoId = sensorInfoId;
+    }
+
+    public String getSmuId() {
+        return smuId;
+    }
+
+    public void setSmuId(String smuId) {
+        this.smuId = smuId == null ? null : smuId.trim();
     }
 
     public Integer getDetectionPointId() {

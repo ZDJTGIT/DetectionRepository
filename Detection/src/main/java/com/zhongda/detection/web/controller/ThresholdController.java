@@ -140,13 +140,13 @@ public class ThresholdController {
 			threshold.setUserId(project.getUserId());
 			threshold.setProjectTypeId(project.getProjectTypeId());
 			thresholdService.insertSelective(threshold);
-			return threshold;
-		}else{
-			threshold.setThresholdId(0);
 			//插入一条操作日志
 			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
 			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"阀值插入",
 					currentUser.getUserName()+"插入阀值,ID为："+threshold.getThresholdId(),new Date()));
+			return threshold;
+		}else{
+			threshold.setThresholdId(0);
 			return threshold;
 		}
 		}else{

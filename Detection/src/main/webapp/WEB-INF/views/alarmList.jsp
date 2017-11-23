@@ -109,8 +109,7 @@
 							  									
                         	</form>
 						</div>
-                        <div id="checkboxTip" style="display: none;text-align: center;"><span></span><a class="confirmClick btn btn-sm btn-info">点击确认</a></div>
-                        <div style="display: none;"><input type="text" id="alarmTotalInput"/></div>
+                        <div id="checkboxTip" style="display: none;text-align: center;"><span></span><a id="alarmTotalA"></a><a class="btn btn-sm btn-info">点击确认</a></div>
 						<table id="alarmTable" class="table table-striped table-bordered table-hover topy">
 							<thead>
 							    <tr>
@@ -257,7 +256,7 @@
 
 				 //初始化分页组件函数
 				 function loadLaypage(dataTotal, jsonData){
-					 $('#alarmTotalInput').val(dataTotal);
+					 $('#alarmTotalA').text("点击选择所有告警消息共"+dataTotal+"项");
 					 var laypage = layui.laypage;
 					 laypage.render({
 						 elem: 'pageComponent', //分页组件div的id
@@ -297,7 +296,7 @@
 		      $('#checkboxTip').hide();
 		    }else{
 		      checkboxArray.iCheck('check');
-		      $('#checkboxTip').find('span').text("已选择当前页共"+checkboxArray.size()+"项，点击选择所有告警消息共"+$('#alarmTotalInput').val()+"项");
+		      $('#checkboxTip').find('span').text("已选择当前页共"+checkboxArray.size()+"项，");
 		      $('#checkboxTip').show();
 		    }
 		 });
@@ -314,7 +313,7 @@
 			 }else{
 				 if(checkLength == totalLength - 1){
 					  $('#checkbox-all').iCheck('check');
-					  $('#checkboxTip').find('span').text("已选择当前页共"+totalLength+"项，点击选择所有告警消息共"+$('#alarmTotalInput').val()+"项");
+					  $('#checkboxTip').find('span').text("已选择当前页共"+totalLength+"项，");
 				      $('#checkboxTip').show();
 				 }
 			 }
