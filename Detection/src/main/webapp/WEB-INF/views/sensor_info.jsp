@@ -104,7 +104,10 @@
 								<input class="md_input" type="text" id="sensorDepth_addSensorInfo" name="sensorDepth_addSensorInfo"><br><br>
 								
 								<label class="md_lable" for="terminalsInfoNum_addSensorInfo">采集器编号:&nbsp;&nbsp;</label>
-								<input class="md_input" type="text" id="terminalsInfoNum_addSensorInfo" name="terminalsInfoNum_addSensorInfo"><br>
+								<input class="md_input" type="text" id="terminalsInfoNum_addSensorInfo" name="terminalsInfoNum_addSensorInfo"><br><br>
+								
+								<label class="md_lable" for="terminalsInfoAisle_addSensorInfo">采集器通道:&nbsp;&nbsp;</label>
+								<input class="md_input" type="text" id="terminalsInfoAisle_addSensorInfo" name="terminalsInfoAisle_addSensorInfo"><br>
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" id="offAddSensorInfo" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -142,7 +145,10 @@
 								<input class="md_input" type="text" id="sensorDepth_updetaSensorInfo" name="sensorDepth_updetaSensorInfo"><br><br>
 								
 								<label class="md_lable" for="terminalsInfoNum_updetaSensorInfo">采集器编号:&nbsp;&nbsp;</label>
-								<input class="md_input" type="text" id="terminalsInfoNum_updetaSensorInfo" name="terminalsInfoNum_updetaSensorInfo"><br>
+								<input class="md_input" type="text" id="terminalsInfoNum_updetaSensorInfo" name="terminalsInfoNum_updetaSensorInfo"><br><br>
+								
+								<label class="md_lable" for="terminalsInfoAisle_updetaSensorInfo">采集器通道:&nbsp;&nbsp;</label>
+								<input class="md_input" type="text" id="terminalsInfoAisle_updetaSensorInfo" name="terminalsInfoAisle_updetaSensorInfo"><br>
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" id="offUpdetaSensorInfo" class="btn btn-default" data-dismiss="modal">关闭</button>

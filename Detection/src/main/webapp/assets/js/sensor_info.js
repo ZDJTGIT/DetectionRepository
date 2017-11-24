@@ -11,6 +11,7 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 		var sensorModel = $('#sensorModel_addSensorInfo').val();
 		var sensorDepth = $('#sensorDepth_addSensorInfo').val();
 		var smuId = $('#terminalsInfoNum_addSensorInfo').val();
+		var smuCmsChannel = $('#terminalsInfoAisle_addSensorInfo').val();
 		var jsonData = '{"detectionPointId":"'
 						+ detectionPointId
 						+ '","sensorId":"'
@@ -21,6 +22,8 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 						+ sensorModel 
 						+ '","smuId":"'
 						+ smuId 
+						+ '","smuCmsChannel":"'
+						+ smuCmsChannel 
 						+ '","sensorDepth":"'
 						+ sensorDepth + '"}';
 		$.ajax({
@@ -37,6 +40,8 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 						$('#sensorType_addSensorInfo').val("");
 						$('#sensorModel_addSensorInfo').val("");
 						$('#sensorDepth_addSensorInfo').val("");
+						$('#terminalsInfoNum_addSensorInfo').val("");
+						$('#terminalsInfoAisle_addSensorInfo').val("");
 						
 		 var viewData = '<tr id='+data.sensorInfoId+'>'+
 						'<td class="project-title" style="width:60px">'+
@@ -67,6 +72,10 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 						'</td>'+
 						'<td class="project-title" style="width:260px">'+
 							'<span class="label label-primary">'+data.smuId+'</span>'+
+						'</td>'+
+						//传感器ID（隐藏9）
+						'<td class="project-status" style="display:none">'+
+							'<span class="label label-primary">' + data.smuCmsChannel+ '</span>'+
 						'</td>'+
 						'<td class="project-title" style="width:340px">'+
 						'</td>'+
@@ -108,6 +117,7 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 		var sensorInfoId= $("table tr:eq(" + b + ") td:eq(6)").text();//传感器ID
 		var detectionPointId = $("table tr:eq(" + b + ") td:eq(7)").text();//测点ID
 		var smuId = $("table tr:eq(" + b + ") td:eq(8)").text();//采集器ID
+		var smuCmsChannel = $("table tr:eq(" + b + ") td:eq(9)").text();//采集器通道
 		$('#sensorId_updetaSensorInfo').val(sensorId);
 		$('#sensorType_updetaSensorInfo').val(sensorType);
 		$('#sensorModel_updetaSensorInfo').val(sensorModel);
@@ -115,6 +125,7 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 		$('#sensorInfoId_updetaSensorInfo').val(sensorInfoId);
 		$('#detectionPointId_updetaSensorInfo').val(detectionPointId);   	
 		$('#terminalsInfoNum_updetaSensorInfo').val(smuId);
+		$('#terminalsInfoAisle_updetaSensorInfo').val(smuCmsChannel);
 	}
 	
 	//点击提交，确定修改，修改的数据库存入数据库
@@ -130,6 +141,7 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 		var sensorInfoId= $('#sensorInfoId_updetaSensorInfo').val();
 		var detectionPointId = $('#detectionPointId_updetaSensorInfo').val();
 		var smuId = $('#terminalsInfoNum_updetaSensorInfo').val();
+		var smuCmsChannel = $('#terminalsInfoAisle_updetaSensorInfo').val();
 		var jsonData = '{"sensorType":"'
 						+ sensorType
 						+ '","sensorId":"'
@@ -142,6 +154,8 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 						+ sensorInfoId 
 						+ '","smuId":"'
 						+ smuId 
+						+ '","smuCmsChannel":"'
+						+ smuCmsChannel 
 						+ '","detectionPointId":"'
 						+ detectionPointId
 						+'"}';
@@ -161,6 +175,7 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 							$("table tr:eq(" + b + ") td:eq(6)").text(sensorInfoId);//传感器ID
 							$("table tr:eq(" + b + ") td:eq(7)").text(detectionPointId);//测点ID
 							$("table tr:eq(" + b + ") td:eq(8) span").text(smuId);//采集器ID
+							$("table tr:eq(" + b + ") td:eq(9)").text(smuCmsChannel);//采集器通道
 							$('#offUpdetaSensorInfo').trigger("click"); 
 							layer.msg('修改成功（该提示1s后自动关闭）', {
 								time : 1000, //1s后自动关闭
@@ -179,7 +194,6 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 	
 	//点击删除，删除该传感器
 	function deleteSensorInfo(sensorInfoId){
-		alert(sensorInfoId);
 		layer.msg('玩命提示中');
 		layer.confirm('确定要删除该传感器么？', {
 			btn : [ '取消删除', '确定删除' ] //按钮
@@ -247,6 +261,10 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 										'</td>'+
 										'<td class="project-title" style="width:260px">'+
 											'<span class="label label-primary">'+item.smuId+'</span>'+
+										'</td>'+
+										//传感器ID（隐藏9）
+										'<td class="project-status" style="display:none">'+
+											'<span class="label label-primary">' + item.smuCmsChannel+ '</span>'+
 										'</td>'+
 										'<td class="project-title" style="width:340px">'+
 										'</td>'+
