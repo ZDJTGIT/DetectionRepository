@@ -160,7 +160,7 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 							$("table tr:eq(" + b + ") td:eq(5) a").text(sensorModel);//传感器模型
 							$("table tr:eq(" + b + ") td:eq(6)").text(sensorInfoId);//传感器ID
 							$("table tr:eq(" + b + ") td:eq(7)").text(detectionPointId);//测点ID
-							$("table tr:eq(" + b + ") td:eq(8)").text(smuId);//采集器ID
+							$("table tr:eq(" + b + ") td:eq(8) span").text(smuId);//采集器ID
 							$('#offUpdetaSensorInfo').trigger("click"); 
 							layer.msg('修改成功（该提示1s后自动关闭）', {
 								time : 1000, //1s后自动关闭
@@ -179,6 +179,7 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 	
 	//点击删除，删除该传感器
 	function deleteSensorInfo(sensorInfoId){
+		alert(sensorInfoId);
 		layer.msg('玩命提示中');
 		layer.confirm('确定要删除该传感器么？', {
 			btn : [ '取消删除', '确定删除' ] //按钮

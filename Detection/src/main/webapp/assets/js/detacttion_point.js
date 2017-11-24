@@ -438,10 +438,10 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 															''+item.detectionDescription+''+
 														'</td>'+
 														'<td class="project-title" style="width:140px">'+
-															''+item.detectionLatitude+''+
+															''+item.detectionLongitude+''+
 														'</td>'+
 														'<td class="project-title" style="width:140px">'+
-															''+item.detectionLongitude+''+
+															''+item.detectionLatitude+''+
 														'</td>'+
 														//测点ID（隐藏7）
 														'<td class="project-status" style="display:none">'+

@@ -82,6 +82,7 @@ public class SensorInfoController {
 
 	/**
 	 * 添加一个传感器
+	 * 刚刚添加时sensorInfoId为空不能修改和删除传感器---
 	 * @param sensorInfo
 	 * @return
 	 */
@@ -92,10 +93,12 @@ public class SensorInfoController {
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 		sensorInfoService.insertSelective(sensorInfo);
+		//把数据库的自增长编号取出
+		sensorInfo = sensorInfoService.selectBySensorIdAndSensorType(sensorInfo.getSensorId(), null);
 		//插入一条操作日志
 		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
 		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"传感器插入",
-				currentUser.getUserName()+"在测点ID："+sensorInfo.getDetectionPointId()+"插入传感器编号为："+sensorInfo.getSensorId(),new Date()));
+				currentUser.getUserName()+"在ID为："+sensorInfo.getDetectionPointId()+"的测点下插入传感器，编号为："+sensorInfo.getSensorId(),new Date()));
 		return sensorInfo;
 		}else{
 			return null;
@@ -159,7 +162,7 @@ public class SensorInfoController {
 	 * @param response
 	 */
 	@RequestMapping(value = "/OnlysensorInfoId", method = RequestMethod.POST)
-	public void OnlyProjectName(Integer sensorId_addSensorInfo,String sensorType_addSensorInfo, HttpServletResponse response) {
+	public void OnlyProjectName(String sensorId_addSensorInfo,String sensorType_addSensorInfo, HttpServletResponse response) {
 		SensorInfo sensorInfo = sensorInfoService.selectBySensorIdAndSensorType(sensorId_addSensorInfo, sensorType_addSensorInfo);
 		try {
 			if (sensorInfo == null) {
@@ -179,7 +182,7 @@ public class SensorInfoController {
 	 * @param response
 	 */
 	@RequestMapping(value = "/upOnlysensorInfoId", method = RequestMethod.POST)
-	public void upOnlyProjectName(Integer sensorId_updetaSensorInfo, String sensorType_updetaSensorInfo,
+	public void upOnlyProjectName(String sensorId_updetaSensorInfo, String sensorType_updetaSensorInfo,
 			Integer sensorInfoId_updetaSensorInfo, HttpServletResponse response) {
 		SensorInfo sensorInfoLL = sensorInfoService.selectSensorInfoBySensorInfoId(sensorInfoId_updetaSensorInfo);
 		if(sensorInfoLL.getSensorId().equals(sensorId_updetaSensorInfo)){

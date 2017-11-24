@@ -659,15 +659,10 @@ public class ProjectController {
 			// 非管理员不能添加项目
 			project.setUserId(2);
 		}
-		// 插入一条操作日志
-		User currentUser = (User) WebUtils.getSessionAttribute(request,
-				"userInfo");
-		operationLogService
-				.insertOperationLog(new OperationLog(currentUser.getUserId(),
-						currentUser.getUserName(), "项目插入", currentUser
-								.getUserName()
-								+ "插入项目："
-								+ project.getProjectName(), new Date()));
+		//插入一条操作日志
+		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目插入",
+				currentUser.getUserName()+"插入项目，项目名为："+project.getProjectName(),new Date()));
 		return project;
 	}
 
@@ -714,13 +709,10 @@ public class ProjectController {
 			// 项目状态为int关联字典表，取出
 			project.setProjectStatusString(sysDictionaryServce
 					.selectProjectStatusByDicId(project.getProjectStatus()));
-			// 插入一条操作日志
-			User currentUser = (User) WebUtils.getSessionAttribute(request,
-					"userInfo");
-			operationLogService.insertOperationLog(new OperationLog(currentUser
-					.getUserId(), currentUser.getUserName(), "项目修改",
-					currentUser.getUserName() + "修改项目："
-							+ project.getProjectName(), new Date()));
+			//插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目修改",
+					currentUser.getUserName()+"修改项目，项目名为："+project.getProjectName(),new Date()));
 			return project;
 		} else {
 			return null;
@@ -749,13 +741,10 @@ public class ProjectController {
 			sensorInfoService.deleteByProjectId(projectId);
 			// 项目ID删除阀值
 			thresholdService.deleteByProjectId(projectId);
-			// 插入一条操作日志
-			User currentUser = (User) WebUtils.getSessionAttribute(request,
-					"userInfo");
-			operationLogService.insertOperationLog(new OperationLog(currentUser
-					.getUserId(), currentUser.getUserName(), "项目修改",
-					currentUser.getUserName() + "删除项目ID为：" + projectId
-							+ "下所有信息", new Date()));
+			//插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目删除",
+					currentUser.getUserName()+"删除项目，项目ID为："+projectId,new Date()));
 			return 1;
 		} else {
 			// 非管理员不能删除项目

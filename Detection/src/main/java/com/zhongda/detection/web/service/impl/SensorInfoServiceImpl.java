@@ -49,7 +49,7 @@ public class SensorInfoServiceImpl implements SensorInfoService {
 	}
 
 	@Override
-	public SensorInfo selectBySensorIdAndSensorType(Integer sensorId,
+	public SensorInfo selectBySensorIdAndSensorType(String sensorId,
 			String sensorType) {
 		return sensorInfoMapper.selectBySensorIdAndSensorType(sensorId, sensorType);
 	}

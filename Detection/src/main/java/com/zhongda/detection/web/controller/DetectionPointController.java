@@ -67,7 +67,7 @@ public class DetectionPointController {
 			//插入一条操作日志
 			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
 			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"测点插入",
-					currentUser.getUserName()+"在项目："+detectionPoint.getProjectName()+"中插入测点："+detectionPoint.getDetectionName(),new Date()));
+					currentUser.getUserName()+"插入测点，在项目："+detectionPoint.getProjectName()+"中，测点名为："+detectionPoint.getDetectionName(),new Date()));
 			// 根据项目名查项目ID加到测点
 			detectionPoint.setProjectId((projectService
 					.selectByProjectName(detectionPoint.getProjectName()))
@@ -162,7 +162,7 @@ public class DetectionPointController {
 		//插入一条操作日志
 		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
 		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"测点修改",
-				currentUser.getUserName()+"在项目"+detectionPoint.getProjectName()+"修改测点ID为："+detectionPoint.getDetectionPointId(),new Date()));
+				currentUser.getUserName()+"修改测点，在项目："+detectionPoint.getProjectName()+"下，测点ID为："+detectionPoint.getDetectionPointId(),new Date()));
 		return detectionPoint;
 		}else{
 			return null;
@@ -199,7 +199,7 @@ public class DetectionPointController {
 			//插入一条操作日志
 			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
 			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"测点删除",
-					currentUser.getUserName()+"删除测点ID为："+detectionPointId,new Date()));
+					currentUser.getUserName()+"删除测点，测点ID为："+detectionPointId,new Date()));
 			return 1;
 		} else {
 			// 非管理员不能删除测点

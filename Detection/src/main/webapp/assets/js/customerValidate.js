@@ -322,12 +322,10 @@ $('#form_addThresHold').validate({
 				minlength : 1
 			},
 			maxDrasticThresholdValue_add : {
-				required : true,
 				isdouble:  true,
 				minlength : 1
 			},
 			minDrasticThresholdValue_add : {
-				required : true,
 				isdouble:  true,
 				minlength : 1
 			}
@@ -346,12 +344,10 @@ $('#form_addThresHold').validate({
 				minlength:"最小告警值为2-15个字符"
 			},
 			maxDrasticThresholdValue_add : {
-				required : "最大意外告警值不能为空",
 				number:  "请按要求填写阀值",
 				minlength:"最大意外告警值为1-15个字符"
 			},
 			minDrasticThresholdValue_add : {
-				required : "最小意外告警值不能为空",
 				number:  "请按要求填写阀值",
 				minlength:"最小意外告警值为2-15个字符"
 			}
