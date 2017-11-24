@@ -32,7 +32,7 @@ public interface AlarmService {
 	 * @param alarm 封装了查询条件的alarm对象(包含当前页和每页记录数)
 	 * @return
 	 */
-	List<Alarm> selectPageAlarmByUserIdAndOtherInfo(Alarm alarm);
+	List<Alarm> selectPageAlarmByQuery(Alarm alarm);
 	
 	/**
 	 * 查当前用户下所有告警信息
@@ -56,4 +56,18 @@ public interface AlarmService {
 	 * @return
 	 */
 	Result updateAlarmStatus(Integer alarmId);
+	
+	/**
+	 * 批量修改对应的告警消息状态为确认状态
+	 * @param alarmIds 告警消息id串
+	 * @return
+	 */
+	Result updateBatchAlarmStatus(String alarmIds);
+	
+	/**
+	 * 批量修改通过查询条件查询出来的告警消息状态为确认状态
+	 * @param alarm 封装的查询条件
+	 * @return
+	 */
+	Result updateBatchAlarmStatusByQuery(Alarm alarm);
 }

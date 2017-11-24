@@ -109,7 +109,7 @@
 							  									
                         	</form>
 						</div>
-                        <div id="checkboxTip" style="display: none;text-align: center;"><span></span><a id="alarmTotalA"></a><a class="btn btn-sm btn-info">点击确认</a></div>
+                        <div id="checkboxTip" style="display: none;text-align: center;"><span></span><a id="alarmTotalA"></a><a id="confirmAllAlarm" class="btn btn-sm btn-info">点击确认</a></div>
 						<table id="alarmTable" class="table table-striped table-bordered table-hover topy">
 							<thead>
 							    <tr>
@@ -188,7 +188,6 @@
 					dataType : 'json',
 					data : {alarmId:clickObj.parent().parent().find('td:eq(1)').text()},
 					success : function(res) {
-						console.log(res);
 						if (res.code == 0) {
 							clickObj.parent().prev().text("已确认");
 							clickObj.attr("disabled","disabled");
@@ -203,7 +202,96 @@
 					}
 				});
 	        });
+	        
+	        //点击修改所有被选中的告警信息
+	        $('#confirmAllAlarm').click(function(e){
+	        	e.preventDefault();
+	        	 //显示loading提示
+                var loading = layer.load(2, {
+               	  shade: [0.1,'#fff'] //0.1透明度的白色背景
+                });
+	        	var selectedAlarmIds = "";
+	        	$('.alarmFlag').each(function(idx,item){
+	        		if($(this).parent().find('td:last').prev().text() === "未确认"){
+	        			selectedAlarmIds += $(this).text()+",";
+	        		}
+	        	});
+	        	selectedAlarmIds = selectedAlarmIds.substring(0,selectedAlarmIds.length - 1);
+	        	$.ajax({
+					type : 'post',
+					url : 'rest/alarm/alarmBatchConfirm',
+					dataType : 'json',					
+					data : {alarmIds:selectedAlarmIds},
+					success : function(res) {
+						if (res.code == 0) {
+							$('.alarmFlag').each(function(idx,item){
+								var lastTd = $(this).parent().find('td:last');
+				        		if(lastTd.prev().text() === "未确认"){
+				        			lastTd.prev().text("已确认");
+				        			lastTd.find('a').attr("disabled","disabled");
+				        			lastTd.find('a').text("已确认");
+									$('#alarmTotalSpan').text($('#alarmTotalSpan').text()-1);
+				        		}
+				        	});
+							$('#checkboxTip').hide();
+							//加载完成后隐藏loading提示
+		                    layer.close(loading);
+						} else {
+							alert("数据异常");
+							//加载完成后隐藏loading提示
+		                    layer.close(loading);
+						}
+					},
+					error : function() {
+						alert("数据加载失败");
+					}
+				});
+	        });
 
+	        $('#alarmTotalA').click(function(e){
+	        	e.preventDefault();
+	        	 //显示loading提示
+               var loading = layer.load(2, {
+              	  shade: [0.1,'#fff'] //0.1透明度的白色背景
+               });
+               var jsonData = {};
+				$('#AlarmSearchForm .form-control').each(function(index,item){
+					if($(this).val() && $(this).val()!=0){
+						jsonData[$(this).attr("name")] = $(this).val();
+					}
+				});	        	
+	        	$.ajax({
+					type : 'post',
+					url : 'rest/alarm/alarmBatchConfirmByQuery',
+					dataType : 'json',					
+					contentType : 'application/json',
+					data : JSON.stringify(jsonData),
+					success : function(res) {
+						if (res.code == 0) {
+							$('.alarmFlag').each(function(idx,item){
+								var lastTd = $(this).parent().find('td:last');
+				        		if(lastTd.prev().text() === "未确认"){
+				        			lastTd.prev().text("已确认");
+				        			lastTd.find('a').attr("disabled","disabled");
+				        			lastTd.find('a').text("已确认");
+									$('#alarmTotalSpan').text($('#alarmTotalSpan').text()-1);
+				        		}
+				        	});
+							$('#checkboxTip').hide();
+							//加载完成后隐藏loading提示
+		                    layer.close(loading);
+						} else {
+							alert("数据异常");
+							//加载完成后隐藏loading提示
+		                    layer.close(loading);
+						}
+					},
+					error : function() {
+						alert("数据加载失败");
+					}
+				});
+	        });
+	        
 	       (function(){
 				//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
 				function alarmPageAjax(jsonData, loadLaypage){
@@ -221,7 +309,7 @@
 								if (data) {
 									var htmlData = '';
 									$.each(data.alarmList,function(idx,item){
-										htmlData +='<tr><td style="text-align:center"><input type="checkbox"></td><td>'+item.alarmId+'</td><td>'+item.projectName+'</td><td>'+item.detectionId+'</td><td>'+item.smuCmsId+'</td><td>'+item.sensorId+'</td><td>'+item.alarmType+'</td><td class="layerOpen">'+item.alarmContext+'</td><td>'+item.createTime+'</td><td>'+item.alarmStatus+'</td><td><a class="confirmClick btn btn-sm btn-info"'
+										htmlData +='<tr><td style="text-align:center"><input type="checkbox"></td><td class="alarmFlag">'+item.alarmId+'</td><td>'+item.projectName+'</td><td>'+item.detectionId+'</td><td>'+item.smuCmsId+'</td><td>'+item.sensorId+'</td><td>'+item.alarmType+'</td><td class="layerOpen">'+item.alarmContext+'</td><td>'+item.createTime+'</td><td>'+item.alarmStatus+'</td><td><a class="confirmClick btn btn-sm btn-info"'
 										if(item.alarmStatus === "已确认"){
 											htmlData +=' disabled="disabled">已确认</a></td></tr>'
 										}else{
@@ -250,6 +338,8 @@
 							},
 							error : function() {
 								alert("数据加载失败");
+								//加载完成后隐藏loading提示
+			                    layer.close(loading);
 							}
 						});
 				 }

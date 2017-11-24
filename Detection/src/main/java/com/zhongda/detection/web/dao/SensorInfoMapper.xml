@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.zhongda.detection.web.model.SensorInfo">
     <id column="sensor_info_id" jdbcType="INTEGER" property="sensorInfoId" />
     <result column="smu_id" jdbcType="VARCHAR" property="smuId" />
+    <result column="smu_cms_channel" jdbcType="VARCHAR" property="smuCmsChannel" />
     <result column="detection_point_id" jdbcType="INTEGER" property="detectionPointId" />
     <result column="sensor_id" jdbcType="VARCHAR" property="sensorId" />
     <result column="sensor_type" jdbcType="VARCHAR" property="sensorType" />
@@ -11,8 +12,8 @@
     <result column="sensor_depth" jdbcType="REAL" property="sensorDepth" />
   </resultMap>
   <sql id="Base_Column_List">
-    sensor_info_id, smu_id, detection_point_id, sensor_id, sensor_type, sensor_model, 
-    sensor_depth
+    sensor_info_id, smu_id, smu_cms_channel, detection_point_id, sensor_id, sensor_type, 
+    sensor_model, sensor_depth
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -65,12 +66,12 @@
     where detection_point_id = #{detectionPointId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.SensorInfo">
-    insert into sensor_info (sensor_info_id, smu_id, detection_point_id, 
-      sensor_id, sensor_type, sensor_model, 
-      sensor_depth)
-    values (#{sensorInfoId,jdbcType=INTEGER}, #{smuId,jdbcType=VARCHAR}, #{detectionPointId,jdbcType=INTEGER}, 
-      #{sensorId,jdbcType=VARCHAR}, #{sensorType,jdbcType=VARCHAR}, #{sensorModel,jdbcType=VARCHAR}, 
-      #{sensorDepth,jdbcType=REAL})
+    insert into sensor_info (sensor_info_id, smu_id, smu_cms_channel, 
+      detection_point_id, sensor_id, sensor_type, 
+      sensor_model, sensor_depth)
+    values (#{sensorInfoId,jdbcType=INTEGER}, #{smuId,jdbcType=VARCHAR}, #{smuCmsChannel,jdbcType=VARCHAR}, 
+      #{detectionPointId,jdbcType=INTEGER}, #{sensorId,jdbcType=VARCHAR}, #{sensorType,jdbcType=VARCHAR}, 
+      #{sensorModel,jdbcType=VARCHAR}, #{sensorDepth,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.SensorInfo">
     insert into sensor_info
@@ -80,6 +81,9 @@
       </if>
       <if test="smuId != null">
         smu_id,
+      </if>
+      <if test="smuCmsChannel != null">
+        smu_cms_channel,
       </if>
       <if test="detectionPointId != null">
         detection_point_id,
@@ -104,6 +108,9 @@
       <if test="smuId != null">
         #{smuId,jdbcType=VARCHAR},
       </if>
+      <if test="smuCmsChannel != null">
+        #{smuCmsChannel,jdbcType=VARCHAR},
+      </if>
       <if test="detectionPointId != null">
         #{detectionPointId,jdbcType=INTEGER},
       </if>
@@ -127,6 +134,9 @@
       <if test="smuId != null">
         smu_id = #{smuId,jdbcType=VARCHAR},
       </if>
+      <if test="smuCmsChannel != null">
+        smu_cms_channel = #{smuCmsChannel,jdbcType=VARCHAR},
+      </if>
       <if test="detectionPointId != null">
         detection_point_id = #{detectionPointId,jdbcType=INTEGER},
       </if>
@@ -148,6 +158,7 @@
   <update id="updateByPrimaryKey" parameterType="com.zhongda.detection.web.model.SensorInfo">
     update sensor_info
     set smu_id = #{smuId,jdbcType=VARCHAR},
+      smu_cms_channel = #{smuCmsChannel,jdbcType=VARCHAR},
       detection_point_id = #{detectionPointId,jdbcType=INTEGER},
       sensor_id = #{sensorId,jdbcType=VARCHAR},
       sensor_type = #{sensorType,jdbcType=VARCHAR},

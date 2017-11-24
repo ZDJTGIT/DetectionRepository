@@ -5,6 +5,8 @@ public class SensorInfo {
 
     private String smuId;
 
+    private String smuCmsChannel;
+
     private Integer detectionPointId;
 
     private String sensorId;
@@ -14,7 +16,7 @@ public class SensorInfo {
     private String sensorModel;
 
     private Float sensorDepth;
-
+    
     //缓存测点名称，数据库无
     private String detectionName;
      
@@ -25,8 +27,8 @@ public class SensorInfo {
 	public void setDetectionName(String detectionName) {
 		this.detectionName = detectionName == null ? null : detectionName.trim();
 	}
-
-	public Integer getSensorInfoId() {
+    
+    public Integer getSensorInfoId() {
         return sensorInfoId;
     }
 
@@ -40,6 +42,14 @@ public class SensorInfo {
 
     public void setSmuId(String smuId) {
         this.smuId = smuId == null ? null : smuId.trim();
+    }
+
+    public String getSmuCmsChannel() {
+        return smuCmsChannel;
+    }
+
+    public void setSmuCmsChannel(String smuCmsChannel) {
+        this.smuCmsChannel = smuCmsChannel == null ? null : smuCmsChannel.trim();
     }
 
     public Integer getDetectionPointId() {

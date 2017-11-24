@@ -1,5 +1,6 @@
 package com.zhongda.detection.web.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,8 +20,8 @@ import com.zhongda.detection.web.service.AlarmService;
 @Service
 public class AlarmServiceImpl implements AlarmService{
 	
-	 @Resource
-	 private AlarmMapper alarmMapper;
+	@Resource
+	private AlarmMapper alarmMapper;
 
 	@Override
 	public List<Alarm> selectAlarmAndLinkmanPeriod() {
@@ -34,9 +35,9 @@ public class AlarmServiceImpl implements AlarmService{
 	}
 
 	@Override
-	public List<Alarm> selectPageAlarmByUserIdAndOtherInfo(Alarm alarm) {
+	public List<Alarm> selectPageAlarmByQuery(Alarm alarm) {
 		PageHelper.startPage(alarm.getPageNum(), alarm.getPageSize());
-		return alarmMapper.selectPageAlarmByUserIdAndOtherInfo(alarm);
+		return alarmMapper.selectPageAlarmByQuery(alarm);
 	}
 
 	@Override
@@ -63,6 +64,41 @@ public class AlarmServiceImpl implements AlarmService{
 			result.setCode(Result.FAILURE);
 			result.setMsg("修改状态失败");
 		}
+		return result;
+	}
+
+	@Override
+	public Result updateBatchAlarmStatus(String alarmIds) {
+		List<Integer> list = new ArrayList<Integer>();
+		String[] alarmIdArray = alarmIds.split(",");
+		Result result = new Result();
+		for (String alarmId : alarmIdArray) {
+			if(null != alarmId && !alarmId.trim().equals("")){
+				list.add(Integer.parseInt(alarmId));
+			}
+		}
+		int index = alarmMapper.updateBatchAlarmStatus(list);
+		if(index > 0){
+			result.setCode(Result.SUCCESS);
+			result.setMsg("修改状态成功");
+		}else{
+			result.setCode(Result.FAILURE);
+			result.setMsg("修改状态失败");
+		}		
+		return result;
+	}
+
+	@Override
+	public Result updateBatchAlarmStatusByQuery(Alarm alarm) {
+		int index = alarmMapper.updateBatchAlarmStatusByQuery(alarm);
+		Result result = new Result();
+		if(index > 0){
+			result.setCode(Result.SUCCESS);
+			result.setMsg("修改状态成功");
+		}else{
+			result.setCode(Result.FAILURE);
+			result.setMsg("修改状态失败");
+		}		
 		return result;
 	}
 }

@@ -36,7 +36,7 @@ public interface AlarmMapper {
 	 * @param alarm 封装了查询条件的alarm对象
 	 * @return
 	 */
-	List<Alarm> selectPageAlarmByUserIdAndOtherInfo(Alarm alarm);
+	List<Alarm> selectPageAlarmByQuery(Alarm alarm);
 	
 	/**
 	 * 查当前用户下所有告警信息
@@ -60,4 +60,18 @@ public interface AlarmMapper {
 	 * @return
 	 */
 	int updateAlarmStatus(Integer alarmId);
+	
+	/**
+	 * 批量修改对应的告警消息状态为确认状态
+	 * @param list 告警消息Id集合
+	 * @return
+	 */
+	int updateBatchAlarmStatus(List<Integer> list);
+	
+	/**
+	 * 批量修改通过查询条件查询出来的告警消息状态为确认状态
+	 * @param alarm 封装的查询条件
+	 * @return
+	 */
+	int updateBatchAlarmStatusByQuery(Alarm alarm);
 }

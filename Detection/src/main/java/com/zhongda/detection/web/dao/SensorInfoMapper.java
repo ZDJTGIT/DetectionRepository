@@ -7,7 +7,7 @@ import com.zhongda.detection.web.model.SensorInfo;
 
 public interface SensorInfoMapper {
 	
-    /**
+	/**
 	 * 根据传感器ID删除传感器--
 	 * @param sensorInfoId
 	 * @return
@@ -82,5 +82,4 @@ public interface SensorInfoMapper {
 	 * @return
 	 */
     List<SensorInfo> selectSensorInfoWithAlarmCount(Project project);
-    
 }

@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,7 @@ import com.zhongda.detection.web.model.AlarmLinkman;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.Result;
 import com.zhongda.detection.web.model.User;
+import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.AlarmLinkmanService;
 import com.zhongda.detection.web.service.AlarmService;
 
@@ -64,11 +67,14 @@ public class AlarmController {
 	@ResponseBody
 	public Map<String, Object> alarmPageList(@RequestBody Alarm alarm,
 			HttpServletRequest request) {
-		// 查出当前用户下所有未读的消息
-		User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
-		alarm.setUserId(user.getUserId());
-		List<Alarm> alarmList = alarmService
-				.selectPageAlarmByUserIdAndOtherInfo(alarm);
+		Subject subject = SecurityUtils.getSubject();
+		if (!subject.hasRole(RoleSign.ADMIN)
+				&& !subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			// 非管理员用户，只可查看自己的告警信息，查询条件增加userId
+			User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
+			alarm.setUserId(user.getUserId());
+		}
+		List<Alarm> alarmList = alarmService.selectPageAlarmByQuery(alarm);
 		PageInfo<Alarm> alarmPageInfo = new PageInfo<Alarm>(alarmList);
 		Map<String, Object> alarmMap = new HashMap<String, Object>();
 		alarmMap.put("total", alarmPageInfo.getTotal());
@@ -111,4 +117,35 @@ public class AlarmController {
 		return result;
 	}
 	
+	/**
+	 * 批量修改告警消息状态为确认状态
+	 * @param alarmId
+	 * @return
+	 */
+	@RequestMapping("/alarmBatchConfirm")
+	@ResponseBody
+	public Result alarmBatchConfirm(String alarmIds) {
+		Result result = alarmService.updateBatchAlarmStatus(alarmIds);
+		return result;
+	}
+	
+	/**
+	 * 批量修改通过查询条件查询出来的告警消息状态为确认状态
+	 * @param alarm 封装的查询条件
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/alarmBatchConfirmByQuery")
+	@ResponseBody
+	public Result alarmBatchConfirmByQuery(@RequestBody Alarm alarm, HttpServletRequest request) {
+		Subject subject = SecurityUtils.getSubject();
+		if (!subject.hasRole(RoleSign.ADMIN)
+				&& !subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			// 非管理员用户，只可查看自己的告警信息，查询条件增加userId
+			User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
+			alarm.setUserId(user.getUserId());
+		}		
+		Result result = alarmService.updateBatchAlarmStatusByQuery(alarm);
+		return result;
+	}
 }

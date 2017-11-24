@@ -92,41 +92,45 @@
       and a.status = sds.dic_id
       order by a.create_time desc
   </select>  
-  <select id="selectPageAlarmByUserIdAndOtherInfo" parameterType="com.zhongda.detection.web.model.Alarm" resultMap="BaseResultMap">
+  <select id="selectPageAlarmByQuery" parameterType="com.zhongda.detection.web.model.Alarm" resultMap="BaseResultMap">
 	select
     a.*, sd_type.item_name 'alarm_type', sd_status.item_name 'alarm_status'
     from alarm a, sys_dictionary sd_type, sys_dictionary sd_status
-    where user_id = #{userId,jdbcType=INTEGER}
-      <if test="alarmId != null">
-        and alarm_id = #{alarmId,jdbcType=INTEGER}
-      </if>
-      <if test="projectName != null">
-        and project_name = #{projectName,jdbcType=VARCHAR}
-      </if>
-      <if test="detectionId != null">
-        and detection_id = #{detectionId,jdbcType=INTEGER}
-      </if>
-      <if test="smuCmsId != null">
-        and smu_cms_id = #{smuCmsId,jdbcType=INTEGER}
-      </if>
-      <if test="sensorId != null">
-        and sensor_id = #{sensorId,jdbcType=VARCHAR}
-      </if>
-      <if test="alarmTypeId != null">
-        and alarm_type_id = #{alarmTypeId,jdbcType=INTEGER}
-      </if>
-      <if test="alarmContext != null">
-        and alarm_context like '%${_parameter.messageContext}%'
-      </if>
-      <if test="startCreateTime != null">
-        and (create_time &gt;= #{startCreateTime,jdbcType=TIMESTAMP})
-      </if>
-      <if test="endCreateTime != null">
-        and (create_time &lt;= #{endCreateTime,jdbcType=TIMESTAMP})
-      </if>
-      <if test="status != null">
-        and status = #{status,jdbcType=VARCHAR}
-      </if>
+    <where> 
+     	  <if test="userId != null">
+        	user_id = #{userId,jdbcType=INTEGER}
+      	  </if>	   
+	      <if test="alarmId != null">
+	        and alarm_id = #{alarmId,jdbcType=INTEGER}
+	      </if>
+	      <if test="projectName != null">
+	        and project_name = #{projectName,jdbcType=VARCHAR}
+	      </if>
+	      <if test="detectionId != null">
+	        and detection_id = #{detectionId,jdbcType=INTEGER}
+	      </if>
+	      <if test="smuCmsId != null">
+	        and smu_cms_id = #{smuCmsId,jdbcType=INTEGER}
+	      </if>
+	      <if test="sensorId != null">
+	        and sensor_id = #{sensorId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="alarmTypeId != null">
+	        and alarm_type_id = #{alarmTypeId,jdbcType=INTEGER}
+	      </if>
+	      <if test="alarmContext != null">
+	        and alarm_context like '%${_parameter.messageContext}%'
+	      </if>
+	      <if test="startCreateTime != null">
+	        and (create_time &gt;= #{startCreateTime,jdbcType=TIMESTAMP})
+	      </if>
+	      <if test="endCreateTime != null">
+	        and (create_time &lt;= #{endCreateTime,jdbcType=TIMESTAMP})
+	      </if>
+	      <if test="status != null">
+	        and status = #{status,jdbcType=VARCHAR}
+	      </if>
+      </where>
       and a.alarm_type_id = sd_type.dic_id
       and a.status = sd_status.dic_id
       order by create_time desc
@@ -238,11 +242,57 @@
       </if>
     </trim>
   </insert> 
-   <update id="updateAlarmStatus" parameterType="java.lang.Integer">
+  <update id="updateAlarmStatus" parameterType="java.lang.Integer">
     update alarm
     set status = 19     
     where alarm_id = #{alarmId,jdbcType=INTEGER}
   </update>
+  <update id="updateBatchAlarmStatus" parameterType="java.util.List">
+    update alarm
+    set status = 19     
+    where alarm_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+  </update> 
+  <update id="updateBatchAlarmStatusByQuery" parameterType="com.zhongda.detection.web.model.Alarm">
+    update alarm
+    set status = 19     
+    where  
+     	  <if test="userId != null">
+        	and user_id = #{userId,jdbcType=INTEGER}
+      	  </if>	   
+	      <if test="alarmId != null">
+	        and alarm_id = #{alarmId,jdbcType=INTEGER}
+	      </if>
+	      <if test="projectName != null">
+	        and project_name = #{projectName,jdbcType=VARCHAR}
+	      </if>
+	      <if test="detectionId != null">
+	        and detection_id = #{detectionId,jdbcType=INTEGER}
+	      </if>
+	      <if test="smuCmsId != null">
+	        and smu_cms_id = #{smuCmsId,jdbcType=INTEGER}
+	      </if>
+	      <if test="sensorId != null">
+	        and sensor_id = #{sensorId,jdbcType=VARCHAR}
+	      </if>
+	      <if test="alarmTypeId != null">
+	        and alarm_type_id = #{alarmTypeId,jdbcType=INTEGER}
+	      </if>
+	      <if test="alarmContext != null">
+	        and alarm_context like '%${_parameter.messageContext}%'
+	      </if>
+	      <if test="startCreateTime != null">
+	        and (create_time &gt;= #{startCreateTime,jdbcType=TIMESTAMP})
+	      </if>
+	      <if test="endCreateTime != null">
+	        and (create_time &lt;= #{endCreateTime,jdbcType=TIMESTAMP})
+	      </if>
+	      <if test="status != null">
+	        and status = #{status,jdbcType=VARCHAR}
+	      </if>   
+  </update> 
   <update id="updateByPrimaryKeySelective" parameterType="com.zhongda.detection.web.model.Alarm">
     update alarm
     <set>

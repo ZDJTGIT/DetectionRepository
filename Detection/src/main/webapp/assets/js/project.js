@@ -678,6 +678,12 @@ var dlId=document.getElementById("project_DLID").value;
 					  	  		    	}else{
 					  	  		    		percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
 					  	  		    	}
+					  	  		    	var spanClass;
+					  	  		    	if(item.alarmCount == 0){
+					  	  		    		spanClass = 'label-primary';
+					  	  		    	}else{
+					  	  		    		spanClass = 'label-warning';
+					  	  		    	}
 					  	  		    				 asthtml += '<tr id="project_'+ item.projectId +'" onclick="test('+item.projectId+')" style="height:100px">'+
 															    '<td class="project-status" style="display:none">'+
 																	'<span class="label label-primary">' + item.projectId + '</span>'+
@@ -728,7 +734,7 @@ var dlId=document.getElementById("project_DLID").value;
 														    	'<td class="project-title" style="width:20px">'+
 																'</td>'+
 																'<td class="project-title" style="width:140px">'+
-																	'<a href="javascript:;">项目告警信息(0)</a><br />'+
+																	'<a href="javascript:;">告警次数(<i class="fa fa-bell"></i><span class="label '+spanClass+'">'+item.alarmCount+'</span>)</a><br />'+
 																'</td>'+
 																'<td class="project-title" style="width:20px">'+
 																'</td>'+
