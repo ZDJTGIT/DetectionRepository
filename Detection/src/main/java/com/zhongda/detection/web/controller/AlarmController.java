@@ -50,16 +50,38 @@ public class AlarmController {
 
 	@Resource
 	private AlarmLinkmanService alarmLinkmanService;
-
+	
+	/**
+	 * 点击所有告警消息
+	 * @return
+	 */
 	@RequestMapping("/alarmList")
 	public String alarmList() {
 		// 进入告警列表页
 		return "alarmList";
 	}
 	
+	/**
+	 * 点击单个告警消息
+	 * @param alarmId 告警消息id
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/alarmList/{alarmId}")
 	public String alarmSingle(@PathVariable("alarmId") String alarmId, Model model) {
 		model.addAttribute("alarmId", alarmId);
+		return "alarmList";
+	}
+	
+	/**
+	 * 点击单个项目下所有告警消息
+	 * @param projectId 项目id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/alarmList/project/{projectId}")
+	public String alarmOfProject(@PathVariable("projectId") String projectId, Model model) {
+		model.addAttribute("projectId", projectId);
 		return "alarmList";
 	}
 

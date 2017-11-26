@@ -202,7 +202,7 @@
 							<span class="nav-label">项目管理</span><span class="fa arrow"></span>
 						</a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="rest/projects" name="项目">项目</a></li>							
+							<li><a class="J_menuItem" href="rest/projects" name="项目列表">项目列表</a></li>							
 						</ul>
 					</li>
 					<li>
@@ -238,7 +238,7 @@
 							href="#"><i class="fa fa-bars"></i> </a> -->
 						<div class="logo">
 							<!-- 	<img src="assets/img/zdLogo.png" alt="logo" class="logo"> -->
-							<a href="#" class="navbar-brand">中国大检测数据在线监控平台(恩瑞万豪酒店项目基坑支护工程)</a>
+							<a href="#" class="navbar-brand">中国大检测数据在线监控平台</a>
 						</div>
 					</div>
 					<ul class="nav navbar-top-links navbar-right">

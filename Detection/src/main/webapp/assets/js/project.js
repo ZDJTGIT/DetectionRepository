@@ -678,11 +678,13 @@ var dlId=document.getElementById("project_DLID").value;
 					  	  		    	}else{
 					  	  		    		percentage = ((nowTime-beginTime)/(endTime-beginTime)*100).toFixed(2); 
 					  	  		    	}
-					  	  		    	var spanClass;
+					  	  		    	var spanClass,alarmHref;
 					  	  		    	if(item.alarmCount == 0){
 					  	  		    		spanClass = 'label-primary';
+					  	  		    	    alarmHref = 'javascript:;';
 					  	  		    	}else{
 					  	  		    		spanClass = 'label-warning';
+					  	  		    		alarmHref = 'rest/alarm/alarmList/project/'+item.projectId;
 					  	  		    	}
 					  	  		    				 asthtml += '<tr id="project_'+ item.projectId +'" onclick="test('+item.projectId+')" style="height:100px">'+
 															    '<td class="project-status" style="display:none">'+
@@ -734,7 +736,7 @@ var dlId=document.getElementById("project_DLID").value;
 														    	'<td class="project-title" style="width:20px">'+
 																'</td>'+
 																'<td class="project-title" style="width:140px">'+
-																	'<a href="javascript:;">告警次数(<i class="fa fa-bell"></i><span class="label '+spanClass+'">'+item.alarmCount+'</span>)</a><br />'+
+																	'<a class="J_menuItem" name="告警管理" href="'+alarmHref+'">告警次数(<i class="fa fa-bell"></i><span class="label '+spanClass+'">'+item.alarmCount+'</span>)</a><br />'+
 																'</td>'+
 																'<td class="project-title" style="width:20px">'+
 																'</td>'+

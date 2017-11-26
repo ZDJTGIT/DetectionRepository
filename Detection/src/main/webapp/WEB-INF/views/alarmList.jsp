@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -27,6 +28,9 @@
 <style>
 	#AlarmSearchForm>.row>.form-group{
 		padding:8px 15px;
+	}
+	#alarmTable>thead>tr>th{
+		text-align: center;
 	}
 </style>
 </head>
@@ -59,8 +63,9 @@
 							    		<input type="text" class="form-control" id="alarmId" name="alarmId" value="${alarmId}" placeholder="告警ID">
 							  		</div>
 							  		<div class="form-group col-md-3">
-							    		<label for="projectId">所属项目:</label>
-							    		<input type="text" class="form-control" id="projectId" name="projectName" placeholder="所属项目">
+							    		<label for="projectName">所属项目:</label>
+							    		<input type="text" class="form-control" id="projectName" name="projectName" placeholder="所属项目">
+							    		<input type="text" class="form-control" id="projectId" name="projectId" value="${projectId}" style="display: none;">
 							  		</div>
 							  		<div class="form-group col-md-3">
 							    		<label for="smuCmsId">采集器编号:</label>
@@ -91,30 +96,47 @@
 									    <select  style="width:121px" class="form-control" name="status" id="status">
 		                                    <option value="0">请选择</option>
 		                                </select>
-									 </div>
+									</div>
 							  	</div>
 							  	<div class="row">
-							  		<div class="form-group col-md-3 date">
+							  		 <div class="form-group col-md-3 date">
 									    <label for="startCreateTime">起始时间:</label>
 									    <input type="datetime" class="form-control" id="startCreateTime" name="startCreateTime" placeholder="起始时间">
 									 </div>
-									 <div class="form-group col-md-3">
+									 <div class="form-group col-md-3 date">
 									    <label for="endCreateTime">结束时间:</label>
 									    <input type="datetime" class="form-control" id="endCreateTime" name="endCreateTime" placeholder="结束时间">
 									 </div>
-									 <div class="form-group col-md-3 col-md-offset-3" style="margin-top: 10px;text-align: center">
-									  	<button type="button" id="btnSearch" class="btn btn-md btn-primary query" >查询</button>
-									 </div>
-							  	</div>
-							  									
+									 <shiro:hasPermission name="alarm:query:*">
+										 <div class="form-group col-md-3">
+										    <label for="userName">用户名:</label>
+										    <input type="text" class="form-control" id="userName" name="userName" placeholder="用户名">
+										 </div>
+										 <div class="form-group col-md-3" style="margin-top: 10px;text-align: center">
+											 <button type="button" id="btnSearch" class="btn btn-md btn-primary query" >查询</button>
+										 </div>
+									 </shiro:hasPermission>
+									 <shiro:lacksPermission name="alarm:query:*">  
+										 <div class="form-group col-md-3 col-md-offset-3" style="margin-top: 10px;text-align: center">
+											 <button type="button" id="btnSearch" class="btn btn-md btn-primary query" >查询</button>
+										 </div>	
+									 </shiro:lacksPermission>
+							  	</div>							  									
                         	</form>
 						</div>
-                        <div id="checkboxTip" style="display: none;text-align: center;"><span></span><a id="alarmTotalA"></a><a id="confirmAllAlarm" class="btn btn-sm btn-info">点击确认</a></div>
+                        <div id="checkboxTip" style="display: none;text-align: center;"><span></span>，<a id="alarmTotalSelected" href="total"></a><a id="confirmAllAlarm" class="btn btn-sm btn-info">点击确认</a></div>
+                        <div style="display: none;">
+                        	<input type="text" id="selectedAlarmTotal"/>
+                        	<input type="text" id="queryCondition"/>
+                        </div>
 						<table id="alarmTable" class="table table-striped table-bordered table-hover topy">
 							<thead>
 							    <tr>
 							      <th><input type="checkbox" id="checkbox-all">全选</th>
 							      <th>告警ID</th>
+							      <shiro:hasPermission name="alarm:query:*">
+							      	<th>用户名</th>
+							      </shiro:hasPermission>
 							      <th>所属项目</th>
 							      <th>所在测点</th>
 							      <th>采集终端编号</th>
@@ -203,20 +225,34 @@
 				});
 	        });
 	        
-	        //点击修改所有被选中的告警信息
+	        //点击修改告警信息的状态
 	        $('#confirmAllAlarm').click(function(e){
 	        	e.preventDefault();
-	        	 //显示loading提示
-                var loading = layer.load(2, {
-               	  shade: [0.1,'#fff'] //0.1透明度的白色背景
-                });
+	        	if($(this).prev().attr('href') == "total"){
+	        		seclectedAlarmConfirm();
+	        	}else{
+	        		allAlarmConfirm();
+	        	}
+	        });
+	        
+	        //更新被选中的告警消息状态
+	        function seclectedAlarmConfirm(){
 	        	var selectedAlarmIds = "";
 	        	$('.alarmFlag').each(function(idx,item){
 	        		if($(this).parent().find('td:last').prev().text() === "未确认"){
 	        			selectedAlarmIds += $(this).text()+",";
 	        		}
 	        	});
-	        	selectedAlarmIds = selectedAlarmIds.substring(0,selectedAlarmIds.length - 1);
+	        	if($.trim(selectedAlarmIds) == ""){
+	        		alert("所选择的所有告警信息都是已确认状态，不需要重复确认！");
+					return;
+	        	}else{
+	        		selectedAlarmIds = selectedAlarmIds.substring(0,selectedAlarmIds.length - 1);
+	        	}
+	        	//显示loading提示
+                var loading = layer.load(2, {
+               	  shade: [0.1,'#fff'] //0.1透明度的白色背景
+                });
 	        	$.ajax({
 					type : 'post',
 					url : 'rest/alarm/alarmBatchConfirm',
@@ -224,12 +260,11 @@
 					data : {alarmIds:selectedAlarmIds},
 					success : function(res) {
 						if (res.code == 0) {
-							$('.alarmFlag').each(function(idx,item){
-								var lastTd = $(this).parent().find('td:last');
-				        		if(lastTd.prev().text() === "未确认"){
-				        			lastTd.prev().text("已确认");
-				        			lastTd.find('a').attr("disabled","disabled");
-				        			lastTd.find('a').text("已确认");
+							$('.confirmClick').each(function(idx,item){
+				        		if($(this).text() === "点击确认"){
+				        			$(this).parent().prev().text("已确认");
+				        			$(this).attr("disabled","disabled");
+				        			$(this).text("已确认");
 									$('#alarmTotalSpan').text($('#alarmTotalSpan').text()-1);
 				        		}
 				        	});
@@ -244,53 +279,70 @@
 					},
 					error : function() {
 						alert("数据加载失败");
+						//加载完成后隐藏loading提示
+	                    layer.close(loading);
 					}
 				});
-	        });
-
-	        $('#alarmTotalA').click(function(e){
+	        }
+	        
+	        //更新所有的告警消息状态
+	        function allAlarmConfirm(){
+	        	 var jsonData = JSON.parse($('#queryCondition').val());
+	         	   if(jsonData.status == 19){
+	         		    alert("所选择的所有告警信息都是已确认状态，不需要重复确认！");
+						return;
+	         	   }	
+					//显示loading提示
+		            var loading = layer.load(2, {
+		              	shade: [0.1,'#fff'] //0.1透明度的白色背景
+		            });
+		        	$.ajax({
+						type : 'post',
+						url : 'rest/alarm/alarmBatchConfirmByQuery',
+						dataType : 'json',					
+						contentType : 'application/json',
+						data : JSON.stringify(jsonData),
+						success : function(res) {
+							if (res.code == 0) {
+								$('.confirmClick').each(function(idx,item){
+					        		if($(this).text() === "点击确认"){
+					        			$(this).parent().prev().text("已确认");
+					        			$(this).attr("disabled","disabled");
+					        			$(this).text("已确认");
+					        		}
+					        	});
+								$('#alarmTotalSpan').text($('#alarmTotalSpan').text()-$('#selectedAlarmTotal').text());
+								$('#checkboxTip').hide();
+								//加载完成后隐藏loading提示
+			                    layer.close(loading);
+							} else {
+								alert("数据异常");
+								//加载完成后隐藏loading提示
+			                    layer.close(loading);
+							}
+						},
+						error : function() {
+							alert("数据加载失败");
+							//加载完成后隐藏loading提示
+		                    layer.close(loading);
+						}
+					});
+	        }
+	        
+	        //判断选中哪些告警消息
+	        $('#alarmTotalSelected').click(function(e){
 	        	e.preventDefault();
-	        	 //显示loading提示
-               var loading = layer.load(2, {
-              	  shade: [0.1,'#fff'] //0.1透明度的白色背景
-               });
-               var jsonData = {};
-				$('#AlarmSearchForm .form-control').each(function(index,item){
-					if($(this).val() && $(this).val()!=0){
-						jsonData[$(this).attr("name")] = $(this).val();
-					}
-				});	        	
-	        	$.ajax({
-					type : 'post',
-					url : 'rest/alarm/alarmBatchConfirmByQuery',
-					dataType : 'json',					
-					contentType : 'application/json',
-					data : JSON.stringify(jsonData),
-					success : function(res) {
-						if (res.code == 0) {
-							$('.alarmFlag').each(function(idx,item){
-								var lastTd = $(this).parent().find('td:last');
-				        		if(lastTd.prev().text() === "未确认"){
-				        			lastTd.prev().text("已确认");
-				        			lastTd.find('a').attr("disabled","disabled");
-				        			lastTd.find('a').text("已确认");
-									$('#alarmTotalSpan').text($('#alarmTotalSpan').text()-1);
-				        		}
-				        	});
-							$('#checkboxTip').hide();
-							//加载完成后隐藏loading提示
-		                    layer.close(loading);
-						} else {
-							alert("数据异常");
-							//加载完成后隐藏loading提示
-		                    layer.close(loading);
-						}
-					},
-					error : function() {
-						alert("数据加载失败");
-					}
-				});
-	        });
+	        	var next = $(this).text(),prev = $(this).prev().text();
+	        	if($(this).attr('href') == "total"){
+	        		$(this).text("点击选择当前页告警消息共"+prev.substring(11));
+		        	$(this).prev().text("已选择所有告警消息共"+next.substring(11));
+		        	$(this).attr('href','current');
+	        	}else{
+	        		$(this).text("点击选择所有告警消息共"+prev.substring(10));
+		        	$(this).prev().text("已选择当前页告警消息共"+next.substring(12));
+		        	$(this).attr('href','total');
+	        	}
+	        });	        
 	        
 	       (function(){
 				//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
@@ -299,25 +351,33 @@
 	                 var loading = layer.load(2, {
 	                	  shade: [0.1,'#fff'] //0.1透明度的白色背景
 	                 });
+					 var jsonDataString = JSON.stringify(jsonData);
 					 $.ajax({
 							type : 'post',
 							url : 'rest/alarm/alarmPageList',
 							dataType : 'json',
 							contentType : 'application/json',
-							data : JSON.stringify(jsonData),
+							data : jsonDataString,
 							success : function(data) {
 								if (data) {
 									var htmlData = '';
 									$.each(data.alarmList,function(idx,item){
-										htmlData +='<tr><td style="text-align:center"><input type="checkbox"></td><td class="alarmFlag">'+item.alarmId+'</td><td>'+item.projectName+'</td><td>'+item.detectionId+'</td><td>'+item.smuCmsId+'</td><td>'+item.sensorId+'</td><td>'+item.alarmType+'</td><td class="layerOpen">'+item.alarmContext+'</td><td>'+item.createTime+'</td><td>'+item.alarmStatus+'</td><td><a class="confirmClick btn btn-sm btn-info"'
-										if(item.alarmStatus === "已确认"){
-											htmlData +=' disabled="disabled">已确认</a></td></tr>'
+										if($('#alarmTable thead').find('th').length > 11){
+											htmlData +='<tr><td style="text-align:center"><input type="checkbox"></td><td class="alarmFlag">'+item.alarmId+'</td><td>'+item.userName+'</td><td>'+item.projectName+'</td><td>'+item.detectionId+'</td><td>'+item.smuCmsId+'</td><td>'+item.sensorId+'</td><td>'+item.alarmType+'</td><td class="layerOpen">'+item.alarmContext+'</td><td>'+item.createTime+'</td><td>'+item.alarmStatus+'</td><td><a class="confirmClick btn btn-sm btn-info"';
 										}else{
-											htmlData +='>点击确认</a></td></tr>'
+											htmlData +='<tr><td style="text-align:center"><input type="checkbox"></td><td class="alarmFlag">'+item.alarmId+'</td><td>'+item.projectName+'</td><td>'+item.detectionId+'</td><td>'+item.smuCmsId+'</td><td>'+item.sensorId+'</td><td>'+item.alarmType+'</td><td class="layerOpen">'+item.alarmContext+'</td><td>'+item.createTime+'</td><td>'+item.alarmStatus+'</td><td><a class="confirmClick btn btn-sm btn-info"';
 										}
-				
+										if(item.alarmStatus === "已确认"){
+											htmlData +=' disabled="disabled">已确认</a></td></tr>';
+										}else{
+											htmlData +='>点击确认</a></td></tr>';
+										}
 									});
 									$("#alarmTable tbody").html(htmlData);
+									$('#selectedAlarmTotal').val(data.total);
+									$('#queryCondition').val(jsonDataString);
+									//清除隐藏域的值
+									$('#projectId').val();
 									if(loadLaypage){ //如果该参数有值
 										loadLaypage(data.total, jsonData); //有查询条件时请求数据，需重新初始化分页组件
 									}
@@ -346,7 +406,7 @@
 
 				 //初始化分页组件函数
 				 function loadLaypage(dataTotal, jsonData){
-					 $('#alarmTotalA').text("点击选择所有告警消息共"+dataTotal+"项");
+					 $('#alarmTotalSelected').text("点击选择所有告警消息共"+dataTotal+"项");
 					 var laypage = layui.laypage;
 					 laypage.render({
 						 elem: 'pageComponent', //分页组件div的id
@@ -386,7 +446,7 @@
 		      $('#checkboxTip').hide();
 		    }else{
 		      checkboxArray.iCheck('check');
-		      $('#checkboxTip').find('span').text("已选择当前页共"+checkboxArray.size()+"项，");
+		      $('#checkboxTip').find('span').text("已选择当前页告警消息共"+checkboxArray.size()+"项");
 		      $('#checkboxTip').show();
 		    }
 		 });
@@ -403,7 +463,7 @@
 			 }else{
 				 if(checkLength == totalLength - 1){
 					  $('#checkbox-all').iCheck('check');
-					  $('#checkboxTip').find('span').text("已选择当前页共"+totalLength+"项，");
+					  $('#checkboxTip').find('span').text("已选择当前页告警消息共"+totalLength+"项");
 				      $('#checkboxTip').show();
 				 }
 			 }
