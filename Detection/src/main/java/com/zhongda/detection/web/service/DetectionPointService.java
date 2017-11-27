@@ -144,4 +144,31 @@ public interface DetectionPointService {
 	 * @return
 	 */
 	DetectionPoint selectDetectionByDetectionPointId(Integer detectionPointId);
+
+	/**
+	 * 查询数据根据动态表名
+	 * 
+	 * @param tableName
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param begincurrentTime
+	 * @param endcurrentTime
+	 * @return
+	 */
+	List<DetectionPoint> selectDataByTabelName(String tableName,
+			Integer projectId, Integer detectionTypeId,
+			String begincurrentTime, String endcurrentTime);
+
+	/**
+	 * 查询所有数据根据动态表名
+	 * 
+	 * @param tableName
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param begincurrentTime
+	 * @param endcurrentTime
+	 * @return
+	 */
+	List<DetectionPoint> selectAllDataByTabelName(String tableName,
+			Integer projectId, Integer detectionTypeId);
 }

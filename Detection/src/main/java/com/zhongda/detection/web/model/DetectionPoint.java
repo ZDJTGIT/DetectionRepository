@@ -19,7 +19,7 @@ public class DetectionPoint {
 
 	// 缓存项目名，数据库无该字段
 	private String projectName;
-	
+
 	// 字典表数据，数据库无该字段
 	private String itemName;
 	private String itemValue;
@@ -30,6 +30,8 @@ public class DetectionPoint {
 	private List<KLineGraphLaserData> kGraphLaserDataList;
 	// 沉降
 	private List<StaticLevelData> staticLevelDataList;
+	// 传感器数据通用Javabean
+	private List<UniversalData> universalDataList;
 
 	public String getProjectName() {
 		return projectName;
@@ -140,11 +142,19 @@ public class DetectionPoint {
 		this.staticLevelDataList = staticLevelDataList;
 	}
 
+	public List<UniversalData> getUniversalDataList() {
+		return universalDataList;
+	}
+
+	public void setUniversalDataList(List<UniversalData> universalDataList) {
+		this.universalDataList = universalDataList;
+	}
+
 	@Override
 	public String toString() {
-		return "DetectionPoint [detectionTypeId=" + detectionTypeId
-				+ ", detectionName=" + detectionName + ", staticLevelDataList="
-				+ staticLevelDataList + "]";
+		return "DetectionPoint [projectId=" + projectId + ", detectionTypeId="
+				+ detectionTypeId + ", detectionName=" + detectionName
+				+ ", universalDataList=" + universalDataList + "]";
 	}
 
 }

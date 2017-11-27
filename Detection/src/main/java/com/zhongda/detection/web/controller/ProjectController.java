@@ -235,8 +235,8 @@ public class ProjectController {
 				"yyyy-MM-dd HH:mm:ss");
 		Calendar lastDate = Calendar.getInstance();
 		List<DetectionPoint> laserList = null;
-		System.out.println("begin:" + begin + " end:" + end + " dateRange:"
-				+ dateRange.length());
+		// System.out.println("begin:" + begin + " end:" + end + " dateRange:"
+		// + dateRange.length());
 		if (dateRange.length() != 0) {
 			end = simpleDateFormat.format(date);
 			lastDate.setTime(date);
@@ -262,7 +262,7 @@ public class ProjectController {
 			lastDate.roll(Calendar.DATE, -7);// 日期回滚7天
 			begin = simpleDateFormat.format(lastDate.getTime());
 		}
-		System.out.println("begin:" + begin + " end:" + end);
+		// System.out.println("begin:" + begin + " end:" + end);
 		laserList = detectionPointService.selectAllLaserDataByCurrentTimes(
 				projectId, 26, begin, end);
 		System.out.println(laserList);

@@ -112,4 +112,19 @@ public class DetectionPointServiceImpl implements DetectionPointService {
 		return detectionPointMapper.selectAllLaserDataByCurrentTimes(projectId,
 				detectionTypeId, begincurrentTime, endcurrentTime);
 	}
+
+	@Override
+	public List<DetectionPoint> selectDataByTabelName(String tableName,
+			Integer projectId, Integer detectionTypeId,
+			String begincurrentTime, String endcurrentTime) {
+		return detectionPointMapper.selectDataByTabelName(tableName, projectId,
+				detectionTypeId, begincurrentTime, endcurrentTime);
+	}
+
+	@Override
+	public List<DetectionPoint> selectAllDataByTabelName(String tableName,
+			Integer projectId, Integer detectionTypeId) {
+		return detectionPointMapper.selectAllDataByTabelName(tableName,
+				projectId, detectionTypeId);
+	}
 }

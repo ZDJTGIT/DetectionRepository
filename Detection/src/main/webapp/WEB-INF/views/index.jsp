@@ -127,7 +127,7 @@
 
 
 
-					<shiro:hasPermission name="project:manager:*">
+					 <shiro:hasPermission name="project:manager:*">
 						<li><a href="javascript:;" class="queryproject"> <i
 								class="fa fa fa-bar-chart-o"></i><span class="nav-label">统计图表</span>
 								<span class="fa arrow"></span>
@@ -164,7 +164,7 @@
 									</li>
 								</shiro:hasPermission>
 							</ul></li>
-					</shiro:hasPermission>
+					</shiro:hasPermission> 
 					<li>
 						<a href="javascript:;"><i class="fa fa fa-user"></i>
 							<span class="nav-label">个人资料</span><span class="fa arrow"></span>
@@ -647,7 +647,7 @@
 												var label = "<li><a class='secondbind' data-toggle='collapse' data-parent='#accordion'  href='#"+name[0]+"' name='"+key+"'><i class='fa fa-columns'></i><span class='nav-label'>"+ name[0]+ "</span><span class='fa arrow'></span></a><ul class='collapse nav nav-second-level' id='"+name[0]+"' ></ul></li>";
 												$(".filling").append(label);
 												$(data[key]).each(function(index,val){
-													label = "<li><a class='J_menuItem' name='"+val.projectName+"' href='rest/project/"+name[1]+"?projectId="+val.projectId+"'>"+val.projectName+"</a></li>"
+													label = "<li><a class='J_menuItem' name='"+val.projectName+"' href='rest/statistiCchart/statistiCcharts?projectId="+val.projectId+"'>"+val.projectName+"</a></li>"
 													$("#"+name[1]).append(label);
 												});
 											});

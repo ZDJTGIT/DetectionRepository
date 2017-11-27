@@ -150,6 +150,9 @@ var statcileveldata;
 						    yAxis : [
 					            {
 						            type : 'value',
+						            axisLabel : {
+										formatter : '{value} mm'
+									},
 						            splitArea : { // 分隔区域
 										show : true, // 默认不显示，属性show控制显示与否
 										areaStyle : { // 属性areaStyle（详见areaStyle）控制区域样式
@@ -232,6 +235,9 @@ var statcileveldata;
 					    yAxis : [
 				            {
 					            type : 'value',
+					            axisLabel : {
+									formatter : '{value} mm'
+								},
 					            splitArea : { // 分隔区域
 									show : true, // 默认不显示，属性show控制显示与否
 									areaStyle : { // 属性areaStyle（详见areaStyle）控制区域样式
@@ -313,6 +319,9 @@ var statcileveldata;
 				    yAxis : [
 			            {
 				            type : 'value',
+				            axisLabel : {
+								formatter : '{value} mm'
+							},
 				            splitArea : { // 分隔区域
 								show : true, // 默认不显示，属性show控制显示与否
 								areaStyle : { // 属性areaStyle（详见areaStyle）控制区域样式
@@ -390,6 +399,9 @@ var statcileveldata;
 				    yAxis : [
 			            {
 				            type : 'value',
+				            axisLabel : {
+								formatter : '{value} mm'
+							},
 				            splitArea : { // 分隔区域
 								show : true, // 默认不显示，属性show控制显示与否
 								areaStyle : { // 属性areaStyle（详见areaStyle）控制区域样式

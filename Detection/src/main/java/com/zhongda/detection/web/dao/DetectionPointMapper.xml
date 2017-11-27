@@ -103,10 +103,68 @@
 	    <result column="smu_status" jdbcType="INTEGER" property="smuStatus" />
     </collection>
   </resultMap>
+  <resultMap id="SensorDataMap" type="com.zhongda.detection.web.model.DetectionPoint">
+    <id column="detection_point_id" jdbcType="INTEGER" property="detectionPointId" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="detection_type_id" jdbcType="INTEGER" property="detectionTypeId" />
+    <result column="detection_latitude" jdbcType="VARCHAR" property="detectionLatitude" />
+    <result column="detection_longitude" jdbcType="VARCHAR" property="detectionLongitude" />
+    <result column="detection_name" jdbcType="VARCHAR" property="detectionName" />
+    <result column="detection_description" jdbcType="VARCHAR" property="detectionDescription" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="item_value" jdbcType="VARCHAR" property="itemValue" />
+    <collection property="universalDataList" javaType="java.util.List" ofType="com.zhongda.detection.web.model.UniversalData">
+    	<id column="id" jdbcType="INTEGER" property="id" />
+	    <result column="sensor_id" jdbcType="VARCHAR" property="sensorId" />
+	    <result column="first_time" jdbcType="TIMESTAMP" property="firstTime" />
+	    <result column="first_data" jdbcType="DOUBLE" property="firstData" />
+	    <result column="previous_time" jdbcType="TIMESTAMP" property="previousTime" />
+	    <result column="previous_data" jdbcType="DOUBLE" property="previousData" />
+	    <result column="current_times" jdbcType="TIMESTAMP" property="currentTimes" />
+	    <result column="current_data" jdbcType="DOUBLE" property="currentData" />
+	    <result column="current_temperature" jdbcType="DOUBLE" property="currentTemperature" />
+	    <result column="current_laser_change" jdbcType="DOUBLE" property="currentLaserChange" />
+	    <result column="total_laser_change" jdbcType="DOUBLE" property="totalLaserChange" />
+	    <result column="speed_change" jdbcType="DOUBLE" property="speedChange" />
+	    <result column="sensor_status" jdbcType="INTEGER" property="sensorStatus" />
+	    <result column="create_type" jdbcType="VARCHAR" property="createType" />
+	    <result column="smu_cms_id" jdbcType="VARCHAR" property="smuCmsId" />
+	    <result column="smu_cms_channel" jdbcType="VARCHAR" property="smuCmsChannel" />
+	    <result column="smu_status" jdbcType="INTEGER" property="smuStatus" />
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List">
     detection_point_id, project_id, detection_type_id, detection_latitude, detection_longitude, 
     detection_name, detection_description
   </sql>
+  <select id="selectDataByTabelName" resultMap="SensorDataMap" >
+  	SELECT
+	dp.*, ld.*
+	FROM
+	(
+		detection_point dp
+		RIGHT JOIN sensor_info si ON dp.detection_point_id = si.detection_point_id
+	)
+	RIGHT JOIN ${_parameter.param1} ld ON ld.sensor_id = si.sensor_id
+	WHERE
+	dp.project_id = #{projectId,jdbcType=INTEGER}
+	AND dp.detection_type_id = ${_parameter.param3} and ld.current_times  BETWEEN '${_parameter.param4}' and '${_parameter.param5}'
+	GROUP BY  dp.detection_name ASC, ld.current_times
+  </select>
+  <select id="selectAllDataByTabelName" resultMap="SensorDataMap" >
+  	SELECT
+	dp.*, ld.*
+	FROM
+	(
+		detection_point dp
+		RIGHT JOIN sensor_info si ON dp.detection_point_id = si.detection_point_id
+	)
+	RIGHT JOIN ${_parameter.param1} ld ON ld.sensor_id = si.sensor_id
+	WHERE
+	dp.project_id = #{projectId,jdbcType=INTEGER}
+	AND dp.detection_type_id = ${_parameter.param3}
+	GROUP BY  dp.detection_name ASC, ld.current_times
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
