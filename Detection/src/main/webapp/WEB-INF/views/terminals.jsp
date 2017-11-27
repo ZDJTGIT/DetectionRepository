@@ -39,8 +39,7 @@
 					</div>
 					<div class="ibox-content">
 						<div class="project-list">
-							<table class="table table-hover" id="sensorInfo_table">
-								<tbody id="sensorInfo_tbody">
+							<table class="table table-hover" id="terminals_table">
 								 <tr>
 										<td class="project-title" style="width:30px">
 										</td>
@@ -74,8 +73,8 @@
 										</td>
 										<td class="project-actions">
 									    </td>
-									   </tr>
-								
+									</tr>
+								<tbody id="terminals_tbody">
 								</tbody>
 							</table>
 						</div>
@@ -90,15 +89,8 @@
 						        <h4 class="modal-title" id="myModalLabel_addSensorInfo">添加采集器</h4>
 						      </div>
 						      <div class="modal-body">
-							    
 							    <label class="md_lable" for="sensorType_addSensorInfo">采集器编号:&nbsp;&nbsp;</label>
-								<input class="md_input" type="text" id="sensorType_addSensorInfo" name="sensorType_addSensorInfo"><br><br>
-								
-								<label class="md_lable" for="sensorModel_addSensorInfo">采集时间间隔:&nbsp;&nbsp;</label>
-								<input class="md_input" type="text" id="sensorModel_addSensorInfo" name="sensorModel_addSensorInfo"><br><br>
-								
-								<label class="md_lable" for="sensorDepth_addSensorInfo">传感器深度:&nbsp;&nbsp;</label>
-								<input class="md_input" type="text" id="sensorDepth_addSensorInfo" name="sensorDepth_addSensorInfo"><br>
+								<input class="md_input" type="text" id="sensorType_addSensorInfo" name="sensorType_addSensorInfo">
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" id="offAddSensorInfo" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -116,19 +108,12 @@
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="myModalLabel_updetaSensorInfo">修改采集器信息</h4>
+						        <h4 class="modal-title" id="myModalLabel_updetaSensorInfo">修改采集器</h4>
 						      </div>
 						      <div class="modal-body">
 						        <input class="md_input" type="text" style="display:none" id="sensorInfoId_updetaSensorInfo" name="sensorInfoId_updetaSensorInfo">
-							    
 							    <label class="md_lable" for="sensorType_updetaSensorInfo">采集器编号:&nbsp;&nbsp;</label>
-								<input class="md_input" type="text" id="sensorType_updetaSensorInfo" name="sensorType_updetaSensorInfo"><br><br>
-
-								<label class="md_lable" for="sensorModel_updetaSensorInfo">传感器型号:&nbsp;&nbsp;</label>
-								<input class="md_input" type="text" id="sensorModel_updetaSensorInfo" name="sensorModel_updetaSensorInfo"><br><br>
-								
-								<label class="md_lable" for="sensorDepth_updetaSensorInfo">传感器深度:&nbsp;&nbsp;</label>
-								<input class="md_input" type="text" id="sensorDepth_updetaSensorInfo" name="sensorDepth_updetaSensorInfo"><br>
+								<input class="md_input" type="text" id="sensorType_updetaSensorInfo" name="sensorType_updetaSensorInfo">
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" id="offUpdetaSensorInfo" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -155,7 +140,107 @@
 	<script src="assets/js/terminals.js"></script>
 	
 	<script>
-		alert("未添加采集器表，此页面暂时不做");
+		//alert("未添加采集器表，此页面暂时不做");
+		var projectId = ${projectId};
+		var projectName = ${projectName};
+		//分页获取项目下所有采集器
+		$(function(){(function(){
+			
+			var jsonData = {};
+			jsonData.projectName = projectName;
+			jsonData.pageNum = 1;
+			jsonData.pageSize = 6;
+			
+			//初始化分页组件函数
+			 function loadLaypage(dataTotal, jsonData){
+				 var laypage = layui.laypage;
+				 laypage.render({
+					 elem: 'pageComponent_n', //分页组件div的id
+					 count: dataTotal, //记录总条数
+					 limit: jsonData.pageSize, //每页显示的条数
+					 limits:[jsonData.pageSize, 10, 20, 30, 40, 50], //每页条数的选择项
+				     groups: 5, //连续显示分页数
+				     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+				     jump: function(obj, first){  //触发分页后的回调
+				         if(!first){ //一定要加此判断，否则初始时会无限刷新
+				        	 jsonData.pageNum = obj.curr;
+				 			 jsonData.pageSize = obj.limit;
+				 			 projectPageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数
+				         }
+				     }
+				 });
+			 }
+			
+			//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
+			function projectPageAjax(jsonData,loadLaypage){
+				 //显示loading提示
+                 var loading = layer.load(2, {
+                	  shade: [0.1,'#fff'] //0.1透明度的白色背景
+                 });
+				 $.ajax({
+					 type:'post',
+						url: 'rest/terminals/showProjectTerminals',
+						contentType:"application/json",
+						dataType : 'json',
+						data: {projectId:projectId},
+						success : function(data) {
+							 if(data){
+				  	  		    var asthtml = '';
+				  	  		   	$.each(data.terminalsInfoList,function(idx,item){
+				  	  		   	asthtml +=  '<tr>'+
+											'<td class="project-title" style="width:30px">'+
+											'</td>'+
+					    	  		    	'<td class="project-title" style="width:120px">'+
+												+创建时间+
+										    '</td>'+
+										    '<td class="project-title" style="width:50px">'+
+											'</td>'+
+											'<td class="project-title" style="width:200px">'+
+												+更新时间+
+											'</td>'+
+											'<td class="project-title" style="width:260px">'+
+												+采集器编号+
+											'</td>'+
+											'<td class="project-title" style="width:260px">'+
+												+信号强度+
+											'</td>'+
+											'<td class="project-title" style="width:260px">'+
+												+采集器状态+
+											'</td>'+
+											'<td class="project-title" style="width:260px">'+
+												+电压+
+											'</td>'+
+											'<td class="project-title" style="width:260px">'+
+												+采集时间间隔+
+											'</td>'+
+											'<td class="project-title" style="width:140px">'+
+											'</td>'+
+											'<td class="project-title" style="width:120px">'+
+												'<a href="javascript:;">&nbsp;&nbsp;&nbsp;&nbsp;操作栏</a>'+
+											'</td>'+
+											'<td class="project-actions">'+
+										    '</td>'+
+										'</tr>';
+				  	  		   	});
+				  	  		    $('#terminals_tbody').html(asthtml);
+								//加载完成后隐藏loading提示
+			                   	layer.close(loading);
+			                   	if(loadLaypage){
+			                   		loadLaypage(data.total,jsonData);
+			                   	}
+				  	  		}else{
+				  	  		    alert("数据异常");
+				  	  		}
+						},
+						error : function() {
+							alert("数据加载失败");
+						}
+					});
+			 }
+			projectPageAjax(jsonData,loadLaypage);
+		})();
+		});
+		
 	</script>
 	
 	<script type="text/javascript"

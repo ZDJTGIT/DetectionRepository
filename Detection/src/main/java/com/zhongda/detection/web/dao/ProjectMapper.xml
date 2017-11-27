@@ -200,7 +200,8 @@
 	(select detection_point_id 
 	from detection_point 
 	where project_id = #{projectId,jdbcType=INTEGER})) b 
-	where a.sensor_id=b.sensor_id
+	where a. project_id = #{projectId,jdbcType=INTEGER}
+	and a.sensor_id=b.sensor_id
 	and a.status=20) o
   </select>
   <select id="selectAlarmSensorInfoCount" parameterType="java.lang.Integer" resultMap="ProjectResultMap">

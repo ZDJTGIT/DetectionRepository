@@ -785,9 +785,8 @@ public class ProjectController {
 				.selectThresholdCount(projectId).getThresholdCount());
 		project.setImageCount(projectService.selectImageCount(projectId)
 				.getImageCount());
-		project.setAlarmDetectionCount(projectService
-				.selectAlarmDetectionPointCount(projectId)
-				.getAlarmDetectionCount());
+		project.setAlarmDetectionCount(projectService.selectAlarmDetectionPointCount(projectId).getAlarmDetectionCount());
+		System.out.println("--------------------------------"+projectService.selectAlarmDetectionPointCount(projectId).getAlarmDetectionCount());
 		project.setAlarmSensorInfoCount(projectService
 				.selectAlarmSensorInfoCount(projectId)
 				.getAlarmSensorInfoCount());

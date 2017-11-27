@@ -379,7 +379,7 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 		    	  		  },
 		    	  	  });*/
 			  
-			//分页获取项目下所有测点
+				//分页获取项目下所有测点
 				$(function(){(function(){
 					
 					var jsonData = {};
