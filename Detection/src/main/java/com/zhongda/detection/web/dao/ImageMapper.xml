@@ -40,6 +40,10 @@
     delete from image
     where image_id = #{imageId,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByProjectId" parameterType="java.lang.Integer">
+  	delete from image 
+  	where project_id = #{projectId,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.Image">
     insert into image (image_id, user_id, project_id, 
       project_type_id, detection_type_id, heat_image_url, 

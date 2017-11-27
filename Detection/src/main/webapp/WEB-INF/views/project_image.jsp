@@ -151,7 +151,7 @@
 						
 						<!-- Modal添加图片-url为空-->
 						<div class="modal fade" id="addImageModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 160px">
-						 <form id="addImageForm">
+						 <!-- <form id="addImageForm"> -->
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content" style="">
 						      <div class="modal-header">
@@ -164,9 +164,8 @@
 									<select class="md_input" id="selectDetectionTypeAddImage" name="selectDetectionTypeAddImage">
 									</select>
 							    </div>	
-							    
-							    <label class="md_lable" style="display:none" for="projectId_addImage">项目ID</label>
-								<input class="md_input" style="display:none" type="text" id="projectId_addImage" name="projectId_addImage" value="${projectId}"><br><br>						
+							    <%-- <label class="md_lable" style="display:none" for="projectId_addImage">项目ID</label>
+								<input class="md_input" style="display:none" type="text" id="projectId_addImage" name="projectId_addImage" value="${projectId}"><br><br>					 --%>	
 						      </div>
 						      <div class="modal-footer">
 						      	<button type="button" id="offAddImageModel" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -174,7 +173,7 @@
 						      </div>
 						    </div>
 						  </div>
-						 </form>
+						 <!-- </form> -->
 						</div>		
 					</div>
 				</div>
@@ -222,10 +221,10 @@
 	
 	//确认添加图片记录
 	$(".sureAddImageModel").click(function(){
-		alert($('#addImageForm').valid());
+		/* alert($('#addImageForm').valid());
 		if(!$('#addImageForm').valid()){
 			return false;
-		} 
+		}  */
 		//alert(addImageFormValidate().form());
 		var detectionTypeId = $('#selectDetectionTypeAddImage option:selected').val();//检测指标ID-
 		$.ajax({
@@ -234,6 +233,7 @@
 	   	  	  data: {projectId:projectId, detectionTypeId:detectionTypeId},
 	   	  	  contextType:"application/json",
 	   	  	  success: function(data){
+	   	  		if(data.imageId==null){
 		   	  	if(data){
 	    	  		var string = "",operationHeatStr = "上传",operationPhysicalStr = "上传",powerHeat="",powerPhysical="";
 	    	  			//权限控制
@@ -255,7 +255,11 @@
 						time : 1000, //1s后自动关闭
 						btn : [ '知道了' ]
 					});
+	   	  	  }else{
+	   	  		  alert("添加失败，该检验指标下图片已存在");
+	   	  		  $('#offAddImageModel').trigger("click"); 
 	   	  	  }
+			  }
 		   });
 		
 	});

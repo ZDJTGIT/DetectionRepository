@@ -31,7 +31,7 @@ public interface ImageService {
     int updateByPrimaryKeySelective(Image record);
 
 	/**
-	 * 查找图片根据项目ID和项目类型ID
+	 * 查找图片根据项目ID和检测指标ID
 	 * 
 	 * @param projectId
 	 * @param detectionTypeId
@@ -74,5 +74,18 @@ public interface ImageService {
 	 * @return 
 	 */
 	Image updatePhysicalUrl(Integer imageId);
-
+	
+	/**
+	 * 根据项目ID删除服务器上的图片
+	 * @param projectId
+	 * @return
+	 */
+	Result delateImageByProjectId(Integer projectId);
+	
+	/**
+	 * 通过项目ID删除项目下所有图片
+	 * @param projectId
+	 * @return
+	 */
+	int deleteByProjectId(Integer projectId);
 }

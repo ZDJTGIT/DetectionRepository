@@ -739,8 +739,9 @@ public class ProjectController {
 			sensorInfoService.deleteByProjectId(projectId);
 			// 项目ID删除阀值
 			thresholdService.deleteByProjectId(projectId);
-			// 项目ID删除图片
-			
+			// 项目ID删除图片(先删除服务器上图片，再删除数据库记录)
+			imageService.delateImageByProjectId(projectId);
+			imageService.deleteByProjectId(projectId);
 			//插入一条操作日志
 			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
 			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目删除",

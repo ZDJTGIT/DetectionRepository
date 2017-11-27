@@ -102,13 +102,19 @@ public class ImgaeController {
 	@ResponseBody
 	public Image showAddImage(Integer projectId,Integer detectionTypeId){
 		Project project = projectService.selectByPrimaryKey(projectId);
-		Image image = new Image(project.getUserId(), project.getProjectId(), project.getProjectTypeId(), detectionTypeId,null,null,sysDictionaryServce.selectByPrimaryKey(detectionTypeId).getItemName());
-		imageService.insertSelective(image);
-		return image;
+		Image images = imageService.selectImageByTwoId(projectId, detectionTypeId);
+		if(images==null){
+			Image image = new Image(project.getUserId(), project.getProjectId(), project.getProjectTypeId(), 
+					detectionTypeId,null,null,sysDictionaryServce.selectByPrimaryKey(detectionTypeId).getItemName());
+			imageService.insertSelective(image);
+			return image;
+		}else{
+			return images;
+		}
 	}
 //==>校验
 	/**
-	 * 校验该检测指标下是否已经存在图片
+	 * 校验该检测指标下是否已经存在图片(未启用)
 	 * @param projectTypeId
 	 * @return
 	 */

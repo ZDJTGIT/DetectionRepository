@@ -183,4 +183,33 @@ public class ImageServiceImpl implements ImageService {
 		}	
 		return image;
 	}
+
+	@Override
+	public Result delateImageByProjectId(Integer projectId) {
+		Result result = new Result();
+		List<Image>  imageList = imageMapper.selectImageByProjectId(projectId);
+		for(Image image :imageList){
+			if(null != image){
+				if(null != image.getHeatImageUrl() && !"".equals(image.getHeatImageUrl().trim())){
+					//删除服务器上的热点图片
+					removeImage(image.getHeatImageUrl());
+				}
+				if(null != image.getPhysicalImageUrl() && !"".equals(image.getPhysicalImageUrl().trim())){
+					//删除服务器上的物理图片
+					String[] imgUrls = image.getPhysicalImageUrl().split(",");
+					for (String imgUrl : imgUrls) {
+						removeImage(imgUrl);
+					}
+				}
+			}
+		}
+		result.setCode(Result.SUCCESS);
+		result.setMsg("删除成功");
+		return result;
+	}
+
+	@Override
+	public int deleteByProjectId(Integer projectId) {
+		return imageMapper.deleteByProjectId(projectId);
+	}
 }

@@ -27,7 +27,7 @@ jQuery.validator.addMethod("isdouble", function(value, element) {
 //添加用户校验用户信息唯一性
 $(document).ready(function() {
 
-//添加图片校验该检测指标是否已存在图片
+//添加图片校验该检测指标是否已存在图片（未启用）
 /*function addImageFormValidate(){
 	return*/ $('#addImageForm').validate({
 		rules : {
