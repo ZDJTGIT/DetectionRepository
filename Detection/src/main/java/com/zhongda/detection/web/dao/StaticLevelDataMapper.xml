@@ -31,6 +31,15 @@
     from static_level_data
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAllDataBySensorIdAndTime" resultMap="BaseResultMap">
+  	SELECT
+	*
+	FROM
+		static_level_data
+	WHERE
+		sensor_id = #{sensorId,jdbcType=VARCHAR}
+	AND current_times LIKE concat(#{currentTime,jdbcType=VARCHAR},'%')
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from static_level_data
     where id = #{id,jdbcType=INTEGER}

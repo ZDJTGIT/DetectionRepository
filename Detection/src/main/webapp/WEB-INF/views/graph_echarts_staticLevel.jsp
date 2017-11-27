@@ -19,7 +19,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> 激光测距</title>
+    <title> 沉降</title>
     <meta name="keywords" content="detection,plat,inspection,ZDJT,zhongdajiance">
     <meta name="description" content="中大检测平台">
 

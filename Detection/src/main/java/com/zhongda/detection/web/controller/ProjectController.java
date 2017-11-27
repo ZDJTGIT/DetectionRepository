@@ -36,6 +36,7 @@ import com.zhongda.detection.web.model.Image;
 import com.zhongda.detection.web.model.LaserData;
 import com.zhongda.detection.web.model.OperationLog;
 import com.zhongda.detection.web.model.Project;
+import com.zhongda.detection.web.model.StaticLevelData;
 import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.model.Threshold;
 import com.zhongda.detection.web.model.User;
@@ -49,6 +50,7 @@ import com.zhongda.detection.web.service.OperationLogService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
 import com.zhongda.detection.web.service.SensorInfoService;
+import com.zhongda.detection.web.service.StaticLevelDataService;
 import com.zhongda.detection.web.service.SysDictionaryService;
 import com.zhongda.detection.web.service.UserService;
 
@@ -91,6 +93,9 @@ public class ProjectController {
 
 	@Resource
 	private LaserDataService laserDataService;
+
+	@Resource
+	private StaticLevelDataService staticLevelDataService;
 
 	@Resource
 	private JXLExcel jxlExcel;
@@ -435,6 +440,38 @@ public class ProjectController {
 	}
 
 	/**
+	 * 导出表沉降
+	 * 
+	 * @param sensorId
+	 * @param currentTime
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param detectionName
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/excel_statis")
+	public void excel_statis(String sensorId, String currentTime,
+			Integer projectId, Integer detectionTypeId, String detectionName,
+			HttpServletResponse response) throws IOException {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		List<StaticLevelData> list = staticLevelDataService
+				.selectAllDataBySensorIdAndTime(sensorId, currentTime);
+		Project project = projectService.selectProjectAndSysdicByTwoId(
+				projectId, detectionTypeId);
+		String datesnew = format.format(list.get(0).getCurrentTimes());
+		response.setContentType("application/octet-stream");
+		response.setContentType("application/OCTET-STREAM;charset=UTF-8");
+		response.setHeader("Content-Disposition", "attachment;filename="
+				+ datesnew + ".xls");
+		String[] head = { "初次测试值(MM)", "前次测试时间", "前次测试值(MM)", "本次检测时间",
+				"本次测试值(MM)", "单次变化量(MM)", "总变化量(MM)", "变化速率(MM/MIN)", "温度(℃)" };
+
+		jxlExcel.export_static(response, list, head, project, detectionName);
+
+	}
+
+	/**
 	 * 分页查找用户所有项目
 	 * 
 	 * @param project
@@ -644,7 +681,9 @@ public class ProjectController {
 					.selectProjectStatusByDicId(project.getProjectStatus()));
 			// 创建完项目在图片表中按项目类型添加记录
 			// 获取项目类型ID
-			List<SysDictionary> sysDictionaryList = sysDictionaryServce.selectSysDictionaryByProjectTypeId(project.getProjectTypeId());
+			List<SysDictionary> sysDictionaryList = sysDictionaryServce
+					.selectSysDictionaryByProjectTypeId(project
+							.getProjectTypeId());
 			for (SysDictionary sysDictionary : sysDictionaryList) {
 				Image image = new Image();
 				image.setUserId(project.getUserId());
@@ -657,10 +696,13 @@ public class ProjectController {
 			// 非管理员不能添加项目
 			project.setUserId(2);
 		}
-		//插入一条操作日志
-		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
-		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目插入",
-				currentUser.getUserName()+"插入项目，项目名为："+project.getProjectName(),new Date()));
+		// 插入一条操作日志
+		User currentUser = (User) WebUtils.getSessionAttribute(request,
+				"userInfo");
+		operationLogService.insertOperationLog(new OperationLog(currentUser
+				.getUserId(), currentUser.getUserName(), "项目插入", currentUser
+				.getUserName() + "插入项目，项目名为：" + project.getProjectName(),
+				new Date()));
 		return project;
 	}
 
@@ -707,10 +749,13 @@ public class ProjectController {
 			// 项目状态为int关联字典表，取出
 			project.setProjectStatusString(sysDictionaryServce
 					.selectProjectStatusByDicId(project.getProjectStatus()));
-			//插入一条操作日志
-			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
-			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目修改",
-					currentUser.getUserName()+"修改项目，项目名为："+project.getProjectName(),new Date()));
+			// 插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,
+					"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser
+					.getUserId(), currentUser.getUserName(), "项目修改",
+					currentUser.getUserName() + "修改项目，项目名为："
+							+ project.getProjectName(), new Date()));
 			return project;
 		} else {
 			return null;
@@ -742,10 +787,13 @@ public class ProjectController {
 			// 项目ID删除图片(先删除服务器上图片，再删除数据库记录)
 			imageService.delateImageByProjectId(projectId);
 			imageService.deleteByProjectId(projectId);
-			//插入一条操作日志
-			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
-			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目删除",
-					currentUser.getUserName()+"删除项目，项目ID为："+projectId,new Date()));
+			// 插入一条操作日志
+			User currentUser = (User) WebUtils.getSessionAttribute(request,
+					"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser
+					.getUserId(), currentUser.getUserName(), "项目删除",
+					currentUser.getUserName() + "删除项目，项目ID为：" + projectId,
+					new Date()));
 			return 1;
 		} else {
 			// 非管理员不能删除项目

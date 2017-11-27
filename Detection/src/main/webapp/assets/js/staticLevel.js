@@ -26,6 +26,7 @@ var statcileveldata;
   	  	  			var rateSeries = [];
   	  	  			var grandtotalSeries = [];
   	  	  			var singleSeries = [];
+  	  	  			$("#laserRangexcel_a").attr('href',"rest/project/excel_statis?sensorId="+(data[0].staticLevelDataList)[0].sensorId+"&currentTime="+(data[0].staticLevelDataList)[0].currentTimes.substring(0,10)+"&projectId="+$("#projectId").text()+"&detectionTypeId="+$("#detectionTypeId").text()+"&detectionName="+data[0].detectionName);
   	  	  			$("[name='staticlevel_detectionButtion']").empty();//清空button
   	  	  			staticTabel.fnClearTable();//清空数据.fnClearTable();//清空数据  
   	  	  			//填冲dataTable
@@ -445,6 +446,7 @@ var statcileveldata;
 		var id = $(this).attr("name");
 		$(statcileveldata).each(function(index,value){
 			if(id==value.detectionPointId){
+				$("#laserRangexcel_a").attr('href',"rest/project/excel_statis?sensorId="+(value.staticLevelDataList)[0].sensorId+"&currentTime="+(value.staticLevelDataList)[0].currentTimes.substring(0,10)+"&projectId="+$("#projectId").text()+"&detectionTypeId="+$("#detectionTypeId").text()+"&detectionName="+value.detectionName);
 				staticTabel.fnClearTable();//清空数据.fnClearTable();//清空数据  
 				$(value.staticLevelDataList).each(function(ind,val){
 					staticTabel.fnAddData([
