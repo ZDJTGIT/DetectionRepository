@@ -1,12 +1,11 @@
 package com.zhongda.detection.web.controller;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,12 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.zhongda.detection.web.model.Image;
-import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.Result;
-import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.service.ImageService;
 import com.zhongda.detection.web.service.ProjectService;
-import com.zhongda.detection.web.service.SysDictionaryService;
 
 @RestController
 @RequestMapping(value = "/image")
@@ -28,9 +24,6 @@ public class ImgaeController {
 	
 	@Resource
 	private ImageService imageService;
-	
-	@Resource
-	private SysDictionaryService sysDictionaryServce;
 	
 	@Autowired
 	private ProjectService projectService;
@@ -83,54 +76,14 @@ public class ImgaeController {
 	}
 	
 	/**
-	 * 加载添加弹出层的检测指标选项(所有项目公用所有检测指标)
-	 * @param projectTypeId
-	 * @return
-	 */
-	@RequestMapping(value = "/showDetectionStatus_addImage", method = RequestMethod.POST)
-	@ResponseBody
-	public List<SysDictionary> showDetectionStatus_addImage(String projectName){
-		return sysDictionaryServce.selectAllDetectionType();
-	}
-
-	/**
 	 * 添加图片记录
-	 * @param projectTypeId
+	 * @param image
 	 * @return
 	 */
-	@RequestMapping(value = "/showAddImage", method = RequestMethod.POST)
+	@RequestMapping(value = "/addImage", method = RequestMethod.POST)
 	@ResponseBody
-	public Image showAddImage(Integer projectId,Integer detectionTypeId){
-		Project project = projectService.selectByPrimaryKey(projectId);
-		Image images = imageService.selectImageByTwoId(projectId, detectionTypeId);
-		if(images==null){
-			Image image = new Image(project.getUserId(), project.getProjectId(), project.getProjectTypeId(), 
-					detectionTypeId,null,null,sysDictionaryServce.selectByPrimaryKey(detectionTypeId).getItemName());
-			imageService.insertSelective(image);
-			return image;
-		}else{
-			return images;
-		}
-	}
-//==>校验
-	/**
-	 * 校验该检测指标下是否已经存在图片(未启用)
-	 * @param projectTypeId
-	 * @return
-	 */
-	@RequestMapping(value = "/OnlyImage", method = RequestMethod.POST)
-	@ResponseBody
-	public void OnlyImage(Integer selectDetectionTypeAddImage,Integer projectId_addImage, HttpServletResponse response){
-		//response.setCharacterEncoding("UTF-8");
-		Image image = imageService.selectImageByTwoId(projectId_addImage, selectDetectionTypeAddImage);
-		try {
-			if (image == null) {
-				response.getWriter().print(true);
-			} else {
-				response.getWriter().print(false);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public Image addImage(@RequestBody Image image){			
+		imageService.insertSelective(image);
+		return image;
 	}
 }

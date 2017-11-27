@@ -180,9 +180,8 @@ var projectTypeId=document.getElementById("thres_hold_projectTypeId").value;
 			//加载添加弹出层的测点类型选项
 			$.ajax({
 		    	type:'post',
-			  	  url: 'rest/threshold/showDetectionType',
-			  	  data: {projectTypeId:projectTypeId},
-			  	  contextType:"application/json",
+			  	  url: 'rest/sysDictionary/queryType',
+			  	  data: {typeCode:2},			 
 			  	  success: function(data){
 			  		       if(data){
 			  		    	var stringAdd = '';
@@ -205,9 +204,8 @@ var projectTypeId=document.getElementById("thres_hold_projectTypeId").value;
 			//加载添加弹出层的阀值类型选项
 			$.ajax({
 		    	type:'post',
-			  	  url: 'rest/threshold/showThresHoldType',
-			  	  data: {projectId:projectId},
-			  	  contextType:"application/json",
+			  	  url: 'rest/sysDictionary/queryType',
+			  	  data: {typeCode:10},
 			  	  success: function(data){
 			  		 if(data){
 			  		    	var stringAdd = '';

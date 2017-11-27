@@ -52,7 +52,7 @@
       #{projectTypeId,jdbcType=INTEGER}, #{detectionTypeId,jdbcType=INTEGER}, #{heatImageUrl,jdbcType=VARCHAR}, 
       #{physicalImageUrl,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.Image">
+  <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.Image" useGeneratedKeys="true" keyProperty="imageId">
     insert into image
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="imageId != null">

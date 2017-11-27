@@ -18,13 +18,11 @@ import org.springframework.web.util.WebUtils;
 
 import com.zhongda.detection.web.model.OperationLog;
 import com.zhongda.detection.web.model.Project;
-import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.model.Threshold;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.OperationLogService;
 import com.zhongda.detection.web.service.ProjectService;
-import com.zhongda.detection.web.service.SysDictionaryService;
 import com.zhongda.detection.web.service.ThresholdService;
 
 @RestController
@@ -33,9 +31,6 @@ public class ThresholdController {
 
 	@Autowired
 	private ThresholdService thresholdService;
-
-	@Resource
-	private SysDictionaryService sysDictionaryServce;
 
 	@Autowired
 	private ProjectService projectService;
@@ -92,29 +87,6 @@ public class ThresholdController {
 	@ResponseBody
 	public List<Threshold> showProjectThreshold(Integer projectId) {
 		return thresholdService.selectByProjectId(projectId);
-	}
-
-	/**
-	 * 显示当前项目下所有测点类型
-	 * @param projectTypeId
-	 * @return
-	 */
-	@RequestMapping(value = "/showDetectionType", method = RequestMethod.POST)
-	@ResponseBody
-	public List<SysDictionary> showDetectionType(Integer projectTypeId) {
-		return sysDictionaryServce.selectAllDetectionType();
-	}
-
-	/**
-	 * 显示所有阀值类型（所有的测点类型都是公用同样的阀值类型）
-	 * @param projectId
-	 * @return
-	 */
-	@RequestMapping(value = "/showThresHoldType", method = RequestMethod.POST)
-	@ResponseBody
-	public List<SysDictionary> showThresHoldType(Integer projectId) {
-		// 所有阀值类型一致，通用
-		return sysDictionaryServce.selectSysDictionaryByTypeCode(10);
 	}
 
 	/**

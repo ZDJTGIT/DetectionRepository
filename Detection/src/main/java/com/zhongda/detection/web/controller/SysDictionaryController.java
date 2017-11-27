@@ -35,4 +35,12 @@ public class SysDictionaryController {
 		List<SysDictionary> sysDictionaryList = sysDictionaryService.selectSysDictionaryByAlarmTypeAndStatus(alarmType, alarmStatus);
 		return sysDictionaryList;
 	}
+	
+	@RequestMapping("/queryType")
+	@ResponseBody
+	public List<SysDictionary> queryType(Integer typeCode) {
+		//查出所有的检测指标
+		List<SysDictionary> sysDictionaryList = sysDictionaryService.selectSysDictionaryByTypeCode(typeCode);
+		return sysDictionaryList;
+	}
 }

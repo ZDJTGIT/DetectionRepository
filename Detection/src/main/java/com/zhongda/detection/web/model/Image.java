@@ -24,16 +24,6 @@ public class Image {
 		this.imageId = imageId;
 	}
     
-    public Image(Integer userId, Integer projectId, Integer projectTypeId, Integer detectionTypeId, String heatImageUrl, String physicalImageUrl,String detectionTypeName){
-    	this.userId = userId;
-    	this.projectId = projectId;
-    	this.projectTypeId = projectTypeId;
-    	this.detectionTypeId = detectionTypeId;
-    	this.heatImageUrl = heatImageUrl;
-    	this.physicalImageUrl = physicalImageUrl;
-    	this.detectionTypeName = detectionTypeName;
-    }
-
 	public String getDetectionTypeName() {
 		return detectionTypeName;
 	}

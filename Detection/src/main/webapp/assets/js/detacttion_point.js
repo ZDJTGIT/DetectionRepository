@@ -294,9 +294,8 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 			//加载添加弹出层的检测指标选项(所有项目公用所有检测指标)
 			$.ajax({
 		    	type:'post',
-			  	  url: 'rest/detectionPoint/showDetectionStatus',
-			  	  data: {projectTypeId:projectTypeId},
-			  	  contextType:"application/json",
+			  	  url: 'rest/sysDictionary/queryType',
+			  	  data: {typeCode:2},
 			  	  success: function(data){
 			  		       if(data){
 			  		    	var stringUpdeta = '';

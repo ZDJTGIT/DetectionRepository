@@ -54,10 +54,4 @@ public class SysDictionaryServiceImpl implements SysDictionaryService {
 		return sysDictionaryMapper.selectSysDictionaryByTypeCode(typeCode);
 
 	}
-
-	@Override
-	public List<SysDictionary> selectAllDetectionType() {
-		return sysDictionaryMapper.selectAllDetectionType();
-	}
-
 }

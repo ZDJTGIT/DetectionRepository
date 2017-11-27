@@ -206,9 +206,11 @@ public class CommonController {
 
 	@RequestMapping("project_image/{project}")
 	public String image(Model model, @PathVariable("project") String project) {
-		String[] strings = project.split(":");
-		model.addAttribute("projectId", strings[0]);
-		model.addAttribute("projectName", strings[1]);
+		String[] projectDetail = project.split(":");
+		model.addAttribute("projectId", projectDetail[0]);
+		model.addAttribute("userId", projectDetail[1]);
+		model.addAttribute("projectName", projectDetail[2]);
+		model.addAttribute("projectTypeId", projectDetail[3]);
 		return "project_image";
 	}
 

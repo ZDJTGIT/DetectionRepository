@@ -578,7 +578,7 @@ var dlId=document.getElementById("project_DLID").value;
 											'</a>'+
 										'</td>'+
 										'<td class="project-status" style="width:70px">'+
-											'<a href="rest/image/'+data.projectId+':'+data.projectName+'" class="J_menuItem" name="图片">'+
+											'<a href="rest/image/'+data.projectId+':'+data.userId+':'+data.projectName+':'+data.projectTypeId+'" class="J_menuItem" name="图片">'+
 												'图片 '+
 											'</a>'+
 										'</td>'+
@@ -750,7 +750,7 @@ var dlId=document.getElementById("project_DLID").value;
 																	'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+':'+item.projectTypeId+'" class="J_menuItem" name="阀值">阀值 </a>'+
 																'</td>'+
 																'<td class="project-status" style="width:70px">'+
-																	'<a href="rest/project_image/'+item.projectId+':'+item.projectName+'" class="J_menuItem" name="图片">图片 </a>'+
+																	'<a href="rest/project_image/'+item.projectId+':'+item.userId+':'+item.projectName+':'+item.projectTypeId+'" class="J_menuItem" name="图片">图片 </a>'+
 																'</td>'+
 																	'<td class="project-actions">'+
 																    '<a href="javascript:;" class="J_menuItem" onclick="updetaProject(this)" data-toggle="modal" data-target="#myModal_updetaProject">'+

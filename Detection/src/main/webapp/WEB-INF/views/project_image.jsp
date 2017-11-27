@@ -150,26 +150,23 @@
 						</div>
 						
 						<!-- Modal添加图片-url为空-->
-						<div class="modal fade" id="addImageModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 160px">
-						 <!-- <form id="addImageForm"> -->
+						<div class="modal fade" id="addImageModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 160px">				
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content" style="">
 						      <div class="modal-header">
-						        <button type="button" class="close imageCloseBtn">&times;</button>
-						        <h4 class="modal-title" id="myModalLabel_updetaimage">添加图片</h4>
+						        <button type="button" class="close closeAddImageBtn">&times;</button>
+						        <h4 class="modal-title" id="myModalLabel_updetaimage">添加图片信息</h4>
 						      </div>
 						      <div class="modal-body">
 						        <label class="md_lable" for="">检测指标:</label>
-								<div id="selectDetectionType_div_addDetection">
-									<select class="md_input" id="selectDetectionTypeAddImage" name="selectDetectionTypeAddImage">
-									</select>
-							    </div>	
-							    <%-- <label class="md_lable" style="display:none" for="projectId_addImage">项目ID</label>
-								<input class="md_input" style="display:none" type="text" id="projectId_addImage" name="projectId_addImage" value="${projectId}"><br><br>					 --%>	
+								<div id="selectDetectionTypeDiv">
+									<select class="md_input" id="selectDetectionType" name="selectDetectionType"></select>
+							    </div>								 
 						      </div>
 						      <div class="modal-footer">
-						      	<button type="button" id="offAddImageModel" class="btn btn-default" data-dismiss="modal">关闭</button>
-						        <button type="button" class="btn btn-primary sureAddImageModel">提交</button>
+						      	<button type="button" class="btn btn-default realCloseAddImageBtn" style="display:none" data-dismiss="modal">关闭</button>
+						      	<button type="button" class="btn btn-default closeAddImageBtn">关闭</button>
+						        <button type="button" class="btn btn-primary addImageModel">提交</button>
 						      </div>
 						    </div>
 						  </div>
@@ -184,107 +181,83 @@
 	<script src="assets/js/layui.all.js" charset="utf-8"></script>
 	<script src="assets/js/content.js"></script>
 	<script src="assets/js/plugins/validate/jquery.validate.js"></script>
-	<script src="assets/js/customerValidate.js"></script>
-	
-	<script>
-	
-	var projectName = '${projectName}';
-	var projectId = '${projectId}';
-	
-	//添加图片校验该检测指标是否已存在图片
-	function addImageFormValidate(){
-		return $('#addImageForm').validate({
-			rules : {
-				selectDetectionTypeAddImage : {
-					//校验该检测指标是否已存在图片
-					remote: {
-						   url: "rest/image/OnlyImage",    //后台处理程序
-						   type: "post",                   //数据发送方式  
-						   data: {                         //要传递的数据
-							    selectDetectionTypeAddImage: function() {
-					            return $("#selectDetectionTypeAddImage").val();
-					        },
-					        	projectId_addImage: function() {
-					            return $("#projectId_addImage").val();
-					        }
-					    }
-					}
-				}
-			},
-			messages : {
-				selectDetectionTypeAddImage : {
-					remote: "该检测指标已存在图片"
-				}
+	<script src="assets/js/customerValidate.js"></script>	
+	<script>		
+	//添加图片记录
+	$(".addImageModel").click(function(){
+		var detectionTypeId = $('#selectDetectionType option:selected').val();
+		var isDetectionTypeExist = false;
+		$('#image_tbody tr').each(function(idx,item){
+			if($(this).attr('name') == detectionTypeId){
+				isDetectionTypeExist = true;
+				return false;
 			}
-		});		
-	}
-	
-	//确认添加图片记录
-	$(".sureAddImageModel").click(function(){
-		/* alert($('#addImageForm').valid());
-		if(!$('#addImageForm').valid()){
-			return false;
-		}  */
-		//alert(addImageFormValidate().form());
-		var detectionTypeId = $('#selectDetectionTypeAddImage option:selected').val();//检测指标ID-
+		});
+		if(isDetectionTypeExist){
+			alert("该种检测指标的图片已存在");
+			return;
+		}
+		
 		$.ajax({
 	   		  type:'post',
-	   	  	  url: 'rest/image/showAddImage',
-	   	  	  data: {projectId:projectId, detectionTypeId:detectionTypeId},
-	   	  	  contextType:"application/json",
+	   	  	  url: 'rest/image/addImage',
+	   	  	  data: '{"projectId":${projectId},"userId":${userId},"projectTypeId":${projectTypeId},"detectionTypeId":'+detectionTypeId+'}',
+	   	  	  contentType:'application/json',
 	   	  	  success: function(data){
-	   	  		if(data.imageId==null){
-		   	  	if(data){
-	    	  		var string = "",operationHeatStr = "上传",operationPhysicalStr = "上传",powerHeat="",powerPhysical="";
-	    	  			//权限控制
+		   	  		if(data){
+		   	  			var detectionTypeName;
+		   	  			$('#selectDetectionType option').each(function(idx,item){
+		   					if($(this).val() == data.detectionTypeId){
+		   						detectionTypeName = $(this).text();
+		   					}
+		   				});
+		   	  			var powerHeat="",powerPhysical="";
+		   	  			//权限控制
 	    	  			if($('#image_table thead tr th').length >= 5){
-	    	  				powerHeat = '<td class="project-title" style="width:110px"><a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updateImage(this,true)"  data-toggle="modal" data-target="#updateHeatImageModel"><i class="layui-icon">&#xe681;</i>'+operationHeatStr+'</a><br /></td>';
-	    	  				powerPhysical = '<td class="project-status" style="width:110px"><a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updateImage(this,false)"  data-toggle="modal" data-target="#updatePhysicalImageModel"><i class="layui-icon">&#xe681;</i>'+operationPhysicalStr+'</a><br /></td>';
+	    	  				powerHeat = '<td class="project-title" style="width:110px"><a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updateImage(this,true)"  data-toggle="modal" data-target="#updateHeatImageModel"><i class="layui-icon">&#xe681;</i>上传</a><br /></td>';
+	    	  				powerPhysical = '<td class="project-status" style="width:110px"><a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updateImage(this,false)"  data-toggle="modal" data-target="#updatePhysicalImageModel"><i class="layui-icon">&#xe681;</i>上传</a><br /></td>';
 	    	  			}
-	    	  	   string = '<tr><td class="project-title" style="width:160px" name="'+data.imageId+'">'+data.detectionTypeName+'</td>'+				    	  		    	
+	    	  	   		string = '<tr name="'+data.detectionTypeId+'"><td class="project-title" style="width:160px" name="'+data.imageId+'">'+detectionTypeName+'</td>'+				    	  		    	
 							'<td class="project-title" style="width:500px">'+
-								'<img alt="未上传图片" id="h'+data.imageId+'" src="'+data.heatImageUrl+'" style="padding:0">'+
+								'<img alt="未上传图片" id="h'+data.imageId+'" src="assets/img/test1.png" style="padding:0">'+
 							'</td>'+ powerHeat +							
 			    	  		'<td class="project-title" style="width:500px">'+
-			    	  			carouselImage(data) +
+			    	  			'<img alt="未上传图片" id="p'+data.imageId+'" src="assets/img/test1.png" style="padding:0">'+
 							'</td>'+ powerPhysical + '</tr>';									   
-	    	  		$('#image_tbody').append(string);
-	    	  	}
-	    	  	 $('#offAddImageModel').trigger("click"); 
-			   	 layer.msg('添加成功（该提示1s后自动关闭）', {
-						time : 1000, //1s后自动关闭
-						btn : [ '知道了' ]
-					});
-	   	  	  }else{
-	   	  		  alert("添加失败，该检验指标下图片已存在");
-	   	  		  $('#offAddImageModel').trigger("click"); 
+	    	  			$('#image_tbody').append(string);
+	    	  			$('#realCloseAddImageBtn').trigger("click"); 
+			   	 		layer.msg('添加成功（该提示1s后自动关闭）', {
+							time : 1000, //1s后自动关闭
+							btn : [ '知道了' ]
+						});
+	   	  	  		}else{
+	   	  		  		alert("添加失败");
+	   	  		  		$('.realCloseAddImageBtn').trigger("click"); 
+			  		}
 	   	  	  }
-			  }
-		   });
-		
+		   });		
 	});
 	
 	//加载添加弹出层的检测指标选项(所有项目公用所有检测指标)
 	$.ajax({
-    	type:'post',
-	  	  url: 'rest/image/showDetectionStatus_addImage',
-	  	  data: {projectName:projectName},
-	  	  contextType:"application/json",
+    	  type:'post',
+	  	  url: 'rest/sysDictionary/queryType',
+	  	  data: {typeCode:2},	 
 	  	  success: function(data){
-	  		       if(data){
-	  		    	var stringUpdeta = '';
-	  		    	var stringAdd = '';
-	  		    	$.each(data,function(idx,SysDictionary){
-	  		    		stringAdd += '<option value="'+SysDictionary.dicId+'">'+ SysDictionary.itemName +'</option>';
-	  		    	});
-	  		       $('#selectDetectionTypeAddImage').append(stringAdd);
-	  		       }else{
-	  		    	alert("数据异常");
-	  		       }
+	  		 if(data){
+	  		    var stringUpdeta = '';
+	  		    var stringAdd = '';
+	  		    $.each(data,function(idx,SysDictionary){
+	  		    	stringAdd += '<option value="'+SysDictionary.dicId+'">'+ SysDictionary.itemName +'</option>';
+	  		    });
+	  		    $('#selectDetectionType').append(stringAdd);
+	  		 }else{
+	  		    alert("数据异常");
+	  		 }
 	  	  },
 	  	  error: function(){
-			    alert("数据加载失败");
-		      }
+			alert("数据加载失败");
+		  }
      });
 		
 	function carouselImage(item){
@@ -364,7 +337,7 @@
 		    	  				powerHeat = '<td class="project-title" style="width:110px"><a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updateImage(this,true)"  data-toggle="modal" data-target="#updateHeatImageModel"><i class="layui-icon">&#xe681;</i>'+operationHeatStr+'</a><br /></td>';
 		    	  				powerPhysical = '<td class="project-status" style="width:110px"><a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updateImage(this,false)"  data-toggle="modal" data-target="#updatePhysicalImageModel"><i class="layui-icon">&#xe681;</i>'+operationPhysicalStr+'</a><br /></td>';
 		    	  			}
-		    	  			string += '<tr><td class="project-title" style="width:160px" name="'+item.imageId+'">'+item.detectionTypeName+'</td>'+				    	  		    	
+		    	  			string += '<tr name="'+item.detectionTypeId+'"><td class="project-title" style="width:160px" name="'+item.imageId+'">'+item.detectionTypeName+'</td>'+				    	  		    	
 								'<td class="project-title" style="width:500px">'+
 									'<img alt="未上传图片" id="h'+item.imageId+'" src="'+item.heatImageUrl+'" style="padding:0">'+
 								'</td>'+ powerHeat +							
@@ -393,10 +366,15 @@
 				layer.load(2, {
 					shade: [0.1,'#fff'] //0.1透明度的白色背景
 			    });
-				$.get('rest/project_image/${projectId}:${projectName}', function(data) {
+				$.get('rest/project_image/${projectId}:${userId}:${projectName}:${projectTypeId}', function(data) {
 	                 $('#content-main').html(data);
 	            });
 				layer.closeAll('loading');
+			});
+			
+			//关闭模态框
+			$('.closeAddImageBtn').click(function(){				
+				$('.realCloseAddImageBtn').trigger("click");				
 			});
 		});			
 	
