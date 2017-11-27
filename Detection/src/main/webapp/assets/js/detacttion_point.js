@@ -7,7 +7,7 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 		if(!$('#form_addDetection').valid()){
 			return false;
 		}
-		var detectionTypeId = $('#selectDetectionStatusAdd option:selected').val();//测点类型ID-
+		var detectionTypeId = $('#selectDetectionStatusAdd option:selected').val();//检测指标ID-
 		var detectionLongitude = $('#DetectionLongitude_addDetection').val();//测点经度.
 		var detectionLatitude = $('#DetectionLatitude_addDetection').val();//测点纬度.
 		var detectionName = $('#DetectionName_addDetection').val();//测点名.

@@ -39,6 +39,11 @@
 				<div class="ibox">
 					<div class="ibox-title">
 						<h5>${projectName}</h5>
+						<div class="ibox-tools">
+							<button type="button" class="btn btn-primary btn-xs btn-lg" data-toggle="modal" data-target="#addImageModel">
+						 		添加图片记录
+							</button>
+						</div>
 					</div>
 					<div class="ibox-content">
 						<div class="project-list">
@@ -79,7 +84,7 @@
 						        <h4 class="modal-title" id="myModalLabel_updetaimage">修改图片</h4>
 						      </div>
 						      <div class="modal-body">
-						        <label class="md_lable" for="detectionTypeNameHeat">测点类型:</label>
+						        <label class="md_lable" for="detectionTypeNameHeat">检测指标:</label>
 						        <input class="md_input" type="text" readonly id="detectionTypeNameHeat" name="detectionTypeNameHeat"><br><br>						        
 						        <input class="md_input" type="text" style="display:none" id="imageIdHeat" name="imageIdHeat">								
 								<label class="md_lable" for="">添加热点图:</label><span>(重新上传会覆盖原有已上传图片)</span>
@@ -102,6 +107,7 @@
 						  </div>
 						 </form>
 						</div>
+						
 						<!-- Modal修改现场图-->
 						<div class="modal fade" id="updatePhysicalImageModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 60px">
 						 <form id="updatePhysicalForm">
@@ -112,7 +118,7 @@
 						        <h4 class="modal-title" id="myModalLabel_updetaimage">修改图片</h4>
 						      </div>
 						      <div class="modal-body">
-						        <label class="md_lable" for="detectionTypeNamePhysical">测点类型:</label>
+						        <label class="md_lable" for="detectionTypeNamePhysical">检测指标:</label>
 						        <input class="md_input" type="text" readonly id="detectionTypeNamePhysical" name="detectionTypeNamePhysical"><br><br>						        
 						        <input class="md_input" type="text" style="display:none" id="imageIdPhysical" name="imageIdPhysical">						        
 							    <label class="md_lable" for="">添加现场图:</label><span>(重新上传会覆盖原有已上传图片)</span>
@@ -142,6 +148,34 @@
 						  </div>
 						 </form>
 						</div>
+						
+						<!-- Modal添加图片-url为空-->
+						<div class="modal fade" id="addImageModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="padding-top: 160px">
+						 <form id="addImageForm">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content" style="">
+						      <div class="modal-header">
+						        <button type="button" class="close imageCloseBtn">&times;</button>
+						        <h4 class="modal-title" id="myModalLabel_updetaimage">添加图片</h4>
+						      </div>
+						      <div class="modal-body">
+						        <label class="md_lable" for="">检测指标:</label>
+								<div id="selectDetectionType_div_addDetection">
+									<select class="md_input" id="selectDetectionTypeAddImage" name="selectDetectionTypeAddImage">
+									</select>
+							    </div>	
+							    
+							    <label class="md_lable" style="display:none" for="projectId_addImage">项目ID</label>
+								<input class="md_input" style="display:none" type="text" id="projectId_addImage" name="projectId_addImage" value="${projectId}"><br><br>						
+						      </div>
+						      <div class="modal-footer">
+						      	<button type="button" id="offAddImageModel" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        <button type="button" class="btn btn-primary sureAddImageModel">提交</button>
+						      </div>
+						    </div>
+						  </div>
+						 </form>
+						</div>		
 					</div>
 				</div>
 			</div>
@@ -150,7 +184,104 @@
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/layui.all.js" charset="utf-8"></script>
 	<script src="assets/js/content.js"></script>
+	<script src="assets/js/plugins/validate/jquery.validate.js"></script>
+	<script src="assets/js/customerValidate.js"></script>
+	
 	<script>
+	
+	var projectName = '${projectName}';
+	var projectId = '${projectId}';
+	
+	//添加图片校验该检测指标是否已存在图片
+	function addImageFormValidate(){
+		return $('#addImageForm').validate({
+			rules : {
+				selectDetectionTypeAddImage : {
+					//校验该检测指标是否已存在图片
+					remote: {
+						   url: "rest/image/OnlyImage",    //后台处理程序
+						   type: "post",                   //数据发送方式  
+						   data: {                         //要传递的数据
+							    selectDetectionTypeAddImage: function() {
+					            return $("#selectDetectionTypeAddImage").val();
+					        },
+					        	projectId_addImage: function() {
+					            return $("#projectId_addImage").val();
+					        }
+					    }
+					}
+				}
+			},
+			messages : {
+				selectDetectionTypeAddImage : {
+					remote: "该检测指标已存在图片"
+				}
+			}
+		});		
+	}
+	
+	//确认添加图片记录
+	$(".sureAddImageModel").click(function(){
+		alert($('#addImageForm').valid());
+		if(!$('#addImageForm').valid()){
+			return false;
+		} 
+		//alert(addImageFormValidate().form());
+		var detectionTypeId = $('#selectDetectionTypeAddImage option:selected').val();//检测指标ID-
+		$.ajax({
+	   		  type:'post',
+	   	  	  url: 'rest/image/showAddImage',
+	   	  	  data: {projectId:projectId, detectionTypeId:detectionTypeId},
+	   	  	  contextType:"application/json",
+	   	  	  success: function(data){
+		   	  	if(data){
+	    	  		var string = "",operationHeatStr = "上传",operationPhysicalStr = "上传",powerHeat="",powerPhysical="";
+	    	  			//权限控制
+	    	  			if($('#image_table thead tr th').length >= 5){
+	    	  				powerHeat = '<td class="project-title" style="width:110px"><a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updateImage(this,true)"  data-toggle="modal" data-target="#updateHeatImageModel"><i class="layui-icon">&#xe681;</i>'+operationHeatStr+'</a><br /></td>';
+	    	  				powerPhysical = '<td class="project-status" style="width:110px"><a href="javascript:;" class="J_menuItem" style="color:#337ab7" onclick="updateImage(this,false)"  data-toggle="modal" data-target="#updatePhysicalImageModel"><i class="layui-icon">&#xe681;</i>'+operationPhysicalStr+'</a><br /></td>';
+	    	  			}
+	    	  	   string = '<tr><td class="project-title" style="width:160px" name="'+data.imageId+'">'+data.detectionTypeName+'</td>'+				    	  		    	
+							'<td class="project-title" style="width:500px">'+
+								'<img alt="未上传图片" id="h'+data.imageId+'" src="'+data.heatImageUrl+'" style="padding:0">'+
+							'</td>'+ powerHeat +							
+			    	  		'<td class="project-title" style="width:500px">'+
+			    	  			carouselImage(data) +
+							'</td>'+ powerPhysical + '</tr>';									   
+	    	  		$('#image_tbody').append(string);
+	    	  	}
+	    	  	 $('#offAddImageModel').trigger("click"); 
+			   	 layer.msg('添加成功（该提示1s后自动关闭）', {
+						time : 1000, //1s后自动关闭
+						btn : [ '知道了' ]
+					});
+	   	  	  }
+		   });
+		
+	});
+	
+	//加载添加弹出层的检测指标选项(所有项目公用所有检测指标)
+	$.ajax({
+    	type:'post',
+	  	  url: 'rest/image/showDetectionStatus_addImage',
+	  	  data: {projectName:projectName},
+	  	  contextType:"application/json",
+	  	  success: function(data){
+	  		       if(data){
+	  		    	var stringUpdeta = '';
+	  		    	var stringAdd = '';
+	  		    	$.each(data,function(idx,SysDictionary){
+	  		    		stringAdd += '<option value="'+SysDictionary.dicId+'">'+ SysDictionary.itemName +'</option>';
+	  		    	});
+	  		       $('#selectDetectionTypeAddImage').append(stringAdd);
+	  		       }else{
+	  		    	alert("数据异常");
+	  		       }
+	  	  },
+	  	  error: function(){
+			    alert("数据加载失败");
+		      }
+     });
 		
 	function carouselImage(item){
 		var imageDivStr = '';
@@ -237,7 +368,7 @@
 				    	  			carouselImage(item) +
 								'</td>'+ powerPhysical + '</tr>';									   
 								   									    
-				    	});
+				    		});
 		    	  		$('#image_tbody').append(string);
 		    	  	}
 		    	}

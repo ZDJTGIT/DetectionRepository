@@ -242,8 +242,8 @@ var projectName=document.getElementById("project_detail_projectName").value;
 														'<td><span class="label label-primary">'+
 														'<i class=""></i>'+item.detectionName+'</span></td>'+
 														'<td>'+item.itemName+'</td>'+
-														'<td>'+item.detectionLatitude+'</td>'+
 														'<td>'+item.detectionLongitude+'</td>'+
+														'<td>'+item.detectionLatitude+'</td>'+
 														'<td>'+
 															'<p class="small">第一个测点</p>'+
 														'</td>'+

@@ -9,6 +9,13 @@ import com.zhongda.detection.web.model.Image;
 
 public interface ImageMapper {
 	int deleteByPrimaryKey(Integer imageId);
+	
+	/**
+	 * 通过项目ID删除项目下所有图片
+	 * @param projectId
+	 * @return
+	 */
+	int deleteByProjectId(Integer projectId);
 
 	int insert(Image record);
 

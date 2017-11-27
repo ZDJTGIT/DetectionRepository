@@ -642,11 +642,9 @@ public class ProjectController {
 			// 项目状态为int关联字典表，取出
 			project.setProjectStatusString(sysDictionaryServce
 					.selectProjectStatusByDicId(project.getProjectStatus()));
-			// 创建完项目在警戒值表中按项目类型添加记录
+			// 创建完项目在图片表中按项目类型添加记录
 			// 获取项目类型ID
-			List<SysDictionary> sysDictionaryList = sysDictionaryServce
-					.selectSysDictionaryByProjectTypeId(project
-							.getProjectTypeId());
+			List<SysDictionary> sysDictionaryList = sysDictionaryServce.selectSysDictionaryByProjectTypeId(project.getProjectTypeId());
 			for (SysDictionary sysDictionary : sysDictionaryList) {
 				Image image = new Image();
 				image.setUserId(project.getUserId());
@@ -741,6 +739,8 @@ public class ProjectController {
 			sensorInfoService.deleteByProjectId(projectId);
 			// 项目ID删除阀值
 			thresholdService.deleteByProjectId(projectId);
+			// 项目ID删除图片
+			
 			//插入一条操作日志
 			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
 			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"项目删除",

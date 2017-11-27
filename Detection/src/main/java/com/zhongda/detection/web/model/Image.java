@@ -18,11 +18,21 @@ public class Image {
     //测点类型名称，缓存数据库数据
     private String detectionTypeName;
     
-    public Image() {}
+    public Image(){};
     
     public Image(Integer imageId) {
 		this.imageId = imageId;
 	}
+    
+    public Image(Integer userId, Integer projectId, Integer projectTypeId, Integer detectionTypeId, String heatImageUrl, String physicalImageUrl,String detectionTypeName){
+    	this.userId = userId;
+    	this.projectId = projectId;
+    	this.projectTypeId = projectTypeId;
+    	this.detectionTypeId = detectionTypeId;
+    	this.heatImageUrl = heatImageUrl;
+    	this.physicalImageUrl = physicalImageUrl;
+    	this.detectionTypeName = detectionTypeName;
+    }
 
 	public String getDetectionTypeName() {
 		return detectionTypeName;
