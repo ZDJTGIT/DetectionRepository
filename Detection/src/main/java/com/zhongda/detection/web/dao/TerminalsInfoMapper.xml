@@ -15,15 +15,21 @@
     from terminals_info
     where terminals_info_id = #{terminalsInfoId,jdbcType=INTEGER}
   </select>
-  <select id="selectByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-  	select t.*
-	from terminals_info ti, terminals t
-	where ti.project_id = #{projectId,jdbcType=INTEGER}
-	and t.smu_id=ti.smu_id
+  <select id="selectBySmuIdAndProjectId" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from terminals_info
+  	where smu_id = ${_parameter.param1}
+  	and project_id = ${_parameter.param2}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from terminals_info
     where terminals_info_id = #{terminalsInfoId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteBySmuIdAndProjectId">
+    delete from terminals_info
+    where smu_id = ${_parameter.param1}
+    and project_id = ${_parameter.param2}
   </delete>
   <insert id="insert" parameterType="com.zhongda.detection.web.model.TerminalsInfo">
     insert into terminals_info (terminals_info_id, smu_id, project_id

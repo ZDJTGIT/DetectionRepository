@@ -6,6 +6,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="smu_id" jdbcType="VARCHAR" property="smuId" />
+    <result column="smu_id_nu" jdbcType="VARCHAR" property="smuIdNu" />
     <result column="smu_rssi" jdbcType="INTEGER" property="smuRssi" />
     <result column="smu_status" jdbcType="INTEGER" property="smuStatus" />
     <result column="smu_voltage" jdbcType="VARCHAR" property="smuVoltage" />
@@ -19,6 +20,20 @@
     <include refid="Base_Column_List" />
     from terminals
     where Id = #{id,jdbcType=INTEGER}
+  </select>
+   <select id="selectByProjectId" parameterType="com.zhongda.detection.web.model.Project" resultMap="BaseResultMap">
+     select 
+   	 t.*,ti.smu_id 'smu_id_nu'
+	 from terminals_info ti
+	 LEFT JOIN terminals t ON t.smu_id=ti.smu_id
+	 where ti.project_id = #{projectId}
+   	 order by t.Id desc
+  </select>
+  <select id="selectBySmuId" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+  	from terminals
+  	where smu_id = #{smuId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from terminals

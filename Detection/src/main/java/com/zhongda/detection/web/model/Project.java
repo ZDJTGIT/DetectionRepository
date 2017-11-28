@@ -39,13 +39,14 @@ public class Project {
     //数据库不存在该字段，只作为分页时存储每页记录条数数据时使用
     private Integer pageSize;
     
-    //缓存测点数量，传感器数量，阀值数量，图片数量。
-    //异常测点数，异常传感器数量，未处理告警信息数量
+    //缓存测点数量，传感器数量，阀值数量，图片数量
+    //异常测点数，异常传感器数量，未处理告警信息数量，异常采集器数量
+    private Integer alarmTerminalsCount;
     private Integer alarmAlarmCount;
 	private Integer alarmSensorInfoCount;
 	private Integer alarmDetectionCount;
     private Integer detectionPointCount;
-    private Integer sensorInfoCount;
+	private Integer sensorInfoCount;
     private Integer thresholdCount;
     private Integer imageCount;
     
@@ -54,6 +55,14 @@ public class Project {
     
     // 缓存告警信息的数量
   	private Integer alarmCount;
+  	
+  	public Integer getAlarmTerminalsCount() {
+ 		return alarmTerminalsCount;
+ 	}
+
+ 	public void setAlarmTerminalsCount(Integer alarmTerminalsCount) {
+ 		this.alarmTerminalsCount = alarmTerminalsCount;
+ 	}
   	
   	public Integer getAlarmAlarmCount() {
 		return alarmAlarmCount;

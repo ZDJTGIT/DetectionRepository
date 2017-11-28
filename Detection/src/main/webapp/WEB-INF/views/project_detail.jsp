@@ -147,28 +147,9 @@
 														</tr>
 													</thead>
 													<tbody id="tbody_terminals">
-															<tr>
-																<td><span class="label label-primary">
-																<i class=""></i>2017100004</span></td>
-																<td>2017-10-24 14:23:55</td>
-																<td>2017-11-10 08:32:23</td>
-																<td>31</td>
-																<td></td>
-																<td>在线</td>
-																<td></td>
-															</tr>
-															<tr>
-																<td><span class="label label-primary">
-																<i class=""></i>2017100005</span></td>
-																<td>2017-10-24 14:55:54</td>
-																<td>2017-11-10 08:32:46</td>
-																<td>31</td>
-																<td></td>
-																<td>在线</td>
-																<td></td>
-															</tr>
 													</tbody>
 													</table>
+													<div style="margin-top:15px; text-align:center;" id="pageComponent_terminals"></div>
 												</div>
 											</div>
 											<div class="tab-pane" id="tab-2">

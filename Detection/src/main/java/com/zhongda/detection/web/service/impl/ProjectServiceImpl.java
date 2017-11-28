@@ -186,4 +186,14 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectMapper.selectAlarmAlarmCount(projectId);
 	}
 
+	@Override
+	public Project selectTerminalsCount(Integer projectId) {
+		return projectMapper.selectTerminalsCount(projectId);
+	}
+
+	@Override
+	public Project selectAlarmTerminalsCount(Integer projectId) {
+		return projectMapper.selectAlarmTerminalsCount(projectId);
+	}
+
 }

@@ -56,6 +56,32 @@ $(document).ready(function() {
 	});		
 /*}*/
 
+//添加采集器时判断采集器编号是否已存在项目
+$('#form_addTerminals').validate({
+	rules : {
+		terminalsNum : {
+			//校验该检测指标是否已存在图片
+			remote: {
+				   url: "rest/terminals/OnlyTerminals",    //后台处理程序
+				   type: "post",				   //数据发送方式
+				   dataType: "json",  
+				   data: {                         //要传递的数据
+					   terminalsNum: function() {
+					    return $("#terminalsNum").val();
+					     },
+					   terminals_projectId: function() {
+					    return $("#terminals_projectId").val();
+					     }
+					   }
+					}
+				}
+			},
+			messages : {
+				terminalsNum : {
+					remote: "该检测指标已存在图片"
+				}
+			}
+		});		
 	
 //添加项目信息验证	
 $('#form_addProject').validate({

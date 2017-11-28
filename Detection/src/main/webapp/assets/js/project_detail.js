@@ -85,19 +85,21 @@ var projectName=document.getElementById("project_detail_projectName").value;
 			    data: {projectId:projectId},
 			    contextType:"application/json",
 			    success: function(data){
-			    	 //非正常测点（出线告警信息的测点）
+			    	 //正常测点（出现告警信息的测点为非正常测点）
 			    	 var normalDetectionPointCount = data.detectionPointCount-data.alarmDetectionCount;
-			    	 //非正常传感器（传回设备类告警的传感器）
+			    	 //正常传感器（传回设备类告警的传感器为非正常传感器）
 			    	 var normalSensorInfoCount = data.sensorInfoCount-data.alarmSensorInfoCount;
-			    	 //未处理告警信息（告警信息状态为未读）
+			    	 //已处理告警信息（告警信息状态为未读表示未处理）
 			    	 var normalAlarmCount = data.alarmCount-data.alarmAlarmCount;
+			    	 //正常采集器（离线表示非正常）---有BUG
+			    	 var normalTerminalsCount = data.terminalsCount-data.alarmTerminalsCount;
 			    	 if(data){   
 				    		 content.push(normalAlarmCount);//告警信息条数（alarm表）
-				    		 content.push(2);//改成采集器数量---
+				    		 content.push(normalTerminalsCount);//在线采集器数量---bug
 				    		 content.push(normalSensorInfoCount);
 				    		 content.push(normalDetectionPointCount);
 				    		 contenterror.push(data.alarmAlarmCount);
-				    		 contenterror.push(0);
+				    		 contenterror.push(data.alarmTerminalsCount);//离线采集器数量---bug
 				    		 contenterror.push(data.alarmSensorInfoCount);
 				    		 contenterror.push(data.alarmDetectionCount);
 				    		 myChart.hideLoading();
@@ -267,8 +269,81 @@ var projectName=document.getElementById("project_detail_projectName").value;
 				projectPageAjax(jsonData,loadLaypage);
 			})();
 		});
-	    //获取项目下所有采集器
 	    
+		//分页获取项目下所有采集器---
+			$(function(){(function(){
+				
+				var jsonData = {};
+				jsonData.projectId = projectId;
+				jsonData.pageNum = 1;
+				jsonData.pageSize = 6;
+				
+				//初始化分页组件函数
+				 function loadLaypage(dataTotal, jsonData){
+					 var laypage = layui.laypage;
+					 laypage.render({
+						 elem: 'pageComponent_terminals', //分页组件div的id
+						 count: dataTotal, //记录总条数
+						 limit: jsonData.pageSize, //每页显示的条数
+						 limits:[jsonData.pageSize, 10, 20, 30, 40, 50], //每页条数的选择项
+					     groups: 5, //连续显示分页数
+					     layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+					     jump: function(obj, first){  //触发分页后的回调
+					         if(!first){ //一定要加此判断，否则初始时会无限刷新
+					        	 jsonData.pageNum = obj.curr;
+					 			 jsonData.pageSize = obj.limit;
+					 			 projectPageAjax(jsonData); //分页请求后台函数  参数jsonData查询条件参数
+					         }
+					     }
+					 });
+				 }
+				
+				//分页请求后台获取数据函数 , 参数jsonData为查询条件集合json数据 , loadLaypage是分页组件函数
+				function projectPageAjax(jsonData,loadLaypage){
+					 //显示loading提示
+	                 var loading = layer.load(2, {
+	                	  shade: [0.1,'#fff'] //0.1透明度的白色背景
+	                 });
+					 $.ajax({
+							type : 'post',
+							url : 'rest/terminals/showProjectTerminals',
+							dataType : 'json',
+							contentType : 'application/json',
+							data : JSON.stringify(jsonData),
+							success : function(data) {
+								 if(data){
+					  	  		    var asthtml = '';
+					  	  		   	$.each(data.terminalsInfoList,function(idx,item){
+						  	  		     asthtml += '<tr>'+
+													'<td><span class="label label-primary">'+
+													'<i class=""></i>'+item.smuId+'</span></td>'+
+													'<td>'+item.createTime+'</td>'+
+													'<td>'+item.updateTime+'</td>'+
+													'<td>'+item.smuRssi+'</td>'+
+													'<td>'+item.timesInterval+'</td>'+
+													'<td>'+item.smuStatus+'</td>'+
+													'<td>'+item.smuVoltage+'</td>'+
+						  	  		    	 		'</tr>';		
+					  	  		    	});
+					  	  		    $('#tbody_terminals').html(asthtml);
+									//加载完成后隐藏loading提示
+				                   	layer.close(loading);
+				                   	if(loadLaypage){
+				                   		loadLaypage(data.total,jsonData);
+				                   	}
+					  	  		}else{
+					  	  		    alert("数据异常");
+					  	  		}
+							},
+							error : function() {
+								alert("数据加载失败");
+							}
+						});
+				 }
+				projectPageAjax(jsonData,loadLaypage);
+			})();
+		});	
+			
 	    /*//获取项目下所有传感器
 	     $.ajax({
 		        type:'post',

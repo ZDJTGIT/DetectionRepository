@@ -2,6 +2,8 @@ package com.zhongda.detection.web.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Terminals {
     private Integer id;
 
@@ -18,15 +20,27 @@ public class Terminals {
     private String smuVoltage;
 
     private Integer timesInterval;
+    
+    //左表查询使用
+    private String smuIdNu;
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public String getSmuIdNu() {
+		return smuIdNu;
+	}
+
+	public void setSmuIdNu(String smuIdNu) {
+		this.smuIdNu = smuIdNu;
+	}
+
+	public void setId(Integer id) {
         this.id = id;
     }
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getCreateTime() {
         return createTime;
     }
@@ -35,6 +49,7 @@ public class Terminals {
         this.createTime = createTime;
     }
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Date getUpdateTime() {
         return updateTime;
     }

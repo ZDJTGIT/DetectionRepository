@@ -179,11 +179,11 @@ public class CommonController {
 	}
 
 	@RequestMapping("terminals/{project}")
-	public String terminals(Model model,
-			@PathVariable("project") String project) {
+	public String terminals(Model model,@PathVariable("project") String project) {
 		String[] strings = project.split(":");
 		model.addAttribute("projectTypeId", strings[0]);
 		model.addAttribute("projectName", strings[1]);
+		model.addAttribute("projectId", strings[2]);
 		return "terminals";
 	}
 	

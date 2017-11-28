@@ -207,4 +207,16 @@ public interface ProjectMapper {
 	 * @return
 	 */
 	Project selectAlarmAlarmCount(Integer projectId);
+	/**
+	 * 查项目下采集器数量
+	 * @param projectId
+	 * @return
+	 */
+	Project selectTerminalsCount(Integer projectId);
+	/**
+	 * 查项目下离线采集器数量
+	 * @param projectId
+	 * @return
+	 */
+	Project selectAlarmTerminalsCount(Integer projectId);
 }

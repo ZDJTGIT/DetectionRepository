@@ -750,12 +750,9 @@ public class ProjectController {
 			project.setProjectStatusString(sysDictionaryServce
 					.selectProjectStatusByDicId(project.getProjectStatus()));
 			// 插入一条操作日志
-			User currentUser = (User) WebUtils.getSessionAttribute(request,
-					"userInfo");
-			operationLogService.insertOperationLog(new OperationLog(currentUser
-					.getUserId(), currentUser.getUserName(), "项目修改",
-					currentUser.getUserName() + "修改项目，项目名为："
-							+ project.getProjectName(), new Date()));
+			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(), currentUser.getUserName(), "项目修改",
+					currentUser.getUserName() + "修改项目，项目名为："+ project.getProjectName(), new Date()));
 			return project;
 		} else {
 			return null;
@@ -814,7 +811,7 @@ public class ProjectController {
 	}
 
 	/**
-	 * 获取测点数量，传感器数量，阀值数量，图片数量，告警信息数量，采集器数量（---数据库未添加）。
+	 * 获取测点数量，传感器数量，阀值数量，图片数量，告警信息数量，采集器数量）。
 	 * 
 	 * @param projectId
 	 * @return
@@ -823,23 +820,16 @@ public class ProjectController {
 	@ResponseBody
 	public Project obtainCount(Integer projectId) {
 		Project project = new Project();
-		project.setAlarmCount(projectService.selectAlarmCount(projectId)
-				.getAlarmCount());
-		project.setDetectionPointCount(projectService.selectDetectionCount(
-				projectId).getDetectionPointCount());
-		project.setSensorInfoCount(projectService.selectSensorInfoCount(
-				projectId).getSensorInfoCount());
-		project.setThresholdCount(projectService
-				.selectThresholdCount(projectId).getThresholdCount());
-		project.setImageCount(projectService.selectImageCount(projectId)
-				.getImageCount());
+		project.setAlarmCount(projectService.selectAlarmCount(projectId).getAlarmCount());
+		project.setDetectionPointCount(projectService.selectDetectionCount(projectId).getDetectionPointCount());
+		project.setSensorInfoCount(projectService.selectSensorInfoCount(projectId).getSensorInfoCount());
+		project.setThresholdCount(projectService.selectThresholdCount(projectId).getThresholdCount());
+		project.setImageCount(projectService.selectImageCount(projectId).getImageCount());
+		project.setTerminalsCount(projectService.selectThresholdCount(projectId).getThresholdCount());
 		project.setAlarmDetectionCount(projectService.selectAlarmDetectionPointCount(projectId).getAlarmDetectionCount());
-		System.out.println("--------------------------------"+projectService.selectAlarmDetectionPointCount(projectId).getAlarmDetectionCount());
-		project.setAlarmSensorInfoCount(projectService
-				.selectAlarmSensorInfoCount(projectId)
-				.getAlarmSensorInfoCount());
-		project.setAlarmAlarmCount(projectService.selectAlarmAlarmCount(
-				projectId).getAlarmAlarmCount());
+		project.setAlarmSensorInfoCount(projectService.selectAlarmSensorInfoCount(projectId).getAlarmSensorInfoCount());
+		project.setAlarmAlarmCount(projectService.selectAlarmAlarmCount(projectId).getAlarmAlarmCount());
+		project.setAlarmTerminalsCount(projectService.selectAlarmTerminalsCount(projectId).getAlarmTerminalsCount());
 		return project;
 	}
 

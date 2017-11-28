@@ -40,6 +40,8 @@
     <result column="project_status_string" jdbcType="VARCHAR" property="projectStatusString" />
     <result column="alarm_sensor_info_count" jdbcType="INTEGER" property="alarmSensorInfoCount" />
     <result column="alarm_detection_point_count" jdbcType="INTEGER" property="alarmDetectionCount" />
+    <result column="alarm_terminals_count" jdbcType="INTEGER" property="alarmTerminalsCount" />
+    <result column="terminals_count" jdbcType="INTEGER" property="terminals_count" />
     <result column="detection_point_count" jdbcType="INTEGER" property="detectionPointCount" />
     <result column="sensor_info_count" jdbcType="INTEGER" property="sensorInfoCount" />
     <result column="threshold_count" jdbcType="INTEGER" property="thresholdCount" />
@@ -83,7 +85,7 @@
     from project p,sys_dictionary sd,sys_dictionary sds
     where p.project_type_id = sd.dic_id
     and p.project_status = sds.dic_id
-  </select>  
+  </select>
    <select id="selectUsersProjectWithAlarmCount" parameterType="com.zhongda.detection.web.model.Project" resultMap="BaseResultMap">
     select
      x.*,sd.item_name 'project_status_string',sds.*
@@ -160,6 +162,11 @@
 		p.project_id = #{projectId,jdbcType=INTEGER}
 	AND s.dic_id = #{detectionTypeId,jdbcType=INTEGER}
   </select>
+  <select id="selectTerminalsCount" parameterType="java.lang.Integer" resultMap="ProjectResultMap">
+  	select count(*) 'terminals_count'
+  	from terminals_info 
+  	where project_id=#{projectId,jdbcType=INTEGER}
+  </select>
   <select id="selectDetectionCount" parameterType="java.lang.Integer" resultMap="ProjectResultMap">
   	select count(*) 'detection_point_count'
   	from detection_point 
@@ -183,6 +190,16 @@
   	from image 
   	where project_id = #{projectId,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectAlarmTerminalsCount" parameterType="java.lang.Integer" resultMap="ProjectResultMap">
+  	select 
+  	count(*) 'alarm_terminals_count'
+  	from terminals_info ti,terminals t
+  	where project_id = #{projectId,jdbcType=INTEGER}
+    and t.smu_id=ti.smu_id
+	and t.smu_status = 0
+  </select>
+  
    <select id="selectAlarmCount" parameterType="java.lang.Integer" resultMap="ProjectResultMap">
   	select count(*) 'alarm_count'
   	from alarm 

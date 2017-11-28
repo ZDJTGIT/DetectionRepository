@@ -198,7 +198,7 @@
      dp.*, sd.item_name 'item_name'
      from detection_point dp, sys_dictionary sd
      where dp.project_id = (select project_id 
-     from project where project_name = '${_parameter.projectName}')
+     from project where project_name = #{projectName})
      and dp.detection_type_id = sd.dic_id
      order by dp.detection_point_id desc
   </select>

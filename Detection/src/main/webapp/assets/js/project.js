@@ -156,7 +156,6 @@ var dlId=document.getElementById("project_DLID").value;
 	    		  type:'post',
 	    	  	  url: 'rest/project/showUser',
 	    	  	  data: {userId:dlId},
-	    	  	  contextType:"application/json",
 	    	  	  success: function(data){
 	    	  		       if(data){
 	    	  		    	var string = '<select class="md_input" id="selectUser" name="selectUser">';
@@ -744,7 +743,7 @@ var dlId=document.getElementById("project_DLID").value;
 																	'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="测点">测点</a>'+
 																'</td>'+
 																'<td class="project-status" style="width:70px">'+
-																	'<a href="rest/terminals/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="采集器">采集器</a>'+
+																	'<a href="rest/terminals/'+item.projectTypeId+':'+item.projectName+':'+item.projectId+'" class="J_menuItem" name="采集器">采集器</a>'+
 																'</td>'+
 																'<td class="project-status" style="width:70px">'+
 																	'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+':'+item.projectTypeId+'" class="J_menuItem" name="阀值">阀值 </a>'+

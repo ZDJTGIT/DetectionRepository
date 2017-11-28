@@ -1,7 +1,5 @@
 package com.zhongda.detection.web.dao;
 
-import java.util.List;
-
 import com.zhongda.detection.web.model.TerminalsInfo;
 
 public interface TerminalsInfoMapper {
@@ -11,7 +9,14 @@ public interface TerminalsInfoMapper {
 	 * @return
 	 */
     int deleteByPrimaryKey(Integer terminalsInfoId);
-
+    
+    /**
+     * 根据采集器编号和项目ID删除表记录
+     * @param smuId
+     * @return
+     */
+    int deleteBySmuIdAndProjectId(String smuId,Integer projectId);
+    
     int insert(TerminalsInfo record);
 
     /**
@@ -35,12 +40,13 @@ public interface TerminalsInfoMapper {
      */
     int updateByPrimaryKeySelective(TerminalsInfo record);
     
+    int updateByPrimaryKey(TerminalsInfo record);
+    
     /**
-     * 通过项目ID查项目下所有采集器
+     * 通过采集器编号和项目ID查采集器
+     * @param smuId
      * @param projectId
      * @return
      */
-    List<TerminalsInfo> selectByProjectId(Integer projectId);
-
-    int updateByPrimaryKey(TerminalsInfo record);
+    TerminalsInfo selectBySmuIdAndProjectId(String smuId,Integer projectId);
 }
