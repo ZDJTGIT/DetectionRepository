@@ -41,7 +41,7 @@
     <result column="alarm_sensor_info_count" jdbcType="INTEGER" property="alarmSensorInfoCount" />
     <result column="alarm_detection_point_count" jdbcType="INTEGER" property="alarmDetectionCount" />
     <result column="alarm_terminals_count" jdbcType="INTEGER" property="alarmTerminalsCount" />
-    <result column="terminals_count" jdbcType="INTEGER" property="terminals_count" />
+    <result column="terminals_count" jdbcType="INTEGER" property="terminalsCount" />
     <result column="detection_point_count" jdbcType="INTEGER" property="detectionPointCount" />
     <result column="sensor_info_count" jdbcType="INTEGER" property="sensorInfoCount" />
     <result column="threshold_count" jdbcType="INTEGER" property="thresholdCount" />

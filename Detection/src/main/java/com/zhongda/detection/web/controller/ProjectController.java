@@ -821,15 +821,15 @@ public class ProjectController {
 	public Project obtainCount(Integer projectId) {
 		Project project = new Project();
 		project.setAlarmCount(projectService.selectAlarmCount(projectId).getAlarmCount());
-		project.setDetectionPointCount(projectService.selectDetectionCount(projectId).getDetectionPointCount());
-		project.setSensorInfoCount(projectService.selectSensorInfoCount(projectId).getSensorInfoCount());
-		project.setThresholdCount(projectService.selectThresholdCount(projectId).getThresholdCount());
-		project.setImageCount(projectService.selectImageCount(projectId).getImageCount());
-		project.setTerminalsCount(projectService.selectThresholdCount(projectId).getThresholdCount());
-		project.setAlarmDetectionCount(projectService.selectAlarmDetectionPointCount(projectId).getAlarmDetectionCount());
-		project.setAlarmSensorInfoCount(projectService.selectAlarmSensorInfoCount(projectId).getAlarmSensorInfoCount());
-		project.setAlarmAlarmCount(projectService.selectAlarmAlarmCount(projectId).getAlarmAlarmCount());
-		project.setAlarmTerminalsCount(projectService.selectAlarmTerminalsCount(projectId).getAlarmTerminalsCount());
+		project.setDetectionPointCount(projectService.selectDetectionCount(projectId).getDetectionPointCount());//所有测点
+		project.setSensorInfoCount(projectService.selectSensorInfoCount(projectId).getSensorInfoCount());//所有传感器
+		project.setThresholdCount(projectService.selectThresholdCount(projectId).getThresholdCount());//所有阀值
+		project.setImageCount(projectService.selectImageCount(projectId).getImageCount());//所有图片
+		project.setTerminalsCount(projectService.selectTerminalsCount(projectId).getTerminalsCount());//所有采集器
+		project.setAlarmDetectionCount(projectService.selectAlarmDetectionPointCount(projectId).getAlarmDetectionCount());//异常测点
+		project.setAlarmSensorInfoCount(projectService.selectAlarmSensorInfoCount(projectId).getAlarmSensorInfoCount());//异常传感器
+		project.setAlarmAlarmCount(projectService.selectAlarmAlarmCount(projectId).getAlarmAlarmCount());//异常告警信息
+		project.setAlarmTerminalsCount(projectService.selectAlarmTerminalsCount(projectId).getAlarmTerminalsCount());//异常采集器
 		return project;
 	}
 
