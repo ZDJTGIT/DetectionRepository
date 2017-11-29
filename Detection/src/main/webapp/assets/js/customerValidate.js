@@ -475,6 +475,14 @@ $('#form_addSensorInfo').validate({
 				required : true,
 				number:  true,
 				minlength : 1
+			},
+			terminalsInfoNum_addSensorInfo : {
+				required : true,
+				minlength : 2
+			},
+			terminalsInfoAisle_addSensorInfo : {
+				required : true,
+				minlength : 1
 			}
 		},
 		
@@ -497,6 +505,14 @@ $('#form_addSensorInfo').validate({
 				required : "传感器深度不能为空",
 				number: "传感器深度为数字",
 				minlength:"传感器深度为1-15个字符"
+			},
+			terminalsInfoNum_addSensorInfo : {
+				required : "请填写采集器编号",
+				minlength:"采集器编号为2-15个字符"
+			},
+			terminalsInfoAisle_addSensorInfo : {
+				required : "请填写采集器通道号",
+				minlength:"采集器通道号为1-15个字符"
 			}
 		}
 });
@@ -537,6 +553,14 @@ $('#form_updetaSensorInfo').validate({
 				required : true,
 				number:  true,
 				minlength : 1
+			},
+			terminalsInfoNum_addSensorInfo : {
+				required : true,
+				minlength : 2
+			},
+			terminalsInfoAisle_addSensorInfo : {
+				required : true,
+				minlength : 1
 			}
 		},
 		
@@ -559,6 +583,14 @@ $('#form_updetaSensorInfo').validate({
 				required : "传感器深度不能为空",
 				number: "传感器深度为数字",
 				minlength:"传感器深度为1-15个字符"
+			},
+			terminalsInfoNum_addSensorInfo : {
+				required : "请填写采集器编号",
+				minlength:"采集器编号为2-15个字符"
+			},
+			terminalsInfoAisle_addSensorInfo : {
+				required : "请填写采集器通道号",
+				minlength:"采集器通道号为1-15个字符"
 			}
 		}
 });
