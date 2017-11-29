@@ -109,19 +109,19 @@ public class DetectionPointController {
 	}
 	
 	/**
-	 * 展示项目下所有测点
+	 * 展示项目下所有测点(暂时用不到)
 	 * @param projectName
 	 * @return
 	 */
-	@RequestMapping(value = "/showProjectDetectionPoint", method = RequestMethod.POST)
-	@ResponseBody
-	public List<DetectionPoint> showProjectDetectionPoint(String projectName){
-		//通过projectName查询项目ID，
-		Project project = projectService.selectByProjectName(projectName);
-		List<DetectionPoint> detectionPointList = detectionPointService.selectByProjectId(project.getProjectId());
-		//通过项目ID查询到所有测点
-		return detectionPointList;
-	}
+//	@RequestMapping(value = "/showProjectDetectionPoint", method = RequestMethod.POST)
+//	@ResponseBody
+//	public List<DetectionPoint> showProjectDetectionPoint(String projectName){
+//		//通过projectName查询项目ID，
+//		Project project = projectService.selectByProjectName(projectName);
+//		List<DetectionPoint> detectionPointList = detectionPointService.selectByProjectId(project.getProjectId());
+//		//通过项目ID查询到所有测点
+//		return detectionPointList;
+//	}
 	
 	/**
 	 * 修改测点

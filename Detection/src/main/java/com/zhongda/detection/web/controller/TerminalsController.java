@@ -112,7 +112,7 @@ public class TerminalsController {
 			// 插入一条操作日志
 			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
 			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(), currentUser.getUserName(), "采集器删除",
-					currentUser.getUserName() + "在项目ID为："+projectId+"下插入传感器，传感器编号为："+ smuId, new Date()));
+					currentUser.getUserName() + "在项目ID为："+projectId+"下删除采集器，采集器编号为："+ smuId, new Date()));
 			return 1;
 		} else {
 			// 非管理员不能删除测点
