@@ -88,9 +88,7 @@ public class StatisticChartController {
 				lastDate.roll(Calendar.DATE, -7);// 日期回滚7天
 				begin = simpleDateFormat.format(lastDate.getTime());
 			}
-			System.out.println("begin:" + begin + " end:" + end);
 		}
-		System.out.println("begin:" + begin + " end:" + end);
 		for (StatisticChart statisticChart : detectionTypeList) {
 			List<DetectionPoint> selectDataByTabelName = detectionPointService
 					.selectDataByTabelName(statisticChart.getTableName(),
@@ -100,7 +98,6 @@ public class StatisticChartController {
 			hashMap.put(statisticChart.getDetectionTypeName(),
 					selectDataByTabelName);
 			hashMap.put(statisticChart.getDetectionTypeName() + "1", split);
-			System.out.println(selectDataByTabelName);
 		}
 
 		return hashMap;

@@ -696,7 +696,8 @@
 												+ projectId,
 										success : function(data) {
 											$(data).each(function(index,val) {
-												var label = "<li><a class='J_menuItem' name='"+ val.itemName+ "' href='rest/project/"+ val.itemValue+ "?projectId="+ val.projectId+ "&detectionTypeId="+ val.detectionTypeId+ "'><i>—</i><span class='nav-label'>"+ val.itemName+ "</span></a></li>";
+												/* var label = "<li><a class='J_menuItem' name='"+ val.itemName+ "' href='rest/project/"+ val.itemValue+ "?projectId="+ val.projectId+ "&detectionTypeId="+ val.detectionTypeId+ "'><i>—</i><span class='nav-label'>"+ val.itemName+ "</span></a></li>"; */
+												var label = "<li><a class='J_menuItem' name='"+ val.itemName+ "' href='rest/detectionType/monitor?projectId="+ val.projectId+ "&detectionTypeId="+ val.detectionTypeId+ "'><i>—</i><span class='nav-label'>"+ val.itemName+ "</span></a></li>";
 												$(projectName).append(label);
 											});
 										}

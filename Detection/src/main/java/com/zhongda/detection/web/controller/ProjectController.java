@@ -39,6 +39,7 @@ import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.StaticLevelData;
 import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.model.Threshold;
+import com.zhongda.detection.web.model.UniversalData;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.AlarmLinkmanService;
@@ -472,6 +473,44 @@ public class ProjectController {
 	}
 
 	/**
+	 * 检测类型导出表
+	 * 
+	 * @param sensorId
+	 * @param currentTime
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param detectionName
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/export_Excel")
+	public void export_Excel(String sensorId, String currentTime,
+			Integer projectId, Integer detectionTypeId, String detectionName,
+			String tableName, HttpServletResponse response) throws IOException {
+		System.out.println("detectionName:" + tableName);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		List<UniversalData> list = staticLevelDataService
+				.selectUniversalDataBySensorIdAndTimeAndTN(tableName, sensorId,
+						currentTime);
+		Project project = projectService.selectProjectAndSysdicByTwoId(
+				projectId, detectionTypeId);
+		String datesnew = format.format(list.get(0).getCurrentTimes());
+		response.setContentType("application/octet-stream");
+		response.setContentType("application/OCTET-STREAM;charset=UTF-8");
+		response.setHeader("Content-Disposition", "attachment;filename="
+				+ datesnew + ".xls");
+		String[] head = { "初次测试值(MM)", "前次测试时间", "前次测试值(MM)", "本次检测时间",
+				"本次测试值(MM)", "单次变化量(MM)", "总变化量(MM)", "变化速率(MM/MIN)" };
+		if (null != list.get(0).getCurrentTemperature()) {
+			head = new String[] { "初次测试值(MM)", "前次测试时间", "前次测试值(MM)", "本次检测时间",
+					"本次测试值(MM)", "单次变化量(MM)", "总变化量(MM)", "变化速率(MM/MIN)",
+					"温度(℃)" };
+		}
+		jxlExcel.export_excel(response, list, head, project, detectionName);
+
+	}
+
+	/**
 	 * 分页查找用户所有项目
 	 * 
 	 * @param project
@@ -750,9 +789,12 @@ public class ProjectController {
 			project.setProjectStatusString(sysDictionaryServce
 					.selectProjectStatusByDicId(project.getProjectStatus()));
 			// 插入一条操作日志
-			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
-			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(), currentUser.getUserName(), "项目修改",
-					currentUser.getUserName() + "修改项目，项目名为："+ project.getProjectName(), new Date()));
+			User currentUser = (User) WebUtils.getSessionAttribute(request,
+					"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser
+					.getUserId(), currentUser.getUserName(), "项目修改",
+					currentUser.getUserName() + "修改项目，项目名为："
+							+ project.getProjectName(), new Date()));
 			return project;
 		} else {
 			return null;
@@ -820,16 +862,28 @@ public class ProjectController {
 	@ResponseBody
 	public Project obtainCount(Integer projectId) {
 		Project project = new Project();
-		project.setAlarmCount(projectService.selectAlarmCount(projectId).getAlarmCount());
-		project.setDetectionPointCount(projectService.selectDetectionCount(projectId).getDetectionPointCount());//所有测点
-		project.setSensorInfoCount(projectService.selectSensorInfoCount(projectId).getSensorInfoCount());//所有传感器
-		project.setThresholdCount(projectService.selectThresholdCount(projectId).getThresholdCount());//所有阀值
-		project.setImageCount(projectService.selectImageCount(projectId).getImageCount());//所有图片
-		project.setTerminalsCount(projectService.selectTerminalsCount(projectId).getTerminalsCount());//所有采集器
-		project.setAlarmDetectionCount(projectService.selectAlarmDetectionPointCount(projectId).getAlarmDetectionCount());//异常测点
-		project.setAlarmSensorInfoCount(projectService.selectAlarmSensorInfoCount(projectId).getAlarmSensorInfoCount());//异常传感器
-		project.setAlarmAlarmCount(projectService.selectAlarmAlarmCount(projectId).getAlarmAlarmCount());//异常告警信息
-		project.setAlarmTerminalsCount(projectService.selectAlarmTerminalsCount(projectId).getAlarmTerminalsCount());//异常采集器
+		project.setAlarmCount(projectService.selectAlarmCount(projectId)
+				.getAlarmCount());
+		project.setDetectionPointCount(projectService.selectDetectionCount(
+				projectId).getDetectionPointCount());// 所有测点
+		project.setSensorInfoCount(projectService.selectSensorInfoCount(
+				projectId).getSensorInfoCount());// 所有传感器
+		project.setThresholdCount(projectService
+				.selectThresholdCount(projectId).getThresholdCount());// 所有阀值
+		project.setImageCount(projectService.selectImageCount(projectId)
+				.getImageCount());// 所有图片
+		project.setTerminalsCount(projectService
+				.selectTerminalsCount(projectId).getTerminalsCount());// 所有采集器
+		project.setAlarmDetectionCount(projectService
+				.selectAlarmDetectionPointCount(projectId)
+				.getAlarmDetectionCount());// 异常测点
+		project.setAlarmSensorInfoCount(projectService
+				.selectAlarmSensorInfoCount(projectId)
+				.getAlarmSensorInfoCount());// 异常传感器
+		project.setAlarmAlarmCount(projectService.selectAlarmAlarmCount(
+				projectId).getAlarmAlarmCount());// 异常告警信息
+		project.setAlarmTerminalsCount(projectService
+				.selectAlarmTerminalsCount(projectId).getAlarmTerminalsCount());// 异常采集器
 		return project;
 	}
 

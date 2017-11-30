@@ -76,10 +76,10 @@ public class UserController {
 
 	@Resource
 	private RoleService roleService;
-	
+
 	@Resource
 	private ProjectService projectService;
-	
+
 	@Resource
 	private OperationLogService operationLogService;
 
@@ -164,8 +164,10 @@ public class UserController {
 			final User authUserInfo = userService.selectByUsername(user
 					.getUserName());
 			WebUtils.setSessionAttribute(request, "userInfo", authUserInfo);
-			//插入一条操作日志
-			operationLogService.insertOperationLog(new OperationLog(authUserInfo.getUserId(),authUserInfo.getUserName(),"用户登录","登录",new Date()));
+			// 插入一条操作日志
+			operationLogService.insertOperationLog(new OperationLog(
+					authUserInfo.getUserId(), authUserInfo.getUserName(),
+					"用户登录", "登录", new Date()));
 			PushAlarm.userSet.add(authUserInfo.getUserName());
 
 		} catch (LockedAccountException e) {
@@ -205,6 +207,7 @@ public class UserController {
 
 	/**
 	 * 基于角色 标识的权限控制案例
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/admin")
@@ -216,6 +219,7 @@ public class UserController {
 
 	/**
 	 * 基于权限标识的权限控制案例
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/create")
@@ -227,6 +231,7 @@ public class UserController {
 
 	/**
 	 * 验证账号唯一
+	 * 
 	 * @param username
 	 * @return
 	 */
@@ -246,6 +251,7 @@ public class UserController {
 
 	/**
 	 * 验证邮箱唯一
+	 * 
 	 * @param email
 	 * @return
 	 */
@@ -265,6 +271,7 @@ public class UserController {
 
 	/**
 	 * 根据邮箱修改密码
+	 * 
 	 * @param user
 	 * @param result
 	 * @param model
@@ -288,6 +295,7 @@ public class UserController {
 
 	/**
 	 * 跳到changPassword页面
+	 * 
 	 * @param user
 	 * @param result
 	 * @param model
@@ -310,6 +318,7 @@ public class UserController {
 
 	/**
 	 * 修改密码
+	 * 
 	 * @param user
 	 * @param result
 	 * @param model
@@ -331,6 +340,7 @@ public class UserController {
 
 	/**
 	 * 显示所有用户
+	 * 
 	 * @param request
 	 * @param model
 	 * @return
@@ -351,6 +361,7 @@ public class UserController {
 
 	/**
 	 * 根据用户名查找用户
+	 * 
 	 * @param user
 	 * @param model
 	 * @return
@@ -369,12 +380,13 @@ public class UserController {
 
 	/**
 	 * 输入用户信息添加用户(初始密码：123456，初始状态：正常)
+	 * 
 	 * @param user
 	 * @return
 	 */
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	@ResponseBody
-	public User addUser(@RequestBody User user,HttpServletRequest request) {
+	public User addUser(@RequestBody User user, HttpServletRequest request) {
 		Date date = new Date();
 		user.setPassword("123456");
 		user.setStatus("正常");
@@ -384,34 +396,45 @@ public class UserController {
 		user.setUserId(userService.selectByUsername(user.getUserName())
 				.getUserId());
 		userService.insertUser_Role(user.getUserId(), user.getRoleId());
-		//插入一条操作日志
-		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
-		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"用户插入",
-				currentUser.getUserName()+"插入用户："+user.getUserName(),new Date()));
+		// 插入一条操作日志
+		User currentUser = (User) WebUtils.getSessionAttribute(request,
+				"userInfo");
+		operationLogService.insertOperationLog(new OperationLog(currentUser
+				.getUserId(), currentUser.getUserName(), "用户插入", currentUser
+				.getUserName() + "插入用户：" + user.getUserName(), new Date()));
 		return user;
 	}
 
 	/**
 	 * 根据当前选中的用户名删除用户
+	 * 
 	 * @param user
 	 * @return
 	 */
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> delete(@RequestBody User user,HttpServletRequest request) {
+	public Map<String, String> delete(@RequestBody User user,
+			HttpServletRequest request) {
 		Map<String, String> model = new HashMap<String, String>();
-			userService.deleteUser_role(userService.selectByUsername(user.getUserName()).getUserId());
-			userService.deleteUser(user.getUserName());
-			model.put("isDelete", "1");
-			//插入一条操作日志
-			User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
-			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"用户删除",
-					currentUser.getUserName()+"删除用户，用户名为："+user.getUserName(),new Date()));
-			return model;
+		userService.deleteUser_role(userService.selectByUsername(
+				user.getUserName()).getUserId());
+		userService.deleteUser(user.getUserName());
+		model.put("isDelete", "1");
+		// 插入一条操作日志
+		User currentUser = (User) WebUtils.getSessionAttribute(request,
+				"userInfo");
+		operationLogService
+				.insertOperationLog(new OperationLog(currentUser.getUserId(),
+						currentUser.getUserName(), "用户删除", currentUser
+								.getUserName()
+								+ "删除用户，用户名为："
+								+ user.getUserName(), new Date()));
+		return model;
 	}
 
 	/**
 	 * 查找展示添加用户时的用户权限
+	 * 
 	 * @param userId
 	 * @return
 	 */
@@ -424,6 +447,7 @@ public class UserController {
 
 	/**
 	 * 查找展示添加用户时的用户权限
+	 * 
 	 * @param userId
 	 * @param userName
 	 * @return
@@ -507,16 +531,19 @@ public class UserController {
 			WebUtils.setSessionAttribute(request, "userInfo", user);
 		}
 		userService.updateUsersRole(user);
-		//插入一条操作日志
-		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
-		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"用户修改",
-				currentUser.getUserName()+"修改用户信息，用户名为："+user.getUserName(),new Date()));
+		// 插入一条操作日志
+		User currentUser = (User) WebUtils.getSessionAttribute(request,
+				"userInfo");
+		operationLogService.insertOperationLog(new OperationLog(currentUser
+				.getUserId(), currentUser.getUserName(), "用户修改", currentUser
+				.getUserName() + "修改用户信息，用户名为：" + user.getUserName(),
+				new Date()));
 		return user;
 	}
 
-	
 	/**
 	 * 用户修改用户信息
+	 * 
 	 * @param user
 	 * @param request
 	 * @return
@@ -545,14 +572,16 @@ public class UserController {
 		}
 		userService.updateByPrimaryKeySelective(user);
 		WebUtils.setSessionAttribute(request, "userInfo", user);
-		//插入一条操作日志
-		operationLogService.insertOperationLog(new OperationLog(user.getUserId(),user.getUserName(),"用户修改",
-				user.getUserName()+"修改用户信息",new Date()));
+		// 插入一条操作日志
+		operationLogService.insertOperationLog(new OperationLog(user
+				.getUserId(), user.getUserName(), "用户修改", user.getUserName()
+				+ "修改用户信息", new Date()));
 		return user;
 	}
 
 	/**
 	 * 查找用户权限
+	 * 
 	 * @param userId
 	 * @return
 	 */
@@ -569,24 +598,29 @@ public class UserController {
 
 	/**
 	 * 查找用户所属项目
+	 * 
 	 * @param project
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping(value = "/selectUserproject", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> selectUserproject(@RequestBody Project project,HttpServletRequest request) {
+	public Map<String, Object> selectUserproject(@RequestBody Project project,
+			HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		Map<String, Object> UserprojectMap = new HashMap<String, Object>();
-		if (subject.hasRole(RoleSign.ADMIN)|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 
 		} else {
 			// 非管理员用户，只可查看自己的项目信息，查询条件增加userId
-			User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
+			User user = (User) WebUtils
+					.getSessionAttribute(request, "userInfo");
 			project.setUserId(user.getUserId());
 		}
-		
-		List<Project> projectList = projectService.selectUsersProjectWithAlarmCount(project);
+
+		List<Project> projectList = projectService
+				.selectUsersProjectWithAlarmCount(project);
 		PageInfo<Project> projectPageInfo = new PageInfo<Project>(projectList);
 		UserprojectMap.put("total", projectPageInfo.getTotal());
 		UserprojectMap.put("usersProjectList", projectList);
@@ -595,6 +629,7 @@ public class UserController {
 
 	/**
 	 * 关键词查找用户（用户名，电话，邮箱，公司，联系人，用户表按时间排序）
+	 * 
 	 * @param keyword
 	 * @param userId
 	 * @return
@@ -605,34 +640,43 @@ public class UserController {
 		List<User> usersList = userService.selectUserByKeyword(keyword, userId);
 		return usersList;
 	}
-	
+
 	/**
 	 * 更改用户状态
+	 * 
 	 * @param userId
 	 * @param status
 	 * @return
 	 */
 	@RequestMapping(value = "/changUserStatus", method = RequestMethod.POST)
 	@ResponseBody
-	public User changUserStatus(Integer userId,String status,HttpServletRequest request) {
+	public User changUserStatus(Integer userId, String status,
+			HttpServletRequest request) {
 		User user = userService.selectByPrimaryKey(userId);
-		if(status.equals("正常")){
+		if (status.equals("正常")) {
 			user.setStatus("禁用");
-		}else{
+		} else {
 			user.setStatus("正常");
 		}
 		userService.updateByPrimaryKeySelective(user);
-		//插入一条操作日志
-		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
-		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"更改用户状态",
-				currentUser.getUserName()+"更改用户"+user.getUserName()+"状态为："+user.getStatus(),new Date()));
+		// 插入一条操作日志
+		User currentUser = (User) WebUtils.getSessionAttribute(request,
+				"userInfo");
+		operationLogService.insertOperationLog(new OperationLog(currentUser
+				.getUserId(), currentUser.getUserName(), "更改用户状态", currentUser
+				.getUserName()
+				+ "更改用户"
+				+ user.getUserName()
+				+ "状态为："
+				+ user.getStatus(), new Date()));
 		return user;
 	}
-	
-//校验==>
-	
+
+	// 校验==>
+
 	/**
 	 * 验证用户名是否唯一(添加验证)
+	 * 
 	 * @param userName
 	 * @param response
 	 */
@@ -652,6 +696,7 @@ public class UserController {
 
 	/**
 	 * 验证手机号码是否唯一(添加验证)
+	 * 
 	 * @param phone
 	 * @param response
 	 */
@@ -671,6 +716,7 @@ public class UserController {
 
 	/**
 	 * 验证电子邮件是否唯一(添加验证)
+	 * 
 	 * @param email
 	 * @param response
 	 */
@@ -690,6 +736,7 @@ public class UserController {
 
 	/**
 	 * 验证用户名是否唯一(修改验证)
+	 * 
 	 * @param userName
 	 * @param userId
 	 * @param response
@@ -720,6 +767,7 @@ public class UserController {
 
 	/**
 	 * 验证手机号码是否唯一(修改验证)
+	 * 
 	 * @param mdphone
 	 * @param userId
 	 * @param response
@@ -749,6 +797,7 @@ public class UserController {
 
 	/**
 	 * 验证电子邮箱是否唯一(修改验证)
+	 * 
 	 * @param mdemail
 	 * @param userId
 	 * @param response
@@ -778,6 +827,7 @@ public class UserController {
 
 	/**
 	 * 验证原密码输入
+	 * 
 	 * @param password
 	 * @param userId
 	 * @param response
@@ -804,11 +854,11 @@ public class UserController {
 		}
 	}
 
-	
-//找回密码==>
-	
+	// 找回密码==>
+
 	/**
 	 * 找回密码retpassword
+	 * 
 	 * @param contect
 	 * @return
 	 */
@@ -866,6 +916,7 @@ public class UserController {
 
 	/**
 	 * 用户输入验证码是否正确
+	 * 
 	 * @param inputVerification
 	 * @param temporaryVerification
 	 * @return
@@ -886,6 +937,7 @@ public class UserController {
 
 	/**
 	 * 用户通过验证找回密码-修改密码
+	 * 
 	 * @param newpassword
 	 * @param contect
 	 */
@@ -912,6 +964,7 @@ public class UserController {
 
 	/**
 	 * 跳转到找回密码页面
+	 * 
 	 * @return
 	 */
 	@RequestMapping(value = "/retpassword")

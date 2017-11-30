@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.zhongda.detection.web.model.StaticLevelData;
+import com.zhongda.detection.web.model.UniversalData;
 
 public interface StaticLevelDataMapper {
 	int deleteByPrimaryKey(Integer id);
@@ -28,5 +29,16 @@ public interface StaticLevelDataMapper {
 	 */
 	List<StaticLevelData> selectAllDataBySensorIdAndTime(
 			@Param(value = "sensorId") String sensorId,
+			@Param(value = "currentTime") String currentTime);
+
+	/**
+	 * 通过传感器ID,表名和时间查询数据
+	 * 
+	 * @param sensorId
+	 * @param currentTime
+	 * @return
+	 */
+	List<UniversalData> selectUniversalDataBySensorIdAndTimeAndTN(
+			String tableName, @Param(value = "sensorId") String sensorId,
 			@Param(value = "currentTime") String currentTime);
 }

@@ -21,4 +21,11 @@ public class StatisticChartServiceImpl implements StatisticChartService {
 		return statisticChartMapper.selectAllDataByProjectId(projectId);
 	}
 
+	@Override
+	public StatisticChart selectDataByProjectIdAndDetectionTId(
+			Integer projectId, Integer detectionTypeId) {
+		return statisticChartMapper.selectDataByProjectIdAndDetectionTId(
+				projectId, detectionTypeId);
+	}
+
 }

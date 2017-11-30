@@ -127,4 +127,11 @@ public class DetectionPointServiceImpl implements DetectionPointService {
 		return detectionPointMapper.selectAllDataByTabelName(tableName,
 				projectId, detectionTypeId);
 	}
+
+	@Override
+	public List<DetectionPoint> selectDataByTNAndPIAndDTI(String tableName,
+			Integer projectId, Integer detectionTypeId, String currentTime) {
+		return detectionPointMapper.selectDataByTNAndPIAndDTI(tableName,
+				projectId, detectionTypeId, currentTime);
+	}
 }

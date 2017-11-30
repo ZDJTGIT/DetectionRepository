@@ -13,4 +13,14 @@ public interface StatisticChartService {
 	 * @return
 	 */
 	List<StatisticChart> selectAllDataByProjectId(Integer projectId);
+
+	/**
+	 * 通过项目ID和检测类型Id查询数据
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	StatisticChart selectDataByProjectIdAndDetectionTId(Integer projectId,
+			Integer detectionTypeId);
 }

@@ -171,4 +171,17 @@ public interface DetectionPointService {
 	 */
 	List<DetectionPoint> selectAllDataByTabelName(String tableName,
 			Integer projectId, Integer detectionTypeId);
+
+	/**
+	 * 查询数据根据动态表名项目ID检测类型ID
+	 * 
+	 * @param tableName
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @param begincurrentTime
+	 * @param endcurrentTime
+	 * @return
+	 */
+	List<DetectionPoint> selectDataByTNAndPIAndDTI(String tableName,
+			Integer projectId, Integer detectionTypeId, String currentTime);
 }

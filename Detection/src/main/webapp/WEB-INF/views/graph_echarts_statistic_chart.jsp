@@ -76,8 +76,8 @@
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>	
-    <script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
-	<script src="assets/js/plugins/datepicker/bootstrap-datetimepicker.min.js" charset="utf-8"></script>
+<!--     <script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
+	<script src="assets/js/plugins/datepicker/bootstrap-datetimepicker.min.js" charset="utf-8"></script> -->
 	<script src="assets/js/plugins/laydate/laydate.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/layui/layui.all.js" charset="utf-8"></script>
 	<script type="text/javascript">

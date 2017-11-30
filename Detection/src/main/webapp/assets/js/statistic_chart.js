@@ -61,7 +61,7 @@ $('#btnSearchstatic').click(function(){
 	  	  				$("#outerdiv").fadeOut("fast");
 	  	  			}else{
 	  	  			$(data[value.detectionTypeName+'1']).each(function(ind,val){
-	  	  				var label="<div class='col-sm-12' ><div class='ibox float-e-margins'><div class='ibox-title' style='text-align: center;'><h5>"+val+"("+(value.detectionTypeName)+")</h5><div class='btn-group' ></div></div><div class='ibox-content'><div class='echarts' id='"+val+(value.detectionTypeName)+"' style='height: 360px'></div></div></div></div>";
+	  	  				var label="<div class='col-sm-12' id='"+val+"'><div class='ibox float-e-margins'><div class='ibox-title' style='text-align: center;'><h5>"+val+"("+(value.detectionTypeName)+")</h5><div class='btn-group' ></div></div><div class='ibox-content'><div class='echarts' id='"+val+(value.detectionTypeName)+"' style='height: 360px'></div></div></div></div>";
 	  	  				$("#rowstatistic").append(label);
 	  	  				var chart = echarts.init(document.getElementById(val+value.detectionTypeName));
 	  	  				chart.showLoading();

@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 import com.zhongda.detection.web.model.LaserData;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.StaticLevelData;
+import com.zhongda.detection.web.model.UniversalData;
 
 @Component
 public class JXLExcel {
@@ -151,6 +152,75 @@ public class JXLExcel {
 	}
 
 	/**
+	 * 通用检测类型导表
+	 * 
+	 * @param response
+	 * @param list
+	 * @param head
+	 * @param project
+	 * @param detectionName
+	 */
+	public void export_excel(HttpServletResponse response,
+			List<UniversalData> list, String[] head, Project project,
+			String detectionName) {
+		try {
+			// 创建excel文件
+			WritableWorkbook book = Workbook.createWorkbook(response
+					.getOutputStream());
+			// 设置字体
+			WritableFont writableFont = new WritableFont(
+					WritableFont.createFont("宋体"), 12);
+
+			WritableCellFormat writableCellFormat = new WritableCellFormat(
+					writableFont);// 创建样式对象
+			// 垂直水平居中
+			writableCellFormat.setAlignment(Alignment.CENTRE);
+			writableCellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
+
+			WritableSheet sheet = book.createSheet("sheet", 0);// 创建工作簿对象
+
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:SS");
+
+			row = 0;
+			universalData_Head(sheet, row, list, project, detectionName);// 设置表信息
+			row++;
+			headExcel(sheet, head, row);// 设置表头
+			// 传数据
+			row++;
+			for (int i = 0; i < list.size(); i++) {
+				sheet.addCell(new Label(3, row, simpleDateFormat.format(list
+						.get(i).getCurrentTimes()), writableCellFormat));
+				sheet.addCell(new Label(0, row,
+						list.get(i).getFirstData() + "", writableCellFormat));
+				sheet.addCell(new Label(1, row, simpleDateFormat.format(list
+						.get(i).getPreviousTime()), writableCellFormat));
+				sheet.addCell(new Label(2, row, list.get(i).getPreviousData()
+						+ "", writableCellFormat));
+				sheet.addCell(new Label(4, row, list.get(i).getCurrentData()
+						+ "", writableCellFormat));
+				sheet.addCell(new Label(5, row, list.get(i)
+						.getCurrentLaserChange() + "", writableCellFormat));
+				sheet.addCell(new Label(6, row, list.get(i)
+						.getTotalLaserChange() + "", writableCellFormat));
+				sheet.addCell(new Label(7, row, String.valueOf(list.get(i)
+						.getSpeedChange()), writableCellFormat));
+				if (null != list.get(i).getCurrentTemperature()) {
+					sheet.addCell(new Label(8, row, String.valueOf(list.get(i)
+							.getCurrentTemperature()), writableCellFormat));
+				}
+				row++;
+			}
+			book.write();
+			book.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (WriteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * 创建表头
 	 * 
 	 * @param sheet
@@ -236,6 +306,55 @@ public class JXLExcel {
 
 	public void laserDataHead_static(WritableSheet sheet, Integer row,
 			List<StaticLevelData> list, Project project, String detectionName) {
+		// 字体样式
+		WritableFont writableFont = new WritableFont(
+				WritableFont.createFont("宋体"), 12);
+		// 样式对象
+		WritableCellFormat writableCellFormat = new WritableCellFormat(
+				writableFont);
+
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd HH:mm:SS");
+
+		try {
+			sheet.mergeCells(0, row, 5, row);
+			sheet.addCell(new Label(0, row, "工程名称:" + project.getProjectName()
+					+ "(" + project.getSysDictionary().getItemName() + ")",
+					writableCellFormat));
+			row++;
+			sheet.mergeCells(0, row, 5, row);
+			sheet.addCell(new Label(0, row, "测试单位:中大检测", writableCellFormat));
+			row++;
+			sheet.mergeCells(0, row, 2, row);
+			sheet.addCell(new Label(0, row, "初次测试时间:"
+					+ simpleDateFormat.format(list.get(0).getFirstTime()),
+					writableCellFormat));
+			sheet.mergeCells(3, row, 5, row);
+			sheet.addCell(new Label(3, row, "测试人:", writableCellFormat));
+			row++;
+			sheet.mergeCells(0, row, 2, row);
+			sheet.addCell(new Label(0, row, "传感器编号:"
+					+ list.get(0).getSensorId(), writableCellFormat));
+			sheet.mergeCells(3, row, 5, row);
+			sheet.addCell(new Label(3, row, "测点名称:" + detectionName,
+					writableCellFormat));
+			row++;
+			sheet.mergeCells(0, row, 2, row);
+			sheet.addCell(new Label(0, row, "终端编号(DTU):"
+					+ list.get(0).getSmuCmsId(), writableCellFormat));
+			sheet.mergeCells(3, row, 5, row);
+			sheet.addCell(new Label(3, row, "采集器通道:"
+					+ list.get(0).getSmuCmsChannel(), writableCellFormat));
+			this.row = row;
+		} catch (RowsExceededException e) {
+			e.printStackTrace();
+		} catch (WriteException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void universalData_Head(WritableSheet sheet, Integer row,
+			List<UniversalData> list, Project project, String detectionName) {
 		// 字体样式
 		WritableFont writableFont = new WritableFont(
 				WritableFont.createFont("宋体"), 12);

@@ -30,24 +30,78 @@
 	<link href="assets/css/plugins/datepicker/datepicker3.css" rel="stylesheet">
     <script type="text/javascript" src="assets/js/slop_photo.js"></script>
     <link href="assets/css/style.min.css" rel="stylesheet">
-	
+	<style type="text/css">
+		body{
+			width:100%;
+			height:100%;
+			overflow: hidden;
+		}
+		#small-chat2{			
+			width:100%;
+			padding:10px 15px;
+			box-sizing:border-box;
+		}
+		#small-chat3{			
+			position: absolute;
+			top:180px;
+			bottom: 40px;
+			overflow: auto;
+			padding:0px 15px;
+		}
+	</style>
 </head>
 
-<body class="gray-bg">
+<body class="gray-bg" style="position:relative">
 	<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:999;width:100%;height:100%;display:none;">
-		<div id="innerdiv" style="position:absolute;"><img id="bigimg" style="border:5px solid #fff;" src="assets/img/farmmap.jpg" />
+		<div id="innerdiv" style="position:absolute;"><img id="bigimg"  src="assets/img/farmmap.jpg" />
 		</div>
 	</div>
 	<label style="display: none;" id="projectId">${projectId }</label>
 	<label style="display: none;" id="detectionTypeId">${detectionTypeId }</label>
-    <div class="wrapper wrapper-content animated fadeInRight">
-    	<div class="row">
+
+                <div class="ibox float-e-margins" id="small-chat2">
+                    <div class="ibox-content" style="background: rgba(255,255,255, 0.1);height: 65px;">
+                        <form class="form-inline"  >
+                        	<div class="row">
+                        		<div class="col-sm-5">
+	                                <label for="startCreateTime">选择日期:</label>
+								   	<input type="datetime" class="form-control" id="diapladata" style="ime-mode: disabled" value="${currentTime }">
+	                            <button class="btn btn-primary " id="selectstaticleveldata" type="button" style="margin-top: 5px;">&nbsp;查询</button>
+	                        	</div>
+	                            <div class="col-sm-1" style="margin-top: 12px;">
+	                            	<label for="startCreateTime"><a href="#热点图片">热点图片</a></label>
+	                            </div>
+	                            <div class="col-sm-1" style="margin-top: 12px;">
+	                            	<label for="startCreateTime"><a href="#现场图片">现场图片</a></label>
+	                            </div>
+	                            <div class="col-sm-1" style="margin-top: 12px;">
+	                            	<label for="startCreateTime"><a href="#实时数据">实时数据</a></label>
+	                            </div>
+	                            <div class="col-sm-1" style="margin-top: 12px;">
+	                            	<label for="startCreateTime"><a href="#累计变化量">累计变化量</a></label>
+	                            </div>
+	                            <div class="col-sm-1" style="margin-top: 12px;">
+	                            	<label for="startCreateTime"><a href="#变化速率">变化速率</a></label>
+	                            </div>
+	                            <div class="col-sm-1" style="margin-top: 12px;">
+	                            	<label for="startCreateTime"><a href="#单次变化量">单次变化量</a></label>
+	                            </div>
+	                            <div class="col-sm-1" style="margin-top: 12px;">
+	                            	<label for="startCreateTime"><a href="#数据信息">数据信息</a></label>
+	                            </div>
+	                        </div>
+                        </form>
+                    </div>
+                </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight" id="small-chat3">
+    	<%-- <div class="row">
     		<div class="col-sm-12">
-                <div class="ibox float-e-margins" id="small-chat1" style="width: 100%" >
+                <div class="ibox float-e-margins" id="small-chat2">
                     <div class="ibox-content" style="background: rgba(255,255,255, 0.5);height: 65px;">
                         <form class="form-inline"  >
                         	<div class="row">
-                        		<div class="col-sm-3">
+                        		<div class="col-sm-5">
 	                                <label for="startCreateTime">选择日期:</label>
 								   	<input type="datetime" class="form-control" id="diapladata" style="ime-mode: disabled" value="${currentTime }">
 	                            <button class="btn btn-primary " id="selectstaticleveldata" type="button" style="margin-top: 5px;">&nbsp;查询</button>
@@ -78,13 +132,12 @@
                     </div>
                 </div>
             </div>
-    	</div>
-   		 <div class="row">
+    	</div> --%>
+   		 <!-- <div class="row">
     		<div class="col-sm-12" style="height: 65px">
                 
                 </div>
-            </div>
-            
+            </div> -->  
     	<c:set value="${fn:split(image.physicalImageUrl,',') }" var="names" />
         <div class="row">
             <div class="col-sm-6" id="热点图片">
@@ -268,6 +321,8 @@
 				</div>
 			</div>
 		</div> 
+
+    
     </div>
     <script src="assets/js/jquery.min.js"></script>	
     <script src="assets/js/plugins/datepicker/moment-with-locales.min.js" charset="utf-8"></script>
@@ -292,6 +347,21 @@
 	    	
 	    });
 	</script> -->
+	
+	<script>
+	$(document).ready(function(){
+		$("#small-chat2").scroll(function(){
+	   		/* var topScroll =document.body.scrollTop;//滚动的距离,距离顶部的距离
+	    	if(topScroll > 250){  //当滚动距离大于250px时执行下面的东西
+	    	small_chat2.style.position = 'fixed';
+	    	small_chat2.style.top = '0';
+	    	small_chat2.style.zIndex = '9999';
+		 }else{//当滚动距离小于250的时候执行下面的内容，也就是让导航栏恢复原状
+			 small_chat2.style.position = 'static';
+	        } */
+	     })
+	})
+    </script>
 	
     <!-- ECharts -->
     <script src="assets/js/plugins/echarts/echarts-all.js"></script>
