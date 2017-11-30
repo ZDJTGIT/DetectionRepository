@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,27 +17,21 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import com.zhongda.detection.core.utils.JXLExcel;
 import com.zhongda.detection.web.dao.ThresholdMapper;
 import com.zhongda.detection.web.model.AlarmLinkman;
 import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Image;
-import com.zhongda.detection.web.model.LaserData;
 import com.zhongda.detection.web.model.OperationLog;
 import com.zhongda.detection.web.model.Project;
-import com.zhongda.detection.web.model.StaticLevelData;
 import com.zhongda.detection.web.model.SysDictionary;
-import com.zhongda.detection.web.model.Threshold;
 import com.zhongda.detection.web.model.UniversalData;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.RoleSign;
@@ -122,191 +115,6 @@ public class ProjectController {
 		List<DetectionPoint> itemNameList = detectionPointService
 				.selectItemNameByProjectgId(projectId);
 		return itemNameList;
-	}
-
-	/**
-	 * 激光测距
-	 * 
-	 * @param model
-	 * @param projectId
-	 * @param detectionTypeId
-	 * @return
-	 * @throws JsonProcessingException
-	 */
-	@RequestMapping(value = "/laserRanging")
-	public String laserRanging(Model model, Integer projectId,
-			Integer detectionTypeId) throws JsonProcessingException {
-		Date date = new Date();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String currentTime = simpleDateFormat.format(date);
-		List<DetectionPoint> laserList = detectionPointService
-				.selectLaserDataByCurrentTimes(projectId, detectionTypeId,
-						currentTime);
-		List<Threshold> thresholdList = thresholdService
-				.selectByProjectIdAndDetectionTypeId(projectId, detectionTypeId);
-		HashMap<Integer, Threshold> hashMap2 = new HashMap<Integer, Threshold>();
-		for (Threshold threshold : thresholdList) {
-			hashMap2.put(threshold.getThresholdTypeId(), threshold);
-		}
-		Map<String, Object> hashMap = new HashMap<String, Object>();
-		Image image = imageService.selectImageByTwoId(projectId,
-				detectionTypeId);
-		hashMap.put("laser", laserList);
-		hashMap.put("threshold", hashMap2);
-		ObjectMapper mapper = new ObjectMapper();
-		String map = mapper.writeValueAsString(hashMap);
-		model.addAttribute("image", image);
-		model.addAttribute("map", map);
-		model.addAttribute("projectId", projectId);
-		model.addAttribute("detectionTypeId", detectionTypeId);
-		return "graph_echarts_laserRanging";
-
-	}
-
-	/**
-	 * 激光测距
-	 * 
-	 * @param currentTime
-	 * @param projectId
-	 * @param detectionTypeId
-	 * @return
-	 */
-	@RequestMapping(value = "/selectlaserRanging")
-	public @ResponseBody Map<String, Object> selectlaserRanging(
-			String currentTime, Integer projectId, Integer detectionTypeId) {
-		List<DetectionPoint> laserList = detectionPointService
-				.selectLaserDataByCurrentTimes(projectId, detectionTypeId,
-						currentTime);
-		List<Threshold> thresholdList = thresholdService
-				.selectByProjectIdAndDetectionTypeId(projectId, detectionTypeId);
-		HashMap<Integer, Threshold> hashMap2 = new HashMap<Integer, Threshold>();
-		for (Threshold threshold : thresholdList) {
-			hashMap2.put(threshold.getThresholdTypeId(), threshold);
-		}
-		Map<String, Object> hashMap = new HashMap<String, Object>();
-		hashMap.put("laser", laserList);
-		hashMap.put("threshold", hashMap2);
-		return hashMap;
-	}
-
-	// /**
-	// * 地铁总表
-	// *
-	// * @return
-	// * @throws JsonProcessingException
-	// */
-	// @RequestMapping(value = "/subwayRail")
-	// public String subwayRail(Integer projectId, Model model)
-	// throws JsonProcessingException {
-	// System.out.println("projectId:" + projectId);
-	// List<DetectionPoint> laserList = detectionPointService
-	// .selectLaserDataByCurrentTimes(projectId, 26, "2");
-	// // List<DetectionPoint> selectKlineGraphData = detectionPointService
-	// // .selectKlineGraphData(projectId, 26);// 每天最大值最小值
-	// // HashMap<Integer, DetectionPoint> hashMap = new HashMap<Integer,
-	// // DetectionPoint>();
-	// // for (DetectionPoint detectionPoint : selectKlineGraphData) {
-	// // hashMap.put(detectionPoint.getDetectionPointId(), detectionPoint);
-	// // }
-	// ObjectMapper mapper = new ObjectMapper();
-	// String laser = mapper.writeValueAsString(laserList);
-	// // String kline = mapper.writeValueAsString(hashMap);
-	// model.addAttribute("laserList", laser);
-	// // model.addAttribute("kline", kline);
-	// return "graph_echarts_subwayRail";
-	// }
-
-	/**
-	 * 进入地铁总表数据对比页面
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/subwayRail", method = RequestMethod.GET)
-	public String subwayRail(Integer projectId, Model model) {
-		model.addAttribute("projectId", projectId);
-		return "graph_echarts_subwayRail";
-	}
-
-	/**
-	 * 获取地铁总表数据
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/subwayRailComparison", method = RequestMethod.POST)
-	@ResponseBody
-	public List<DetectionPoint> subwayRailComparison(Integer projectId,
-			String begin, String end, String dateRange) {
-		Date date = new Date();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-				"yyyy-MM-dd HH:mm:ss");
-		Calendar lastDate = Calendar.getInstance();
-		List<DetectionPoint> laserList = null;
-		// System.out.println("begin:" + begin + " end:" + end + " dateRange:"
-		// + dateRange.length());
-		if (dateRange.length() != 0) {
-			end = simpleDateFormat.format(date);
-			lastDate.setTime(date);
-			if ("最近一周".equals(dateRange)) {
-				lastDate.add(Calendar.DATE, -1);
-			} else if ("最近一月".equals(dateRange)) {
-				lastDate.add(Calendar.MONTH, -1);
-			} else if ("最近三个月".equals(dateRange)) {
-				lastDate.add(Calendar.MONTH, -3);
-			} else if ("最近六个月".equals(dateRange)) {
-				lastDate.add(Calendar.MONTH, -6);
-			} else if ("最近一年".equals(dateRange)) {
-				lastDate.add(Calendar.YEAR, -1);
-			} else if ("全部".equals(dateRange)) {
-				return detectionPointService.selectLaserDataByCurrentTimes(
-						projectId, 26, "2");
-			}
-			Date m = lastDate.getTime();
-			begin = simpleDateFormat.format(m);
-		}
-		if (begin.length() == 0 && end.length() == 0) {
-			end = simpleDateFormat.format(date);
-			lastDate.roll(Calendar.DATE, -7);// 日期回滚7天
-			begin = simpleDateFormat.format(lastDate.getTime());
-		}
-		// System.out.println("begin:" + begin + " end:" + end);
-		laserList = detectionPointService.selectAllLaserDataByCurrentTimes(
-				projectId, 26, begin, end);
-		System.out.println(laserList);
-		return laserList;
-	}
-
-	/**
-	 * 沉降
-	 * 
-	 * @param model
-	 * @param projectId
-	 * @param detectionTypeId
-	 * @return
-	 * @throws JsonProcessingException
-	 */
-	@RequestMapping(value = "/staticLevel")
-	public String staticLevel(Model model, Integer projectId,
-			Integer detectionTypeId) {
-		System.out.println(detectionTypeId);
-		Date date = new Date();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String format = simpleDateFormat.format(date);
-		Image image = imageService.selectImageByTwoId(projectId,
-				detectionTypeId);
-		model.addAttribute("image", image);
-		model.addAttribute("currentTime", format);
-		model.addAttribute("projectId", projectId);
-		model.addAttribute("detectionTypeId", detectionTypeId);
-		return "graph_echarts_staticLevel";
-	}
-
-	@RequestMapping(value = "/staticLevelMonitor")
-	public @ResponseBody List<DetectionPoint> staticLevelMonitor(
-			Integer projectId, Integer detectionTypeId, String currentTime) {
-		List<DetectionPoint> staticList = detectionPointService
-				.selectStaticLevelByCurrentTimes(projectId, detectionTypeId,
-						currentTime);
-		return staticList;
 	}
 
 	/**
@@ -406,70 +214,6 @@ public class ProjectController {
 		} else {
 			response.getWriter().print(false);
 		}
-	}
-
-	/**
-	 * 导出表
-	 * 
-	 * @param sensorId
-	 * @param currentTime
-	 * @param projectId
-	 * @param detectionTypeId
-	 * @param detectionName
-	 * @param response
-	 * @throws IOException
-	 */
-	@RequestMapping(value = "/exportExcel")
-	public void excel(String sensorId, String currentTime, Integer projectId,
-			Integer detectionTypeId, String detectionName,
-			HttpServletResponse response) throws IOException {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		List<LaserData> list = laserDataService.selectAllDataBySensorIdAndTime(
-				sensorId, currentTime);
-		Project project = projectService.selectProjectAndSysdicByTwoId(
-				projectId, detectionTypeId);
-		String datesnew = format.format(list.get(0).getCurrentTimes());
-		response.setContentType("application/octet-stream");
-		response.setContentType("application/OCTET-STREAM;charset=UTF-8");
-		response.setHeader("Content-Disposition", "attachment;filename="
-				+ datesnew + ".xls");
-		String[] head = { "初次测试值(MM)", "前次测试时间", "前次测试值(MM)", "本次检测时间",
-				"本次测试值(MM)", "单次变化量(MM)", "总变化量(MM)", "变化速率(MM/MIN)" };
-
-		jxlExcel.export(response, list, head, project, detectionName);
-
-	}
-
-	/**
-	 * 导出表沉降
-	 * 
-	 * @param sensorId
-	 * @param currentTime
-	 * @param projectId
-	 * @param detectionTypeId
-	 * @param detectionName
-	 * @param response
-	 * @throws IOException
-	 */
-	@RequestMapping(value = "/excel_statis")
-	public void excel_statis(String sensorId, String currentTime,
-			Integer projectId, Integer detectionTypeId, String detectionName,
-			HttpServletResponse response) throws IOException {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		List<StaticLevelData> list = staticLevelDataService
-				.selectAllDataBySensorIdAndTime(sensorId, currentTime);
-		Project project = projectService.selectProjectAndSysdicByTwoId(
-				projectId, detectionTypeId);
-		String datesnew = format.format(list.get(0).getCurrentTimes());
-		response.setContentType("application/octet-stream");
-		response.setContentType("application/OCTET-STREAM;charset=UTF-8");
-		response.setHeader("Content-Disposition", "attachment;filename="
-				+ datesnew + ".xls");
-		String[] head = { "初次测试值(MM)", "前次测试时间", "前次测试值(MM)", "本次检测时间",
-				"本次测试值(MM)", "单次变化量(MM)", "总变化量(MM)", "变化速率(MM/MIN)", "温度(℃)" };
-
-		jxlExcel.export_static(response, list, head, project, detectionName);
-
 	}
 
 	/**

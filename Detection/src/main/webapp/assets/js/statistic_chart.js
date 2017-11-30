@@ -47,6 +47,7 @@ $('#selectdata').change(function(){
 
 $('#btnSearchstatic').click(function(){
 //	$("#loadgif").hide();
+	clickType="button";
 	lodingbgin();
 	$.ajax({
 		type:'post',
