@@ -63,7 +63,7 @@ public interface ThresholdService {
 	 */
 	List<Threshold> selectByProjectIdAndDetectionTypeId(Integer projectId,
 			Integer detectionTypeId);
-	
+
 	/**
 	 * 做校验用-通过项目ID，测点类型ID，阀值类型ID查询唯一的阀值记录
 	 * 
@@ -74,5 +74,15 @@ public interface ThresholdService {
 	 */
 	Threshold selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
 			Integer projectId, Integer detectionTypeId, Integer thresholdTypeId);
+
+	/**
+	 * 根据项目ID和测点类型ID关联字典表精确查找到阈值表中的一条记录
+	 * 
+	 * @param projectId
+	 * @param detectionTypeId
+	 * @return
+	 */
+	List<Threshold> selectAndSysDByPIAndDTI(Integer projectId,
+			Integer detectionTypeId);
 
 }

@@ -88,6 +88,9 @@ $("#selectDetectionDatas").click(function(){
 		  	  				var legen = [];//legend属性中的data数据，添加测点个数
 		  	  				var Series = [];
 		  	  				
+		  	  				
+//		  	  				var mindata;
+//		  	  				var maxdata;
 			  				$(data["data"]).each(function(index,value){
 			  					if(ind==0){
 			  						label ="<button class='btn btn-primary deTeButton' name='"+value.detectionPointId+"' type='button'>"+value.detectionName+"</button>";
@@ -122,6 +125,10 @@ $("#selectDetectionDatas").click(function(){
 			  	  					var temper=value_d.currentTimes;
 			  	  					var dt = new Date(temper.substring(0,4),temper.substring(5,7)-1,temper.substring(8,10),temper.substring(11,13),temper.substring(14,16),temper.substring(17,19));
 			  	  					datas.push(dt);
+//			  	  					if(index_d==0){
+//			  	  						mindata=temper;
+//			  	  					}
+//			  	  					maxdata=temper;
 			  	  					if(val=="实时数据"){
 			  	  						datas.push(value_d.currentData);
 			  	  					}else if(val=="累计变化量"){
@@ -136,6 +143,27 @@ $("#selectDetectionDatas").click(function(){
 			  	  				var point ={name: value.detectionName, type: 'line',symbol:'circle',showAllSymbol: true,data: displacementData,markPoint : {data : [ {type : 'max',name : '最大值'}, {type : 'min',name : '最小值'} ]}, formatter : function (params){return params.name+'<br>'+params } };
 			  	  				Series.push(point);
 			  				});
+//			  				if(data["thresholds"].length!=0){
+//			  	  				$(data["thresholds"]).each(function(index,value){
+//			  	  					if((value.sysDictionary.itemName.indexOf(val))!=-1){
+//			  	  						alert(mindata+"***"+maxdata)
+//			  	  						var alardata;
+//			  	  						if(null!=value.minThresholdValue){
+//			  	  							legen.push("警戒值Min")
+//				  	  						alardata = {name : '警戒值Min',type : 'line',symbol : 'none',data : [ 0 ],itemStyle : {normal : {color : '#FE0202',}},markLine : {data : [ [ {name : '警戒值Min起点',value : value.minThresholdValue,xAxis : mindata,yAxis : value.minThresholdValue}, {name : '警戒值Min终点',xAxis : maxdata,yAxis : value.minThresholdValue},]]},};
+//			  	  							Series.push(alardata);
+//			  	  						}
+//				  	  					if(null!=value.maxThresholdValue){
+//			  	  							legen.push("警戒值Max")
+//				  	  						alardata = {name : '警戒值Max',type : 'line',symbol : 'none',data : [ 0 ],itemStyle : {normal : {color : '#FE0202',}},markLine : {data : [ [ {name : '警戒值Max起点',value : value.maxThresholdValue,xAxis : mindata,yAxis : value.maxThresholdValue}, {name : '警戒值Max终点',xAxis : maxdata,yAxis : value.maxThresholdValue},]]},};
+//			  	  							Series.push(alardata);
+//			  	  						}
+//			  	  						return false;
+//			  	  					}
+//			  	  					
+//			  	  				});
+//		  	  				}
+			  				
 			  				var displacement = {
 			  	  					tooltip : {
 								        trigger: 'axis',
@@ -145,7 +173,7 @@ $("#selectDetectionDatas").click(function(){
 								            var seconds = date.getSeconds();
 								            var hours = date.getHours();
 								            var year= date.getFullYear();
-								            var month =date.getMonth() ;
+								            var month =date.getMonth()+1 ;
 							                var day = date.getDate(); 
 							                if(month<10){
 							                	month='0'+month;
@@ -166,6 +194,9 @@ $("#selectDetectionDatas").click(function(){
 								                   + minute+':'+seconds;
 								            return '测点名称：'+params[0]+'<br/>'+'时间：'+data + '<br/>'
 								                   + val+":"+params.value[1]
+								        },
+								        position:function(p){   //其中p为当前鼠标的位置
+								            return [p[0] -50, p[1] - 50];
 								        }
 								    },
 								    toolbox: {

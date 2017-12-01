@@ -50,8 +50,8 @@ public class ThresholdServiceImpl implements ThresholdService {
 	}
 
 	@Override
-	public List<Threshold> selectByProjectIdAndDetectionTypeId(Integer projectId,
-			Integer detectionTypeId) {
+	public List<Threshold> selectByProjectIdAndDetectionTypeId(
+			Integer projectId, Integer detectionTypeId) {
 		return thresholdMapper.selectByProjectIdAndDetectionTypeId(projectId,
 				detectionTypeId);
 	}
@@ -62,6 +62,13 @@ public class ThresholdServiceImpl implements ThresholdService {
 		return thresholdMapper
 				.selectThresholdByProjectIdDetectionTypeIdThresholdTypeId(
 						projectId, detectionTypeId, thresholdTypeId);
+	}
+
+	@Override
+	public List<Threshold> selectAndSysDByPIAndDTI(Integer projectId,
+			Integer detectionTypeId) {
+		return thresholdMapper.selectAndSysDByPIAndDTI(projectId,
+				detectionTypeId);
 	}
 
 }

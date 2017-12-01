@@ -16,10 +16,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Image;
 import com.zhongda.detection.web.model.StatisticChart;
+import com.zhongda.detection.web.model.Threshold;
 import com.zhongda.detection.web.service.DetectionPointService;
 import com.zhongda.detection.web.service.ImageService;
 import com.zhongda.detection.web.service.StatisticChartService;
+import com.zhongda.detection.web.service.ThresholdService;
 
+/**
+ * 
+ * <p>
+ * </p>
+ * 
+ * @author 研发中心-LiIverson<1061734892@qq.com>
+ * @sine 2017年12月1日
+ */
 @Controller
 @RequestMapping(value = "/detectionType")
 public class UniversalDataController {
@@ -32,6 +42,9 @@ public class UniversalDataController {
 
 	@Resource
 	private ImageService imageService;
+
+	@Resource
+	private ThresholdService thresholdService;
 
 	@RequestMapping(value = "/monitor")
 	public String monitor(Integer projectId, Integer detectionTypeId,
@@ -55,6 +68,9 @@ public class UniversalDataController {
 		StatisticChart statisticChart = statisticChartService
 				.selectDataByProjectIdAndDetectionTId(projectId,
 						detectionTypeId);
+		List<Threshold> thresholds = thresholdService.selectAndSysDByPIAndDTI(
+				projectId, detectionTypeId);
+		System.out.println(thresholds);
 		String[] attributes = statisticChart.getAttributes().split(",");
 		System.out.println(statisticChart);
 		List<DetectionPoint> dataList = detectionPointService
@@ -64,6 +80,7 @@ public class UniversalDataController {
 		hashMap.put("attributes", attributes);
 		hashMap.put("data", dataList);
 		hashMap.put("tableName", statisticChart.getTableName());
+		hashMap.put("thresholds", thresholds);
 		return hashMap;
 	}
 }
