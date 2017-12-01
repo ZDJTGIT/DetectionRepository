@@ -105,8 +105,8 @@
 													data-toggle="tab">结构健康</a></li>
 												<li class=""><a href="project_detail.html#tab-4"
 													data-toggle="tab">阀值</a></li>
-												<li><a href="project_detail.html#tab-3"
-													data-toggle="tab">图片</a></li>
+												<!-- <li><a href="project_detail.html#tab-3"
+													data-toggle="tab">图片</a></li> -->
 											</ul>
 										</div>
 									</div>
@@ -206,7 +206,7 @@
 													</tbody>
 												</table>
 											</div>
-											<div class="tab-pane" id="tab-3">
+											<!-- <div class="tab-pane" id="tab-3">
 												<table class="table table-striped">
 													<thead>
 														<tr>
@@ -218,7 +218,7 @@
 													<tbody id="tbody_image">
 													</tbody>
 												</table>
-											</div>
+											</div> -->
 										</div>
 									</div>
 								</div>

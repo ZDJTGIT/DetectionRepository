@@ -185,7 +185,7 @@ public class DetectionPointController {
 	}
 	
 	/**
-	 * 查项目下有告警信息的测点个数
+	 * 查项目下有告警信息的测点个数（未使用）
 	 * @param detectionPointId
 	 * @return
 	 */
