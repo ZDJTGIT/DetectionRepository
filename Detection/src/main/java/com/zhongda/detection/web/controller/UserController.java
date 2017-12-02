@@ -198,10 +198,13 @@ public class UserController {
 	@ApiOperation(value = "退出", httpMethod = "GET", response = String.class, notes = "用户退出")
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
+		User authUserInfo = (User) session.getAttribute("userInfo");
 		session.removeAttribute("userInfo");
 		// 登出操作
 		Subject subject = SecurityUtils.getSubject();
 		subject.logout();
+		//插入一条操作日志	
+		operationLogService.insertOperationLog(new OperationLog(authUserInfo.getUserId(),authUserInfo.getUserName(),"退出登录","退出",new Date()));
 		return "login";
 	}
 

@@ -19,6 +19,8 @@ public class Alarm {
     private Integer detectionId;
 
     private String smuCmsId;
+    
+    private String smuCmsChannel;
 
     private String sensorId;
 
@@ -125,7 +127,15 @@ public class Alarm {
         this.smuCmsId = smuCmsId == null ? null : smuCmsId.trim();
     }
 
-    public String getSensorId() {
+    public String getSmuCmsChannel() {
+		return smuCmsChannel;
+	}
+
+	public void setSmuCmsChannel(String smuCmsChannel) {
+		this.smuCmsChannel = smuCmsChannel == null ? null : smuCmsChannel.trim();
+	}
+
+	public String getSensorId() {
         return sensorId;
     }
 
