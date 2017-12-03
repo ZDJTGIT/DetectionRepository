@@ -42,12 +42,19 @@ var dateRange='';
 $('#selectdata').change(function(){
 	dateRange = $(this).val();
 	clickType="select";
-	$('#btnSearchstatic').trigger('click');
+	dataAjax()
 });
 
 $('#btnSearchstatic').click(function(){
-//	$("#loadgif").hide();
 	clickType="button";
+	dataAjax()
+});
+
+$('#btnSearchstatic').trigger('click');
+
+function dataAjax(){
+	$("#loadgif").hide();
+	
 	lodingbgin();
 	$.ajax({
 		type:'post',
@@ -186,8 +193,6 @@ $('#btnSearchstatic').click(function(){
 	    });	
 	
 //	$("#loadgif").show();
-});
-
-$('#btnSearchstatic').trigger('click');
+}
 
 

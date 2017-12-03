@@ -617,11 +617,11 @@
 								 }); */
 							});
 
-			//	        stompClient.send("/ws/singlemessage", {}, JSON.stringify({
-			//	            name : "nane",
-			//	            taskName : "taskName",
-			//	            taskDetail : "taskDetail"
-			//	       }));
+				       /*  stompClient.send("/ws/singlemessage", {}, JSON.stringify({
+			            	name : "nane",
+				            taskName : "taskName",
+				            taskDetail : "taskDetail"
+				       })); */
 
 		});
 	</script>

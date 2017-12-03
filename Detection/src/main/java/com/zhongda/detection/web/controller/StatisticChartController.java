@@ -41,18 +41,17 @@ public class StatisticChartController {
 	public @ResponseBody Map<String, Object> dataAnalysis(Integer projectId,
 			String begin, String end, String dateRange, String clickType,
 			Model model) {
-		System.out.println("projectId:" + projectId);
+		System.out.println("-----------clickType:" + clickType);
 		List<StatisticChart> detectionTypeList = statisticChartService
 				.selectAllDataByProjectId(projectId);
 		Date date = new Date();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
 				"yyyy-MM-dd HH:mm:ss");
 		Calendar lastDate = Calendar.getInstance();
-
-		System.out.println(detectionTypeList);
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		hashMap.put("detectionList", detectionTypeList);
 		if ("select".equals(clickType)) {
+			System.out.println("select");
 			end = simpleDateFormat.format(date);
 			lastDate.setTime(date);
 			if ("最近一周".equals(dateRange)) {
@@ -76,17 +75,19 @@ public class StatisticChartController {
 							selectDataByTabelName);
 					hashMap.put(statisticChart.getDetectionTypeName() + "1",
 							split);
-					System.out.println(selectDataByTabelName);
 				}
 				return hashMap;
 			}
 			Date m = lastDate.getTime();
 			begin = simpleDateFormat.format(m);
 		} else {
+			System.out.println("button");
 			if (begin.length() == 0 || end.length() == 0) {
 				end = simpleDateFormat.format(date);
-				lastDate.roll(Calendar.DATE, -7);// 日期回滚7天
+				lastDate.setTime(date);
+				lastDate.add(Calendar.DATE, -7);
 				begin = simpleDateFormat.format(lastDate.getTime());
+				System.out.println(begin + "******" + end);
 			}
 		}
 		for (StatisticChart statisticChart : detectionTypeList) {
@@ -98,6 +99,8 @@ public class StatisticChartController {
 			hashMap.put(statisticChart.getDetectionTypeName(),
 					selectDataByTabelName);
 			hashMap.put(statisticChart.getDetectionTypeName() + "1", split);
+			System.out.println(statisticChart.getDetectionTypeName() + ":"
+					+ selectDataByTabelName);
 		}
 
 		return hashMap;
