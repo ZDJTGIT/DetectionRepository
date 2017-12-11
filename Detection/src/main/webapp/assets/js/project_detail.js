@@ -317,11 +317,14 @@ var projectName=document.getElementById("project_detail_projectName").value;
 						  	  		     asthtml += '<tr>'+
 													'<td><span class="label label-primary">'+
 													'<i class=""></i>'+item.smuId+'</span></td>'+
+													'<td>'+item.smuVersions+'</td>'+
 													'<td>'+item.createTime+'</td>'+
 													'<td>'+item.updateTime+'</td>'+
 													'<td>'+item.smuRssi+'</td>'+
 													'<td>'+item.timesInterval+'</td>'+
 													'<td>'+item.smuStatus+'</td>'+
+													'<td>'+item.smuPowSt+'</td>'+
+													'<td>'+item.smuBatSt+'</td>'+
 													'<td>'+item.smuVoltage+'</td>'+
 						  	  		    	 		'</tr>';		
 					  	  		    	});

@@ -6,6 +6,7 @@ import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.Terminals;
 
 public interface TerminalsMapper {
+	
     int deleteByPrimaryKey(Integer id);
 
     int insert(Terminals record);
@@ -31,5 +32,13 @@ public interface TerminalsMapper {
      * @return
      */
     Terminals selectBySmuId(String smuId);
+    
+    /**
+     * 通过采集器编号修改采集器采集间隔时间
+     * @param sumId
+     * @param timesInterval
+     * @return
+     */
+    int updateTimesIntervalBySumId(Terminals terminals);
     
 }

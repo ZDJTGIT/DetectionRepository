@@ -49,4 +49,5 @@ public interface TerminalsInfoMapper {
      * @return
      */
     TerminalsInfo selectBySmuIdAndProjectId(String smuId,Integer projectId);
+    
 }

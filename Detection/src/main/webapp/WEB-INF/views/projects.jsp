@@ -25,11 +25,13 @@
 <link href="assets/css/plugins/layuis/layui.css" rel="stylesheet" media="all">
 <style>
 #trhight{
+	
 	height:39px;
 	overflow:hidden;
 }
 
 #trhight:hover{
+	box-sizing:border-box;
 	height: 100%;
 }
 </style>

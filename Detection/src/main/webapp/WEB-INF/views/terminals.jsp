@@ -61,7 +61,16 @@
 											采集器状态
 										</td>
 										<td class="project-title" style="width:260px">
+											采集器电源状态
+										</td>
+										<td class="project-title" style="width:260px">
+											采集器电池状态
+										</td>
+										<td class="project-title" style="width:260px">
 											电压
+										</td>
+										<td class="project-title" style="width:260px">
+											采集器版本
 										</td>
 										<td class="project-title" style="width:260px">
 											采集时间间隔

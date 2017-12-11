@@ -161,14 +161,7 @@
 									<font size="3" color=#585858>个人说明</font>
 									<textarea class="data_content_input_5"  rows="4">
 								    </textarea>
-									</div>
-							    </div>
-							</div>
-							<div class="data_basic">
-							     <div class="data_content_7">
-								    <div class="data_content_8">
-									<font size="3" color=#585858>预留区域</font>
-									<input class="data_content_input_6" type="text">
+								    <br><br>
 									</div>
 							    </div>
 							</div>

@@ -45,7 +45,16 @@ var projectName=document.getElementById("project_terminals_projectName").value;
 								''+data.data.smuStatus+''+
 							'</td>'+
 							'<td class="project-title" style="width:260px">'+
+								''+data.data.smuPowSt+''+
+							'</td>'+
+							'<td class="project-title" style="width:260px">'+
+								''+data.data.smuBatSt+''+
+							'</td>'+
+							'<td class="project-title" style="width:260px">'+
 								''+data.data.smuVoltage+''+
+							'</td>'+
+							'<td class="project-title" style="width:260px">'+
+								''+data.data.smuVersions+''+
 							'</td>'+
 							'<td class="project-title" style="width:260px">'+
 								''+data.data.timesInterval+''+
@@ -116,9 +125,9 @@ var projectName=document.getElementById("project_terminals_projectName").value;
 						data: JSON.stringify(jsonData),
 						success : function(data) {
 							 if(data){
-				  	  		    var asthtml = '';
+				  	  		    $('#terminals_tbody').empty();
 				  	  		   	$.each(data.terminalsInfoList,function(idx,item){
-				  	  		   	asthtml +=  '<tr id="'+item.smuIdNu+'">'+
+				  	  		   	var asthtml =  '<tr id="'+item.smuIdNu+'">'+
 											'<td class="project-title" style="width:30px">'+
 											'</td>'+
 					    	  		    	'<td class="project-title" style="width:200px">'+
@@ -139,10 +148,26 @@ var projectName=document.getElementById("project_terminals_projectName").value;
 												''+item.smuStatus+''+
 											'</td>'+
 											'<td class="project-title" style="width:260px">'+
+												''+item.smuPowSt+''+
+											'</td>'+
+											'<td class="project-title" style="width:260px">'+
+												''+item.smuBatSt+''+
+											'</td>'+
+											'<td class="project-title" style="width:260px">'+
 												''+item.smuVoltage+''+
 											'</td>'+
 											'<td class="project-title" style="width:260px">'+
-												''+item.timesInterval+''+
+												''+item.smuVersions+''+
+											'</td>'+
+											'<td class="project-title" style="width:260px">'+
+												/*''+item.timesInterval+''+*/
+												'<select  id="selectTimesInterval_div_terminals' + item.smuIdNu +'">'+
+													'<option value="10">10</option>'+
+													'<option value="20">20</option>'+
+													'<option value="30">30</option>'+
+													'<option value="60">60</option>'+
+												'</select>'+
+												'<a href="javascript:;" onclick="changTimesInterval('+item.smuIdNu+')">确定</a>'+
 											'</td>'+
 											'<td class="project-title" style="width:140px">'+
 											'</td>'+
@@ -152,8 +177,10 @@ var projectName=document.getElementById("project_terminals_projectName").value;
 											'<td class="project-actions">'+
 										    '</td>'+
 											'</tr>';
+				  	  		   		$('#terminals_tbody').append(asthtml);
+				  	  		   		$("#selectTimesInterval_div_terminals"+item.smuIdNu+" option[value='"+item.timesInterval+"']").prop("selected",true);
 				  	  		   	});
-				  	  		    $('#terminals_tbody').html(asthtml);
+				  	  		   
 								//加载完成后隐藏loading提示
 			                   	layer.close(loading);
 			                   	if(loadLaypage){
@@ -171,6 +198,29 @@ var projectName=document.getElementById("project_terminals_projectName").value;
 			projectPageAjax(jsonData,loadLaypage);
 		})();
 	});
+		//改变检测间隔时间
+		function changTimesInterval(smuId){
+			 var timesInterval = $("#selectTimesInterval_div_terminals"+smuId+" option:selected").val();
+			var jsonData = '{"smuId":"'
+				       		+ smuId
+							+ '","timesInterval":"'
+							+ timesInterval + '"}';
+			 $.ajax({
+		   		  type:'post',
+		   	  	  url: 'rest/terminals/updataTimesInterval',
+		   	  	  data: jsonData,
+		   	  	  contentType:"application/json",
+		   	  	  success: function(data){
+		   	  		 if(data==1){
+			   	  		layer.msg('修改成功', {
+							time : 500, //3s后自动关闭
+						});
+		   	  		 }else{
+	  					alert("抱歉！您为非管理员用户，修改项目信息请联系对应管理员！");
+  					 }
+		   	  	  }
+			   });
+		}
 		
 		//删除采集器
 		function delateTerminals(smuId){

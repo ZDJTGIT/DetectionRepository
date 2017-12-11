@@ -20,4 +20,12 @@ public interface TerminalsService {
      * @return
      */
     Terminals selectBySmuId(String smuId);
+    
+    /**
+     * 通过采集器编号修改采集器采集间隔时间
+     * @param sumId
+     * @param timesInterval
+     * @return
+     */
+    int updateTimesIntervalBySumId(Terminals terminals);
 }

@@ -31,4 +31,8 @@ public class TerminalsServiceImpl implements TerminalsService {
 		return terminalsMapper.selectBySmuId(smuId);
 	}
 
+	@Override
+	public int updateTimesIntervalBySumId(Terminals terminals) {
+		return terminalsMapper.updateTimesIntervalBySumId(terminals);
+	}
 }

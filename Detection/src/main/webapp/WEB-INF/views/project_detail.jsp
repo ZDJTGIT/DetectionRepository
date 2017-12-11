@@ -131,19 +131,21 @@
 													<div style="margin-top:15px; text-align:center;" id="pageComponent_1"></div>
 												</div>
 											</div>
-											<!-- 采集器，未更新，4,5写死展示 -->
 											<div class="tab-pane" id="tab-5">
 												<div class="feed-activity-list">
 													<table class="table table-striped">
 													<thead>
 														<tr>
 															<th>采集器编号</th>
+															<th>采集器版本</th>
 															<th>创建时间</th>
 															<th>更新时间</th>
 															<th>采集器信号强度</th>
 															<th>采集时间间隔</th>
 															<th>采集器状态</th>
-															<th>采集器电压</th>
+															<th>电源状态</th>
+															<th>电池状态</th>
+															<th>电压</th>
 														</tr>
 													</thead>
 													<tbody id="tbody_terminals">

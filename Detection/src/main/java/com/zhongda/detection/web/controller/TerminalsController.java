@@ -86,14 +86,38 @@ public class TerminalsController {
 	@RequestMapping(value = "/showProjectTerminals", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> showProjectTerminals(@RequestBody  Project project,HttpServletRequest request) {
-		//根据查询条件分页查询传感器
+		//根据查询条件分页查询采集器
 		List<Terminals> terminalsInfoList = terminalsService.selectByProjectId(project);
 		PageInfo<Terminals> TerminalsPageInfo = new PageInfo<Terminals>(terminalsInfoList);
 		Map<String, Object> TerminalsMap = new HashMap<String, Object>();
 		TerminalsMap.put("total", TerminalsPageInfo.getTotal());
 		TerminalsMap.put("terminalsInfoList", terminalsInfoList);
-		//通过项目ID查询到所有传感器
+		//通过项目ID查询到所有采集器
 		return TerminalsMap;
+	}
+	
+	/**
+	 * 删除选中的采集器
+	 * @param detectionPointId
+	 * @return
+	 */
+	@RequestMapping(value = "/updataTimesInterval", method = RequestMethod.POST)
+	@ResponseBody
+	public Integer updataTimesInterval(@RequestBody Terminals terminals, HttpServletRequest request){
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.hasRole(RoleSign.ADMIN)
+				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			// 管理员用户，可修改检测间隔时间
+			terminalsService.updateTimesIntervalBySumId(terminals);
+			// 插入一条操作日志
+			/*User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
+			operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(), currentUser.getUserName(), "采集器删除",
+					currentUser.getUserName() + "在项目ID为："+projectId+"下删除采集器，采集器编号为："+ smuId, new Date()));*/
+			return 1;
+		} else {
+			// 非管理员不能修改检测间隔时间
+			return 2;
+		}
 	}
 	
 	/**

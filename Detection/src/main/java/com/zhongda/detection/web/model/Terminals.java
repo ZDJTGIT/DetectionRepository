@@ -23,8 +23,39 @@ public class Terminals {
     
     //左表查询使用
     private String smuIdNu;
+    
+    //电源状态，电池状态，版本
+    private String smuPowSt;
+    
+    private String smuBatSt;
+    
+    private String smuVersions;
 
-    public Integer getId() {
+    public String getSmuPowSt() {
+		return smuPowSt;
+	}
+
+	public void setSmuPowSt(String smuPowSt) {
+		this.smuPowSt = smuPowSt;
+	}
+
+	public String getSmuBatSt() {
+		return smuBatSt;
+	}
+
+	public void setSmuBatSt(String smuBatSt) {
+		this.smuBatSt = smuBatSt;
+	}
+
+	public String getSmuVersions() {
+		return smuVersions;
+	}
+
+	public void setSmuVersions(String smuVersions) {
+		this.smuVersions = smuVersions;
+	}
+
+	public Integer getId() {
         return id;
     }
 

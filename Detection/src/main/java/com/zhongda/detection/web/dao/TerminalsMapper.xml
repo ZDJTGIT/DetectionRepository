@@ -10,10 +10,13 @@
     <result column="smu_rssi" jdbcType="INTEGER" property="smuRssi" />
     <result column="smu_status" jdbcType="INTEGER" property="smuStatus" />
     <result column="smu_voltage" jdbcType="VARCHAR" property="smuVoltage" />
+    <result column="smu_pow_st" jdbcType="VARCHAR" property="smuPowSt" />
+    <result column="smu_bat_st" jdbcType="VARCHAR" property="smuBatSt" />
+    <result column="smu_versions" jdbcType="VARCHAR" property="smuVersions" />
     <result column="times_interval" jdbcType="INTEGER" property="timesInterval" />
   </resultMap>
   <sql id="Base_Column_List">
-    Id, create_time, update_time, smu_id, smu_rssi, smu_status, smu_voltage, times_interval
+    Id, create_time, update_time, smu_id, smu_rssi, smu_status, smu_voltage, times_interval, smu_pow_st, smu_bat_st, smu_versions
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -45,6 +48,7 @@
       smu_voltage, times_interval)
     values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{smuId,jdbcType=VARCHAR}, #{smuRssi,jdbcType=INTEGER}, #{smuStatus,jdbcType=INTEGER}, 
+       #{smuPowSt,jdbcType=VARCHAR}, #{smuBatSt,jdbcType=VARCHAR}, #{smuVersions,jdbcType=VARCHAR},
       #{smuVoltage,jdbcType=VARCHAR}, #{timesInterval,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.Terminals">
@@ -67,6 +71,15 @@
       </if>
       <if test="smuStatus != null">
         smu_status,
+      </if>
+      <if test="smuVoltage != null">
+        smu_pow_st,
+      </if>
+      <if test="smuVoltage != null">
+        smu_bat_st,
+      </if>
+      <if test="smuVoltage != null">
+        smu_versions,
       </if>
       <if test="smuVoltage != null">
         smu_voltage,
@@ -94,6 +107,15 @@
       <if test="smuStatus != null">
         #{smuStatus,jdbcType=INTEGER},
       </if>
+       <if test="smuPowSt != null">
+        #{smuPowSt,jdbcType=VARCHAR},
+      </if>
+       <if test="smuBatSt != null">
+        #{smuBatSt,jdbcType=VARCHAR},
+      </if>
+       <if test="smuVersions != null">
+        #{smuVersions,jdbcType=VARCHAR},
+      </if>
       <if test="smuVoltage != null">
         #{smuVoltage,jdbcType=VARCHAR},
       </if>
@@ -102,6 +124,13 @@
       </if>
     </trim>
   </insert>
+  <update id="updateTimesIntervalBySumId" parameterType="com.zhongda.detection.web.model.Terminals">
+  	update terminals
+	set 
+	times_interval = #{timesInterval,jdbcType=INTEGER}
+	where
+	smu_id = #{smuId,jdbcType=VARCHAR}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.zhongda.detection.web.model.Terminals">
     update terminals
     <set>
@@ -120,6 +149,15 @@
       <if test="smuStatus != null">
         smu_status = #{smuStatus,jdbcType=INTEGER},
       </if>
+      <if test="smuPowSt != null">
+        smu_pow_st = #{smuPowSt,jdbcType=VARCHAR},
+      </if>
+       <if test="smuBatSt != null">
+        smu_bat_st = #{smuBatSt,jdbcType=VARCHAR},
+      </if>
+       <if test="smuVersions != null">
+        smu_versions = #{smuVersions,jdbcType=VARCHAR},
+      </if>
       <if test="smuVoltage != null">
         smu_voltage = #{smuVoltage,jdbcType=VARCHAR},
       </if>
@@ -136,6 +174,9 @@
       smu_id = #{smuId,jdbcType=VARCHAR},
       smu_rssi = #{smuRssi,jdbcType=INTEGER},
       smu_status = #{smuStatus,jdbcType=INTEGER},
+      smu_pow_st = #{smuPowSt,jdbcType=VARCHAR},
+      smu_bat_st = #{smuBatSt,jdbcType=VARCHAR},
+      smu_versions = #{smuVersions,jdbcType=VARCHAR},
       smu_voltage = #{smuVoltage,jdbcType=VARCHAR},
       times_interval = #{timesInterval,jdbcType=INTEGER}
     where Id = #{id,jdbcType=INTEGER}
