@@ -37,6 +37,45 @@ function lodingbgin(){
         $("#outerdiv").fadeIn("fast");//淡入显示#outerdiv及.pimg
     });
 }
+
+
+//自动刷新代码
+var today = new Date();
+var minute = today.getMinutes();
+var time;
+
+	if(minute<10  && minute>2){
+		time=12-minute;
+	}else if(minute==2){
+		time=10;
+	}else if(minute<2){
+		time=2-minute;
+	}else{
+		for(var i=1;i<11;i++){
+			minute++;
+			if(minute.toString().substring(1,2)==2){
+				time=i;
+				break;
+			}
+		}
+	}
+time = time*60*1000;
+
+var refreshbegin =setInterval("refresh()",time);
+
+function refresh(){
+	$("#selectDetectionDatas").trigger("click");
+	clearInterval(refreshbegin);
+	setInterval("fixed()",600000);
+}
+
+function fixed(){
+	$("#selectDetectionDatas").trigger("click");
+}
+//自动刷新代码结束
+
+
+
 var isTrue = true;
 $("#selectDetectionDatas").click(function(){
 	if($("#currentTime").val().length<=0){
@@ -228,6 +267,9 @@ $("#selectDetectionDatas").click(function(){
 								    yAxis : [
 							            {
 								            type : 'value',
+								            axisLabel : {
+								                formatter: '{value} mm'
+								            },
 								            splitArea : { // 分隔区域
 												show : true, // 默认不显示，属性show控制显示与否
 												areaStyle : { // 属性areaStyle（详见areaStyle）控制区域样式
