@@ -42,7 +42,6 @@ var newpassword=document.getElementById("user_userInfo.password").value;
     		  type:'post',
     	  	  url: 'rest/user/selectUserRole',
     	  	  data: {userId:user_idvalue},
-    	  	  contextType:"application/json",
     	  	  success: function(data){
     	  		       if(data){
     	  		    	$('#user_role').val(data.role);
@@ -61,7 +60,6 @@ var newpassword=document.getElementById("user_userInfo.password").value;
  		  type:'post',
  	  	  url: 'rest/user/selectUserproject',
  	  	  data: {userId:user_idvalue},
- 	  	  contextType:"application/json",
  	  	  success: function(data){
  	  		         if(data){
  	  		    	 var  asthtml="";

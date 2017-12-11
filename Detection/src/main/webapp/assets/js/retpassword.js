@@ -5,7 +5,6 @@ $('#putverification').click(function(){
 				  type: 'post',
 	    		  url: 'rest/user/retunpassword',
 	    		  data: {contect:contect},
-	    		  contextType:"application/json",
 	    		  success: function (data){
 	    			  if(data.code!=null){
 	    				  $("input[name=temporaryVerification]").val(data.code);

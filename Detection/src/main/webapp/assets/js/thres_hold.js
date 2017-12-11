@@ -230,7 +230,6 @@ var projectTypeId=document.getElementById("thres_hold_projectTypeId").value;
 		    		  type:'post',
 		    	  	  url: 'rest/threshold/showProjectThreshold',
 		    	  	  data: {projectId:projectId},
-		    	  	  contextType:"application/json",
 		    	  	  success: function(data){
 		    	  		  //循环加载返回的测点集合
 		    	  		  if(data){

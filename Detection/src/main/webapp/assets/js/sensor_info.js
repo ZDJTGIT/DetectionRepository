@@ -226,7 +226,6 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 		    		  type:'post',
 		    	  	  url: 'rest/sensorInfo/showDetectionPointSensorInfo',
 		    	  	  data: {detectionPointId:detectionPointId},
-		    	  	  contextType:"application/json",
 		    	  	  success: function(data){
 		    	  		  //循环加载返回的测点集合
 		    	  		  if(data){

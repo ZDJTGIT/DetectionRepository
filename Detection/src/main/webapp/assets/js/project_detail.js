@@ -83,7 +83,6 @@ var projectName=document.getElementById("project_detail_projectName").value;
 		        type:'post',
 			    url: 'rest/project/obtainCount',
 			    data: {projectId:projectId},
-			    contextType:"application/json",
 			    success: function(data){
 			    	 //正常测点（出现告警信息的测点为非正常测点）
 			    	 var normalDetectionPointCount = data.detectionPointCount-data.alarmDetectionCount;
@@ -132,7 +131,6 @@ var projectName=document.getElementById("project_detail_projectName").value;
 		        type:'post',
 			    url: 'rest/project/obtainProject',
 			    data: {projectId:projectId},
-			    contextType:"application/json",
 			    success: function(data){
 			    	if(data){
 				    		var nowDate = new Date().getTime();
@@ -171,7 +169,6 @@ var projectName=document.getElementById("project_detail_projectName").value;
 		        type:'post',
 			    url: 'rest/detectionPoint/showProjectDetectionPoint',
 			    data: {projectName:projectName},
-			    contextType:"application/json",
 			    success: function(data){
 			    	if(data){
 			    	  		 var string = "";
@@ -352,7 +349,6 @@ var projectName=document.getElementById("project_detail_projectName").value;
 		        type:'post',
 			    url: 'rest/sensorInfo/showProjectSensorInfo',
 			    data: {projectId:projectId},
-			    contextType:"application/json",
 			    success: function(data){
 			    	if(data){
 			    	  		 var string = "";
@@ -457,7 +453,6 @@ var projectName=document.getElementById("project_detail_projectName").value;
 		        type:'post',
 			    url: 'rest/alarm/showProjectAlarm',
 			    data: {projectId:projectId},
-			    contextType:"application/json",
 			    success: function(data){
 			    	if(data){
 			    	  		 var string = "";
@@ -565,7 +560,6 @@ var projectName=document.getElementById("project_detail_projectName").value;
 		        type:'post',
 			    url: 'rest/threshold/showProjectThreshold',
 			    data: {projectId:projectId},
-			    contextType:"application/json",
 			    success: function(data){
 			    	if(data){
 			    	  		 var string = "";
@@ -594,7 +588,6 @@ var projectName=document.getElementById("project_detail_projectName").value;
 		        type:'post',
 			    url: 'rest/image/showProjectImage',
 			    data: {projectId:projectId},
-			    contextType:"application/json",
 			    success: function(data){
 			    	if(data){
 			    	  		 var string = "";
@@ -624,7 +617,6 @@ var projectName=document.getElementById("project_detail_projectName").value;
 		        type:'post',
 			    url: 'rest/project/obtainCount',
 			    data: {projectId:projectId},
-			    contextType:"application/json",
 			    success: function(data){
 			    	 if(data){   
 				    		 $("#dd_detectionPointCont").text(data.detectionPointCount);

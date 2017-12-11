@@ -124,7 +124,6 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 	   		  type:'post',
 	   	  	  url: 'rest/detectionPoint/showSelectDetectionType',
 	   	  	  data: {detectionTypeId:detectionTypeId},
-	   	  	  contextType:"application/json",
 	   	  	  success: function(data){
 	   	  		$('#selectDetectionStatusUpdeta option').removeProp("selected");
 	   	  	    $("#selectDetectionStatusUpdeta option[value='"+data.dicId+"']").prop("selected",true);
@@ -319,7 +318,6 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 		    		  type:'post',
 		    	  	  url: 'rest/detectionPoint/showProjectDetectionPoint',
 		    	  	  data: {projectName:projectName},
-		    	  	  contextType:"application/json",
 		    	  	  success: function(data){
 		    	  		  //循环加载返回的测点集合
 		    	  		  if(data){

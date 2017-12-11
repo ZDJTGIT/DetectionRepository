@@ -177,7 +177,6 @@ var dlId=document.getElementById("project_DLID").value;
 		    		  type:'post',
 		    	  	  url: 'rest/project/showProjectType',
 		    	  	  data: {userId:dlId},
-		    	  	  contextType:"application/json",
 		    	  	  success: function(data){
 		    	  		       if(data){
 		    	  		    	var string = '<select class="md_input" id="selectProjectType" name="selectProjectType">';
@@ -199,7 +198,6 @@ var dlId=document.getElementById("project_DLID").value;
 	    	    	type:'post',
 		    	  	  url: 'rest/project/showProjectStatus',
 		    	  	  data: {userId:dlId},
-		    	  	  contextType:"application/json",
 		    	  	  success: function(data){
 		    	  		       if(data){
 		    	  		    	var string = '<select class="md_input" id="selectProjectStatus" name="selectProjectStatus">';
@@ -222,7 +220,6 @@ var dlId=document.getElementById("project_DLID").value;
 		    		   type:'post',
 			    	  	  url: 'rest/project/showUserType_selected',
 			    	  	  data: {userId:dlId},
-			    	  	  contextType:"application/json",
 			    	  	  success: function(data){
 			    	  		       if(data){
 			    	  		    	var string = '<select class="md_input" id="selectUserType_selected" name="selectUserType_selected">';
@@ -244,7 +241,6 @@ var dlId=document.getElementById("project_DLID").value;
 		    		   type:'post',
 			    	  	  url: 'rest/project/showProjectType_selected',
 			    	  	  data: {userId:dlId},
-			    	  	  contextType:"application/json",
 			    	  	  success: function(data){
 			    	  		       if(data){
 			    	  		    	var string = '<select class="md_input" id="selectProjectType_selected" name="selectProjectType_selected">';
@@ -266,7 +262,6 @@ var dlId=document.getElementById("project_DLID").value;
 		    		   type:'post',
 			    	  	  url: 'rest/project/showProjectStatus_selected',
 			    	  	  data: {userId:dlId},
-			    	  	  contextType:"application/json",
 			    	  	  success: function(data){
 			    	  		       if(data){
 			    	  		    	var string = '<select class="md_input" id="selectProjectStatus_selected" name="selectProjectStatus_selected">';
@@ -314,7 +309,6 @@ var dlId=document.getElementById("project_DLID").value;
 		   		  type:'post',
 		   	  	  url: 'rest/project/showSelectUserAndProjectType',
 		   	  	  data: {projectId:projectId,projectTypeId:projectTypeId},
-		   	  	  contextType:"application/json",
 		   	  	  success: function(data){
 		   	  	    $("#selectProjectType_selected option[value='"+data.sysDictionary.dicId+"']").prop("selected",true);
 		   	    	$("#selectUserType_selected option[value='"+data.userId+"']").prop("selected",true);
@@ -324,7 +318,6 @@ var dlId=document.getElementById("project_DLID").value;
 		   		  type:'post',
 		   	  	  url: 'rest/project/showSelectProjectStatus',
 		   	  	  data: {projectStatusString:projectStatusString},
-		   	  	  contextType:"application/json",
 		   	  	  success: function(data){
 		   	  	    $("#selectProjectType_selected option[value='"+data.sysDictionary.dicId+"']").attr("selected","selected");
 		   	    	$("#selectUserType_selected option[value='"+data.userId+"']").attr("selected","selected");
@@ -340,7 +333,6 @@ var dlId=document.getElementById("project_DLID").value;
 		   		  type:'post',
 		   	  	  url: 'rest/project/obtainProject',
 		   	  	  data: {projectId:tr_projectId},
-		   	  	  contextType:"application/json",
 		   	  	  success: function(data){
 		   	  	    var hreftt='rest/project_detail/'+tr_projectId+":"+data.projectName;
 		   	  	  	window.location.href='rest/project_detail/'+tr_projectId+":"+data.projectName;

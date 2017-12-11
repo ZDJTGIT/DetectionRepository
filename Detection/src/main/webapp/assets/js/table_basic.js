@@ -27,7 +27,6 @@ table_basic_datatable = $('#mytable').dataTable({
 	   		  type:'post',
 	   	  	  url: 'rest/user/showSelectUserRole',
 	   	  	  data: {userId:dlId,userName:name},
-	   	  	  contextType:"application/json",
 	   	  	  success: function(data){
 	   	  		document.getElementById("userRole")[data.roleid].selected=true;
 	   	  	  }
@@ -44,7 +43,6 @@ table_basic_datatable = $('#mytable').dataTable({
     		   type:'post',
 	    	  	  url: 'rest/user/changUserStatus',
 	    	  	  data: {userId:userId,status:status},
-	    	  	  contextType:"application/json",
 	    	  	  success: function(data){
 	    	  		       if(data){
 	    	  		    	 $("table tr:eq(" + b + ") td:eq(8)").text(data.status);
@@ -91,7 +89,6 @@ table_basic_datatable = $('#mytable').dataTable({
    		  type:'post',
    	  	  url: 'rest/user/showUserRole',
    	  	  data: {userId:dlId},
-   	  	  contextType:"application/json",
    	  	  success: function(data){
    	  		       if(data){
    	  		    	var strings = '<select class="md_input" id="userRoles" name="userRoles">';   
@@ -120,7 +117,6 @@ table_basic_datatable = $('#mytable').dataTable({
 				  type:'post',
 	    	  	  url: 'rest/user/keywordSearch',
 	    	  	  data: {keyword:keyword,userId:dlId},
-	    	  	  contextType:"application/json",
 				  success : function(data) {
 					if (data) {
 						$("#mytable tbody").html("");
