@@ -29,6 +29,21 @@ public interface UserService {
 	 * @return
 	 */
 	User selectByUsername(String username);
+	
+	/**
+	 * 根据Id查用户
+	 * @param userId
+	 * @return
+	 */
+	User selectByPrimaryKey(Integer userId);
+	
+	/**
+	 * 根据用户名和ID查用户
+	 * @param username
+	 * @param userId
+	 * @return
+	 */
+	User selectByPrimaryKeyAndUserName(String userName, Integer userId);
 
 	/**
 	 * 根据用户名模糊查询用户
@@ -87,13 +102,6 @@ public interface UserService {
 	 * @return
 	 */
 	boolean deleteUser(String name);
-
-	/**
-	 * 根据Id查用户
-	 * @param userId
-	 * @return
-	 */
-	User selectByPrimaryKey(Integer userId);
 
 	/**
 	 * 根据邮箱号查用户

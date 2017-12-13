@@ -56,6 +56,15 @@
     from user
     where user_name = #{userName,jdbcType=VARCHAR}
   </select>
+  <select id="selectByPrimaryKeyAndUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select
+    <include refid="Base_Column_List" />
+    from user
+    where 
+    user_name = ${_parameter.param1}
+    or
+    user_id = ${_parameter.param2}
+  </select>
    <select id="selectByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

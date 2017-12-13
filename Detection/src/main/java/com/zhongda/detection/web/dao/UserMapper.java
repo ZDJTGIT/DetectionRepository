@@ -76,4 +76,12 @@ public interface UserMapper {
 	 * @return
 	 */
 	int selectUserRoleByUserId(Integer userId);
+	
+	/**
+	 * 根据用户名和ID查用户
+	 * @param username
+	 * @param userId
+	 * @return
+	 */
+	User selectByPrimaryKeyAndUserName(String userName, Integer userId);
 }

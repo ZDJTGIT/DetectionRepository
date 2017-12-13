@@ -129,4 +129,9 @@ public class UserServiceImpl implements UserService {
 		return userMapper.selectUserRoleByUserId(userId);
 	}
 
+	@Override
+	public User selectByPrimaryKeyAndUserName(String userName, Integer userId) {
+		return userMapper.selectByPrimaryKeyAndUserName(userName, userId);
+	}
+
 }

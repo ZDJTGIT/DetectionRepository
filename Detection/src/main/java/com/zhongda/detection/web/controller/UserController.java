@@ -491,6 +491,9 @@ public class UserController {
 			case 9:
 				model.put("roleid", "7");
 				break;
+			case 10:
+				model.put("roleid", "8");
+				break;
 			}
 			return model;
 		} else {
@@ -516,6 +519,9 @@ public class UserController {
 				break;
 			case 9:
 				model.put("roleid", "6");
+				break;
+			case 10:
+				model.put("roleid", "7");
 				break;
 			}
 			return model;
@@ -747,25 +753,20 @@ public class UserController {
 	@RequestMapping(value = "/mdOnlyUserName", method = RequestMethod.POST)
 	public void mdOnlyUserName(String userName, Integer userId,
 			HttpServletResponse response) {
-		if (userName.equals(userService.selectByPrimaryKey(userId)
-				.getUserName())) {
-			try {
-				response.getWriter().print(true);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
 			User user = userService.selectByUsername(userName);
 			try {
-				if (user == null) {
+			if(null == user){
 					response.getWriter().print(true);
+			}else{
+				if (user.getUserId()==userId) {
+						response.getWriter().print(true);
 				} else {
-					response.getWriter().print(false);
+						response.getWriter().print(false);
 				}
+			}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
 	}
 
 	/**
@@ -776,8 +777,7 @@ public class UserController {
 	 * @param response
 	 */
 	@RequestMapping(value = "/mdOnlyPhone", method = RequestMethod.POST)
-	public void mdOnlyPhone(String mdphone, Integer userId,
-			HttpServletResponse response) {
+	public void mdOnlyPhone(String mdphone, Integer userId, HttpServletResponse response) {
 		if (mdphone.equals(userService.selectByPrimaryKey(userId).getPhone())) {
 			try {
 				response.getWriter().print(true);
