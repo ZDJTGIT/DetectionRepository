@@ -150,9 +150,15 @@ table_basic_datatable = $('#mytable').dataTable({
 	    
 		//确定修改（修改操作稍后改成看信息修改）
 		$("#sureMdy").click(function() {
-			if(!$('#form_modifyuser').valid()){
-				return false;
+			
+			var cb = $("#form_modifyuser").validate().form();
+			for(var i =0 ; i<1 ; i++){
+				cb = $("#form_modifyuser").validate().form();
+				alert(cb);
 			}
+			if(!$("#form_modifyuser").validate().form()){
+				return;
+				} 
 			        var t=b;
 			        var role = $("#userRole option:selected").val();
 					var idvalue = $('#mdid').val();

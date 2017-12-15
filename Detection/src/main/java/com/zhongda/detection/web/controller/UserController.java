@@ -755,14 +755,10 @@ public class UserController {
 			HttpServletResponse response) {
 			User user = userService.selectByUsername(userName);
 			try {
-			if(null == user){
+			if (user.getUserId().equals(userId)) {
 					response.getWriter().print(true);
-			}else{
-				if (user.getUserId()==userId) {
-						response.getWriter().print(true);
-				} else {
-						response.getWriter().print(false);
-				}
+			}else {
+					response.getWriter().print(false);
 			}
 			} catch (IOException e) {
 				e.printStackTrace();
