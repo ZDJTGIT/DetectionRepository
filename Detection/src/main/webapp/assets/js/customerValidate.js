@@ -686,6 +686,12 @@ $('#form_adduser').validate({
 				email : "请输入一个正确的邮箱",
 				remote: "邮箱号已经被注册"	
 			}
+		},
+		
+		success:{
+			userName : {
+				remote:"asd"
+			}
 		}
 		
 	});
@@ -924,7 +930,6 @@ $('#from_modifyusermassage').validate({
 	},
 	
 	messages : {
-	
 		self_name : {
 			required : "请输入用户名",
 			minlength:"用户名为2-15个字符",
@@ -953,8 +958,8 @@ $('#from_modifyusermassage').validate({
 			email : "请输入一个正确的邮箱",
 			remote: "电子邮箱已经被注册"
 		}
-		
 	}
+	
 	
   });
 

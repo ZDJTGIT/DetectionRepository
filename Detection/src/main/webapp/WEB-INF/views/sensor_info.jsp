@@ -91,22 +91,22 @@
 						      </div>
 						      <div class="modal-body">
 							    
-							    <label class="md_lable" for="sensorType_addSensorInfo">传感器类型:&nbsp;&nbsp;</label>
+							    <label class="md_lable" for="sensorType_addSensorInfo">传感器类型:</label>
 								<input class="md_input" type="text" id="sensorType_addSensorInfo" name="sensorType_addSensorInfo"><br><br>
 								
-							    <label class="md_lable" for="sensorId_addSensorInfo">传感器&nbsp;I&nbsp;&nbsp;D:&nbsp;&nbsp;</label>
+							    <label class="md_lable" for="sensorId_addSensorInfo">传感器&nbsp;I&nbsp;&nbsp;D:</label>
 								<input class="md_input" type="text" id="sensorId_addSensorInfo" name="sensorId_addSensorInfo"><br><br>
 								
-								<label class="md_lable" for="sensorModel_addSensorInfo">传感器型号:&nbsp;&nbsp;</label>
+								<label class="md_lable" for="sensorModel_addSensorInfo">传感器型号:</label>
 								<input class="md_input" type="text" id="sensorModel_addSensorInfo" name="sensorModel_addSensorInfo"><br><br>
 								
-								<label class="md_lable" for="sensorDepth_addSensorInfo">传感器深度:&nbsp;&nbsp;</label>
+								<label class="md_lable" for="sensorDepth_addSensorInfo">传感器深度:</label>
 								<input class="md_input" type="text" id="sensorDepth_addSensorInfo" name="sensorDepth_addSensorInfo"><br><br>
 								
-								<label class="md_lable" for="terminalsInfoNum_addSensorInfo">采集器编号:&nbsp;&nbsp;</label>
+								<label class="md_lable" for="terminalsInfoNum_addSensorInfo">采集器编号:</label>
 								<input class="md_input" type="text" id="terminalsInfoNum_addSensorInfo" name="terminalsInfoNum_addSensorInfo"><br><br>
 								
-								<label class="md_lable" for="terminalsInfoAisle_addSensorInfo">采集器通道:&nbsp;&nbsp;</label>
+								<label class="md_lable" for="terminalsInfoAisle_addSensorInfo">采集器通道:</label>
 								<input class="md_input" type="text" id="terminalsInfoAisle_addSensorInfo" name="terminalsInfoAisle_addSensorInfo"><br>
 						      </div>
 						      <div class="modal-footer">
@@ -132,22 +132,22 @@
 						      
 							    <input class="md_input" type="text" style="display:none" id="detectionPointId_updetaSensorInfo" name="detectionPointId_updetaSensorInfo">
 							    
-							    <label class="md_lable" for="sensorType_updetaSensorInfo">传感器类型:&nbsp;&nbsp;</label>
+							    <label class="md_lable" for="sensorType_updetaSensorInfo">传感器类型:</label>
 								<input class="md_input" type="text" id="sensorType_updetaSensorInfo" name="sensorType_updetaSensorInfo"><br><br>
 							    
-							    <label class="md_lable" for="sensorId_updetaSensorInfo">传感器&nbsp;I&nbsp;&nbsp;D:&nbsp;&nbsp;</label>
+							    <label class="md_lable" for="sensorId_updetaSensorInfo">传感器&nbsp;I&nbsp;&nbsp;D:</label>
 								<input class="md_input" type="text" id="sensorId_updetaSensorInfo" name="sensorId_updetaSensorInfo"><br><br>
 							    
-								<label class="md_lable" for="sensorModel_updetaSensorInfo">传感器型号:&nbsp;&nbsp;</label>
+								<label class="md_lable" for="sensorModel_updetaSensorInfo">传感器型号:</label>
 								<input class="md_input" type="text" id="sensorModel_updetaSensorInfo" name="sensorModel_updetaSensorInfo"><br><br>
 								
-								<label class="md_lable" for="sensorDepth_updetaSensorInfo">传感器深度:&nbsp;&nbsp;</label>
+								<label class="md_lable" for="sensorDepth_updetaSensorInfo">传感器深度:</label>
 								<input class="md_input" type="text" id="sensorDepth_updetaSensorInfo" name="sensorDepth_updetaSensorInfo"><br><br>
 								
-								<label class="md_lable" for="terminalsInfoNum_updetaSensorInfo">采集器编号:&nbsp;&nbsp;</label>
+								<label class="md_lable" for="terminalsInfoNum_updetaSensorInfo">采集器编号:</label>
 								<input class="md_input" type="text" id="terminalsInfoNum_updetaSensorInfo" name="terminalsInfoNum_updetaSensorInfo"><br><br>
 								
-								<label class="md_lable" for="terminalsInfoAisle_updetaSensorInfo">采集器通道:&nbsp;&nbsp;</label>
+								<label class="md_lable" for="terminalsInfoAisle_updetaSensorInfo">采集器通道:</label>
 								<input class="md_input" type="text" id="terminalsInfoAisle_updetaSensorInfo" name="terminalsInfoAisle_updetaSensorInfo"><br>
 						      </div>
 						      <div class="modal-footer">
