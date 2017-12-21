@@ -26,8 +26,6 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.codec.Base64;
@@ -54,7 +52,6 @@ import com.zhongda.detection.web.model.OperationLog;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.Role;
 import com.zhongda.detection.web.model.User;
-import com.zhongda.detection.web.security.PermissionSign;
 import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.AlarmLinkmanService;
 import com.zhongda.detection.web.service.OperationLogService;
@@ -206,30 +203,6 @@ public class UserController {
 		//插入一条操作日志	
 		operationLogService.insertOperationLog(new OperationLog(authUserInfo.getUserId(),authUserInfo.getUserName(),"退出登录","退出",new Date()));
 		return "login";
-	}
-
-	/**
-	 * 基于角色 标识的权限控制案例
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/admin")
-	@ResponseBody
-	@RequiresRoles(value = RoleSign.ADMIN)
-	public String admin() {
-		return "拥有admin角色,能访问";
-	}
-
-	/**
-	 * 基于权限标识的权限控制案例
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/create")
-	@ResponseBody
-	@RequiresPermissions(value = PermissionSign.USER_CREATE)
-	public String create() {
-		return "拥有user:create权限,能访问";
 	}
 
 	/**

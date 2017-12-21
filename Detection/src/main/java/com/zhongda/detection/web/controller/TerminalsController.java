@@ -53,9 +53,9 @@ public class TerminalsController {
 	 */
 	@RequestMapping(value = "/addTerminals", method = RequestMethod.POST)
 	@ResponseBody
-	public Result addTerminals(@RequestBody TerminalsInfo terminalsInfo,HttpServletRequest request) {
+	public Result<Terminals> addTerminals(@RequestBody TerminalsInfo terminalsInfo,HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
-		Result result = new Result();
+		Result<Terminals> result = new Result<Terminals>();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
 			Terminals terminals =terminalsService.selectBySmuId(terminalsInfo.getSmuId());

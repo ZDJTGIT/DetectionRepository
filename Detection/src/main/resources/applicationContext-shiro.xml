@@ -6,14 +6,21 @@
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <description>apache shiro配置</description>
-
+	<!-- web.xml中shiro的filter对应的bean Shiro的web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
+        <!-- loginUrl认证提交地址，如果没有认证将会请求此地址进行认证,请求此地址将由formAuthenticationFilter进行表单认证 -->
         <property name="loginUrl" value="/rest/page/login"/>
+        <!-- 认证成功统一跳转到/rest/index，建议不配置，默认情况下，shiro认证成功后自动跳转上一个请求路径 -->
         <property name="successUrl" value="/rest/index"/>
+        <!-- 通过unauthorizedUrl 指定没有权限操作时的跳转页面 -->
         <property name="unauthorizedUrl" value="/rest/page/401"/>
+        <!-- 过滤器链定义，从上向下执行，一般将/**放在最下边 -->
         <property name="filterChainDefinitions">
             <value>
+            	<!-- 退出拦截，请求logout.action执行退出操作 shiro自动清除Session-->  
+                <!-- /rest/user/logout = logout -->
+                <!-- 无权访问页面 anon表示可以匿名访问 -->
                 <!-- 静态资源允许访问 -->
                 /app/** = anon
                 /assets/** = anon
@@ -25,6 +32,8 @@
                 /rest/user/retunpassword = anon
                 /rest/user/verIsQqual = anon
                 /rest/user/selfChangPassword = anon
+                <!-- perms[xx] 表示有xx权限才可以访问 -->  
+                <!-- /rest/user/userList = perms[user:query:*] -->
                 <!-- 其他资源需要认证 -->
                 /** = authc
             </value>

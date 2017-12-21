@@ -286,7 +286,7 @@ public class CommonController {
 	public String graph_echarts_rainwater(HttpServletRequest request) {
 		return "graph_echarts_rainfall";
 	}
-
+	
 	/**
 	 * 获取验证码（Gif版本）
 	 */

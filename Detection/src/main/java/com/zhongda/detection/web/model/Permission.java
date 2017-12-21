@@ -1,7 +1,11 @@
 package com.zhongda.detection.web.model;
 
+import java.util.List;
+
 public class Permission {
     private Integer permissionId;
+
+    private Integer permissionParentId;
 
     private String permissionName;
 
@@ -10,13 +14,25 @@ public class Permission {
     private String permissionSign;
 
     private String permissionDescription;
-
+    
+    private String permissionParentName;
+    
+    private List<Role> roleList;
+    
     public Integer getPermissionId() {
         return permissionId;
     }
 
     public void setPermissionId(Integer permissionId) {
         this.permissionId = permissionId;
+    }
+
+    public Integer getPermissionParentId() {
+        return permissionParentId;
+    }
+
+    public void setPermissionParentId(Integer permissionParentId) {
+        this.permissionParentId = permissionParentId;
     }
 
     public String getPermissionName() {
@@ -50,4 +66,21 @@ public class Permission {
     public void setPermissionDescription(String permissionDescription) {
         this.permissionDescription = permissionDescription == null ? null : permissionDescription.trim();
     }
+
+	public String getPermissionParentName() {
+		return permissionParentName;
+	}
+
+	public void setPermissionParentName(String permissionParentName) {
+		this.permissionParentName = permissionParentName == null ? null : permissionParentName.trim();
+	}
+
+	public List<Role> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<Role> roleList) {
+		this.roleList = roleList;
+	}
+	
 }

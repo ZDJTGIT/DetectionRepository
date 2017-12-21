@@ -63,6 +63,8 @@
 .md_lable{
 	width: 30%; 
 	margin-left: 5px;
+	height:34px;
+	line-height:34px;
 }
 
 table, td, th {
@@ -78,4 +80,9 @@ table, td, th {
   width:expression(this.width>300?"300px":this.width);  
   max-height:172px;  
   height:expression(this.height>172?"172px":this.height);
+}
+
+.myInputClass{
+	width: 82%; 
+	border-radius: 8px;
 }

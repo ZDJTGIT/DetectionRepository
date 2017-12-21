@@ -124,9 +124,6 @@
 							</ul></li>
 
 					</shiro:hasPermission>
-
-
-
 					 <shiro:hasPermission name="project:manager:*">
 						<li><a href="javascript:;" class="queryproject"> <i
 								class="fa fa fa-bar-chart-o"></i><span class="nav-label">统计图表</span>
@@ -175,7 +172,7 @@
 							</li>
 						</ul>
 					</li>
-					<shiro:hasAnyRoles name="superAdmin, admin">
+					<shiro:hasPermission name="user:manager:*">
 						<li>
 							<a href="javascript:;"><i class="fa fa-table"></i>
 								<span class="nav-label">用户管理</span><span class="fa arrow"></span>
@@ -195,7 +192,7 @@
 								</li>
 							</ul>
 						</li>
-					</shiro:hasAnyRoles>
+					</shiro:hasPermission>
 					<li>
 						<a href="javascript:;">
 							<i class="fa fa-tasks"></i>
@@ -223,6 +220,22 @@
 							</li>
 						</ul>
 					</li>
+					 <shiro:hasPermission name="role:manager:*">
+						<li>
+							<a class="J_menuItem" href="rest/role/roleManager" name="角色管理">
+								<i class="fa fa-gears"></i>
+								<span class="nav-label">角色管理</span>
+							</a>						
+						</li>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="permission:manager:*">
+						<li>
+							<a class="J_menuItem" href="rest/permission/permissionManager" name="权限管理">
+								<i class="fa fa-gear"></i>
+								<span class="nav-label">权限管理</span>
+							</a>						
+						</li>
+					</shiro:hasPermission> 
 				</ul>
 			</div>
 		</nav>

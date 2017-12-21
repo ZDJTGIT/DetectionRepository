@@ -36,8 +36,8 @@ public class ImgaeController {
 	 */
 	@RequestMapping(value="/uploadSingleImage", method = RequestMethod.POST)
 	@ResponseBody
-	public Result uploadSingleImage(@RequestParam(value = "file") MultipartFile file, Integer imageId){	
-		Result result = imageService.uploadSingleImage(file, imageId);
+	public Result<String> uploadSingleImage(@RequestParam(value = "file") MultipartFile file, Integer imageId){	
+		Result<String> result = imageService.uploadSingleImage(file, imageId);
 		return result;
 	}
 	
@@ -49,8 +49,8 @@ public class ImgaeController {
 	 */
 	@RequestMapping(value="/uploadMultipleImage", method = RequestMethod.POST)
 	@ResponseBody
-	public Result uploadMultipleImage(@RequestParam(value = "file") MultipartFile file, Integer imageId){
-		Result result = imageService.uploadMultipleImage(file, imageId);
+	public Result<String> uploadMultipleImage(@RequestParam(value = "file") MultipartFile file, Integer imageId){
+		Result<String> result = imageService.uploadMultipleImage(file, imageId);
 		return result;
 	}
 	

@@ -50,7 +50,7 @@ public interface ImageService {
 	 * @param file 图片文件
 	 * @return 返回上传结果
 	 */
-	Result uploadImage(MultipartFile file);
+	Result<String> uploadImage(MultipartFile file);
 	
 	/**
 	 * 单个图片上传至服务器，同时更新数据库的url路径
@@ -58,7 +58,7 @@ public interface ImageService {
 	 * @param imageId 数据库对应的图片id
 	 * @return
 	 */
-	Result uploadSingleImage(MultipartFile file, Integer imageId);
+	Result<String> uploadSingleImage(MultipartFile file, Integer imageId);
 	
 	/**
 	 * 多个图片上传至服务器，同时更新数据库的url路径
@@ -66,7 +66,7 @@ public interface ImageService {
 	 * @param imageId 数据库对应的图片id
 	 * @return
 	 */
-	Result uploadMultipleImage(MultipartFile file, Integer imageId);
+	Result<String> uploadMultipleImage(MultipartFile file, Integer imageId);
 	
 	/**
 	 * 更新物理图的Url路径
@@ -80,7 +80,7 @@ public interface ImageService {
 	 * @param projectId
 	 * @return
 	 */
-	Result delateImageByProjectId(Integer projectId);
+	Result<String> delateImageByProjectId(Integer projectId);
 	
 	/**
 	 * 通过项目ID删除项目下所有图片

@@ -39,7 +39,6 @@ import com.zhongda.detection.web.service.AlarmLinkmanService;
 import com.zhongda.detection.web.service.DetectionPointService;
 import com.zhongda.detection.web.service.ImageService;
 import com.zhongda.detection.web.service.LaserDataService;
-import com.zhongda.detection.web.service.MessageService;
 import com.zhongda.detection.web.service.OperationLogService;
 import com.zhongda.detection.web.service.ProjectService;
 import com.zhongda.detection.web.service.RoleService;
@@ -69,9 +68,6 @@ public class ProjectController {
 
 	@Autowired
 	private ProjectService projectService;
-
-	@Autowired
-	private MessageService messageService;
 
 	@Autowired
 	private ImageService imageService;

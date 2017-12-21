@@ -5,14 +5,30 @@ import java.util.List;
 import com.zhongda.detection.web.model.Role;
 
 public interface RoleMapper {
+	
+	/**
+	 * 删除一个角色根据角色id
+	 * @param roleId 需删除角色的id
+	 * @return
+	 */
     int deleteByPrimaryKey(Integer roleId);
 
     int insert(Role record);
-
+    
+    /**
+     * 插入一个角色
+     * @param record 需插入的角色
+     * @return
+     */
     int insertSelective(Role record);
 
     Role selectByPrimaryKey(Integer roleId);
-
+    
+    /**
+     * 修改角色信息
+     * @param record 需修改的角色
+     * @return
+     */
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
@@ -37,4 +53,18 @@ public interface RoleMapper {
      * @return
      */
 	List<Role> selectLessRolesByUserId(Integer userId);
+	
+	/**
+	 * 根据角色名称获取角色
+	 * @param roleName 角色名称
+	 * @return
+	 */
+	Role selectRoleByRoleName(String roleName);
+	
+	/**
+	 * 根据角色标识获取角色
+	 * @param roleSign 角色标识
+	 * @return
+	 */
+	Role selectRoleByRoleSign(String roleSign);
 }

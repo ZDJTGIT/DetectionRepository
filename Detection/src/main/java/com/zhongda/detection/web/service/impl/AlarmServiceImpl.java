@@ -54,9 +54,9 @@ public class AlarmServiceImpl implements AlarmService{
 	}
 
 	@Override
-	public Result updateAlarmStatus(Integer alarmId) {
+	public Result<Alarm> updateAlarmStatus(Integer alarmId) {
 		int index = alarmMapper.updateAlarmStatus(alarmId);
-		Result result = new Result();
+		Result<Alarm> result = new Result<Alarm>();
 		if(index > 0){
 			result.setCode(Result.SUCCESS);
 			result.setMsg("修改状态成功");
@@ -68,10 +68,10 @@ public class AlarmServiceImpl implements AlarmService{
 	}
 
 	@Override
-	public Result updateBatchAlarmStatus(String alarmIds) {
+	public Result<Alarm> updateBatchAlarmStatus(String alarmIds) {
 		List<Integer> list = new ArrayList<Integer>();
 		String[] alarmIdArray = alarmIds.split(",");
-		Result result = new Result();
+		Result<Alarm> result = new Result<Alarm>();
 		for (String alarmId : alarmIdArray) {
 			if(null != alarmId && !alarmId.trim().equals("")){
 				list.add(Integer.parseInt(alarmId));
@@ -89,9 +89,9 @@ public class AlarmServiceImpl implements AlarmService{
 	}
 
 	@Override
-	public Result updateBatchAlarmStatusByQuery(Alarm alarm) {
+	public Result<Alarm> updateBatchAlarmStatusByQuery(Alarm alarm) {
 		int index = alarmMapper.updateBatchAlarmStatusByQuery(alarm);
-		Result result = new Result();
+		Result<Alarm> result = new Result<Alarm>();
 		if(index > 0){
 			result.setCode(Result.SUCCESS);
 			result.setMsg("修改状态成功");

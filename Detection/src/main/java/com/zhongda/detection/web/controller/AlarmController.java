@@ -134,8 +134,8 @@ public class AlarmController {
 	 */
 	@RequestMapping("/alarmConfirm")
 	@ResponseBody
-	public Result alarmConfirm(Integer alarmId) {
-		Result result = alarmService.updateAlarmStatus(alarmId);
+	public Result<Alarm> alarmConfirm(Integer alarmId) {
+		Result<Alarm> result = alarmService.updateAlarmStatus(alarmId);
 		return result;
 	}
 	
@@ -146,8 +146,8 @@ public class AlarmController {
 	 */
 	@RequestMapping("/alarmBatchConfirm")
 	@ResponseBody
-	public Result alarmBatchConfirm(String alarmIds) {
-		Result result = alarmService.updateBatchAlarmStatus(alarmIds);
+	public Result<Alarm> alarmBatchConfirm(String alarmIds) {
+		Result<Alarm> result = alarmService.updateBatchAlarmStatus(alarmIds);
 		return result;
 	}
 	
@@ -159,7 +159,7 @@ public class AlarmController {
 	 */
 	@RequestMapping("/alarmBatchConfirmByQuery")
 	@ResponseBody
-	public Result alarmBatchConfirmByQuery(@RequestBody Alarm alarm, HttpServletRequest request) {
+	public Result<Alarm> alarmBatchConfirmByQuery(@RequestBody Alarm alarm, HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
 		if (!subject.hasRole(RoleSign.ADMIN)
 				&& !subject.hasRole(RoleSign.SUPER_ADMIN)) {
@@ -167,7 +167,7 @@ public class AlarmController {
 			User user = (User) WebUtils.getSessionAttribute(request, "userInfo");
 			alarm.setUserId(user.getUserId());
 		}		
-		Result result = alarmService.updateBatchAlarmStatusByQuery(alarm);
+		Result<Alarm> result = alarmService.updateBatchAlarmStatusByQuery(alarm);
 		return result;
 	}
 }

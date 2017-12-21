@@ -6,8 +6,10 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +17,7 @@ import com.zhongda.detection.core.utils.JschRemote;
 import com.zhongda.detection.web.dao.ImageMapper;
 import com.zhongda.detection.web.model.Image;
 import com.zhongda.detection.web.model.Result;
+import com.zhongda.detection.web.security.PermissionSign;
 import com.zhongda.detection.web.service.ImageService;
 
 @Service
@@ -75,8 +78,8 @@ public class ImageServiceImpl implements ImageService {
 	}
 
 	@Override
-	public Result uploadImage(MultipartFile file) {
-		Result result = new Result();
+	public Result<String> uploadImage(MultipartFile file) {
+		Result<String> result = new Result<String>();
 		try {			
 	        String fileName = file.getOriginalFilename();
 	        // 新的图片名称
@@ -121,27 +124,36 @@ public class ImageServiceImpl implements ImageService {
 	}
 
 	@Override
-	public Result uploadSingleImage(MultipartFile file, Integer imageId) {
-		//上传图片至服务器
-		Result result = uploadImage(file);
-		//删除服务器上的图片
-		Image image = imageMapper.selectByPrimaryKey(imageId);
-		if(null != image && null != image.getHeatImageUrl()){
-			removeImage(image.getHeatImageUrl());
-		}	
-		//如果上传成功，则更新图片路径Url
-		if(result.getCode() == Result.SUCCESS){
-			image = new Image(imageId);
-			image.setHeatImageUrl(result.getData().toString());
-			imageMapper.updateByPrimaryKeySelective(image);
+	public Result<String> uploadSingleImage(MultipartFile file, Integer imageId) {
+		Result<String> result = null;
+		Subject subject = SecurityUtils.getSubject();
+		//判断当前登录用户有上传图片的权限
+		if (subject.isPermitted(PermissionSign.IMAGE_UPLOAD)) {
+			//上传图片至服务器
+			result = uploadImage(file);
+			//删除服务器上的图片
+			Image image = imageMapper.selectByPrimaryKey(imageId);
+			if(null != image && null != image.getHeatImageUrl()){
+				removeImage(image.getHeatImageUrl());
+			}	
+			//如果上传成功，则更新图片路径Url
+			if(result.getCode() == Result.SUCCESS){
+				image = new Image(imageId);
+				image.setHeatImageUrl(result.getData().toString());
+				imageMapper.updateByPrimaryKeySelective(image);
+			}
+		}else{
+			result =new Result<String>();
+			result.setCode(Result.FAILURE);
+			result.setMsg("抱歉，你没有上传图片的权限，如需上传，请联系管理员");
 		}
 		return result;
 	}
 
 	@Override
-	public Result uploadMultipleImage(MultipartFile file, Integer imageId) {
+	public Result<String> uploadMultipleImage(MultipartFile file, Integer imageId) {
 		//上传图片至服务器
-		Result result = uploadImage(file);
+		Result<String> result = uploadImage(file);
 		//如果上传成功，则将该图片路径Url添加至缓存
 		if(result.getCode() == Result.SUCCESS){
 			multipleImageCache = cacheManager.getCache("multipleImageCache");
@@ -185,8 +197,8 @@ public class ImageServiceImpl implements ImageService {
 	}
 
 	@Override
-	public Result delateImageByProjectId(Integer projectId) {
-		Result result = new Result();
+	public Result<String> delateImageByProjectId(Integer projectId) {
+		Result<String> result = new Result<String>();
 		List<Image>  imageList = imageMapper.selectImageByProjectId(projectId);
 		for(Image image :imageList){
 			if(null != image){

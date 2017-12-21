@@ -5,40 +5,28 @@ package com.zhongda.detection.web.security;
  * 与 role_info 角色表中的 role_sign 字段 相对应 <br>
  * 使用:
  *
- * <pre>
- * &#064;RequiresRoles(value = RoleSign.ADMIN)
- * public String admin() {
- *     return &quot;拥有admin角色,能访问&quot;;
- * }
- * </pre>
- *
  **/
 public class RoleSign {
-
-    /**
-     * 普通后台管理员 标识
-     */
-    public static final String ADMIN = "admin";
-    
-    /**
-     * 超级后台管理员 标识
+	
+	/**
+     * 超级管理员角色 标识
      */
     public static final String SUPER_ADMIN = "superAdmin";
-
+    
     /**
-     * 客户经理 标识
+     * 普通管理员角色 标识
      */
-    public static final String CONSULTANT = "consultant";
-
+    public static final String COMMON_ADMIN = "commonAdmin";
+    
     /**
-     * VIP客户 标识
+     * 管理员角色 标识
      */
-    public static final String VIP_USER = "vip_user";
-
+    public static final String ADMIN = "admin";
+        
     /**
-     * 商家 标识
+     * 地铁用户角色 标识
      */
-    public static final String MERCHANT = "merchant";
+    public static final String SUBWAYRAIL = "subwayRail";
 
     /**
      * 添加更多...

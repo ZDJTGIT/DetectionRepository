@@ -39,6 +39,18 @@
 		<include refid="Base_Column_List" />
 		from role
 	</select>
+	<select id="selectRoleByRoleName" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from role
+		where role_name = #{roleName,jdbcType=VARCHAR}
+	</select>
+	<select id="selectRoleByRoleSign" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from role
+		where role_sign = #{roleSign,jdbcType=VARCHAR}
+	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from role
 		where role_id = #{roleId,jdbcType=INTEGER}
@@ -50,7 +62,7 @@
 		#{roleSign,jdbcType=VARCHAR},
 		#{roleDescription,jdbcType=VARCHAR})
 	</insert>
-	<insert id="insertSelective" parameterType="com.zhongda.detection.web.model.Role">
+	<insert id="insertSelective" parameterType="com.zhongda.detection.web.model.Role" useGeneratedKeys="true" keyProperty="roleId">
 		insert into role
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="roleId != null">
