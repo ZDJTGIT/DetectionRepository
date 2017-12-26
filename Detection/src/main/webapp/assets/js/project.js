@@ -556,7 +556,7 @@ var dlId=document.getElementById("project_DLID").value;
 										'</td>'+
 										
 										'<td class="project-status" style="width:70px">'+
-											'<a href="rest/detectionPoint/'+data.projectTypeId+':'+data.projectName+'" class="J_menuItem" name="测点">'+
+											'<a href="rest/detectionPoint/'+data.projectTypeId+':'+data.projectName+':'+data.projectId+'" class="J_menuItem" name="测点">'+
 												 '测点'+
 											'</a>'+
 										'</td>'+
@@ -732,7 +732,7 @@ var dlId=document.getElementById("project_DLID").value;
 																	'<td class="project-title" style="width:20px">'+
 																	'</td>'+
 																	'<td class="project-status" style="width:70px">'+
-																		'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+'" class="J_menuItem" name="测点">测点</a>'+
+																		'<a href="rest/detectionPoint/'+item.projectTypeId+':'+item.projectName+':'+item.projectId+'" class="J_menuItem" name="测点">测点</a>'+
 																	'</td>'+
 																	'<td class="project-status" style="width:70px">'+
 																		'<a href="rest/terminals/'+item.projectTypeId+':'+item.projectName+':'+item.projectId+'" class="J_menuItem" name="采集器">采集器</a>'+

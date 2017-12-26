@@ -178,6 +178,7 @@
 						</div>
 						<input class="md_input" style="display:none" id="detectionPoint_projectTypeId" name="detectionPoint_projectTypeId" value="${projectTypeId}">
 						<input class="md_input" style="display:none" id="detectionPoint_projectName" name="detectionPoint_projectName" value="${projectName}">
+						<input class="md_input" style="display:none" id="detectionPoint_projectId" name="detectionPoint_projectId" value="${projectId}">
 					</div>
 				</div>
 			</div>

@@ -49,9 +49,8 @@ public class SensorInfoServiceImpl implements SensorInfoService {
 	}
 
 	@Override
-	public SensorInfo selectBySensorIdAndSensorType(String sensorId,
-			String sensorType) {
-		return sensorInfoMapper.selectBySensorIdAndSensorType(sensorId, sensorType);
+	public SensorInfo selectBySensorIdAndSensorType(String sensorId,Integer projectId) {
+		return sensorInfoMapper.selectBySensorIdAndSensorType(sensorId, projectId);
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 
 var projectTypeId=document.getElementById("detectionPoint_projectTypeId").value;
 var projectName=document.getElementById("detectionPoint_projectName").value;
-
+var projectId=document.getElementById("detectionPoint_projectId").value;
 //确定添加响应事件-将测点信息存入数据库
 	$(".sureAddDetection_addDetection").click(function(){
 		if(!$('#form_addDetection').valid()){
@@ -70,7 +70,7 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 					'</td>'+
 					'<td class="project-status" style="width:150px">'+
 					//打开传感器页面，传测点ID和测点名称
-						'<a href="rest/sensor_info/'+data.detectionPointId+':'+data.detectionName+'" class="J_menuItem" name="传感器信息">'+
+						'<a href="rest/sensor_info/'+data.detectionPointId+':'+data.detectionName+':'+projectId+'" class="J_menuItem" name="传感器信息">'+
 							'&nbsp&nbsp&nbsp&nbsp'+'进入'+
 						'</a>'+
 					'</td>'+
@@ -261,7 +261,7 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 												'</td>'+
 												'<td class="project-status" style="width:150px">'+
 												//打开传感器页面，传测点ID和测点名称
-													'<a href="rest/sensor_info/'+item.detectionPointId+':'+item.detectionName+'" class="J_menuItem" name="传感器信息">'+
+													'<a href="rest/sensor_info/'+item.detectionPointId+':'+item.detectionName+':'+projectId+'" class="J_menuItem" name="传感器信息">'+
 														'&nbsp&nbsp&nbsp&nbsp'+'进入'+
 													'</a>'+
 												'</td>'+
@@ -452,7 +452,7 @@ var projectName=document.getElementById("detectionPoint_projectName").value;
 														'</td>'+
 														'<td class="project-status" style="width:150px">'+
 														//打开传感器页面，传测点ID和测点名称
-															'<a href="rest/sensor_info/'+item.detectionPointId+':'+item.detectionName+'" class="J_menuItem" name="传感器信息">'+
+															'<a href="rest/sensor_info/'+item.detectionPointId+':'+item.detectionName+':'+projectId+'" class="J_menuItem" name="传感器信息">'+
 																'&nbsp&nbsp&nbsp&nbsp'+'进入'+
 															'</a>'+
 														'</td>'+

@@ -188,11 +188,11 @@ public class CommonController {
 	}
 	
 	@RequestMapping("detectionPoint/{project}")
-	public String detectionPoint(Model model,
-			@PathVariable("project") String project) {
+	public String detectionPoint(Model model,@PathVariable("project") String project) {
 		String[] strings = project.split(":");
 		model.addAttribute("projectTypeId", strings[0]);
 		model.addAttribute("projectName", strings[1]);
+		model.addAttribute("projectId", strings[2]);
 		return "detectionPoint";
 	}
 
@@ -224,11 +224,11 @@ public class CommonController {
 	}
 
 	@RequestMapping("sensor_info/{detectionPoint}")
-	public String sensor_info(Model model,
-			@PathVariable("detectionPoint") String detectionPoint) {
+	public String sensor_info(Model model,@PathVariable("detectionPoint") String detectionPoint) {
 		String[] strings = detectionPoint.split(":");
 		model.addAttribute("detectionPointId", strings[0]);
 		model.addAttribute("detectionName", strings[1]);
+		model.addAttribute("projectId", strings[2]);
 		return "sensor_info";
 	}
 

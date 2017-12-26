@@ -459,6 +459,9 @@ $('#form_addSensorInfo').validate({
 				        },
 				        sensorType_addSensorInfo: function() {
 						    return $("#sensorType_addSensorInfo").val();
+						},
+						projectId_addSensorInfo: function() {
+						    return $("#projectId_addSensorInfo").val();
 						}
 				    }
 				}
@@ -537,6 +540,9 @@ $('#form_updetaSensorInfo').validate({
 						},
 						sensorInfoId_updetaSensorInfo: function() {
 						    return $("#sensorInfoId_updetaSensorInfo").val();
+						},
+						projectId_updetaSensorInfo: function() {
+						    return $("#projectId_updetaSensorInfo").val();
 						}
 				    }
 				}

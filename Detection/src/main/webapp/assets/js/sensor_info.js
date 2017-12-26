@@ -1,6 +1,9 @@
 
 var detectionPointId=document.getElementById("project_sensor_info_projectId").value;
-
+//把当前项目ID放置到添加和修改采集器的地方projectId_addSensorInfo
+var projectId=document.getElementById("sensorinfo_projectId").value;
+$('#projectId_addSensorInfo').val(projectId);
+$('#projectId_updetaSensorInfo').val(projectId);
 	//确定添加传感器，将新添加传感器数据存入数据库
 	$('.sureAddSensorInfo_addSensorInfo').click(function(){
 		if(!$('#form_addSensorInfo').valid()){
@@ -118,12 +121,14 @@ var detectionPointId=document.getElementById("project_sensor_info_projectId").va
 		var detectionPointId = $("table tr:eq(" + b + ") td:eq(7)").text();//测点ID
 		var smuId = $("table tr:eq(" + b + ") td:eq(8)").text();//采集器ID
 		var smuCmsChannel = $("table tr:eq(" + b + ") td:eq(9)").text();//采集器通道
+		
 		$('#sensorId_updetaSensorInfo').val(sensorId);
 		$('#sensorType_updetaSensorInfo').val(sensorType);
 		$('#sensorModel_updetaSensorInfo').val(sensorModel);
 		$('#sensorDepth_updetaSensorInfo').val(sensorDepth); 
 		$('#sensorInfoId_updetaSensorInfo').val(sensorInfoId);
-		$('#detectionPointId_updetaSensorInfo').val(detectionPointId);   	
+		$('#detectionPointId_updetaSensorInfo').val(detectionPointId); 
+		$('#projectId_updetaSensorInfo').val(projectId);
 		$('#terminalsInfoNum_updetaSensorInfo').val(smuId);
 		$('#terminalsInfoAisle_updetaSensorInfo').val(smuCmsChannel);
 	}

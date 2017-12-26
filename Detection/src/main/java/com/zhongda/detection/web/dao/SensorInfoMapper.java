@@ -63,7 +63,7 @@ public interface SensorInfoMapper {
      * @param sensorId
      * @return
      */
-    SensorInfo selectBySensorIdAndSensorType(String sensorId, String sensorType);
+    SensorInfo selectBySensorIdAndSensorType(String sensorId, Integer projectId);
     
     /**
      * 根据传感器ID修改传感器信息

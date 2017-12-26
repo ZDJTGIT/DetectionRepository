@@ -91,6 +91,8 @@
 						      </div>
 						      <div class="modal-body">
 							    
+							    <input class="md_input" type="text" style="display:none" id="projectId_addSensorInfo" name="projectId_addSensorInfo">
+							    
 							    <label class="md_lable" for="sensorType_addSensorInfo">传感器类型:</label>
 								<input class="md_input" type="text" id="sensorType_addSensorInfo" name="sensorType_addSensorInfo"><br><br>
 								
@@ -108,6 +110,7 @@
 								
 								<label class="md_lable" for="terminalsInfoAisle_addSensorInfo">采集器通道:</label>
 								<input class="md_input" type="text" id="terminalsInfoAisle_addSensorInfo" name="terminalsInfoAisle_addSensorInfo"><br>
+								
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" id="offAddSensorInfo" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -131,7 +134,9 @@
 						        <input class="md_input" type="text" style="display:none" id="sensorInfoId_updetaSensorInfo" name="sensorInfoId_updetaSensorInfo">
 						      
 							    <input class="md_input" type="text" style="display:none" id="detectionPointId_updetaSensorInfo" name="detectionPointId_updetaSensorInfo">
-							    
+							   
+							    <input class="md_input" type="text" style="display:none" id="projectId_updetaSensorInfo" name="projectId_updetaSensorInfo">
+							   
 							    <label class="md_lable" for="sensorType_updetaSensorInfo">传感器类型:</label>
 								<input class="md_input" type="text" id="sensorType_updetaSensorInfo" name="sensorType_updetaSensorInfo"><br><br>
 							    
@@ -159,6 +164,7 @@
 						 </form>
 						</div>
 						<input class="md_input" style="display:none" id="project_sensor_info_projectId" name="project_sensor_info_projectId" value="${detectionPointId}">
+					 	<input class="md_input" style="display:none" id="sensorinfo_projectId" name="sensorinfo_projectId" value="${projectId}">
 					</div>
 				</div>
 			</div>

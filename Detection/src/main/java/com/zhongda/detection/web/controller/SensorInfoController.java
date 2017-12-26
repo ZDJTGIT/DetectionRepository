@@ -162,8 +162,8 @@ public class SensorInfoController {
 	 * @param response
 	 */
 	@RequestMapping(value = "/OnlysensorInfoId", method = RequestMethod.POST)
-	public void OnlyProjectName(String sensorId_addSensorInfo,String sensorType_addSensorInfo, HttpServletResponse response) {
-		SensorInfo sensorInfo = sensorInfoService.selectBySensorIdAndSensorType(sensorId_addSensorInfo, sensorType_addSensorInfo);
+	public void OnlyProjectName(String sensorId_addSensorInfo,String sensorType_addSensorInfo,Integer projectId_addSensorInfo,HttpServletResponse response) {
+		SensorInfo sensorInfo = sensorInfoService.selectBySensorIdAndSensorType(sensorId_addSensorInfo, projectId_addSensorInfo);
 		try {
 			if (sensorInfo == null) {
 				response.getWriter().print(true);
@@ -183,7 +183,7 @@ public class SensorInfoController {
 	 */
 	@RequestMapping(value = "/upOnlysensorInfoId", method = RequestMethod.POST)
 	public void upOnlyProjectName(String sensorId_updetaSensorInfo, String sensorType_updetaSensorInfo,
-			Integer sensorInfoId_updetaSensorInfo, HttpServletResponse response) {
+			Integer sensorInfoId_updetaSensorInfo,Integer projectId_updetaSensorInfo, HttpServletResponse response) {
 		SensorInfo sensorInfoLL = sensorInfoService.selectSensorInfoBySensorInfoId(sensorInfoId_updetaSensorInfo);
 		if(sensorInfoLL.getSensorId().equals(sensorId_updetaSensorInfo)){
 			try {
@@ -192,7 +192,7 @@ public class SensorInfoController {
 				e.printStackTrace();
 			}
 		}else{
-		SensorInfo sensorInfo = sensorInfoService.selectBySensorIdAndSensorType(sensorId_updetaSensorInfo, sensorType_updetaSensorInfo);
+		SensorInfo sensorInfo = sensorInfoService.selectBySensorIdAndSensorType(sensorId_updetaSensorInfo, projectId_updetaSensorInfo);
 		try {
 			if (sensorInfo == null) {
 				response.getWriter().print(true);
