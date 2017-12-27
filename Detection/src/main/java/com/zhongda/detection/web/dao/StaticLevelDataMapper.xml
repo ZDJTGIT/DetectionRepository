@@ -68,6 +68,15 @@
 		sensor_id = #{sensorId,jdbcType=VARCHAR}
 	AND current_times LIKE concat(#{currentTime,jdbcType=VARCHAR},'%')
   </select>
+  <select id="selectUniversalDataBySTT" resultMap="UniversalMap">
+  	SELECT
+	*
+	FROM
+		${_parameter.param1}
+	WHERE
+		sensor_id = #{sensorId,jdbcType=VARCHAR}
+	AND current_times LIKE concat(#{currentTime,jdbcType=VARCHAR},'%') ORDER BY current_times 
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from static_level_data
     where id = #{id,jdbcType=INTEGER}

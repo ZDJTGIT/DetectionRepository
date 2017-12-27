@@ -85,7 +85,6 @@ $("#coButtion").click(function(){
 		$("#coButtion").attr("value","false");
 		$("#coButtion").text("关闭气泡");
 	}
-	
 	medth_dt(data_dt);
 });
 

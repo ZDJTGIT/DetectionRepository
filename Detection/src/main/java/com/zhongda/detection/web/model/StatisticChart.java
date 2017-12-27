@@ -13,6 +13,8 @@ public class StatisticChart {
 
 	private String attributes;
 
+	private String sensorId;
+
 	public Integer getStatisticChartId() {
 		return statisticChartId;
 	}
@@ -60,6 +62,14 @@ public class StatisticChart {
 
 	public void setAttributes(String attributes) {
 		this.attributes = attributes == null ? null : attributes.trim();
+	}
+
+	public String getSensorId() {
+		return sensorId;
+	}
+
+	public void setSensorId(String sensorId) {
+		this.sensorId = sensorId;
 	}
 
 	@Override

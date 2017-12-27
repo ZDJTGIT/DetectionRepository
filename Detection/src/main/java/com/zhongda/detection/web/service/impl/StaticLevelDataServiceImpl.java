@@ -31,4 +31,11 @@ public class StaticLevelDataServiceImpl implements StaticLevelDataService {
 				tableName, sensorId, currentTime);
 	}
 
+	@Override
+	public List<UniversalData> selectUniversalDataBySTT(String tableName,
+			String sensorId, String currentTime) {
+		return staticLevelDataMapper.selectUniversalDataBySTT(tableName,
+				sensorId, currentTime);
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.zhongda.detection.web.controller;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,8 +18,10 @@ import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Image;
 import com.zhongda.detection.web.model.StatisticChart;
 import com.zhongda.detection.web.model.Threshold;
+import com.zhongda.detection.web.model.UniversalData;
 import com.zhongda.detection.web.service.DetectionPointService;
 import com.zhongda.detection.web.service.ImageService;
+import com.zhongda.detection.web.service.StaticLevelDataService;
 import com.zhongda.detection.web.service.StatisticChartService;
 import com.zhongda.detection.web.service.ThresholdService;
 
@@ -46,6 +49,9 @@ public class UniversalDataController {
 	@Resource
 	private ThresholdService thresholdService;
 
+	@Resource
+	private StaticLevelDataService staticLevelDataService;
+
 	@RequestMapping(value = "/monitor")
 	public String monitor(Integer projectId, Integer detectionTypeId,
 			Model model) {
@@ -68,6 +74,7 @@ public class UniversalDataController {
 		StatisticChart statisticChart = statisticChartService
 				.selectDataByProjectIdAndDetectionTId(projectId,
 						detectionTypeId);
+		String sensorId = statisticChart.getSensorId();
 		List<Threshold> thresholds = thresholdService.selectAndSysDByPIAndDTI(
 				projectId, detectionTypeId);
 		System.out.println(thresholds);
@@ -77,6 +84,71 @@ public class UniversalDataController {
 				.selectDataByTNAndPIAndDTI(statisticChart.getTableName(),
 						projectId, detectionTypeId, currentTime);
 		Map<String, Object> hashMap = new HashMap<String, Object>();
+		// System.out.println(dataList);
+		// DecimalFormat decimalFormat = new DecimalFormat("#.0000");
+		// System.out.println(sensorId + "--------------------");
+		// if (null != sensorId) {
+		// List<UniversalData> sensorIdDatas = staticLevelDataService
+		// .selectUniversalDataBySTT(statisticChart.getTableName(),
+		// sensorId, currentTime);
+		// for (DetectionPoint detectionPoint : dataList) {
+		// if (!(detectionPoint.getDetectionName().equals("CJ" + sensorId))) {
+		// for (int i = 0; i < detectionPoint.getUniversalDataList()
+		// .size(); i++) {
+		// detectionPoint
+		// .getUniversalDataList()
+		// .get(i)
+		// .setCurrentLaserChange(
+		// Double.valueOf(decimalFormat
+		// .format(detectionPoint
+		// .getUniversalDataList()
+		// .get(i)
+		// .getCurrentLaserChange()
+		// - sensorIdDatas
+		// .get(i)
+		// .getCurrentLaserChange())));
+		// detectionPoint
+		// .getUniversalDataList()
+		// .get(i)
+		// .setTotalLaserChange(
+		// Double.valueOf(decimalFormat
+		// .format(detectionPoint
+		// .getUniversalDataList()
+		// .get(i)
+		// .getTotalLaserChange()
+		// - sensorIdDatas
+		// .get(i)
+		// .getTotalLaserChange())));
+		// detectionPoint
+		// .getUniversalDataList()
+		// .get(i)
+		// .setSpeedChange(
+		// Double.valueOf(decimalFormat
+		// .format(detectionPoint
+		// .getUniversalDataList()
+		// .get(i)
+		// .getSpeedChange()
+		// - sensorIdDatas
+		// .get(i)
+		// .getSpeedChange())));
+		// detectionPoint
+		// .getUniversalDataList()
+		// .get(i)
+		// .setCurrentData(
+		// Double.valueOf(decimalFormat
+		// .format(detectionPoint
+		// .getUniversalDataList()
+		// .get(i)
+		// .getCurrentData()
+		// - sensorIdDatas
+		// .get(i)
+		// .getCurrentData())));
+		// }
+		// }
+		//
+		// }
+		//
+		// }
 		hashMap.put("attributes", attributes);
 		hashMap.put("data", dataList);
 		hashMap.put("tableName", statisticChart.getTableName());
