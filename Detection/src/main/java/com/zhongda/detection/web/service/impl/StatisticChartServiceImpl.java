@@ -28,4 +28,10 @@ public class StatisticChartServiceImpl implements StatisticChartService {
 				projectId, detectionTypeId);
 	}
 
+	@Override
+	public int insertSelective(StatisticChart statisticChart) {
+		
+		return statisticChartMapper.insertSelective(statisticChart);
+	}
+
 }

@@ -3,6 +3,7 @@ package com.zhongda.detection.web.controller;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -265,4 +266,29 @@ public class DetectionPointController {
 		}
 		}
 	}
+	
+	/**
+	 * 根据id查询所有检测类型
+	 * 
+	 */
+	@RequestMapping(value = "/queryDetectionPointName")
+	@ResponseBody
+	public Map<String,DetectionPoint> queryDetectionPointType( Integer projectId ){
+		
+		DetectionPoint detectionPoint =null;
+		String DetectionPointTypeName = "";
+		List<DetectionPoint> detectionPointList = detectionPointService.selectByProjectId(projectId);
+		
+		Map<String,DetectionPoint> detectionMap = new HashMap<String, DetectionPoint>();
+		Iterator< DetectionPoint> it =  detectionPointList.iterator();
+		//去重
+		while(it.hasNext()){
+			 detectionPoint = it.next();
+			 DetectionPointTypeName = detectionPoint.getItemName();	 
+			 detectionMap.put(DetectionPointTypeName, detectionPoint);
+		}
+		
+		return detectionMap;
+	}
+	
 }

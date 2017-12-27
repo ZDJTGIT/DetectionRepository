@@ -1,5 +1,6 @@
 package com.zhongda.detection.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -43,4 +44,26 @@ public class SysDictionaryController {
 		List<SysDictionary> sysDictionaryList = sysDictionaryService.selectSysDictionaryByTypeCode(typeCode);
 		return sysDictionaryList;
 	}
+	
+	/**
+	 * 查询所有数据展示类型
+	 * 
+	 */
+	@RequestMapping("/queryStatistic")
+	@ResponseBody
+	public List<String> queryStatisticChart( Integer typeCode ){
+		
+		List<SysDictionary> sysDictionaryList = sysDictionaryService.selectSysDictionaryByTypeCode(typeCode);
+		SysDictionary statistic  = sysDictionaryList.get(0);
+		String statisticChart = statistic.getItemName();
+		String [] statisticChartArr = statisticChart.split(",");
+		List <String > list_statistic = new ArrayList<String>();
+		
+		for(int i = 0 ; i<statisticChartArr.length ;i++){
+			list_statistic.add(statisticChartArr[i]);
+		}
+		System.out.println(list_statistic);
+		return list_statistic;
+	}
+	
 }

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -105,4 +106,19 @@ public class StatisticChartController {
 
 		return hashMap;
 	}
+	/**
+	 * 添加数据----------------------------
+	 * 
+	 */
+	@RequestMapping(value = "/insertStatisticChart", method = RequestMethod.POST)
+	public void insertStatisticChart(Integer projectId  ,Integer detectionPointTypeId,String detectionPointTypeName, String attri , HttpServletResponse  response){
+			
+		
+		
+	}
+	
+	
+	
+	
+	
 }

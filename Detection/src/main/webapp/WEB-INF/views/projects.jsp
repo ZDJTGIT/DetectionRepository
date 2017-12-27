@@ -169,6 +169,7 @@
 			</div>
 		</div>
 	</div>
+	<a href="rest/detectionPoint/queryDetectionPointName">dianji</a>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/content.js"></script>
 	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>

@@ -18,9 +18,14 @@ public interface StatisticChartMapper {
 	int deleteByPrimaryKey(Integer statisticChartId);
 
 	int insert(StatisticChart record);
-
+	/**
+	 * 插入数据
+	 * @param statisticChartId
+	 * @return
+	 * 
+	 */
 	int insertSelective(StatisticChart record);
-
+	
 	StatisticChart selectByPrimaryKey(Integer statisticChartId);
 
 	int updateByPrimaryKeySelective(StatisticChart record);
@@ -45,4 +50,6 @@ public interface StatisticChartMapper {
 	StatisticChart selectDataByProjectIdAndDetectionTId(
 			@Param(value = "projectId") Integer projectId,
 			@Param(value = "detectionTypeId") Integer detectionTypeId);
+	
+	
 }

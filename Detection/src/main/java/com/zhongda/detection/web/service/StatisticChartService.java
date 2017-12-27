@@ -23,4 +23,11 @@ public interface StatisticChartService {
 	 */
 	StatisticChart selectDataByProjectIdAndDetectionTId(Integer projectId,
 			Integer detectionTypeId);
+	
+	
+	/**
+	 * 给StatisticChart添加数据
+	 */
+	 int insertSelective(StatisticChart statisticChart);
+	
 }
