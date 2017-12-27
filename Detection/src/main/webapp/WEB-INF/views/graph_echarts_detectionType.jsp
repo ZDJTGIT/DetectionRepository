@@ -51,6 +51,7 @@
 	                                <label for="startCreateTime">选择日期:</label>
 								   	<input type="datetime" class="form-control" id="currentTime" value="${today }" style="ime-mode: disabled">
 	                            	<button class="btn btn-primary " id="selectDetectionDatas" type="button" style="margin-top: 5px;">&nbsp;查询</button>
+	                            	<button class="btn btn-primary " id="coButtion" type="button" style="margin-top: 5px;" value="false">关闭气泡</button>
 	                        	</div>
 	                            <div class="col-sm-1" style="margin-top: 12px;">
 	                            	<a href='#热点图片'>热点图片</a>

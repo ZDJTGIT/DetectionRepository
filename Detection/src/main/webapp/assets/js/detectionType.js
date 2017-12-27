@@ -1,6 +1,8 @@
 var dataTablesDT;
 var dataAll;
 var tableName_excel;
+var coBubble="true";
+var data_dt;
 function lodingbgin(){
 //	var _this = $(this);//将当前的pimg元素作为_this传入函数
     // imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
@@ -74,6 +76,17 @@ function fixed(){
 }
 //自动刷新代码结束
 
+$("#coButtion").click(function(){
+	coBubble=$("#coButtion").val();
+	if(coBubble=="false"){
+		$("#coButtion").attr("value","true");
+		$("#coButtion").text("打开气泡");
+	}else{
+		$("#coButtion").attr("value","false");
+		$("#coButtion").text("关闭气泡");
+	}
+	medth_dt(data_dt);
+});
 
 
 var isTrue = true;
@@ -88,210 +101,8 @@ $("#selectDetectionDatas").click(function(){
 		  	  	data: {projectId:$('#projectId').text(),detectionTypeId:$('#detectionTypeId').text(),currentTime:$("#currentTime").val()},
 		  	    dataType: 'json',
 		  	  	success: function(data){
-		  	  		if(data["data"]==0){
-		  	  			alert("所选时间没有数据");
-		  	  			$("#outerdiv").fadeOut("fast");
-		  	  		}else{
-		  	  			dataAll=data["data"];
-		  	  			tableName_excel = data["tableName"];
-			  	  		if(isTrue){
-				  	  		var isTemperature = true;
-					  	  	if(null==((data["data"])[0].universalDataList)[0].currentTemperature){
-					  	  		isTemperature=false;
-					  	  	}
-					  	  	dataTablesDT= $('#dataTablesDT').dataTable({
-					  	 	 "columnDefs": [
-					  	 	                {
-					  	 	                  "targets": [ 12 ],
-					  	 	                  "visible": isTemperature,
-					  	 	                  "searchable": false
-					  	 	                },
-					  	 	              ]
-					  	  	});
-					  	  $(data["attributes"]).each(function(ind,val){
-			  	  				var label="<div class='col-sm-1' style='margin-top: 12px;'><a href='#"+val+"'>"+val+"</a></div>"
-				  	  			$("#onsitephoto").after(label);
-				  	  		});
-			  	  			isTrue=false;
-			  	  		}
-			  	  		
-			  	  		$("#dataDeTForDay").empty();
-			  	  		$("#dtName").empty();
-			  	  		dataTablesDT.fnClearTable();//清空数据.fnClearTable();//清空数据  
-			  	  	
-			  	  		$(data["attributes"]).each(function(ind,val){
-			  	  			label="<div class='col-sm-12' id='"+val+"'><div class='ibox float-e-margins'><div class='ibox-title' style='text-align: center;'><h5>"+val+"</h5><div class='btn-group' ></div></div><div class='ibox-content'><div class='echarts' id='echart_"+val+"' style='height: 360px'></div></div></div></div>";
-			  				$("#dataDeTForDay").append(label);
-			  				var chart = echarts.init(document.getElementById("echart_"+val));
-			  				var selected = {};//设置测点数据加载时是否显示
-		  	  				var legen = [];//legend属性中的data数据，添加测点个数
-		  	  				var Series = [];
-		  	  				
-		  	  				
-//		  	  				var mindata;
-//		  	  				var maxdata;
-			  				$(data["data"]).each(function(index,value){
-			  					if(ind==0){
-			  						label ="<button class='btn btn-primary deTeButton' name='"+value.detectionPointId+"' type='button'>"+value.detectionName+"</button>";
-				  					$("#dtName").append(label);
-			  					}
-			  					legen.push(value.detectionName);
-		  	  					if(index>1){
-		  	  						selected[value.detectionName]=false;
-		  	  					}
-		  	  					var displacementData = [];
-		  	  					$(value.universalDataList).each(function(index_d,value_d){
-		  	  						if(ind==0 && index==0){
-		  	  						$("#excelDT").attr('href',"rest/project/export_Excel?sensorId="+value_d.sensorId+"&currentTime="+value_d.currentTimes.substring(0,10)+"&projectId="+$("#projectId").text()+"&detectionTypeId="+$("#detectionTypeId").text()+"&detectionName="+value.detectionName+"&tableName="+tableName_excel);
-		  	  							dataTablesDT.fnAddData([
-											value.detectionName,
-											value_d.firstTime,
-											value_d.firstData,
-											value_d.previousTime,
-											value_d.previousData,
-											value_d.currentTimes,
-											value_d.currentData,
-											value_d.currentLaserChange,
-											value_d.totalLaserChange,
-											value_d.speedChange,
-											value_d.smuCmsId,
-											value_d.smuCmsChannel,
-											value_d.currentTemperature
-											
-			  	  						]);
-		  	  						}
-			  	  					var datas = [];
-			  	  					var temper=value_d.currentTimes;
-			  	  					var dt = new Date(temper.substring(0,4),temper.substring(5,7)-1,temper.substring(8,10),temper.substring(11,13),temper.substring(14,16),temper.substring(17,19));
-			  	  					datas.push(dt);
-//			  	  					if(index_d==0){
-//			  	  						mindata=temper;
-//			  	  					}
-//			  	  					maxdata=temper;
-			  	  					if(val=="实时数据"){
-			  	  						datas.push(value_d.currentData);
-			  	  					}else if(val=="累计变化量"){
-			  	  						datas.push(value_d.totalLaserChange);
-			  	  					}else if(val=="变化速率"){
-			  	  						datas.push(value_d.speedChange);
-			  	  					}else if(val=="单次变化量"){
-			  	  						datas.push(value_d.currentLaserChange);
-			  	  					}
-			  	  					displacementData.push(datas);
-		  	  					});
-			  	  				var point ={name: value.detectionName, type: 'line',symbol:'circle',showAllSymbol: true,data: displacementData,markPoint : {data : [ {type : 'max',name : '最大值'}, {type : 'min',name : '最小值'} ]}, formatter : function (params){return params.name+'<br>'+params } };
-			  	  				Series.push(point);
-			  				});
-//			  				if(data["thresholds"].length!=0){
-//			  	  				$(data["thresholds"]).each(function(index,value){
-//			  	  					if((value.sysDictionary.itemName.indexOf(val))!=-1){
-//			  	  						alert(mindata+"***"+maxdata)
-//			  	  						var alardata;
-//			  	  						if(null!=value.minThresholdValue){
-//			  	  							legen.push("警戒值Min")
-//				  	  						alardata = {name : '警戒值Min',type : 'line',symbol : 'none',data : [ 0 ],itemStyle : {normal : {color : '#FE0202',}},markLine : {data : [ [ {name : '警戒值Min起点',value : value.minThresholdValue,xAxis : mindata,yAxis : value.minThresholdValue}, {name : '警戒值Min终点',xAxis : maxdata,yAxis : value.minThresholdValue},]]},};
-//			  	  							Series.push(alardata);
-//			  	  						}
-//				  	  					if(null!=value.maxThresholdValue){
-//			  	  							legen.push("警戒值Max")
-//				  	  						alardata = {name : '警戒值Max',type : 'line',symbol : 'none',data : [ 0 ],itemStyle : {normal : {color : '#FE0202',}},markLine : {data : [ [ {name : '警戒值Max起点',value : value.maxThresholdValue,xAxis : mindata,yAxis : value.maxThresholdValue}, {name : '警戒值Max终点',xAxis : maxdata,yAxis : value.maxThresholdValue},]]},};
-//			  	  							Series.push(alardata);
-//			  	  						}
-//			  	  						return false;
-//			  	  					}
-//			  	  					
-//			  	  				});
-//		  	  				}
-			  				
-			  				var displacement = {
-			  	  					tooltip : {
-								        trigger: 'axis',
-								        formatter : function (params) {
-								            var date = new Date(params.value[0]);
-								            var minute = date.getMinutes();
-								            var seconds = date.getSeconds();
-								            var hours = date.getHours();
-								            var year= date.getFullYear();
-								            var month =date.getMonth()+1 ;
-							                var day = date.getDate(); 
-							                if(month<10){
-							                	month='0'+month;
-							                }
-							                if(day<10){
-							                	day='0'+day;
-							                }
-								            if(minute<10){
-								            	minute='0'+minute;
-								            }
-								            if(seconds<10){
-								            	seconds='0'+seconds;
-								            }
-								            if(hours<10){
-								            	hours='0'+hours;
-								            }
-								            data =year+'-'+month+'-'+day+' '+ hours  + ':'
-								                   + minute+':'+seconds;
-								            return '测点名称：'+params[0]+'<br/>'+'时间：'+data + '<br/>'
-								                   + val+":"+params.value[1]
-								        },
-								        position:function(p){   //其中p为当前鼠标的位置
-								            return [p[0] -50, p[1] - 50];
-								        }
-								    },
-								    toolbox: {
-								        show : true,
-								        feature : {
-								            mark : {show: true},
-								            dataView : {show: true, readOnly: false},
-								            restore : {show: true},
-								            saveAsImage : {show: true}
-								        }
-								    },
-//								    dataZoom: {
-//								        show: true,
-//								        start : 90
-//								    },
-								    legend : {
-								    	selected:selected,
-								        data : legen
-								    },
-								    grid: {
-								        y2: 80
-								    },
-								    xAxis : [
-								        {
-								            type : 'time',
-								            splitNumber:10
-								        }
-								    ],
-								    yAxis : [
-							            {
-								            type : 'value',
-								            axisLabel : {
-								                formatter: '{value} mm'
-								            },
-								            splitArea : { // 分隔区域
-												show : true, // 默认不显示，属性show控制显示与否
-												areaStyle : { // 属性areaStyle（详见areaStyle）控制区域样式
-													color : [ 'rgba(250,250,250,0.3)', 'rgba(200,200,200,0.3)' ]
-												}
-											}
-								        }
-								    ],
-								    series : Series
-								                    
-								};
-				  	  			chart.clear();
-				  	  			chart.setOption(displacement);
-								window.addEventListener('resize',function(){
-									chart.resize();
-							    });//表格自适应
-								chart.hideLoading();
-		  	  				
-			  	  		});
-			  	  		$("#outerdiv").fadeOut("fast");
-			  	  		
-		  	  		}
+		  	  		data_dt=data;
+		  	  		medth_dt(data);
 		  	  	},
 		  	  	error: function(){
 		  	  		alert('数据加载失败');
@@ -331,3 +142,218 @@ $("#dtName").on('click','.deTeButton',function(){
 		}
 	});
 });
+
+function medth_dt(data){
+
+		if(data["data"]==0){
+			alert("所选时间没有数据");
+			$("#outerdiv").fadeOut("fast");
+		}else{
+			dataAll=data["data"];
+			tableName_excel = data["tableName"];
+	  		if(isTrue){
+  	  		var isTemperature = true;
+	  	  	if(null==((data["data"])[0].universalDataList)[0].currentTemperature){
+	  	  		isTemperature=false;
+	  	  	}
+	  	  	dataTablesDT= $('#dataTablesDT').dataTable({
+	  	 	 "columnDefs": [
+	  	 	                {
+	  	 	                  "targets": [ 12 ],
+	  	 	                  "visible": isTemperature,
+	  	 	                  "searchable": false
+	  	 	                },
+	  	 	              ]
+	  	  	});
+	  	  $(data["attributes"]).each(function(ind,val){
+	  				var label="<div class='col-sm-1' style='margin-top: 12px;'><a href='#"+val+"'>"+val+"</a></div>"
+  	  			$("#onsitephoto").after(label);
+  	  		});
+	  			isTrue=false;
+	  		}
+	  		
+	  		$("#dataDeTForDay").empty();
+	  		$("#dtName").empty();
+	  		dataTablesDT.fnClearTable();//清空数据.fnClearTable();//清空数据  
+	  	
+	  		$(data["attributes"]).each(function(ind,val){
+	  			label="<div class='col-sm-12' id='"+val+"'><div class='ibox float-e-margins'><div class='ibox-title' style='text-align: center;'><h5>"+val+"</h5><div class='btn-group' ></div></div><div class='ibox-content'><div class='echarts' id='echart_"+val+"' style='height: 360px'></div></div></div></div>";
+				$("#dataDeTForDay").append(label);
+				var chart = echarts.init(document.getElementById("echart_"+val));
+				var selected = {};//设置测点数据加载时是否显示
+				var legen = [];//legend属性中的data数据，添加测点个数
+				var Series = [];
+				
+				
+//				var mindata;
+//				var maxdata;
+				$(data["data"]).each(function(index,value){
+					if(ind==0){
+						label ="<button class='btn btn-primary deTeButton' name='"+value.detectionPointId+"' type='button'>"+value.detectionName+"</button>";
+  					$("#dtName").append(label);
+					}
+					legen.push(value.detectionName);
+					if(index>1){
+						selected[value.detectionName]=false;
+					}
+					var displacementData = [];
+					$(value.universalDataList).each(function(index_d,value_d){
+						if(ind==0 && index==0){
+						$("#excelDT").attr('href',"rest/project/export_Excel?sensorId="+value_d.sensorId+"&currentTime="+value_d.currentTimes.substring(0,10)+"&projectId="+$("#projectId").text()+"&detectionTypeId="+$("#detectionTypeId").text()+"&detectionName="+value.detectionName+"&tableName="+tableName_excel);
+							dataTablesDT.fnAddData([
+							value.detectionName,
+							value_d.firstTime,
+							value_d.firstData,
+							value_d.previousTime,
+							value_d.previousData,
+							value_d.currentTimes,
+							value_d.currentData,
+							value_d.currentLaserChange,
+							value_d.totalLaserChange,
+							value_d.speedChange,
+							value_d.smuCmsId,
+							value_d.smuCmsChannel,
+							value_d.currentTemperature
+							
+	  						]);
+						}
+	  					var datas = [];
+	  					var temper=value_d.currentTimes;
+	  					var dt = new Date(temper.substring(0,4),temper.substring(5,7)-1,temper.substring(8,10),temper.substring(11,13),temper.substring(14,16),temper.substring(17,19));
+	  					datas.push(dt);
+//	  					if(index_d==0){
+//	  						mindata=temper;
+//	  					}
+//	  					maxdata=temper;
+	  					if(val=="实时数据"){
+	  						datas.push(value_d.currentData);
+	  					}else if(val=="累计变化量"){
+	  						datas.push(value_d.totalLaserChange);
+	  					}else if(val=="变化速率"){
+	  						datas.push(value_d.speedChange);
+	  					}else if(val=="单次变化量"){
+	  						datas.push(value_d.currentLaserChange);
+	  					}
+	  					displacementData.push(datas);
+					});
+					if(coBubble=="true"){
+						var point ={name: value.detectionName, type: 'line',symbol:'circle',showAllSymbol: true,data: displacementData,markPoint : {data : [ {type : 'max',name : '最大值'}, {type : 'min',name : '最小值'} ]}, formatter : function (params){return params.name+'<br>'+params } };
+					}else{
+						var point ={name: value.detectionName, type: 'line',symbol:'circle',showAllSymbol: true,data: displacementData};
+					}
+	  				
+	  				
+	  				Series.push(point);
+				});
+//				if(data["thresholds"].length!=0){
+//	  				$(data["thresholds"]).each(function(index,value){
+//	  					if((value.sysDictionary.itemName.indexOf(val))!=-1){
+//	  						alert(mindata+"***"+maxdata)
+//	  						var alardata;
+//	  						if(null!=value.minThresholdValue){
+//	  							legen.push("警戒值Min")
+//  	  						alardata = {name : '警戒值Min',type : 'line',symbol : 'none',data : [ 0 ],itemStyle : {normal : {color : '#FE0202',}},markLine : {data : [ [ {name : '警戒值Min起点',value : value.minThresholdValue,xAxis : mindata,yAxis : value.minThresholdValue}, {name : '警戒值Min终点',xAxis : maxdata,yAxis : value.minThresholdValue},]]},};
+//	  							Series.push(alardata);
+//	  						}
+//  	  					if(null!=value.maxThresholdValue){
+//	  							legen.push("警戒值Max")
+//  	  						alardata = {name : '警戒值Max',type : 'line',symbol : 'none',data : [ 0 ],itemStyle : {normal : {color : '#FE0202',}},markLine : {data : [ [ {name : '警戒值Max起点',value : value.maxThresholdValue,xAxis : mindata,yAxis : value.maxThresholdValue}, {name : '警戒值Max终点',xAxis : maxdata,yAxis : value.maxThresholdValue},]]},};
+//	  							Series.push(alardata);
+//	  						}
+//	  						return false;
+//	  					}
+//	  					
+//	  				});
+//				}
+				
+				var displacement = {
+	  					tooltip : {
+				        trigger: 'axis',
+				        formatter : function (params) {
+				            var date = new Date(params.value[0]);
+				            var minute = date.getMinutes();
+				            var seconds = date.getSeconds();
+				            var hours = date.getHours();
+				            var year= date.getFullYear();
+				            var month =date.getMonth()+1 ;
+			                var day = date.getDate(); 
+			                if(month<10){
+			                	month='0'+month;
+			                }
+			                if(day<10){
+			                	day='0'+day;
+			                }
+				            if(minute<10){
+				            	minute='0'+minute;
+				            }
+				            if(seconds<10){
+				            	seconds='0'+seconds;
+				            }
+				            if(hours<10){
+				            	hours='0'+hours;
+				            }
+				            data =year+'-'+month+'-'+day+' '+ hours  + ':'
+				                   + minute+':'+seconds;
+				            return '测点名称：'+params[0]+'<br/>'+'时间：'+data + '<br/>'
+				                   + val+":"+params.value[1]
+				        },
+				        position:function(p){   //其中p为当前鼠标的位置
+				            return [p[0] -50, p[1] - 50];
+				        }
+				    },
+				    toolbox: {
+				        show : true,
+				        feature : {
+				            mark : {show: true},
+				            dataView : {show: true, readOnly: false},
+				            restore : {show: true},
+				            saveAsImage : {show: true}
+				        }
+				    },
+//				    dataZoom: {
+//				        show: true,
+//				        start : 90
+//				    },
+				    legend : {
+				    	selected:selected,
+				        data : legen
+				    },
+				    grid: {
+				        y2: 80
+				    },
+				    xAxis : [
+				        {
+				            type : 'time',
+				            splitNumber:10
+				        }
+				    ],
+				    yAxis : [
+			            {
+				            type : 'value',
+				            axisLabel : {
+				                formatter: '{value} mm'
+				            },
+				            splitArea : { // 分隔区域
+								show : true, // 默认不显示，属性show控制显示与否
+								areaStyle : { // 属性areaStyle（详见areaStyle）控制区域样式
+									color : [ 'rgba(250,250,250,0.3)', 'rgba(200,200,200,0.3)' ]
+								}
+							}
+				        }
+				    ],
+				    series : Series
+				                    
+				};
+  	  			chart.clear();
+  	  			chart.setOption(displacement);
+				window.addEventListener('resize',function(){
+					chart.resize();
+			    });//表格自适应
+				chart.hideLoading();
+				
+	  		});
+	  		$("#outerdiv").fadeOut("fast");
+	  		
+		}
+	
+}

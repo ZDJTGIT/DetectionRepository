@@ -60,6 +60,7 @@
 									    <input type="datetime" class="form-control" id="endCreateTime" name="endCreateTime" placeholder="结束时间">
 									 </div>
 									 <button type="button" id="btnSearchstatic"  class="btn btn-md btn-primary query" >查询</button>
+									 <button type="button" id="cobutton"  class="btn btn-md btn-primary query" value="false">关闭气泡</button>
 							  	</div>
                         </form>
                     </div>

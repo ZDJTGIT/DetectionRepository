@@ -41,4 +41,15 @@ public interface StaticLevelDataMapper {
 	List<UniversalData> selectUniversalDataBySensorIdAndTimeAndTN(
 			String tableName, @Param(value = "sensorId") String sensorId,
 			@Param(value = "currentTime") String currentTime);
+
+	/**
+	 * 通过传感器ID,表名和时间查询数据并按照时间排序
+	 * 
+	 * @param sensorId
+	 * @param currentTime
+	 * @return
+	 */
+	List<UniversalData> selectUniversalDataBySTT(String tableName,
+			@Param(value = "sensorId") String sensorId,
+			@Param(value = "currentTime") String currentTime);
 }

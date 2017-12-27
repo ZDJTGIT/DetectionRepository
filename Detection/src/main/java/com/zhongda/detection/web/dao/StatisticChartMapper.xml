@@ -8,10 +8,11 @@
     <result column="detection_type_name" jdbcType="VARCHAR" property="detectionTypeName" />
     <result column="table_name" jdbcType="VARCHAR" property="tableName" />
     <result column="attributes" jdbcType="VARCHAR" property="attributes" />
+    <result column="sensor_id" jdbcType="VARCHAR" property="sensorId" />
   </resultMap>
   <sql id="Base_Column_List">
     statistic_chart_id, project_id, detection_type_id, detection_type_name, table_name, 
-    attributes
+    attributes,sensor_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

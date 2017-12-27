@@ -177,7 +177,7 @@
 	WHERE
 	dp.project_id = #{projectId,jdbcType=INTEGER}
 	AND dp.detection_type_id = ${_parameter.param3} and ld.current_times  like concat(#{currentTime,jdbcType=VARCHAR},'%')
-	GROUP BY  dp.detection_name ASC, ld.current_times
+	GROUP BY  dp.detection_name ASC, ld.current_times  
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

@@ -27,4 +27,14 @@ public interface StaticLevelDataService {
 	List<UniversalData> selectUniversalDataBySensorIdAndTimeAndTN(
 			String tableName, String sensorId, String currentTime);
 
+	/**
+	 * 通过传感器ID,表名和时间查询数据并按照时间排序
+	 * 
+	 * @param sensorId
+	 * @param currentTime
+	 * @return
+	 */
+	List<UniversalData> selectUniversalDataBySTT(String tableName,
+			String sensorId, String currentTime);
+
 }
