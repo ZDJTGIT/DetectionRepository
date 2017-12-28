@@ -179,13 +179,13 @@ var newpassword=document.getElementById("user_userInfo.password").value;
 				  	  		    $('#allProject').html(asthtml);
 								//加载完成后隐藏loading提示
 			                   	layer.close(loading);
-			                   	if(loadLaypage){
-			                   		layer.msg('项目信息不能翻页的时候操作其他项目界面之后即可翻页（该提示5s后自动关闭）', {
-			    						time : 5000, //3s后自动关闭
-			    						btn : [ '知道了' ]
-			    					});
-			                   		loadLaypage(data.total,jsonData);
-			                   	}
+//			                   	if(loadLaypage){
+//			                   		layer.msg('项目信息不能翻页的时候操作其他项目界面之后即可翻页（该提示5s后自动关闭）', {
+//			    						time : 5000, //3s后自动关闭
+//			    						btn : [ '知道了' ]
+//			    					});
+//			                   		loadLaypage(data.total,jsonData);
+//			                   	}
 				  	  		}else{
 				  	  		    alert("数据异常");
 				  	  		}
