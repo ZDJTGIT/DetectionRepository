@@ -68,10 +68,10 @@
 							    <div class="modal-content">
 							      <div class="modal-header">
 							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							        <h4 class="modal-title" id="myModalLabel_addProject">新建项目</h4>
+							        <h4 class="modal-title" id="myModalLabel_addProject">添加新用户</h4>
 							      </div>
 							      <div class="modal-body">
-							      		<p><h3><strong>添加新用户</strong></h3>(请确保用户名的唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
+							      		<p>(请确保用户名的唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
 											<br>
 											<label class="md_lable" for="userName">用户名:</label>
 											<input class="md_input" type="text" id="userName" name="userName"><br><br>
@@ -88,7 +88,7 @@
 											<label class="md_lable" for="email">邮箱地址:</label>
 											<input class="md_input" type="text" id="email" name="email"><br><br>
 											
-								            <label class="md_lable" for="">用户权限:</label>
+								            <label class="md_lable" for="">所属角色:</label>
 								            <div id="userRole_div_s">
 								            </div>
 							      </div>
@@ -108,10 +108,10 @@
 							    <div class="modal-content">
 							      <div class="modal-header">
 							        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							        <h4 class="modal-title" id="myModalLabel_addProject">新建项目</h4>
+							        <h4 class="modal-title" id="myModalLabel_addProject">修改用户信息</h4>
 							      </div>
 							      <div class="modal-body">
-							      		<p><h3><strong>修改用户信息</strong></h3>（请确保修改之后用户名唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
+							      		<p>(请确保修改之后用户名唯一，确认邮箱，电话正确。其他输入框不能为空)</p>
 										<label for="mdid" style="display:none"></label>
 										<input type="text" id="mdid" name="mdid" style="display:none"><br>
 
@@ -130,7 +130,7 @@
 										<label class="md_lable" for="mdemail">邮箱地址:</label>
 										<input class="md_input" type="text" id="mdemail" name="mdemail"><br><br>
 										
-										<label class="md_lable" for="">用户权限:</label>
+										<label class="md_lable" for="">所属角色:</label>
 										<div id="userRole_div">
 							            </div>
 							      </div>
@@ -167,6 +167,7 @@
 										<th>手机号码</th>
 										<th>所属公司</th>
 										<th>联系人</th>
+										<th>所属角色</th>
 										<th>创建时间</th>
 										<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作</th>
 										<th>状态</th>
@@ -175,6 +176,7 @@
 								</thead>
 								<tbody id="userTableDeatil">
 									<c:forEach items="${userList}" var="singleUser">
+										
 										<tr class="project-status">
 											<td>${singleUser.userId}</td>
 											<td>${singleUser.userName}</td>
@@ -182,6 +184,7 @@
 											<td>${singleUser.phone}</td>
 											<td>${singleUser.company}</td>
 											<td>${singleUser.linkman}</td>
+											<td>${singleUser.roleName}</td>
 											<td><fmt:formatDate value="${singleUser.createTime}" type="both" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 											<td>
 												<a href="javascript:;" class="selectRow"
