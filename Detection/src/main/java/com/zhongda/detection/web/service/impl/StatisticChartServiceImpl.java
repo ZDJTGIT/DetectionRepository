@@ -34,4 +34,10 @@ public class StatisticChartServiceImpl implements StatisticChartService {
 		return statisticChartMapper.insertSelective(statisticChart);
 	}
 
+	@Override
+	public int updateByPrimaryKeySelective(StatisticChart record) {
+		int lins = statisticChartMapper.updateByPrimaryKeySelective(record);
+		return lins;
+	}
+
 }

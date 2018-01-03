@@ -29,5 +29,10 @@ public interface StatisticChartService {
 	 * 给StatisticChart添加数据
 	 */
 	 int insertSelective(StatisticChart statisticChart);
-	
+	 
+	 /**
+	  * 根据ID更新StatisticChart数据
+	  * 
+	  */
+	 int updateByPrimaryKeySelective(StatisticChart record);
 }

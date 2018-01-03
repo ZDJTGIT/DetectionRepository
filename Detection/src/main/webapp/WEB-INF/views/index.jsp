@@ -540,7 +540,9 @@
 	<script src="assets/js/hplus.js" type="text/javascript"></script>
 	<script src="assets/js/contabs.js" type="text/javascript"></script>
 	<script src="assets/js/demo.js"></script>
+	<script src="assets/js/plugins/commonsmmp/commons.js"></script>
 	<script type="text/javascript">
+	
 		$(function() {
 
 			/* demo.showNotification('top','right', 'success', "欢迎来到<b>中大检测在线监控平台</b>."); */

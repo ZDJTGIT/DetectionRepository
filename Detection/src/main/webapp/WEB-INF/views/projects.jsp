@@ -23,6 +23,8 @@
 <link href="assets/css/plugins/table/basic.css" rel="stylesheet">
 <link href="assets/css/plugins/table/user.css" rel="stylesheet">
 <link href="assets/css/plugins/layuis/layui.css" rel="stylesheet" media="all">
+<link href="assets/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+<link href="assets/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 <style>
 #trhight{
 	
@@ -163,13 +165,19 @@
 						  </div>
 						 </form>
 						</div>
+						
+						<!--  mmp-->
+						<!-- Modal编辑修改 -->
+						<div id='myModal'>
+						</div>
+						</div>
+						
 						<input class="md_input" style="display:none" id="project_DLID" name="project_DLID" value="${userInfo.userId}">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/content.js"></script>
 	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
@@ -179,6 +187,9 @@
 	
 	<!-- external jquery -->
 	<script src="assets/js/project.js"></script>
+	 <script src="assets/js/plugins/sweetalert/sweetalert.min.js"></script>
+	 
+	<!-- <script src="assets/js/plugins/commonsmmp/commons.js"></script>  -->
 	
 	<script type="text/javascript"
 		src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>

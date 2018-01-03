@@ -87,7 +87,10 @@ var dlId=document.getElementById("project_DLID").value;
 			 });
 	
 		$(document).ready(function() {
-			
+			$zd.myPall.createPagingDage('myModal');
+			var htmlBodyTyp;
+			var htmlLiTopTypArray;
+			var cuurTableLine ;
 			//日期范围限制
 	        var start = {
 	            elem: '#projectBeginTime_addProject',
@@ -736,7 +739,12 @@ var dlId=document.getElementById("project_DLID").value;
 																	'</td>'+
 																	'<td class="project-status" style="width:70px">'+
 																		'<a href="rest/terminals/'+item.projectTypeId+':'+item.projectName+':'+item.projectId+'" class="J_menuItem" name="采集器">采集器</a>'+
-																	'</td>'+
+																	'</td>'+														
+																	'<td class="project-actions">'+
+																	    '<a href="javascript:;" class="J_menuItem" onclick="hc(this)" data-toggle="modal" data-target="#myModal_updetaMMp">'+
+																			'报表配置'+
+																		'</a>'+
+																    '</td>'+
 																	'<td class="project-status" style="width:70px">'+
 																		'<a href="rest/thresHold/'+item.projectId+':'+item.projectName+':'+item.projectTypeId+'" class="J_menuItem" name="阀值">阀值 </a>'+
 																	'</td>'+
@@ -810,3 +818,33 @@ var dlId=document.getElementById("project_DLID").value;
 				 $('#searchButton').trigger("click");
 			})();
 		});
+		function hc(a){
+		
+		
+			cuurTableLine = a.parentNode.parentNode.rowIndex;
+			   var projectName = $("table tr:eq(" + cuurTableLine + ") td:eq(6)").text();//项目名--2
+				var projectId = $("table tr:eq(" + cuurTableLine + ") td:eq(0)").text();//项目ID--6
+				   htmlBodyTyp = $zd.ajax({
+						 url:'rest/sysDictionary/queryStatistic',
+						 data:{typeCode:12}
+					 })
+					
+				  htmlLiTopTypArray = $zd.ajax({
+					 url:'rest/detectionPoint/queryDetectionPointName',
+					 data:{projectId:projectId}
+				 })
+				$zd.myPall.loadPagingDage({
+					projectName_parm:projectName,
+					htmlBodyTyp_parm:htmlBodyTyp,
+					htmlLiTopTypArray_parm:htmlLiTopTypArray,
+					projectId_parm:projectId});
+			/*var statistiCchart =	$zd.loadPagingDage({
+					projectName_parm:projectName,
+					htmlBodyTyp_parm:htmlBodyTyp,
+					htmlLiTopTypArray_parm:htmlLiTopTypArray,
+					projectId_parm:projectId});*/
+				   $zd.myPall.addClick();
+				
+								
+		}
+		

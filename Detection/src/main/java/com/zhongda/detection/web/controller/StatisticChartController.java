@@ -4,11 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.LinkedBlockingDeque;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.StatisticChart;
+import com.zhongda.detection.web.model.SysDictionary;
 import com.zhongda.detection.web.service.DetectionPointService;
 import com.zhongda.detection.web.service.StatisticChartService;
+import com.zhongda.detection.web.service.SysDictionaryService;
 
 @Controller
 @RequestMapping(value = "/statistiCchart")
@@ -29,7 +32,10 @@ public class StatisticChartController {
 	private StatisticChartService statisticChartService;
 
 	@Resource
-	private DetectionPointService detectionPointService;
+	private DetectionPointService detectionPointService;  
+	
+	@Resource
+	private SysDictionaryService sysDictionaryService;
 
 	@RequestMapping(value = "/statistiCcharts")
 	public String statistiCcharts(Integer projectId, Model model) {
@@ -111,14 +117,40 @@ public class StatisticChartController {
 	 * 
 	 */
 	@RequestMapping(value = "/insertStatisticChart", method = RequestMethod.POST)
-	public void insertStatisticChart(Integer projectId  ,Integer detectionPointTypeId,String detectionPointTypeName, String attri , HttpServletResponse  response){
+	public @ResponseBody List<String> insertStatisticChart(StatisticChart obj){
+			StatisticChart myObj = obj;
 			
-		
+			List<SysDictionary>  SysDictionaryData = sysDictionaryService.selectSysDictionaryByTypeCode(11);
+			for( SysDictionary in: SysDictionaryData){
+				if(in.getItemName().equals(myObj.getDetectionTypeName())){
+					myObj.setTableName(in.getItemValue());
+					break;
+				}
+				
+			}
+		int  	insertAmount= statisticChartService.insertSelective(myObj);
+		List<String> amountList = new LinkedList<String>();
+		amountList.add(String.valueOf(insertAmount));
+			return amountList;
 		
 	}
 	
 	
-	
-	
+	@RequestMapping(value = "/allDataByProjectId", method = RequestMethod.POST)
+	public @ResponseBody List<StatisticChart> selectAllDataByProjectId(Integer projectId){
+			
+		List<StatisticChart> StatisticChart = statisticChartService.selectAllDataByProjectId(projectId);
+			return StatisticChart;
+		
+	}
+	@RequestMapping(value = "/updateByPrimaryKeySelective", method = RequestMethod.POST)
+	public @ResponseBody List<Integer> updateByPrimaryKeySelective(StatisticChart obj){
+			
+		int StatisticChart = statisticChartService.updateByPrimaryKeySelective(obj);
+		List<Integer> list = new LinkedList<Integer>();
+		list.add(StatisticChart);
+		return list;
+		
+	}
 	
 }
