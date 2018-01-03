@@ -329,6 +329,7 @@ public class UserController {
 		List<User> userList = userService.selectList(currentUser.getUserId());
 		List<AlarmLinkman> aLinkmanList = alarmLinkmanService.selectAll();
 		model.addAttribute("userList", userList);
+		System.out.println(userList.toString());
 		model.addAttribute("aLinkmanList", aLinkmanList);
 		logger.info("进入userList");
 		logger.info("userList的大小" + userList.size());
@@ -430,75 +431,9 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/showSelectUserRole", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> showSelectUserRole(Integer userId,
-			String userName) {// 当前登陆账号ID,要修改的用户的用户名
-		Subject subject = SecurityUtils.getSubject();
-		Map<String, String> model = new HashMap<String, String>();
-		List<Role> selectedrole = roleService.selectRolesByUserId((userService
-				.selectByUsername(userName)).getUserId());
-		Integer roleId = selectedrole.get(0).getRoleId();
-		if (subject.hasRole(RoleSign.SUPER_ADMIN)) {
-			// 用户权限为超级管理员
-			switch (roleId) {
-			case 2:
-				model.put("roleid", "0");
-				break;
-			case 3:
-				model.put("roleid", "1");
-				break;
-			case 4:
-				model.put("roleid", "2");
-				break;
-			case 5:
-				model.put("roleid", "3");
-				break;
-			case 6:
-				model.put("roleid", "4");
-				break;
-			case 7:
-				model.put("roleid", "5");
-				break;
-			case 8:
-				model.put("roleid", "6");
-				break;
-			case 9:
-				model.put("roleid", "7");
-				break;
-			case 10:
-				model.put("roleid", "8");
-				break;
-			}
-			return model;
-		} else {
-			// 用户权限为管理员
-			switch (roleId) {
-			case 3:
-				model.put("roleid", "0");
-				break;
-			case 4:
-				model.put("roleid", "1");
-				break;
-			case 5:
-				model.put("roleid", "2");
-				break;
-			case 6:
-				model.put("roleid", "3");
-				break;
-			case 7:
-				model.put("roleid", "4");
-				break;
-			case 8:
-				model.put("roleid", "5");
-				break;
-			case 9:
-				model.put("roleid", "6");
-				break;
-			case 10:
-				model.put("roleid", "7");
-				break;
-			}
-			return model;
-		}
+	public Role showSelectUserRole(Integer userId) {// 当前登陆账号ID,要修改的用户的用户名
+		List<Role> selectedRole = roleService.selectRolesByUserId(userId);
+		return selectedRole.get(0);
 	}
 
 	/**

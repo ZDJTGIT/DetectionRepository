@@ -12,6 +12,9 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="status" jdbcType="VARCHAR" property="status" />
   </resultMap>
+   <resultMap id="LinkRoleMap" extends="BaseResultMap" type="com.zhongda.detection.web.model.User">
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+  </resultMap>
   <sql id="Base_Column_List">
     user_id, user_name, password, phone, email, company, linkman, create_time, status
   </sql>
@@ -21,14 +24,15 @@
     from user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
-  <select id="selectAllUser" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select u.*
-    from user u, user_role ur
+  <select id="selectAllUser" parameterType="java.lang.Integer" resultMap="LinkRoleMap">
+  	  select u.*,r.role_name
+    from user u, user_role ur, role r
 	where ur.role_id >(select
     				role_id
     				from user_role
     				where user_id = #{userId,jdbcType=INTEGER})
 	and u.user_id = ur.user_id
+  and ur.role_id = r.role_id
   </select>
   <select id="selectUserWithoutAdmin" resultMap="BaseResultMap">
    select 
@@ -37,9 +41,10 @@
    where u.user_id = ur.user_id 
    and ur.role_id>2;
   </select>
-  <select id="selectUserByKeyword" parameterType="java.lang.String" resultMap="BaseResultMap">
-   select
-   u.*
+  <select id="selectUserByKeyword" parameterType="java.lang.String" resultMap="LinkRoleMap">
+  SELECT t.*,r.role_name FROM 
+   (select
+   u.*,ur.role_id
    from user u, user_role ur
    where  (u.email like '%${_parameter.param1}%' 
    or u.user_name like '%${_parameter.param1}%' 
@@ -48,7 +53,7 @@
    or u.linkman like '%${_parameter.param1}%')
    and ur.role_id >(select role_id from user_role
    where user_id = ${_parameter.param2})
-   and u.user_id = ur.user_id
+   and u.user_id = ur.user_id)t ,role r where t.role_id = r.role_id ;
   </select>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
     select

@@ -15,7 +15,9 @@ table_basic_datatable = $('#mytable').dataTable({
 		var phone = $("table tr:eq(" + b + ") td:eq(3)").text();
 		var company= $("table tr:eq(" + b + ") td:eq(4)").text();
 		var linkman = $("table tr:eq(" + b + ") td:eq(5)").text();
+		var roleName =  $("table tr:eq(" + b + ") td:eq(6)").text();
 		var id = $("table tr:eq(" + b + ") td:eq(0)").text();
+		
 		$('#modifyuser').show();
 		$('#mdlinkman').val(linkman);
 		$('#mdname').val(name);
@@ -23,12 +25,13 @@ table_basic_datatable = $('#mytable').dataTable({
 		$('#mdphone').val(phone);
 		$('#mdemail').val(email);
 		$('#mdid').val(id);
+		
 		$.ajax({
 	   		  type:'post',
 	   	  	  url: 'rest/user/showSelectUserRole',
-	   	  	  data: {userId:dlId,userName:name},
+	   	  	  data: {userId:id},
 	   	  	  success: function(data){
-	   	  		document.getElementById("userRole")[data.roleid].selected=true;
+	   	  		$('#userRole option[value="'+data.roleId+'"]').prop("selected",true);
 	   	  	  }
 		});
 		return;
@@ -97,10 +100,13 @@ table_basic_datatable = $('#mytable').dataTable({
    	  		    		//如果这个roleId和选中的user的roleId是相同的，就选中当前的option
    	  		    	    string += '<option value="'+role.roleId+'">'+ role.roleName +'</option>';
    	  		    	    strings += '<option value="'+role.roleId+'">'+ role.roleName +'</option>';
+   	  		    	    
+   	  		    	   
+   	  		    	  
    	  		    	});
    	  		       string += '</select>';
-   	  		       $('#userRole_div').append(string);
-   	  		       $('#userRole_div_s').append(strings); 
+   	  		       $('#userRole_div').append(string);//修改用户
+   	  		       $('#userRole_div_s').append(strings); //添加用户
    	  		       
    	  		       }else{
    	  		    	alert("数据异常");
@@ -122,12 +128,13 @@ table_basic_datatable = $('#mytable').dataTable({
 					if (data) {
 						$("#mytable tbody").html("");
 						$.each(data,function(idx,user){
-						   var viewData = '<tr><td>'+ user.userId
+						   var viewData = '<tr><td>'+  user.userId
 										+ '</td><td>'+ user.userName
 										+ '</td><td>'+ user.email
 										+ '</td><td>'+ user.phone
 										+ '</td><td>'+ user.company
 										+ '</td><td>'+ user.linkman
+										+ '</td><td>'+ user.roleName
 										+ '</td><td>'+ user.createTime
 										+ '</td><td>'
 										+ '<a href="javascript:;" class="selectRow" onclick="selectRow(this)" data-toggle="modal" data-target="#myModal_modifyuser"><b>修改</b></a>'
@@ -154,7 +161,7 @@ table_basic_datatable = $('#mytable').dataTable({
 			var cb = $("#form_modifyuser").validate().form();
 			for(var i =0 ; i<1 ; i++){
 				cb = $("#form_modifyuser").validate().form();
-				alert(cb);
+				
 			}
 			if(!$("#form_modifyuser").validate().form()){
 				return;
@@ -168,7 +175,7 @@ table_basic_datatable = $('#mytable').dataTable({
 					var phonevalue = $("#mdphone").val();
 					var emailvalue = $("#mdemail").val();
 				    var jsonData = '{"userId":"'+idvalue+'","linkman":"'+linkmanvalue+'","roleId":"'+role+'","userName":"'+namevalue+
-						           '","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue +'"}';
+						           '","company":"'+companyvalue+'","phone":"'+phonevalue+'","email":"'+emailvalue +'","roleName":"'+role +'"}';
 					$('#modifyuser').hide();
 					$.ajax({
 						type : 'post',
@@ -183,10 +190,10 @@ table_basic_datatable = $('#mytable').dataTable({
 								$("table tr:eq(" + t + ") td:eq(3)").text(data.phone);
 								$("table tr:eq(" + t + ") td:eq(4)").text(data.company);
 								$("table tr:eq(" + t + ") td:eq(5)").text(data.linkman);
+								$("table tr:eq(" + t + ") td:eq(6)").text($("#userRole option:selected").text());
 								$('#offModifyUser').trigger("click"); 
-								layer.msg('修改成功（该提示1s后自动关闭）', {
-									time : 1000, //1s后自动关闭
-									btn : [ '知道了' ]
+								layer.msg('修改成功', {
+									time :500, //0.5s后自动关闭
 								});
 							} else {
 								alert("数据异常");
