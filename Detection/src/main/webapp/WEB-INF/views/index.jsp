@@ -131,25 +131,29 @@
 						</a>
 							<ul class="nav nav-second-level">
 								<shiro:hasPermission name="farmland:query:*">
-									<li><a class="J_menuItem" href="rest/graph_echarts_farmland" name="农田数据分析图">农田数据分析图</a>
+									<!-- <li><a class="J_menuItem" href="rest/graph_echarts_farmland" name="农田数据分析图">农田数据分析图</a> -->
+									<li><a > <i class="fa fa fa-bar-chart-o"></i><span class="nav-label">农田数据分析图</span><span class="fa arrow"></span></a>
 										<ul class="nav nav-third-level" aria-expanded="false" id="farmland">
 										</ul>
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="bridge:query:*">
-									<li><a class="J_menuItem" href="rest/graph_echarts_bridge" name="桥梁数据分析图">桥梁数据分析图</a>
+									<!-- <li><a class="J_menuItem" href="rest/graph_echarts_bridge" name="桥梁数据分析图">桥梁数据分析图</a> -->
+									<li><a > <i class="fa fa fa-bar-chart-o"></i><span class="nav-label">桥梁数据分析图</span><span class="fa arrow"></span></a>
 										<ul class="nav nav-third-level" aria-expanded="false" id="bridge">
 										</ul>
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="tunnel:query:*">
-									<li><a class="J_menuItem" href="rest/graph_echarts_tunnel" name="隧道数据分析图">隧道数据分析图</a>
+									<!-- <li><a class="J_menuItem" href="rest/graph_echarts_tunnel" name="隧道数据分析图">隧道数据分析图</a> -->
+									<li><a > <i class="fa fa fa-bar-chart-o"></i><span class="nav-label">隧道数据分析图</span><span class="fa arrow"></span></a>
 										<ul class="nav nav-third-level" aria-expanded="false" id="tunnel">
 										</ul>
 									</li>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="slope:query:*">
-									<li><a class="J_menuItem" href="rest/graph_echarts_slope" name="边坡数据分析图">边坡数据分析图</a>
+									<!-- <li><a class="J_menuItem" href="rest/graph_echarts_slope" name="边坡数据分析图">边坡数据分析图</a> -->
+									<li><a > <i class="fa fa fa-bar-chart-o"></i><span class="nav-label">边坡数据分析图</span><span class="fa arrow"></span></a>
 										<ul class="nav nav-third-level" aria-expanded="false" id="slope">
 										</ul>
 									</li>
@@ -720,6 +724,7 @@
 								}
 							});
 						})
+						
 	</script>
 
 </body>
