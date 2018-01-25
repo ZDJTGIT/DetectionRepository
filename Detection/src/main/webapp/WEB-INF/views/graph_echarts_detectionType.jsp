@@ -120,7 +120,7 @@
                             		<c:choose>
                             			<c:when test="${status.index eq 0}">
                             				<div class="item active">
-			                                    <img alt="image" class="img-responsive" src="${num }" style="margin: 0 auto;"> 
+			                                    <img alt="image" class="img-responsive" src="${num }" style="margin: 0 auto;width: 270px;height: 360;"> 
 			                                    <!-- <div class="carousel-caption">
 			                                        <p>This is simple caption 1</p>
 			                                    </div> -->
@@ -128,7 +128,7 @@
                             			</c:when>
                             			<c:otherwise>
                             				<div class="item ">
-			                                    <img alt="image" class="img-responsive" src="${num }" style="margin: 0 auto;">
+			                                    <img alt="image" class="img-responsive" src="${num }" style="margin: 0 auto;width: 270px;height: 360;">
 			                                    <!-- <div class="carousel-caption">
 			                                        <p>This is simple caption 2</p>
 			                                    </div> -->
