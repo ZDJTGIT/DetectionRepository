@@ -74,7 +74,7 @@
       #{detectionPointId,jdbcType=INTEGER}, #{sensorId,jdbcType=VARCHAR}, #{sensorType,jdbcType=VARCHAR}, 
       #{sensorModel,jdbcType=VARCHAR}, #{sensorDepth,jdbcType=REAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.SensorInfo">
+  <insert id="insertSelective" parameterType="com.zhongda.detection.web.model.SensorInfo"  useGeneratedKeys="true" keyProperty="sensorInfoId">
     insert into sensor_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="sensorInfoId != null">
@@ -167,4 +167,11 @@
       sensor_depth = #{sensorDepth,jdbcType=REAL}
     where sensor_info_id = #{sensorInfoId,jdbcType=INTEGER}
   </update>
+   <select id="selectVirtualPk" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List" />
+    from sensor_info
+    where smu_id = #{0}
+    and smu_cms_channel=#{1} and sensor_id=#{2}
+  </select>
 </mapper>

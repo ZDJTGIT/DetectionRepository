@@ -82,4 +82,6 @@ public interface SensorInfoMapper {
 	 * @return
 	 */
     List<SensorInfo> selectSensorInfoWithAlarmCount(Project project);
+    
+    SensorInfo  selectVirtualPk(String smu_id,String smu_cms_channel,String sensorId_addSensorInfo);
 }

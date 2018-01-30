@@ -83,4 +83,6 @@ public interface SensorInfoService {
      * @return
      */
     SensorInfo selectSensorInfoBySensorInfoId(Integer sensorInfoId);
+    
+    SensorInfo  selectVirtualPk(String smu_id,String smu_cms_channel,String sensorId_addSensorInfo);
 }

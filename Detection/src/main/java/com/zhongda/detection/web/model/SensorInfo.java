@@ -91,4 +91,15 @@ public class SensorInfo {
     public void setSensorDepth(Float sensorDepth) {
         this.sensorDepth = sensorDepth;
     }
+
+	@Override
+	public String toString() {
+		return "SensorInfo [sensorInfoId=" + sensorInfoId + ", smuId=" + smuId
+				+ ", smuCmsChannel=" + smuCmsChannel + ", detectionPointId="
+				+ detectionPointId + ", sensorId=" + sensorId + ", sensorType="
+				+ sensorType + ", sensorModel=" + sensorModel
+				+ ", sensorDepth=" + sensorDepth + ", detectionName="
+				+ detectionName + "]";
+	}
+    
 }

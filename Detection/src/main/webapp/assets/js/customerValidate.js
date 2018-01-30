@@ -23,7 +23,6 @@ jQuery.validator.addMethod("isdouble", function(value, element) {
     var mobile =  /^[-+]?[0-9]+(\.[0-9]+)?$/;
     return this.optional(element) || mobile.test(value);
 }, "请按要求填入double值");
-
 //添加用户校验用户信息唯一性
 $(document).ready(function() {
 
@@ -450,21 +449,7 @@ $('#form_addSensorInfo').validate({
 				required : true,
 				minlength : 1,
 				//验证，同一个项目下的测点名称不能相同
-				remote: {
-				    url: "rest/sensorInfo/OnlysensorInfoId",  //后台处理程序
-				    type: "post",               //数据发送方式  
-				    data: {                     //要传递的数据
-				    	sensorId_addSensorInfo: function() {
-					        return $("#sensorId_addSensorInfo").val();
-				        },
-				        sensorType_addSensorInfo: function() {
-						    return $("#sensorType_addSensorInfo").val();
-						},
-						projectId_addSensorInfo: function() {
-						    return $("#projectId_addSensorInfo").val();
-						}
-				    }
-				}
+				
 			},
 			sensorType_addSensorInfo : {
 				required : true,
@@ -481,12 +466,17 @@ $('#form_addSensorInfo').validate({
 			},
 			terminalsInfoNum_addSensorInfo : {
 				required : true,
-				minlength : 2
+				minlength : 2,
+			
+				
+				
 			},
 			terminalsInfoAisle_addSensorInfo : {
 				required : true,
-				minlength : 1
-			}
+				minlength : 1,
+			
+			},
+			
 		},
 		
 		messages : {
@@ -494,7 +484,8 @@ $('#form_addSensorInfo').validate({
 			sensorId_addSensorInfo : {
 				required : "传感器编号不能为空",
 				minlength:"传感器编号为1-15个字符",
-				remote: "编号已存在"
+				
+				
 			},
 			sensorType_addSensorInfo : {
 				required : "传感器类型不能为空",
@@ -511,11 +502,13 @@ $('#form_addSensorInfo').validate({
 			},
 			terminalsInfoNum_addSensorInfo : {
 				required : "请填写采集器编号",
-				minlength:"采集器编号为2-15个字符"
+				minlength:"采集器编号为2-15个字符",
+				
 			},
 			terminalsInfoAisle_addSensorInfo : {
 				required : "请填写采集器通道号",
-				minlength:"采集器通道号为1-15个字符"
+				minlength:"采集器通道号为1-15个字符",
+			
 			}
 		}
 });

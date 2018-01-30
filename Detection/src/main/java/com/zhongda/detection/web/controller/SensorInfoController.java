@@ -23,6 +23,7 @@ import com.github.pagehelper.PageInfo;
 import com.zhongda.detection.web.model.OperationLog;
 import com.zhongda.detection.web.model.Project;
 import com.zhongda.detection.web.model.SensorInfo;
+import com.zhongda.detection.web.model.SensorInfoError;
 import com.zhongda.detection.web.model.User;
 import com.zhongda.detection.web.security.RoleSign;
 import com.zhongda.detection.web.service.OperationLogService;
@@ -92,9 +93,16 @@ public class SensorInfoController {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			String smu_id =sensorInfo.getSmuId();
+			String smu_cms_channel=sensorInfo.getSmuCmsChannel();
+			String sensorId_addSensorInfo=sensorInfo.getSensorId();
+			SensorInfo sensorInfo_condition= sensorInfoService.selectVirtualPk(smu_id,smu_cms_channel,sensorId_addSensorInfo);
+			if(sensorInfo_condition!=null){
+				return new SensorInfoError("测点数据已存在,"+"传感器 I  D:"+sensorId_addSensorInfo+",采集器编号:"+smu_id+",采集器通道:"+smu_cms_channel);
+			}
 		sensorInfoService.insertSelective(sensorInfo);
 		//把数据库的自增长编号取出
-		sensorInfo = sensorInfoService.selectBySensorIdAndSensorType(sensorInfo.getSensorId(), null);
+		//sensorInfo = sensorInfoService.selectBySensorIdAndSensorType(sensorInfo.getSensorId(), null);
 		//插入一条操作日志
 		User currentUser = (User) WebUtils.getSessionAttribute(request,"userInfo");
 		operationLogService.insertOperationLog(new OperationLog(currentUser.getUserId(),currentUser.getUserName(),"传感器插入",
@@ -162,13 +170,33 @@ public class SensorInfoController {
 	 * @param response
 	 */
 	@RequestMapping(value = "/OnlysensorInfoId", method = RequestMethod.POST)
-	public void OnlyProjectName(String sensorId_addSensorInfo,String sensorType_addSensorInfo,Integer projectId_addSensorInfo,HttpServletResponse response) {
-		SensorInfo sensorInfo = sensorInfoService.selectBySensorIdAndSensorType(sensorId_addSensorInfo, projectId_addSensorInfo);
+	public void OnlyProjectName(String sensorId_addSensorInfo,String terminalsInfoNum_addSensorInfo,Integer projectId_addSensorInfo,HttpServletResponse response) {
+		
+		String[] datas = terminalsInfoNum_addSensorInfo.split(":");
+		String smu_id = "";
+		String smu_cms_channel ="";
+		if(datas.length==2){
+			 smu_id = datas[0];//对应页面采集器编号
+			 smu_cms_channel = datas[1];//采集器通道:
+		}else{
+			try {
+				response.getWriter().print(true);
+				return ;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	
+		SensorInfo sensorInfo = sensorInfoService.selectVirtualPk(smu_id,smu_cms_channel,sensorId_addSensorInfo);//sensorId_addSensorInfo传感器 I  D:
+		/*SensorInfo sensorInfo = sensorInfoService.selectBySensorIdAndSensorType(smu_id,smu_cms_channel,sensorId_addSensorInfo);*/
 		try {
 			if (sensorInfo == null) {
 				response.getWriter().print(true);
+				return ;
 			} else {
 				response.getWriter().print(false);
+				return ;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

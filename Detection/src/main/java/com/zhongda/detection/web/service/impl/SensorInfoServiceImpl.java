@@ -71,4 +71,11 @@ public class SensorInfoServiceImpl implements SensorInfoService {
 		return sensorInfoMapper.selectByPrimaryKey(sensorInfoId);
 	}
 
+	@Override
+	public SensorInfo selectVirtualPk(String smu_id, String smu_cms_channel,
+			String sensorId_addSensorInfo) {
+		SensorInfo SensorInfo = sensorInfoMapper.selectVirtualPk(smu_id, smu_cms_channel, sensorId_addSensorInfo);
+		return SensorInfo;
+	}
+
 }
