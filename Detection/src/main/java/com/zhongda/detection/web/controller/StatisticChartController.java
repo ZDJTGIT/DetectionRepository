@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.zhongda.detection.web.annotation.CountTimeAnnotation;
 import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.StatisticChart;
 import com.zhongda.detection.web.model.SysDictionary;
@@ -37,7 +36,6 @@ public class StatisticChartController {
 	@Resource
 	private SysDictionaryService sysDictionaryService;
 
-	@CountTimeAnnotation
 	@RequestMapping(value = "/statistiCcharts")
 	public String statistiCcharts(Integer projectId, Model model) {
 		model.addAttribute("projectId", projectId);
@@ -46,7 +44,6 @@ public class StatisticChartController {
 	}
 
 	@RequestMapping(value = "/dataAnalysis", method = RequestMethod.POST)
-	@CountTimeAnnotation
 	public @ResponseBody Map<String, Object> dataAnalysis(Integer projectId,
 			String begin, String end, String dateRange, String clickType,
 			Model model) {
