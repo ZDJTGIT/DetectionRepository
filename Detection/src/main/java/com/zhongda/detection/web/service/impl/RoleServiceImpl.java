@@ -138,4 +138,10 @@ public class RoleServiceImpl implements RoleService{
 		securityRealm.clearAllCachedAuthorizationInfo();
 	}
 
+	@Override
+	public Role selectByPrimaryKey(Integer roleId) {
+		Role role  = roleMapper.selectByPrimaryKey(roleId);
+		return role;
+	}
+
 }

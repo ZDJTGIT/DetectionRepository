@@ -368,6 +368,11 @@ public class UserController {
 		user.setPassword("123456");
 		user.setStatus("正常");
 		user.setCreateTime(date);
+		
+		Integer roleId = user.getRoleId();;
+		Role Role = roleService.selectByPrimaryKey(roleId);
+		String roleNam = Role.getRoleName();
+		user.setRoleName(roleNam);
 		// 将user存入数据库
 		userService.insertUser(user);
 		user.setUserId(userService.selectByUsername(user.getUserName())

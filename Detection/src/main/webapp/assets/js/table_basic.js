@@ -244,12 +244,14 @@ table_basic_datatable = $('#mytable').dataTable({
 						data : jsonData,
 						success : function(data) {
 							if(data) {
+							
 							var viewData = "<tr><td>"+ data.userId
 										+ "</td><td>"+ data.userName
 										+ "</td><td>"+ data.email
 										+ "</td><td>"+ data.phone
 										+ "</td><td>"+ data.company
 										+ "</td><td>"+ data.linkman
+										+ "</td><td>"+ data.roleName
 										+ "</td><td>"+ data.createTime
 										+ "</td><td>"
 										+ "<a href='javascript:;' class='selectRow' onclick='selectRow(this)' data-toggle='modal' data-target='#myModal_modifyuser'><b>修改</b></a> "

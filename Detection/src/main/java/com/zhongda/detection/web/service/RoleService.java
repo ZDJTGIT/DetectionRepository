@@ -88,5 +88,7 @@ public interface RoleService {
 	 * 清除角色的缓存
 	 */
 	void clearRoleCache();
+	
+	 Role selectByPrimaryKey(Integer roleId);
 
 }

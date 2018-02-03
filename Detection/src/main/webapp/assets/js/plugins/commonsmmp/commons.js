@@ -124,7 +124,7 @@ zdjc.myPall = (function($) {
 		  '<div class="modal-dialog" role="document">'+
 		    '<div class="modal-content">'+
 		     ' <div class="modal-header" id='+'xx'+'>'+
-		     ' <h4 class="modal-title" id="myModalLabel_updetaProject">选择mmp</h4>'+
+		     ' <h4 class="modal-title" id="myModalLabel_updetaProject">报表配置</h4>'+
 		     ' </div>'+
 		      '<div class="modal-body"'+" id ='mmp'>"+				
 		      '</div>'+

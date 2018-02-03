@@ -630,7 +630,7 @@ $('#form_adduser').validate({
 				//验证手机号码是否已注册
 				remote: {
 				    url: "rest/user/OnlyPhone",     //后台处理程序
-				    type: "post",               //数据发送方式  
+				    type: "post",               //数据发送方式  				   
 				    data: {                     //要传递的数据
 				    	phone: function() {
 				            return $("#phone").val();
@@ -645,7 +645,7 @@ $('#form_adduser').validate({
 				//验证邮箱号是否已注册
 				remote: {
 				    url: "rest/user/OnlyEmail",     //后台处理程序
-				    type: "post",               //数据发送方式  
+				    type: "post",               //数据发送方式  				    
 				    data: {                     //要传递的数据
 				    	email: function() {
 				            return $("#email").val();
@@ -687,11 +687,11 @@ $('#form_adduser').validate({
 			}
 		},
 		
-		success:{
+	/*	success:{
 			userName : {
 				remote:"asd"
 			}
-		}
+		}*/
 		
 	});
 
