@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
+import com.zhongda.detection.web.annotation.CountTimeAnnotation;
 import com.zhongda.detection.web.dao.DetectionPointMapper;
 import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Project;
@@ -114,6 +115,7 @@ public class DetectionPointServiceImpl implements DetectionPointService {
 	}
 
 	@Override
+	@CountTimeAnnotation
 	public List<DetectionPoint> selectDataByTabelName(String tableName,
 			Integer projectId, Integer detectionTypeId,
 			String begincurrentTime, String endcurrentTime) {

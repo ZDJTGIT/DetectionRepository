@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.LinkedBlockingDeque;
 
 import javax.annotation.Resource;
 
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.zhongda.detection.web.annotation.CountTimeAnnotation;
 import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.StatisticChart;
 import com.zhongda.detection.web.model.SysDictionary;
@@ -32,11 +32,12 @@ public class StatisticChartController {
 	private StatisticChartService statisticChartService;
 
 	@Resource
-	private DetectionPointService detectionPointService;  
-	
+	private DetectionPointService detectionPointService;
+
 	@Resource
 	private SysDictionaryService sysDictionaryService;
 
+	@CountTimeAnnotation
 	@RequestMapping(value = "/statistiCcharts")
 	public String statistiCcharts(Integer projectId, Model model) {
 		model.addAttribute("projectId", projectId);
@@ -45,9 +46,12 @@ public class StatisticChartController {
 	}
 
 	@RequestMapping(value = "/dataAnalysis", method = RequestMethod.POST)
+	@CountTimeAnnotation
 	public @ResponseBody Map<String, Object> dataAnalysis(Integer projectId,
 			String begin, String end, String dateRange, String clickType,
 			Model model) {
+		System.out
+				.println("-----------------------@CountTimeAnnotation----------------------");
 		System.out.println("-----------clickType:" + clickType);
 		List<StatisticChart> detectionTypeList = statisticChartService
 				.selectAllDataByProjectId(projectId);
@@ -106,51 +110,55 @@ public class StatisticChartController {
 			hashMap.put(statisticChart.getDetectionTypeName(),
 					selectDataByTabelName);
 			hashMap.put(statisticChart.getDetectionTypeName() + "1", split);
-			System.out.println(statisticChart.getDetectionTypeName() + ":"
-					+ selectDataByTabelName);
 		}
 
 		return hashMap;
 	}
+
 	/**
 	 * 添加数据----------------------------
 	 * 
 	 */
 	@RequestMapping(value = "/insertStatisticChart", method = RequestMethod.POST)
-	public @ResponseBody List<String> insertStatisticChart(StatisticChart obj){
-			StatisticChart myObj = obj;
-			
-			List<SysDictionary>  SysDictionaryData = sysDictionaryService.selectSysDictionaryByTypeCode(11);
-			for( SysDictionary in: SysDictionaryData){
-				if(in.getItemName().equals(myObj.getDetectionTypeName())){
-					myObj.setTableName(in.getItemValue());
-					break;
-				}
-				
+	public @ResponseBody List<String> insertStatisticChart(StatisticChart obj) {
+		StatisticChart myObj = obj;
+
+		List<SysDictionary> SysDictionaryData = sysDictionaryService
+				.selectSysDictionaryByTypeCode(11);
+		for (SysDictionary in : SysDictionaryData) {
+			if (in.getItemName().equals(myObj.getDetectionTypeName())) {
+				myObj.setTableName(in.getItemValue());
+				break;
 			}
-		int  	insertAmount= statisticChartService.insertSelective(myObj);
+
+		}
+		int insertAmount = statisticChartService.insertSelective(myObj);
 		List<String> amountList = new LinkedList<String>();
 		amountList.add(String.valueOf(insertAmount));
-			return amountList;
-		
+		return amountList;
+
 	}
-	
-	
+
 	@RequestMapping(value = "/allDataByProjectId", method = RequestMethod.POST)
-	public @ResponseBody List<StatisticChart> selectAllDataByProjectId(Integer projectId){
-			
-		List<StatisticChart> StatisticChart = statisticChartService.selectAllDataByProjectId(projectId);
-			return StatisticChart;
-		
+	public @ResponseBody List<StatisticChart> selectAllDataByProjectId(
+			Integer projectId) {
+
+		List<StatisticChart> StatisticChart = statisticChartService
+				.selectAllDataByProjectId(projectId);
+		return StatisticChart;
+
 	}
+
 	@RequestMapping(value = "/updateByPrimaryKeySelective", method = RequestMethod.POST)
-	public @ResponseBody List<Integer> updateByPrimaryKeySelective(StatisticChart obj){
-			
-		int StatisticChart = statisticChartService.updateByPrimaryKeySelective(obj);
+	public @ResponseBody List<Integer> updateByPrimaryKeySelective(
+			StatisticChart obj) {
+
+		int StatisticChart = statisticChartService
+				.updateByPrimaryKeySelective(obj);
 		List<Integer> list = new LinkedList<Integer>();
 		list.add(StatisticChart);
 		return list;
-		
+
 	}
-	
+
 }

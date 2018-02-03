@@ -1,6 +1,5 @@
 package com.zhongda.detection.web.controller;
 
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,7 +17,6 @@ import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Image;
 import com.zhongda.detection.web.model.StatisticChart;
 import com.zhongda.detection.web.model.Threshold;
-import com.zhongda.detection.web.model.UniversalData;
 import com.zhongda.detection.web.service.DetectionPointService;
 import com.zhongda.detection.web.service.ImageService;
 import com.zhongda.detection.web.service.StaticLevelDataService;

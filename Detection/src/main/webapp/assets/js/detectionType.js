@@ -41,40 +41,44 @@ function lodingbgin(){
 }
 
 
-//自动刷新代码
-var today = new Date();
-var minute = today.getMinutes();
-var time;
 
-	if(minute<10  && minute>2){
-		time=12-minute;
-	}else if(minute==2){
-		time=10;
-	}else if(minute<2){
-		time=2-minute;
-	}else{
-		for(var i=1;i<11;i++){
-			minute++;
-			if(minute.toString().substring(1,2)==2){
-				time=i;
-				break;
+(function(){
+	//自动刷新代码
+	var today = new Date();
+	var minute = today.getMinutes();
+	var time;
+
+		if(minute<10  && minute>2){
+			time=12-minute;
+		}else if(minute==2){
+			time=10;
+		}else if(minute<2){
+			time=2-minute;
+		}else{
+			for(var i=1;i<11;i++){
+				minute++;
+				if(minute.toString().substring(1,2)==2){
+					time=i;
+					break;
+				}
 			}
 		}
+	time = time*60*1000;
+
+	var refreshbegin =setInterval("refresh()",time);
+
+	function refresh(){
+		$("#selectDetectionDatas").trigger("click");
+		clearInterval(refreshbegin);
+		setInterval("fixed()",600000);
 	}
-time = time*60*1000;
 
-var refreshbegin =setInterval("refresh()",time);
+	function fixed(){
+		$("#selectDetectionDatas").trigger("click");
+	}
+	//自动刷新代码结束
+})();
 
-function refresh(){
-	$("#selectDetectionDatas").trigger("click");
-	clearInterval(refreshbegin);
-	setInterval("fixed()",600000);
-}
-
-function fixed(){
-	$("#selectDetectionDatas").trigger("click");
-}
-//自动刷新代码结束
 
 $("#coButtion").click(function(){
 	coBubble=$("#coButtion").val();

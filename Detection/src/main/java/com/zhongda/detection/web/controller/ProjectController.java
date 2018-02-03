@@ -110,6 +110,7 @@ public class ProjectController {
 	public @ResponseBody List<DetectionPoint> queryItem(Integer projectId) {
 		List<DetectionPoint> itemNameList = detectionPointService
 				.selectItemNameByProjectgId(projectId);
+		System.out.println("边坡：" + itemNameList);
 		return itemNameList;
 	}
 
