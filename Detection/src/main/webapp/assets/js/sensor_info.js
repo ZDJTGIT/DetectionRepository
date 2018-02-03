@@ -180,24 +180,32 @@ $('#projectId_updetaSensorInfo').val(projectId);
 				data: jsonData,
 				success: function(data){
 						if(data){
-							//修改传感器信息成功后，实时刷新页面
-							$("table tr:eq(" + b + ") td:eq(1) a").text(sensorType);//传感器类型
-							$("table tr:eq(" + b + ") td:eq(3) span").text(sensorId);//传感器编号
-							$("table tr:eq(" + b + ") td:eq(4) a").text(sensorDepth);//传感器深度
-							$("table tr:eq(" + b + ") td:eq(5) a").text(sensorModel);//传感器模型
-							$("table tr:eq(" + b + ") td:eq(6)").text(sensorInfoId);//传感器ID
-							$("table tr:eq(" + b + ") td:eq(7)").text(detectionPointId);//测点ID
-							$("table tr:eq(" + b + ") td:eq(8) span").text(smuId);//采集器ID
-							$("table tr:eq(" + b + ") td:eq(9)").text(smuCmsChannel);//采集器通道
-							$('#offUpdetaSensorInfo').trigger("click"); 
-							layer.msg('修改成功（该提示1s后自动关闭）', {
-								time : 1000, //1s后自动关闭
-								btn : [ '知道了' ]
-							});
-								}else 
-								{
-								alert("数据异常");
+								if(data.errorMessage){
+										layer.msg('添加失败,测点数据已经存在['+data.errorMessage+']（该提示10s后自动关闭）', {
+											time : 10000, //1s后自动关闭
+											btn : [ '知道了' ]
+										});
+								}else{
+									//修改传感器信息成功后，实时刷新页面
+									$("table tr:eq(" + b + ") td:eq(1) a").text(sensorType);//传感器类型
+									$("table tr:eq(" + b + ") td:eq(3) span").text(sensorId);//传感器编号
+									$("table tr:eq(" + b + ") td:eq(4) a").text(sensorDepth);//传感器深度
+									$("table tr:eq(" + b + ") td:eq(5) a").text(sensorModel);//传感器模型
+									$("table tr:eq(" + b + ") td:eq(6)").text(sensorInfoId);//传感器ID
+									$("table tr:eq(" + b + ") td:eq(7)").text(detectionPointId);//测点ID
+									$("table tr:eq(" + b + ") td:eq(8) span").text(smuId);//采集器ID
+									$("table tr:eq(" + b + ") td:eq(9)").text(smuCmsChannel);//采集器通道
+									$('#offUpdetaSensorInfo').trigger("click"); 
+									layer.msg('修改成功（该提示1s后自动关闭）', {
+										time : 1000, //1s后自动关闭
+										btn : [ '知道了' ]
+									});
 								}
+							
+						}else 
+							{
+							alert("数据异常");
+							}
 						},
 						error: function(){
 						    alert("抱歉！您为非管理员用户，修改传感器请联系对应管理员！");

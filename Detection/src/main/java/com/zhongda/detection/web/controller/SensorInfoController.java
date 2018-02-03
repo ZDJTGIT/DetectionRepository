@@ -148,6 +148,13 @@ public class SensorInfoController {
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.hasRole(RoleSign.ADMIN)
 				|| subject.hasRole(RoleSign.SUPER_ADMIN)) {
+			String smu_id =sensorInfo.getSmuId();
+			String smu_cms_channel=sensorInfo.getSmuCmsChannel();
+			String sensorId_addSensorInfo=sensorInfo.getSensorId();
+			SensorInfo sensorInfo_condition= sensorInfoService.selectVirtualPk(smu_id,smu_cms_channel,sensorId_addSensorInfo);
+			if(sensorInfo_condition!=null){
+				return new SensorInfoError("测点数据已存在,"+"传感器 I  D:"+sensorId_addSensorInfo+",采集器编号:"+smu_id+",采集器通道:"+smu_cms_channel);
+			}
 			// 管理员用户，可以修改传感器信息
 			sensorInfoService.updateByPrimaryKeySelective(sensorInfo);
 			//插入一条操作日志

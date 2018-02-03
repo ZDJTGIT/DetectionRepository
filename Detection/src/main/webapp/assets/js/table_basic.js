@@ -215,6 +215,7 @@ table_basic_datatable = $('#mytable').dataTable({
 			//确定添加用户
 			$('#sureAdd').click(function(){
 				if(!$('#form_adduser').valid()){
+				
 					return false;
 				}
 				var role = $("#userRoles option:selected").val();
@@ -243,6 +244,7 @@ table_basic_datatable = $('#mytable').dataTable({
 						dataType : 'json',
 						data : jsonData,
 						success : function(data) {
+							
 							if(data) {
 							
 							var viewData = "<tr><td>"+ data.userId
@@ -255,6 +257,7 @@ table_basic_datatable = $('#mytable').dataTable({
 										+ "</td><td>"+ data.createTime
 										+ "</td><td>"
 										+ "<a href='javascript:;' class='selectRow' onclick='selectRow(this)' data-toggle='modal' data-target='#myModal_modifyuser'><b>修改</b></a> "
+										+"&nbsp;&nbsp;&nbsp;"
 										+ "<a href='javascript:;' class='deteteRow' onclick='deleteRow(this)'><b>删除</b></a>"
 										+ "</td><td>"+ data.status
                             			+ "</td><td>"
@@ -266,12 +269,22 @@ table_basic_datatable = $('#mytable').dataTable({
 								});
 								$('#offAddUser').trigger("click"); 	
 								$('#userTableDeatil').append(viewData);
+								var userNamevalue = $("#userName").val('');
+								var companyvalue = $("#company").val('');
+								var phonevalue = $("#phone").val('');
+								var linkmanvalue = $("#linkman").val('');
+								var emailvalue = $("#email").val('');
 								} else {
 									alert("数据异常");
 								}
 							}
 						});
 				}); 
+		
+			
+				
+		
+			
 	 });
 	 
 		$(function(){(function(){
