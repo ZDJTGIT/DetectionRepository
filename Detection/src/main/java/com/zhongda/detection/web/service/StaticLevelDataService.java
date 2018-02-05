@@ -25,7 +25,8 @@ public interface StaticLevelDataService {
 	 * @return
 	 */
 	List<UniversalData> selectUniversalDataBySensorIdAndTimeAndTN(
-			String tableName, String sensorId, String currentTime);
+			String tableName, String sensorId, String smuCmsId,
+			String smuCmsChannel, String currentTime);
 
 	/**
 	 * 通过传感器ID,表名和时间查询数据并按照时间排序

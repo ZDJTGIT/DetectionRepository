@@ -65,7 +65,7 @@
 	FROM
 		${_parameter.param1}
 	WHERE
-		sensor_id = #{sensorId,jdbcType=VARCHAR}
+		sensor_id = #{sensorId,jdbcType=VARCHAR} and smu_cms_id=#{smuCmsId,jdbcType=VARCHAR} and smu_cms_channel=#{smuCmsChannel,jdbcType=VARCHAR}
 	AND current_times LIKE concat(#{currentTime,jdbcType=VARCHAR},'%')
   </select>
   <select id="selectUniversalDataBySTT" resultMap="UniversalMap">
@@ -74,7 +74,7 @@
 	FROM
 		${_parameter.param1}
 	WHERE
-		sensor_id = #{sensorId,jdbcType=VARCHAR}
+		sensor_id = #{sensorId,jdbcType=VARCHAR} 
 	AND current_times LIKE concat(#{currentTime,jdbcType=VARCHAR},'%') ORDER BY current_times 
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

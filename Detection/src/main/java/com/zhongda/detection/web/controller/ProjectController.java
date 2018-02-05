@@ -225,14 +225,19 @@ public class ProjectController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/export_Excel")
-	public void export_Excel(String sensorId, String currentTime,
-			Integer projectId, Integer detectionTypeId, String detectionName,
-			String tableName, HttpServletResponse response) throws IOException {
+	public void export_Excel(String sensorId, String smuCmsId,
+			String smuCmsChannel, String currentTime, Integer projectId,
+			Integer detectionTypeId, String detectionName, String tableName,
+			HttpServletResponse response) throws IOException {
 		System.out.println("detectionName:" + tableName);
+		System.out.println("------------------------------------");
+		System.out.println("smuCmsId:" + smuCmsId + "smuCmsChannel:"
+				+ smuCmsChannel);
+		System.out.println("------------------------------------");
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		List<UniversalData> list = staticLevelDataService
 				.selectUniversalDataBySensorIdAndTimeAndTN(tableName, sensorId,
-						currentTime);
+						smuCmsId, smuCmsChannel, currentTime);
 		Project project = projectService.selectProjectAndSysdicByTwoId(
 				projectId, detectionTypeId);
 		String datesnew = format.format(list.get(0).getCurrentTimes());

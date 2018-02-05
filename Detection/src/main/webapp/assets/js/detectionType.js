@@ -124,8 +124,8 @@ $("#dtName").on('click','.deTeButton',function(){
 	var id = $(this).attr("name");
 	$(dataAll).each(function(index,value){
 		if(id==value.detectionPointId){
-			$("#excelDT").attr('href',"rest/project/export_Excel?sensorId="+(value.universalDataList)[0].sensorId+"&currentTime="+(value.universalDataList)[0].currentTimes.substring(0,10)+"&projectId="+$("#projectId").text()+"&detectionTypeId="+$("#detectionTypeId").text()+"&detectionName="+value.detectionName+"&tableName="+tableName_excel);
-			dataTablesDT.fnClearTable();//清空数据.fnClearTable();//清空数据  
+			$("#excelDT").attr('href',"rest/project/export_Excel?sensorId="+(value.universalDataList)[0].sensorId+"&currentTime="+(value.universalDataList)[0].currentTimes.substring(0,10)+"&smuCmsId="+(value.universalDataList)[0].smuCmsId+"&smuCmsChannel="+(value.universalDataList)[0].smuCmsChannel+"&projectId="+$("#projectId").text()+"&detectionTypeId="+$("#detectionTypeId").text()+"&detectionName="+value.detectionName+"&tableName="+tableName_excel);
+			dataTablesDT.fnClearTable();//清空数据.fnClearTable();//清空数据 
 			$(value.universalDataList).each(function(ind,val){
 				dataTablesDT.fnAddData([
 					value.detectionName,
@@ -203,7 +203,7 @@ function medth_dt(data){
 					var displacementData = [];
 					$(value.universalDataList).each(function(index_d,value_d){
 						if(ind==0 && index==0){
-						$("#excelDT").attr('href',"rest/project/export_Excel?sensorId="+value_d.sensorId+"&currentTime="+value_d.currentTimes.substring(0,10)+"&projectId="+$("#projectId").text()+"&detectionTypeId="+$("#detectionTypeId").text()+"&detectionName="+value.detectionName+"&tableName="+tableName_excel);
+						$("#excelDT").attr('href',"rest/project/export_Excel?sensorId="+value_d.sensorId+"&smuCmsId="+value_d.smuCmsId+"&smuCmsChannel="+value_d.smuCmsChannel+"&currentTime="+value_d.currentTimes.substring(0,10)+"&projectId="+$("#projectId").text()+"&detectionTypeId="+$("#detectionTypeId").text()+"&detectionName="+value.detectionName+"&tableName="+tableName_excel);
 							dataTablesDT.fnAddData([
 							value.detectionName,
 							value_d.firstTime,

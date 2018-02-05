@@ -40,6 +40,8 @@ public interface StaticLevelDataMapper {
 	 */
 	List<UniversalData> selectUniversalDataBySensorIdAndTimeAndTN(
 			String tableName, @Param(value = "sensorId") String sensorId,
+			@Param(value = "smuCmsId") String smuCmsId,
+			@Param(value = "smuCmsChannel") String smuCmsChannel,
 			@Param(value = "currentTime") String currentTime);
 
 	/**

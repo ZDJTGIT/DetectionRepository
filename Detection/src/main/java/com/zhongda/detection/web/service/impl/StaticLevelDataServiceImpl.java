@@ -26,9 +26,10 @@ public class StaticLevelDataServiceImpl implements StaticLevelDataService {
 
 	@Override
 	public List<UniversalData> selectUniversalDataBySensorIdAndTimeAndTN(
-			String tableName, String sensorId, String currentTime) {
+			String tableName, String sensorId, String smuCmsId,
+			String smuCmsChannel, String currentTime) {
 		return staticLevelDataMapper.selectUniversalDataBySensorIdAndTimeAndTN(
-				tableName, sensorId, currentTime);
+				tableName, sensorId, smuCmsId, smuCmsChannel, currentTime);
 	}
 
 	@Override
