@@ -87,7 +87,7 @@ public class UniversalDataController {
 		String endTime = null;
 		Calendar calendar = Calendar.getInstance();
 		/* 收敛只显示0点到凌晨6点的数据 begin */
-		if (detectionTypeId == 26) {
+		if (detectionTypeId == 26 && projectId == 176) {
 			beginTime = currentTime + " 00:00:00";
 			endTime = currentTime + " 05:05:00";
 		}
