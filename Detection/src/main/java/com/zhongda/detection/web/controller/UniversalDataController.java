@@ -1,6 +1,8 @@
 package com.zhongda.detection.web.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -66,21 +68,40 @@ public class UniversalDataController {
 
 	@RequestMapping(value = "/monitorData")
 	public @ResponseBody Map<String, Object> monitorData(Integer projectId,
-			Integer detectionTypeId, String currentTime) {
+			Integer detectionTypeId, String currentTime) throws ParseException {
 		System.out.println("projectId:" + projectId + " detectionTypeId:"
 				+ detectionTypeId + " currentTime:" + currentTime);
 		StatisticChart statisticChart = statisticChartService
 				.selectDataByProjectIdAndDetectionTId(projectId,
 						detectionTypeId);
-		String sensorId = statisticChart.getSensorId();
+		// String sensorId = statisticChart.getSensorId();
 		List<Threshold> thresholds = thresholdService.selectAndSysDByPIAndDTI(
 				projectId, detectionTypeId);
 		System.out.println(thresholds);
 		String[] attributes = statisticChart.getAttributes().split(",");
 		System.out.println(statisticChart);
+
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = format.parse(currentTime);
+		String beginTime = currentTime;
+		String endTime = null;
+		Calendar calendar = Calendar.getInstance();
+		/* 收敛只显示0点到凌晨6点的数据 begin */
+		if (detectionTypeId == 26) {
+			beginTime = currentTime + " 00:00:00";
+			endTime = currentTime + " 05:05:00";
+		}
+		/* 收敛只显示0点到凌晨6点的数据 end */
+		else {
+			calendar.setTime(date);
+			calendar.add(Calendar.DATE, +1);
+			endTime = format.format(calendar.getTime());
+		}
+		System.out.println("unBUGbegintime:" + beginTime + "  unBUGendtime:"
+				+ endTime);
 		List<DetectionPoint> dataList = detectionPointService
 				.selectDataByTNAndPIAndDTI(statisticChart.getTableName(),
-						projectId, detectionTypeId, currentTime);
+						projectId, detectionTypeId, beginTime, endTime);
 		Map<String, Object> hashMap = new HashMap<String, Object>();
 		// System.out.println(dataList);
 		// DecimalFormat decimalFormat = new DecimalFormat("#.0000");

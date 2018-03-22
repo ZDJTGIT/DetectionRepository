@@ -183,5 +183,6 @@ public interface DetectionPointService {
 	 * @return
 	 */
 	List<DetectionPoint> selectDataByTNAndPIAndDTI(String tableName,
-			Integer projectId, Integer detectionTypeId, String currentTime);
+			Integer projectId, Integer detectionTypeId, String beginTime,
+			String endTime);
 }

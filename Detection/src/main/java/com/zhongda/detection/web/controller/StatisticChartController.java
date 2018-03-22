@@ -98,6 +98,8 @@ public class StatisticChartController {
 				System.out.println(begin + "******" + end);
 			}
 		}
+		System.out.println("BUGBegintime:" + begin);
+		System.out.println("BUGEndtime:" + end);
 		for (StatisticChart statisticChart : detectionTypeList) {
 			List<DetectionPoint> selectDataByTabelName = detectionPointService
 					.selectDataByTabelName(statisticChart.getTableName(),

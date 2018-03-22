@@ -176,7 +176,7 @@
 	RIGHT JOIN ${_parameter.param1} ld ON (ld.sensor_id = si.sensor_id and si.smu_id=ld.smu_cms_id and si.smu_cms_channel=ld.smu_cms_channel )
 	WHERE
 	dp.project_id = #{projectId,jdbcType=INTEGER} 
-	AND dp.detection_type_id = ${_parameter.param3} and ld.current_times  like concat(#{currentTime,jdbcType=VARCHAR},'%')
+	AND dp.detection_type_id = ${_parameter.param3} and ld.current_times  BETWEEN #{beginTime,jdbcType=VARCHAR} and #{endTime,jdbcType=VARCHAR}
 	GROUP BY  dp.detection_name ASC, ld.current_times  
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

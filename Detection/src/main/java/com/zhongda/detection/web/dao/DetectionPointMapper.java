@@ -194,6 +194,7 @@ public interface DetectionPointMapper {
 	List<DetectionPoint> selectDataByTNAndPIAndDTI(String tableName,
 			@Param(value = "projectId") Integer projectId,
 			Integer detectionTypeId,
-			@Param(value = "currentTime") String currentTime);
+			@Param(value = "beginTime") String beginTime,
+			@Param(value = "endTime") String endTime);
 
 }

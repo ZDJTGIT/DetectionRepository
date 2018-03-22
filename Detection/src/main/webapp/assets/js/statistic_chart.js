@@ -144,7 +144,7 @@ function method_chart(data){
 				            var seconds = date.getSeconds();
 				            var hours = date.getHours();
 				            var year= date.getFullYear();
-				            var month =date.getMonth() ;
+				            var month =date.getMonth()+1 ;
 			                var day = date.getDate(); 
 			                if(month<10){
 			                	month='0'+month;
@@ -165,6 +165,9 @@ function method_chart(data){
 				                   + minute+':'+seconds;
 				            return '测点名称：'+params[0]+'<br/>'+'时间：'+data + '<br/>'
 				                   + '实时数据：'+params.value[1]
+				        },
+				        position:function(p){   //其中p为当前鼠标的位置
+				            return [p[0] -50, p[1] - 50];
 				        }
 				    },
 				    toolbox: {
