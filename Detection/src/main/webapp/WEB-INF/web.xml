@@ -45,6 +45,18 @@
     <dispatcher>REQUEST</dispatcher>  
     <dispatcher>ASYNC</dispatcher>
   </filter-mapping>
+  
+  <!-- Gzip 过滤器配置 -->
+    <filter>
+        <filter-name>gzipF</filter-name>
+        <filter-class>com.zhongda.detection.core.utils.gzip.GzipFilter</filter-class>
+    </filter>
+    <!-- Gzip for JavaScript -->
+    <filter-mapping>
+        <filter-name>gzipF</filter-name>
+        <url-pattern>*.gzip</url-pattern>
+    </filter-mapping>
+  
   <context-param>
     <param-name>log4jConfigLocation</param-name>
     <param-value>classpath:log4j.properties</param-value>

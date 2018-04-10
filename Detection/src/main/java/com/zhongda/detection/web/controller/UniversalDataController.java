@@ -66,7 +66,7 @@ public class UniversalDataController {
 		return "graph_echarts_detectionType";
 	}
 
-	@RequestMapping(value = "/monitorData")
+	@RequestMapping(value = "/monitorData.gzip")
 	public @ResponseBody Map<String, Object> monitorData(Integer projectId,
 			Integer detectionTypeId, String currentTime) throws ParseException {
 		System.out.println("projectId:" + projectId + " detectionTypeId:"
@@ -77,9 +77,7 @@ public class UniversalDataController {
 		// String sensorId = statisticChart.getSensorId();
 		List<Threshold> thresholds = thresholdService.selectAndSysDByPIAndDTI(
 				projectId, detectionTypeId);
-		System.out.println(thresholds);
 		String[] attributes = statisticChart.getAttributes().split(",");
-		System.out.println(statisticChart);
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = format.parse(currentTime);
@@ -97,11 +95,16 @@ public class UniversalDataController {
 			calendar.add(Calendar.DATE, +1);
 			endTime = format.format(calendar.getTime());
 		}
-		System.out.println("unBUGbegintime:" + beginTime + "  unBUGendtime:"
-				+ endTime);
 		List<DetectionPoint> dataList = detectionPointService
 				.selectDataByTNAndPIAndDTI(statisticChart.getTableName(),
 						projectId, detectionTypeId, beginTime, endTime);
+		/* 查找第一天的最后一条数据 */
+		// Map<Object, Object> lastDataMap = staticLevelDataService
+		// .selectOneDayLastData(statisticChart.getTableName(), projectId,
+		// beginTime, endTime, new MapParam("sensor_info_id",
+		// "total_laser_change",
+		// MapParam.ValueClass.STRING.getCode()));
+
 		Map<String, Object> hashMap = new HashMap<String, Object>();
 		// System.out.println(dataList);
 		// DecimalFormat decimalFormat = new DecimalFormat("#.0000");

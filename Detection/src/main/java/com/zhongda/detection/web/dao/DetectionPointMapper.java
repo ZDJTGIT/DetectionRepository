@@ -163,9 +163,8 @@ public interface DetectionPointMapper {
 	 * @return
 	 */
 	List<DetectionPoint> selectDataByTabelName(String tableName,
-			@Param(value = "projectId") Integer projectId,
-			Integer detectionTypeId, String begincurrentTime,
-			String endcurrentTime);
+			Integer projectId, Integer detectionTypeId,
+			String begincurrentTime, String endcurrentTime);
 
 	/**
 	 * 查询所有数据根据动态表名

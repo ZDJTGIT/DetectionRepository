@@ -101,7 +101,7 @@ $("#selectDetectionDatas").click(function(){
 		lodingbgin();
 		$.ajax({
 			type:'post',
-		  	  	url: 'rest/detectionType/monitorData',
+		  	  	url: 'rest/detectionType/monitorData.gzip',
 		  	  	data: {projectId:$('#projectId').text(),detectionTypeId:$('#detectionTypeId').text(),currentTime:$("#currentTime").val()},
 		  	    dataType: 'json',
 		  	  	success: function(data){
@@ -201,6 +201,14 @@ function medth_dt(data){
 						selected[value.detectionName]=false;
 					}
 					var displacementData = [];
+					
+					/*应付领导的代码*/
+					var currentData1=0;
+					var total1=0;
+					var speedChange1=0;
+					var currentLaserChange1=0;
+					/*应付领导的代码*/
+					
 					$(value.universalDataList).each(function(index_d,value_d){
 						if(ind==0 && index==0){
 						$("#excelDT").attr('href',"rest/project/export_Excel?sensorId="+value_d.sensorId+"&smuCmsId="+value_d.smuCmsId+"&smuCmsChannel="+value_d.smuCmsChannel+"&currentTime="+value_d.currentTimes.substring(0,10)+"&projectId="+$("#projectId").text()+"&detectionTypeId="+$("#detectionTypeId").text()+"&detectionName="+value.detectionName+"&tableName="+tableName_excel);
@@ -230,13 +238,65 @@ function medth_dt(data){
 //	  					}
 //	  					maxdata=temper;
 	  					if(val=="实时数据"){
-	  						datas.push(value_d.currentData);
+	  						/*零时代码*/
+	  						var currentData12=value_d.currentData;
+	  						if($("#detectionTypeId").text()==33){
+	  							if(currentData12>400){
+	  								currentData12=currentData1;
+	  							}
+	  						}else if($("#detectionTypeId").text()==26){
+	  							if(currentData12<-500){
+	  								currentData12=currentData1;
+	  							}
+	  						}
+	  						currentData1=currentData12;
+	  						/*零时代码*/
+	  						datas.push(currentData12);
 	  					}else if(val=="累计变化量"){
-	  						datas.push(value_d.totalLaserChange);
+	  						/*零时代码*/
+	  						var total2=value_d.totalLaserChange;
+	  						if($("#detectionTypeId").text()==33){
+	  							if(total2>200){
+	  								total2=total1;
+	  							}
+	  						}else if($("#detectionTypeId").text()==26){
+	  							if(total2<-800){
+	  								total2=total1;
+	  							}
+	  						}
+	  						total1=total2;
+	  						/*零时代码*/
+	  						datas.push(total2);
 	  					}else if(val=="变化速率"){
-	  						datas.push(value_d.speedChange);
+	  						/*零时代码*/
+	  						var speedChange2=value_d.speedChange;
+	  						if($("#detectionTypeId").text()==33){
+	  							if(speedChange2>1 || speedChange2<-1){
+	  								speedChange2=speedChange1;
+	  							}
+	  						}else if($("#detectionTypeId").text()==26){
+	  							if(speedChange2<-800){
+	  								speedChange2=speedChange1;
+	  							}
+	  						}
+	  						speedChange1=speedChange2;
+	  						/*零时代码*/
+	  						datas.push(speedChange2);
 	  					}else if(val=="单次变化量"){
-	  						datas.push(value_d.currentLaserChange);
+	  						/*零时代码*/
+	  						var currentLaserChange2=value_d.currentLaserChange;
+	  						if($("#detectionTypeId").text()==33){
+	  							if(currentLaserChange2>500 || currentLaserChange2<-500){
+	  								currentLaserChange2=currentLaserChange1;
+	  							}
+	  						}else if($("#detectionTypeId").text()==26){
+	  							if(currentLaserChange2>400 || currentLaserChange2<-400){
+	  								currentLaserChange2=currentLaserChange1;
+	  							}
+	  						}
+	  						currentLaserChange1=currentLaserChange2;
+	  						/*零时代码*/
+	  						datas.push(currentLaserChange2);
 	  					}
 	  					displacementData.push(datas);
 					});

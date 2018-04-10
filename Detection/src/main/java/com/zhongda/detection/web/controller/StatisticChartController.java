@@ -39,17 +39,13 @@ public class StatisticChartController {
 	@RequestMapping(value = "/statistiCcharts")
 	public String statistiCcharts(Integer projectId, Model model) {
 		model.addAttribute("projectId", projectId);
-		System.out.println("-----statistiCcharts-------" + projectId);
 		return "graph_echarts_statistic_chart";
 	}
 
-	@RequestMapping(value = "/dataAnalysis", method = RequestMethod.POST)
+	@RequestMapping(value = "/dataAnalysis.gzip", method = RequestMethod.POST)
 	public @ResponseBody Map<String, Object> dataAnalysis(Integer projectId,
-			String begin, String end, String dateRange, String clickType,
-			Model model) {
-		System.out
-				.println("-----------------------@CountTimeAnnotation----------------------");
-		System.out.println("-----------clickType:" + clickType);
+			String begin, String end, String dateRange, String clickType) {
+		long begien = new Date().getTime();
 		List<StatisticChart> detectionTypeList = statisticChartService
 				.selectAllDataByProjectId(projectId);
 		Date date = new Date();
@@ -89,28 +85,31 @@ public class StatisticChartController {
 			Date m = lastDate.getTime();
 			begin = simpleDateFormat.format(m);
 		} else {
-			System.out.println("button");
 			if (begin.length() == 0 || end.length() == 0) {
 				end = simpleDateFormat.format(date);
 				lastDate.setTime(date);
 				lastDate.add(Calendar.DATE, -7);
 				begin = simpleDateFormat.format(lastDate.getTime());
-				System.out.println(begin + "******" + end);
 			}
 		}
-		System.out.println("BUGBegintime:" + begin);
-		System.out.println("BUGEndtime:" + end);
+		long time = new Date().getTime();
 		for (StatisticChart statisticChart : detectionTypeList) {
+			long time2 = new Date().getTime();
 			List<DetectionPoint> selectDataByTabelName = detectionPointService
 					.selectDataByTabelName(statisticChart.getTableName(),
 							statisticChart.getProjectId(),
 							statisticChart.getDetectionTypeId(), begin, end);
+			long time3 = new Date().getTime();
+			System.out.println(time3 - time2 + "ms");
+
 			String[] split = statisticChart.getAttributes().split(",");
 			hashMap.put(statisticChart.getDetectionTypeName(),
 					selectDataByTabelName);
 			hashMap.put(statisticChart.getDetectionTypeName() + "1", split);
 		}
-
+		long ends = new Date().getTime();
+		System.out.println("循环耗时：" + (ends - time) + "ms");
+		System.out.println("方法耗时：" + (ends - begien));
 		return hashMap;
 	}
 

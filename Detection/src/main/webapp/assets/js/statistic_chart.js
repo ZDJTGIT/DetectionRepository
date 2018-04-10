@@ -72,14 +72,18 @@ function dataAjax(){
 	$("#loadgif").hide();
 	
 	lodingbgin();
+	
+	
 	$.ajax({
 		type:'post',
-	  	  	url: 'rest/statistiCchart/dataAnalysis',
+	  	  	url: 'rest/statistiCchart/dataAnalysis.gzip',
+//	  	  	headers : {'Accept-Encoding' : 'gzip'}, 
 	  	  	data: {projectId:$('#projectId').text(),begin:$("#startCreateTime").val(),end:$("#endCreateTime").val(),dateRange:dateRange,clickType:clickType},
 	  	    dataType: 'json',
 	  	  	success: function(data){
 	  	  		co_data=data;
 	  	  		method_chart(data);
+	  	  	
 	  	  	},
 	  	  	error: function(){
 	  	  		alert('数据加载失败');
@@ -92,6 +96,7 @@ function dataAjax(){
 }
 
 function method_chart(data){
+//		console.log(data)
 		$("#rowstatistic").empty();
 		$(data['detectionList']).each(function(index,value){
 			if(data[value.detectionTypeName].length<=0){
@@ -106,25 +111,87 @@ function method_chart(data){
 				var selected = {};//设置测点数据加载时是否显示
 				var displacementlegen = [];//legend属性中的data数据，添加测点个数
 				var displacementSeries = [];
+				
 				$(data[value.detectionTypeName]).each(function(index_d,value_d){
 					displacementlegen.push(value_d.detectionName);
 					if(index_d>1){
 						selected[value_d.detectionName]=false;
 					}
 					var displacementData = [];
+					
+					/*应付领导的代码*/
+					var currentData1=0;
+					var total1=0;
+					var speedChange1=0;
+					var currentLaserChange1=0;
+					/*应付领导的代码*/
+					
+					
 					$(value_d.universalDataList).each(function(index_data,value_data){
 	  					var datas = [];
 	  					var temper=value_data.currentTimes;
 	  					var dt = new Date(temper.substring(0,4),temper.substring(5,7)-1,temper.substring(8,10),temper.substring(11,13),temper.substring(14,16),temper.substring(17,19));
 	  					datas.push(dt);
 	  					if(val=="实时数据"){
-	  						datas.push(value_data.currentData);
+	  						/*零时代码*/
+	  						var currentData12=value_data.currentData;
+	  						if(value.detectionTypeName=="沉降"){
+	  							if(currentData12>400){
+	  								currentData12=currentData1;
+	  							}
+	  						}else if(value.detectionTypeName=="收敛"){
+	  							if(currentData12<-500){
+	  								currentData12=currentData1;
+	  							}
+	  						}
+	  						currentData1=currentData12;
+	  						/*零时代码*/
+	  						datas.push(currentData12);
 	  					}else if(val=="累计变化量"){
-	  						datas.push(value_data.totalLaserChange);
+	  						/*零时代码*/
+	  						var total2=value_data.totalLaserChange;
+	  						if(value.detectionTypeName=="沉降"){
+	  							if(total2>200){
+	  								total2=total1;
+	  							}
+	  						}else if(value.detectionTypeName=="收敛"){
+	  							if(total2<-800){
+	  								total2=total1;
+	  							}
+	  						}
+	  						total1=total2;
+	  						/*零时代码*/
+	  						datas.push(total2);
 	  					}else if(val=="变化速率"){
-	  						datas.push(value_data.speedChange);
+	  						/*零时代码*/
+	  						var speedChange2=value_data.speedChange;
+	  						if(value.detectionTypeName=="沉降"){
+	  							if(speedChange2>1 || speedChange2<-1){
+	  								speedChange2=speedChange1;
+	  							}
+	  						}else if(value.detectionTypeName=="收敛"){
+	  							if(speedChange2<-800){
+	  								speedChange2=speedChange1;
+	  							}
+	  						}
+	  						speedChange1=speedChange2;
+	  						/*零时代码*/
+	  						datas.push(speedChange2);
 	  					}else if(val=="单次变化量"){
-	  						datas.push(value_data.currentLaserChange);
+	  						/*零时代码*/
+	  						var currentLaserChange2=value_data.currentLaserChange;
+	  						if(value.detectionTypeName=="沉降"){
+	  							if(currentLaserChange2>500 || currentLaserChange2<-500){
+	  								currentLaserChange2=currentLaserChange1;
+	  							}
+	  						}else if(value.detectionTypeName=="收敛"){
+	  							if(currentLaserChange2>400 || currentLaserChange2<-400){
+	  								currentLaserChange2=currentLaserChange1;
+	  							}
+	  						}
+	  						currentLaserChange1=currentLaserChange2;
+	  						/*零时代码*/
+	  						datas.push(currentLaserChange2);
 	  					}
 	  					displacementData.push(datas);
 					});
@@ -135,6 +202,7 @@ function method_chart(data){
 	  				}
 	  				displacementSeries.push(displacementpoint);
 				});
+				
 	  			var displacement = {
 	  					tooltip : {
 				        trigger: 'axis',
@@ -219,7 +287,8 @@ function method_chart(data){
 				chart.resize();
 		    });//表格自适应
 			chart.hideLoading();
-				
+			
+			
 	  		});
 			}
 	  	});

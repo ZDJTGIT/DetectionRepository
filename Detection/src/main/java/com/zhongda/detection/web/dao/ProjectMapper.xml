@@ -53,6 +53,7 @@
 	project_latitude, project_begin_time, project_end_time, project_status, project_description
   </sql>
   <!-- bug -->
+ 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ProjectResultMap">
     select
     p.*,sd.item_name 'project_status_string'

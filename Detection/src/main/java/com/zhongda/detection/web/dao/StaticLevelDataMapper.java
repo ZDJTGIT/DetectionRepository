@@ -1,9 +1,11 @@
 package com.zhongda.detection.web.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.zhongda.detection.core.utils.MapParam;
 import com.zhongda.detection.web.model.StaticLevelData;
 import com.zhongda.detection.web.model.UniversalData;
 
@@ -54,4 +56,17 @@ public interface StaticLevelDataMapper {
 	List<UniversalData> selectUniversalDataBySTT(String tableName,
 			@Param(value = "sensorId") String sensorId,
 			@Param(value = "currentTime") String currentTime);
+
+	/**
+	 * 查询传感器最后第一天最后一条数据
+	 * 
+	 * @param tableName
+	 * @param snesorId
+	 * @param beginTime
+	 * @param endTime
+	 * @return
+	 */
+	Map<Object, Object> selectOneDayLastData(String tableName,
+			Integer projectId, String beginTime, String endTime,
+			MapParam mapParam);
 }

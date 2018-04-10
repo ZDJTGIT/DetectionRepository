@@ -137,7 +137,8 @@
     detection_point_id, project_id, detection_type_id, detection_latitude, detection_longitude, 
     detection_name, detection_description
   </sql>
-  <select id="selectDataByTabelName" resultMap="SensorDataMap" >
+  <select id="selectDataByTabelName" resultMap="SensorDataMap" fetchSize="1000">
+  	<![CDATA[ 
   	SELECT
 	dp.*, ld.*
 	FROM
@@ -147,9 +148,10 @@
 	)
 	RIGHT JOIN ${_parameter.param1} ld ON (ld.sensor_id = si.sensor_id and si.smu_id=ld.smu_cms_id and si.smu_cms_channel=ld.smu_cms_channel )
 	WHERE
-	dp.project_id = #{projectId,jdbcType=INTEGER}
+	dp.project_id = ${_parameter.param2}
 	AND dp.detection_type_id = ${_parameter.param3} and ld.current_times  BETWEEN '${_parameter.param4}' and '${_parameter.param5}'
 	GROUP BY  dp.detection_name ASC, ld.current_times
+  	  ]]> 
   </select>
   <select id="selectAllDataByTabelName" resultMap="SensorDataMap" >
   	SELECT

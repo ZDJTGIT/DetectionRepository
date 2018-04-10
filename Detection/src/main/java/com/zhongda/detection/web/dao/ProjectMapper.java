@@ -189,34 +189,45 @@ public interface ProjectMapper {
 	 * @return
 	 */
 	List<Project> selectAllProjects();
+
 	/**
 	 * 查项目下异常测点数量
+	 * 
 	 * @param projectId
 	 * @return
 	 */
 	Project selectAlarmDetectionPointCount(Integer projectId);
+
 	/**
 	 * 查项目下异常传感器数量
+	 * 
 	 * @param projectId
 	 * @return
 	 */
 	Project selectAlarmSensorInfoCount(Integer projectId);
+
 	/**
 	 * 查项目下未处理告警信息条数
+	 * 
 	 * @param projectId
 	 * @return
 	 */
 	Project selectAlarmAlarmCount(Integer projectId);
+
 	/**
 	 * 查项目下采集器数量
+	 * 
 	 * @param projectId
 	 * @return
 	 */
 	Project selectTerminalsCount(Integer projectId);
+
 	/**
 	 * 查项目下离线采集器数量
+	 * 
 	 * @param projectId
 	 * @return
 	 */
 	Project selectAlarmTerminalsCount(Integer projectId);
+
 }
