@@ -126,7 +126,7 @@
 					</shiro:hasPermission>
 					 <shiro:hasPermission name="project:manager:*">
 						<li><a href="javascript:;" class="queryproject"> <i
-								class="fa fa fa-bar-chart-o"></i><span class="nav-label">统计图表</span>
+								class="fa fa fa-bar-chart-o"></i><span class="nav-label">对比分析</span>
 								<span class="fa arrow"></span>
 						</a>
 							<ul class="nav nav-second-level">

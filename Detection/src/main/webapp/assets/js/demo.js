@@ -66,7 +66,7 @@ demo = {
 			});
 			
 			map.addOverlay(marker);// 添加标注
-//			marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+			//marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
 			marker.addEventListener("onmouseover", function() {
 				lng = marker.getPosition().lng; // 获取marker的位置经度
 				lat = marker.getPosition().lat;// 获取纬度

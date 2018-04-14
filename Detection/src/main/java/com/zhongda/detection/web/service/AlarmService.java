@@ -70,4 +70,12 @@ public interface AlarmService {
 	 * @return
 	 */
 	Result<Alarm> updateBatchAlarmStatusByQuery(Alarm alarm);
+	
+	/**
+	 * 手动触发对应告警信息的短信给指定的手机号
+	 * @param alarmId
+	 * @param phone
+	 * @return
+	 */
+	Result<String> alarmManualTriggerSms(Integer alarmId, String phone);
 }
