@@ -26,6 +26,24 @@ jQuery.validator.addMethod("isdouble", function(value, element) {
 //添加用户校验用户信息唯一性
 $(document).ready(function() {
 
+	//手机号码校验	
+	$('#confirmSmsForm').validate({
+		rules : {		
+			confirmSmsPhone : {
+				required : true,
+				minlength : 11,
+				isMobile : true					
+			}
+		},			
+		messages : {		
+			confirmSmsPhone : {
+				required : "输入常用手机号码",
+				minlength : "请输入一个正确的手机号码",
+				isMobile : "请正确填写您的手机号码"					
+			}
+		},		
+	});
+	
 //添加图片校验该检测指标是否已存在图片（未启用）
 /*function addImageFormValidate(){
 	return*/ $('#addImageForm').validate({

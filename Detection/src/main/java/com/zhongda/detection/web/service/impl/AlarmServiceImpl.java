@@ -1,5 +1,6 @@
 package com.zhongda.detection.web.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
+import com.zhongda.detection.core.utils.sms.SmsContentTemplate;
+import com.zhongda.detection.core.utils.sms.SmsSender;
 import com.zhongda.detection.web.dao.AlarmMapper;
 import com.zhongda.detection.web.model.Alarm;
 import com.zhongda.detection.web.model.Project;
@@ -99,6 +102,46 @@ public class AlarmServiceImpl implements AlarmService{
 			result.setCode(Result.FAILURE);
 			result.setMsg("修改状态失败");
 		}		
+		return result;
+	}
+
+	@Override
+	public Result<String> alarmManualTriggerSms(Integer alarmId, String phone) {
+		Result<String> result = new Result<String>();
+		result.setCode(Result.FAILURE);
+		result.setMsg("发送短信失败");
+		Alarm alarm = alarmMapper.selectByPrimaryKey(alarmId);
+		List<String> params = new ArrayList<String>();
+		params.add(alarm.getUserName());
+		params.add(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(alarm
+				.getCreateTime()));
+		params.add("沉降");
+		params.add(alarm.getProjectName());
+		params.add(alarm.getSmuCmsId());
+		params.add(alarm.getSensorId());
+		// 如果是数据类告警
+		if (alarm.getAlarmTypeId() == 17) {
+			String[] contextArray = alarm.getAlarmContext().split("，");
+			params.add(contextArray[0].split("：")[1]);
+			String[] thresholdArray = contextArray[2].split("~");
+			params.add(thresholdArray[0].substring(5));
+			params.add(thresholdArray[1]);
+		} else if (alarm.getAlarmTypeId() == 18) { // 如果是设备类告警
+			params.add(alarm.getAlarmContext());
+		}
+		SmsSender smsSender = new SmsSender();
+		// 如果是数据类告警
+		if (alarm.getAlarmTypeId() == 17) {
+			// 群发短信
+			smsSender.send(SmsContentTemplate.ALARM_DATA_MESSAGE,
+					phone, params);
+		} else if (alarm.getAlarmTypeId() == 18) { // 如果是设备类告警
+			// 群发短信
+			smsSender.send(SmsContentTemplate.ALARM_DEVICE_MESSAGE,
+					phone, params);
+		}
+		result.setCode(Result.SUCCESS);
+		result.setMsg("发送短信成功");
 		return result;
 	}
 }

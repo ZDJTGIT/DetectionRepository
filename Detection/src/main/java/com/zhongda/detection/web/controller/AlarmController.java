@@ -170,4 +170,18 @@ public class AlarmController {
 		Result<Alarm> result = alarmService.updateBatchAlarmStatusByQuery(alarm);
 		return result;
 	}
+	
+	/**
+	 * 批量修改通过查询条件查询出来的告警消息状态为确认状态
+	 * @param alarm 封装的查询条件
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/alarmManualTriggerSms")
+	@ResponseBody
+	public Result<String> alarmManualTriggerSms(Integer alarmId, String phone) {
+		System.out.println("alarmId:"+alarmId+", phone:"+phone);
+		Result<String> result = alarmService.alarmManualTriggerSms(alarmId, phone);
+		return result;
+	}
 }

@@ -146,6 +146,9 @@
 							      <th>产生时间</th>
 							      <th>告警状态</th>
 							      <th>操作</th>
+							      <shiro:hasPermission name="alarm:query:*">
+							      	<th>手动触发短信</th>
+							      </shiro:hasPermission>
 							    </tr>
 							</thead>
 							<tbody></tbody>
@@ -156,10 +159,40 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Modal添加手机号码手动触发短信 -->
+	<div class="modal fade" id="confirmSmsModel" tabindex="-1" role="dialog" aria-labelledby="confirmSmsLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="confirmSmsLabel">指定手机号码</h4>
+				</div>
+				<div class="modal-body">
+					<p>(请确保填写的手机号码有效)</p><br>
+					<form id="confirmSmsForm" class="form-horizontal m-t">
+						<div class="form-group">
+							<label class="col-sm-3 control-label" for="confirmSmsPhone">手机号码:</label>
+							<div class="col-sm-8">
+								<input id="confirmSmsAlarmId" name="confirmSmsAlarmId" class="form-control myInputClass" type="hidden">
+				    			<input id="confirmSmsPhone" name="confirmSmsPhone" class="form-control myInputClass" type="text">
+							</div>
+						</div>
+		    		</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="closeconfirmSmsModelBtn" class="btn btn-default" style="margin-bottom:0px" data-dismiss="modal">关闭</button>
+					<button type="button" id="submitconfirmSmsBtn" class="btn btn-primary">提交</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script src="assets/js/plugins/iCheck/icheck.min.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/laydate/laydate.js" charset="utf-8"></script>
 	<script src="assets/js/plugins/layui/layui.all.js" charset="utf-8"></script>
+	<script src="assets/js/plugins/validate/jquery.validate.min.js"></script>
+	<script src="assets/js/customerValidate.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
 
@@ -234,6 +267,37 @@
 	        		allAlarmConfirm();
 	        	}
 	        });
+	        
+	        //弹出添加指定手机号码model
+			$('#alarmTable').on('click', '.confirmSms', function(e) {
+				var alarmInfoArray = $(this).parent().siblings();
+				$('#confirmSmsAlarmId').val(alarmInfoArray.eq(1).text());
+			});
+	        
+			//添加手机号码手动触发提交
+			$('#submitconfirmSmsBtn').click(function(){
+				if(!$('#confirmSmsForm').valid()){
+					return false;
+				}
+				var jsonRoleData = {alarmId:$('#confirmSmsAlarmId').val(),phone:$('#confirmSmsPhone').val()};
+				$('#closeconfirmSmsModelBtn').trigger("click");
+				$.ajax({
+			  		type:'post',
+			  	  	url: 'rest/alarm/alarmManualTriggerSms',
+			  	  	dataType : 'json',
+			  	  	data : jsonRoleData,
+			  	  	success: function(res){
+			  	  		if(res.code == 0){
+			  	  			alert(res.msg);
+			  	  		}else{
+			  	  			alert(res.msg);
+			  	  		}
+			  	  	 },
+			  	  	 error: function(){
+						alert("数据加载失败");
+					 }
+			  	});
+			});	
 	        
 	        //更新被选中的告警消息状态
 	        function seclectedAlarmConfirm(){
@@ -368,9 +432,12 @@
 											htmlData +='<tr><td style="text-align:center"><input type="checkbox"></td><td class="alarmFlag">'+item.alarmId+'</td><td>'+item.projectName+'</td><td>'+item.detectionId+'</td><td>'+item.smuCmsId+'</td><td>'+item.sensorId+'</td><td>'+item.alarmType+'</td><td class="layerOpen">'+item.alarmContext+'</td><td>'+item.createTime+'</td><td>'+item.alarmStatus+'</td><td><a class="confirmClick btn btn-sm btn-info"';
 										}
 										if(item.alarmStatus === "已确认"){
-											htmlData +=' disabled="disabled">已确认</a></td></tr>';
+											htmlData +=' disabled="disabled">已确认</a></td>';
 										}else{
-											htmlData +='>点击确认</a></td></tr>';
+											htmlData +='>点击确认</a></td><td><a href="javascript:;" class="confirmSms btn btn-sm btn-info" data-toggle="modal" data-target="#confirmSmsModel">手动触发</a></td></tr>';
+										}
+										if($('#alarmTable thead').find('th').length > 11){
+											htmlData +='<td><a href="javascript:;" class="confirmSms btn btn-sm btn-info" data-toggle="modal" data-target="#confirmSmsModel">手动触发</a></td></tr>';
 										}
 									});
 									$("#alarmTable tbody").html(htmlData);
