@@ -226,7 +226,6 @@ function medth_dt(data){
 							value_d.smuCmsId,
 							value_d.smuCmsChannel,
 							value_d.currentTemperature
-							
 	  						]);
 						}
 	  					var datas = [];
@@ -241,9 +240,9 @@ function medth_dt(data){
 	  						/*零时代码*/
 	  						var currentData12=value_d.currentData;
 	  						if($("#detectionTypeId").text()==33){
-	  							if(currentData12>400){
-	  								currentData12=currentData1;
-	  							}
+//	  							if(currentData12>400){
+//	  								currentData12=currentData1;
+//	  							}
 	  						}else if($("#detectionTypeId").text()==26){
 	  							if(currentData12<-500){
 	  								currentData12=currentData1;

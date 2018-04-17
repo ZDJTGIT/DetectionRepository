@@ -19,6 +19,7 @@ import com.zhongda.detection.web.model.DetectionPoint;
 import com.zhongda.detection.web.model.Image;
 import com.zhongda.detection.web.model.StatisticChart;
 import com.zhongda.detection.web.model.Threshold;
+import com.zhongda.detection.web.model.UniversalData;
 import com.zhongda.detection.web.service.DetectionPointService;
 import com.zhongda.detection.web.service.ImageService;
 import com.zhongda.detection.web.service.StaticLevelDataService;
@@ -98,6 +99,20 @@ public class UniversalDataController {
 		List<DetectionPoint> dataList = detectionPointService
 				.selectDataByTNAndPIAndDTI(statisticChart.getTableName(),
 						projectId, detectionTypeId, beginTime, endTime);
+		if (detectionTypeId == 33) {
+			for (DetectionPoint detectionPoint : dataList) {
+				for (UniversalData universalData : detectionPoint
+						.getUniversalDataList()) {
+					universalData.setCurrentLaserChange(universalData
+							.getCurrentLaserChange() * (-1));
+					universalData.setSpeedChange(universalData.getSpeedChange()
+							* (-1));
+					universalData.setTotalLaserChange(universalData
+							.getTotalLaserChange() * (-1));
+				}
+			}
+		}
+
 		/* 查找第一天的最后一条数据 */
 		// Map<Object, Object> lastDataMap = staticLevelDataService
 		// .selectOneDayLastData(statisticChart.getTableName(), projectId,

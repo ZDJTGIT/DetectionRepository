@@ -188,6 +188,7 @@ public class JXLExcel {
 			headExcel(sheet, head, row);// 设置表头
 			// 传数据
 			row++;
+			double a = 0.0;
 			for (int i = 0; i < list.size(); i++) {
 				sheet.addCell(new Label(3, row, simpleDateFormat.format(list
 						.get(i).getCurrentTimes()), writableCellFormat));
@@ -200,11 +201,16 @@ public class JXLExcel {
 				sheet.addCell(new Label(4, row, list.get(i).getCurrentData()
 						+ "", writableCellFormat));
 				sheet.addCell(new Label(5, row, list.get(i)
-						.getCurrentLaserChange() + "", writableCellFormat));
+						.getCurrentLaserChange() * (-1) + "",
+						writableCellFormat));
 				sheet.addCell(new Label(6, row, list.get(i)
-						.getTotalLaserChange() + "", writableCellFormat));
-				sheet.addCell(new Label(7, row, String.valueOf(list.get(i)
-						.getSpeedChange()), writableCellFormat));
+						.getTotalLaserChange() * (-1) + "", writableCellFormat));
+				a = list.get(i).getSpeedChange() * (-1);
+				if (a == (-0.0)) {
+					a = 0.0;
+				}
+				sheet.addCell(new Label(7, row, String.valueOf(a),
+						writableCellFormat));
 				if (null != list.get(i).getCurrentTemperature()) {
 					sheet.addCell(new Label(8, row, String.valueOf(list.get(i)
 							.getCurrentTemperature()), writableCellFormat));

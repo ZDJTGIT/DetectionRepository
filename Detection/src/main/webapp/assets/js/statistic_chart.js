@@ -136,17 +136,20 @@ function method_chart(data){
 	  						/*零时代码*/
 	  						var currentData12=value_data.currentData;
 	  						if(value.detectionTypeName=="沉降"){
-	  							if(currentData12>400){
-	  								currentData12=currentData1;
-	  							}
+//	  							if(currentData12>400){
+//	  								currentData12=currentData1;
+//	  							}
+	  							datas.push(currentData12*(-1));
 	  						}else if(value.detectionTypeName=="收敛"){
 	  							if(currentData12<-500){
 	  								currentData12=currentData1;
 	  							}
+	  							datas.push(currentData12);
+	  						}else{
+	  							datas.push(currentData12);
 	  						}
 	  						currentData1=currentData12;
 	  						/*零时代码*/
-	  						datas.push(currentData12);
 	  					}else if(val=="累计变化量"){
 	  						/*零时代码*/
 	  						var total2=value_data.totalLaserChange;
@@ -154,14 +157,18 @@ function method_chart(data){
 	  							if(total2>200){
 	  								total2=total1;
 	  							}
+	  							datas.push(total2*(-1));
 	  						}else if(value.detectionTypeName=="收敛"){
 	  							if(total2<-800){
 	  								total2=total1;
 	  							}
+	  							datas.push(total2);
+	  						}else{
+	  							datas.push(total2);
 	  						}
 	  						total1=total2;
 	  						/*零时代码*/
-	  						datas.push(total2);
+	  						
 	  					}else if(val=="变化速率"){
 	  						/*零时代码*/
 	  						var speedChange2=value_data.speedChange;
@@ -169,14 +176,18 @@ function method_chart(data){
 	  							if(speedChange2>1 || speedChange2<-1){
 	  								speedChange2=speedChange1;
 	  							}
+	  							datas.push(speedChange2*(-1));
 	  						}else if(value.detectionTypeName=="收敛"){
 	  							if(speedChange2<-800){
 	  								speedChange2=speedChange1;
 	  							}
+	  							datas.push(speedChange2);
+	  						}else{
+	  							datas.push(speedChange2);
 	  						}
 	  						speedChange1=speedChange2;
 	  						/*零时代码*/
-	  						datas.push(speedChange2);
+	  						
 	  					}else if(val=="单次变化量"){
 	  						/*零时代码*/
 	  						var currentLaserChange2=value_data.currentLaserChange;
@@ -184,14 +195,18 @@ function method_chart(data){
 	  							if(currentLaserChange2>500 || currentLaserChange2<-500){
 	  								currentLaserChange2=currentLaserChange1;
 	  							}
+	  							datas.push(currentLaserChange2*(-1));
 	  						}else if(value.detectionTypeName=="收敛"){
 	  							if(currentLaserChange2>400 || currentLaserChange2<-400){
 	  								currentLaserChange2=currentLaserChange1;
 	  							}
+	  							datas.push(currentLaserChange2);
+	  						}else{
+	  							datas.push(currentLaserChange2);
 	  						}
 	  						currentLaserChange1=currentLaserChange2;
 	  						/*零时代码*/
-	  						datas.push(currentLaserChange2);
+	  						
 	  					}
 	  					displacementData.push(datas);
 					});
